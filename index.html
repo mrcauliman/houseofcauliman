@@ -32,7 +32,7 @@
 
   h1 {
     text-align:center;
-    font-size:2.6rem;
+    font-size:2.4rem;
     font-weight:900;
     margin-bottom:10px;
     color:var(--fg);
@@ -43,79 +43,52 @@
     text-align:center;
     font-size:1.1rem;
     color:var(--blue);
-    margin-bottom:40px;
+    margin-bottom:50px;
   }
 
-  /* PROJECT CARDS */
-  .card {
+  /* CINEMATIC PANELS */
+  .panel {
     background:var(--panel);
+    padding:28px 30px;
     border:1px solid var(--line);
     border-radius:6px;
-    padding:0;
-    margin-bottom:50px;
-    box-shadow:
-      inset 0 0 25px rgba(77,163,255,0.09),
-      0 0 14px rgba(0,0,0,0.7);
+    margin-bottom:45px;
+    position:relative;
     overflow:hidden;
-    position:relative;
+    box-shadow:
+      inset 0 0 20px rgba(77,163,255,0.08),
+      0 0 10px rgba(0,0,0,0.6);
   }
 
-  .card-header {
-    position:relative;
-    height:180px;
-    background:#0f0f12;
-    border-bottom:1px solid var(--line);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
-
-  .card-header img {
-    height:120px;
-    z-index:2;
-  }
-
-  .card-header .wall {
+  .panel:before {
+    content:"";
     position:absolute;
     top:0; left:0;
-    width:100%; height:100%;
-    object-fit:cover;
-    opacity:0.22;
-    filter:blur(2px);
+    width:100%;
+    height:3px;
+    background:linear-gradient(90deg, var(--blue), var(--gold));
+    opacity:0.65;
   }
 
-  .card-title {
-    padding:22px 30px 0 30px;
+  .panel h2 {
     font-size:1.7rem;
     font-weight:800;
+    margin:0 0 14px;
     color:var(--gold);
   }
 
   .bio {
-    padding:10px 30px 20px 30px;
     font-size:1rem;
     line-height:1.55;
     color:var(--muted);
-  }
-
-  .links {
-    padding:15px 30px 30px 30px;
-  }
-
-  .tag {
-    margin-top:22px;
-    margin-bottom:8px;
-    font-size:0.75rem;
-    color:var(--gold);
-    text-transform:uppercase;
-    letter-spacing:1px;
+    margin-bottom:24px;
   }
 
   .links a {
     display:block;
-    padding:13px 16px;
+    padding:14px 16px;
     margin:10px 0;
-    background:#101115;
+    background:#0f0f12;
     border:1px solid var(--line);
     border-left:4px solid var(--blue);
     color:var(--fg);
@@ -126,33 +99,39 @@
   }
 
   .links a:hover {
-    background:#13141a;
     border-color:var(--blue);
+    background:#11131a;
+    color:#fff;
+  }
+
+  .tag {
+    margin-top:16px;
+    margin-bottom:6px;
+    text-transform:uppercase;
+    font-size:0.75rem;
+    color:var(--gold);
+    letter-spacing:1px;
   }
 </style>
 </head>
 
 <body>
-
 <div class="wrap">
+
   <h1>HOUSE OF CAULIMAN</h1>
-  <div class="sub">Protocol • Precision • Execution</div>
+  <div class="sub">Protocol. Precision. Execution.</div>
 
-  <!-- MR CAULIMAN CARD -->
-  <div class="card">
-    <div class="card-header">
-      <img src="/assets/wck_logo.webp" alt="">
-    </div>
-
-    <div class="card-title">THE MRCAULIMAN COLLECTION</div>
+  <!-- THE COLLECTION -->
+  <div class="panel">
+    <h2>The mrcauliman Collection</h2>
     <div class="bio">
-      Everything I run lives inside these walls.  
-      Clean. Direct. Built with pressure and execution.
+      Everything I’ve built lives inside these walls.  
+      Clean. Direct. No noise. No shortcuts.
     </div>
-
     <div class="links">
-      <div class="tag">𝕏 / Communities</div>
       <a href="https://x.com/mrcauliman">𝕏 Profile</a>
+
+      <div class="tag">𝕏 Communities</div>
       <a href="https://x.com/i/communities/1677882151931637760">THE CAULIFLOWER CHRONICLES</a>
       <a href="https://x.com/i/communities/1993769453449040144">House of Cauliman</a>
 
@@ -161,60 +140,44 @@
     </div>
   </div>
 
-  <!-- WCK CARD -->
-  <div class="card">
-    <div class="card-header">
-      <img src="/assets/wck_logo.webp" alt="">
-    </div>
-
-    <div class="card-title">CONTINENTAL WICK</div>
+  <!-- WCK -->
+  <div class="panel">
+    <h2>CONTINENTAL WICK</h2>
     <div class="bio">
-      Protocol discipline and structured world-building.  
-      WCK is the enforcement layer and cinematic protocol universe.
+      Protocol discipline. Narrative precision.  
+      WCK operates like a system, not a story.
     </div>
-
     <div class="links">
       <div class="tag">Telegram</div>
-      <a href="https://t.me/wcktoken">WCK Channel</a>
+      <a href="https://t.me/wcktoken">WCK Token</a>
       <a href="https://t.me/wcklobby">WCK Lobby</a>
     </div>
   </div>
 
-  <!-- RAD CARD -->
-  <div class="card">
-    <div class="card-header">
-      <img src="/assets/rad_logo.webp" alt="">
+  <!-- BAG -->
+  <div class="panel">
+    <h2>GET THE $BAG</h2>
+    <div class="bio">
+      XRPL’s heaviest meme. Utility on chain. Culture on brand.
     </div>
+    <div class="links">
+      <div class="tag">Telegram</div>
+      <a href="https://t.me/getthebag_io">$BAG Channel</a>
+      <a href="https://t.me/bagxchange">BAG Exchange</a>
+    </div>
+  </div>
 
-    <div class="card-title">RAD GARLINGTON</div>
+  <!-- RAD -->
+  <div class="panel">
+    <h2>RAD GARLINGTON</h2>
     <div class="bio">
       Ledger truth. Certified structure.  
-      RAD runs the verification layer and the standard for accountability.
+      RAD defines verification on the XRPL.
     </div>
-
     <div class="links">
       <div class="tag">Telegram</div>
       <a href="https://t.me/radgarlington">RAD Channel</a>
       <a href="https://t.me/TheLedgerRoom">The Ledger Room</a>
-    </div>
-  </div>
-
-  <!-- BAG CARD -->
-  <div class="card">
-    <div class="card-header">
-      <img src="/assets/bag_logo.webp" alt="">
-    </div>
-
-    <div class="card-title">GET THE $BAG</div>
-    <div class="bio">
-      XRPL’s heaviest meme. Utility on chain. Culture on brand.  
-      Movement built with pressure, liquidity, and execution.
-    </div>
-
-    <div class="links">
-      <div class="tag">Telegram</div>
-      <a href="https://t.me/getthebag_io">$BAG Channel</a>
-      <a href="https://t.me/bagxchange">$BAG Exchange Community</a>
     </div>
   </div>
 
