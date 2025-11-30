@@ -6,16 +6,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="canonical" href="https://houseofcauliman.com/">
 
+  <!-- SEO -->
+  <meta name="description" content="House of Cauliman — XRPL ecosystems built by mrcauliman. $WCK Continental Wick Protocol, Rad Garlington Ledger Registry, and $BAG XRPL Meme Infrastructure. Powered by $XRP.">
+  <meta name="keywords" content="XRP, XRPL, XRP Ledger, meme coins, Continental Wick, ContinentalWick, WCK token, Rad Garlington, RAD token, BAG token, getthebag, XRP meme coin, XRPL ecosystem, XRP builder, XRP projects">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="House of Cauliman — XRPL Ecosystem">
+  <meta property="og:description" content="The operator hub for $WCK, $RAD, and $BAG on the XRPL. Protocol. Precision. Execution.">
+  <meta property="og:image" content="https://houseofcauliman.com/assets/mrcauliman_logo.webp">
+  <meta property="og:url" content="https://houseofcauliman.com/">
+  <meta property="og:type" content="website">
+
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "House of Cauliman",
+    "url": "https://houseofcauliman.com",
+    "logo": "https://houseofcauliman.com/assets/mrcauliman_logo.webp",
+    "description": "House of Cauliman — XRPL ecosystems built by mrcauliman. Runs the Continental Wick Protocol ($WCK), Rad Garlington ($RAD), and $BAG Meme Infrastructure on the XRP Ledger.",
+    "sameAs": [
+      "https://continentalwick.com",
+      "https://radgarlington.io",
+      "https://getthebag.io",
+      "https://x.com/mrcauliman",
+      "https://x.com/wcktoken",
+      "https://x.com/radgarlington",
+      "https://x.com/getthebag_io"
+    ]
+  }
+  </script>
+
   <style>
     :root {
       --bg:#050509;
       --bg-soft:#090910;
       --card:#11121a;
-      --card-alt:#151622;
       --border-subtle:#1a1b24;
       --border-strong:#2b3345;
       --accent:#0a74d0;
-      --accent-soft:#133d71;
       --accent-glow:rgba(10,116,208,0.65);
       --text:#f5f7ff;
       --text-muted:#9aa2c3;
@@ -30,14 +60,12 @@
     }
 
     * { box-sizing:border-box; }
-
     html, body {
       margin:0; padding:0; width:100%; overflow-x:hidden;
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
       background:radial-gradient(circle at top, #111827 0, #020308 55%, #000 100%);
       color:var(--text);
     }
-
     a { color:inherit; text-decoration:none; }
 
     /* HEADER */
@@ -63,12 +91,11 @@
     .hoc-header-text h1 {
       margin:0; font-size:1.5rem; letter-spacing:0.15em; text-transform:uppercase;
     }
-
     .hoc-header-text p {
       margin:5px 0 0; font-size:0.92rem; color:#9fb4e2;
     }
 
-    /* MAIN & GRID */
+    /* MAIN */
     .hoc-main { padding:22px 16px 40px; }
     .hoc-shell { max-width:960px; margin:0 auto; }
 
@@ -78,14 +105,13 @@
       background:linear-gradient(135deg,rgba(15,23,42,0.9),rgba(5,6,12,0.98));
       box-shadow:var(--shadow-soft);
     }
-
     .hoc-intro-title { font-size:0.82rem; text-transform:uppercase; letter-spacing:0.18em; color:var(--text-soft); margin:0 0 6px; }
     .hoc-intro-main { font-size:0.97rem; color:var(--text-muted); margin:0; line-height:1.5; }
 
+    /* GRID */
     .hoc-grid {
       display:grid; grid-template-columns:1fr; gap:18px;
     }
-
     @media (min-width:768px) {
       .hoc-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
     }
@@ -99,21 +125,16 @@
       overflow:hidden; display:flex; flex-direction:column; min-height:260px;
       position:relative; isolation:isolate;
     }
-
     .project-card::before {
       content:""; position:absolute; inset:-1px; border-radius:inherit;
-      background:conic-gradient(from 210deg,
-        rgba(10,116,208,0.4), transparent 18%, transparent 60%,
-        rgba(10,116,208,0.35), rgba(212,164,74,0.3),
-        transparent 88%, rgba(10,116,208,0.4)
-      );
+      background:conic-gradient(from 210deg, rgba(10,116,208,0.4), transparent 18%, transparent 60%, rgba(10,116,208,0.35), rgba(212,164,74,0.3), transparent 88%, rgba(10,116,208,0.4));
       opacity:0; transition:opacity 0.3s ease; z-index:-1;
     }
-
     .project-card:hover::before { opacity:0.65; }
 
     .project-media {
-      position:relative; padding:14px; border-bottom:1px solid rgba(37,44,70,0.9);
+      position:relative; padding:14px;
+      border-bottom:1px solid rgba(37,44,70,0.9);
       background:radial-gradient(circle at top,#111827 0,#020308 70%);
     }
 
@@ -153,35 +174,42 @@
       background:linear-gradient(135deg,rgba(15,23,42,0.98),rgba(3,7,18,0.98));
       box-shadow:0 8px 20px rgba(0,0,0,0.9);
       text-transform:uppercase; letter-spacing:0.16em; color:#dbe3ff;
-      transition:border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease, background 0.2s ease;
+      transition:border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
       cursor:pointer;
     }
-
     .project-link:hover {
       border-color:var(--accent);
       box-shadow:var(--shadow-glow);
       transform:translateY(-1px);
-      background:radial-gradient(circle at top,rgba(15,118,246,0.25),rgba(3,7,18,0.98));
     }
 
     /* PROJECT THEMES */
-    .project-wck .project-wallpaper { background:radial-gradient(circle at 10% 0,#2a2111 0,#050308 46%,#000 100%); border-color:rgba(212,164,74,0.65); }
+    .project-wck .project-wallpaper {
+      background:radial-gradient(circle at 10% 0,#2a2111 0,#050308 46%,#000 100%);
+      border-color:rgba(212,164,74,0.65);
+    }
     .project-wck .project-title { color:var(--wck-gold); }
-    .project-wck .project-tag { border-color:rgba(212,164,74,0.7); color:#ffe9b3; background:rgba(23,15,5,0.96); }
 
-    .project-rad .project-wallpaper { background:radial-gradient(circle at 15% 0,#0b66c2 0,#020617 55%,#000 100%); border-color:rgba(59,130,246,0.9); }
+    .project-rad .project-wallpaper {
+      background:radial-gradient(circle at 15% 0,#0b66c2 0,#020617 55%,#000 100%);
+      border-color:rgba(59,130,246,0.9);
+    }
     .project-rad .project-title { color:var(--rad-blue); }
-    .project-rad .project-tag { border-color:rgba(59,130,246,0.75); background:rgba(8,47,107,0.98); color:#dbeafe; }
 
-    .project-bag .project-wallpaper { background:radial-gradient(circle at 20% 0,#064e3b 0,#020617 55%,#000 100%); border-color:rgba(74,222,128,0.75); }
+    .project-bag .project-wallpaper {
+      background:radial-gradient(circle at 20% 0,#064e3b 0,#020617 55%,#000 100%);
+      border-color:rgba(74,222,128,0.75);
+    }
     .project-bag .project-title { color:var(--bag-green); }
-    .project-bag .project-tag { border-color:rgba(74,222,128,0.8); background:rgba(6,78,59,0.98); color:#e1ffef; }
 
     /* FOOTER */
     .hoc-footer {
-      max-width:960px; margin:10px auto 26px; padding:10px 18px 0;
-      border-top:1px solid #141728; color:var(--text-soft); font-size:0.78rem;
-      display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px;
+      max-width:960px; margin:10px auto 26px;
+      padding:10px 18px 0;
+      border-top:1px solid #141728;
+      color:var(--text-soft);
+      font-size:0.78rem;
+      display:flex; justify-content:space-between; gap:8px;
     }
   </style>
 </head>
@@ -229,7 +257,7 @@
               Enforcement agents. OTC execution. Narrative physics.
             </p>
             <div class="project-links">
-              <a class="project-link primary" href="https://wicktoken.net" target="_blank"><span>🌐 Website</span></a>
+              <a class="project-link primary" href="https://continentalwick.com" target="_blank"><span>🌐 Website</span></a>
               <a class="project-link" href="https://x.com/wcktoken" target="_blank"><span>𝕏 Profile</span></a>
               <a class="project-link" href="https://x.com/i/communities/1994081719163736323" target="_blank"><span>🕴️ WCK LOBBY 𝕏</span></a>
               <a class="project-link" href="https://t.me/wcktoken" target="_blank"><span>📢 Telegram Channel</span></a>
@@ -289,7 +317,7 @@
 
       </section>
 
-      <!-- OPERATOR CARD (FULL WIDTH) -->
+      <!-- MRCAULIMAN CARD (FULL WIDTH) -->
       <section style="margin-top:28px;">
         <article class="project-card" style="grid-column:1 / -1;">
           <div class="project-media">
@@ -326,8 +354,3 @@
 
 </body>
 </html>
-
-
-
-
-
