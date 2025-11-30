@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>HOUSE OF CAULIMAN</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<style>
+  :root {
+    --bg:#050506;
+    --panel:#0b0b0d;
+    --line:#1c1c20;
+    --gold:#d4a44a;
+    --blue:#4da3ff;
+    --fg:#e9e9e9;
+    --muted:#9ca0a8;
+  }
+
+  body {
+    margin:0;
+    padding:0;
+    background:var(--bg);
+    color:var(--fg);
+    font-family:-apple-system, BlinkMacSystemFont, "Inter", Segoe UI, Roboto, sans-serif;
+  }
+
+  .wrap {
+    max-width:900px;
+    margin:0 auto;
+    padding:50px 20px 100px;
+  }
+
+  h1 {
+    text-align:center;
+    font-size:2.4rem;
+    font-weight:900;
+    margin-bottom:10px;
+    color:var(--fg);
+    letter-spacing:-1px;
+  }
+
+  .sub {
+    text-align:center;
+    font-size:1.1rem;
+    color:var(--blue);
+    margin-bottom:50px;
+  }
+
+  /* CINEMATIC PANELS */
+  .panel {
+    background:var(--panel);
+    padding:28px 30px;
+    border:1px solid var(--line);
+    border-radius:6px;
+    margin-bottom:45px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:
+      inset 0 0 20px rgba(77,163,255,0.08),
+      0 0 10px rgba(0,0,0,0.6);
+  }
+
+  .panel:before {
+    content:"";
+    position:absolute;
+    top:0; left:0;
+    width:100%;
+    height:3px;
+    background:linear-gradient(90deg, var(--blue), var(--gold));
+    opacity:0.65;
+  }
+
+  .panel h2 {
+    font-size:1.7rem;
+    font-weight:800;
+    margin:0 0 14px;
+    color:var(--gold);
+  }
+
+  .bio {
+    font-size:1rem;
+    line-height:1.55;
+    color:var(--muted);
+    margin-bottom:24px;
+  }
+
+  .links a {
+    display:block;
+    padding:14px 16px;
+    margin:10px 0;
+    background:#0f0f12;
+    border:1px solid var(--line);
+    border-left:4px solid var(--blue);
+    color:var(--fg);
+    text-decoration:none;
+    font-weight:600;
+    font-size:0.98rem;
+    transition:0.12s;
+  }
+
+  .links a:hover {
+    border-color:var(--blue);
+    background:#11131a;
+    color:#fff;
+  }
+
+  .tag {
+    margin-top:16px;
+    margin-bottom:6px;
+    text-transform:uppercase;
+    font-size:0.75rem;
+    color:var(--gold);
+    letter-spacing:1px;
+  }
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <h1>HOUSE OF CAULIMAN</h1>
+  <div class="sub">Protocol. Precision. Execution.</div>
+
+  <!-- THE COLLECTION -->
+  <div class="panel">
+    <h2>The mrcauliman Collection</h2>
+    <div class="bio">
+      Everything I’ve built lives inside these walls.  
+      No noise. No filters. Just work, pressure, and results.
+    </div>
+    <div class="links">
+      <a href="https://x.com/mrcauliman">𝕏 Profile</a>
+      <a href="https://youtube.com/@mrcauliman">YouTube</a>
+      <a href="https://t.me/houseofcauliman">Telegram Community</a>
+    </div>
+  </div>
+
+  <!-- WCK -->
+  <div class="panel">
+    <h2>CONTINENTAL WICK</h2>
+    <div class="bio">
+      Protocol discipline. Narrative precision.  
+      The WCK universe is built like a system, not a story.  
+      $WCK and the agents are the enforcement layer.
+    </div>
+    <div class="links">
+      <div class="tag">Website</div>
+      <a href="https://wicktoken.net">wicktoken.net</a>
+
+      <div class="tag">Channels</div>
+      <a href="https://x.com/wicktoken">𝕏</a>
+      <a href="https://t.me/continentalwick">Telegram Channel</a>
+      <a href="https://t.me/continentalwickchat">Telegram Community</a>
+    </div>
+  </div>
+
+  <!-- BAG -->
+  <div class="panel">
+    <h2>GET THE $BAG</h2>
+    <div class="bio">
+      XRPL’s heaviest meme. Utility on chain. Culture on brand.  
+      Built with floor control, casino systems, and full-stack execution.
+    </div>
+    <div class="links">
+      <div class="tag">Website</div>
+      <a href="https://getthebag.io">getthebag.io</a>
+
+      <div class="tag">Channels</div>
+      <a href="https://x.com/getthebag_io">𝕏</a>
+      <a href="https://x.com/i/communities/1994831536378843504">𝕏 Meme Factory</a>
+      <a href="https://t.me/bagxchange">Telegram Channel</a>
+      <a href="https://t.me/bagchatx">Telegram Community</a>
+    </div>
+  </div>
+
+  <!-- RAD -->
+  <div class="panel">
+    <h2>RAD GARLINGTON</h2>
+    <div class="bio">
+      Ledger truth. Certified structure.  
+      RAD runs the verification layer and the accountability stack.
+    </div>
+    <div class="links">
+      <div class="tag">Website</div>
+      <a href="https://radgarlington.io">radgarlington.io</a>
+
+      <div class="tag">Channels</div>
+      <a href="https://x.com/radgarlington">𝕏</a>
+      <a href="https://t.me/radledger">Telegram Channel</a>
+      <a href="https://t.me/radledgerchat">Telegram Community</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
