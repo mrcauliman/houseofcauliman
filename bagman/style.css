@@ -36,6 +36,14 @@ h1 {
   font-weight: 700;
 }
 
+.bio {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #d1e5f5;
+  margin: 20px 0 40px;
+  text-align: center;
+}
+
 .section {
   margin-bottom: 40px;
 }
@@ -75,43 +83,62 @@ h1 {
   border-radius: 2px;
 }
 
-/* ------------------------------------------- */
-/* PROJECT CARDS — NEW SYSTEM                  */
-/* ------------------------------------------- */
-
-.project-cards {
+/* CARD GRID */
+.cards {
   display: grid;
-  gap: 40px;
+  grid-template-columns: 1fr;
+  gap: 32px;
 }
 
-.project-card {
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid #133b5e;
+@media (min-width: 900px) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+}
+
+/* CARD STYLE */
+.card {
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(91, 192, 255, 0.35);
   border-radius: 16px;
-  padding: 25px;
+  padding: 32px 20px;
   text-align: center;
-  box-shadow: 0 0 18px rgba(0, 150, 255, 0.25);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 0 20px rgba(0, 150, 255, 0.22);
+  transition: transform .25s ease, box-shadow .25s ease;
 }
 
-.project-logo {
-  width: 120px;
-  height: auto;
-  margin-bottom: 15px;
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 28px rgba(0, 200, 255, 0.45);
 }
 
-.project-card h3 {
-  color: #5bc0ff;
+/* LOGOS */
+.card-logo {
+  width: 100px;
+  max-width: 100%;
+  margin-bottom: 18px;
+}
+
+/* TITLES */
+.card h3 {
   font-size: 24px;
-  margin: 10px 0 6px;
+  color: #5bc0ff;
+  margin: 12px 0 8px;
+  font-weight: 800;
 }
 
-.project-card p {
+/* SUBTEXT */
+.card p {
   color: #cbd5e1;
   font-size: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
-.project-links a {
+/* BUTTONS */
+.card-links a {
+  display: inline-block;
   background: #38bdf8;
   color: #000;
   padding: 8px 16px;
@@ -119,15 +146,14 @@ h1 {
   font-weight: 700;
   text-decoration: none;
   margin: 0 6px;
+  font-size: 14px;
 }
 
-.project-links a.disabled {
+.card-links a.disabled {
   background: #333;
   color: #666;
   pointer-events: none;
 }
-
-/* ------------------------------------------- */
 
 .closing {
   text-align: center;
