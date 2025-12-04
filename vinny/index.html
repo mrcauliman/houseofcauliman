@@ -11,6 +11,7 @@
   --fg:#e9e9e9;
   --gold:#d4a44a;
   --soft:#8f939a;
+  --panel:#111113;
 }
 
 * { box-sizing:border-box; }
@@ -24,12 +25,12 @@ body {
 .wrapper {
   max-width:900px;
   margin:0 auto;
-  padding:40px 20px;
+  padding:40px 20px 80px;
 }
 
 h1 {
   margin:0;
-  font-size:2.5rem;
+  font-size:2.6rem;
   font-weight:700;
   color:var(--gold);
   text-align:center;
@@ -38,53 +39,61 @@ h1 {
 .sub {
   text-align:center;
   margin-top:8px;
-  font-size:1.1rem;
+  font-size:1.15rem;
   color:var(--soft);
 }
 
 .portrait {
   width:100%;
   max-width:380px;
-  margin:40px auto;
+  margin:45px auto 30px;
   display:block;
-  border-radius:12px;
+  border-radius:14px;
+  box-shadow:0 0 25px rgba(0,0,0,.55);
 }
 
 .section-title {
-  font-size:1.4rem;
-  margin-top:40px;
-  margin-bottom:10px;
+  font-size:1.35rem;
+  margin-top:42px;
+  margin-bottom:12px;
   color:var(--gold);
   font-weight:600;
-  text-transform:uppercase;
   letter-spacing:1px;
+  text-transform:uppercase;
 }
 
 p {
-  font-size:1.1rem;
-  line-height:1.65;
+  font-size:1.12rem;
+  line-height:1.7;
   color:var(--fg);
 }
 
 .bio-block {
-  background:#111113;
-  padding:20px;
+  background:var(--panel);
+  padding:22px 22px;
   border-left:4px solid var(--gold);
   margin-top:20px;
   border-radius:6px;
+  font-size:1.15rem;
 }
 
-a {
+.quote {
+  font-style:italic;
   color:var(--gold);
-  text-decoration:none;
+  font-size:1.25rem;
+  margin:25px 0 10px;
+  text-align:center;
 }
-a:hover {
-  text-decoration:underline;
+
+.item-list {
+  margin-top:10px;
+  line-height:1.75;
+  font-size:1.08rem;
 }
 
 .footer {
   text-align:center;
-  margin-top:60px;
+  margin-top:70px;
   padding:20px 0;
   color:var(--soft);
   font-size:0.9rem;
@@ -96,48 +105,58 @@ a:hover {
 <div class="wrapper">
 
 <h1>Vinny “The Value” Marino</h1>
-<div class="sub">XRPL Loyalist | Meme Engine | The Guy Who Knows a Guy</div>
+<div class="sub">XRPL Loyalist • Streetwise Signal • The Guy Who Knows a Guy</div>
 
-<img src="assets/img/vinny.webp" alt="Vinny The Value Marino" class="portrait" />
+<img src="assets/vinny_the_value_marino.webp" alt="Vinny The Value Marino" class="portrait" />
+
+<div class="quote">“Relax, kid. The value always shows up.”</div>
 
 <div class="section-title">Identity File</div>
-
 <div class="bio-block">
-<p><strong>Ledger loyalist. XRPL shill. Meme engine. Here for every ripple. That’s the whole story. He’s the guy who “knows a guy.”</strong></p>
+  Vinny is the XRPL cousin everybody wishes they had — smooth, sharp, loud when he needs to be, quiet when he’s watching the room.  
+  He’s the guy who can read a chart like he’s reading your face.  
+  No protocol power. No badges. No enforcement.  
+  Just instinct, humor, and a gift for cutting through nonsense.
 </div>
 
 <div class="section-title">Role in the House</div>
 <p>
-Vinny operates as the street-level signal of the House of Cauliman — the voice of the timeline, the cousin you didn’t know you had, the loud XRPL loyalist who breaks the chain down the way normal people talk.
+Vinny operates at ground level — the <em>streetside signal</em> of the House of Cauliman.  
+He’s not here to verify projects.  
+He doesn’t police anything.  
+He doesn’t touch Ledger business — that’s RAD’s job, and Vinny won’t even stand in the same line.
 </p>
+
 <p>
-He’s not a coder. Not a suit. Not a strategist. He’s the <em>connector</em>. The timeline’s neighborhood plug. The loudmouth cousin at the barbecue who somehow always knows the latest XRPL play before anyone else tweets it.
+He’s the social layer.  
+The middleman between the timeline and reality.  
+If the XRPL fam is asking, Vinny is answering — in English, not protocol.
 </p>
 
 <div class="section-title">Function</div>
-<p>
-• Amplifies XRPL projects through meme-driven energy.<br>
-• Spots nonsense early and clowns it publicly.<br>
-• Points the fam toward value with instinct, not spreadsheets.<br>
-• Fills the timeline with the kind of commentary only a ledger loyalist can deliver.
-</p>
+
+<div class="item-list">
+• Boosts XRPL culture through memes, instinct, and street smarts.<br>
+• Clowns nonsense early so the fam doesn’t get clipped.<br>
+• Gives common-sense guidance — no rulings, no authority.<br>
+• Keeps the timeline laughing, learning, and staying out of trouble.<br>
+• Acts as the House’s “guy who knows a guy,” not the House’s judge.
+</div>
 
 <div class="section-title">Vinny’s Code</div>
 <p>
-If it’s XRPL, he’s in its corner.  
-If it’s a bad move, he’ll make it a meme.  
-If you need a lead… Vinny knows a guy.
+If it’s XRPL, he’s behind it.  
+If it smells funny, he’s roasting it.  
+If you need direction… Vinny’s got a cousin for that.
 </p>
 
 <div class="section-title">Follow Vinny</div>
 <p>
-<a href="https://x.com/USERNAME" target="_blank">𝕏 — @USERNAME</a><br>
-(Replace USERNAME once you lock the handle.)
+𝕏 — <strong>@USERNAME</strong><br>
+(Replace USERNAME once you lock his handle.)
 </p>
 
-<div class="footer">
-🏛️ House of Cauliman
-</div>
+<div class="footer">🏛️ House of Cauliman</div>
 
 </div>
 </body>
