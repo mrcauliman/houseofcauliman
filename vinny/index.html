@@ -9,8 +9,8 @@
 :root {
   --bg:#0a0a0b;
   --fg:#e9e9e9;
-  --gold:#d4a44a;
   --soft:#8f939a;
+  --accent:#00aaff;
   --panel:#111113;
 }
 
@@ -25,76 +25,130 @@ body {
 .wrapper {
   max-width:900px;
   margin:0 auto;
-  padding:40px 20px 80px;
+  padding:40px 20px 100px;
 }
 
+/* HEADERS */
 h1 {
   margin:0;
   font-size:2.6rem;
   font-weight:700;
-  color:var(--gold);
+  color:var(--accent);
   text-align:center;
 }
 
-.sub {
+.sub, .team-title {
   text-align:center;
-  margin-top:8px;
+  margin-top:10px;
+}
+
+.sub {
   font-size:1.15rem;
   color:var(--soft);
 }
 
-.portrait {
-  width:100%;
-  max-width:380px;
-  margin:45px auto 30px;
-  display:block;
-  border-radius:14px;
-  box-shadow:0 0 25px rgba(0,0,0,.55);
+.team-title {
+  font-size:1.05rem;
+  color:var(--accent);
+  font-weight:600;
 }
 
+/* PORTRAIT */
+img.portrait {
+  width:100%;
+  max-width:360px;
+  display:block;
+  margin:40px auto 30px;
+  border-radius:14px;
+  box-shadow:0 0 25px rgba(0,0,0,.45);
+}
+
+/* SECTION TITLES */
 .section-title {
   font-size:1.35rem;
-  margin-top:42px;
-  margin-bottom:12px;
-  color:var(--gold);
+  margin-top:40px;
+  margin-bottom:10px;
   font-weight:600;
-  letter-spacing:1px;
-  text-transform:uppercase;
+  color:var(--accent);
 }
 
+/* TEXT */
 p {
-  font-size:1.12rem;
-  line-height:1.7;
-  color:var(--fg);
-}
-
-.bio-block {
-  background:var(--panel);
-  padding:22px 22px;
-  border-left:4px solid var(--gold);
-  margin-top:20px;
-  border-radius:6px;
   font-size:1.15rem;
+  line-height:1.7;
 }
 
-.quote {
-  font-style:italic;
-  color:var(--gold);
-  font-size:1.25rem;
-  margin:25px 0 10px;
+/* BUTTONS */
+.btn-row {
+  margin-top:20px;
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.btn {
+  padding:10px 18px;
+  background:var(--accent);
+  border-radius:8px;
+  color:#000;
+  font-weight:600;
+  text-decoration:none;
+}
+
+/* HOUSE PROJECT CARDS */
+.house-card {
+  background:#0d0f14;
+  border-radius:14px;
+  padding:24px;
+  margin:28px 0;
+  border:1px solid #1a1d23;
+  box-shadow:0 0 18px rgba(0,0,0,.45);
+}
+
+.house-card img.icon {
+  width:82px;
+  height:82px;
+  border-radius:50%;
+  display:block;
+  margin:0 auto 18px;
+}
+
+.house-card h3 {
   text-align:center;
+  color:#e9e9e9;
+  font-size:1.4rem;
+  margin:0 0 6px;
+  font-weight:700;
 }
 
-.item-list {
-  margin-top:10px;
-  line-height:1.75;
-  font-size:1.08rem;
+.house-card .ticker {
+  text-align:center;
+  color:var(--accent);
+  font-size:1.05rem;
+  margin-bottom:18px;
 }
 
+.house-card .btn-row {
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top:14px;
+}
+
+.house-card .btn {
+  padding:9px 16px;
+  background:var(--accent);
+  color:#000;
+  font-weight:600;
+  text-decoration:none;
+  border-radius:8px;
+}
+
+/* FOOTER */
 .footer {
   text-align:center;
-  margin-top:70px;
-  padding:20px 0;
+  margin-top:80px;
   color:var(--soft);
   font-size:0.9rem;
 }
@@ -104,59 +158,129 @@ p {
 <body>
 <div class="wrapper">
 
+<!-- HEADER -->
 <h1>Vinny “The Value” Marino</h1>
-<div class="sub">XRPL Loyalist • Streetwise Signal • The Guy Who Knows a Guy</div>
+<div class="sub">Yeah, that’s me. The guy who knows a guy.</div>
+<div class="team-title">Community Liaison — House of Cauliman</div>
 
 <img src="assets/vinny_the_value_marino.webp" alt="Vinny The Value Marino" class="portrait" />
 
-<div class="quote">“Relax, kid. The value always shows up.”</div>
+<!-- WHO I AM -->
+<div class="section-title">Who I Am</div>
+<p>
+Alright, here’s the truth. I’m not a dev, not a suit, and I’m definitely not one of those
+“let me explain liquidity” influencers.  
+I’m just Vinny — the cousin you call when you want the *real* explanation, not the TED Talk.
+</p>
+<p>
+I grew up around loud tables and louder opinions.  
+Learned early how to read people, and that skill carries over into markets pretty damn well.
+</p>
 
-<div class="section-title">Identity File</div>
-<div class="bio-block">
-  Vinny is the XRPL cousin everybody wishes they had — smooth, sharp, loud when he needs to be, quiet when he’s watching the room.  
-  He’s the guy who can read a chart like he’s reading your face.  
-  No protocol power. No badges. No enforcement.  
-  Just instinct, humor, and a gift for cutting through nonsense.
+<!-- WHAT I DO -->
+<div class="section-title">What I Actually Do</div>
+<p>
+I don’t verify projects.  
+I don’t enforce anything.  
+RAD handles the protocol heavy lifting — I stay with the people.
+</p>
+<p>
+I read the timeline.  
+I read the vibe.  
+And when the XRPL fam needs clarity, I break it down like I’m explaining it at a barbecue.
+</p>
+
+<!-- XRPL -->
+<div class="section-title">How I See XRPL</div>
+<p>
+XRPL’s home.  
+Fast. Clean. No carnival nonsense.  
+It's the only ecosystem where common sense still gets invited to the conversation.
+</p>
+<p>
+I move on instinct.  
+If something’s off, I’ll roast it before I argue it.  
+If something’s strong, I’ll point you toward it without the buzzwords.
+</p>
+
+<!-- LANE -->
+<div class="section-title">My Lane</div>
+<p>
+• I keep XRPL grounded and human.<br>
+• I roast nonsense early so you don’t waste time.<br>
+• I translate chaos into English.<br>
+• I stay in the social layer — never the Ledger layer.<br>
+• And if you need a shortcut… yeah, I know a guy.
+</p>
+
+<!-- SOCIAL -->
+<div class="section-title">Find Me</div>
+<div class="btn-row">
+  <a class="btn" href="https://x.com/vinnythevalue" target="_blank">𝕏 — @vinnythevalue</a>
 </div>
 
-<div class="section-title">Role in the House</div>
-<p>
-Vinny operates at ground level — the <em>streetside signal</em> of the House of Cauliman.  
-He’s not here to verify projects.  
-He doesn’t police anything.  
-He doesn’t touch Ledger business — that’s RAD’s job, and Vinny won’t even stand in the same line.
-</p>
+<!-- HOUSE PROJECT CARDS -->
+<div class="section-title">The House I Roll With</div>
 
-<p>
-He’s the social layer.  
-The middleman between the timeline and reality.  
-If the XRPL fam is asking, Vinny is answering — in English, not protocol.
-</p>
-
-<div class="section-title">Function</div>
-
-<div class="item-list">
-• Boosts XRPL culture through memes, instinct, and street smarts.<br>
-• Clowns nonsense early so the fam doesn’t get clipped.<br>
-• Gives common-sense guidance — no rulings, no authority.<br>
-• Keeps the timeline laughing, learning, and staying out of trouble.<br>
-• Acts as the House’s “guy who knows a guy,” not the House’s judge.
+<!-- WCK -->
+<div class="house-card">
+  <img src="/assets/icons/wck.webp" class="icon" alt="Continental Wick" />
+  <h3>Continental Wick</h3>
+  <div class="ticker">$WCK</div>
+  <div class="btn-row">
+    <a class="btn" href="https://continentalwick.com" target="_blank">Site</a>
+    <a class="btn" href="#">AMM (Soon)</a>
+  </div>
 </div>
 
-<div class="section-title">Vinny’s Code</div>
-<p>
-If it’s XRPL, he’s behind it.  
-If it smells funny, he’s roasting it.  
-If you need direction… Vinny’s got a cousin for that.
-</p>
+<!-- BAG -->
+<div class="house-card">
+  <img src="/assets/icons/bag.webp" class="icon" alt="Get The $BAG" />
+  <h3>GET THE $BAG</h3>
+  <div class="ticker">$BAG</div>
+  <div class="btn-row">
+    <a class="btn" href="https://getthebag.io" target="_blank">Site</a>
+    <a class="btn" href="#">Swap</a>
+    <a class="btn" href="#">Issuer</a>
+  </div>
+</div>
 
-<div class="section-title">Follow Vinny</div>
-<p>
-𝕏 — <strong>@USERNAME</strong><br>
-(Replace USERNAME once you lock his handle.)
-</p>
+<!-- RAD -->
+<div class="house-card">
+  <img src="/assets/icons/rad.webp" class="icon" alt="Rad Garlington" />
+  <h3>Rad Garlington</h3>
+  <div class="ticker">$RAD</div>
+  <div class="btn-row">
+    <a class="btn" href="https://radgarlington.io" target="_blank">Site</a>
+    <a class="btn" href="#">Swap</a>
+    <a class="btn" href="#">Issuer</a>
+  </div>
+</div>
 
-<div class="footer">🏛️ House of Cauliman</div>
+<!-- VINNY CARD -->
+<div class="house-card">
+  <img src="assets/vinny_the_value_marino.webp" class="icon" alt="Vinny The Value" />
+  <h3>Vinny “The Value”</h3>
+  <div class="ticker">House Persona</div>
+  <div class="btn-row">
+    <a class="btn" href="/vinny/" target="_blank">Profile</a>
+    <a class="btn" href="https://x.com/vinnythevalue" target="_blank">𝕏</a>
+  </div>
+</div>
+
+<!-- HOUSE -->
+<div class="house-card">
+  <img src="/assets/icons/house.webp" class="icon" alt="House of Cauliman" />
+  <h3>House of Cauliman</h3>
+  <div class="ticker">Foundation</div>
+  <div class="btn-row">
+    <a class="btn" href="https://houseofcauliman.com" target="_blank">Visit</a>
+  </div>
+</div>
+
+<div class="footer">
+🏛️ House of Cauliman
+</div>
 
 </div>
 </body>
