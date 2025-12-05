@@ -1,287 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Vinny “The Value” Marino — House of Cauliman</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<style>
-:root {
-  --bg:#0a0a0b;
-  --fg:#e9e9e9;
-  --soft:#8f939a;
-  --accent:#00aaff;
-  --panel:#111113;
-}
+<meta name="robots" content="noindex,nofollow">
 
-* { box-sizing:border-box; }
-body {
-  margin:0;
-  background:var(--bg);
-  color:var(--fg);
-  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-}
-
-.wrapper {
-  max-width:900px;
-  margin:0 auto;
-  padding:40px 20px 100px;
-}
-
-/* HEADERS */
-h1 {
-  margin:0;
-  font-size:2.6rem;
-  font-weight:700;
-  color:var(--accent);
-  text-align:center;
-}
-
-.sub, .team-title {
-  text-align:center;
-  margin-top:10px;
-}
-
-.sub {
-  font-size:1.15rem;
-  color:var(--soft);
-}
-
-.team-title {
-  font-size:1.05rem;
-  color:var(--accent);
-  font-weight:600;
-}
-
-/* PORTRAIT */
-img.portrait {
-  width:100%;
-  max-width:360px;
-  display:block;
-  margin:40px auto 30px;
-  border-radius:14px;
-  box-shadow:0 0 25px rgba(0,0,0,.45);
-}
-
-/* SECTION TITLES */
-.section-title {
-  font-size:1.35rem;
-  margin-top:40px;
-  margin-bottom:10px;
-  font-weight:600;
-  color:var(--accent);
-}
-
-/* TEXT */
-p {
-  font-size:1.15rem;
-  line-height:1.7;
-}
-
-/* BUTTONS */
-.btn-row {
-  margin-top:20px;
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-}
-
-.btn {
-  padding:10px 18px;
-  background:var(--accent);
-  border-radius:8px;
-  color:#000;
-  font-weight:600;
-  text-decoration:none;
-}
-
-/* HOUSE PROJECT CARDS */
-.house-card {
-  background:#0d0f14;
-  border-radius:14px;
-  padding:24px;
-  margin:28px 0;
-  border:1px solid #1a1d23;
-  box-shadow:0 0 18px rgba(0,0,0,.45);
-}
-
-.house-card img.icon {
-  width:82px;
-  height:82px;
-  border-radius:50%;
-  display:block;
-  margin:0 auto 18px;
-}
-
-.house-card h3 {
-  text-align:center;
-  color:#e9e9e9;
-  font-size:1.4rem;
-  margin:0 0 6px;
-  font-weight:700;
-}
-
-.house-card .ticker {
-  text-align:center;
-  color:var(--accent);
-  font-size:1.05rem;
-  margin-bottom:18px;
-}
-
-.house-card .btn-row {
-  display:flex;
-  gap:12px;
-  justify-content:center;
-  flex-wrap:wrap;
-  margin-top:14px;
-}
-
-.house-card .btn {
-  padding:9px 16px;
-  background:var(--accent);
-  color:#000;
-  font-weight:600;
-  text-decoration:none;
-  border-radius:8px;
-}
-
-/* FOOTER */
-.footer {
-  text-align:center;
-  margin-top:80px;
-  color:var(--soft);
-  font-size:0.9rem;
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-<div class="wrapper">
 
-<!-- HEADER -->
-<h1>Vinny “The Value” Marino</h1>
-<div class="sub">Yeah, that’s me. The guy who knows a guy.</div>
-<div class="team-title">Community Liaison — House of Cauliman</div>
+<div class="page">
 
-<img src="assets/vinny_the_value_marino.webp" alt="Vinny The Value Marino" class="portrait" />
+  <!-- HERO -->
+  <section class="hero">
+    <picture>
+      <source src="assets/vinny_the_value_marino.webp" type="image/webp">
+      <img src="assets/vinny_the_value_marino.png" alt="Vinny The Value Marino" class="bagman-img">
+    </picture>
 
-<!-- WHO I AM -->
-<div class="section-title">Who I Am</div>
-<p>
-Alright, here’s the truth. I’m not a dev, not a suit, and I’m definitely not one of those
-“let me explain liquidity” influencers.  
-I’m just Vinny — the cousin you call when you want the *real* explanation, not the TED Talk.
-</p>
-<p>
-I grew up around loud tables and louder opinions.  
-Learned early how to read people, and that skill carries over into markets pretty damn well.
-</p>
+    <h1>VINNY “THE VALUE”</h1>
 
-<!-- WHAT I DO -->
-<div class="section-title">What I Actually Do</div>
-<p>
-I don’t verify projects.  
-I don’t enforce anything.  
-RAD handles the protocol heavy lifting — I stay with the people.
-</p>
-<p>
-I read the timeline.  
-I read the vibe.  
-And when the XRPL fam needs clarity, I break it down like I’m explaining it at a barbecue.
-</p>
+    <p class="tagline">From Jersey to the Ledger. I see value before it walks in.</p>
 
-<!-- XRPL -->
-<div class="section-title">How I See XRPL</div>
-<p>
-XRPL’s home.  
-Fast. Clean. No carnival nonsense.  
-It's the only ecosystem where common sense still gets invited to the conversation.
-</p>
-<p>
-I move on instinct.  
-If something’s off, I’ll roast it before I argue it.  
-If something’s strong, I’ll point you toward it without the buzzwords.
-</p>
+    <p class="bio">
+      Name’s Vinny. People toss “The Value” at me like it’s a nickname, but look — I never asked for it. I just call things how they are. 
+      I read folks. I read rooms. I read markets without staring at a chart all day.<br><br>
+      You want hype? Go somewhere else.  
+      You want straight talk? Pull up a chair.<br><br>
+      Community Liaison<br>
+      House of Cauliman
+    </p>
+  </section>
 
-<!-- LANE -->
-<div class="section-title">My Lane</div>
-<p>
-• I keep XRPL grounded and human.<br>
-• I roast nonsense early so you don’t waste time.<br>
-• I translate chaos into English.<br>
-• I stay in the social layer — never the Ledger layer.<br>
-• And if you need a shortcut… yeah, I know a guy.
-</p>
+  <!-- XRPL -->
+  <section class="section">
+    <h2>XRPL</h2>
+    <p class="loud">Fast. Clean. No circus. You blink, you miss the move.</p>
 
-<!-- SOCIAL -->
-<div class="section-title">Find Me</div>
-<div class="btn-row">
-  <a class="btn" href="https://x.com/vinnythevalue" target="_blank">𝕏 — @vinnythevalue</a>
-</div>
+    <div class="link-block">
+      <a href="https://xrpscan.com" target="_blank">XRPSCAN</a>
+      <a href="https://bithomp.com" target="_blank">Bithomp</a>
+      <a href="https://xmagnetic.org" target="_blank">Magnetic Swap</a>
+      <a href="https://dexscreener.com/xrpl" target="_blank">DEX Screener</a>
+      <a href="https://onxrp.com" target="_blank">OnXRP</a>
+    </div>
+  </section>
 
-<!-- HOUSE PROJECT CARDS -->
-<div class="section-title">The House I Roll With</div>
+  <div class="divider"></div>
 
-<!-- WCK -->
-<div class="house-card">
-  <img src="/assets/icons/wck.webp" class="icon" alt="Continental Wick" />
-  <h3>Continental Wick</h3>
-  <div class="ticker">$WCK</div>
-  <div class="btn-row">
-    <a class="btn" href="https://continentalwick.com" target="_blank">Site</a>
-    <a class="btn" href="#">AMM (Soon)</a>
-  </div>
-</div>
+  <!-- EARLY -->
+  <section class="section">
+    <h2>You're Early</h2>
+    <p>Most folks show up after the fireworks. Not me. Not you. If you’re here now, you’re already ahead of the herd.</p>
+    <p>I watch who’s building, who’s bluffing, and who’s pretending they didn’t just panic-sell. Jersey instincts don’t miss much.</p>
+  </section>
 
-<!-- BAG -->
-<div class="house-card">
-  <img src="/assets/icons/bag.webp" class="icon" alt="Get The $BAG" />
-  <h3>GET THE $BAG</h3>
-  <div class="ticker">$BAG</div>
-  <div class="btn-row">
-    <a class="btn" href="https://getthebag.io" target="_blank">Site</a>
-    <a class="btn" href="#">Swap</a>
-    <a class="btn" href="#">Issuer</a>
-  </div>
-</div>
+  <div class="divider"></div>
 
-<!-- RAD -->
-<div class="house-card">
-  <img src="/assets/icons/rad.webp" class="icon" alt="Rad Garlington" />
-  <h3>Rad Garlington</h3>
-  <div class="ticker">$RAD</div>
-  <div class="btn-row">
-    <a class="btn" href="https://radgarlington.io" target="_blank">Site</a>
-    <a class="btn" href="#">Swap</a>
-    <a class="btn" href="#">Issuer</a>
-  </div>
-</div>
+  <!-- ECOSYSTEM -->
+  <section class="section">
+    <h2>Mr Cauliman Collection</h2>
 
-<!-- VINNY CARD -->
-<div class="house-card">
-  <img src="assets/vinny_the_value_marino.webp" class="icon" alt="Vinny The Value" />
-  <h3>Vinny “The Value”</h3>
-  <div class="ticker">House Persona</div>
-  <div class="btn-row">
-    <a class="btn" href="/vinny/" target="_blank">Profile</a>
-    <a class="btn" href="https://x.com/vinnythevalue" target="_blank">𝕏</a>
-  </div>
-</div>
+    <div class="cards">
 
-<!-- HOUSE -->
-<div class="house-card">
-  <img src="/assets/icons/house.webp" class="icon" alt="House of Cauliman" />
-  <h3>House of Cauliman</h3>
-  <div class="ticker">Foundation</div>
-  <div class="btn-row">
-    <a class="btn" href="https://houseofcauliman.com" target="_blank">Visit</a>
-  </div>
-</div>
+      <!-- CONTINENTAL WICK -->
+      <div class="card">
+        <img src="../assets/wck_logo.webp" alt="$WCK" class="card-logo">
+        <h3>CONTINENTAL WICK</h3>
+        <p>$WCK</p>
+        <div class="card-links">
+          <a href="https://continentalwick.com" target="_blank">Site</a>
+          <a class="disabled">AMM Coming Soon</a>
+        </div>
+      </div>
 
-<div class="footer">
-🏛️ House of Cauliman
-</div>
+      <!-- GET THE BAG -->
+      <div class="card">
+        <img src="../assets/bag_logo.webp" alt="$BAG" class="card-logo">
+        <h3>GET THE $BAG</h3>
+        <p>$BAG</p>
+        <div class="card-links">
+          <a href="https://getthebag.io" target="_blank">Site</a>
+          <a href="https://xmagnetic.org/swap/BAG+rNeYbfb9EDV8c7mNfUuooEEYYzMcEuDFbr_XRP+XRP?network=mainnet" target="_blank">Swap</a>
+          <a href="https://xrpscan.com/account/rNeYbfb9EDV8c7mNfUuooEEYYzMcEuDFbr" target="_blank">Issuer</a>
+        </div>
+      </div>
+
+      <!-- RAD -->
+      <div class="card">
+        <img src="../assets/rad_logo.webp" alt="$RAD" class="card-logo">
+        <h3>Rad Garlington</h3>
+        <p>$RAD</p>
+        <div class="card-links">
+          <a href="https://radgarlington.io" target="_blank">Site</a>
+          <a href="https://xmagnetic.org/swap/RAD+rKpaNoTRdXa48W7emkKgtCLz2MuhEroU7V_XRP+XRP?network=mainnet" target="_blank">Swap</a>
+          <a href="https://xrpscan.com/account/rKpaNoTRdXa48W7emkKgtCLz2MuhEroU7V" target="_blank">Issuer</a>
+        </div>
+      </div>
+
+      <!-- HOUSE -->
+      <div class="card">
+        <picture>
+          <source src="../assets/houseofcauliman_logo.webp" type="image/webp">
+          <img src="../assets/houseofcauliman_logo.png" alt="House of Cauliman" class="card-logo">
+        </picture>
+        <h3>House of Cauliman</h3>
+        <p>The home base.</p>
+        <div class="card-links">
+          <a href="https://houseofcauliman.com" target="_blank">Visit</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- END -->
+  <section class="section">
+    <p class="closing">Value shows up early. So do I.</p>
+  </section>
 
 </div>
+
 </body>
 </html>
