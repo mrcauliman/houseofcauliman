@@ -1,0 +1,179 @@
+:root {
+  --bg: #f7f5f2;
+  --fg: #2a2a2a;
+  --soft: #7d7d7d;
+  --accent: #b30024; 
+  --gold: #d3a24a;
+}
+
+/* GLOBAL */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+.page {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px 100px;
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.bagman-img {
+  width: 100%;
+  max-width: 360px;
+  display: block;
+  margin: 0 auto 20px;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.tagline {
+  margin-top: 8px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--soft);
+}
+
+.bio {
+  margin-top: 18px;
+  font-size: 1.15rem;
+  line-height: 1.7;
+}
+
+/* SECTION */
+.section {
+  margin-top: 60px;
+}
+
+.section h2 {
+  font-size: 1.9rem;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+.section p {
+  font-size: 1.1rem;
+  line-height: 1.65;
+}
+
+/* LOUD TEXT */
+.loud {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* DIVIDER */
+.divider {
+  width: 100%;
+  height: 2px;
+  background: var(--gold);
+  margin: 60px 0;
+  opacity: 0.25;
+}
+
+/* LINKS */
+.link-block {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.link-block a {
+  padding: 8px 14px;
+  background: var(--gold);
+  color: #000;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.link-block a:hover {
+  opacity: 0.85;
+}
+
+/* CARDS */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin-top: 25px;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.06);
+  text-align: center;
+}
+
+.card-logo {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 14px;
+}
+
+.card h3 {
+  margin: 0;
+  font-size: 1.35rem;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.card p {
+  margin-top: 4px;
+  color: var(--soft);
+  font-size: 1rem;
+}
+
+.card-links {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card-links a {
+  padding: 8px 16px;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.card-links a.disabled {
+  background: #cccccc;
+  color: #666666;
+  pointer-events: none;
+}
+
+/* ENDING */
+.closing {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent);
+  opacity: 0.9;
+}
