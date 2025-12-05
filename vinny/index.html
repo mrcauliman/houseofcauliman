@@ -5,86 +5,77 @@
   <title>Vinny “The Value” Marino — House of Cauliman</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- SEO -->
-  <meta name="description" content="Vinny “The Value” Marino — Community Liaison at the House of Cauliman.">
-  <meta name="keywords" content="Vinny The Value, House of Cauliman, XRP, XRPL">
-
   <style>
     body {
       margin:0;
       padding:0;
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background:
-        radial-gradient(circle at center, rgba(40,28,28,0.25) 0%, rgba(0,0,0,0.95) 70%),
-        #0a0a0c;
+      background:#0a0a0c;
       color:#e9e9e9;
-      min-height:100vh;
     }
 
-    .vinny-header {
+    .wrapper {
+      max-width:960px;
+      margin:0 auto;
+      padding:40px 16px 60px;
+    }
+
+    .header {
       text-align:center;
-      padding:40px 20px 25px;
-      color:#d4a44a;
       font-size:2rem;
-      letter-spacing:0.06em;
       text-transform:uppercase;
+      letter-spacing:0.05em;
+      color:#d4a44a;
+      margin-bottom:25px;
     }
 
-    .vinny-card {
-      max-width:900px;
-      margin:0 auto 50px;
-      background:linear-gradient(145deg, rgba(25,22,22,0.9), rgba(10,10,10,0.95));
+    .card {
+      background:rgba(18,18,18,0.92);
       border:1px solid rgba(212,164,74,0.35);
       border-radius:18px;
       padding:26px;
-      box-shadow:
-        0 10px 50px rgba(0,0,0,0.75),
-        inset 0 0 35px rgba(212,164,74,0.07);
+      margin-bottom:40px;
+      box-shadow:0 12px 45px rgba(0,0,0,0.7);
     }
 
-    .vinny-img {
+    .img {
       display:block;
       margin:0 auto 20px;
-      width:240px;
+      width:260px;
       border-radius:14px;
       border:1px solid rgba(212,164,74,0.45);
       box-shadow:0 8px 28px rgba(0,0,0,0.7);
     }
 
-    .vinny-title {
-      font-size:1.4rem;
+    .title {
       text-align:center;
+      font-size:1.4rem;
       color:#d4a44a;
-      margin-bottom:4px;
-      letter-spacing:0.04em;
+      margin-bottom:6px;
     }
 
-    .vinny-role {
-      font-size:0.95rem;
+    .role {
       text-align:center;
-      color:#c7c7c7;
+      font-size:0.9rem;
       text-transform:uppercase;
       letter-spacing:0.12em;
-      margin-bottom:20px;
+      margin-bottom:18px;
+      color:#c7c7c7;
     }
 
-    .vinny-copy {
-      font-size:1rem;
-      line-height:1.65;
-      color:#cfcfcf;
+    .line {
       text-align:center;
-      max-width:720px;
-      margin:0 auto 25px;
+      color:#d7d7d7;
+      font-size:1rem;
+      margin-bottom:26px;
     }
 
-    .vinny-links {
+    .btn-wrap {
       display:flex;
       justify-content:center;
-      gap:14px;
-      margin-top:20px;
     }
 
-    .vinny-link {
+    .btn {
       padding:10px 18px;
       border-radius:999px;
       border:1px solid rgba(212,164,74,0.5);
@@ -97,37 +88,133 @@
       transition:0.2s ease;
     }
 
-    .vinny-link:hover {
+    .btn:hover {
       background:rgba(212,164,74,0.15);
       transform:translateY(-1px);
       box-shadow:0 0 15px rgba(212,164,74,0.4);
     }
+
+    /* PROJECT GRID */
+    .projects-title {
+      text-align:center;
+      color:#d4a44a;
+      margin:20px 0 30px;
+      font-size:1.1rem;
+      letter-spacing:0.12em;
+      text-transform:uppercase;
+    }
+
+    .grid {
+      display:grid;
+      gap:20px;
+      grid-template-columns:1fr;
+    }
+    @media(min-width:768px){
+      .grid {
+        grid-template-columns:repeat(3,1fr);
+      }
+    }
+
+    .project-card {
+      background:#111;
+      border:1px solid #2a2a2a;
+      border-radius:16px;
+      padding:20px;
+      text-align:center;
+      box-shadow:0 10px 25px rgba(0,0,0,0.6);
+    }
+
+    .project-logo {
+      width:80px;
+      margin-bottom:12px;
+    }
+
+    .project-title {
+      font-size:1rem;
+      text-transform:uppercase;
+      letter-spacing:0.1em;
+      color:#e9e9e9;
+      margin-bottom:6px;
+    }
+
+    .project-sub {
+      font-size:0.8rem;
+      color:#9f9f9f;
+      margin-bottom:12px;
+    }
+
+    .project-btn {
+      display:inline-block;
+      margin-top:6px;
+      padding:8px 14px;
+      border:1px solid #444;
+      border-radius:999px;
+      color:#d4a44a;
+      font-size:0.78rem;
+      text-decoration:none;
+      letter-spacing:0.08em;
+    }
+
+    .project-btn:hover {
+      border-color:#d4a44a;
+    }
   </style>
-
 </head>
+
 <body>
+<div class="wrapper">
 
-  <div class="vinny-header">Vinny “The Value” Marino</div>
+  <div class="header">Vinny “The Value” Marino</div>
 
-  <div class="vinny-card">
+  <!-- PROFILE CARD -->
+  <div class="card">
+    <img src="/vinny/assets/vinny_the_value_marino.webp" class="img" alt="Vinny The Value">
 
-    <img src="/vinny/assets/vinny_the_value_marino.webp"
-         alt="Vinny The Value"
-         class="vinny-img">
+    <h2 class="title">Community Liaison</h2>
+    <p class="role">House of Cauliman</p>
 
-    <h2 class="vinny-title">Community Liaison</h2>
-    <p class="vinny-role">House of Cauliman</p>
-
-    <p class="vinny-copy">
-      Value isn’t noise. It’s pattern, timing, and instinct sharpened by pressure.  
-      Vinny stays behind the scenes, plugged into sentiment, flow, and the pulse of the XRPL.  
+    <p class="line">
+      I stay tapped into the rooms that matter.  
+      If you see me, the conversation has weight.
     </p>
 
-    <div class="vinny-links">
-      <a class="vinny-link" href="https://x.com/vinnythevalue" target="_blank">𝕏 Profile</a>
+    <div class="btn-wrap">
+      <a class="btn" href="https://x.com/vinnythevalue" target="_blank">𝕏 Profile</a>
+    </div>
+  </div>
+
+
+  <!-- PROJECT CARDS (MATCHES BAGMAN'S PAGE) -->
+  <div class="projects-title">House Projects</div>
+
+  <div class="grid">
+
+    <!-- WCK -->
+    <div class="project-card">
+      <img src="/assets/wck_logo.webp" class="project-logo">
+      <div class="project-title">Continental Wick</div>
+      <div class="project-sub">$WCK — Protocol Universe</div>
+      <a class="project-btn" href="https://continentalwick.com" target="_blank">Website</a>
+    </div>
+
+    <!-- BAG -->
+    <div class="project-card">
+      <img src="/assets/bag_logo.webp" class="project-logo">
+      <div class="project-title">GET THE $BAG</div>
+      <div class="project-sub">$BAG — Meme Infrastructure</div>
+      <a class="project-btn" href="https://getthebag.io" target="_blank">Website</a>
+    </div>
+
+    <!-- RAD -->
+    <div class="project-card">
+      <img src="/assets/rad_logo.webp" class="project-logo">
+      <div class="project-title">RAD Garlington</div>
+      <div class="project-sub">$RAD — Ledger Registry</div>
+      <a class="project-btn" href="https://radgarlington.io" target="_blank">Website</a>
     </div>
 
   </div>
 
+</div>
 </body>
 </html>
