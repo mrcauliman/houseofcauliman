@@ -6,14 +6,19 @@ const client = new OpenAI({ apiKey: process.env.OPENAI_KEY });
 
 router.post("/api/ask-vinny", async (req, res) => {
   try {
-    const question = req.body.question?.trim() || "";
+    const question = (req.body.question || "").trim();
+
+    if (!question) {
+      return res.json({ answer: "Ask something real. Vinny’s not a mind reader." });
+    }
 
     const completion = await client.chat.completions.create({
       model: "gpt-5.1",
       messages: [
-        { 
-          role: "system", 
-          content: "You are Vinny. Direct. Sharp. Jersey energy. No fluff. No apologies. Straight answers." 
+        {
+          role: "system",
+          content:
+            "You are Vinny. Direct. Sharp. Jersey energy. Short answers. No fluff. No apologies. Call things how you see them."
         },
         { role: "user", content: question }
       ]
@@ -23,7 +28,7 @@ router.post("/api/ask-vinny", async (req, res) => {
 
   } catch (err) {
     console.error("ASK VINNY ERROR:", err);
-    res.json({ answer: "Relax, something hiccuped. Vinny will be back in a second." });
+    res.json({ answer: "Relax. Something blinked on the backend. Try again." });
   }
 });
 
