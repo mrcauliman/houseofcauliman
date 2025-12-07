@@ -1,19 +1,18 @@
-router.post("/api/ask-vinny", async (req, res) => {
-  try {
-    const question = (req.body.question || "").trim();
+import express from "express";
+import askVinnyRoute from "./askVinny.js";
 
-    const r = await client.chat.completions.create({
-      model: "gpt-5.1",
-      messages: [
-        { role: "system", content: "You are Vinny. Direct, sharp, Jersey tone. No fluff." },
-        { role: "user", content: question }
-      ]
-    });
+const app = express();
 
-    res.json({ answer: r.choices[0].message.content });
+// Allow JSON bodies
+app.use(express.json());
 
-  } catch (err) {
-    console.error("ASK VINNY ERROR:", err);
-    res.json({ answer: "Relax. Vinny’s dealing with something. Try again." });
-  }
+// Serve index.html + style.css + any assets in this folder
+app.use(express.static("."));
+
+// Mount Vinny route
+app.use(askVinnyRoute);
+
+// Start server
+app.listen(3000, () => {
+  console.log("Vinny server running on port 3000");
 });
