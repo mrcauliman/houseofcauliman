@@ -9,19 +9,10 @@
 
   <!-- SEO -->
   <meta name="description" content="POWER PUNKS — non-token XRPL NFT collection inside the House of Cauliman. Built to hold, collect, or trade.">
-  <meta name="keywords" content="POWER PUNKS, XRPL NFTs, XRPL collections, House of Cauliman, NFT collectibles">
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="POWER PUNKS — House of Cauliman">
-  <meta property="og:description" content="Non-token XRPL NFT collection. Hold. Collect. Trade.">
-  <meta property="og:image" content="https://houseofcauliman.com/collections/powerpunks/assets/power_punks_logo.webp">
-  <meta property="og:url" content="https://houseofcauliman.com/collections/powerpunks.html">
-  <meta property="og:type" content="website">
 
   <style>
     :root{
       --bg:#050509;
-      --card:#0d0f18;
       --border:#1b1f33;
       --text:#f5f7ff;
       --muted:#9aa2c3;
@@ -57,34 +48,25 @@
       padding:7px 12px;
       border-radius:999px;
       border:1px solid #2a2f52;
-      background:linear-gradient(135deg,#0b1020,#05060f);
+      background:#0b1020;
       box-shadow:0 10px 22px rgba(0,0,0,.85);
       color:#cfd6ff;
-      transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-    }
-    .back-btn:hover{
-      transform:translateY(-1px);
-      box-shadow:0 14px 30px rgba(0,0,0,.95);
-      border-color:var(--accent);
     }
 
     .header{
       text-align:center;
-      margin-top:56px;
-      margin-bottom:28px;
+      margin-top:44px;
+      margin-bottom:22px;
     }
 
     /* WIDE HERO LOGO */
     .hero-logo{
-      max-width:100%;
-      margin:0 auto 14px;
-      padding:0 6px;
+      margin:0 auto 6px;
+      padding:0;
     }
-
     .hero-logo img{
       width:100%;
       max-width:980px;
-      height:auto;
       display:block;
       margin:0 auto;
       filter:
@@ -94,13 +76,11 @@
 
     /* ATOM IMAGE */
     .atom{
-      margin:10px auto 16px;
+      margin:0 auto 6px;
       max-width:420px;
     }
-
     .atom img{
       width:100%;
-      height:auto;
       display:block;
       filter:
         drop-shadow(0 0 35px rgba(0,0,0,.9))
@@ -109,10 +89,9 @@
 
     /* DROPPING SOON BANNER */
     .drop-banner{
-      margin:18px auto 26px;
+      margin:4px auto 10px;
       max-width:520px;
-      padding:14px 18px;
-      text-align:center;
+      padding:12px 18px;
       border-radius:999px;
       border:1px solid rgba(124,58,237,0.6);
       background:linear-gradient(135deg,rgba(124,58,237,0.15),rgba(10,10,20,0.85));
@@ -123,10 +102,11 @@
       letter-spacing:.28em;
       text-transform:uppercase;
       color:#e9d5ff;
+      text-align:center;
     }
 
     h1{
-      margin:12px 0 8px;
+      margin:8px 0 4px;
       font-size:1.6rem;
       letter-spacing:.26em;
       text-transform:uppercase;
@@ -137,11 +117,12 @@
       letter-spacing:.22em;
       text-transform:uppercase;
       color:var(--muted);
+      margin:0;
     }
 
     .panel{
-      margin-top:10px;
-      padding:26px 26px 28px;
+      margin-top:14px;
+      padding:26px;
       background:linear-gradient(135deg,rgba(15,23,42,.94),rgba(5,6,12,.99));
       border:1px solid var(--border);
       border-radius:var(--radius);
@@ -162,40 +143,8 @@
       color:#d8ddff;
     }
 
-    .meta{
-      margin-top:18px;
-      font-size:.78rem;
-      color:#8b93b8;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-    }
-
-    .actions{
-      margin-top:26px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:14px;
-    }
-
-    .btn{
-      padding:11px 18px;
-      font-size:.75rem;
-      letter-spacing:.2em;
-      text-transform:uppercase;
-      border-radius:999px;
-      border:1px solid #2a2f52;
-      background:linear-gradient(135deg,#0b1020,#05060f);
-      box-shadow:0 14px 32px rgba(0,0,0,.9);
-      cursor:pointer;
-    }
-
-    .btn.disabled{
-      opacity:.55;
-      cursor:default;
-    }
-
     footer{
-      margin-top:54px;
+      margin-top:44px;
       text-align:center;
       font-size:.72rem;
       color:#7b82a8;
@@ -208,17 +157,14 @@
 
   <main class="wrap">
 
-    <!-- BACK -->
     <a href="https://houseofcauliman.com" class="back-btn">← House of Cauliman</a>
 
     <header class="header">
 
-      <!-- WIDE LOGO -->
       <div class="hero-logo">
         <img src="/collections/powerpunks/assets/power_punks_logo.webp" alt="POWER PUNKS">
       </div>
 
-      <!-- ATOM IMAGE -->
       <div class="atom">
         <picture>
           <source srcset="/collections/powerpunks/assets/power_punks_atom_001_.webp" type="image/webp">
@@ -226,13 +172,11 @@
         </picture>
       </div>
 
-      <!-- DROPPING SOON -->
-      <div class="drop-banner">
-        DROPPING SOON
-      </div>
+      <div class="drop-banner">DROPPING SOON</div>
 
       <h1>POWER PUNKS</h1>
       <div class="tagline">House Collection • XRPL NFTs</div>
+
     </header>
 
     <section class="panel">
@@ -243,25 +187,16 @@
         Loud silhouettes. Overbuilt frames. Characters designed to dominate the card.
       </p>
 
-      <p class="panel-copy" style="margin-top:14px;">
+      <p class="panel-copy" style="margin-top:12px;">
         Each Punk stands on its own.  
         Instantly readable. Instantly recognizable.
       </p>
 
-      <p class="panel-copy" style="margin-top:14px;">
+      <p class="panel-copy" style="margin-top:12px;">
         These are collectibles to hold, collect, or trade.  
         Finite supply. Distinct signal.  
         No token. No emissions. Just assets that carry weight.
       </p>
-
-      <div class="meta">
-        XRPL • NFTs • COLLECTIBLE ASSETS
-      </div>
-
-      <div class="actions">
-        <div class="btn disabled">Mint Details Coming</div>
-        <div class="btn disabled">Collection Preview Coming</div>
-      </div>
     </section>
 
     <footer>
