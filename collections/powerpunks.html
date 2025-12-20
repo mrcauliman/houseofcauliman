@@ -177,53 +177,43 @@ a{color:inherit;text-decoration:none}
 </div>
 
 <script>
-const ROSTER = [
-["001","ATOM"],["002","BLOP"],["003","GRUNT"],["004","SLAB"],["005","THUD"],
-["006","KNOB"],["007","BULK"],["008","MASH"],["009","PLOD"],["010","CRAG"],
-["011","BEEF"],["012","SLOSH"],["013","CLUB"],["014","STANCE"],["015","MELLOW"],
-["016","BRIKK"],["017","PUFF"],["018","YOKE"],["019","SAGG"],["020","STACK"],
-["021","BARREL"],["022","SHORTSTACK"],["023","REACH"],["024","STRIDE"],["025","PINCH"],
-["026","PEAK"],["027","SINK"],["028","WEDGE"],["029","OVAL"],["030","BOX"],
-["031","TURTLE"],["032","WALL"],["033","STILT"],["034","ANVIL"],["035","WEDGE"],
-["036","TOPKNOT"],["037","LEAN"],["038","HAMMER"],["039","BRICKS"],["040","TAPER"],
-["041","DOUBLE"],["042","FLATZ"],["043","BULB"],["044","STUB"],["045","TINY"],
-["046","BIGG"],["047","OFFSET"],["048","TAPER"],["049","SQUISH"],["050","LONG"],
-["051","STACKR"],["052","DROP"],["053","PUNCH"],["054","KNEE"],["055","BRICK"],
-["056","ROLL"],["057","SLIDE"],["058","BLOAT"],["059","PRESSR"],["060","GRAV"],
-["061","IRON"],["062","KING"],["063","PRIME"],["064","OGRE"],["065","TITAN"],
-["066","FINAL"],["067","GOLEM"],["068","GRAND"],["069","WALL"],["070","COLOSS"],
-["071","FLOAT"],["072","TILT"],["073","CLUMP"],["074","FUSE"],["075","TOPPER"],
-["076","ANCHOR"],["077","CRUSH"],["078","STRETCH"],["079","PRESS"],["080","MELT"],
-["081","ROOT"],["082","BASE"],["083","CAST"],["084","POUR"],["085","MOLD"],
-["086","PRESS"],["087","RUBR"],["088","VINYL"],["089","BIN"],["090","STACKD"],
-["091","MYTH"],["092","PROTO"],["093","REJECT"],["094","ARCH"],["095","ORIGIN"],
-["096","RAW"],["097","FIRST"],["098","LAST"],["099","END"],["100","OMEGA"]
+// ONLY NFTs THAT CURRENTLY EXIST ON DISK
+const AVAILABLE = [
+  ["003","GRUNT"],
+  ["005","THUD"],
+  ["006","KNOB"],
+  ["007","BULK"],
+  ["008","MASH"],
+  ["009","PLOD"],
+  ["010","CRAG"],
+  ["011","BEEF"]
 ];
 
-const grid=document.getElementById("grid");
+const grid = document.getElementById("grid");
 
-ROSTER.forEach(([num,name])=>{
+AVAILABLE.forEach(([num,name])=>{
   grid.insertAdjacentHTML("beforeend",`
-  <div class="card" onclick="openModal('${num}','${name}')">
-    <picture class="nft-img">
-      <source srcset="/collections/powerpunks/nfts/pp_${num}.webp" type="image/webp">
-      <img src="/collections/powerpunks/nfts/pp_${num}.png" alt="POWER PUNKS #${num} — ${name}">
-    </picture>
-    <div class="meta">#${num} — ${name}</div>
-    <div class="price">25 XRP</div>
-    <div class="edition">Edition 25 / 25</div>
-  </div>`);
+    <div class="card" onclick="openModal('${num}','${name}')">
+      <picture class="nft-img">
+        <source srcset="/collections/powerpunks/nfts/pp_${num}.webp" type="image/webp">
+        <img src="/collections/powerpunks/nfts/pp_${num}.png" alt="POWER PUNKS #${num} — ${name}">
+      </picture>
+      <div class="meta">#${num} — ${name}</div>
+      <div class="price">25 XRP</div>
+      <div class="edition">Edition 25 / 25</div>
+    </div>
+  `);
 });
 
 function openModal(num,name){
-  document.getElementById("modalImg").src=`/collections/powerpunks/nfts/pp_${num}.png`;
-  document.getElementById("modalTitle").innerText=`#${num} — ${name}`;
+  document.getElementById("modalImg").src = `/collections/powerpunks/nfts/pp_${num}.png`;
+  document.getElementById("modalTitle").innerText = `#${num} — ${name}`;
   document.getElementById("modal").classList.add("open");
 }
 function closeModal(){
   document.getElementById("modal").classList.remove("open");
 }
-document.getElementById("modal").onclick=e=>{
+document.getElementById("modal").onclick = e=>{
   if(e.target.id==="modal") closeModal();
 };
 </script>
