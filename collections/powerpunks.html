@@ -1,196 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>POWER PUNKS — House of Cauliman</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <link rel="canonical" href="https://houseofcauliman.com/collections/powerpunks.html">
+<meta charset="UTF-8">
+<title>POWER PUNKS — House of Cauliman</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="canonical" href="https://houseofcauliman.com/collections/powerpunks.html">
 
-  <style>
-    :root{
-      --bg:#050509;
-      --border:#1b1f33;
-      --text:#f5f7ff;
-      --muted:#9aa2c3;
-      --accent:#7c3aed;
-      --radius:22px;
-      --shadow:0 30px 80px rgba(0,0,0,.85);
-    }
-    *{box-sizing:border-box}
-    html,body{
-      margin:0;
-      padding:0;
-      background:radial-gradient(circle at top,#111827 0,#020308 55%,#000 100%);
-      color:var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-    }
-    a{color:inherit;text-decoration:none}
+<style>
+:root{
+  --bg:#050509;
+  --border:#1b1f33;
+  --text:#f5f7ff;
+  --muted:#9aa2c3;
+  --accent:#7c3aed;
+  --radius:18px;
+}
+*{box-sizing:border-box}
+html,body{
+  margin:0;
+  background:radial-gradient(circle at top,#111827 0,#020308 55%,#000 100%);
+  color:var(--text);
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+}
+a{color:inherit;text-decoration:none}
 
-    .wrap{
-      max-width:1400px;
-      margin:0 auto;
-      padding:18px 16px 64px;
-      position:relative;
-    }
+.wrap{max-width:1400px;margin:0 auto;padding:18px 16px 80px}
+.back-btn{
+  display:inline-block;
+  margin-bottom:12px;
+  font-size:.7rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid #2a2f52;
+  background:#0b1020;
+}
+.hero img{width:100%;max-width:980px;margin:0 auto;display:block}
+.atom{max-width:420px;margin:0 auto}
+.drop-banner{
+  margin:8px auto 14px;
+  max-width:520px;
+  padding:8px 16px;
+  border-radius:999px;
+  border:1px solid rgba(124,58,237,.6);
+  text-align:center;
+  font-size:.75rem;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+}
 
-    .back-btn{
-      position:absolute;
-      top:14px;
-      left:16px;
-      font-size:.7rem;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px solid #2a2f52;
-      background:#0b1020;
-      box-shadow:0 8px 18px rgba(0,0,0,.85);
-      color:#cfd6ff;
-    }
+.grid{
+  margin-top:28px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+@media(min-width:700px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1000px){.grid{grid-template-columns:repeat(5,1fr)}}
 
-    .header{text-align:center;padding-top:28px}
-    .hero-logo img{
-      width:100%;
-      max-width:980px;
-      margin:0 auto;
-      display:block;
-      filter:drop-shadow(0 0 55px rgba(124,58,237,.55));
-    }
-    .atom{margin:-2px auto 0;max-width:420px}
-    .atom img{width:100%;display:block}
+.card{
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  background:linear-gradient(135deg,rgba(15,23,42,.95),rgba(5,6,12,.99));
+  padding:10px;
+  cursor:pointer;
+  transition:transform .15s ease,border-color .15s ease;
+}
+.card:hover{transform:translateY(-2px);border-color:var(--accent)}
+.nft-img img{
+  width:100%;
+  display:block;
+}
+.meta{
+  margin-top:8px;
+  font-size:.75rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.price{
+  margin-top:4px;
+  font-size:.8rem;
+  color:#c4b5fd;
+}
+.edition{
+  font-size:.65rem;
+  color:var(--muted);
+}
 
-    .drop-banner{
-      margin:6px auto;
-      max-width:520px;
-      padding:8px 16px;
-      border-radius:999px;
-      border:1px solid rgba(124,58,237,.6);
-      background:linear-gradient(135deg,rgba(124,58,237,.15),rgba(10,10,20,.85));
-      font-size:.75rem;
-      letter-spacing:.28em;
-      text-transform:uppercase;
-      text-align:center;
-    }
-
-    h1{margin:4px 0;font-size:1.55rem;letter-spacing:.26em;text-transform:uppercase}
-    .tagline{font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
-
-    .panel{
-      margin:14px auto 28px;
-      max-width:820px;
-      padding:22px;
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      text-align:center;
-      line-height:1.55;
-      box-shadow:var(--shadow);
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(5,1fr);
-      gap:16px;
-    }
-    @media(max-width:1100px){.grid{grid-template-columns:repeat(3,1fr)}}
-    @media(max-width:680px){.grid{grid-template-columns:repeat(2,1fr)}}
-
-    .card{
-      background:#0b0e1a;
-      border:1px solid var(--border);
-      border-radius:18px;
-      padding:12px;
-      cursor:pointer;
-      transition:transform .15s ease, box-shadow .15s ease;
-    }
-    .card:hover{
-      transform:translateY(-2px);
-      box-shadow:0 18px 40px rgba(0,0,0,.9);
-    }
-    .card img{width:100%;border-radius:12px}
-    .meta{margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase}
-    .price{color:#e9d5ff}
-    .edition{color:var(--muted);font-size:.65rem}
-
-    .modal{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.85);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      z-index:999;
-    }
-    .modal.open{display:flex}
-    .modal-box{
-      background:#0b0e1a;
-      border:1px solid var(--border);
-      border-radius:22px;
-      padding:22px;
-      max-width:420px;
-      width:100%;
-      text-align:center;
-      box-shadow:var(--shadow);
-    }
-    .modal-box img{width:100%;border-radius:14px}
-    .modal h2{margin:12px 0 4px;font-size:1rem;letter-spacing:.2em}
-    .btn{
-      margin-top:14px;
-      display:inline-block;
-      padding:10px 18px;
-      border-radius:999px;
-      border:1px solid rgba(124,58,237,.6);
-      background:linear-gradient(135deg,rgba(124,58,237,.25),rgba(20,20,40,.9));
-      font-size:.7rem;
-      letter-spacing:.22em;
-      text-transform:uppercase;
-    }
-
-    footer{
-      margin-top:36px;
-      text-align:center;
-      font-size:.72rem;
-      color:#7b82a8;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-    }
-  </style>
+#modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:50;
+}
+#modal.open{display:flex}
+.modal-box{
+  max-width:520px;
+  width:90%;
+  background:#050509;
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:18px;
+}
+.modal-box img{width:100%}
+.modal-title{
+  margin:10px 0 6px;
+  font-size:.9rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.modal-actions{
+  margin-top:14px;
+  display:flex;
+  gap:10px;
+}
+.modal-btn{
+  flex:1;
+  padding:10px;
+  text-align:center;
+  border-radius:999px;
+  border:1px solid #2a2f52;
+  font-size:.7rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+</style>
 </head>
-<body>
 
+<body>
 <main class="wrap">
 
 <a href="https://houseofcauliman.com" class="back-btn">← House of Cauliman</a>
 
-<header class="header">
-  <div class="hero-logo">
-    <img src="/collections/powerpunks/assets/power_punks_logo.webp" alt="POWER PUNKS">
-  </div>
-  <div class="atom">
-    <img src="/collections/powerpunks/assets/power_punks_atom_001_.webp" alt="ATOM">
-  </div>
-  <div class="drop-banner">DROPPING SOON</div>
-  <h1>POWER PUNKS</h1>
-  <div class="tagline">House Collection • XRPL NFTs</div>
-</header>
-
-<section class="panel">
-100 characters • 25 editions each • Flat mint: <strong>25 XRP</strong><br>
-Built to collect, hold, and trade.
+<section class="hero">
+  <img src="/collections/powerpunks/assets/power_punks_logo.webp" alt="POWER PUNKS">
 </section>
 
-<section class="grid"></section>
+<section class="atom">
+  <picture>
+    <source srcset="/collections/powerpunks/assets/power_punks_atom_001_.webp" type="image/webp">
+    <img src="/collections/powerpunks/assets/power_punks_atom_001_.png" alt="POWER PUNKS Atom">
+  </picture>
+</section>
 
-<footer>House of Cauliman • XRPL</footer>
+<div class="drop-banner">DROPPING SOON</div>
+
+<section class="grid" id="grid"></section>
 
 </main>
 
-<div class="modal" id="modal">
+<div id="modal">
   <div class="modal-box">
     <img id="modalImg">
-    <h2 id="modalTitle"></h2>
-    <div class="price">25 XRP</div>
-    <div class="edition">Edition 25 / 25</div>
-    <a class="btn" href="#" onclick="event.preventDefault()">View on Marketplace</a>
+    <div class="modal-title" id="modalTitle"></div>
+    <div class="modal-actions">
+      <div class="modal-btn">View on Marketplace</div>
+      <div class="modal-btn" onclick="closeModal()">Close</div>
+    </div>
   </div>
 </div>
 
@@ -218,28 +188,31 @@ const ROSTER = [
 ["096","RAW"],["097","FIRST"],["098","LAST"],["099","END"],["100","OMEGA"]
 ];
 
-const grid = document.querySelector(".grid");
+const grid=document.getElementById("grid");
 
 ROSTER.forEach(([num,name])=>{
   grid.insertAdjacentHTML("beforeend",`
-    <div class="card" onclick="openModal('${num}','${name}')">
-      <img src="/collections/powerpunks/nfts/pp_${num}.png" alt="${name}">
-      <div class="meta">#${num} — ${name}</div>
-      <div class="price">25 XRP</div>
-      <div class="edition">Edition 25 / 25</div>
-    </div>
-  `);
+  <div class="card" onclick="openModal('${num}','${name}')">
+    <picture class="nft-img">
+      <source srcset="/collections/powerpunks/nfts/pp_${num}.webp" type="image/webp">
+      <img src="/collections/powerpunks/nfts/pp_${num}.png" alt="POWER PUNKS #${num} — ${name}">
+    </picture>
+    <div class="meta">#${num} — ${name}</div>
+    <div class="price">25 XRP</div>
+    <div class="edition">Edition 25 / 25</div>
+  </div>`);
 });
 
 function openModal(num,name){
-  document.getElementById("modalImg").src =
-    "/collections/powerpunks/nfts/pp_" + num + ".png";
-  document.getElementById("modalTitle").innerText =
-    "#" + num + " — " + name;
+  document.getElementById("modalImg").src=`/collections/powerpunks/nfts/pp_${num}.png`;
+  document.getElementById("modalTitle").innerText=`#${num} — ${name}`;
   document.getElementById("modal").classList.add("open");
 }
+function closeModal(){
+  document.getElementById("modal").classList.remove("open");
+}
 document.getElementById("modal").onclick=e=>{
-  if(e.target.id==="modal") e.target.classList.remove("open");
+  if(e.target.id==="modal") closeModal();
 };
 </script>
 
