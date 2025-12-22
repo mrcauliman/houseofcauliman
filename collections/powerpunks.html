@@ -47,7 +47,7 @@ a{color:inherit;text-decoration:none}
 
 .drop-banner{
   margin:6px auto 22px;
-  max-width:520px;
+  max-width:620px;
   padding:8px 16px;
   border-radius:999px;
   border:1px solid rgba(124,58,237,.6);
@@ -72,12 +72,21 @@ a{color:inherit;text-decoration:none}
   padding:10px;
   cursor:pointer;
   transition:transform .15s ease,border-color .15s ease;
+  position:relative;
+  overflow:hidden;
 }
 .card:hover{
   transform:translateY(-2px);
   border-color:var(--accent);
 }
 
+.nft-img{
+  width:100%;
+  display:block;
+  border-radius:12px;
+  overflow:hidden;
+  background:#070716;
+}
 .nft-img img{
   width:100%;
   display:block;
@@ -101,6 +110,35 @@ a{color:inherit;text-decoration:none}
   color:var(--muted);
 }
 
+/* Placeholder panel */
+.placeholder{
+  width:100%;
+  aspect-ratio:1/1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  background:
+    radial-gradient(circle at top, rgba(124,58,237,.18), rgba(0,0,0,.0) 55%),
+    linear-gradient(135deg, rgba(17,24,39,.9), rgba(5,6,12,.98));
+  border:1px dashed rgba(124,58,237,.35);
+  text-align:center;
+  padding:16px;
+}
+.placeholder .tag{
+  font-size:.7rem;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:#c4b5fd;
+}
+.placeholder .sub{
+  margin-top:10px;
+  font-size:.65rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
 /* MODAL */
 #modal{
   position:fixed;
@@ -121,7 +159,14 @@ a{color:inherit;text-decoration:none}
   border-radius:22px;
   padding:18px;
 }
-.modal-box img{width:100%}
+
+.modal-media{
+  width:100%;
+  border-radius:14px;
+  overflow:hidden;
+  background:#070716;
+}
+.modal-media img{width:100%;display:block}
 
 .modal-title{
   margin:10px 0 6px;
@@ -142,6 +187,7 @@ a{color:inherit;text-decoration:none}
   text-align:center;
   border-radius:999px;
   border:1px solid #2a2f52;
+  background:#0b1020;
   font-size:.7rem;
   letter-spacing:.18em;
   text-transform:uppercase;
@@ -159,7 +205,7 @@ a{color:inherit;text-decoration:none}
   <img src="/collections/powerpunks/assets/power_punks_logo.webp" alt="POWER PUNKS">
 </section>
 
-<div class="drop-banner">DROPPING SOON</div>
+<div class="drop-banner">SERIES BUILD IN PROGRESS</div>
 
 <section class="grid" id="grid"></section>
 
@@ -167,7 +213,7 @@ a{color:inherit;text-decoration:none}
 
 <div id="modal">
   <div class="modal-box">
-    <img id="modalImg">
+    <div class="modal-media" id="modalMedia"></div>
     <div class="modal-title" id="modalTitle"></div>
     <div class="modal-actions">
       <div class="modal-btn">View on Marketplace</div>
@@ -181,44 +227,85 @@ const ROSTER = [
 ["001","ATOM"],["002","BLOP"],["003","GRUNT"],["004","SLAB"],["005","THUD"],
 ["006","KNOB"],["007","BULK"],["008","MASH"],["009","PLOD"],["010","CRAG"],
 ["011","BEEF"],["012","SLOSH"],["013","CLUB"],["014","STANCE"],["015","MELLOW"],
-["016","BRIKK"],["017","PUFF"],["018","YOKE"],["019","SAGG"],["020","STACK"],
-["021","BARREL"],["022","SHORTSTACK"],["023","REACH"],["024","STRIDE"],["025","PINCH"],
-["026","PEAK"],["027","SINK"],["028","WEDGE"],["029","OVAL"],["030","BOX"],
-["031","TURTLE"],["032","WALL"],["033","STILT"],["034","ANVIL"],["035","WEDGE"],
-["036","TOPKNOT"],["037","LEAN"],["038","HAMMER"],["039","BRICKS"],["040","TAPER"],
-["041","DOUBLE"],["042","FLATZ"],["043","BULB"],["044","STUB"],["045","TINY"],
-["046","BIGG"],["047","OFFSET"],["048","TAPER"],["049","SQUISH"],["050","LONG"],
-["051","STACKR"],["052","DROP"],["053","PUNCH"],["054","KNEE"],["055","BRICK"],
-["056","ROLL"],["057","SLIDE"],["058","BLOAT"],["059","PRESSR"],["060","GRAV"],
-["061","IRON"],["062","KING"],["063","PRIME"],["064","OGRE"],["065","TITAN"],
-["066","FINAL"],["067","GOLEM"],["068","GRAND"],["069","WALL"],["070","COLOSS"],
-["071","FLOAT"],["072","TILT"],["073","CLUMP"],["074","FUSE"],["075","TOPPER"],
-["076","ANCHOR"],["077","CRUSH"],["078","STRETCH"],["079","PRESS"],["080","MELT"],
-["081","ROOT"],["082","BASE"],["083","CAST"],["084","POUR"],["085","MOLD"],
-["086","PRESS"],["087","RUBR"],["088","VINYL"],["089","BIN"],["090","STACKD"],
-["091","MYTH"],["092","PROTO"],["093","REJECT"],["094","ARCH"],["095","ORIGIN"],
-["096","RAW"],["097","FIRST"],["098","LAST"],["099","END"],["100","OMEGA"]
+["016","BRICK"],["017","GUMBO"],["018","SPIKELESS"],["019","NUGGET"],["020","CHOMP"],
+["021","ANVIL"],["022","DRIFT"],["023","BEVEL"],["024","PEBBLE"],["025","TONGS"],
+["026","—"],["027","—"],["028","—"],["029","—"],["030","—"],
+["031","—"],["032","—"],["033","—"],["034","—"],["035","—"],
+["036","—"],["037","—"],["038","—"],["039","—"],["040","—"],
+["041","—"],["042","—"],["043","—"],["044","—"],["045","—"],
+["046","—"],["047","—"],["048","—"],["049","—"],["050","—"],
+["051","—"],["052","—"],["053","—"],["054","—"],["055","—"],
+["056","—"],["057","—"],["058","—"],["059","—"],["060","—"],
+["061","—"],["062","—"],["063","—"],["064","—"],["065","—"],
+["066","—"],["067","—"],["068","—"],["069","—"],["070","—"],
+["071","—"],["072","—"],["073","—"],["074","—"],["075","—"],
+["076","—"],["077","—"],["078","—"],["079","—"],["080","—"],
+["081","—"],["082","—"],["083","—"],["084","—"],["085","—"],
+["086","—"],["087","—"],["088","—"],["089","—"],["090","—"],
+["091","—"],["092","—"],["093","—"],["094","—"],["095","—"],
+["096","—"],["097","—"],["098","—"],["099","—"],["100","—"]
 ];
+
+// IDs with real images available on server right now.
+const READY_MAX = 25;
 
 const grid=document.getElementById("grid");
 
 ROSTER.forEach(([num,name])=>{
+  const n = parseInt(num,10);
+  const ready = n <= READY_MAX;
+  const displayName = (name==="—") ? "DROPPING SOON" : name;
+
   grid.insertAdjacentHTML("beforeend",`
-  <div class="card" onclick="openModal('${num}','${name}')">
-    <picture class="nft-img">
-      <source srcset="/collections/powerpunks/nfts/pp_${num}.webp" type="image/webp">
-      <img src="/collections/powerpunks/nfts/pp_${num}.png" alt="POWER PUNKS #${num} — ${name}">
-    </picture>
-    <div class="meta">#${num} — ${name}</div>
-    <div class="price">25 XRP</div>
-    <div class="edition">Edition 25 / 25</div>
+  <div class="card" onclick="openModal('${num}','${displayName}',${ready})">
+    ${ready ? `
+      <picture class="nft-img">
+        <source srcset="/collections/powerpunks/nfts/pp_${num}.webp" type="image/webp">
+        <img src="/collections/powerpunks/nfts/pp_${num}.png" alt="POWER PUNKS #${num} - ${displayName}" loading="lazy"
+             onerror="this.closest('.nft-img').outerHTML = placeholderHTML('${num}')">
+      </picture>
+    ` : placeholderHTML(num)}
+    <div class="meta">#${num} - ${displayName}</div>
+    <div class="price">${ready ? "25 XRP" : "DROPPING SOON"}</div>
+    <div class="edition">${ready ? "Edition 25 / 25" : "Unreleased"}</div>
   </div>`);
 });
 
-function openModal(num,name){
-  document.getElementById("modalImg").src=`/collections/powerpunks/nfts/pp_${num}.png`;
-  document.getElementById("modalTitle").innerText=`#${num} — ${name}`;
+function placeholderHTML(num){
+  return `
+  <div class="placeholder">
+    <div>
+      <div class="tag">DROPPING SOON</div>
+      <div class="sub">POWER PUNKS #${num}</div>
+    </div>
+  </div>`;
+}
+
+function openModal(num,name,ready){
+  document.getElementById("modalTitle").innerText = `#${num} - ${name}`;
+
+  const media = document.getElementById("modalMedia");
+  if(ready){
+    media.innerHTML = `
+      <picture>
+        <source srcset="/collections/powerpunks/nfts/pp_${num}.webp" type="image/webp">
+        <img src="/collections/powerpunks/nfts/pp_${num}.png" alt="POWER PUNKS #${num} - ${name}"
+             onerror="this.parentElement.outerHTML = modalPlaceholderHTML('${num}')">
+      </picture>`;
+  }else{
+    media.innerHTML = modalPlaceholderHTML(num);
+  }
+
   document.getElementById("modal").classList.add("open");
+}
+function modalPlaceholderHTML(num){
+  return `
+    <div class="placeholder" style="border-radius:14px">
+      <div>
+        <div class="tag">DROPPING SOON</div>
+        <div class="sub">POWER PUNKS #${num}</div>
+      </div>
+    </div>`;
 }
 function closeModal(){
   document.getElementById("modal").classList.remove("open");
