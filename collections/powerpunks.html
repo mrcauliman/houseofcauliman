@@ -80,37 +80,28 @@ a{color:inherit;text-decoration:none}
   border-color:var(--accent);
 }
 
-.nft-img{
-  width:100%;
-  display:block;
-  border-radius:12px;
-  overflow:hidden;
-  background:#070716;
-}
-.nft-img img{
-  width:100%;
-  display:block;
-}
-
 .meta{
   margin-top:8px;
   font-size:.75rem;
   letter-spacing:.14em;
   text-transform:uppercase;
+  text-align:center;
 }
 
 .price{
   margin-top:4px;
   font-size:.8rem;
   color:#c4b5fd;
+  text-align:center;
 }
 
 .edition{
   font-size:.65rem;
   color:var(--muted);
+  text-align:center;
 }
 
-/* Placeholder panel */
+/* Placeholder */
 .placeholder{
   width:100%;
   aspect-ratio:1/1;
@@ -119,7 +110,7 @@ a{color:inherit;text-decoration:none}
   justify-content:center;
   border-radius:12px;
   background:
-    radial-gradient(circle at top, rgba(124,58,237,.18), rgba(0,0,0,.0) 55%),
+    radial-gradient(circle at top, rgba(124,58,237,.18), rgba(0,0,0,0) 55%),
     linear-gradient(135deg, rgba(17,24,39,.9), rgba(5,6,12,.98));
   border:1px dashed rgba(124,58,237,.35);
   text-align:center;
@@ -164,15 +155,14 @@ a{color:inherit;text-decoration:none}
   width:100%;
   border-radius:14px;
   overflow:hidden;
-  background:#070716;
 }
-.modal-media img{width:100%;display:block}
 
 .modal-title{
   margin:10px 0 6px;
   font-size:.9rem;
   letter-spacing:.18em;
   text-transform:uppercase;
+  text-align:center;
 }
 
 .modal-actions{
@@ -216,101 +206,49 @@ a{color:inherit;text-decoration:none}
     <div class="modal-media" id="modalMedia"></div>
     <div class="modal-title" id="modalTitle"></div>
     <div class="modal-actions">
-      <div class="modal-btn">View on Marketplace</div>
       <div class="modal-btn" onclick="closeModal()">Close</div>
     </div>
   </div>
 </div>
 
 <script>
-const ROSTER = [
-["001","ATOM"],["002","BLOP"],["003","GRUNT"],["004","SLAB"],["005","THUD"],
-["006","KNOB"],["007","BULK"],["008","MASH"],["009","PLOD"],["010","CRAG"],
-["011","BEEF"],["012","SLOSH"],["013","CLUB"],["014","STANCE"],["015","MELLOW"],
-["016","BRICK"],["017","GUMBO"],["018","SPIKELESS"],["019","NUGGET"],["020","CHOMP"],
-["021","ANVIL"],["022","DRIFT"],["023","BEVEL"],["024","PEBBLE"],["025","TONGS"],
-["026","—"],["027","—"],["028","—"],["029","—"],["030","—"],
-["031","—"],["032","—"],["033","—"],["034","—"],["035","—"],
-["036","—"],["037","—"],["038","—"],["039","—"],["040","—"],
-["041","—"],["042","—"],["043","—"],["044","—"],["045","—"],
-["046","—"],["047","—"],["048","—"],["049","—"],["050","—"],
-["051","—"],["052","—"],["053","—"],["054","—"],["055","—"],
-["056","—"],["057","—"],["058","—"],["059","—"],["060","—"],
-["061","—"],["062","—"],["063","—"],["064","—"],["065","—"],
-["066","—"],["067","—"],["068","—"],["069","—"],["070","—"],
-["071","—"],["072","—"],["073","—"],["074","—"],["075","—"],
-["076","—"],["077","—"],["078","—"],["079","—"],["080","—"],
-["081","—"],["082","—"],["083","—"],["084","—"],["085","—"],
-["086","—"],["087","—"],["088","—"],["089","—"],["090","—"],
-["091","—"],["092","—"],["093","—"],["094","—"],["095","—"],
-["096","—"],["097","—"],["098","—"],["099","—"],["100","—"]
-];
+const TOTAL = 32;
+const grid = document.getElementById("grid");
 
-// IDs with real images available on server right now.
-const READY_MAX = 25;
-
-const grid=document.getElementById("grid");
-
-ROSTER.forEach(([num,name])=>{
-  const n = parseInt(num,10);
-  const ready = n <= READY_MAX;
-  const displayName = (name==="—") ? "DROPPING SOON" : name;
-
+for(let i=1;i<=TOTAL;i++){
+  const num = String(i).padStart(3,"0");
   grid.insertAdjacentHTML("beforeend",`
-  <div class="card" onclick="openModal('${num}','${displayName}',${ready})">
-    ${ready ? `
-      <picture class="nft-img">
-        <source srcset="/collections/powerpunks/nfts/pp_${num}.webp" type="image/webp">
-        <img src="/collections/powerpunks/nfts/pp_${num}.png" alt="POWER PUNKS #${num} - ${displayName}" loading="lazy"
-             onerror="this.closest('.nft-img').outerHTML = placeholderHTML('${num}')">
-      </picture>
-    ` : placeholderHTML(num)}
-    <div class="meta">#${num} - ${displayName}</div>
-    <div class="price">${ready ? "25 XRP" : "DROPPING SOON"}</div>
-    <div class="edition">${ready ? "Edition 25 / 25" : "Unreleased"}</div>
-  </div>`);
-});
+    <div class="card" onclick="openModal('${num}')">
+      ${placeholderHTML(num)}
+      <div class="meta">POWER PUNKS #${num}</div>
+      <div class="price">DROPPING SOON</div>
+      <div class="edition">Unreleased</div>
+    </div>
+  `);
+}
 
 function placeholderHTML(num){
   return `
-  <div class="placeholder">
-    <div>
-      <div class="tag">DROPPING SOON</div>
-      <div class="sub">POWER PUNKS #${num}</div>
-    </div>
-  </div>`;
-}
-
-function openModal(num,name,ready){
-  document.getElementById("modalTitle").innerText = `#${num} - ${name}`;
-
-  const media = document.getElementById("modalMedia");
-  if(ready){
-    media.innerHTML = `
-      <picture>
-        <source srcset="/collections/powerpunks/nfts/pp_${num}.webp" type="image/webp">
-        <img src="/collections/powerpunks/nfts/pp_${num}.png" alt="POWER PUNKS #${num} - ${name}"
-             onerror="this.parentElement.outerHTML = modalPlaceholderHTML('${num}')">
-      </picture>`;
-  }else{
-    media.innerHTML = modalPlaceholderHTML(num);
-  }
-
-  document.getElementById("modal").classList.add("open");
-}
-function modalPlaceholderHTML(num){
-  return `
-    <div class="placeholder" style="border-radius:14px">
+    <div class="placeholder">
       <div>
         <div class="tag">DROPPING SOON</div>
         <div class="sub">POWER PUNKS #${num}</div>
       </div>
-    </div>`;
+    </div>
+  `;
 }
+
+function openModal(num){
+  document.getElementById("modalTitle").innerText = `POWER PUNKS #${num}`;
+  document.getElementById("modalMedia").innerHTML = placeholderHTML(num);
+  document.getElementById("modal").classList.add("open");
+}
+
 function closeModal(){
   document.getElementById("modal").classList.remove("open");
 }
-document.getElementById("modal").onclick=e=>{
+
+document.getElementById("modal").onclick = e=>{
   if(e.target.id==="modal") closeModal();
 };
 </script>
