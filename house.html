@@ -6,42 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="canonical" href="https://houseofcauliman.com/house">
 
-  <!-- Favicons -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
-  <link rel="manifest" href="/assets/favicons/site.webmanifest">
-  <link rel="icon" href="/assets/favicons/favicon.ico">
-
-  <!-- SEO -->
   <meta name="description" content="House of Cauliman investment thesis. RAD, $BAG, $WCK, hand-crafted access collections, managed liquidity, reseeding mechanisms, and rising structural floors built on XRPL.">
   <meta name="keywords" content="XRPL, XRP, House of Cauliman, WCK, RAD, BAG, XRPL NFTs, XRPL AMM">
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="House of Cauliman — Investment Thesis">
-  <meta property="og:description" content="Investment thesis for House of Cauliman XRPL ecosystems: $WCK, $RAD, $BAG.">
-  <meta property="og:image" content="https://houseofcauliman.com/assets/mrcauliman_logo.webp">
-  <meta property="og:url" content="https://houseofcauliman.com/house">
-  <meta property="og:type" content="website">
-
-  <!-- JSON-LD Schema -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": "House of Cauliman Investment Thesis",
-    "url": "https://houseofcauliman.com/house",
-    "description": "Investment thesis for House of Cauliman XRPL ecosystems: $WCK, $RAD, $BAG.",
-    "about": {
-      "@type": "Organization",
-      "name": "House of Cauliman",
-      "url": "https://houseofcauliman.com"
-    }
-  }
-  </script>
-
   <style>
-    /* untouched */
     :root {
       --bg:#050509;
       --bg-soft:#090910;
@@ -77,208 +45,173 @@
     .hoc-main{padding:22px 16px 40px}
     .hoc-shell{max-width:960px;margin:0 auto}
     .hoc-intro{margin-bottom:22px;padding:16px 18px 18px;border-radius:var(--radius-lg);border:1px solid rgba(26,31,55,0.9);background:linear-gradient(135deg,rgba(15,23,42,0.9),rgba(5,6,12,0.98));box-shadow:var(--shadow-soft)}
-    .hoc-intro-title{font-size:0.82rem;text-transform:uppercase;letter-spacing:0.18em;color:var(--text-soft);margin:0 0 6px}
-    .hoc-intro-main{font-size:0.97rem;color:var(--text-muted);margin:0;line-height:1.5}
+    .hoc-intro-main{font-size:0.97rem;color:var(--text-muted);margin:0;line-height:1.55}
     .hoc-grid{display:grid;grid-template-columns:1fr;gap:18px}
     @media(min-width:768px){.hoc-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-    .project-card{border-radius:var(--radius-xl);border:1px solid var(--border-subtle);background:radial-gradient(circle at top,rgba(26,35,58,0.85) 0,#050509 55%,#000 100%);box-shadow:var(--shadow-soft);overflow:hidden;display:flex;flex-direction:column;min-height:260px;position:relative;isolation:isolate}
-    .project-card::before{content:"";position:absolute;inset:-1px;border-radius:inherit;background:conic-gradient(from 210deg,rgba(10,116,208,0.4),transparent 18%,transparent 60%,rgba(10,116,208,0.35),rgba(212,164,74,0.3),transparent 88%,rgba(10,116,208,0.4));opacity:0;transition:opacity .3s ease;z-index:-1}
-    .project-card:hover::before{opacity:.65}
-    .project-media{position:relative;padding:14px;border-bottom:1px solid rgba(37,44,70,0.9);background:radial-gradient(circle at top,#111827 0,#020308 70%)}
-    .project-wallpaper{height:120px;border-radius:16px;border:1px solid rgba(46,57,98,0.9);background:radial-gradient(circle at top,rgba(15,23,42,0.95),#020308 65%);box-shadow:0 16px 32px rgba(0,0,0,0.9);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-    .project-logo{width:86px;height:86px;object-fit:contain;filter:drop-shadow(0 0 24px rgba(0,0,0,0.95)) drop-shadow(0 0 24px rgba(10,116,208,0.65))}
-    .project-tag{position:absolute;right:10px;bottom:8px;font-size:0.7rem;letter-spacing:0.16em;text-transform:uppercase;padding:4px 8px;border-radius:999px;border:1px solid rgba(148,163,184,0.35);background:rgba(15,23,42,0.92);color:#cbd5f5;backdrop-filter:blur(8px)}
-    .project-body{padding:14px;display:flex;flex-direction:column;gap:6px}
-    .project-title{margin:0;font-size:1rem;letter-spacing:0.12em;text-transform:uppercase}
-    .project-sub{margin:0;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.18em;color:var(--text-soft)}
-    .project-copy{margin:6px 0 10px;font-size:0.86rem;line-height:1.5;color:var(--text-muted)}
-    .project-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
-    .project-link{display:inline-flex;align-items:center;justify-content:center;gap:6px;font-size:0.78rem;padding:7px 11px;border-radius:999px;border:1px solid var(--border-strong);background:linear-gradient(135deg,rgba(15,23,42,0.98),rgba(3,7,18,0.98));box-shadow:0 8px 20px rgba(0,0,0,0.9);text-transform:uppercase;letter-spacing:0.16em;color:#dbe3ff;transition:border-color .2s ease,box-shadow .2s ease,transform .15s ease;cursor:pointer}
-    .project-link:hover{border-color:var(--accent);box-shadow:var(--shadow-glow);transform:translateY(-1px)}
-    .project-wck .project-wallpaper{background:radial-gradient(circle at 10% 0,#2a2111 0,#050308 46%,#000 100%);border-color:rgba(212,164,74,0.65)}
-    .project-wck .project-title{color:var(--wck-gold)}
-    .project-rad .project-wallpaper{background:radial-gradient(circle at 15% 0,#0b66c2 0,#020617 55%,#000 100%);border-color:rgba(59,130,246,0.9)}
-    .project-rad .project-title{color:var(--rad-blue)}
-    .project-bag .project-wallpaper{background:radial-gradient(circle at 20% 0,#064e3b 0,#020617 55%,#000 100%);border-color:rgba(74,222,128,0.75)}
-    .project-bag .project-title{color:var(--bag-green)}
-    .hoc-footer{max-width:960px;margin:10px auto 26px;padding:10px 18px 0;border-top:1px solid #141728;color:var(--text-soft);font-size:0.78rem;display:flex;justify-content:space-between;gap:8px}
-    .project-image{width:100%;height:auto;display:block}
-
-    /* New style for navigation link */
-    .nav-link-card{
-      text-align:center;
-      padding:20px;
-    }
-    .nav-link-card a{
-      color:var(--text);
-      font-size:0.95rem;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      padding:10px 20px;
-      border:1px solid var(--border-subtle);
-      border-radius:var(--radius-xl);
-      transition:all .25s ease;
-    }
-    .nav-link-card a:hover{
-      border-color:var(--accent);
-      box-shadow:0 0 20px var(--accent-glow);
-    }
+    .project-card{border-radius:var(--radius-xl);border:1px solid var(--border-subtle);background:radial-gradient(circle at top,rgba(26,35,58,0.85) 0,#050509 55%,#000 100%);box-shadow:var(--shadow-soft);overflow:hidden;display:flex;flex-direction:column;min-height:220px}
+    .project-body{padding:16px;display:flex;flex-direction:column;gap:6px}
+    .project-title{margin:0;font-size:1rem;letter-spacing:.12em;text-transform:uppercase}
+    .project-sub{margin:0;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-soft)}
+    .project-copy{margin:6px 0;font-size:.86rem;line-height:1.5;color:var(--text-muted)}
+    .project-image{width:100%;height:auto;display:block;border-radius:14px;margin-top:12px;box-shadow:0 12px 30px rgba(0,0,0,0.8);}
+    .hoc-footer{max-width:960px;margin:26px auto 10px;padding-top:10px;border-top:1px solid #141728;display:flex;justify-content:space-between;gap:8px;font-size:.78rem;color:var(--text-soft)}
+    .nav-link-card{text-align:center;padding:20px;}
+    .nav-link-card a{color:var(--text);font-size:0.95rem;letter-spacing:.12em;text-transform:uppercase;padding:10px 20px;border:1px solid var(--border-subtle);border-radius:var(--radius-xl);transition:all .25s ease;display:inline-block;}
+    .nav-link-card a:hover{border-color:var(--accent);box-shadow:0 0 20px var(--accent-glow);}
   </style>
 </head>
-
 <body>
 
 <header class="hoc-header">
-<div class="hoc-header-inner">
-<img src="/assets/mrcauliman_logo.webp" class="hoc-brand-mark">
-<div class="hoc-header-text">
-<h1>🏛️ HOUSE OF CAULIMAN</h1>
-<p>Investment Thesis</p>
-</div>
-</div>
+  <div class="hoc-header-inner">
+    <img src="/assets/mrcauliman_logo.webp" class="hoc-brand-mark">
+    <div class="hoc-header-text">
+      <h1>🏛️ HOUSE OF CAULIMAN</h1>
+      <p>Investment Thesis</p>
+    </div>
+  </div>
 </header>
 
 <main class="hoc-main">
-<div class="hoc-shell">
+  <div class="hoc-shell">
 
-<section class="hoc-intro">
-<p class="hoc-intro-main">
-Most crypto projects fail because they are passive.<br>
-Liquidity is seeded once. Supply is released without discipline.<br>
-The market is expected to behave.
-</p>
-</section>
+    <section class="hoc-intro">
+      <p class="hoc-intro-main">
+        Most crypto projects fail because they are passive.<br>
+        Liquidity is seeded once. Supply is released without discipline.<br>
+        The market is expected to behave.
+      </p>
+    </section>
 
-<section class="hoc-intro">
-<p class="hoc-intro-main">
-The House of Cauliman is actively managed.<br>
-This ecosystem is designed for durability, not short-term attention cycles.<br>
-If usage grows, the structure strengthens.
-</p>
-</section>
+    <section class="hoc-intro">
+      <p class="hoc-intro-main">
+        The House of Cauliman is actively managed.<br>
+        This ecosystem is designed for durability, not short-term attention cycles.<br>
+        If usage grows, the structure strengthens.
+      </p>
+    </section>
 
-<section class="hoc-grid">
+    <section class="hoc-grid">
 
-<article class="project-card" style="grid-column:1/-1">
-<div class="project-body">
-<h2 class="project-title">One Ecosystem. Three Roles</h2>
-<img src="/assets/hoc.png" alt="House of Cauliman Ecosystem Diagram" class="project-image">
-</div>
-</article>
+      <article class="project-card" style="grid-column:1/-1">
+        <div class="project-body">
+          <h2 class="project-title">One Ecosystem. Three Roles</h2>
+          <img src="/assets/hoc.png" alt="House of Cauliman Ecosystem Diagram" class="project-image">
+        </div>
+      </article>
 
-<article class="project-card">
-<div class="project-body">
-<h2 class="project-title">RAD</h2>
-<p class="project-sub">The Filter</p>
-<p class="project-copy">
-Trust and verification layer.<br>
-Highlights builders, exposes bad actors, filters noise.
-</p>
-<p class="project-copy">
-Fixed supply • Usage-driven relevance • Value accrues through verification demand
-</p>
-</div>
-</article>
+      <article class="project-card">
+        <div class="project-body">
+          <h2 class="project-title">RAD</h2>
+          <p class="project-sub">The Filter</p>
+          <p class="project-copy">
+            Trust and verification layer.<br>
+            Highlights builders, exposes bad actors, filters noise.
+          </p>
+          <p class="project-copy">
+            Fixed supply • Usage-driven relevance • Value accrues through verification demand
+          </p>
+        </div>
+      </article>
 
-<article class="project-card">
-<div class="project-body">
-<h2 class="project-title">$BAG</h2>
-<p class="project-sub">The Engine</p>
-<p class="project-copy">
-Captures participation, games, and culture.<br>
-Routes activity through on-chain mechanics.
-</p>
-<p class="project-copy">
-Arcade systems • High engagement • Utility-driven demand
-</p>
-</div>
-</article>
+      <article class="project-card">
+        <div class="project-body">
+          <h2 class="project-title">$BAG</h2>
+          <p class="project-sub">The Engine</p>
+          <p class="project-copy">
+            Captures participation, games, and culture.<br>
+            Routes activity through on-chain mechanics.
+          </p>
+          <p class="project-copy">
+            Arcade systems • High engagement • Utility-driven demand
+          </p>
+        </div>
+      </article>
 
-<article class="project-card">
-<div class="project-body">
-<h2 class="project-title">$WCK</h2>
-<p class="project-sub">The IP</p>
-<p class="project-copy">
-Digital property — characters, operators, artifacts.<br>
-Tied to a growing interactive universe.
-</p>
-<p class="project-copy">
-Collectible scarcity • Game-aligned demand • Long-term IP expansion
-</p>
-</div>
-</article>
+      <article class="project-card">
+        <div class="project-body">
+          <h2 class="project-title">$WCK</h2>
+          <p class="project-sub">The IP</p>
+          <p class="project-copy">
+            Digital property — characters, operators, artifacts.<br>
+            Tied to a growing interactive universe.
+          </p>
+          <p class="project-copy">
+            Collectible scarcity • Game-aligned demand • Long-term IP expansion
+          </p>
+        </div>
+      </article>
 
-<article class="project-card" style="grid-column:1/-1">
-<div class="project-body">
-<h2 class="project-title">Hand-Crafted Access Collections</h2>
-<p class="project-copy">
-Sit above tokens. Individually illustrated access instruments and cultural assets.<br>
-Finite • No inflation • Ownership-based access
-</p>
-<p class="project-copy">
-Unlock early access, private channels, priority participation, future permissions.<br>
-As the ecosystem grows, access becomes scarcer and more valuable.
-</p>
-<p class="project-copy">
-Example: <strong>Power Punks</strong> — Exaggerated power. Loud identity. Built to stand out on the ledger.
-</p>
-</div>
-</article>
+      <article class="project-card" style="grid-column:1/-1">
+        <div class="project-body">
+          <h2 class="project-title">Hand-Crafted Access Collections</h2>
+          <p class="project-copy">
+            Sit above tokens. Individually illustrated access instruments and cultural assets.<br>
+            Finite • No inflation • Ownership-based access
+          </p>
+          <p class="project-copy">
+            Unlock early access, private channels, priority participation, future permissions.<br>
+            As the ecosystem grows, access becomes scarcer and more valuable.
+          </p>
+          <p class="project-copy">
+            Example: <strong>Power Punks</strong> — Exaggerated power. Loud identity. Built to stand out on the ledger.
+          </p>
+        </div>
+      </article>
 
-<article class="project-card" style="grid-column:1/-1">
-<div class="project-body">
-<h2 class="project-title">Floor Control & Structural Growth</h2>
-<p class="project-copy">
-Liquidity seeded, retained, and reinforced by the House.<br>
-No external entity can remove the base.
-</p>
-<p class="project-copy">
-Reseeding: As usage increases, liquidity reintroduced → floor steps upward.<br>
-Timed releases: Supply aligned with real demand absorption.
-</p>
-<p class="project-copy">
-Price may fluctuate. The base remains intact.
-</p>
-</div>
-</article>
+      <article class="project-card" style="grid-column:1/-1">
+        <div class="project-body">
+          <h2 class="project-title">Floor Control & Structural Growth</h2>
+          <p class="project-copy">
+            Liquidity seeded, retained, and reinforced by the House.<br>
+            No external entity can remove the base.
+          </p>
+          <p class="project-copy">
+            Reseeding: As usage increases, liquidity reintroduced → floor steps upward.<br>
+            Timed releases: Supply aligned with real demand absorption.
+          </p>
+          <p class="project-copy">
+            Price may fluctuate. The base remains intact.
+          </p>
+        </div>
+      </article>
 
-<article class="project-card" style="grid-column:1/-1">
-<div class="project-body">
-<h2 class="project-title">Long-Term Holder Alignment</h2>
-<p class="project-copy">
-Patience structurally favored.<br>
-Participation aligns with growth.<br>
-Time strengthens positioning.
-</p>
-</div>
-</article>
+      <article class="project-card" style="grid-column:1/-1">
+        <div class="project-body">
+          <h2 class="project-title">Long-Term Holder Alignment</h2>
+          <p class="project-copy">
+            Patience structurally favored.<br>
+            Participation aligns with growth.<br>
+            Time strengthens positioning.
+          </p>
+        </div>
+      </article>
 
-<article class="project-card" style="grid-column:1/-1">
-<div class="project-body">
-<h2 class="project-title">Risk Disclosure</h2>
-<p class="project-copy">
-Nothing on-chain is guaranteed.<br>
-Success depends on continued development, usage, and XRPL adoption.<br>
-No promises are made. Only structure is built.
-</p>
-</div>
-</article>
+      <article class="project-card" style="grid-column:1/-1">
+        <div class="project-body">
+          <h2 class="project-title">Risk Disclosure</h2>
+          <p class="project-copy">
+            Nothing on-chain is guaranteed.<br>
+            Success depends on continued development, usage, and XRPL adoption.<br>
+            No promises are made. Only structure is built.
+          </p>
+        </div>
+      </article>
 
-<!-- NEW: Home link card -->
-<article class="project-card" style="grid-column:1/-1">
-  <div class="project-body nav-link-card">
-    <a href="/index.html">← Home</a>
+      <article class="project-card" style="grid-column:1/-1">
+        <div class="project-body nav-link-card">
+          <a href="/index.html">← Home</a>
+        </div>
+      </article>
+
+    </section>
+
+    <footer class="hoc-footer">
+      <span>Built and enforced by mrcauliman</span>
+      <span>Powered by $XRP • HouseOfCauliman.com</span>
+    </footer>
+
   </div>
-</article>
-
-</section>
-
-<footer class="hoc-footer">
-<span>Built and enforced by mrcauliman</span>
-<span>Powered by $XRP • HouseOfCauliman.com</span>
-</footer>
-
-</div>
 </main>
 
 </body>
