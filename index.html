@@ -37,16 +37,15 @@
       "https://continentalwick.com",
       "https://radgarlington.io",
       "https://getthebag.io",
-      "twitter://user?screen_name=mrcauliman",
-      "twitter://user?screen_name=wcktoken",
-      "twitter://user?screen_name=radgarlington",
-      "twitter://user?screen_name=getthebag_io"
+      "https://x.com/mrcauliman",
+      "https://x.com/wcktoken",
+      "https://x.com/radgarlington",
+      "https://x.com/getthebag_io"
     ]
   }
   </script>
 
   <style>
-    /* untouched */
     :root {
       --bg:#050509;
       --bg-soft:#090910;
@@ -107,280 +106,264 @@
     .project-bag .project-wallpaper{background:radial-gradient(circle at 20% 0,#064e3b 0,#020617 55%,#000 100%);border-color:rgba(74,222,128,0.75)}
     .project-bag .project-title{color:var(--bag-green)}
     .hoc-footer{max-width:960px;margin:10px auto 26px;padding:10px 18px 0;border-top:1px solid #141728;color:var(--text-soft);font-size:0.78rem;display:flex;justify-content:space-between;gap:8px}
-
-    /* ONLY CHANGE: Power Punks logo padding/fit so it renders larger and doesn’t feel cropped */
     img.project-logo[alt="POWER PUNKS"]{width:118px;height:118px}
-
-    /* New style for navigation link */
-    .nav-link-card{
-      text-align:center;
-      padding:20px;
-    }
-    .nav-link-card a{
-      color:var(--text);
-      font-size:0.95rem;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      padding:10px 20px;
-      border:1px solid var(--border-subtle);
-      border-radius:var(--radius-xl);
-      transition:all .25s ease;
-    }
-    .nav-link-card a:hover{
-      border-color:var(--accent);
-      box-shadow:0 0 20px var(--accent-glow);
-    }
+    .thesis-image{width:100%;height:auto;display:block;border-radius:14px;margin-top:12px;box-shadow:0 12px 30px rgba(0,0,0,0.8);}
+    .nav-link-card{text-align:center;padding:20px;}
+    .nav-link-card a{color:var(--text);font-size:0.95rem;letter-spacing:.12em;text-transform:uppercase;padding:10px 20px;border:1px solid var(--border-subtle);border-radius:var(--radius-xl);transition:all .25s ease;display:inline-block;}
+    .nav-link-card a:hover{border-color:var(--accent);box-shadow:0 0 20px var(--accent-glow);}
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header class="hoc-header">
-    <div class="hoc-header-inner">
-      <img src="/assets/mrcauliman_logo.webp" alt="mrcauliman" class="hoc-brand-mark">
-      <div class="hoc-header-text">
-        <h1>🏛️ HOUSE OF CAULIMAN</h1>
-        <p>XRPL • $WCK • $RAD • $BAG • Collections</p>
-      </div>
+<header class="hoc-header">
+  <div class="hoc-header-inner">
+    <img src="/assets/mrcauliman_logo.webp" alt="mrcauliman" class="hoc-brand-mark">
+    <div class="hoc-header-text">
+      <h1>🏛️ HOUSE OF CAULIMAN</h1>
+      <p>XRPL • $WCK • $RAD • $BAG • Collections</p>
     </div>
-  </header>
+  </div>
+</header>
 
-  <main class="hoc-main">
-    <div class="hoc-shell">
+<main class="hoc-main">
+  <div class="hoc-shell">
 
-      <!-- HOUSE STACK -->
-      <section class="hoc-intro">
-        <p class="hoc-intro-main">
-          One operator. Three active ecosystems.  
-          Protocols, culture, and collectibles curated under one roof.  
-        </p>
-      </section>
+    <section class="hoc-intro">
+      <p class="hoc-intro-main">
+        One operator. Three active ecosystems.  
+        Protocols, culture, and collectibles curated under one roof.  
+      </p>
+    </section>
 
-      <!-- PROJECT GRID -->
-      <section class="hoc-grid">
+    <section class="hoc-grid">
 
-        <!-- WCK CARD -->
-        <article class="project-card project-wck">
-          <div class="project-media">
-            <div class="project-wallpaper">
-              <img src="/assets/wck_logo.webp" class="project-logo">
-              <span class="project-tag">Protocol Universe</span>
-            </div>
+      <!-- WCK CARD (OTC removed) -->
+      <article class="project-card project-wck">
+        <div class="project-media">
+          <div class="project-wallpaper">
+            <img src="/assets/wck_logo.webp" class="project-logo">
+            <span class="project-tag">Protocol Universe</span>
           </div>
-          <div class="project-body">
-            <h2 class="project-title">CONTINENTAL WICK</h2>
-            <p class="project-sub">$WCK • COLLECTIBLE UNIVERSE</p>
-            <p class="project-copy">
-              A cinematic XRPL protocol where order meets consequence.  
-              Enforcement agents. OTC execution. Narrative physics.
-            </p>
-            <div class="project-links">
-              <a class="project-link primary" href="https://continentalwick.com" target="_blank"><span>🌐 Website</span></a>
-              <a class="project-link" href="twitter://user?screen_name=wcktoken" onclick="window.location='https://x.com/wcktoken'" target="_blank"><span>𝕏 Profile</span></a>
-              <a class="project-link" href="https://x.com/i/communities/199081719163736323" target="_blank"><span>🕴️ WCK LOBBY 𝕏</span></a>
-              <a class="project-link" href="https://t.me/wcktoken" target="_blank"><span>📢 Telegram Channel</span></a>
-              <a class="project-link" href="https://t.me/wcklobby" target="_blank"><span>💬 The Lobby on TG</span></a>
-              <a class="project-link" href="#" onclick="return false;"><span>🔒 AMM Coming Soon</span></a>
-            </div>
-          </div>
-        </article>
-
-        <!-- BAG CARD -->
-        <article class="project-card project-bag">
-          <div class="project-media">
-            <div class="project-wallpaper">
-              <img src="/assets/bag_logo.webp" class="project-logo">
-              <span class="project-tag">Meme Infrastructure</span>
-            </div>
-          </div>
-          <div class="project-body">
-            <h2 class="project-title">GET THE $BAG</h2>
-            <p class="project-sub">$BAG • XRPL’S HEAVIEST MEME</p>
-            <p class="project-copy">
-              $BAG runs the casino and arcade.  
-              Culture on brand. Utility under the hood. Built for movement.
-            </p>
-            <div class="project-links">
-              <a class="project-link primary" href="https://getthebag.io" target="_blank"><span>🌐 Website</span></a>
-              <a class="project-link" href="https://xmagnetic.org/swap/BAG+rNeYbfb9EDV8c7mNfUuooEEYYzMcEuDFbr_XRP+XRP?network=mainnet" target="_blank"><span>💚 BAG AMM</span></a>
-              <a class="project-link" href="twitter://user?screen_name=getthebag_io" onclick="window.location='https://x.com/getthebag_io'" target="_blank"><span>𝕏 Profile</span></a>
-              <a class="project-link" href="https://t.me/getthebag_io" target="_blank"><span>📢 Telegram Channel</span></a>
-              <a class="project-link" href="https://t.me/bagxchange" target="_blank"><span>💰 BAG Exchange on TG</span></a>
-            </div>
-          </div>
-        </article>
-
-        <!-- RAD CARD -->
-        <article class="project-card project-rad">
-          <div class="project-media">
-            <div class="project-wallpaper">
-              <img src="/assets/rad_logo.webp" class="project-logo">
-              <span class="project-tag">Ledger Registry</span>
-            </div>
-          </div>
-          <div class="project-body">
-            <h2 class="project-title">RAD GARLINGTON</h2>
-            <p class="project-sub">$RAD • LEDGER FIRST</p>
-            <p class="project-copy">
-              $RAD powers verification across the XRPL.  
-              Certified tokens. Verified builders. Threat matrix mapping.
-            </p>
-            <div class="project-links">
-              <a class="project-link primary" href="https://radgarlington.io" target="_blank"><span>🌐 Website</span></a>
-              <a class="project-link" href="https://xmagnetic.org/swap/RAD+rKpaNoTRdXa48W7emkKgtCLz2MuhEroU7V_XRP+XRP?network=mainnet" target="_blank"><span>🔵 RAD AMM</span></a>
-              <a class="project-link" href="twitter://user?screen_name=radgarlington" onclick="window.location='https://x.com/radgarlington'" target="_blank"><span>𝕏 Profile</span></a>
-              <a class="project-link" href="https://x.com/i/communities/1994831536378843504" target="_blank"><span>🌀 XRP Meme Factory 𝕏</span></a>
-              <a class="project-link" href="https://t.me/radgarlington" target="_blank"><span>📢 Telegram Channel</span></a>
-              <a class="project-link" href="https://t.me/TheLedgerRoom" target="_blank"><span>📘 Ledger Room on TG</span></a>
-            </div>
-          </div>
-        </article>
-
-      </section>
-
-      <section class="hoc-intro" style="margin-top:26px;">
-        <p class="hoc-intro-title">Inside the House</p>
-        <p class="hoc-intro-main">
-          Non-token XRPL projects.  
-          NFTs, collections, and limited drops.
-        </p>
-      </section>
-
-      <!-- HOUSE COLLECTIONS GRID -->
-      <section class="hoc-grid" style="margin-top:18px;">
-
-        <!-- POWER PUNKS CARD -->
-        <article class="project-card">
-          <div class="project-media" style="padding:8px;">
-            <div class="project-wallpaper" style="height:140px;background:radial-gradient(circle at 20% 0,#3b0764 0,#020308 65%,#000 100%); border-color:rgba(168,85,247,0.75);">
-              <img src="/collections/powerpunks/assets/power_punks_logo.webp" class="project-logo" alt="POWER PUNKS">
-              <span class="project-tag">NFT Collection</span>
-            </div>
-          </div>
-          <div class="project-body">
-            <h2 class="project-title" style="color:#c084fc;">POWER PUNKS</h2>
-            <p class="project-sub">XRPL • NON-TOKEN COLLECTION</p>
-            <p class="project-copy">
-              Exaggerated power. Loud identity. Built to stand out on the ledger.  
-              Designed to hold, collect, or trade.
-            </p>
-            <div class="project-links">
-              <a class="project-link primary" href="/collections/powerpunks.html">
-                <span>⚡ View Collection</span>
-              </a>
-
-              <a class="project-link"
-                 href="twitter://user?screen_name=powerpunks"
-                 onclick="window.location='https://x.com/powerpunks'"
-                 target="_blank">
-                <span>𝕏 Profile</span>
-              </a>
-            </div>
-          </div>
-        </article>
-
-      </section>
-
-      <!-- OPERATOR CARD -->
-      <section style="margin-top:28px;">
-        <article class="project-card" style="grid-column:1 / -1;">
-          <div class="project-media">
-            <div class="project-wallpaper" style="background:radial-gradient(circle at top,#1e293b 0,#020308 70%); border-color:rgba(77,163,255,0.8);">
-              <img src="/assets/mrcauliman_logo.webp" class="project-logo">
-              <span class="project-tag">Operator</span>
-            </div>
-          </div>
-          <div class="project-body">
-            <h2 class="project-title" style="color:var(--blue);">MR CAULIMAN</h2>
-            <p class="project-sub">BUILDER • BJJ BLACK BELT • CTO</p>
-            <p class="project-copy">
-              Every system in this stack is architected and enforced under one operator.  
-              Discipline. Pressure. Execution.
-            </p>
-
-            <p class="project-copy" style="margin-top:6px; font-size:0.78rem; color:var(--text-soft); line-height:1.55;">
-              <strong>Skills:</strong><br>
-              XRPL AMMs (build, seed, reseed) • XRPL Trustlines & Rippling • XLS-20 NFTs (minting, burning, metadata) •
-              Python (Flask, xrpl-py) • Node.js (Telegram bots, grammy, sqlite) • HTML/CSS/JavaScript • Phaser.js (arcade games) •
-              Token Architecture • Ledger Security Flows • Wallet Architecture (issuer, treasury, reserve, liquidity) •
-              Ubuntu Server Management • DigitalOcean • Nginx • Reverse Proxies • SSL/HTTPS • systemd Services •
-              Git • GitHub Deployment Workflows • Custom Deployment Scripts • Static & Dynamic Web Stacks •
-              Creative Direction (Pixar-style assets) • Character Universe Design • Multi-Brand Ecosystem Architecture •
-              Compliance Logic (threat matrix, blacklist) • Verification Systems • NFT Metadata Systems •
-              Game UI/UX • Responsive Layouts • API Integration • Server Hardening •
-              Multi-site Infrastructure Planning & Execution
-            </p>
-
-            <div class="project-links">
-              <a class="project-link primary" href="twitter://user?screen_name=mrcauliman" onclick="window.location='https://x.com/mrcauliman'" target="_blank"><span>𝕏 Profile</span></a>
-              <a class="project-link" href="https://x.com/i/communities/1677882151931637760" target="_blank"><span>🥋 Cauliflower Chronicles 𝕏</span></a>
-              <a class="project-link" href="https://x.com/i/communities/1993769453449040144" target="_blank"><span>🏛️ House of Cauliman 𝕏</span></a>
-              <a class="project-link" href="https://t.me/houseofcauliman" target="_blank"><span>📢 Telegram Channel</span></a>
-            </div>
-          </div>
-        </article>
-      </section>
-
-      <!-- HOUSE OPERATORS -->
-      <section style="margin-top:32px;">
-        <p class="hoc-intro-title" style="margin-bottom:10px; text-align:center;">House Operators</p>
-
-        <div class="hoc-grid">
-
-          <!-- BAGMAN_XRPL -->
-          <article class="project-card" style="min-height:200px;">
-            <div class="project-media">
-              <div class="project-wallpaper" style="background:radial-gradient(circle at top,#1a2d4a 0,#020308 70%); border-color:rgba(77,163,255,0.8);">
-                <img src="/assets/bagman.png" class="project-logo" alt="BAGMAN_XRPL">
-              </div>
-            </div>
-            <div class="project-body">
-              <h2 class="project-title">BAGMAN_XRPL</h2>
-              <p class="project-sub">SIGNAL ANALYST — HOUSE OF CAULIMAN</p>
-
-              <div class="project-links">
-                <a class="project-link primary" href="https://houseofcauliman.com/bagman/" target="_blank"><span>Profile</span></a>
-                <a class="project-link" href="twitter://user?screen_name=BAGMAN_XRPL" onclick="window.location='https://x.com/BAGMAN_XRPL'" target="_blank"><span>𝕏</span></a>
-              </div>
-            </div>
-          </article>
-
-          <!-- VINNY “THE VALUE” MARINO -->
-          <article class="project-card" style="min-height:200px;">
-            <div class="project-media">
-              <div class="project-wallpaper" style="background:radial-gradient(circle at top,#2d1f1f 0,#020308 70%); border-color:rgba(212,164,74,0.7);">
-                <img src="/assets/vinny_the_value.png" class="project-logo" alt="Vinny The Value">
-              </div>
-            </div>
-            <div class="project-body">
-              <h2 class="project-title">Vinny “The Value” Marino</h2>
-              <p class="project-sub">COMMUNITY LIAISON — HOUSE OF CAULIMAN</p>
-
-              <div class="project-links">
-                <a class="project-link primary" href="https://houseofcauliman.com/vinny/" target="_blank"><span>Profile</span></a>
-                <a class="project-link" href="twitter://user?screen_name=vinnythevalue" onclick="window.location='https://x.com/vinnythevalue'" target="_blank"><span>𝕏</span></a>
-              </div>
-            </div>
-          </article>
-
         </div>
-      </section>
-
-      <!-- NEW: Thesis link card -->
-      <article class="project-card" style="grid-column:1/-1; margin-top:32px;">
-        <div class="project-body nav-link-card">
-          <a href="/house.html">Investment Thesis →</a>
+        <div class="project-body">
+          <h2 class="project-title">CONTINENTAL WICK</h2>
+          <p class="project-sub">$WCK • COLLECTIBLE UNIVERSE</p>
+          <p class="project-copy">
+            A cinematic XRPL protocol where order meets consequence.  
+            Enforcement agents. Narrative physics.
+          </p>
+          <div class="project-links">
+            <a class="project-link primary" href="https://continentalwick.com" target="_blank"><span>🌐 Website</span></a>
+            <a class="project-link" href="https://x.com/wcktoken" target="_blank"><span>𝕏 Profile</span></a>
+            <a class="project-link" href="https://x.com/i/communities/199081719163736323" target="_blank"><span>🕴️ WCK LOBBY 𝕏</span></a>
+            <a class="project-link" href="https://t.me/wcktoken" target="_blank"><span>📢 Telegram Channel</span></a>
+            <a class="project-link" href="https://t.me/wcklobby" target="_blank"><span>💬 The Lobby on TG</span></a>
+            <a class="project-link" href="#" onclick="return false;"><span>🔒 AMM Coming Soon</span></a>
+          </div>
         </div>
       </article>
 
-      <!-- FOOTER -->
-      <footer class="hoc-footer">
-        <span>Built and backed by mrcauliman. No VC. No training wheels.</span>
-        <span>Powered by $XRP • HouseOfCauliman.com</span>
-      </footer>
+      <!-- BAG CARD -->
+      <article class="project-card project-bag">
+        <div class="project-media">
+          <div class="project-wallpaper">
+            <img src="/assets/bag_logo.webp" class="project-logo">
+            <span class="project-tag">Meme Infrastructure</span>
+          </div>
+        </div>
+        <div class="project-body">
+          <h2 class="project-title">GET THE $BAG</h2>
+          <p class="project-sub">$BAG • XRPL’S HEAVIEST MEME</p>
+          <p class="project-copy">
+            $BAG runs the casino and arcade.  
+            Culture on brand. Utility under the hood. Built for movement.
+          </p>
+          <div class="project-links">
+            <a class="project-link primary" href="https://getthebag.io" target="_blank"><span>🌐 Website</span></a>
+            <a class="project-link" href="https://xmagnetic.org/swap/BAG+rNeYbfb9EDV8c7mNfUuooEEYYzMcEuDFbr_XRP+XRP?network=mainnet" target="_blank"><span>💚 BAG AMM</span></a>
+            <a class="project-link" href="https://x.com/getthebag_io" target="_blank"><span>𝕏 Profile</span></a>
+            <a class="project-link" href="https://t.me/getthebag_io" target="_blank"><span>📢 Telegram Channel</span></a>
+            <a class="project-link" href="https://t.me/bagxchange" target="_blank"><span>💰 BAG Exchange on TG</span></a>
+          </div>
+        </div>
+      </article>
 
-    </div>
-  </main>
+      <!-- RAD CARD -->
+      <article class="project-card project-rad">
+        <div class="project-media">
+          <div class="project-wallpaper">
+            <img src="/assets/rad_logo.webp" class="project-logo">
+            <span class="project-tag">Ledger Registry</span>
+          </div>
+        </div>
+        <div class="project-body">
+          <h2 class="project-title">RAD GARLINGTON</h2>
+          <p class="project-sub">$RAD • LEDGER FIRST</p>
+          <p class="project-copy">
+            $RAD powers verification across the XRPL.  
+            Certified tokens. Verified builders. Threat matrix mapping.
+          </p>
+          <div class="project-links">
+            <a class="project-link primary" href="https://radgarlington.io" target="_blank"><span>🌐 Website</span></a>
+            <a class="project-link" href="https://xmagnetic.org/swap/RAD+rKpaNoTRdXa48W7emkKgtCLz2MuhEroU7V_XRP+XRP?network=mainnet" target="_blank"><span>🔵 RAD AMM</span></a>
+            <a class="project-link" href="https://x.com/radgarlington" target="_blank"><span>𝕏 Profile</span></a>
+            <a class="project-link" href="https://x.com/i/communities/1994831536378843504" target="_blank"><span>🌀 XRP Meme Factory 𝕏</span></a>
+            <a class="project-link" href="https://t.me/radgarlington" target="_blank"><span>📢 Telegram Channel</span></a>
+            <a class="project-link" href="https://t.me/TheLedgerRoom" target="_blank"><span>📘 Ledger Room on TG</span></a>
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- Investment Thesis Section with hoc.png -->
+    <section style="margin-top:40px;">
+      <article class="project-card" style="grid-column:1/-1;">
+        <div class="project-body">
+          <h2 class="project-title">Investment Thesis</h2>
+          <img src="/assets/hoc.png" alt="House of Cauliman Ecosystem Diagram" class="thesis-image">
+          <p class="project-copy" style="margin-top:16px;">
+            Most crypto projects fail because they are passive.<br>
+            Liquidity is seeded once. Supply is released without discipline.<br>
+            The market is expected to behave.
+          </p>
+          <p class="project-copy">
+            The House of Cauliman is actively managed.<br>
+            This ecosystem is designed for durability, not short-term attention cycles.<br>
+            If usage grows, the structure strengthens.
+          </p>
+        </div>
+      </article>
+    </section>
+
+    <section class="hoc-intro" style="margin-top:26px;">
+      <p class="hoc-intro-title">Inside the House</p>
+      <p class="hoc-intro-main">
+        Non-token XRPL projects.  
+        NFTs, collections, and limited drops.
+      </p>
+    </section>
+
+    <section class="hoc-grid" style="margin-top:18px;">
+
+      <article class="project-card">
+        <div class="project-media" style="padding:8px;">
+          <div class="project-wallpaper" style="height:140px;background:radial-gradient(circle at 20% 0,#3b0764 0,#020308 65%,#000 100%); border-color:rgba(168,85,247,0.75);">
+            <img src="/collections/powerpunks/assets/power_punks_logo.webp" class="project-logo" alt="POWER PUNKS">
+            <span class="project-tag">NFT Collection</span>
+          </div>
+        </div>
+        <div class="project-body">
+          <h2 class="project-title" style="color:#c084fc;">POWER PUNKS</h2>
+          <p class="project-sub">XRPL • NON-TOKEN COLLECTION</p>
+          <p class="project-copy">
+            Exaggerated power. Loud identity. Built to stand out on the ledger.  
+            Designed to hold, collect, or trade.
+          </p>
+          <div class="project-links">
+            <a class="project-link primary" href="/collections/powerpunks.html"><span>⚡ View Collection</span></a>
+            <a class="project-link" href="https://x.com/powerpunks" target="_blank"><span>𝕏 Profile</span></a>
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+    <section style="margin-top:28px;">
+      <article class="project-card" style="grid-column:1 / -1;">
+        <div class="project-media">
+          <div class="project-wallpaper" style="background:radial-gradient(circle at top,#1e293b 0,#020308 70%); border-color:rgba(77,163,255,0.8);">
+            <img src="/assets/mrcauliman_logo.webp" class="project-logo">
+            <span class="project-tag">Operator</span>
+          </div>
+        </div>
+        <div class="project-body">
+          <h2 class="project-title" style="color:var(--blue);">MR CAULIMAN</h2>
+          <p class="project-sub">BUILDER • BJJ BLACK BELT • CTO</p>
+          <p class="project-copy">
+            Every system in this stack is architected and enforced under one operator.  
+            Discipline. Pressure. Execution.
+          </p>
+
+          <p class="project-copy" style="margin-top:6px; font-size:0.78rem; color:var(--text-soft); line-height:1.55;">
+            <strong>Skills:</strong><br>
+            XRPL AMMs (build, seed, reseed) • XRPL Trustlines & Rippling • XLS-20 NFTs (minting, burning, metadata) •
+            Python (Flask, xrpl-py) • Node.js (Telegram bots, grammy, sqlite) • HTML/CSS/JavaScript • Phaser.js (arcade games) •
+            Token Architecture • Ledger Security Flows • Wallet Architecture (issuer, treasury, reserve, liquidity) •
+            Ubuntu Server Management • DigitalOcean • Nginx • Reverse Proxies • SSL/HTTPS • systemd Services •
+            Git • GitHub Deployment Workflows • Custom Deployment Scripts • Static & Dynamic Web Stacks •
+            Creative Direction (Pixar-style assets) • Character Universe Design • Multi-Brand Ecosystem Architecture •
+            Compliance Logic (threat matrix, blacklist) • Verification Systems • NFT Metadata Systems •
+            Game UI/UX • Responsive Layouts • API Integration • Server Hardening •
+            Multi-site Infrastructure Planning & Execution
+          </p>
+
+          <div class="project-links">
+            <a class="project-link primary" href="https://x.com/mrcauliman" target="_blank"><span>𝕏 Profile</span></a>
+            <a class="project-link" href="https://x.com/i/communities/1677882151931637760" target="_blank"><span>🥋 Cauliflower Chronicles 𝕏</span></a>
+            <a class="project-link" href="https://x.com/i/communities/1993769453449040144" target="_blank"><span>🏛️ House of Cauliman 𝕏</span></a>
+            <a class="project-link" href="https://t.me/houseofcauliman" target="_blank"><span>📢 Telegram Channel</span></a>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section style="margin-top:32px;">
+      <p class="hoc-intro-title" style="margin-bottom:10px; text-align:center;">House Operators</p>
+
+      <div class="hoc-grid">
+
+        <article class="project-card" style="min-height:200px;">
+          <div class="project-media">
+            <div class="project-wallpaper" style="background:radial-gradient(circle at top,#1a2d4a 0,#020308 70%); border-color:rgba(77,163,255,0.8);">
+              <img src="/assets/bagman.png" class="project-logo" alt="BAGMAN_XRPL">
+            </div>
+          </div>
+          <div class="project-body">
+            <h2 class="project-title">BAGMAN_XRPL</h2>
+            <p class="project-sub">SIGNAL ANALYST — HOUSE OF CAULIMAN</p>
+
+            <div class="project-links">
+              <a class="project-link primary" href="https://houseofcauliman.com/bagman/" target="_blank"><span>Profile</span></a>
+              <a class="project-link" href="https://x.com/BAGMAN_XRPL" target="_blank"><span>𝕏</span></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card" style="min-height:200px;">
+          <div class="project-media">
+            <div class="project-wallpaper" style="background:radial-gradient(circle at top,#2d1f1f 0,#020308 70%); border-color:rgba(212,164,74,0.7);">
+              <img src="/assets/vinny_the_value.png" class="project-logo" alt="Vinny The Value">
+            </div>
+          </div>
+          <div class="project-body">
+            <h2 class="project-title">Vinny “The Value” Marino</h2>
+            <p class="project-sub">COMMUNITY LIAISON — HOUSE OF CAULIMAN</p>
+
+            <div class="project-links">
+              <a class="project-link primary" href="https://houseofcauliman.com/vinny/" target="_blank"><span>Profile</span></a>
+              <a class="project-link" href="https://x.com/vinnythevalue" target="_blank"><span>𝕏</span></a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- Link to full thesis -->
+    <article class="project-card" style="grid-column:1/-1; margin-top:32px;">
+      <div class="project-body nav-link-card">
+        <a href="/house.html">Full Investment Thesis →</a>
+      </div>
+    </article>
+
+    <footer class="hoc-footer">
+      <span>Built and backed by mrcauliman. No VC. No training wheels.</span>
+      <span>Powered by $XRP • HouseOfCauliman.com</span>
+    </footer>
+
+  </div>
+</main>
 
 </body>
 </html>
