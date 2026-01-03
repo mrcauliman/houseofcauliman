@@ -1,350 +1,311 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>House of Cauliman | Investment Thesis</title>
+<meta charset="UTF-8">
+<title>HOUSE OF CAULIMAN — Investment Thesis</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="canonical" href="https://houseofcauliman.com/thesis">
 
-<meta name="description" content="House of Cauliman investment thesis. RAD, $BAG, $WCK, hand-crafted access collections, managed liquidity, reseeding mechanisms, and rising structural floors built on XRPL." />
-<meta name="keywords" content="XRPL, XRP, House of Cauliman, WCK, RAD, BAG, XRPL NFTs, XRPL AMM, liquidity management" />
+<meta name="description" content="House of Cauliman investment thesis. RAD, $BAG, $WCK, hand-crafted access collections, managed liquidity, reseeding mechanisms, and rising structural floors built on XRPL.">
+<meta name="keywords" content="XRPL, XRP, House of Cauliman, WCK, RAD, BAG, XRPL NFTs, XRPL AMM">
 
 <style>
-  :root{
-    --bg:#050607;
-    --panel:#0c0f12;
-    --fg:#f5f7fa;
-    --muted:#9aa3ad;
-    --gold:#d4af37;
-    --line:#1b1f25;
-    --accent:#3a7bfd;
-    --maxw:980px;
-  }
+:root{
+--bg:#050509;
+--bg-soft:#090910;
+--card:#11121a;
+--border-subtle:#1a1b24;
+--border-strong:#2b3345;
+--accent:#0a74d0;
+--accent-glow:rgba(10,116,208,0.65);
+--text:#f5f7ff;
+--text-muted:#9aa2c3;
+--text-soft:#717895;
+--wck-gold:#d4a44a;
+--rad-blue:#3da0ff;
+--bag-green:#4ade80;
+--radius-lg:18px;
+--radius-xl:22px;
+--shadow-soft:0 18px 45px rgba(0,0,0,0.75);
+--shadow-glow:0 0 32px rgba(10,116,208,0.7);
+}
+*{box-sizing:border-box}
+html,body{
+margin:0;
+padding:0;
+width:100%;
+overflow-x:hidden;
+font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+background:radial-gradient(circle at top,#111827 0,#020308 55%,#000 100%);
+color:var(--text);
+}
+a{color:inherit;text-decoration:none}
 
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{
-    margin:0;
-    background:var(--bg);
-    color:var(--fg);
-    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    line-height:1.6;
-  }
+/* HEADER */
+.hoc-header{
+padding:24px 20px 10px;
+background:radial-gradient(circle at top,#0a74d0 0,#050509 55%,#000 100%);
+border-bottom:1px solid #151827;
+box-shadow:0 20px 40px rgba(0,0,0,0.75)
+}
+.hoc-header-inner{
+max-width:960px;
+margin:0 auto;
+display:flex;
+align-items:center;
+gap:18px
+}
+.hoc-brand-mark{
+width:82px;
+height:82px;
+border-radius:20px;
+border:1px solid #1b3a62;
+box-shadow:0 0 28px var(--accent-glow);
+background:#020308
+}
+.hoc-header-text h1{
+margin:0;
+font-size:1.5rem;
+letter-spacing:.15em;
+text-transform:uppercase
+}
+.hoc-header-text p{
+margin:5px 0 0;
+font-size:.92rem;
+color:#9fb4e2
+}
 
-  header{
-    padding:96px 24px 72px;
-    border-bottom:1px solid var(--line);
-    background:radial-gradient(ellipse at top, #0e1220 0%, var(--bg) 60%);
-  }
+/* BODY */
+.hoc-main{padding:22px 16px 40px}
+.hoc-shell{max-width:960px;margin:0 auto}
+.hoc-intro{
+margin-bottom:22px;
+padding:16px 18px 18px;
+border-radius:var(--radius-lg);
+border:1px solid rgba(26,31,55,.9);
+background:linear-gradient(135deg,rgba(15,23,42,.9),rgba(5,6,12,.98));
+box-shadow:var(--shadow-soft)
+}
+.hoc-intro-title{
+font-size:.82rem;
+text-transform:uppercase;
+letter-spacing:.18em;
+color:var(--text-soft);
+margin:0 0 6px
+}
+.hoc-intro-main{
+font-size:.97rem;
+color:var(--text-muted);
+margin:0;
+line-height:1.55
+}
 
-  header h1{
-    margin:0 0 12px;
-    font-size:42px;
-    letter-spacing:-0.02em;
-  }
+.hoc-grid{
+display:grid;
+grid-template-columns:1fr;
+gap:18px
+}
+@media(min-width:768px){
+.hoc-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
 
-  header p{
-    max-width:760px;
-    color:var(--muted);
-    font-size:18px;
-  }
+.project-card{
+border-radius:var(--radius-xl);
+border:1px solid var(--border-subtle);
+background:radial-gradient(circle at top,rgba(26,35,58,.85) 0,#050509 55%,#000 100%);
+box-shadow:var(--shadow-soft);
+overflow:hidden;
+display:flex;
+flex-direction:column;
+min-height:220px
+}
+.project-body{
+padding:16px;
+display:flex;
+flex-direction:column;
+gap:6px
+}
+.project-title{
+margin:0;
+font-size:1rem;
+letter-spacing:.12em;
+text-transform:uppercase
+}
+.project-sub{
+margin:0;
+font-size:.8rem;
+letter-spacing:.18em;
+text-transform:uppercase;
+color:var(--text-soft)
+}
+.project-copy{
+margin:6px 0;
+font-size:.86rem;
+line-height:1.5;
+color:var(--text-muted)
+}
 
-  section{
-    padding:72px 24px;
-    border-bottom:1px solid var(--line);
-  }
-
-  .wrap{max-width:var(--maxw);margin:0 auto}
-
-  h2{
-    font-size:30px;
-    margin:0 0 16px;
-    letter-spacing:-0.015em;
-  }
-
-  h3{
-    font-size:22px;
-    margin:36px 0 12px;
-    letter-spacing:-0.01em;
-  }
-
-  p{margin:0 0 14px}
-  .muted{color:var(--muted)}
-
-  ul{
-    margin:12px 0 20px 18px;
-    padding:0;
-  }
-  li{margin:6px 0}
-
-  .card{
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:10px;
-    padding:28px;
-    margin-top:28px;
-  }
-
-  .cta{
-    text-align:center;
-    padding:96px 24px;
-    background:linear-gradient(to bottom, var(--bg), #070a12);
-  }
-
-  .buttons{
-    display:flex;
-    flex-wrap:wrap;
-    gap:16px;
-    justify-content:center;
-    margin-top:32px;
-  }
-
-  .btn{
-    padding:14px 22px;
-    border-radius:8px;
-    border:1px solid var(--line);
-    background:#0e1220;
-    color:var(--fg);
-    text-decoration:none;
-    font-weight:600;
-    transition:all .15s ease;
-  }
-
-  .btn:hover{
-    border-color:var(--accent);
-    box-shadow:0 0 0 1px rgba(58,123,253,.25);
-  }
-
-  footer{
-    padding:40px 24px;
-    text-align:center;
-    color:var(--muted);
-    font-size:14px;
-  }
+/* FOOTER */
+.hoc-footer{
+max-width:960px;
+margin:26px auto 10px;
+padding-top:10px;
+border-top:1px solid #141728;
+display:flex;
+justify-content:space-between;
+gap:8px;
+font-size:.78rem;
+color:var(--text-soft)
+}
 </style>
 </head>
 
 <body>
 
-<header>
-  <div class="wrap">
-    <h1>The House of Cauliman</h1>
-    <p>
-      Long-term value. On-chain reality.<br>
-      Tokens, access collections, and managed structure on the XRPL.
-    </p>
-  </div>
+<header class="hoc-header">
+<div class="hoc-header-inner">
+<img src="/assets/mrcauliman_logo.webp" class="hoc-brand-mark">
+<div class="hoc-header-text">
+<h1>🏛️ HOUSE OF CAULIMAN</h1>
+<p>Investment Thesis</p>
+</div>
+</div>
 </header>
 
-<section>
-  <div class="wrap">
-    <h2>Investment Thesis</h2>
-    <p>
-      Most crypto projects fail because they are passive.
-      Liquidity is seeded once. Supply is released without discipline.
-      The market is expected to behave.
-    </p>
-    <p>
-      The House of Cauliman is actively managed.
-      This ecosystem is designed for durability, not short-term attention cycles.
-    </p>
-    <p class="muted">
-      If usage grows, the structure strengthens.
-    </p>
-  </div>
+<main class="hoc-main">
+<div class="hoc-shell">
+
+<section class="hoc-intro">
+<p class="hoc-intro-main">
+Most crypto projects fail because they are passive.<br>
+Liquidity is seeded once. Supply is released without discipline.<br>
+The market is expected to behave.
+</p>
 </section>
 
-<section>
-  <div class="wrap">
-    <h2>One Ecosystem. Three Roles.</h2>
-
-    <div class="card">
-      <h3>RAD — The Filter</h3>
-      <p>
-        RAD is the trust and verification layer.
-        It highlights real builders, exposes bad actors,
-        and filters noise as the ledger scales.
-      </p>
-      <ul>
-        <li>Fixed supply</li>
-        <li>Usage-driven relevance</li>
-        <li>Value accrues through verification demand</li>
-      </ul>
-      <p class="muted">
-        RAD decides what earns attention.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>$BAG — The Engine</h3>
-      <p>
-        $BAG captures participation, games, and culture
-        and routes activity through on-chain mechanics.
-      </p>
-      <ul>
-        <li>Arcade and skill-based systems</li>
-        <li>High engagement loops</li>
-        <li>Utility-driven demand</li>
-      </ul>
-      <p class="muted">
-        $BAG is where activity concentrates.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>$WCK — The IP</h3>
-      <p>
-        $WCK represents digital property.
-        Characters, operators, and artifacts
-        tied to a growing interactive universe.
-      </p>
-      <ul>
-        <li>Scarcity through collectibles</li>
-        <li>Game-aligned demand</li>
-        <li>Long-term IP expansion</li>
-      </ul>
-      <p class="muted">
-        $WCK is where ownership compounds.
-      </p>
-    </div>
-  </div>
+<section class="hoc-intro">
+<p class="hoc-intro-main">
+The House of Cauliman is actively managed.<br>
+This ecosystem is designed for durability, not short-term attention cycles.<br>
+If usage grows, the structure strengthens.
+</p>
 </section>
 
-<section>
-  <div class="wrap">
-    <h2>Hand-Crafted Access Collections</h2>
-    <p>
-      These collections sit above the tokens.
-      They are individually illustrated access instruments and cultural assets.
-    </p>
+<section class="hoc-grid">
 
-    <div class="card">
-      <h3>What They Are</h3>
-      <p>
-        Hand-illustrated. Individually made. Finite by design.
-        No procedural generation. No inflation.
-      </p>
-      <ul>
-        <li>Independent of token velocity</li>
-        <li>Ownership-based access</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h3>What They Unlock</h3>
-      <ul>
-        <li>Early or exclusive access to products</li>
-        <li>Private communities or channels</li>
-        <li>Priority participation in games or releases</li>
-        <li>Future ecosystem permissions</li>
-      </ul>
-      <p class="muted">
-        Access is permanent while ownership is held.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>Why They Matter Long-Term</h3>
-      <p>
-        Tokens move capital.
-        Access controls who participates.
-      </p>
-      <p>
-        As the ecosystem grows, access becomes scarcer and more valuable.
-        Early holders gain structural advantage.
-        New participants must buy from existing holders.
-      </p>
-      <p class="muted">
-        Secondary value without dilution.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>Example: Power Punks</h3>
-      <p>
-        Exaggerated power. Loud identity.
-        Built to stand out on the ledger. Designed to hold, collect, or trade.
-      </p>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <h2>Floor Control & Structural Growth</h2>
-
-    <h3>Who Owns the Floor</h3>
-    <p>
-      The House does.
-      Liquidity is seeded, retained, and reinforced internally.
-      No external entity can remove the base.
-    </p>
-
-    <h3>Reseeding Mechanisms</h3>
-    <p>
-      As usage and participation increase,
-      liquidity is periodically reintroduced.
-      Pool depth grows. The effective floor steps upward over time.
-    </p>
-
-    <h3>Timed Supply Releases</h3>
-    <p>
-      Supply enters through structured schedules
-      aligned with real demand absorption.
-    </p>
-
-    <h3>No Floor Puncture Scenario</h3>
-    <p>
-      Price may fluctuate.
-      The base remains intact.
-    </p>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <h2>What This Means for Long-Term Holders</h2>
-    <ul>
-      <li>Patience is structurally favored</li>
-      <li>Participation aligns with growth</li>
-      <li>Time strengthens positioning</li>
-    </ul>
-    <p class="muted">
-      Alignment with structure, not short-term reaction.
-    </p>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <h2>Risk Disclosure</h2>
-    <p>
-      Nothing on-chain is guaranteed.
-      Success depends on continued development,
-      ecosystem usage, and XRPL adoption.
-    </p>
-    <p class="muted">
-      No promises are made. Only structure is built.
-    </p>
-  </div>
-</section>
-
-<div class="cta">
-  <div class="wrap">
-    <h2>Access the Market</h2>
-    <p class="muted">
-      Understand the system. Choose participation.
-    </p>
-    <div class="buttons">
-      <a class="btn" href="#" target="_blank" rel="noopener">Access RAD AMM</a>
-      <a class="btn" href="#" target="_blank" rel="noopener">Access $BAG AMM</a>
-      <a class="btn" href="#" target="_blank" rel="noopener">Access $WCK AMM</a>
-    </div>
-  </div>
+<article class="project-card" style="grid-column:1/-1">
+<div class="project-body">
+<h2 class="project-title">One Ecosystem. Three Roles</h2>
 </div>
+</article>
 
-<footer>
-  © House of Cauliman. Open markets. Managed structure.
+<article class="project-card">
+<div class="project-body">
+<h2 class="project-title">RAD</h2>
+<p class="project-sub">The Filter</p>
+<p class="project-copy">
+Trust and verification layer.<br>
+Highlights builders, exposes bad actors, filters noise.
+</p>
+<p class="project-copy">
+Fixed supply • Usage-driven relevance • Value accrues through verification demand
+</p>
+</div>
+</article>
+
+<article class="project-card">
+<div class="project-body">
+<h2 class="project-title">$BAG</h2>
+<p class="project-sub">The Engine</p>
+<p class="project-copy">
+Captures participation, games, and culture.<br>
+Routes activity through on-chain mechanics.
+</p>
+<p class="project-copy">
+Arcade systems • High engagement • Utility-driven demand
+</p>
+</div>
+</article>
+
+<article class="project-card">
+<div class="project-body">
+<h2 class="project-title">$WCK</h2>
+<p class="project-sub">The IP</p>
+<p class="project-copy">
+Digital property — characters, operators, artifacts.<br>
+Tied to a growing interactive universe.
+</p>
+<p class="project-copy">
+Collectible scarcity • Game-aligned demand • Long-term IP expansion
+</p>
+</div>
+</article>
+
+<article class="project-card" style="grid-column:1/-1">
+<div class="project-body">
+<h2 class="project-title">Hand-Crafted Access Collections</h2>
+<p class="project-copy">
+Sit above tokens. Individually illustrated access instruments and cultural assets.<br>
+Finite • No inflation • Ownership-based access
+</p>
+<p class="project-copy">
+Unlock early access, private channels, priority participation, future permissions.<br>
+As the ecosystem grows, access becomes scarcer and more valuable.
+</p>
+<p class="project-copy">
+Example: <strong>Power Punks</strong> — Exaggerated power. Loud identity. Built to stand out on the ledger.
+</p>
+</div>
+</article>
+
+<article class="project-card" style="grid-column:1/-1">
+<div class="project-body">
+<h2 class="project-title">Floor Control & Structural Growth</h2>
+<p class="project-copy">
+Liquidity seeded, retained, and reinforced by the House.<br>
+No external entity can remove the base.
+</p>
+<p class="project-copy">
+Reseeding: As usage increases, liquidity reintroduced → floor steps upward.<br>
+Timed releases: Supply aligned with real demand absorption.
+</p>
+<p class="project-copy">
+Price may fluctuate. The base remains intact.
+</p>
+</div>
+</article>
+
+<article class="project-card" style="grid-column:1/-1">
+<div class="project-body">
+<h2 class="project-title">Long-Term Holder Alignment</h2>
+<p class="project-copy">
+Patience structurally favored.<br>
+Participation aligns with growth.<br>
+Time strengthens positioning.
+</p>
+</div>
+</article>
+
+<article class="project-card" style="grid-column:1/-1">
+<div class="project-body">
+<h2 class="project-title">Risk Disclosure</h2>
+<p class="project-copy">
+Nothing on-chain is guaranteed.<br>
+Success depends on continued development, usage, and XRPL adoption.<br>
+No promises are made. Only structure is built.
+</p>
+</div>
+</article>
+
+</section>
+
+<footer class="hoc-footer">
+<span>Built and enforced by mrcauliman</span>
+<span>Powered by $XRP • HouseOfCauliman.com</span>
 </footer>
+
+</div>
+</main>
 
 </body>
 </html>
