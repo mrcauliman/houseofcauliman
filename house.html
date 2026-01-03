@@ -150,6 +150,28 @@ height:auto;
 display:block
 }
 
+/* NAV LINK STYLE */
+.nav-link-card{
+text-align:center;
+padding:20px;
+}
+.nav-link-card a{
+color:var(--text);
+font-size:0.95rem;
+letter-spacing:.12em;
+text-transform:uppercase;
+padding:12px 24px;
+border:1px solid var(--border-subtle);
+border-radius:var(--radius-xl);
+transition:all .25s ease;
+display:inline-block;
+}
+.nav-link-card a:hover{
+border-color:var(--accent);
+box-shadow:0 0 20px var(--accent-glow);
+background:rgba(10,116,208,0.1);
+}
+
 /* FOOTER */
 .hoc-footer{
 max-width:960px;
@@ -300,6 +322,13 @@ Nothing on-chain is guaranteed.<br>
 Success depends on continued development, usage, and XRPL adoption.<br>
 No promises are made. Only structure is built.
 </p>
+</div>
+</article>
+
+<!-- NEW: Back to Home link -->
+<article class="project-card" style="grid-column:1/-1">
+<div class="project-body nav-link-card">
+<a href="/index.html">← Home</a>
 </div>
 </article>
 
