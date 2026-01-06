@@ -101,18 +101,24 @@
     .project-bag .project-wallpaper{background:radial-gradient(circle at 20% 0,#064e3b 0,#020617 55%,#000 100%);border-color:rgba(74,222,128,0.75)}
     .project-bag .project-title{color:var(--bag-green)}
     .hoc-footer{max-width:960px;margin:10px auto 26px;padding:10px 18px 0;border-top:1px solid #141728;color:var(--text-soft);font-size:0.78rem;display:flex;justify-content:space-between;gap:8px}
-    img.project-logo[alt="POWER PUNKS"]{width:118px;height:118px}
     .thesis-image{width:100%;height:auto;display:block;border-radius:14px;margin-top:12px;box-shadow:0 12px 30px rgba(0,0,0,0.8);}
     .nav-link-card{text-align:center;padding:20px;}
     .nav-link-card a{color:var(--text);font-size:0.95rem;letter-spacing:.12em;text-transform:uppercase;padding:10px 20px;border:1px solid var(--border-subtle);border-radius:var(--radius-xl);transition:all .25s ease;display:inline-block;}
     .nav-link-card a:hover{border-color:var(--accent);box-shadow:0 0 20px var(--accent-glow);}
 
-    /* COLLECTION LOGO — DOMINANT SCALE */
+    /* Ensure perfect centering for all wallpapers */
+    .project-wallpaper{
+      align-items:center;
+      justify-content:center;
+    }
+
+    /* COLLECTION LOGO — TRUE DOMINANT SCALE */
     img.project-logo[alt="NFTITANS"],
     img.project-logo[alt="POWER PUNKS"]{
-      height:160px;        /* ~73% of 220px */
+      height:165px;          /* ~75% of 220px */
       width:auto;
-      max-width:95%;
+      max-width:96%;
+      object-fit:contain;
       filter:
         drop-shadow(0 0 28px rgba(0,0,0,0.95))
         drop-shadow(0 0 26px rgba(212,164,74,0.35));
@@ -229,41 +235,41 @@
     </section>
     <section class="hoc-grid" style="margin-top:18px;">
       <article class="project-card">
-  <div class="project-media" style="padding:8px;">
-    <div class="project-wallpaper"
-      style="
-        height:220px;
-        background:radial-gradient(circle at 20% 0,#2b1b0f 0,#050308 65%,#000 100%);
-        border-color:rgba(212,164,74,0.75);
-      ">
-      <img src="/collections/nftitans/assets/NFTITANS_logo.webp"
-           class="project-logo"
-           alt="NFTITANS">
-      <span class="project-tag">NFT Collection</span>
-    </div>
-  </div>
-  <div class="project-body">
-    <h2 class="project-title" style="color:#d4a44a;">NFTITANS</h2>
-    <p class="project-sub">XRPL • COLLECTIBLE SERIES</p>
-    <p class="project-copy">
-32 Roman Titans.
-Extreme muscle.
-Toy-accurate NFT collectibles.
-Built on XRPL.
-Forged for the House of Cauliman.
-    </p>
-    <div class="project-links">
-      <a class="project-link primary" href="/collections/nftitans.html">
-        <span>🏛️ View Collection</span>
-      </a>
-      <a class="project-link" href="https://x.com/NFTITANS_XRPL" target="_blank">
-        <span>𝕏 Profile</span>
-      </a>
-    </div>
-  </div>
-</article>
+        <div class="project-media" style="padding:6px 8px;">
+          <div class="project-wallpaper"
+            style="
+              height:220px;
+              background:radial-gradient(circle at 20% 0,#2b1b0f 0,#050308 65%,#000 100%);
+              border-color:rgba(212,164,74,0.75);
+            ">
+            <img src="/collections/nftitans/assets/NFTITANS_logo.webp"
+                 class="project-logo"
+                 alt="NFTITANS">
+            <span class="project-tag">NFT Collection</span>
+          </div>
+        </div>
+        <div class="project-body">
+          <h2 class="project-title" style="color:#d4a44a;">NFTITANS</h2>
+          <p class="project-sub">XRPL • COLLECTIBLE SERIES</p>
+          <p class="project-copy">
+            32 Roman Titans.
+            Extreme muscle.
+            Toy-accurate NFT collectibles.
+            Built on XRPL.
+            Forged for the House of Cauliman.
+          </p>
+          <div class="project-links">
+            <a class="project-link primary" href="/collections/nftitans.html">
+              <span>🏛️ View Collection</span>
+            </a>
+            <a class="project-link" href="https://x.com/NFTITANS_XRPL" target="_blank">
+              <span>𝕏 Profile</span>
+            </a>
+          </div>
+        </div>
+      </article>
       <article class="project-card">
-        <div class="project-media" style="padding:8px;">
+        <div class="project-media" style="padding:6px 8px;">
           <div class="project-wallpaper" style="height:220px;background:radial-gradient(circle at 20% 0,#3b0764 0,#020308 65%,#000 100%); border-color:rgba(168,85,247,0.75);">
             <img src="/collections/powerpunks/assets/power_punks_logo.webp" class="project-logo" alt="POWER PUNKS">
             <span class="project-tag">NFT Collection</span>
