@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>THE DON — NFT Collection | House of Cauliman</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://houseofcauliman.com/collections/thedon.html" />
+
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png" />
+  <link rel="manifest" href="/assets/favicons/site.webmanifest" />
+  <link rel="icon" href="/assets/favicons/favicon.ico" />
+
+  <!-- SEO -->
+  <meta name="description" content="THE DON — an XRPL icon NFT collection under House of Cauliman. Cinematic moments, minted as collectible drops." />
+  <meta property="og:title" content="THE DON — NFT Collection" />
+  <meta property="og:description" content="XRPL icon series. Moments. Myth. Pressure. Built under House of Cauliman." />
+  <meta property="og:image" content="https://houseofcauliman.com/collections/thedon/assets/thedon_og.webp" />
+  <meta property="og:url" content="https://houseofcauliman.com/collections/thedon.html" />
+  <meta property="og:type" content="website" />
+
+  <style>
+    :root{
+      --bg:#050509;
+      --card:#11121a;
+      --border-subtle:#1a1b24;
+      --border-strong:#2b3345;
+      --text:#f5f7ff;
+      --text-muted:#9aa2c3;
+      --text-soft:#717895;
+      --radius-lg:18px;
+      --radius-xl:22px;
+      --shadow-soft:0 18px 45px rgba(0,0,0,0.75);
+      --shadow-glow:0 0 32px rgba(220,38,38,0.35);
+    }
+    *{box-sizing:border-box}
+    html,body{
+      margin:0;padding:0;width:100%;overflow-x:hidden;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background:radial-gradient(circle at top,#0b1226 0,#020308 55%,#000 100%);
+      color:var(--text);
+    }
+    a{color:inherit;text-decoration:none}
+    .hdr{
+      padding:22px 16px 12px;
+      background:
+        linear-gradient(135deg, rgba(2,6,23,0.86), rgba(0,0,0,0.98)),
+        repeating-linear-gradient(90deg,
+          rgba(220,38,38,0.22) 0px, rgba(220,38,38,0.22) 22px,
+          rgba(255,255,255,0.06) 22px, rgba(255,255,255,0.06) 44px
+        ),
+        radial-gradient(circle at 12% 8%, rgba(37,99,235,0.55) 0, rgba(2,6,23,0.0) 48%),
+        radial-gradient(circle at 85% 15%, rgba(220,38,38,0.35) 0, rgba(0,0,0,0) 55%);
+      border-bottom:1px solid #151827;
+      box-shadow:0 20px 40px rgba(0,0,0,0.75);
+    }
+    .hdr-inner{max-width:1020px;margin:0 auto;display:flex;align-items:center;gap:16px}
+    .mark{
+      width:78px;height:78px;border-radius:20px;
+      border:1px solid rgba(248,113,113,0.55);
+      background:radial-gradient(circle at 30% 0,#1f2937 0,#020308 70%);
+      box-shadow:0 0 28px rgba(220,38,38,0.35);
+      object-fit:contain;
+      padding:8px;
+    }
+    .hdr h1{
+      margin:0;
+      font-size:1.55rem;
+      letter-spacing:0.14em;
+      text-transform:uppercase;
+    }
+    .hdr p{
+      margin:6px 0 0;
+      font-size:0.92rem;
+      color:#c7cde6;
+      line-height:1.4;
+    }
+    .shell{max-width:1020px;margin:0 auto;padding:22px 16px 46px}
+    .topbar{
+      display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;
+      margin-bottom:18px;
+    }
+    .pillrow{display:flex;flex-wrap:wrap;gap:10px}
+    .pill{
+      display:inline-flex;align-items:center;justify-content:center;
+      gap:8px;font-size:0.78rem;padding:8px 12px;border-radius:999px;
+      border:1px solid var(--border-strong);
+      background:linear-gradient(135deg,rgba(15,23,42,0.98),rgba(3,7,18,0.98));
+      text-transform:uppercase;letter-spacing:0.16em;color:#dbe3ff;
+      box-shadow:0 8px 20px rgba(0,0,0,0.9);
+    }
+    .pill:hover{border-color:rgba(248,113,113,0.85);box-shadow:var(--shadow-glow);transform:translateY(-1px)}
+    .intro{
+      padding:16px 18px 18px;border-radius:var(--radius-lg);
+      border:1px solid rgba(26,31,55,0.9);
+      background:linear-gradient(135deg,rgba(15,23,42,0.9),rgba(5,6,12,0.98));
+      box-shadow:var(--shadow-soft);
+      margin-bottom:18px;
+    }
+    .intro small{
+      display:block;
+      font-size:0.78rem;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      color:var(--text-soft);
+      margin-bottom:8px;
+    }
+    .intro p{margin:0;color:var(--text-muted);line-height:1.55}
+    .grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:14px;
+    }
+    @media(min-width:720px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(min-width:1020px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+    .card{
+      border-radius:var(--radius-xl);
+      border:1px solid var(--border-subtle);
+      background:radial-gradient(circle at top,rgba(26,35,58,0.85) 0,#050509 55%,#000 100%);
+      box-shadow:var(--shadow-soft);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      min-height:240px;
+      position:relative;
+    }
+    .media{
+      padding:12px;
+      border-bottom:1px solid rgba(37,44,70,0.9);
+      background:radial-gradient(circle at top,#111827 0,#020308 70%);
+    }
+    .thumb{
+      width:100%;
+      aspect-ratio:1/1;
+      border-radius:16px;
+      border:1px solid rgba(248,113,113,0.35);
+      background:radial-gradient(circle at top,rgba(15,23,42,0.95),#020308 65%);
+      box-shadow:0 16px 32px rgba(0,0,0,0.9);
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+    }
+    .thumb img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      display:block;
+    }
+    .tag{
+      position:absolute;right:10px;bottom:10px;
+      font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;
+      padding:4px 8px;border-radius:999px;
+      border:1px solid rgba(248,113,113,0.35);
+      background:rgba(15,23,42,0.92);
+      color:#ffe9e9;
+      backdrop-filter:blur(8px);
+    }
+    .body{padding:14px;display:flex;flex-direction:column;gap:6px}
+    .title{margin:0;font-size:0.95rem;letter-spacing:0.12em;text-transform:uppercase}
+    .sub{margin:0;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.18em;color:var(--text-soft)}
+    .copy{margin:6px 0 10px;font-size:0.86rem;line-height:1.5;color:var(--text-muted)}
+    .links{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
+    .link{
+      display:inline-flex;align-items:center;justify-content:center;
+      gap:6px;font-size:0.76rem;padding:7px 11px;border-radius:999px;
+      border:1px solid var(--border-strong);
+      background:linear-gradient(135deg,rgba(15,23,42,0.98),rgba(3,7,18,0.98));
+      box-shadow:0 8px 20px rgba(0,0,0,0.9);
+      text-transform:uppercase;letter-spacing:0.16em;color:#dbe3ff;
+      cursor:pointer;
+    }
+    .link:hover{border-color:rgba(248,113,113,0.85);box-shadow:var(--shadow-glow);transform:translateY(-1px)}
+    .empty{
+      padding:26px 18px;
+      border-radius:var(--radius-lg);
+      border:1px dashed rgba(148,163,184,0.25);
+      color:var(--text-muted);
+      background:rgba(2,6,23,0.35);
+      text-align:center;
+    }
+    .footer{
+      margin-top:28px;
+      padding-top:12px;
+      border-top:1px solid #141728;
+      color:var(--text-soft);
+      font-size:0.78rem;
+      display:flex;
+      justify-content:space-between;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:0.92em}
+  </style>
+</head>
+<body>
+  <header class="hdr">
+    <div class="hdr-inner">
+      <img src="/collections/thedon/assets/thedon_logo.webp" alt="THE DON" class="mark" />
+      <div>
+        <h1>THE DON</h1>
+        <p>XRPL icon series under House of Cauliman. Clean collectible drops, no filler.</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell">
+    <div class="topbar">
+      <div class="pillrow">
+        <a class="pill" href="/">🏛️ House Home</a>
+        <a class="pill" href="/collections/">🗂️ Collections</a>
+      </div>
+      <div class="pillrow">
+        <a class="pill" href="#drops">🦅 Drops</a>
+        <a class="pill" href="#how">📦 How to add NFTs</a>
+      </div>
+    </div>
+
+    <section class="intro">
+      <small>Collection Profile</small>
+      <p>
+        <strong>Format:</strong> 1024×1024 transparent PNG master assets for NFTs, background variants only for marketing.<br/>
+        <strong>Theme:</strong> American icon moments + XRPL energy, executed with cinematic polish.<br/>
+        <strong>Rule:</strong> No generic faces, no random variants. Every piece is a moment.
+      </p>
+    </section>
+
+    <section id="drops">
+      <div id="grid" class="grid"></div>
+      <div id="empty" class="empty" style="display:none;">
+        No published drops yet.<br/><br/>
+        When you’re ready, add entries in the <code>NFTS</code> list inside this page and deploy.
+      </div>
+    </section>
+
+    <section id="how" class="intro" style="margin-top:18px;">
+      <small>How to add NFTs</small>
+      <p>
+        1) Upload images to <code>/collections/thedon/nfts/</code> (example: <code>TD001.webp</code>)<br/>
+        2) Edit the <code>NFTS</code> array in this file with id, title, and image path<br/>
+        3) Deploy. The grid auto-renders.
+      </p>
+    </section>
+
+    <footer class="footer">
+      <span>House of Cauliman • THE DON Collection</span>
+      <span>Powered by $XRP • <a href="https://houseofcauliman.com">HouseOfCauliman.com</a></span>
+    </footer>
+  </main>
+
+  <script>
+    // THE DON drops live here.
+    // Add objects to publish drops. Keep filenames stable.
+    const NFTS = [
+      // Example (delete after first real drop):
+      // { id:"TD001", title:"The Descent", note:"Origin moment", img:"/collections/thedon/nfts/TD001.webp" }
+    ];
+
+    const grid = document.getElementById("grid");
+    const empty = document.getElementById("empty");
+
+    if (!NFTS.length) {
+      empty.style.display = "block";
+    } else {
+      empty.style.display = "none";
+      NFTS.forEach(n => {
+        const card = document.createElement("article");
+        card.className = "card";
+        card.innerHTML = `
+          <div class="media">
+            <div class="thumb">
+              <img src="${n.img}" alt="${n.id} — ${n.title}" loading="lazy" />
+              <span class="tag">${n.id}</span>
+            </div>
+          </div>
+          <div class="body">
+            <h2 class="title">${n.title}</h2>
+            <p class="sub">THE DON • XRPL</p>
+            <p class="copy">${n.note ? n.note : "Published drop."}</p>
+            <div class="links">
+              <a class="link" href="${n.img}" target="_blank" rel="noopener">🖼️ View</a>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+  </script>
+</body>
+</html>
