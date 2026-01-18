@@ -104,6 +104,25 @@ a{color:inherit;text-decoration:none}
   color:var(--muted);
   text-align:center;
 }
+
+/* MEDIA */
+.thumb{
+  width:100%;
+  aspect-ratio:1/1;
+  border-radius:12px;
+  overflow:hidden;
+  border:1px solid rgba(220,38,38,.25);
+  background:
+    radial-gradient(circle at top, rgba(37,99,235,.22), rgba(0,0,0,0) 55%),
+    linear-gradient(135deg, rgba(2,6,23,.86), rgba(5,3,2,.99));
+}
+.thumb img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+}
+
 /* Placeholder */
 .placeholder{
   width:100%;
@@ -132,6 +151,7 @@ a{color:inherit;text-decoration:none}
   text-transform:uppercase;
   color:var(--muted);
 }
+
 /* MODAL */
 #modal{
   position:fixed;
@@ -155,6 +175,15 @@ a{color:inherit;text-decoration:none}
   width:100%;
   border-radius:14px;
   overflow:hidden;
+  border:1px solid rgba(220,38,38,.25);
+  background:
+    radial-gradient(circle at top, rgba(37,99,235,.16), rgba(0,0,0,0) 55%),
+    linear-gradient(135deg, rgba(2,6,23,.86), rgba(5,3,2,.99));
+}
+.modal-media img{
+  width:100%;
+  height:auto;
+  display:block;
 }
 .modal-title{
   margin:10px 0 6px;
@@ -182,11 +211,11 @@ a{color:inherit;text-decoration:none}
   cursor:pointer;
 }
 
-  .ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;position:relative}
-  .phLogo{width:78%;max-width:260px;opacity:.22;filter:saturate(1.1) contrast(1.05);object-fit:contain}
-  .phText{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
-  .phTop{font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:rgba(226,232,240,.9)}
-  .phBottom{font-size:14px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:rgba(248,113,113,.95)}
+.ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;position:relative}
+.phLogo{width:78%;max-width:260px;opacity:.22;filter:saturate(1.1) contrast(1.05);object-fit:contain}
+.phText{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+.phTop{font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:rgba(226,232,240,.9)}
+.phBottom{font-size:14px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:rgba(248,113,113,.95)}
 
 .collection-desc{
   max-width:980px;
@@ -205,19 +234,23 @@ a{color:inherit;text-decoration:none}
 <body>
 <main class="wrap">
 <a href="https://houseofcauliman.com" class="back-btn">← House of Cauliman</a>
+
 <section class="hero">
   <img src="/collections/thedon/assets/THE_DON_XRPL.webp" alt="THE DON">
 </section>
-<div class="drop-banner"
-     style="border-color:rgba(212,164,74,.6);color:#e2e8f0;">
+
+<div class="drop-banner" style="border-color:rgba(212,164,74,.6);color:#e2e8f0;">
   ICON SERIES — THE DON
 </div>
+
 <div class="collection-desc">
   THE DON Icon moments. Pixar-style collectibles. History, meme, and culture on XRPL.<br>
   Early access. Limited supply. Pure collectible energy.
 </div>
+
 <section class="grid" id="grid"></section>
 </main>
+
 <div id="modal">
   <div class="modal-box">
     <div class="modal-media" id="modalMedia"></div>
@@ -227,24 +260,41 @@ a{color:inherit;text-decoration:none}
     </div>
   </div>
 </div>
+
 <script>
 const TOTAL = 32;
 const grid = document.getElementById("grid");
 
-// When live images exist:
-// Replace placeholderHTML(num) with `<img src="/collections/thedon/assets/TD${num}.webp" alt="THE DON TD${num}">`
+/* Assets present (not released yet) */
+const LIVE = {
+  "001": { webp: "/collections/thedon/assets/td001.webp", png: "/collections/thedon/assets/td001.png" },
+  "002": { webp: "/collections/thedon/assets/td002.webp", png: "/collections/thedon/assets/td002.png" },
+  "003": { webp: "/collections/thedon/assets/td003.webp", png: "/collections/thedon/assets/td003.png" }
+};
 
 for(let i=1;i<=TOTAL;i++){
   const num = String(i).padStart(3,"0");
+  const hasArt = !!LIVE[num];
+
   grid.insertAdjacentHTML("beforeend",`
     <div class="card" onclick="openModal('${num}')">
-      ${placeholderHTML(num)}
+      ${hasArt ? artThumbHTML(num) : placeholderHTML(num)}
       <div class="meta">THE DON — TD${num}</div>
       <div class="price">DROPPING SOON</div>
-      <div class="edition">Unreleased</div>
+      <div class="edition">${hasArt ? "Preview" : "Unrevealed"}</div>
     </div>
   `);
 }
+
+function artThumbHTML(num){
+  const src = LIVE[num].webp;
+  return `
+    <div class="thumb">
+      <img src="${src}" alt="THE DON TD${num}">
+    </div>
+  `;
+}
+
 function placeholderHTML(num){
   return `
     <div class="ph">
@@ -256,18 +306,27 @@ function placeholderHTML(num){
     </div>
   `;
 }
+
 function openModal(num){
   document.getElementById("modalTitle").innerText = `THE DON — TD${num}`;
-  document.getElementById("modalMedia").innerHTML = placeholderHTML(num);
+
+  if(LIVE[num]){
+    const src = LIVE[num].png || LIVE[num].webp;
+    document.getElementById("modalMedia").innerHTML = `<img src="${src}" alt="THE DON TD${num}">`;
+  } else {
+    document.getElementById("modalMedia").innerHTML = placeholderHTML(num);
+  }
+
   document.getElementById("modal").classList.add("open");
 }
+
 function closeModal(){
   document.getElementById("modal").classList.remove("open");
 }
+
 document.getElementById("modal").onclick = e=>{
   if(e.target.id==="modal") closeModal();
 };
 </script>
 </body>
 </html>
-
