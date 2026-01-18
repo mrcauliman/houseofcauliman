@@ -93,13 +93,43 @@ a{color:inherit;text-decoration:none}
   text-transform:uppercase;
   text-align:center;
 }
+.date{
+  margin-top:6px;
+  font-size:.68rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:rgba(226,232,240,.92);
+  text-align:center;
+}
+.quote{
+  margin-top:8px;
+  padding:8px 10px;
+  border-radius:12px;
+  border:1px solid rgba(37,99,235,.20);
+  background:rgba(2,6,23,.35);
+  font-size:.72rem;
+  line-height:1.35;
+  color:rgba(226,232,240,.92);
+  text-align:center;
+  font-style:italic;
+}
+.desc{
+  margin-top:8px;
+  font-size:.72rem;
+  line-height:1.35;
+  color:rgba(182,191,214,.95);
+  text-align:center;
+  min-height:2.6em;
+}
 .price{
-  margin-top:4px;
+  margin-top:10px;
   font-size:.8rem;
   color:rgba(248,113,113,.95);
   text-align:center;
+  letter-spacing:.08em;
 }
 .edition{
+  margin-top:4px;
   font-size:.65rem;
   color:var(--muted);
   text-align:center;
@@ -123,35 +153,6 @@ a{color:inherit;text-decoration:none}
   object-fit:cover;
 }
 
-/* Placeholder */
-.placeholder{
-  width:100%;
-  aspect-ratio:1/1;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:12px;
-  background:
-    radial-gradient(circle at top, rgba(37,99,235,.22), rgba(0,0,0,0) 55%),
-    linear-gradient(135deg, rgba(2,6,23,.86), rgba(5,3,2,.99));
-  border:1px dashed rgba(220,38,38,.45);
-  text-align:center;
-  padding:16px;
-}
-.placeholder .tag{
-  font-size:.7rem;
-  letter-spacing:.28em;
-  text-transform:uppercase;
-  color:#e2e8f0;
-}
-.placeholder .sub{
-  margin-top:10px;
-  font-size:.65rem;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:var(--muted);
-}
-
 /* MODAL */
 #modal{
   position:fixed;
@@ -164,7 +165,7 @@ a{color:inherit;text-decoration:none}
 }
 #modal.open{display:flex}
 .modal-box{
-  max-width:520px;
+  max-width:560px;
   width:90%;
   background:#050509;
   border:1px solid rgba(37,99,235,.28);
@@ -186,12 +187,39 @@ a{color:inherit;text-decoration:none}
   display:block;
 }
 .modal-title{
-  margin:10px 0 6px;
+  margin:12px 0 6px;
   font-size:.9rem;
   letter-spacing:.18em;
   text-transform:uppercase;
   text-align:center;
-  font-weight:600;
+  font-weight:800;
+}
+.modal-date{
+  margin:0 0 10px;
+  font-size:.72rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:rgba(226,232,240,.92);
+  text-align:center;
+}
+.modal-quote{
+  margin:0 0 12px;
+  padding:10px 12px;
+  border-radius:14px;
+  border:1px solid rgba(37,99,235,.20);
+  background:rgba(2,6,23,.35);
+  font-size:.8rem;
+  line-height:1.4;
+  color:rgba(226,232,240,.92);
+  text-align:center;
+  font-style:italic;
+}
+.modal-desc{
+  margin:0 0 14px;
+  font-size:.82rem;
+  line-height:1.45;
+  color:rgba(182,191,214,.95);
+  text-align:center;
 }
 .modal-actions{
   margin-top:14px;
@@ -211,6 +239,7 @@ a{color:inherit;text-decoration:none}
   cursor:pointer;
 }
 
+/* PLACEHOLDER */
 .ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;position:relative}
 .phLogo{width:78%;max-width:260px;opacity:.22;filter:saturate(1.1) contrast(1.05);object-fit:contain}
 .phText{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
@@ -255,6 +284,9 @@ a{color:inherit;text-decoration:none}
   <div class="modal-box">
     <div class="modal-media" id="modalMedia"></div>
     <div class="modal-title" id="modalTitle"></div>
+    <div class="modal-date" id="modalDate"></div>
+    <div class="modal-quote" id="modalQuote" style="display:none;"></div>
+    <div class="modal-desc" id="modalDesc"></div>
     <div class="modal-actions">
       <div class="modal-btn" onclick="closeModal()">Close</div>
     </div>
@@ -265,29 +297,66 @@ a{color:inherit;text-decoration:none}
 const TOTAL = 32;
 const grid = document.getElementById("grid");
 
-/* Assets present (not released yet) */
-const LIVE = {
+/* Art present (not released yet) */
+const ART = {
   "001": { webp: "/collections/thedon/assets/td001.webp", png: "/collections/thedon/assets/td001.png" },
   "002": { webp: "/collections/thedon/assets/td002.webp", png: "/collections/thedon/assets/td002.png" },
   "003": { webp: "/collections/thedon/assets/td003.webp", png: "/collections/thedon/assets/td003.png" }
 };
 
+/*
+LOCKED DISPLAY METADATA v1.0
+- Title: short, punchy
+- Date: YYYY-MM-DD
+- Quote: exact line snippet
+- Desc: one clean sentence
+*/
+const META = {
+  "001": {
+    title: "THE ENTRANCE",
+    date: "2015-06-16",
+    quote: "I am officially running for president of the United States, and we are going to make our country great again.",
+    desc: "The Trump Tower announcement that ignited the entire icon timeline."
+  },
+  "002": {
+    title: "THESE HANDS",
+    date: "2016-03-03",
+    quote: "I have to say this. He hit my hands. Nobody has ever hit my hands. I've never heard of this one. Look at those hands. Are they small hands? And he referred to my hands - if they're small, something else must be small. I guarantee you, there's no problem. I guarantee it.",
+    desc: "Detroit debate moment that detonated into permanent meme culture."
+  },
+  "003": {
+    title: "THE VICTORY",
+    date: "2016-11-09",
+    quote: "Now it’s time for America to bind the wounds of division.",
+    desc: "Election night win speech, unity line, history stamped in place."
+  }
+};
+
 for(let i=1;i<=TOTAL;i++){
   const num = String(i).padStart(3,"0");
-  const hasArt = !!LIVE[num];
+  const hasArt = !!ART[num];
+  const hasMeta = !!META[num];
+
+  const titleText = hasMeta ? META[num].title : `TD${num}`;
+  const dateText  = hasMeta ? META[num].date : "UNREVEALED";
+  const quoteText = hasMeta ? META[num].quote : "";
+  const descText  = hasMeta ? META[num].desc  : "Icon moment classified";
 
   grid.insertAdjacentHTML("beforeend",`
     <div class="card" onclick="openModal('${num}')">
       ${hasArt ? artThumbHTML(num) : placeholderHTML(num)}
-      <div class="meta">THE DON — TD${num}</div>
+      <div class="meta">THE DON — TD${num} — ${escapeHTML(titleText)}</div>
+      <div class="date">${escapeHTML(dateText)}</div>
+      ${hasMeta ? `<div class="quote">“${escapeHTML(quoteText)}”</div>` : ``}
+      <div class="desc">${escapeHTML(descText)}</div>
       <div class="price">DROPPING SOON</div>
-      <div class="edition">${hasArt ? "Preview" : "Unrevealed"}</div>
+      <div class="edition">${hasArt ? "Preview Art" : "Unrevealed"}</div>
     </div>
   `);
 }
 
 function artThumbHTML(num){
-  const src = LIVE[num].webp;
+  const src = ART[num].webp;
   return `
     <div class="thumb">
       <img src="${src}" alt="THE DON TD${num}">
@@ -308,10 +377,27 @@ function placeholderHTML(num){
 }
 
 function openModal(num){
-  document.getElementById("modalTitle").innerText = `THE DON — TD${num}`;
+  const hasMeta = !!META[num];
+  const titleText = hasMeta ? META[num].title : `TD${num}`;
+  const dateText  = hasMeta ? META[num].date : "UNREVEALED";
+  const quoteText = hasMeta ? META[num].quote : "";
+  const descText  = hasMeta ? META[num].desc  : "Icon moment classified";
 
-  if(LIVE[num]){
-    const src = LIVE[num].png || LIVE[num].webp;
+  document.getElementById("modalTitle").innerText = `THE DON — TD${num} — ${titleText}`;
+  document.getElementById("modalDate").innerText  = dateText;
+  document.getElementById("modalDesc").innerText  = descText;
+
+  const mq = document.getElementById("modalQuote");
+  if(hasMeta && quoteText){
+    mq.style.display = "block";
+    mq.innerText = `“${quoteText}”`;
+  } else {
+    mq.style.display = "none";
+    mq.innerText = "";
+  }
+
+  if(ART[num]){
+    const src = ART[num].png || ART[num].webp;
     document.getElementById("modalMedia").innerHTML = `<img src="${src}" alt="THE DON TD${num}">`;
   } else {
     document.getElementById("modalMedia").innerHTML = placeholderHTML(num);
@@ -327,6 +413,15 @@ function closeModal(){
 document.getElementById("modal").onclick = e=>{
   if(e.target.id==="modal") closeModal();
 };
+
+function escapeHTML(str){
+  return String(str)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
 </script>
 </body>
 </html>
