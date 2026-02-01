@@ -55,6 +55,8 @@
       --wck-gold:#d4a44a;
       --rad-blue:#3da0ff;
       --bag-green:#4ade80;
+      --dl-mint:#2bf3a2;
+      --dl-mint-glow:rgba(43,243,162,0.22);
       --radius-lg:18px;
       --radius-xl:22px;
       --shadow-soft:0 18px 45px rgba(0,0,0,0.75);
@@ -134,6 +136,115 @@
       transform:scale(1.03);
       transition:transform .18s ease;
     }
+
+    /* DIGITAL LEDGER COMING SOON BLOCK */
+    .dl-soon{
+      margin:0 0 18px;
+      padding:18px 18px 16px;
+      border-radius:var(--radius-xl);
+      border:1px solid rgba(43,243,162,0.22);
+      background:
+        radial-gradient(circle at 12% 0, rgba(43,243,162,0.18) 0, rgba(2,6,23,0) 55%),
+        radial-gradient(circle at 80% 10%, rgba(10,116,208,0.22) 0, rgba(0,0,0,0) 60%),
+        linear-gradient(135deg, rgba(15,23,42,0.92), rgba(0,0,0,0.98));
+      box-shadow:var(--shadow-soft);
+      position:relative;
+      overflow:hidden;
+    }
+    .dl-kicker{
+      font-size:0.78rem;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      color:var(--text-soft);
+      margin:0 0 8px;
+      font-weight:900;
+    }
+    .dl-title{
+      margin:0 0 10px;
+      font-size:1.05rem;
+      letter-spacing:0.14em;
+      text-transform:uppercase;
+      font-weight:900;
+      color:#bfffe3;
+    }
+    .dl-copy{
+      margin:0 0 12px;
+      font-size:0.92rem;
+      color:var(--text-muted);
+      line-height:1.55;
+      max-width:920px;
+    }
+    .dl-bullets{
+      list-style:none;
+      padding:0;
+      margin:10px 0 14px;
+      display:grid;
+      grid-template-columns:1fr;
+      gap:10px;
+    }
+    @media(min-width:860px){.dl-bullets{grid-template-columns:1fr 1fr}}
+    .dl-bullets li{
+      position:relative;
+      padding:10px 12px 10px 40px;
+      border-radius:16px;
+      border:1px solid rgba(43,243,162,0.14);
+      background:linear-gradient(135deg, rgba(15,23,42,0.98), rgba(3,7,18,0.98));
+      box-shadow:0 10px 26px rgba(0,0,0,0.75);
+      color:#dbe3ff;
+      font-weight:750;
+      font-size:0.84rem;
+      line-height:1.45;
+    }
+    .dl-bullets li:before{
+      content:"✓";
+      position:absolute;
+      left:12px;
+      top:10px;
+      width:20px;
+      height:20px;
+      border-radius:8px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#03140d;
+      background:radial-gradient(circle at 30% 0, rgba(191,255,227,1) 0, rgba(43,243,162,1) 55%, rgba(4,80,55,1) 100%);
+      box-shadow:0 0 18px var(--dl-mint-glow);
+      border:1px solid rgba(191,255,227,0.35);
+      font-weight:900;
+    }
+    .dl-cta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:6px;
+    }
+    .dl-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid rgba(43,243,162,0.22);
+      background:linear-gradient(135deg, rgba(15,23,42,0.98), rgba(3,7,18,0.98));
+      box-shadow:0 8px 22px rgba(0,0,0,0.85);
+      text-transform:uppercase;
+      letter-spacing:0.16em;
+      font-size:0.76rem;
+      font-weight:900;
+      color:#dbe3ff;
+      transition:transform .15s ease,border-color .2s ease,box-shadow .2s ease;
+    }
+    .dl-btn:hover{
+      border-color:rgba(43,243,162,0.55);
+      box-shadow:0 0 26px rgba(43,243,162,0.18);
+      transform:translateY(-1px);
+    }
+    .dl-btn.primary{
+      background:radial-gradient(circle at 20% 0, rgba(191,255,227,1) 0, rgba(43,243,162,1) 55%, rgba(4,80,55,1) 100%);
+      border-color:rgba(191,255,227,0.35);
+      color:#03140d;
+      box-shadow:0 0 30px rgba(43,243,162,0.18);
+    }
   </style>
 </head>
 <body>
@@ -148,6 +259,27 @@
 </header>
 <main class="hoc-main">
   <div class="hoc-shell">
+
+    <!-- DIGITAL LEDGER COMING SOON -->
+    <section class="dl-soon">
+      <p class="dl-kicker">Coming Soon</p>
+      <h2 class="dl-title">DIGITAL LEDGER</h2>
+      <p class="dl-copy">
+        Paste public wallet addresses and get clean statements in plain English.
+        No wallet connection. No keys. No custody.
+      </p>
+      <ul class="dl-bullets">
+        <li>Add multiple wallets across chains, organized under one account</li>
+        <li>Auto breakdown of inflows, outflows, fees, and net flow</li>
+        <li>Tokens and NFTs included, not just native coin</li>
+        <li>Monthly snapshots plus statement-style exports</li>
+      </ul>
+      <div class="dl-cta">
+        <a class="dl-btn primary" href="/digital-ledger.html">View Digital Ledger</a>
+        <a class="dl-btn" href="/digital-ledger.html#waitlist">Join Waitlist</a>
+      </div>
+    </section>
+
     <section class="hoc-intro">
       <p class="hoc-intro-main">
         One operator. Three active ecosystems.
@@ -341,7 +473,7 @@
     </div>
   </article>
 
-  <!-- THE LIVING WORD CARD (FREE MINT COLLECTION) — DIRECTLY BELOW THE DON -->
+  <!-- THE LIVING WORD CARD -->
   <article class="project-card">
     <div class="project-media" style="padding:6px 8px;">
       <div class="project-wallpaper"
@@ -378,7 +510,6 @@
 
 </section>
 
-
     <section style="margin-top:28px;">
       <article class="project-card" style="grid-column:1 / -1;">
         <div class="project-media">
@@ -388,7 +519,7 @@
           </div>
         </div>
         <div class="project-body">
-          <h2 class="project-title" style="color:var(--blue);">MR CAULIMAN</h2>
+          <h2 class="project-title" style="color:var(--accent);">MR CAULIMAN</h2>
           <p class="project-sub">BUILDER • BJJ BLACK BELT • CTO</p>
           <p class="project-copy">
             Every system in this stack is architected and enforced under one operator.
@@ -482,4 +613,3 @@
 </main>
 </body>
 </html>
-
