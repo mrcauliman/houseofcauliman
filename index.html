@@ -14,7 +14,7 @@
   <link rel="icon" href="/assets/favicons/favicon.ico">
 
   <!-- SEO -->
-  <meta name="description" content="House of Cauliman — XRPL ecosystems built by mrcauliman. AUGUR Chain Oracle, $WCK Continental Wick Protocol, RAD Garlington Ledger Registry, and $BAG Meme Infrastructure. Powered by $XRP.">
+  <meta name="description" content="House of Cauliman — XRPL ecosystems built by mrcauliman. AUGUR Chain Oracle, $WCK Continental Wick Protocol, Rad Garlington Ledger Registry, and $BAG Meme Infrastructure. Powered by $XRP.">
   <meta name="keywords" content="XRP, XRPL, XRP Ledger, meme coins, Continental Wick, ContinentalWick, WCK token, Rad Garlington, RAD token, BAG token, getthebag, XRPL ecosystem, XRP builder, XRP projects, AUGUR, Chain Oracle, chain oracle, ledger reader, chain interpreter, wallet statements, crypto statements, XRPL statements">
 
   <!-- Open Graph -->
@@ -347,6 +347,58 @@
       color:#03140d;
       box-shadow:0 0 30px rgba(43,243,162,0.18);
     }
+
+    /* AUGUR HEADER WITH LOGO (BUILT IN) */
+    .augur-head{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      justify-content:flex-start;
+      padding:10px 10px 12px;
+      border-radius:18px;
+      border:1px solid rgba(43,243,162,0.12);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(43,243,162,0.14) 0, rgba(0,0,0,0) 55%),
+        linear-gradient(135deg, rgba(15,23,42,0.55), rgba(0,0,0,0.55));
+      box-shadow:0 10px 26px rgba(0,0,0,0.55);
+    }
+    .augur-mark{
+      width:74px;
+      height:74px;
+      border-radius:18px;
+      border:1px solid rgba(191,255,227,0.18);
+      background:
+        radial-gradient(circle at 30% 0, rgba(43,243,162,0.10) 0, rgba(2,6,23,0.0) 60%),
+        radial-gradient(circle at 70% 70%, rgba(10,116,208,0.12) 0, rgba(0,0,0,0) 55%),
+        linear-gradient(135deg, rgba(15,23,42,0.9), rgba(0,0,0,0.95));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      box-shadow:0 0 22px rgba(43,243,162,0.10);
+    }
+    .augur-logo{
+      width:58px;
+      height:58px;
+      object-fit:contain;
+      filter:
+        drop-shadow(0 0 18px rgba(0,0,0,0.95))
+        drop-shadow(0 0 18px rgba(43,243,162,0.18));
+    }
+    .augur-sub{
+      margin:6px 0 0;
+      font-size:0.78rem;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      color:#d6ffe9;
+      font-weight:900;
+      opacity:0.95;
+    }
+    @media (max-width:520px){
+      .augur-head{gap:12px}
+      .augur-mark{width:66px;height:66px;border-radius:16px}
+      .augur-logo{width:52px;height:52px}
+    }
   </style>
 </head>
 
@@ -373,23 +425,34 @@
 
     <!-- AUGUR COMING SOON -->
     <section class="dl-soon">
-      <p class="dl-kicker">Coming Soon</p>
-      <h2 class="dl-title">AUGUR</h2>
-      <p class="dl-copy">
-        Chain Oracle.
+      <div class="augur-head">
+        <div class="augur-mark">
+          <img src="/augur/assets/augur_logo.png" alt="AUGUR" class="augur-logo">
+        </div>
+        <div>
+          <p class="dl-kicker">Coming Soon</p>
+          <h2 class="dl-title" style="margin:0;">AUGUR</h2>
+          <p class="augur-sub">Chain Oracle</p>
+        </div>
+      </div>
+
+      <p class="dl-copy" style="margin-top:12px;">
         Paste a public wallet address and AUGUR reads the chain for you.
         It forges clean statements in plain English so you see what changed, where it moved, and what it cost.
         No wallet connection. No keys. No custody.
       </p>
+
       <ul class="dl-bullets">
         <li>Add multiple wallets across chains under one account, clean and organized</li>
         <li>See inflows, outflows, fees, and net change, explained like a real statement</li>
         <li>Tokens and NFTs included, not just the main coin</li>
         <li>Monthly snapshots plus exports so you can track progress over time</li>
       </ul>
+
       <p class="dl-copy" style="margin-top:6px; font-size:0.82rem; color:var(--text-soft);">
         Non-custodial. Read-only. Public data only.
       </p>
+
       <div class="dl-cta">
         <a class="dl-btn primary" href="/augur.html">View AUGUR</a>
         <a class="dl-btn" href="/augur.html#waitlist">Join Waitlist</a>
@@ -401,7 +464,7 @@
       <article class="project-card project-wck">
         <div class="project-media">
           <div class="project-wallpaper">
-            <img src="/assets/wck_logo.webp" class="project-logo">
+            <img src="/assets/wck_logo.webp" class="project-logo" alt="WCK">
             <span class="project-tag">Protocol Universe</span>
           </div>
         </div>
@@ -427,7 +490,7 @@
       <article class="project-card project-bag">
         <div class="project-media">
           <div class="project-wallpaper">
-            <img src="/assets/bag_logo.webp" class="project-logo">
+            <img src="/assets/bag_logo.webp" class="project-logo" alt="BAG">
             <span class="project-tag">Meme Infrastructure</span>
           </div>
         </div>
@@ -452,7 +515,7 @@
       <article class="project-card project-rad">
         <div class="project-media">
           <div class="project-wallpaper">
-            <img src="/assets/rad_logo.webp" class="project-logo">
+            <img src="/assets/rad_logo.webp" class="project-logo" alt="RAD">
             <span class="project-tag">Ledger Registry</span>
           </div>
         </div>
@@ -493,9 +556,7 @@
               background:radial-gradient(circle at 20% 0,#2b1b0f 0,#050308 65%,#000 100%);
               border-color:rgba(212,164,74,0.75);
             ">
-            <img src="/collections/nftitans/assets/NFTITANS_logo.webp"
-                 class="project-logo"
-                 alt="NFTITANS">
+            <img src="/collections/nftitans/assets/NFTITANS_logo.webp" class="project-logo" alt="NFTITANS">
             <span class="project-tag">NFT Collection</span>
           </div>
         </div>
@@ -524,9 +585,7 @@
               background:radial-gradient(circle at 20% 0,#3b0764 0,#020308 65%,#000 100%);
               border-color:rgba(168,85,247,0.75);
             ">
-            <img src="/collections/powerpunks/assets/power_punks_logo.webp"
-                 class="project-logo"
-                 alt="POWER PUNKS">
+            <img src="/collections/powerpunks/assets/power_punks_logo.webp" class="project-logo" alt="POWER PUNKS">
             <span class="project-tag">NFT Collection</span>
           </div>
         </div>
@@ -544,7 +603,6 @@
         </div>
       </article>
 
-      <!-- THE DON CARD -->
       <article class="project-card">
         <div class="project-media" style="padding:6px 8px;">
           <div class="project-wallpaper"
@@ -560,9 +618,7 @@
                 radial-gradient(circle at 12% 8%, rgba(37,99,235,0.55) 0, rgba(2,6,23,0.0) 48%),
                 radial-gradient(circle at 85% 15%, rgba(220,38,38,0.35) 0, rgba(0,0,0,0) 55%);
             ">
-            <img src="/collections/thedon/assets/THE_DON_XRPL.webp"
-                 class="project-logo"
-                 alt="THE DON">
+            <img src="/collections/thedon/assets/THE_DON_XRPL.webp" class="project-logo" alt="THE DON">
             <span class="project-tag">NFT Collection</span>
           </div>
         </div>
@@ -582,7 +638,6 @@
         </div>
       </article>
 
-      <!-- THE LIVING WORD CARD -->
       <article class="project-card">
         <div class="project-media" style="padding:6px 8px;">
           <div class="project-wallpaper"
@@ -594,9 +649,7 @@
                 linear-gradient(135deg, rgba(10,12,22,0.92), rgba(0,0,0,0.98));
               border-color:rgba(122,167,255,0.8);
             ">
-            <img src="/collections/thelivingword/assets/THE_LIVING_WORD.webp"
-                 class="project-logo"
-                 alt="THE LIVING WORD">
+            <img src="/collections/thelivingword/assets/THE_LIVING_WORD.webp" class="project-logo" alt="THE LIVING WORD">
             <span class="project-tag">Free NFT Collection</span>
           </div>
         </div>
@@ -634,36 +687,38 @@
             Every system in this stack is architected and enforced under one operator.
             Discipline. Pressure. Execution.
           </p>
+
           <p class="project-copy" style="margin-top:6px; font-size:0.78rem; color:var(--text-soft); line-height:1.55;">
-  <strong>Operator Stack:</strong><br>
-  XRPL public-ledger indexing • Account history parsing • Trustlines & rippling analysis • AMM flows (build, seed, reseed) •
-  XLS-20 NFTs (minting, burning, metadata) • Token + NFT inventory mapping •
-  Statement forging (plain-English summaries) • Net flow + fee breakdowns • Monthly snapshots • Export pipelines •
-  Non-custodial architecture (read-only, public data) • Zero-key design (no wallet connection, no custody) •
-  Wallet architecture (issuer, treasury, reserve, liquidity) • Threat mapping + blacklist logic • Verification flows •
+            <strong>Operator Stack:</strong><br>
+            XRPL public-ledger indexing • Account history parsing • Trustlines & rippling analysis • AMM flows (build, seed, reseed) •
+            XLS-20 NFTs (minting, burning, metadata) • Token + NFT inventory mapping •
+            Statement forging (plain-English summaries) • Net flow + fee breakdowns • Monthly snapshots • Export pipelines •
+            Non-custodial architecture (read-only, public data) • Zero-key design (no wallet connection, no custody) •
+            Wallet architecture (issuer, treasury, reserve, liquidity) • Threat mapping + blacklist logic • Verification flows •
 
-  <br><br>
-  <strong>AUGUR — Chain Oracle Build:</strong><br>
-  Multi-wallet account model • Labeling + grouping wallets under one identity •
-  Auto-detection of inflows/outflows/fees • Swap + AMM movement interpretation •
-  Token + NFT change tracking • Chain events translated into plain English •
-  Monthly statement snapshots • Statement-style exports •
+            <br><br>
+            <strong>AUGUR — Chain Oracle Build:</strong><br>
+            Multi-wallet account model • Labeling + grouping wallets under one identity •
+            Auto-detection of inflows/outflows/fees • Swap + AMM movement interpretation •
+            Token + NFT change tracking • Chain events translated into plain English •
+            Monthly statement snapshots • Statement-style exports •
 
-  <br><br>
-  <strong>Engineering:</strong><br>
-  Python (Flask, xrpl-py) • Node.js (Express, Telegram bots, grammy) • SQLite • HTML/CSS/JavaScript • Phaser.js (PvP arcade) •
-  API integrations • Static + dynamic web stacks • Git + GitHub deploy workflows • Custom CLI tools •
+            <br><br>
+            <strong>Engineering:</strong><br>
+            Python (Flask, xrpl-py) • Node.js (Express, Telegram bots, grammy) • SQLite • HTML/CSS/JavaScript • Phaser.js (PvP arcade) •
+            API integrations • Static + dynamic web stacks • Git + GitHub deploy workflows • Custom CLI tools •
 
-  <br><br>
-  <strong>Infrastructure:</strong><br>
-  Ubuntu server management • DigitalOcean • Nginx • reverse proxies • SSL/HTTPS • systemd services •
-  server hardening • multi-site architecture • uptime + log-driven debugging •
+            <br><br>
+            <strong>Infrastructure:</strong><br>
+            Ubuntu server management • DigitalOcean • Nginx • reverse proxies • SSL/HTTPS • systemd services •
+            server hardening • multi-site architecture • uptime + log-driven debugging •
 
-  <br><br>
-  <strong>Creative Systems:</strong><br>
-Cinematic realism • Pixar-style asset pipelines • 8-bit protocol visuals • character universe design •
-multi-brand ecosystem architecture • metadata systems • collection bibles • production locking + version control
-</p>
+            <br><br>
+            <strong>Creative Systems:</strong><br>
+            Cinematic realism • Pixar-style asset pipelines • 8-bit protocol visuals • character universe design •
+            multi-brand ecosystem architecture • metadata systems • collection bibles • production locking + version control
+          </p>
+
           <div class="project-links">
             <a class="project-link primary" href="https://x.com/mrcauliman" target="_blank" rel="noopener"><span>𝕏 Profile</span></a>
             <a class="project-link" href="https://x.com/i/communities/1677882151931637760" target="_blank" rel="noopener"><span>🥋 Cauliflower Chronicles 𝕏</span></a>
