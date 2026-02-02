@@ -1,12 +1,3 @@
-cd /var/www/houseofcauliman.com || exit 1
-
-cp -a augur.html /tmp/augur.html.pre_full_rebuild.bak.$(date +%s) 2>/dev/null || true
-
-# wipe the file
-: > augur.html
-
-# PART 1: head + base styles
-cat >> augur.html <<'HTML'
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -248,23 +239,3 @@ cat >> augur.html <<'HTML'
     })();
   </script>
 </body>
-HTML
-
-# PART 3: close html
-cat >> augur.html <<'HTML'
-</html>
-HTML
-
-# sanity checks
-grep -n "<title>AUGUR" augur.html | head -n 3 || true
-grep -n 'id="waitlist"' augur.html | head -n 3 || true
-tail -n 5 augur.html
-
-# commit + push
-git add augur.html
-git commit -m "site: rebuild AUGUR page clean" || true
-git push
-
-# verify from origin
-curl -sS https://houseofcauliman.com/augur.html | grep -n "AUGUR waitlist" | head -n 5
-curl -sS https://houseofcauliman.com/augur.html | grep -n "no wallet connection" | head -n 5
