@@ -4,250 +4,265 @@
   <meta charset="UTF-8">
   <title>MONOLITH • The Wall of Record</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-  <link rel="canonical" href="https://houseofcauliman.com/monolith/">
-
-  <!-- SEO -->
   <meta name="description" content="MONOLITH is the Wall of Record. An on-chain monument of proof and presence. Leave your mark. History keeps it.">
   <meta name="keywords" content="MONOLITH, Wall of Record, on-chain graffiti wall, XRPL, XRP, proof of presence, tiles, logo wall, credibility layer">
 
-  <!-- Open Graph -->
   <meta property="og:title" content="MONOLITH • The Wall of Record">
-  <meta property="og:description" content="Leave your mark. History keeps it.">
-  <meta property="og:image" content="https://houseofcauliman.com/assets/monolith/monolith_logo.png">
+  <meta property="og:description" content="An on-chain monument of proof and presence. Leave your mark. History keeps it.">
+  <meta property="og:image" content="https://houseofcauliman.com/assets/monolith/monolith_logo.webp">
   <meta property="og:url" content="https://houseofcauliman.com/monolith/">
   <meta property="og:type" content="website">
 
+  <link rel="canonical" href="https://houseofcauliman.com/monolith/">
+
+  <!-- PWA -->
+<link rel="manifest" href="/assets/monolith/manifest.webmanifest">
+  <meta name="theme-color" content="#000000">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="MONOLITH">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="/assets/monolith/monolith_logo.png">
+
   <style>
     :root{
-      --bg0:#000000;
-      --bg1:#050509;
-      --bg2:#0a0b12;
+      --bg:#000;
       --ink:#f5f7ff;
-      --muted:#a6abc7;
-      --soft:#7b81a0;
+      --muted:#aab3d6;
+      --soft:#7a83a6;
 
-      --line:rgba(245,247,255,0.14);
-      --line2:rgba(10,116,208,0.24);
+      --panelA:rgba(14,16,26,0.92);
+      --panelB:rgba(0,0,0,0.98);
+
+      --border:rgba(255,255,255,0.10);
+      --border2:rgba(255,255,255,0.14);
 
       --glow:rgba(245,247,255,0.12);
-      --blue:rgba(10,116,208,0.70);
+      --accent:rgba(10,116,208,0.28);
 
-      --radius:18px;
-      --radius2:22px;
-
-      --shadow:0 18px 45px rgba(0,0,0,0.78);
-      --shadow2:0 10px 26px rgba(0,0,0,0.82);
-
-      --tile:72px;
-      --tileGap:10px;
+      --radius-lg:18px;
+      --radius-xl:22px;
+      --shadow:0 18px 48px rgba(0,0,0,0.82);
     }
 
     *{box-sizing:border-box}
     html,body{
-      margin:0;padding:0;width:100%;overflow-x:hidden;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-      background:var(--bg0);
+      height:100%;
+      margin:0;
+      background:#000;
       color:var(--ink);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      -webkit-font-smoothing:antialiased;
+      overscroll-behavior:none;
     }
     a{color:inherit;text-decoration:none}
 
-    .top{
-      padding:22px 16px 16px;
+    /* APP SHELL */
+    .app{
+      min-height:100dvh;
+      padding-top:env(safe-area-inset-top);
+      padding-bottom:env(safe-area-inset-bottom);
+      padding-left:env(safe-area-inset-left);
+      padding-right:env(safe-area-inset-right);
+      display:flex;
+      flex-direction:column;
       background:
-        radial-gradient(circle at 12% 0, rgba(245,247,255,0.11) 0, rgba(0,0,0,0) 55%),
-        radial-gradient(circle at 78% 10%, rgba(10,116,208,0.22) 0, rgba(0,0,0,0) 60%),
-        linear-gradient(180deg, #0b0c16 0, #000 100%);
-      border-bottom:1px solid rgba(245,247,255,0.10);
-      box-shadow:0 18px 38px rgba(0,0,0,0.85);
+        radial-gradient(circle at 15% 0, rgba(245,247,255,0.08) 0, rgba(0,0,0,0) 55%),
+        radial-gradient(circle at 85% 10%, rgba(10,116,208,0.18) 0, rgba(0,0,0,0) 60%),
+        radial-gradient(circle at 50% 120%, rgba(245,247,255,0.06) 0, rgba(0,0,0,0) 58%),
+        #000;
     }
-    .shell{max-width:980px;margin:0 auto}
 
-    .brand{
+    .app-topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      padding:16px 16px 14px;
+      backdrop-filter:blur(16px);
+      background:linear-gradient(180deg, rgba(0,0,0,0.90), rgba(0,0,0,0.40));
+      border-bottom:1px solid rgba(255,255,255,0.08);
+    }
+    .app-topbar-inner{
+      max-width:980px;
+      margin:0 auto;
       display:flex;
       align-items:center;
-      gap:14px;
+      justify-content:space-between;
+      gap:12px;
     }
-    .mark{
-      width:64px;height:64px;border-radius:18px;
-      border:1px solid rgba(245,247,255,0.16);
-      background:
-        radial-gradient(circle at 30% 0, rgba(245,247,255,0.10) 0, rgba(0,0,0,0) 60%),
-        linear-gradient(135deg, rgba(15,23,42,0.85), rgba(0,0,0,0.92));
-      display:flex;align-items:center;justify-content:center;
-      box-shadow:0 0 28px rgba(245,247,255,0.08);
-      overflow:hidden;
+    .app-left{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+    .app-mark{
+      width:36px;height:36px;
+      object-fit:contain;
+      filter:drop-shadow(0 0 16px rgba(255,255,255,0.10));
       flex:0 0 auto;
     }
-    .mark img{
-      width:56px;height:56px;object-fit:contain;
-      filter:drop-shadow(0 0 18px rgba(0,0,0,0.95)) drop-shadow(0 0 18px rgba(245,247,255,0.10));
-    }
-    .title h1{
-      margin:0;
-      font-size:1.05rem;
-      letter-spacing:0.22em;
+    .app-title{
+      font-weight:800;
+      letter-spacing:0.14em;
       text-transform:uppercase;
+      font-size:0.95rem;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
-    .title p{
-      margin:6px 0 0;
-      color:var(--muted);
-      font-size:0.90rem;
-      line-height:1.35;
+    .app-actions{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
     }
 
-    .pills{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:14px;
-    }
     .pill{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      padding:9px 12px;
+      padding:8px 11px;
       border-radius:999px;
-      border:1px solid rgba(245,247,255,0.18);
-      background:linear-gradient(135deg, rgba(15,23,42,0.98), rgba(3,7,18,0.98));
-      box-shadow:0 10px 24px rgba(0,0,0,0.88);
+      border:1px solid var(--border);
+      background:linear-gradient(135deg, rgba(15,23,42,0.72), rgba(0,0,0,0.75));
+      box-shadow:0 10px 24px rgba(0,0,0,0.70);
       text-transform:uppercase;
-      letter-spacing:0.16em;
-      font-size:0.76rem;
-      font-weight:900;
-      color:#dbe3ff;
-      transition:transform .15s ease,border-color .2s ease,box-shadow .2s ease;
-      cursor:pointer;
+      letter-spacing:0.14em;
+      font-size:0.72rem;
+      font-weight:650;
+      color:#e9ecff;
+      transition:transform .15s ease, border-color .2s ease, box-shadow .2s ease;
     }
     .pill:hover{
-      border-color:rgba(245,247,255,0.38);
-      box-shadow:0 0 26px rgba(245,247,255,0.10);
+      border-color:rgba(245,247,255,0.32);
+      box-shadow:0 0 22px rgba(245,247,255,0.08);
       transform:translateY(-1px);
     }
     .pill.primary{
       background:radial-gradient(circle at 20% 0, rgba(245,247,255,1) 0, rgba(245,247,255,0.90) 55%, rgba(210,214,230,1) 100%);
       border-color:rgba(245,247,255,0.30);
       color:#0a0b10;
-      box-shadow:0 0 28px rgba(245,247,255,0.12);
     }
     .pill.disabled{
       opacity:0.55;
-      cursor:not-allowed;
       pointer-events:none;
+      filter:saturate(0.7);
     }
 
-    .main{
-      padding:18px 16px 48px;
-      background:radial-gradient(circle at top,#111827 0,#020308 55%,#000 100%);
+    .app-screen{
+      flex:1;
+      max-width:980px;
+      width:100%;
+      margin:0 auto;
+      padding:18px 16px 26px;
+    }
+
+    .panel{
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,0.10);
+      background:
+        radial-gradient(circle at 30% 0, rgba(255,255,255,0.06) 0, rgba(0,0,0,0) 55%),
+        linear-gradient(135deg, rgba(14,16,26,0.92), rgba(0,0,0,0.98));
+      box-shadow:var(--shadow);
+      overflow:hidden;
     }
 
     .hero{
-      border-radius:var(--radius2);
-      border:1px solid rgba(245,247,255,0.14);
+      padding:20px 18px 14px;
+      border-bottom:1px solid rgba(255,255,255,0.08);
       background:
-        radial-gradient(circle at 12% 0, rgba(245,247,255,0.08) 0, rgba(0,0,0,0) 55%),
-        radial-gradient(circle at 80% 10%, rgba(10,116,208,0.16) 0, rgba(0,0,0,0) 60%),
-        linear-gradient(135deg, rgba(15,23,42,0.92), rgba(0,0,0,0.98));
-      box-shadow:var(--shadow);
+        radial-gradient(circle at 18% 0, rgba(245,247,255,0.08) 0, rgba(0,0,0,0) 60%),
+        linear-gradient(135deg, rgba(10,12,22,0.82), rgba(0,0,0,0.98));
+    }
+    .hero-top{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+    .hero-mark{
+      width:64px;height:64px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,0.14);
+      background:
+        radial-gradient(circle at 30% 0, rgba(245,247,255,0.10) 0, rgba(2,6,23,0.0) 60%),
+        linear-gradient(135deg, rgba(15,23,42,0.9), rgba(0,0,0,0.95));
+      display:flex;
+      align-items:center;
+      justify-content:center;
       overflow:hidden;
-      position:relative;
-      isolation:isolate;
+      box-shadow:0 0 26px rgba(245,247,255,0.08);
+      flex:0 0 auto;
     }
-    .hero::before{
-      content:"";
-      position:absolute;
-      inset:-1px;
-      background:
-        repeating-linear-gradient(90deg, rgba(245,247,255,0.06) 0px, rgba(245,247,255,0.06) 18px, rgba(0,0,0,0) 18px, rgba(0,0,0,0) 36px),
-        radial-gradient(circle at 18% 20%, rgba(10,116,208,0.22) 0, rgba(0,0,0,0) 52%),
-        radial-gradient(circle at 86% 24%, rgba(245,247,255,0.10) 0, rgba(0,0,0,0) 58%);
-      opacity:0.34;
-      pointer-events:none;
-      z-index:-1;
+    .hero-mark img{
+      width:54px;height:54px;
+      object-fit:contain;
+      filter:drop-shadow(0 0 22px rgba(0,0,0,0.95)) drop-shadow(0 0 18px rgba(245,247,255,0.12));
     }
-    .hero-inner{padding:18px 18px 16px}
+    .hero h1{
+      margin:0;
+      font-size:1.25rem;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      font-weight:900;
+    }
+    .hero p{
+      margin:6px 0 0;
+      color:var(--muted);
+      line-height:1.5;
+      font-size:0.92rem;
+      max-width:860px;
+    }
+
+    .grid{
+      padding:18px;
+      display:grid;
+      grid-template-columns:1fr;
+      gap:14px;
+    }
+    @media(min-width:860px){ .grid{grid-template-columns:1.2fr 0.8fr;} }
+
+    .block{
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,0.10);
+      background:linear-gradient(135deg, rgba(15,23,42,0.62), rgba(0,0,0,0.78));
+      padding:16px;
+      box-shadow:0 12px 28px rgba(0,0,0,0.72);
+    }
     .kicker{
-      margin:0 0 10px;
+      margin:0 0 8px;
       font-size:0.78rem;
       letter-spacing:0.18em;
       text-transform:uppercase;
       color:var(--soft);
       font-weight:900;
-      display:flex;
-      gap:10px;
-      align-items:center;
-      flex-wrap:wrap;
     }
-    .kicker .tag{
-      font-size:0.70rem;
-      letter-spacing:0.16em;
-      text-transform:uppercase;
-      padding:4px 10px;
-      border-radius:999px;
-      border:1px solid rgba(245,247,255,0.18);
-      background:rgba(0,0,0,0.35);
-      color:#e7e9ff;
-    }
-    .headline{
+    .copy{
       margin:0;
-      font-size:1.22rem;
-      letter-spacing:0.10em;
-      text-transform:uppercase;
-    }
-    .subhead{
-      margin:10px 0 0;
-      color:var(--muted);
-      line-height:1.55;
-      font-size:0.96rem;
-      max-width:920px;
+      color:#d7dcff;
+      line-height:1.6;
+      font-size:0.92rem;
     }
 
-    .grid{
+    ul.bullets{
+      list-style:none;
+      padding:0;
+      margin:12px 0 0;
       display:grid;
-      grid-template-columns:1fr;
-      gap:16px;
-      margin-top:16px;
-    }
-    @media(min-width:900px){
-      .grid{grid-template-columns:1.12fr 0.88fr}
-    }
-
-    .card{
-      border-radius:var(--radius2);
-      border:1px solid rgba(245,247,255,0.12);
-      background:linear-gradient(135deg, rgba(15,23,42,0.86), rgba(0,0,0,0.96));
-      box-shadow:var(--shadow);
-      overflow:hidden;
-    }
-    .card-h{
-      padding:14px 16px;
-      border-bottom:1px solid rgba(245,247,255,0.10);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
       gap:10px;
-      background:radial-gradient(circle at top, rgba(245,247,255,0.06) 0, rgba(0,0,0,0) 72%);
     }
-    .card-h strong{
-      letter-spacing:0.16em;
-      text-transform:uppercase;
-      font-size:0.86rem;
-    }
-    .card-b{padding:14px 16px}
-
-    .bullets{list-style:none;margin:0;padding:0;display:grid;gap:10px}
-    .bullets li{
+    ul.bullets li{
       position:relative;
       padding:10px 12px 10px 40px;
       border-radius:16px;
-      border:1px solid rgba(245,247,255,0.10);
-      background:linear-gradient(135deg, rgba(15,23,42,0.98), rgba(3,7,18,0.98));
-      box-shadow:var(--shadow2);
-      color:#dbe3ff;
-      font-weight:780;
+      border:1px solid rgba(255,255,255,0.10);
+      background:linear-gradient(135deg, rgba(15,23,42,0.78), rgba(0,0,0,0.78));
+      color:#e6e9ff;
+      font-weight:700;
       font-size:0.86rem;
-      line-height:1.45;
+      line-height:1.5;
     }
-    .bullets li:before{
+    ul.bullets li:before{
       content:"■";
       position:absolute;
       left:12px;
@@ -259,229 +274,17 @@
       justify-content:center;
       color:#0a0b10;
       background:radial-gradient(circle at 30% 0, rgba(245,247,255,1) 0, rgba(245,247,255,0.92) 55%, rgba(210,214,230,1) 100%);
-      box-shadow:0 0 18px rgba(245,247,255,0.12);
-      border:1px solid rgba(245,247,255,0.28);
+      box-shadow:0 0 18px rgba(245,247,255,0.10);
+      border:1px solid rgba(245,247,255,0.20);
       font-weight:900;
     }
 
-    .callout{
-      margin-top:14px;
-      padding:14px 16px;
-      border-radius:18px;
-      border:1px solid rgba(245,247,255,0.10);
-      background:
-        radial-gradient(circle at 12% 0, rgba(245,247,255,0.08) 0, rgba(0,0,0,0) 55%),
-        linear-gradient(135deg, rgba(15,23,42,0.72), rgba(0,0,0,0.90));
-      box-shadow:var(--shadow2);
-    }
-    .callout p{
-      margin:0;
-      color:var(--muted);
-      line-height:1.6;
-      font-size:0.92rem;
-    }
-    .callout p strong{color:var(--ink)}
-
-    .wall{
-      border-radius:var(--radius2);
-      border:1px solid rgba(245,247,255,0.12);
-      background:
-        linear-gradient(135deg, rgba(0,0,0,0.75), rgba(0,0,0,0.92)),
-        repeating-linear-gradient(0deg, rgba(245,247,255,0.06) 0px, rgba(245,247,255,0.06) 10px, rgba(0,0,0,0) 10px, rgba(0,0,0,0) 20px),
-        repeating-linear-gradient(90deg, rgba(245,247,255,0.04) 0px, rgba(245,247,255,0.04) 12px, rgba(0,0,0,0) 12px, rgba(0,0,0,0) 24px);
-      box-shadow:var(--shadow);
-      overflow:hidden;
-      position:relative;
-      isolation:isolate;
-    }
-    .wall::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(circle at 20% 18%, rgba(10,116,208,0.22) 0, rgba(0,0,0,0) 56%),
-        radial-gradient(circle at 85% 20%, rgba(245,247,255,0.10) 0, rgba(0,0,0,0) 62%),
-        radial-gradient(circle at 60% 82%, rgba(245,247,255,0.07) 0, rgba(0,0,0,0) 55%);
-      opacity:0.55;
-      pointer-events:none;
-      z-index:-1;
-    }
-    .wall-inner{padding:14px 14px 16px}
-
-    .wall-top{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-    .wall-top .left h2{
-      margin:0;
-      font-size:0.95rem;
-      letter-spacing:0.16em;
-      text-transform:uppercase;
-    }
-    .wall-top .left p{
-      margin:8px 0 0;
-      color:var(--muted);
-      line-height:1.45;
-      font-size:0.88rem;
-      max-width:520px;
-    }
-    .wall-top .right{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-    .mini{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid rgba(245,247,255,0.18);
-      background:linear-gradient(135deg, rgba(15,23,42,0.98), rgba(3,7,18,0.98));
-      box-shadow:0 10px 22px rgba(0,0,0,0.82);
-      text-transform:uppercase;
-      letter-spacing:0.16em;
-      font-size:0.72rem;
-      font-weight:900;
-      color:#dbe3ff;
-      cursor:pointer;
-      transition:transform .15s ease,border-color .2s ease,box-shadow .2s ease;
-    }
-    .mini:hover{
-      border-color:rgba(245,247,255,0.38);
-      box-shadow:0 0 26px rgba(245,247,255,0.10);
-      transform:translateY(-1px);
-    }
-    .mini.primary{
-      background:radial-gradient(circle at 20% 0, rgba(245,247,255,1) 0, rgba(245,247,255,0.90) 55%, rgba(210,214,230,1) 100%);
-      border-color:rgba(245,247,255,0.30);
-      color:#0a0b10;
-    }
-    .mini.disabled{
-      opacity:0.55;
-      cursor:not-allowed;
-      pointer-events:none;
-    }
-
-    .tiles{
-      display:grid;
-      grid-template-columns:repeat(6, minmax(0, 1fr));
-      gap:var(--tileGap);
-      margin-top:14px;
-    }
-    @media(min-width:520px){ .tiles{grid-template-columns:repeat(8, minmax(0, 1fr));} }
-    @media(min-width:860px){ .tiles{grid-template-columns:repeat(10, minmax(0, 1fr));} }
-
-    .tile{
-      aspect-ratio:1/1;
-      border-radius:12px;
-      border:1px solid rgba(245,247,255,0.10);
-      background:linear-gradient(135deg, rgba(15,23,42,0.90), rgba(0,0,0,0.94));
-      box-shadow:0 10px 18px rgba(0,0,0,0.85);
-      position:relative;
-      overflow:hidden;
-      transform:translateZ(0);
-    }
-    .tile::before{
-      content:"";
-      position:absolute;
-      inset:-1px;
-      background:
-        repeating-linear-gradient(45deg,
-          rgba(245,247,255,0.09) 0px,
-          rgba(245,247,255,0.09) 8px,
-          rgba(0,0,0,0) 8px,
-          rgba(0,0,0,0) 16px);
-      opacity:0.06;
-      pointer-events:none;
-    }
-    .tile::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(circle at 22% 18%, rgba(10,116,208,0.18) 0, rgba(0,0,0,0) 58%),
-        radial-gradient(circle at 78% 82%, rgba(245,247,255,0.10) 0, rgba(0,0,0,0) 58%);
-      opacity:0.22;
-      pointer-events:none;
-    }
-    .tile span{
-      position:absolute;
-      left:9px;
-      bottom:9px;
-      font-size:0.62rem;
-      letter-spacing:0.14em;
-      text-transform:uppercase;
-      color:rgba(245,247,255,0.68);
-      user-select:none;
-    }
-    .tile.claimed{
-      border-color:rgba(245,247,255,0.18);
-    }
-    .tile.claimed::before{opacity:0.10}
-    .tile.claimed .tagmark{
-      position:absolute;
-      inset:10px;
-      border-radius:10px;
-      border:1px dashed rgba(245,247,255,0.18);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:rgba(245,247,255,0.75);
-      font-weight:900;
-      letter-spacing:0.18em;
-      text-transform:uppercase;
-      font-size:0.62rem;
-      background:rgba(0,0,0,0.22);
-    }
-
-    .foot{
-      margin-top:16px;
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
-      padding:10px 2px 0;
-      border-top:1px solid rgba(245,247,255,0.10);
-      color:var(--soft);
-      font-size:0.78rem;
-    }
-    .foot a{
-      color:#dbe3ff;
-      border-bottom:1px solid rgba(245,247,255,0.18);
-    }
-    .foot a:hover{border-bottom-color:rgba(245,247,255,0.42)}
-
-    .ruleline{
-      margin-top:16px;
-      padding:14px 16px;
-      border-radius:18px;
-      border:1px solid rgba(245,247,255,0.10);
-      background:linear-gradient(135deg, rgba(15,23,42,0.60), rgba(0,0,0,0.90));
-      box-shadow:var(--shadow2);
-      color:var(--muted);
-      line-height:1.6;
-      font-size:0.90rem;
-    }
-    .ruleline strong{color:var(--ink)}
-
-    .small-note{
-      margin:10px 0 0;
-      color:var(--soft);
-      font-size:0.80rem;
-      letter-spacing:0.06em;
-    }
-  
-    /* MONOLITH CONCEPT IMAGE */
+    /* CONCEPT IMAGE FRAME */
     .concept-frame{
       margin-top:12px;
       border-radius:18px;
       overflow:hidden;
-      border:1px solid rgba(148,163,184,0.22);
+      border:1px solid rgba(255,255,255,0.12);
       background:linear-gradient(135deg, rgba(15,23,42,0.55), rgba(0,0,0,0.65));
       box-shadow:0 16px 36px rgba(0,0,0,0.75);
     }
@@ -496,156 +299,100 @@
       .concept-frame img{ max-height:72vh; }
     }
 
-</style>
+    .footer{
+      padding:16px 18px;
+      border-top:1px solid rgba(255,255,255,0.08);
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      color:rgba(245,247,255,0.70);
+      font-size:0.78rem;
+      letter-spacing:0.02em;
+    }
+    .footer a{color:rgba(245,247,255,0.85);text-decoration:underline}
+  </style>
 </head>
 
 <body>
-  <header class="top">
-    <div class="shell">
-      <div class="brand">
-        <div class="mark">
-          <img src="/assets/monolith/monolith_logo.webp" alt="MONOLITH">
-        </div>
-        <div class="title">
-          <h1>MONOLITH</h1>
-          <p>The Wall of Record. An on-chain monument of proof and presence.</p>
-        </div>
-      </div>
+  <div class="app">
 
-      <div class="pills">
-        <a class="pill primary disabled" href="#" onclick="return false;">Coming Soon</a>
-        <a class="pill" href="/monolith/rules.html">Rules</a>
-        <a class="pill" href="https://x.com/monolith_wall" target="_blank" rel="noopener">𝕏 @monolith_wall</a>
-        <a class="pill" href="https://houseofcauliman.com/">House</a>
+    <div class="app-topbar">
+      <div class="app-topbar-inner">
+        <div class="app-left">
+          <img class="app-mark" src="/assets/monolith/monolith_logo.webp" alt="MONOLITH">
+          <div class="app-title">MONOLITH</div>
+        </div>
+        <div class="app-actions">
+          <a class="pill" href="https://x.com/monolith_wall" target="_blank" rel="noopener">𝕏 PROFILE</a>
+          <a class="pill" href="/monolith/rules.html">Rules</a>
+          <a class="pill primary disabled" href="#" onclick="return false;">Claim Tile</a>
+        </div>
       </div>
     </div>
-  </header>
 
-  <main class="main">
-    <div class="shell">
+    <main class="app-screen">
+      <section class="panel">
 
-      <section class="hero">
-        <div class="hero-inner">
-          <div class="kicker">
-            <span class="tag">Credibility Layer</span>
-            <span class="tag">On-chain Graffiti Wall</span>
-            <span class="tag">Proof of Presence</span>
+        <div class="hero">
+          <div class="hero-top">
+            <div class="hero-mark">
+              <img src="/assets/monolith/monolith_logo.webp" alt="MONOLITH">
+            </div>
+            <div>
+              <div class="kicker" style="margin:0 0 6px;">Coming Soon</div>
+              <h1>MONOLITH</h1>
+              <p>The Wall of Record. An on-chain monument of proof and presence. Leave your mark. History keeps it.</p>
+            </div>
           </div>
-
-          <h2 class="headline">Leave your mark. History keeps it.</h2>
-          <p class="subhead">
-            MONOLITH is not a gallery. It is a wall.
-            You claim a tile, post a constrained logo or artwork, and the ledger becomes the receipt.
-            Years from now, people will look up the wall and see who was real.
-          </p>
         </div>
-      </section>
 
-      <div class="grid">
+        <div class="grid">
+          <div class="block">
+            <p class="kicker">What it is</p>
+            <p class="copy">
+              MONOLITH is an on-chain graffiti wall.
+              One tile equals one constrained mark.
+              No edits. No deletes.
+            </p>
 
-        <section class="card">
-          <div class="card-h">
-            <strong>What it is</strong>
-            <span class="kicker" style="margin:0;color:var(--soft);font-size:0.70rem;letter-spacing:0.16em;text-transform:uppercase;">Simple by design</span>
-          </div>
-          <div class="card-b">
             <ul class="bullets">
               <li>A permanent wall made of tiles, each tile is a constrained slot for a mark</li>
-              <li>Marks are logos, tags, or artwork that stay inside the tile boundaries</li>
-              <li>Each placement is backed by on-chain proof, not vibes and screenshots</li>
-              <li>The wall is designed to stay readable and legendary, even at scale</li>
+              <li>Every tile is time-stamped proof that you were present</li>
+              <li>Years from now, people check MONOLITH to see who was real</li>
+              <li><strong>If you were real back then, you are on MONOLITH.</strong></li>
             </ul>
-
-            <div class="callout">
-              <p>
-                <strong>If you were real back then, you are on MONOLITH.</strong>
-                That is the entire game.
-              </p>
-            </div>
           </div>
-        </section>
 
-        <section class="wall">
-          <div class="wall-inner">
-            <div class="wall-top">
-              <div class="left">
-                <h2>The Wall Preview</h2>
-                
+          <div class="block">
+            <p class="kicker">THE WALL PREVIEW</p>
+
             <div class="concept-frame">
-              <img src="/assets/monolith/monolith_concept.jpg" alt="MONOLITH concept preview">
-            </div>
-<p>
-                  This is the vibe. A disciplined grid with real graffiti energy.
-                  Tiles are constrained so the wall stays clean and readable.
-                </p>
-                <p class="small-note">
-                  Claim flow is coming. Rules are live now.
-                </p>
-              </div>
-
-              <div class="right">
-                <a class="mini primary disabled disabled" href="#" onclick="return false;">Claim Tile</a>
-                <a class="mini disabled" href="#" onclick="return false;">Post Mark</a>
-                <a class="mini" href="/monolith/rules.html">Read Rules</a>
-              </div>
-            </div>
-      <div class="concept-frame" style="margin-top:12px;">
-        <img src="/assets/monolith/monolith_concept.jpg" alt="MONOLITH wall concept preview" loading="lazy">
-      </div>
-<div class="tile"><span>Open</span></div>
-              <div class="tile claimed"><div class="tagmark">HOC</div><span>Claimed</span></div>
-              <div class="tile"><span>Open</span></div>
-              <div class="tile"><span>Open</span></div>
-              <div class="tile"><span>Open</span></div>
-              <div class="tile claimed"><div class="tagmark">OG</div><span>Claimed</span></div>
-              <div class="tile"><span>Open</span></div>
-              <div class="tile"><span>Open</span></div>
-              <div class="tile"><span>Open</span></div>
-
-              <div class="tile"><span>Open</span></div>
-              <div class="tile"><span>Open</span></div>
-              <div class="tile"><span>Open</span></div>
-              <div class="tile claimed"><div class="tagmark">WALL</div><span>Claimed</span></div>
-              <div class="tile"><span>Open</span></div>
-              <div class="tile"><span>Open</span></div>
-              <div class="tile"><span>Open</span></div>
-              <div class="tile"><span>Open</span></div>
-              <div class="tile claimed"><div class="tagmark">REAL</div><span>Claimed</span></div>
-              <div class="tile"><span>Open</span></div>
-
-              <div class="tile"><span>Open</span></div>
-              <div class="tile"><span>Open</span></div>
-              <div class="tile"><span>Open</span></div>
-              <div class="tile"><span>Open</span></div>
-              <div class="tile"><span>Open</span></div>
-              <div class="tile claimed"><div class="tagmark">PROOF</div><span>Claimed</span></div>
-              <div class="tile"><span>Open</span></div>
-              <div class="tile"><span>Open</span></div>
-              <div class="tile"><span>Open</span></div>
-              <div class="tile"><span>Open</span></div>
+              <img src="/assets/monolith/monolith_concept.jpg" alt="MONOLITH concept preview" loading="lazy">
             </div>
 
-            <div class="ruleline">
-              <strong>Constraint is the power.</strong>
-              The tile boundary forces discipline, stops spam layouts, and keeps the wall readable.
-              Graffiti energy, museum-grade structure.
-            </div>
-
-            <div class="foot">
-              <span>MONOLITH is a House of Cauliman project.</span>
-              <span>
-                <a href="/monolith/rules.html">Rules</a>
-                •
-                <a href="https://x.com/monolith_wall" target="_blank" rel="noopener">𝕏</a>
-                •
-                <a href="https://houseofcauliman.com/">House</a>
-              </span>
-            </div>
+            <p class="copy" style="margin-top:12px;color:rgba(245,247,255,0.78);font-size:0.86rem;">
+              This is the target experience. A living wall, browsable like a feed, permanent like a ledger.
+            </p>
           </div>
-        </section>
+        </div>
 
-      </div>
-    </div>
-  </main>
+        <div class="footer">
+          <span>MONOLITH is a House of Cauliman project.</span>
+          <span><a href="https://houseofcauliman.com">houseofcauliman.com</a> • <a href="https://x.com/monolith_wall" target="_blank" rel="noopener">𝕏</a></span>
+        </div>
+
+      </section>
+    </main>
+
+  </div>
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+navigator.serviceWorker.register("/assets/monolith/sw.js");
+      });
+    }
+  </script>
 </body>
 </html>
