@@ -3,539 +3,348 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
-  <title>MONOLITH | The Wall of Record | The On-Chain Monument</title>
-  <meta name="description" content="MONOLITH is a permanent on-chain monument where individuals and projects leave a constrained visual mark, recorded forever as proof of presence." />
-  <meta property="og:title" content="MONOLITH | The Wall of Record" />
-  <meta property="og:description" content="Not a wall. Not a gallery. Not a feature. A credibility layer. Proof of presence, recorded forever." />
+  <title>MONOLITH — The Wall of Record</title>
+
+  <meta name="description" content="MONOLITH is The Wall of Record. An on-chain monument of proof and presence. Leave your mark. History keeps it." />
+  <meta property="og:title" content="MONOLITH — The Wall of Record" />
+  <meta property="og:description" content="An on-chain monument of proof and presence. Leave your mark. History keeps it." />
   <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#07080a" />
+  <meta name="theme-color" content="#050509" />
+
   <style>
     :root{
-      --bg:#07080a;
-      --bg2:#0b0d10;
-      --stone:#0f1217;
-      --panel:#0c0f13;
-      --line:rgba(255,255,255,.10);
-      --line2:rgba(255,255,255,.06);
-      --fg:#f2f4f7;
-      --muted:rgba(242,244,247,.74);
-      --muted2:rgba(242,244,247,.56);
-      --accent:#d7dbe1;
-      --glow:rgba(255,255,255,.08);
-      --radius:16px;
-      --radius2:22px;
-      --shadow:0 18px 60px rgba(0,0,0,.55);
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      --bg:#050509;
+      --panel:#0e101a;
+      --panel2:#0a0c14;
+      --line:rgba(255,255,255,0.10);
+      --line2:rgba(255,255,255,0.06);
+      --fg:#f5f7ff;
+      --muted:#aeb6d6;
+      --soft:#7c85a8;
+
+      --radius-lg:18px;
+      --radius-xl:22px;
+      --shadow-soft:0 18px 45px rgba(0,0,0,0.75);
+      --shadow-deep:0 30px 80px rgba(0,0,0,0.85);
+      --glow:0 0 34px rgba(255,255,255,0.10);
+
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      --sans: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
     }
+
     *{box-sizing:border-box}
-    html,body{height:100%}
+    html,body{margin:0;padding:0;width:100%;overflow-x:hidden}
     body{
-      margin:0;
       font-family:var(--sans);
       color:var(--fg);
       background:
-        radial-gradient(900px 600px at 20% 10%, rgba(255,255,255,.08), transparent 60%),
-        radial-gradient(700px 500px at 80% 30%, rgba(255,255,255,.05), transparent 55%),
-        linear-gradient(180deg, var(--bg), var(--bg2));
-      letter-spacing:.2px;
+        radial-gradient(1200px 700px at 12% 8%, rgba(255,255,255,0.07), transparent 60%),
+        radial-gradient(900px 600px at 82% 12%, rgba(10,116,208,0.14), transparent 58%),
+        radial-gradient(800px 520px at 55% 70%, rgba(43,243,162,0.08), transparent 55%),
+        radial-gradient(circle at top,#111827 0,#020308 55%,#000 100%);
     }
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:1100px; margin:0 auto; padding:22px}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:980px;margin:0 auto;padding:24px 16px 60px}
+
     .topbar{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:16px 0 8px;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+      padding:14px 14px;
+      border:1px solid var(--line2);
+      border-radius:20px;
+      background:linear-gradient(135deg, rgba(15,23,42,0.55), rgba(0,0,0,0.55));
+      box-shadow:0 10px 26px rgba(0,0,0,0.55);
+      backdrop-filter:blur(10px);
     }
-    .brand{
-      display:flex; align-items:center; gap:12px;
-      letter-spacing:2px;
-    }
+    .brand{display:flex;align-items:center;gap:14px}
     .mark{
-      width:38px; height:38px; border-radius:12px;
+      width:64px;height:64px;border-radius:18px;
+      border:1px solid rgba(255,255,255,0.14);
       background:
-        linear-gradient(135deg, rgba(255,255,255,.16), rgba(255,255,255,.05));
-      border:1px solid var(--line);
-      box-shadow: 0 10px 40px rgba(0,0,0,.45);
-      position:relative;
+        radial-gradient(circle at 30% 0, rgba(255,255,255,0.08) 0, rgba(2,6,23,0.0) 60%),
+        radial-gradient(circle at 70% 70%, rgba(10,116,208,0.14) 0, rgba(0,0,0,0) 55%),
+        linear-gradient(135deg, rgba(15,23,42,0.9), rgba(0,0,0,0.95));
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:var(--glow);
       overflow:hidden;
     }
-    .mark:before{
-      content:"";
-      position:absolute; inset:-30%;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.16), transparent 55%);
-      transform: rotate(10deg);
+    .mark img{
+      width:54px;height:54px;object-fit:contain;
+      filter:drop-shadow(0 0 18px rgba(0,0,0,0.95)) drop-shadow(0 0 18px rgba(255,255,255,0.10));
     }
-    .brand h1{
+    .tgroup h1{
       margin:0;
-      font-size:14px;
-      font-weight:800;
+      font-size:1.05rem;
+      letter-spacing:0.22em;
       text-transform:uppercase;
+      font-weight:950;
     }
-    .brand .sub{
-      display:block;
-      font-size:12px;
-      color:var(--muted2);
-      letter-spacing:1px;
-      margin-top:2px;
+    .tgroup .sub{
+      margin:6px 0 0;
+      font-size:0.76rem;
+      letter-spacing:0.18em;
       text-transform:uppercase;
+      color:rgba(245,247,255,0.75);
+      font-weight:900;
     }
     .nav{
-      display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;
+      display:flex;gap:10px;flex-wrap:wrap;
     }
     .pill{
-      padding:10px 12px;
-      border:1px solid var(--line2);
-      background:rgba(255,255,255,.03);
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:9px 12px;
       border-radius:999px;
-      font-size:12px;
-      color:var(--muted);
-      transition:transform .12s ease, border-color .12s ease, background .12s ease;
+      border:1px solid rgba(255,255,255,0.14);
+      background:linear-gradient(135deg, rgba(15,23,42,0.98), rgba(3,7,18,0.98));
+      box-shadow:0 8px 22px rgba(0,0,0,0.85);
+      text-transform:uppercase;
+      letter-spacing:0.16em;
+      font-size:0.74rem;
+      font-weight:950;
+      color:#dbe3ff;
+      transition:transform .15s ease,border-color .2s ease,box-shadow .2s ease;
     }
-    .pill:hover{
-      transform:translateY(-1px);
-      border-color:var(--line);
-      background:rgba(255,255,255,.05);
-    }
+    .pill:hover{transform:translateY(-1px);border-color:rgba(255,255,255,0.28);box-shadow:0 0 26px rgba(255,255,255,0.10)}
+
     .hero{
-      margin-top:16px;
-      padding:26px;
-      border:1px solid var(--line);
-      border-radius:var(--radius2);
+      margin-top:18px;
+      border-radius:var(--radius-xl);
+      border:1px solid rgba(255,255,255,0.10);
       background:
-        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-      box-shadow: var(--shadow);
+        radial-gradient(circle at 12% 0, rgba(255,255,255,0.08) 0, rgba(2,6,23,0) 55%),
+        radial-gradient(circle at 85% 10%, rgba(10,116,208,0.22) 0, rgba(0,0,0,0) 60%),
+        linear-gradient(135deg, rgba(15,23,42,0.92), rgba(0,0,0,0.98));
+      box-shadow:var(--shadow-deep);
+      overflow:hidden;
+      position:relative;
+    }
+    .hero::before{
+      content:"";
+      position:absolute;inset:-2px;
+      background:conic-gradient(from 210deg, rgba(255,255,255,0.16), transparent 18%, transparent 62%, rgba(10,116,208,0.18), rgba(43,243,162,0.10), transparent 86%, rgba(255,255,255,0.16));
+      opacity:.22;
+      pointer-events:none;
+    }
+    .hero-inner{position:relative;padding:22px 18px 18px}
+    .kicker{
+      margin:0 0 10px;
+      color:rgba(245,247,255,0.70);
+      letter-spacing:0.20em;
+      text-transform:uppercase;
+      font-size:0.78rem;
+      font-weight:950;
+    }
+    .headline{
+      margin:0;
+      font-size:1.55rem;
+      letter-spacing:0.06em;
+      font-weight:950;
+      line-height:1.2;
+      text-transform:uppercase;
+    }
+    .lead{
+      margin:12px 0 0;
+      color:var(--muted);
+      font-size:1.02rem;
+      line-height:1.65;
+      max-width:880px;
+    }
+    .quote{
+      margin-top:14px;
+      padding:14px 14px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,0.10);
+      background:linear-gradient(135deg, rgba(15,23,42,0.55), rgba(0,0,0,0.55));
+      color:#dbe3ff;
+      font-weight:950;
+      letter-spacing:0.06em;
+      line-height:1.5;
+    }
+
+    .grid{
+      margin-top:16px;
+      display:grid;
+      grid-template-columns:1fr;
+      gap:14px;
+    }
+    @media(min-width:900px){.grid{grid-template-columns:1fr 1fr}}
+
+    .card{
+      border-radius:var(--radius-xl);
+      border:1px solid rgba(255,255,255,0.08);
+      background:radial-gradient(circle at top, rgba(26,35,58,0.65) 0, rgba(5,5,9,0.8) 55%, rgba(0,0,0,0.92) 100%);
+      box-shadow:var(--shadow-soft);
+      padding:16px 16px 14px;
       position:relative;
       overflow:hidden;
     }
-    .hero:before{
-      content:"";
-      position:absolute; inset:-40%;
-      background: radial-gradient(circle at 20% 30%, rgba(255,255,255,.08), transparent 55%);
-      transform: rotate(-8deg);
-      pointer-events:none;
-    }
-    .kicker{
-      font-size:12px;
-      text-transform:uppercase;
-      letter-spacing:2px;
-      color:var(--muted2);
-      position:relative;
-      z-index:1;
-    }
-    .title{
-      margin:10px 0 6px;
-      font-size:44px;
-      line-height:1.02;
-      font-weight:900;
-      letter-spacing:1px;
-      text-transform:uppercase;
-      position:relative;
-      z-index:1;
-    }
-    .desc{
-      margin:8px 0 0;
-      font-size:15px;
-      line-height:1.55;
-      color:var(--muted);
-      max-width:880px;
-      position:relative;
-      z-index:1;
-    }
-    .tagrow{
-      margin-top:16px;
-      display:flex; flex-wrap:wrap; gap:10px;
-      position:relative;
-      z-index:1;
-    }
-    .tag{
-      font-size:12px;
-      padding:8px 10px;
-      border:1px solid var(--line2);
-      border-radius:999px;
-      background:rgba(0,0,0,.18);
-      color:var(--muted);
-      backdrop-filter: blur(6px);
-    }
-    .grid{
-      margin-top:18px;
-      display:grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap:16px;
-    }
-    @media (max-width: 920px){
-      .title{font-size:38px}
-      .grid{grid-template-columns:1fr}
-    }
-    .card{
-      border:1px solid var(--line2);
-      border-radius:var(--radius);
-      background:rgba(255,255,255,.02);
-      padding:18px;
-    }
     .card h2{
-      margin:0 0 10px;
-      font-size:14px;
-      letter-spacing:1.6px;
+      margin:0 0 8px;
+      font-size:0.86rem;
+      letter-spacing:0.20em;
       text-transform:uppercase;
-      color:var(--accent);
+      font-weight:950;
+      color:#f5f7ff;
     }
     .card p{
-      margin:0 0 10px;
+      margin:0;
       color:var(--muted);
       line-height:1.6;
-      font-size:14px;
+      font-size:0.90rem;
     }
-    .quote{
-      margin:12px 0 0;
-      padding:14px 14px 14px 14px;
-      border-left:3px solid rgba(255,255,255,.25);
-      background:rgba(0,0,0,.18);
-      border-radius:12px;
-      color:rgba(242,244,247,.88);
-      font-size:14px;
-      line-height:1.55;
-    }
-    .quote b{color:var(--fg)}
-    .list{
-      margin:10px 0 0;
-      padding:0;
+    .bullets{
       list-style:none;
+      padding:0;
+      margin:12px 0 0;
       display:grid;
       gap:10px;
     }
-    .li{
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
-      padding:12px;
-      border:1px solid var(--line2);
-      border-radius:12px;
-      background:rgba(0,0,0,.16);
+    .bullets li{
+      position:relative;
+      padding:10px 12px 10px 40px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,0.10);
+      background:linear-gradient(135deg, rgba(15,23,42,0.92), rgba(3,7,18,0.92));
+      box-shadow:0 10px 26px rgba(0,0,0,0.75);
+      color:#dbe3ff;
+      font-weight:850;
+      font-size:0.84rem;
+      line-height:1.45;
     }
-    .dot{
-      width:10px; height:10px;
-      border-radius:999px;
-      margin-top:4px;
-      background:rgba(255,255,255,.28);
-      box-shadow: 0 0 0 3px rgba(255,255,255,.06);
-      flex:0 0 auto;
+    .bullets li:before{
+      content:"✓";
+      position:absolute;
+      left:12px;
+      top:10px;
+      width:20px;height:20px;
+      border-radius:8px;
+      display:flex;align-items:center;justify-content:center;
+      color:#07080a;
+      background:radial-gradient(circle at 30% 0, rgba(255,255,255,1) 0, rgba(210,214,224,1) 60%, rgba(120,125,140,1) 100%);
+      border:1px solid rgba(255,255,255,0.25);
+      font-weight:950;
+      box-shadow:0 0 16px rgba(255,255,255,0.10);
     }
-    .li .t{
-      font-size:13px;
-      color:var(--muted);
-      line-height:1.55;
-    }
-    .spec{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:10px;
-      margin-top:10px;
-    }
-    @media (max-width: 520px){
-      .spec{grid-template-columns:1fr}
-    }
-    .kv{
-      padding:12px;
-      border:1px solid var(--line2);
-      border-radius:12px;
-      background:rgba(0,0,0,.16);
-    }
-    .k{
-      font-size:11px;
-      text-transform:uppercase;
-      letter-spacing:1.6px;
-      color:var(--muted2);
-      margin-bottom:6px;
-    }
-    .v{
-      font-family:var(--mono);
-      font-size:13px;
-      color:rgba(242,244,247,.88);
-      line-height:1.35;
-      word-break:break-word;
-    }
-    .actions{
+
+    .cta{
       margin-top:14px;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
+      display:flex;gap:10px;flex-wrap:wrap;
     }
     .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      padding:12px 14px;
-      border-radius:12px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.05);
-      color:var(--fg);
-      font-weight:700;
-      font-size:13px;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
-      user-select:none;
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.14);
+      background:linear-gradient(135deg, rgba(15,23,42,0.98), rgba(3,7,18,0.98));
+      box-shadow:0 8px 22px rgba(0,0,0,0.85);
+      text-transform:uppercase;
+      letter-spacing:0.16em;
+      font-size:0.76rem;
+      font-weight:950;
+      color:#dbe3ff;
+      transition:transform .15s ease,border-color .2s ease,box-shadow .2s ease;
     }
-    .btn:hover{
-      transform:translateY(-1px);
-      border-color:rgba(255,255,255,.16);
-      background:rgba(255,255,255,.07);
+    .btn:hover{transform:translateY(-1px);border-color:rgba(255,255,255,0.28);box-shadow:0 0 26px rgba(255,255,255,0.10)}
+    .btn.primary{
+      background:radial-gradient(circle at 20% 0, rgba(245,247,255,1) 0, rgba(210,214,224,1) 55%, rgba(90,96,112,1) 100%);
+      border-color:rgba(255,255,255,0.22);
+      color:#07080a;
+      box-shadow:0 0 28px rgba(255,255,255,0.14);
     }
-    .btn.secondary{
-      background:rgba(0,0,0,.18);
-      border-color:var(--line2);
-      color:rgba(242,244,247,.86);
-      font-weight:650;
-    }
-    .hr{
-      height:1px;
-      background:var(--line2);
-      margin:18px 0;
-    }
+
     .footer{
-      margin:22px 0 8px;
-      padding:18px;
-      border:1px solid var(--line2);
-      border-radius:var(--radius);
-      background:rgba(0,0,0,.16);
-      color:var(--muted2);
-      font-size:12px;
-      line-height:1.55;
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:space-between;
-      gap:10px;
+      margin-top:18px;
+      padding-top:14px;
+      border-top:1px solid rgba(255,255,255,0.06);
+      display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+      color:rgba(245,247,255,0.55);
+      font-size:0.78rem;
+      letter-spacing:0.10em;
+      text-transform:uppercase;
     }
-    .footer b{color:rgba(242,244,247,.86)}
-    .mini{
+    .mono{
       font-family:var(--mono);
-      font-size:11px;
-      color:rgba(242,244,247,.72);
+      letter-spacing:0.10em;
+      color:rgba(245,247,255,0.60);
+      font-size:0.76rem;
+      text-transform:uppercase;
     }
   </style>
 </head>
 
 <body>
   <div class="wrap">
+
     <div class="topbar">
       <div class="brand">
-        <div class="mark" aria-hidden="true"></div>
-        <div>
-          <h1>MONOLITH <span class="sub">The Wall of Record</span></h1>
+        <div class="mark">
+          <img src="/assets/monolith/monolith_logo.webp" alt="MONOLITH">
+        </div>
+        <div class="tgroup">
+          <h1>MONOLITH</h1>
+          <div class="sub">The Wall of Record</div>
         </div>
       </div>
+
       <div class="nav">
-        <a class="pill" href="#what">What it is</a>
-        <a class="pill" href="#why">Why it matters</a>
-        <a class="pill" href="#rules">Rules</a>
-        <a class="pill" href="#spec">Posting spec</a>
-        <a class="pill" href="#faq">FAQ</a>
+        <a class="pill" href="https://x.com/monolith_wall" target="_blank" rel="noopener">𝕏 @monolith_wall</a>
+        <a class="pill" href="/monolith/rules.html">Rules</a>
+        <a class="pill" href="/">House</a>
       </div>
     </div>
 
-    <section class="hero" id="top">
-      <div class="kicker">The On-Chain Monument</div>
-      <div class="title">MONOLITH</div>
-      <p class="desc">
-        MONOLITH is a permanent on-chain monument where individuals and projects leave a constrained visual mark,
-        recorded forever as proof of presence.
-      </p>
-      <div class="tagrow">
-        <div class="tag">No accounts</div>
-        <div class="tag">No wallet connection</div>
-        <div class="tag">Public data only</div>
-        <div class="tag">No edits</div>
-        <div class="tag">No deletions</div>
-        <div class="tag">Finite attention, endless record</div>
-      </div>
+    <section class="hero">
+      <div class="hero-inner">
+        <p class="kicker">The On-Chain Monument</p>
+        <h2 class="headline">A credibility layer</h2>
+        <p class="lead">
+          MONOLITH isn’t a wall for ads.
+          It’s a permanent wall of constrained marks tied to wallet identity.
+          Presence you can prove later.
+        </p>
 
-      <div class="grid">
-        <div class="card" id="what">
-          <h2>What you’ve actually created</h2>
-          <p>
-            Not a wall. Not a gallery. Not a feature.
-          </p>
-          <div class="quote">
-            You’ve created a <b>credibility layer</b>.<br><br>
-            Years from now, people will say<br>
-            <b>If you were real back then, you’re on MONOLITH.</b>
+        <div class="quote">
+          If you were real back then, you’re on MONOLITH.
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <h2>What it is</h2>
+            <p>
+              A wall of tiles recorded by on-chain action.
+              Each tile is a constrained mark that can’t dominate the wall.
+            </p>
+            <ul class="bullets">
+              <li>Constrained mark size, no takeovers</li>
+              <li>Permanent record, no edits or deletions</li>
+              <li>Wallet identity only, no profiles</li>
+            </ul>
           </div>
 
-          <div class="hr"></div>
-
-          <h2>What MONOLITH is</h2>
-          <p>
-            A living public record where each post is a small constrained tile, tied to a public wallet identity.
-            It is simple by design. Constraint keeps the monument clean.
-          </p>
-
-          <h2>How it works</h2>
-          <ul class="list">
-            <li class="li"><span class="dot"></span><div class="t">Choose a small logo or artwork tile within strict limits</div></li>
-            <li class="li"><span class="dot"></span><div class="t">Sign a small XRP payment to post</div></li>
-            <li class="li"><span class="dot"></span><div class="t">Your tile is placed on the wall and linked to your public wallet identity</div></li>
-            <li class="li"><span class="dot"></span><div class="t">The wall grows forever, visibility stays controlled by time and relevance</div></li>
-          </ul>
-
-          <div class="actions">
-            <a class="btn" href="/monolith/rules.html">Read the rules</a>
-            <a class="btn secondary" href="#spec">See the posting spec</a>
+          <div class="card">
+            <h2>Why it matters</h2>
+            <p>
+              Noise dies. Records survive.
+              MONOLITH turns early presence into permanent proof.
+            </p>
+            <ul class="bullets">
+              <li>Proof you showed up</li>
+              <li>Proof you acted</li>
+              <li>A cultural footprint that can’t be scrubbed</li>
+            </ul>
+            <div class="cta">
+              <a class="btn primary" href="/monolith/rules.html">Read the Rules</a>
+              <a class="btn" href="https://x.com/monolith_wall" target="_blank" rel="noopener">Follow on 𝕏</a>
+            </div>
           </div>
         </div>
 
-        <div class="card" id="why">
-          <h2>Why people should use it</h2>
-          <p>
-            People want proof, not likes. MONOLITH is proof.
-          </p>
-          <ul class="list">
-            <li class="li"><span class="dot"></span><div class="t">Proof you showed up early</div></li>
-            <li class="li"><span class="dot"></span><div class="t">Proof you supported with action, not comments</div></li>
-            <li class="li"><span class="dot"></span><div class="t">A permanent cultural footprint tied to public identity</div></li>
-            <li class="li"><span class="dot"></span><div class="t">A historical record people will reference later</div></li>
-          </ul>
-
-          <div class="hr"></div>
-
-          <h2>What it is not</h2>
-          <ul class="list">
-            <li class="li"><span class="dot"></span><div class="t">Not a social feed</div></li>
-            <li class="li"><span class="dot"></span><div class="t">Not a profile platform</div></li>
-            <li class="li"><span class="dot"></span><div class="t">Not a vanity metric machine</div></li>
-            <li class="li"><span class="dot"></span><div class="t">Not a place for spam banners</div></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="grid" style="margin-top:16px;">
-        <div class="card" id="rules">
-          <h2>Rules of MONOLITH</h2>
-          <p>
-            MONOLITH is a monument. It stays clean by law.
-          </p>
-          <ul class="list">
-            <li class="li"><span class="dot"></span><div class="t">One tile per post, constrained format only</div></li>
-            <li class="li"><span class="dot"></span><div class="t">No edits after posting</div></li>
-            <li class="li"><span class="dot"></span><div class="t">No deletions, ever</div></li>
-            <li class="li"><span class="dot"></span><div class="t">No full banners, no wall-sized ads</div></li>
-            <li class="li"><span class="dot"></span><div class="t">No wallet connection, no keys, no custody</div></li>
-            <li class="li"><span class="dot"></span><div class="t">Public identity only, public data only</div></li>
-          </ul>
-
-          <div class="hr"></div>
-
-          <h2>Endless without chaos</h2>
-          <ul class="list">
-            <li class="li"><span class="dot"></span><div class="t">New posts are most visible, older posts fade into the archive</div></li>
-            <li class="li"><span class="dot"></span><div class="t">Zoom out to see the monument, zoom in to inspect marks</div></li>
-            <li class="li"><span class="dot"></span><div class="t">History remains accessible, the default view stays clean</div></li>
-          </ul>
-        </div>
-
-        <div class="card" id="spec">
-          <h2>Posting spec v1</h2>
-          <p>
-            Constraint is the feature. Keep it tight, iconic, readable.
-          </p>
-
-          <div class="spec">
-            <div class="kv">
-              <div class="k">Tile size</div>
-              <div class="v">48 × 48</div>
-            </div>
-            <div class="kv">
-              <div class="k">Formats</div>
-              <div class="v">PNG, SVG</div>
-            </div>
-            <div class="kv">
-              <div class="k">Background</div>
-              <div class="v">Transparent only</div>
-            </div>
-            <div class="kv">
-              <div class="k">Animation</div>
-              <div class="v">Not allowed in v1</div>
-            </div>
-            <div class="kv">
-              <div class="k">Identity</div>
-              <div class="v">Public wallet identity</div>
-            </div>
-            <div class="kv">
-              <div class="k">Access</div>
-              <div class="v">No account required</div>
-            </div>
-          </div>
-
-          <div class="hr"></div>
-
-          <h2>Placement policy</h2>
-          <ul class="list">
-            <li class="li"><span class="dot"></span><div class="t">Posting requires a small XRP payment to prevent spam</div></li>
-            <li class="li"><span class="dot"></span><div class="t">Placement is deterministic and auditable</div></li>
-            <li class="li"><span class="dot"></span><div class="t">Archive is permanent, front visibility is time-weighted</div></li>
-          </ul>
-
-          <div class="actions">
-            <a class="btn secondary" href="#faq">FAQ</a>
-            <a class="btn" href="#top">Back to top</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card" id="faq" style="margin-top:16px;">
-        <h2>FAQ</h2>
-
-        <ul class="list">
-          <li class="li">
-            <span class="dot"></span>
-            <div class="t">
-              <b>Do I connect my wallet</b><br>
-              No. MONOLITH does not require wallet connection. Posting is done by signing a payment.
-            </div>
-          </li>
-
-          <li class="li">
-            <span class="dot"></span>
-            <div class="t">
-              <b>Can I change or delete my post later</b><br>
-              No. A monument does not get edited.
-            </div>
-          </li>
-
-          <li class="li">
-            <span class="dot"></span>
-            <div class="t">
-              <b>Is the wall infinite</b><br>
-              The record is endless. Visibility is controlled by time, zoom, and archive behavior.
-            </div>
-          </li>
-
-          <li class="li">
-            <span class="dot"></span>
-            <div class="t">
-              <b>Why pay to post</b><br>
-              To kill spam and keep MONOLITH clean. The wall is a record, not a dumpster.
-            </div>
-          </li>
-
-          <li class="li">
-            <span class="dot"></span>
-            <div class="t">
-              <b>Is this art or utility</b><br>
-              It is proof. It becomes culture, history, and credibility over time.
-            </div>
-          </li>
-        </ul>
-      </div>
-
-      <div class="footer">
-        <div>
-          <b>MONOLITH</b> · The Wall of Record · The On-Chain Monument<br>
-          Built under House of Cauliman
-        </div>
-        <div class="mini">
-          v1 landing page · no edits · no deletions · public record
+        <div class="footer">
+          <span>MONOLITH · The Wall of Record</span>
+          <span class="mono">Public data only · Read-only architecture</span>
         </div>
       </div>
     </section>
+
   </div>
 </body>
 </html>
