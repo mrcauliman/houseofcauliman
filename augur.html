@@ -1,12 +1,19 @@
+cd /var/www/houseofcauliman.com || exit 1
+
+cp -a augur.html /tmp/augur.html.pre_full_rebuild.bak.$(date +%s) 2>/dev/null || true
+
+# wipe the file
+: > augur.html
+
+# PART 1: head + base styles
+cat >> augur.html <<'HTML'
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-
   <title>AUGUR — House of Cauliman</title>
   <meta name="description" content="AUGUR is a Chain Oracle. Read-only. Public data only. No wallet connection. No keys. No custody." />
-
   <meta property="og:title" content="AUGUR — House of Cauliman" />
   <meta property="og:description" content="Chain Oracle for public wallets. Read-only. Public data only. No wallet connection. No keys. No custody." />
   <meta property="og:type" content="website" />
@@ -29,9 +36,10 @@
     *{box-sizing:border-box}
     body{
       margin:0;
-      background: radial-gradient(1200px 800px at 20% -10%, #12213a 0%, rgba(18,33,58,0) 55%),
-                  radial-gradient(900px 600px at 90% 10%, #0d2b2b 0%, rgba(13,43,43,0) 55%),
-                  var(--bg);
+      background:
+        radial-gradient(1200px 800px at 20% -10%, #12213a 0%, rgba(18,33,58,0) 55%),
+        radial-gradient(900px 600px at 90% 10%, #0d2b2b 0%, rgba(13,43,43,0) 55%),
+        var(--bg);
       color:var(--fg);
       font-family:var(--sans);
       line-height:1.45;
@@ -39,13 +47,8 @@
     a{color:var(--a);text-decoration:none}
     a:hover{text-decoration:underline}
     .wrap{max-width:980px;margin:0 auto;padding:26px 18px 46px}
-    .top{
-      display:flex;align-items:center;justify-content:space-between;gap:12px;
-      margin-bottom:18px;
-    }
-    .brand{
-      display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.5px
-    }
+    .top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.5px}
     .badge{
       font-family:var(--mono);
       font-size:12px;
@@ -64,6 +67,7 @@
       box-shadow: 0 18px 60px rgba(0,0,0,.35);
     }
     h1{margin:0;font-size:34px;letter-spacing:.3px}
+    h2{margin:0 0 10px;font-size:18px}
     .sub{margin:10px 0 0;color:var(--muted);font-size:16px;max-width:72ch}
     .ctaRow{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
     .btn{
@@ -75,17 +79,18 @@
       background:rgba(11,17,24,.7);
       color:var(--fg);
     }
-    .btn.primary{
-      background:var(--a);
-      color:#070a0e;
-      border-color:transparent;
+    .btn.primary{background:var(--a);color:#070a0e;border-color:transparent}
+    .pillRow{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      font-size:13px;padding:6px 10px;border-radius:999px;
+      border:1px solid var(--line);background:rgba(7,10,14,.35);color:var(--muted);
     }
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(12,1fr);
-      gap:14px;
-      margin-top:16px;
-    }
+    .dot{width:9px;height:9px;border-radius:999px;display:inline-block}
+    .dot.good{background:var(--good)}
+    .dot.warn{background:var(--warn)}
+    .dot.bad{background:var(--bad)}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:16px}
     .card{
       grid-column: span 12;
       border:1px solid var(--line);
@@ -97,171 +102,170 @@
       .card.third{grid-column: span 4}
       .card.half{grid-column: span 6}
     }
-    .k{font-family:var(--mono);color:var(--muted)}
-    .pillRow{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-    .pill{
-      display:inline-flex;align-items:center;gap:8px;
-      font-size:13px;
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(7,10,14,.35);
-      color:var(--muted);
-    }
-    .dot{width:9px;height:9px;border-radius:999px;display:inline-block}
-    .dot.good{background:var(--good)}
-    .dot.warn{background:var(--warn)}
-    .dot.bad{background:var(--bad)}
-    h2{margin:0 0 10px;font-size:18px}
-    ul{margin:10px 0 0;padding-left:18px;color:var(--muted)}
+    ul,ol{margin:10px 0 0;padding-left:18px;color:var(--muted)}
     li{margin:6px 0}
-    .steps{counter-reset:s}
-    .step{
-      display:flex;gap:10px;margin:10px 0;
-      color:var(--muted);
-    }
+    .steps .step{display:flex;gap:10px;margin:10px 0;color:var(--muted)}
     .n{
-      flex:0 0 auto;
-      width:28px;height:28px;border-radius:10px;
-      border:1px solid var(--line);
-      background:rgba(7,10,14,.35);
+      flex:0 0 auto;width:28px;height:28px;border-radius:10px;
+      border:1px solid var(--line);background:rgba(7,10,14,.35);
       display:flex;align-items:center;justify-content:center;
-      font-family:var(--mono);
-      color:var(--fg);
-      font-weight:800;
+      font-family:var(--mono);color:var(--fg);font-weight:900;
     }
-    .foot{
-      margin-top:22px;
-      color:var(--muted);
-      font-size:13px;
-      border-top:1px solid var(--line);
-      padding-top:14px;
-    }
-    .mini{
-      font-size:13px;color:var(--muted);margin-top:6px
-    }
-    .inputRow{
-      display:flex;flex-wrap:wrap;gap:10px;margin-top:12px
-    }
+    .formRow{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
     input{
       background:rgba(7,10,14,.35);
       border:1px solid var(--line);
       color:var(--fg);
-      padding:10px 12px;
-      border-radius:12px;
-      outline:none;
-      min-width:260px;
-      flex:1 1 260px;
+      padding:10px 12px;border-radius:12px;outline:none;
+      min-width:260px;flex:1 1 260px;
     }
     input::placeholder{color:#6f86a6}
-    .note{
-      margin-top:10px;
-      font-size:12px;
-      color:var(--muted);
-    }
+    .note{margin-top:10px;font-size:12px;color:var(--muted)}
+    .foot{margin-top:22px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:14px}
+    code,kbd,pre{font-family:var(--mono)}
+    .small{font-size:13px;color:var(--muted)}
   </style>
 </head>
+HTML
 
+# PART 2: body content
+cat >> augur.html <<'HTML'
 <body>
   <div class="wrap">
     <div class="top">
       <div class="brand">
         <span style="font-size:18px">AUGUR</span>
-        <span class="badge">Chain Oracle</span>
-        <span class="badge">Read-only</span>
+        <span class="badge">chain oracle</span>
+        <span class="badge">read-only</span>
       </div>
-      <a class="badge" href="/" style="text-decoration:none">Back to House</a>
+      <a class="badge" href="/" style="text-decoration:none">back to house</a>
     </div>
 
     <main class="hero">
       <h1>AUGUR</h1>
       <p class="sub">
-        A simple way to turn public wallet activity into clear, plain-English statements.
-        Add public addresses and labels. AUGUR reads public data and organizes it into something normal humans can understand.
+        AUGUR reads public wallet activity and turns it into plain-English statements.
+        You add public addresses and labels. AUGUR does the organizing.
       </p>
 
       <div class="pillRow">
-        <span class="pill"><span class="dot good"></span> Public data only</span>
-        <span class="pill"><span class="dot good"></span> No wallet connection</span>
-        <span class="pill"><span class="dot good"></span> No keys</span>
-        <span class="pill"><span class="dot good"></span> No custody</span>
+        <span class="pill"><span class="dot good"></span> public data only</span>
+        <span class="pill"><span class="dot good"></span> no wallet connection</span>
+        <span class="pill"><span class="dot good"></span> no keys</span>
+        <span class="pill"><span class="dot good"></span> no custody</span>
       </div>
 
       <div class="ctaRow">
-        <a class="btn primary" href="#waitlist">Join the waitlist</a>
-        <a class="btn" href="https://github.com/mrcauliman/augur" target="_blank" rel="noopener">View repo</a>
+        <a class="btn primary" href="#waitlist">join the waitlist</a>
+        <a class="btn" href="https://github.com/mrcauliman/augur" target="_blank" rel="noopener">view the repo</a>
       </div>
 
-      <div class="grid">
-        <section class="card third">
-          <h2>What it does</h2>
+      <section class="grid" style="margin-top:18px">
+        <div class="card third">
+          <h2>what you get</h2>
           <ul>
-            <li>Statement view for each address</li>
-            <li>Inflows, outflows, fees, net change</li>
-            <li>Token and NFT inventory deltas</li>
-            <li>Exports you can save and share</li>
+            <li>inflows, outflows, fees, net change</li>
+            <li>token and NFT inventory deltas</li>
+            <li>clean export outputs for records</li>
           </ul>
-        </section>
-
-        <section class="card third">
-          <h2>What you do</h2>
-          <div class="steps">
-            <div class="step"><div class="n">1</div><div>Add an address and a label</div></div>
-            <div class="step"><div class="n">2</div><div>Run a snapshot</div></div>
-            <div class="step"><div class="n">3</div><div>Read the statement output</div></div>
-          </div>
-          <div class="mini">You can do this for one wallet or fifty</div>
-        </section>
-
-        <section class="card third">
-          <h2>What you never do</h2>
-          <ul>
-            <li>No connect wallet button</li>
-            <li>No seed phrases</li>
-            <li>No private keys</li>
-            <li>No custody at any point</li>
-          </ul>
-        </section>
-
-        <section class="card half">
-          <h2>Why this exists</h2>
-          <p class="sub" style="margin-top:0">
-            Most people can read a bank statement. Almost nobody wants to dig through explorer pages and raw transaction noise.
-            AUGUR turns ledger activity into a readable statement so you can make decisions fast.
-          </p>
-        </section>
-
-        <section class="card half">
-          <h2>MVP scope</h2>
-          <ul>
-            <li>Add public address with label</li>
-            <li>Snapshot now and snapshot monthly</li>
-            <li>Statement view with totals and deltas</li>
-            <li>Export JSON plus simple statement text</li>
-          </ul>
-        </section>
-
-        <section class="card" id="waitlist">
-          <h2>AUGUR Waitlist</h2>
-          <p class="sub" style="margin-top:0">
-            Early access updates and the first public demo statement.
-          </p>
-
-          <div class="inputRow">
-            <input type="email" placeholder="Email address" disabled />
-            <a class="btn primary" href="#waitlist">Join</a>
-          </div>
-
-          <div class="note">
-            Waitlist form is being wired up. This is a temporary placeholder.
-          </div>
-        </section>
-
-        <div class="foot">
-          House of Cauliman Project — AUGUR
         </div>
+
+        <div class="card third">
+          <h2>how it works</h2>
+          <div class="steps">
+            <div class="step"><div class="n">1</div><div>add an address and a label</div></div>
+            <div class="step"><div class="n">2</div><div>run a snapshot</div></div>
+            <div class="step"><div class="n">3</div><div>read the statement output</div></div>
+          </div>
+          <div class="small">no wallet connection, no signing</div>
+        </div>
+
+        <div class="card third">
+          <h2>hard rules</h2>
+          <ul>
+            <li>no connect wallet button</li>
+            <li>no seed phrases</li>
+            <li>no private keys</li>
+            <li>no custody at any point</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="waitlist" class="card" style="margin-top:14px">
+        <h2>AUGUR waitlist</h2>
+        <p class="small" style="margin:0 0 10px 0">
+          early access updates, first public demo statement, no noise
+        </p>
+
+        <div class="formRow">
+          <input id="wl_email" type="email" placeholder="your email" autocomplete="email" />
+          <a id="wl_btn" class="btn primary" href="#waitlist">join</a>
+        </div>
+
+        <div class="note">
+          this is a temporary on-page waitlist. it opens your email client. swap the destination later.
+        </div>
+      </section>
+
+      <section class="card" style="margin-top:14px">
+        <h2>coming next in the MVP</h2>
+        <ul>
+          <li>add public address with label</li>
+          <li>snapshot now and snapshot monthly</li>
+          <li>statement view per address</li>
+          <li>export JSON plus simple statement text</li>
+        </ul>
+      </section>
+
+      <div class="foot">
+        <div>House of Cauliman Project — AUGUR</div>
       </div>
     </main>
   </div>
+
+  <script>
+    (function(){
+      var btn = document.getElementById('wl_btn');
+      var email = document.getElementById('wl_email');
+
+      function buildMailto(){
+        var to = 'waitlist@example.com';
+        var e = (email && email.value || '').trim();
+        var subject = 'AUGUR waitlist';
+        var body = 'Add me to the AUGUR waitlist.\\n\\nEmail: ' + (e || '[enter email]') + '\\n';
+        var href = 'mailto:' + encodeURIComponent(to) +
+          '?subject=' + encodeURIComponent(subject) +
+          '&body=' + encodeURIComponent(body);
+        return href;
+      }
+
+      function update(){
+        if (!btn) return;
+        btn.setAttribute('href', buildMailto());
+      }
+
+      if (email) email.addEventListener('input', update);
+      update();
+    })();
+  </script>
 </body>
+HTML
+
+# PART 3: close html
+cat >> augur.html <<'HTML'
 </html>
+HTML
+
+# sanity checks
+grep -n "<title>AUGUR" augur.html | head -n 3 || true
+grep -n 'id="waitlist"' augur.html | head -n 3 || true
+tail -n 5 augur.html
+
+# commit + push
+git add augur.html
+git commit -m "site: rebuild AUGUR page clean" || true
+git push
+
+# verify from origin
+curl -sS https://houseofcauliman.com/augur.html | grep -n "AUGUR waitlist" | head -n 5
+curl -sS https://houseofcauliman.com/augur.html | grep -n "no wallet connection" | head -n 5
