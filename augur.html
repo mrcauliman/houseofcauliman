@@ -35,54 +35,24 @@
     }
     a{ color:var(--a); text-decoration:none; }
     a:hover{ text-decoration:underline; }
-    .wrap{ max-width:980px; margin:0 auto; padding:18px 16px 44px; }
+    .wrap{ max-width:980px; margin:0 auto; padding:22px 16px 40px; }
 
     .top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-      padding:12px 0 18px;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:10px 0 18px;
       border-bottom:1px solid var(--line);
-      margin-bottom:18px;
+      margin-bottom:14px;
     }
     .brand{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      min-width:240px;
+      display:flex; align-items:baseline; gap:12px;
+      font-weight:900; letter-spacing:.4px;
     }
-    .brand img{
-      height:150px;
-      width:auto;
-      display:block;
-    }
-    .brandtext{
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-      line-height:1.05;
-    }
-    .brandtext .house{
-      font-weight:900;
-      letter-spacing:.4px;
-      font-size:14px;
-      color:var(--muted);
-      text-transform:uppercase;
-    }
-    .brandtext .name{
-      font-weight:1000;
-      font-size:22px;
-      letter-spacing:.3px;
-    }
-    .pillnav{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-      align-items:center;
-    }
+    .brand .h{ font-weight:1000; }
+    .brand .subh{ color:var(--muted); font-weight:800; }
 
+    .pillnav{
+      display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;
+    }
     .btn{
       display:inline-block;
       padding:10px 14px;
@@ -90,7 +60,7 @@
       border:1px solid var(--line);
       background:rgba(13,20,29,.65);
       color:var(--fg);
-      font-weight:900;
+      font-weight:800;
     }
     .btn.primary{
       background:var(--a);
@@ -98,18 +68,38 @@
       border-color:transparent;
     }
 
+    /* BIG LOGO SECTION UNDER HEADER */
+    .logoSection{
+      margin:14px 0 18px;
+      background:rgba(13,20,29,.65);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:22px 16px;
+      text-align:center;
+    }
+    .logoSection img{
+      height:260px;
+      width:auto;
+      display:block;
+      margin:0 auto;
+      max-width:100%;
+    }
+    @media (max-width: 520px){
+      .logoSection img{ height:210px; }
+    }
+    .logoTag{
+      margin:10px 0 0;
+      color:var(--muted);
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+
     .hero{
       display:grid;
-      grid-template-columns:1.15fr .85fr;
+      grid-template-columns:1fr;
       gap:16px;
       align-items:stretch;
-      margin-top:10px;
-    }
-    @media (max-width: 860px){
-      .top{ flex-direction:column; align-items:flex-start; }
-      .pillnav{ width:100%; justify-content:flex-start; }
-      .hero{ grid-template-columns:1fr; }
-      .brand img{ height:132px; }
+      margin-top:0;
     }
 
     .card{
@@ -118,11 +108,10 @@
       border-radius:16px;
       padding:16px;
     }
-
     .h1{
-      font-size:38px;
+      font-size:36px;
       margin:0 0 10px 0;
-      line-height:1.06;
+      line-height:1.08;
       font-weight:1000;
       letter-spacing:.3px;
     }
@@ -130,7 +119,7 @@
       margin:0;
       color:var(--muted);
       font-size:16px;
-      line-height:1.55;
+      line-height:1.5;
     }
 
     .pills{ display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
@@ -143,54 +132,11 @@
       font-weight:900;
       color:var(--fg);
       font-size:13px;
-      white-space:nowrap;
     }
     .dot{ width:8px; height:8px; border-radius:999px; display:inline-block; }
     .dot.good{ background:var(--good); }
     .dot.warn{ background:var(--warn); }
     .dot.bad{ background:var(--bad); }
-
-    .notice{
-      margin-top:12px;
-      padding:10px 12px;
-      border-radius:14px;
-      border:1px solid var(--line);
-      background:rgba(11,17,24,.6);
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.55;
-    }
-
-    .rightbox{
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      gap:14px;
-      height:100%;
-    }
-    .bigcta{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-    }
-    .bigcta .title{
-      font-weight:1000;
-      font-size:18px;
-      letter-spacing:.2px;
-      margin:0;
-    }
-    .bigcta .desc{
-      margin:0;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.55;
-    }
-    .ctaRow{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:8px;
-    }
 
     .grid{
       display:grid;
@@ -208,7 +154,7 @@
     }
     ul{ margin:10px 0 0 18px; color:var(--muted); }
     li{ margin:6px 0; }
-    .small{ color:var(--muted); font-size:13px; line-height:1.6; }
+    .small{ color:var(--muted); font-size:13px; line-height:1.5; }
 
     .code{
       margin-top:10px;
@@ -221,6 +167,17 @@
       color:#cfe2ff;
       overflow:auto;
       white-space:pre;
+    }
+
+    .notice{
+      margin-top:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(11,17,24,.6);
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.5;
     }
 
     .foot{
@@ -243,13 +200,9 @@
   <div class="wrap">
     <div class="top">
       <div class="brand">
-        <img src="/augur/assets/augur_logo.png" alt="AUGUR" />
-        <div class="brandtext">
-          <div class="house">House of Cauliman</div>
-          <div class="name">AUGUR</div>
-        </div>
+        <span class="h">House of Cauliman</span>
+        <span class="subh">AUGUR</span>
       </div>
-
       <div class="pillnav">
         <a class="btn" href="/">Home</a>
         <a class="btn" href="#waitlist">Waitlist</a>
@@ -257,11 +210,16 @@
       </div>
     </div>
 
+    <section class="logoSection" aria-label="AUGUR logo">
+      <img src="/augur/assets/augur_logo.png" alt="AUGUR logo" />
+      <div class="logoTag">Chain Oracle for public wallets</div>
+    </section>
+
     <div class="hero">
       <div class="card">
-        <div class="h1">Read the chain in plain English</div>
+        <div class="h1">AUGUR</div>
         <p class="sub">
-          AUGUR is a Chain Oracle that reads public wallets and produces clear statements.
+          A Chain Oracle that reads public wallets and produces plain-English statements.
           Read-only. Public data only. No wallet connection. No keys. No custody.
         </p>
 
@@ -275,33 +233,8 @@
         </div>
 
         <div class="notice">
-          This is an early landing page. The first public demo is a clean statement page and a waitlist.
-        </div>
-      </div>
-
-      <div class="rightbox">
-        <div class="card bigcta">
-          <h2 class="title">Get early access</h2>
-          <p class="desc">Waitlist updates, first demo statement, zero spam.</p>
-          <div class="ctaRow">
-            <a class="btn primary" href="https://forms.gle/PquKmgsPf7fk1P446" target="_blank" rel="noopener">Join the waitlist</a>
-            <a class="btn" href="mailto:augurintel@gmail.com">Email</a>
-          </div>
-          <div class="notice">
-            Contact: <a href="mailto:augurintel@gmail.com">augurintel@gmail.com</a>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2>Simple promise</h2>
-          <ul>
-            <li>You paste a public address</li>
-            <li>AUGUR reads public history</li>
-            <li>You get a statement you can use</li>
-          </ul>
-          <div class="notice">
-            No connect wallet button. No signing. No seed phrases. No private keys.
-          </div>
+          This page is an early landing. The product is being built in public.
+          The first demo is a clean statement page and a waitlist.
         </div>
       </div>
     </div>
@@ -310,17 +243,20 @@
       <div class="card">
         <h2>What it does</h2>
         <ul>
-          <li>Tracks public wallet activity across supported chains</li>
-          <li>Organizes movement into readable categories</li>
-          <li>Outputs structured summaries you can archive</li>
+          <li>You paste a public wallet address</li>
+          <li>AUGUR reads public history</li>
+          <li>AUGUR produces clean statements you can act on</li>
         </ul>
+        <div class="notice">
+          No connect button. No signing. No seed phrases. No private keys.
+        </div>
       </div>
 
       <div class="card">
         <h2>What it is not</h2>
         <ul>
           <li>Not a wallet</li>
-          <li>Not custody</li>
+          <li>Not a custody service</li>
           <li>Not a trading tool</li>
           <li>Not a data vacuum</li>
         </ul>
@@ -336,6 +272,7 @@
         Early access updates. First public demo statement. No noise.
       </p>
       <a class="btn primary" href="https://forms.gle/PquKmgsPf7fk1P446" target="_blank" rel="noopener">Join the waitlist</a>
+
       <div class="notice" style="margin-top:12px">
         Contact: <a href="mailto:augurintel@gmail.com">augurintel@gmail.com</a>
       </div>
@@ -344,24 +281,15 @@
     <div class="card" style="margin-top:16px">
       <h2>Developer note</h2>
       <div class="small">
-        AUGUR is being built to generate plain-English statements from public chain data.
-        It will never ask for keys, never take custody, and never require wallet connection for read access.
+        AUGUR runs read-only interpretation over public chain data and produces plain-English statements.
+        No wallet connection. No keys. No custody.
       </div>
-      <div class="code">Read-only
-Public data only
-No wallet connection
-No keys
-No custody</div>
     </div>
 
     <div class="foot">
-      <div><b>House of Cauliman</b> Project Hub</div>
-      <div>© <span id="y"></span> House of Cauliman</div>
+      <span><b>House of Cauliman</b> operator hub</span>
+      <span>Contact: <a href="mailto:augurintel@gmail.com">augurintel@gmail.com</a></span>
     </div>
   </div>
-
-  <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
