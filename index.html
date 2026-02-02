@@ -14,12 +14,12 @@
   <link rel="icon" href="/assets/favicons/favicon.ico">
 
   <!-- SEO -->
-  <meta name="description" content="House of Cauliman — XRPL ecosystems built by mrcauliman. AUGUR Chain Oracle, $WCK Continental Wick Protocol, Rad Garlington Ledger Registry, and $BAG Meme Infrastructure. Powered by $XRP.">
-  <meta name="keywords" content="XRP, XRPL, XRP Ledger, meme coins, Continental Wick, ContinentalWick, WCK token, Rad Garlington, RAD token, BAG token, getthebag, XRPL ecosystem, XRP builder, XRP projects, AUGUR, Chain Oracle, chain oracle, ledger reader, chain interpreter, wallet statements, crypto statements, XRPL statements, MONOLITH, wall of record, on-chain monument, graffiti wall">
+  <meta name="description" content="House of Cauliman — XRPL ecosystems built by mrcauliman. AUGUR Chain Oracle, MONOLITH Wall of Record, $WCK Continental Wick Protocol, Rad Garlington Ledger Registry, and $BAG Meme Infrastructure. Powered by $XRP.">
+  <meta name="keywords" content="XRP, XRPL, XRP Ledger, Continental Wick, WCK token, Rad Garlington, RAD token, BAG token, getthebag, XRPL ecosystem, XRP builder, AUGUR, chain oracle, wallet statements, ledger reader, MONOLITH, wall of record, on chain monument, graffiti wall, proof of presence">
 
   <!-- Open Graph -->
   <meta property="og:title" content="House of Cauliman — XRPL Ecosystem">
-  <meta property="og:description" content="The operator hub for AUGUR, $WCK, $RAD, and $BAG on the XRPL. Read the chain. Know your position.">
+  <meta property="og:description" content="The operator hub for AUGUR, MONOLITH, $WCK, $RAD, and $BAG on the XRPL. Read the chain. Leave a mark.">
   <meta property="og:image" content="https://houseofcauliman.com/assets/mrcauliman_logo.webp">
   <meta property="og:url" content="https://houseofcauliman.com/">
   <meta property="og:type" content="website">
@@ -32,7 +32,7 @@
     "name": "House of Cauliman",
     "url": "https://houseofcauliman.com",
     "logo": "https://houseofcauliman.com/assets/mrcauliman_logo.webp",
-    "description": "House of Cauliman — XRPL ecosystems built by mrcauliman. Runs AUGUR (Chain Oracle), the Continental Wick Protocol ($WCK), Rad Garlington ($RAD), and $BAG Meme Infrastructure on the XRP Ledger.",
+    "description": "House of Cauliman builds XRPL ecosystems including AUGUR (Chain Oracle), MONOLITH (Wall of Record), Continental Wick Protocol ($WCK), Rad Garlington ($RAD), and $BAG infrastructure.",
     "sameAs": [
       "https://continentalwick.com",
       "https://radgarlington.io",
@@ -66,6 +66,10 @@
 
       --augur-mint:#2bf3a2;
       --augur-mint-glow:rgba(43,243,162,0.22);
+
+      --mono-ink:#f5f7ff;
+      --mono-glow:rgba(245,247,255,0.12);
+      --mono-border:rgba(245,247,255,0.18);
 
       --radius-lg:18px;
       --radius-xl:22px;
@@ -220,8 +224,10 @@
     }
     .nav-link-card a:hover{border-color:var(--accent);box-shadow:0 0 20px var(--accent-glow);}
 
+    /* Ensure perfect centering for all wallpapers */
     .project-wallpaper{align-items:center;justify-content:center}
 
+    /* COLLECTION LOGO SCALE */
     img.project-logo[alt="NFTITANS"],
     img.project-logo[alt="POWER PUNKS"],
     img.project-logo[alt="THE DON"],
@@ -239,7 +245,7 @@
       transition:transform .18s ease;
     }
 
-    /* COMING SOON BLOCK */
+    /* AUGUR + MONOLITH FEATURE BLOCKS */
     .dl-soon{
       margin:0 0 18px;
       padding:18px 18px 16px;
@@ -253,6 +259,14 @@
       position:relative;
       overflow:hidden;
     }
+    .dl-soon.mono{
+      border-color:var(--mono-border);
+      background:
+        radial-gradient(circle at 16% 0, rgba(245,247,255,0.10) 0, rgba(2,6,23,0) 55%),
+        radial-gradient(circle at 82% 12%, rgba(10,116,208,0.16) 0, rgba(0,0,0,0) 60%),
+        linear-gradient(135deg, rgba(10,12,22,0.92), rgba(0,0,0,0.98));
+    }
+
     .dl-kicker{
       font-size:0.78rem;
       letter-spacing:0.18em;
@@ -269,6 +283,7 @@
       font-weight:900;
       color:#bfffe3;
     }
+    .mono .dl-title{color:var(--mono-ink)}
     .dl-copy{
       margin:0 0 12px;
       font-size:0.92rem;
@@ -297,6 +312,7 @@
       font-size:0.84rem;
       line-height:1.45;
     }
+    .mono .dl-bullets li{border-color:rgba(245,247,255,0.12)}
     .dl-bullets li:before{
       content:"✓";
       position:absolute;
@@ -314,6 +330,15 @@
       border:1px solid rgba(191,255,227,0.35);
       font-weight:900;
     }
+    .mono .dl-bullets li:before{
+      content:"■";
+      color:#0a0b10;
+      background:radial-gradient(circle at 30% 0, rgba(245,247,255,1) 0, rgba(245,247,255,0.92) 55%, rgba(210,214,230,1) 100%);
+      box-shadow:0 0 18px var(--mono-glow);
+      border-color:rgba(245,247,255,0.28);
+      font-weight:900;
+    }
+
     .dl-cta{
       display:flex;
       gap:10px;
@@ -341,14 +366,24 @@
       box-shadow:0 0 26px rgba(43,243,162,0.18);
       transform:translateY(-1px);
     }
+    .mono .dl-btn{border-color:rgba(245,247,255,0.18)}
+    .mono .dl-btn:hover{
+      border-color:rgba(245,247,255,0.38);
+      box-shadow:0 0 26px rgba(245,247,255,0.10);
+    }
     .dl-btn.primary{
       background:radial-gradient(circle at 20% 0, rgba(191,255,227,1) 0, rgba(43,243,162,1) 55%, rgba(4,80,55,1) 100%);
       border-color:rgba(191,255,227,0.35);
       color:#03140d;
       box-shadow:0 0 30px rgba(43,243,162,0.18);
     }
+    .mono .dl-btn.primary{
+      background:radial-gradient(circle at 20% 0, rgba(245,247,255,1) 0, rgba(245,247,255,0.90) 55%, rgba(210,214,230,1) 100%);
+      border-color:rgba(245,247,255,0.32);
+      color:#0a0b10;
+      box-shadow:0 0 28px rgba(245,247,255,0.12);
+    }
 
-    /* HEADER WITH LOGO */
     .augur-head{
       display:flex;
       gap:16px;
@@ -362,6 +397,13 @@
         linear-gradient(135deg, rgba(15,23,42,0.55), rgba(0,0,0,0.55));
       box-shadow:0 10px 26px rgba(0,0,0,0.55);
     }
+    .mono .augur-head{
+      border-color:rgba(245,247,255,0.12);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(245,247,255,0.08) 0, rgba(0,0,0,0) 55%),
+        linear-gradient(135deg, rgba(15,23,42,0.55), rgba(0,0,0,0.55));
+    }
+
     .augur-mark{
       width:112px;
       height:112px;
@@ -377,6 +419,15 @@
       overflow:hidden;
       box-shadow:0 0 26px rgba(43,243,162,0.12);
     }
+    .mono .augur-mark{
+      border-color:rgba(245,247,255,0.18);
+      background:
+        radial-gradient(circle at 30% 0, rgba(245,247,255,0.10) 0, rgba(2,6,23,0.0) 60%),
+        radial-gradient(circle at 70% 70%, rgba(10,116,208,0.10) 0, rgba(0,0,0,0) 55%),
+        linear-gradient(135deg, rgba(15,23,42,0.9), rgba(0,0,0,0.95));
+      box-shadow:0 0 26px rgba(245,247,255,0.08);
+    }
+
     .augur-logo{
       width:102px;
       height:102px;
@@ -385,6 +436,12 @@
         drop-shadow(0 0 22px rgba(0,0,0,0.95))
         drop-shadow(0 0 22px rgba(43,243,162,0.18));
     }
+    .mono .augur-logo{
+      filter:
+        drop-shadow(0 0 22px rgba(0,0,0,0.95))
+        drop-shadow(0 0 18px rgba(245,247,255,0.12));
+    }
+
     .augur-sub{
       margin:6px 0 0;
       font-size:0.78rem;
@@ -394,6 +451,8 @@
       font-weight:900;
       opacity:0.95;
     }
+    .mono .augur-sub{color:#eef0ff}
+
     @media (max-width:520px){
       .augur-head{gap:14px}
       .augur-mark{width:100px;height:100px;border-radius:18px}
@@ -408,7 +467,7 @@
     <img src="/assets/mrcauliman_logo.webp" alt="mrcauliman" class="hoc-brand-mark">
     <div class="hoc-header-text">
       <h1>🏛️ HOUSE OF CAULIMAN</h1>
-      <p>XRPL • Active Ecosystems: AUGUR • $WCK • $RAD • $BAG • Collections & Protocols</p>
+      <p>XRPL • Active Ecosystems: AUGUR • MONOLITH • $WCK • $RAD • $BAG • Collections</p>
     </div>
   </div>
 </header>
@@ -423,7 +482,7 @@
       </p>
     </section>
 
-    <!-- AUGUR COMING SOON -->
+    <!-- AUGUR -->
     <section class="dl-soon">
       <div class="augur-head">
         <div class="augur-mark">
@@ -456,39 +515,44 @@
       <div class="dl-cta">
         <a class="dl-btn primary" href="/augur.html">View AUGUR</a>
         <a class="dl-btn" href="/augur.html#waitlist">Join Waitlist</a>
-        <a class="dl-btn" href="https://x.com/augurintel" target="_blank" rel="noopener">𝕏 @augurintel</a>
+        <a class="dl-btn" href="https://x.com/augurintel" target="_blank" rel="noopener">𝕏 PROFILE</a>
       </div>
     </section>
 
-    <!-- MONOLITH COMING SOON -->
-    <section class="dl-soon" style="margin-top:18px;border-color:rgba(255,255,255,0.14);">
-      <div class="augur-head" style="border-color:rgba(255,255,255,0.10);">
-        <div class="augur-mark" style="border-color:rgba(255,255,255,0.14); box-shadow:0 0 26px rgba(255,255,255,0.08);">
-          <img src="/assets/monolith/monolith_logo.webp" alt="MONOLITH" class="augur-logo" style="filter:drop-shadow(0 0 22px rgba(0,0,0,0.95)) drop-shadow(0 0 22px rgba(255,255,255,0.10));">
+    <!-- MONOLITH -->
+    <section class="dl-soon mono">
+      <div class="augur-head">
+        <div class="augur-mark">
+          <img src="/assets/monolith/monolith_logo.webp" alt="MONOLITH" class="augur-logo">
         </div>
         <div>
           <p class="dl-kicker">Coming Soon</p>
-          <h2 class="dl-title" style="margin:0;color:#f5f7ff;">MONOLITH</h2>
-          <p class="augur-sub" style="color:rgba(245,247,255,0.86);">The Wall of Record</p>
+          <h2 class="dl-title" style="margin:0;">MONOLITH</h2>
+          <p class="augur-sub">The Wall of Record</p>
         </div>
       </div>
 
       <p class="dl-copy" style="margin-top:12px;">
-        The Wall of Record. An on-chain monument of proof and presence.
-        Leave your mark. History keeps it.
+        MONOLITH is an on-chain graffiti wall.
+        You claim a tile, leave a mark, and the ledger keeps it forever.
+        Not a gallery. A credibility layer.
       </p>
 
-      <ul class="dl-bullets" style="margin-top:10px;">
-        <li style="border-color:rgba(255,255,255,0.10);">Constrained marks only. No banners. No wall takeovers.</li>
-        <li style="border-color:rgba(255,255,255,0.10);">No edits. No deletions. A permanent public record.</li>
-        <li style="border-color:rgba(255,255,255,0.10);">Wallet identity only. No accounts. No profiles.</li>
-        <li style="border-color:rgba(255,255,255,0.10);">Economic friction to kill spam and preserve signal.</li>
+      <ul class="dl-bullets">
+        <li>Each post is constrained to a tile so it stays clean and readable</li>
+        <li>Logos, tags, and artwork live inside the wall without wrecking it</li>
+        <li>Proof of presence is the product, the chain is the receipt</li>
+        <li>Years from now, people check MONOLITH to see who was real</li>
       </ul>
+
+      <p class="dl-copy" style="margin-top:6px; font-size:0.82rem; color:var(--text-soft);">
+        The Wall of Record. An on-chain monument of proof and presence. Leave your mark. History keeps it.
+      </p>
 
       <div class="dl-cta">
         <a class="dl-btn primary" href="/monolith/">Enter MONOLITH</a>
         <a class="dl-btn" href="/monolith/rules.html">Rules</a>
-        <a class="dl-btn" href="https://x.com/monolith_wall" target="_blank" rel="noopener">𝕏 @monolith_wall</a>
+        <a class="dl-btn" href="https://x.com/monolith_wall" target="_blank" rel="noopener">𝕏 PROFILE</a>
       </div>
     </section>
 
@@ -737,11 +801,6 @@
             Monthly statement snapshots • Statement-style exports •
 
             <br><br>
-            <strong>Engineering:</strong><br>
-            Python (Flask, xrpl-py) • Node.js (Express, Telegram bots, grammy) • SQLite • HTML/CSS/JavaScript • Phaser.js (PvP arcade) •
-            API integrations • Static + dynamic web stacks • Git + GitHub deploy workflows • Custom CLI tools •
-
-            <br><br>
             <strong>Infrastructure:</strong><br>
             Ubuntu server management • DigitalOcean • Nginx • reverse proxies • SSL/HTTPS • systemd services •
             server hardening • multi-site architecture • uptime + log-driven debugging •
@@ -773,7 +832,7 @@
           </div>
           <div class="project-body">
             <h2 class="project-title">BAGMAN_XRPL</h2>
-            <p class="project-sub">SIGNAL ANALYST — HOUSE OF CAULIMAN</p>
+            <p class="project-sub">SIGNAL ANALYST • HOUSE OF CAULIMAN</p>
             <div class="project-links">
               <a class="project-link primary" href="https://houseofcauliman.com/bagman/" target="_blank" rel="noopener"><span>Profile</span></a>
               <a class="project-link" href="https://x.com/BAGMAN_XRPL" target="_blank" rel="noopener"><span>𝕏</span></a>
@@ -789,7 +848,7 @@
           </div>
           <div class="project-body">
             <h2 class="project-title">Vinny “The Value” Marino</h2>
-            <p class="project-sub">COMMUNITY LIAISON — HOUSE OF CAULIMAN</p>
+            <p class="project-sub">COMMUNITY LIAISON • HOUSE OF CAULIMAN</p>
             <div class="project-links">
               <a class="project-link primary" href="https://houseofcauliman.com/vinny/" target="_blank" rel="noopener"><span>Profile</span></a>
               <a class="project-link" href="https://x.com/vinnythevalue" target="_blank" rel="noopener"><span>𝕏</span></a>
@@ -825,8 +884,6 @@
     </footer>
 
   </div>
-<section style="margin:24px 0;padding:18px;border:1px solid #203048;border-radius:14px;background:#0b1118;color:#e7eef8">
-</section>
 </main>
 </body>
 </html>
