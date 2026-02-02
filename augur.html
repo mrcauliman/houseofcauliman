@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-  <title>AUGUR — House of Cauliman</title>
+  <title>AUGUR - House of Cauliman</title>
   <meta name="description" content="AUGUR is a Chain Oracle. Read-only. Public data only. No wallet connection. No keys. No custody." />
 
-  <meta property="og:title" content="AUGUR — House of Cauliman" />
+  <meta property="og:title" content="AUGUR - House of Cauliman" />
   <meta property="og:description" content="Chain Oracle for public wallets. Read-only. Public data only. No wallet connection. No keys. No custody." />
   <meta property="og:type" content="website" />
 
@@ -38,40 +38,50 @@
     .wrap{ max-width:980px; margin:0 auto; padding:22px 16px 40px; }
 
     .top{
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-      padding:10px 0 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:12px 0 18px;
       border-bottom:1px solid var(--line);
       margin-bottom:18px;
     }
+
     .brand{
-      display:flex; align-items:center; gap:14px;
-      font-weight:900; letter-spacing:.4px;
-      min-width: 260px;
+      display:flex;
+      align-items:center;
+      gap:14px;
+      font-weight:900;
+      letter-spacing:.4px;
+      min-width:260px;
     }
-    .brand img{
-      height:74px;
-      width:auto;
-      display:block;
-      filter: drop-shadow(0 8px 24px rgba(0,0,0,.35));
-    }
-    .brand .stack{
+    .brand .brandtext{
       display:flex;
       flex-direction:column;
       gap:2px;
       line-height:1.05;
     }
-    .brand .stack .house{
-      font-weight:950;
-    }
-    .brand .stack .proj{
+    .brand .house{
+      font-weight:900;
+      font-size:14px;
       color:var(--muted);
-      font-weight:850;
-      letter-spacing:.6px;
+      letter-spacing:.3px;
+    }
+    .brand .augur{
+      font-weight:1000;
+      font-size:18px;
+      color:var(--fg);
+      letter-spacing:.3px;
     }
 
     .pillnav{
-      display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      align-items:center;
     }
+
     .btn{
       display:inline-block;
       padding:10px 14px;
@@ -79,20 +89,12 @@
       border:1px solid var(--line);
       background:rgba(13,20,29,.65);
       color:var(--fg);
-      font-weight:800;
+      font-weight:900;
     }
     .btn.primary{
       background:var(--a);
       color:#070a0e;
       border-color:transparent;
-    }
-
-    .hero{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:16px;
-      align-items:stretch;
-      margin-top:18px;
     }
 
     .card{
@@ -101,8 +103,22 @@
       border-radius:16px;
       padding:16px;
     }
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.25fr .75fr;
+      gap:16px;
+      align-items:stretch;
+      margin-top:18px;
+    }
+    @media (max-width: 860px){
+      .top{ flex-direction:column; align-items:flex-start; }
+      .pillnav{ justify-content:flex-start; }
+      .hero{ grid-template-columns:1fr; }
+    }
+
     .h1{
-      font-size:38px;
+      font-size:36px;
       margin:0 0 10px 0;
       line-height:1.08;
       font-weight:1000;
@@ -125,11 +141,23 @@
       font-weight:900;
       color:var(--fg);
       font-size:13px;
+      white-space:nowrap;
     }
     .dot{ width:8px; height:8px; border-radius:999px; display:inline-block; }
     .dot.good{ background:var(--good); }
     .dot.warn{ background:var(--warn); }
     .dot.bad{ background:var(--bad); }
+
+    .notice{
+      margin-top:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(11,17,24,.6);
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.5;
+    }
 
     .grid{
       display:grid;
@@ -139,9 +167,7 @@
     }
     @media (max-width: 860px){
       .grid{ grid-template-columns:1fr; }
-      .brand{ min-width: unset; }
     }
-
     h2{
       margin:0 0 10px 0;
       font-size:18px;
@@ -149,6 +175,7 @@
     }
     ul{ margin:10px 0 0 18px; color:var(--muted); }
     li{ margin:6px 0; }
+
     .small{ color:var(--muted); font-size:13px; line-height:1.5; }
 
     .code{
@@ -162,17 +189,6 @@
       color:#cfe2ff;
       overflow:auto;
       white-space:pre;
-    }
-
-    .notice{
-      margin-top:10px;
-      padding:10px 12px;
-      border-radius:14px;
-      border:1px solid var(--line);
-      background:rgba(11,17,24,.6);
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.5;
     }
 
     .foot{
@@ -195,10 +211,10 @@
   <div class="wrap">
     <div class="top">
       <div class="brand">
-        <img src="/augur/assets/augur_logo.png" alt="AUGUR" />
-        <div class="stack">
+        <img src="/augur/assets/augur_logo.png" alt="AUGUR" style="height:140px;width:auto;display:block" />
+        <div class="brandtext">
           <div class="house">House of Cauliman</div>
-          <div class="proj">AUGUR</div>
+          <div class="augur">AUGUR</div>
         </div>
       </div>
 
@@ -227,7 +243,19 @@
         </div>
 
         <div class="notice">
-          This is an early landing. The first public demo is a clean statement page and a waitlist.
+          This page is an early landing. The first demo is a clean statement page and a waitlist.
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>What you do</h2>
+        <ul>
+          <li>Paste a public wallet address</li>
+          <li>Pick a date range</li>
+          <li>Get a clean statement in plain English</li>
+        </ul>
+        <div class="notice">
+          No connect button. No signing. No seed phrases. No private keys.
         </div>
       </div>
     </div>
@@ -236,20 +264,17 @@
       <div class="card">
         <h2>What it does</h2>
         <ul>
-          <li>You paste a public wallet address</li>
-          <li>AUGUR reads public history</li>
-          <li>AUGUR produces clean statements you can act on</li>
+          <li>Reads public chain history</li>
+          <li>Groups activity into understandable events</li>
+          <li>Produces statement-style summaries</li>
         </ul>
-        <div class="notice">
-          No connect button. No signing. No seed phrases. No private keys.
-        </div>
       </div>
 
       <div class="card">
         <h2>What it is not</h2>
         <ul>
           <li>Not a wallet</li>
-          <li>Not a custody service</li>
+          <li>Not custody</li>
           <li>Not a trading tool</li>
           <li>Not a data vacuum</li>
         </ul>
@@ -265,11 +290,10 @@
         Early access updates. First public demo statement. No noise.
       </p>
 
-      <!-- Replace #waitlist with your Google Form URL when ready -->
       <a class="btn primary" href="#waitlist">Join the waitlist</a>
 
       <div class="notice" style="margin-top:12px">
-        Google Form link gets pasted into the Join button when it is ready.
+        This button is a temporary placeholder until the Google Form is ready.
       </div>
 
       <div class="notice" style="margin-top:12px">
@@ -280,17 +304,19 @@
     <div class="card" style="margin-top:16px">
       <h2>Developer note</h2>
       <div class="small">
-        Build focus is statement quality, clarity, and safety.
-        Read-only by design.
+        The alpha focuses on statement generation for public wallets.
+        Later, we add more chains and better classification, still read-only.
       </div>
+
       <div class="code">No wallet connection
 No keys
-No custody</div>
+No custody
+Public data only</div>
     </div>
 
     <div class="foot">
-      <div><b>House of Cauliman</b> • AUGUR</div>
-      <div>Powered by the XRPL</div>
+      <div><b>House of Cauliman</b> - AUGUR</div>
+      <div class="small">Built in public. Read-only by design.</div>
     </div>
   </div>
 </body>
