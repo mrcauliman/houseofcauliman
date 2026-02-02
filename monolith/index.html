@@ -1,392 +1,553 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>MONOLITH • The Wall of Record</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-  <meta name="description" content="MONOLITH is the Wall of Record. An on-chain monument of proof and presence. Leave your mark. History keeps it.">
-  <meta name="keywords" content="MONOLITH, Wall of Record, on-chain graffiti wall, XRPL, XRP, proof of presence, tiles, logo wall, credibility layer">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <meta name="theme-color" content="#070B0A" />
 
-  <meta property="og:title" content="MONOLITH • The Wall of Record">
-  <meta property="og:description" content="An on-chain monument of proof and presence. Leave your mark. History keeps it.">
-  <meta property="og:image" content="https://houseofcauliman.com/assets/monolith/monolith_logo.webp">
-  <meta property="og:url" content="https://houseofcauliman.com/monolith/">
-  <meta property="og:type" content="website">
+  <title>MONOLITH - House of Cauliman</title>
+  <meta name="description" content="MONOLITH is a permanent on-chain wall. One tile. One mark. No edits. No deletes." />
 
-  <link rel="canonical" href="https://houseofcauliman.com/monolith/">
+  <meta property="og:title" content="MONOLITH - House of Cauliman" />
+  <meta property="og:description" content="A permanent on-chain wall. One tile. One mark. No edits. No deletes." />
+  <meta property="og:image" content="https://houseofcauliman.com/assets/monolith/monolith_concept.jpg" />
+  <meta property="og:type" content="website" />
 
-  <!-- PWA -->
-  <meta name="theme-color" content="#000000">
+  <link rel="icon" href="/assets/monolith/monolith_logo.webp" type="image/webp" />
 
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="MONOLITH">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="apple-touch-icon" href="/assets/monolith/monolith_logo.png">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="MONOLITH" />
+  <link rel="apple-touch-icon" href="/assets/monolith/monolith_logo.webp" />
 
   <style>
     :root{
-      --bg:#000;
-      --ink:#f5f7ff;
-      --muted:#aab3d6;
-      --soft:#7a83a6;
+      --bg:#070B0A;
+      --panel:#0C1512;
+      --panel2:#0A120F;
+      --fg:#F2F6F3;
+      --muted:#A8B4AE;
+      --line:rgba(255,255,255,.10);
+      --line2:rgba(255,255,255,.07);
+      --green:#2FBF6B;
+      --gold:#FFE175;
+      --shadow:rgba(0,0,0,.35);
+      --radius:18px;
+    }
 
-      --panelA:rgba(14,16,26,0.92);
-      --panelB:rgba(0,0,0,0.98);
-
-      --border:rgba(255,255,255,0.10);
-      --border2:rgba(255,255,255,0.14);
-
-      --glow:rgba(245,247,255,0.12);
-      --accent:rgba(10,116,208,0.28);
-
-      --radius-lg:18px;
-      --radius-xl:22px;
-      --shadow:0 18px 48px rgba(0,0,0,0.82);
+    html,body{
+      margin:0;
+      height:100%;
+      background:var(--bg);
+      color:var(--fg);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
     }
 
     *{box-sizing:border-box}
-    html,body{
-      height:100%;
-      margin:0;
-      background:#000;
-      color:var(--ink);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-      -webkit-font-smoothing:antialiased;
-      overscroll-behavior:none;
-    }
-    a{color:inherit;text-decoration:none}
 
-    /* APP SHELL */
+    a{color:inherit;text-decoration:none}
+    .wrap{
+      min-height:100%;
+      padding:
+        calc(env(safe-area-inset-top, 0px) + 12px)
+        calc(env(safe-area-inset-right, 0px) + 12px)
+        calc(env(safe-area-inset-bottom, 0px) + 16px)
+        calc(env(safe-area-inset-left, 0px) + 12px);
+      display:flex;
+      justify-content:center;
+    }
+
     .app{
-      min-height:100dvh;
-      padding-top:env(safe-area-inset-top);
-      padding-bottom:env(safe-area-inset-bottom);
-      padding-left:env(safe-area-inset-left);
-      padding-right:env(safe-area-inset-right);
+      width:min(980px, 100%);
       display:flex;
       flex-direction:column;
-      background:
-        radial-gradient(circle at 15% 0, rgba(245,247,255,0.08) 0, rgba(0,0,0,0) 55%),
-        radial-gradient(circle at 85% 10%, rgba(10,116,208,0.18) 0, rgba(0,0,0,0) 60%),
-        radial-gradient(circle at 50% 120%, rgba(245,247,255,0.06) 0, rgba(0,0,0,0) 58%),
-        #000;
+      gap:14px;
     }
 
-    .app-topbar{
-      position:sticky;
-      top:0;
-      z-index:50;
-      padding:16px 16px 14px;
-      backdrop-filter:blur(16px);
-      background:linear-gradient(180deg, rgba(0,0,0,0.90), rgba(0,0,0,0.40));
-      border-bottom:1px solid rgba(255,255,255,0.08);
-    }
-    .app-topbar-inner{
-      max-width:980px;
-      margin:0 auto;
+    .topbar{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:12px;
+      padding:14px 14px;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border-radius:var(--radius);
+      box-shadow:0 18px 45px var(--shadow);
     }
-    .app-left{
+
+    .brand{
       display:flex;
       align-items:center;
       gap:12px;
       min-width:0;
     }
-    .app-mark{
-      width:36px;height:36px;
-      object-fit:contain;
-      filter:drop-shadow(0 0 16px rgba(255,255,255,0.10));
+
+    .logo{
+      width:42px;
+      height:42px;
+      border-radius:12px;
+      background:rgba(255,255,255,.05);
+      border:1px solid var(--line2);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
       flex:0 0 auto;
     }
-    .app-title{
+
+    .logo img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .titles{
+      display:flex;
+      flex-direction:column;
+      line-height:1.05;
+      min-width:0;
+    }
+
+    .titles .name{
       font-weight:800;
-      letter-spacing:0.14em;
+      letter-spacing:.04em;
       text-transform:uppercase;
-      font-size:0.95rem;
+      font-size:1.05rem;
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
     }
-    .app-actions{
+
+    .titles .sub{
+      margin-top:5px;
+      color:var(--muted);
+      font-size:.92rem;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .right{
       display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
+      align-items:center;
+      gap:10px;
+      flex:0 0 auto;
+    }
+
+    .badge{
+      font-weight:800;
+      font-size:.78rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:var(--muted);
+      white-space:nowrap;
     }
 
     .pill{
       display:inline-flex;
       align-items:center;
-      justify-content:center;
-      padding:8px 11px;
+      gap:8px;
+      padding:9px 12px;
       border-radius:999px;
-      border:1px solid var(--border);
-      background:linear-gradient(135deg, rgba(15,23,42,0.72), rgba(0,0,0,0.75));
-      box-shadow:0 10px 24px rgba(0,0,0,0.70);
-      text-transform:uppercase;
-      letter-spacing:0.14em;
-      font-size:0.72rem;
-      font-weight:650;
-      color:#e9ecff;
-      transition:transform .15s ease, border-color .2s ease, box-shadow .2s ease;
-    }
-    .pill:hover{
-      border-color:rgba(245,247,255,0.32);
-      box-shadow:0 0 22px rgba(245,247,255,0.08);
-      transform:translateY(-1px);
-    }
-    .pill.primary{
-      background:radial-gradient(circle at 20% 0, rgba(245,247,255,1) 0, rgba(245,247,255,0.90) 55%, rgba(210,214,230,1) 100%);
-      border-color:rgba(245,247,255,0.30);
-      color:#0a0b10;
-    }
-    .pill.disabled{
-      opacity:0.55;
-      pointer-events:none;
-      filter:saturate(0.7);
+      border:1px solid rgba(47,191,107,.35);
+      background:rgba(47,191,107,.10);
+      color:#DFF7EA;
+      font-weight:700;
+      font-size:.88rem;
+      white-space:nowrap;
     }
 
-    .app-screen{
-      flex:1;
-      max-width:980px;
-      width:100%;
-      margin:0 auto;
-      padding:18px 16px 26px;
-    }
-
-    .panel{
-      border-radius:22px;
-      border:1px solid rgba(255,255,255,0.10);
-      background:
-        radial-gradient(circle at 30% 0, rgba(255,255,255,0.06) 0, rgba(0,0,0,0) 55%),
-        linear-gradient(135deg, rgba(14,16,26,0.92), rgba(0,0,0,0.98));
-      box-shadow:var(--shadow);
-      overflow:hidden;
+    .pill .dot{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:var(--green);
+      box-shadow:0 0 0 3px rgba(47,191,107,.18);
+      flex:0 0 auto;
     }
 
     .hero{
-      padding:20px 18px 14px;
-      border-bottom:1px solid rgba(255,255,255,0.08);
-      background:
-        radial-gradient(circle at 18% 0, rgba(245,247,255,0.08) 0, rgba(0,0,0,0) 60%),
-        linear-gradient(135deg, rgba(10,12,22,0.82), rgba(0,0,0,0.98));
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border-radius:var(--radius);
+      padding:18px 16px;
+      box-shadow:0 18px 45px var(--shadow);
     }
-    .hero-top{
-      display:flex;
-      align-items:center;
-      gap:14px;
-    }
-    .hero-mark{
-      width:64px;height:64px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,0.14);
-      background:
-        radial-gradient(circle at 30% 0, rgba(245,247,255,0.10) 0, rgba(2,6,23,0.0) 60%),
-        linear-gradient(135deg, rgba(15,23,42,0.9), rgba(0,0,0,0.95));
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      overflow:hidden;
-      box-shadow:0 0 26px rgba(245,247,255,0.08);
-      flex:0 0 auto;
-    }
-    .hero-mark img{
-      width:54px;height:54px;
-      object-fit:contain;
-      filter:drop-shadow(0 0 22px rgba(0,0,0,0.95)) drop-shadow(0 0 18px rgba(245,247,255,0.12));
-    }
+
     .hero h1{
       margin:0;
-      font-size:1.25rem;
-      letter-spacing:0.18em;
-      text-transform:uppercase;
-      font-weight:900;
+      font-size:1.35rem;
+      letter-spacing:.02em;
     }
+
     .hero p{
-      margin:6px 0 0;
+      margin:10px 0 0 0;
       color:var(--muted);
-      line-height:1.5;
-      font-size:0.92rem;
-      max-width:860px;
+      line-height:1.45;
+      max-width:72ch;
+    }
+
+    .hero .lines{
+      margin-top:14px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      padding:12px 12px;
+      border:1px solid var(--line2);
+      border-radius:14px;
+      background:rgba(0,0,0,.18);
+    }
+
+    .line{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--fg);
+      font-weight:700;
+      letter-spacing:.01em;
+    }
+
+    .line .tick{
+      width:10px;
+      height:10px;
+      border-radius:3px;
+      background:var(--gold);
+      box-shadow:0 0 0 3px rgba(255,225,117,.12);
+      flex:0 0 auto;
     }
 
     .grid{
-      padding:18px;
       display:grid;
-      grid-template-columns:1fr;
+      grid-template-columns: 1.2fr .8fr;
       gap:14px;
     }
-    @media(min-width:860px){ .grid{grid-template-columns:1.2fr 0.8fr;} }
 
-    .block{
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,0.10);
-      background:linear-gradient(135deg, rgba(15,23,42,0.62), rgba(0,0,0,0.78));
-      padding:16px;
-      box-shadow:0 12px 28px rgba(0,0,0,0.72);
-    }
-    .kicker{
-      margin:0 0 8px;
-      font-size:0.78rem;
-      letter-spacing:0.18em;
-      text-transform:uppercase;
-      color:var(--soft);
-      font-weight:900;
-    }
-    .copy{
-      margin:0;
-      color:#d7dcff;
-      line-height:1.6;
-      font-size:0.92rem;
+    @media (max-width: 860px){
+      .grid{grid-template-columns:1fr}
     }
 
-    ul.bullets{
-      list-style:none;
-      padding:0;
-      margin:12px 0 0;
-      display:grid;
+    .card{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:var(--radius);
+      overflow:hidden;
+      box-shadow:0 18px 45px var(--shadow);
+    }
+
+    .card-h{
+      padding:14px 14px 0 14px;
+      display:flex;
+      justify-content:space-between;
+      align-items:baseline;
       gap:10px;
     }
-    ul.bullets li{
-      position:relative;
-      padding:10px 12px 10px 40px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,0.10);
-      background:linear-gradient(135deg, rgba(15,23,42,0.78), rgba(0,0,0,0.78));
-      color:#e6e9ff;
-      font-weight:700;
-      font-size:0.86rem;
-      line-height:1.5;
-    }
-    ul.bullets li:before{
-      content:"■";
-      position:absolute;
-      left:12px;
-      top:10px;
-      width:20px;height:20px;
-      border-radius:8px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:#0a0b10;
-      background:radial-gradient(circle at 30% 0, rgba(245,247,255,1) 0, rgba(245,247,255,0.92) 55%, rgba(210,214,230,1) 100%);
-      box-shadow:0 0 18px rgba(245,247,255,0.10);
-      border:1px solid rgba(245,247,255,0.20);
+
+    .card-title{
       font-weight:900;
+      letter-spacing:.08em;
+      font-size:.80rem;
+      text-transform:uppercase;
+      color:var(--muted);
     }
 
-    /* CONCEPT IMAGE FRAME */
-    .concept-frame{
-      margin-top:12px;
-      border-radius:18px;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,0.12);
-      background:linear-gradient(135deg, rgba(15,23,42,0.55), rgba(0,0,0,0.65));
-      box-shadow:0 16px 36px rgba(0,0,0,0.75);
+    .card-b{
+      padding:14px;
     }
-    .concept-frame img{
-      display:block;
+
+    .concept{
       width:100%;
-      max-width:100%;
-      height:auto;
-      object-fit:contain;
+      border-radius:14px;
+      border:1px solid var(--line2);
+      overflow:hidden;
+      background:rgba(0,0,0,.15);
     }
-    @media(max-width:520px){
-      .concept-frame img{ max-height:72vh; }
+
+    .concept img{
+      width:100%;
+      height:auto;
+      display:block;
+    }
+
+    .micro{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:.93rem;
+      line-height:1.45;
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      border-radius:14px;
+      padding:12px 14px;
+      font-weight:900;
+      letter-spacing:.02em;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:var(--fg);
+      user-select:none;
+    }
+
+    .btn.primary{
+      border-color: rgba(47,191,107,.45);
+      background: rgba(47,191,107,.16);
+      color:#E8FFF2;
+    }
+
+    .btn.disabled{
+      opacity:.55;
+      cursor:not-allowed;
+    }
+
+    .rules{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .rule{
+      border:1px solid var(--line2);
+      background:rgba(0,0,0,.16);
+      border-radius:14px;
+      padding:12px 12px;
+    }
+
+    .rule .k{
+      font-weight:900;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      font-size:.78rem;
+      color:#CFE7DA;
+    }
+
+    .rule .v{
+      margin-top:6px;
+      color:var(--muted);
+      line-height:1.35;
+      font-size:.95rem;
+    }
+
+    .feed{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .feed-item{
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+      border-radius:14px;
+      padding:14px;
+    }
+
+    .feed-top{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:baseline;
+    }
+
+    .feed-title{
+      font-weight:800;
+      letter-spacing:.02em;
+    }
+
+    .feed-ts{
+      opacity:.7;
+      font-size:.85rem;
+      white-space:nowrap;
+    }
+
+    .feed-body{
+      margin-top:8px;
+      opacity:.92;
+      line-height:1.35;
+      color:var(--muted);
+    }
+
+    .feed-empty{
+      opacity:.7;
+      border:1px dashed rgba(255,255,255,.12);
+      border-radius:14px;
+      padding:14px;
+      color:var(--muted);
     }
 
     .footer{
-      padding:16px 18px;
-      border-top:1px solid rgba(255,255,255,0.08);
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
-      color:rgba(245,247,255,0.70);
-      font-size:0.78rem;
-      letter-spacing:0.02em;
+      text-align:center;
+      color:rgba(255,255,255,.45);
+      font-size:.86rem;
+      padding:6px 0 0 0;
     }
-    .footer a{color:rgba(245,247,255,0.85);text-decoration:underline}
+
+    .mono{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
   </style>
 </head>
 
 <body>
-  <div class="app">
+  <div class="wrap">
+    <div class="app">
 
-    <div class="app-topbar">
-      <div class="app-topbar-inner">
-        <div class="app-left">
-          <img class="app-mark" src="/assets/monolith/monolith_logo.webp" alt="MONOLITH">
-          <div class="app-title">MONOLITH</div>
-        </div>
-        <div class="app-actions">
-          <a class="pill" href="https://x.com/monolith_wall" target="_blank" rel="noopener">𝕏 PROFILE</a>
-          <a class="pill" href="/monolith/rules.html">Rules</a>
-          <a class="pill primary disabled" href="#" onclick="return false;">Claim Tile</a>
-        </div>
-      </div>
-    </div>
-
-    <main class="app-screen">
-      <section class="panel">
-
-        <div class="hero">
-          <div class="hero-top">
-            <div class="hero-mark">
-              <img src="/assets/monolith/monolith_logo.webp" alt="MONOLITH">
-            </div>
-            <div>
-              <div class="kicker" style="margin:0 0 6px;">Coming Soon</div>
-              <h1>MONOLITH</h1>
-              <p>The Wall of Record. An on-chain monument of proof and presence. Leave your mark. History keeps it.</p>
-            </div>
+      <header class="topbar">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">
+            <img src="/assets/monolith/monolith_logo.webp" alt="MONOLITH logo" />
+          </div>
+          <div class="titles">
+            <div class="name">MONOLITH</div>
+            <div class="sub">The Wall of Record</div>
           </div>
         </div>
 
-        <div class="grid">
-          <div class="block">
-            <p class="kicker">What it is</p>
-            <p class="copy">
-              MONOLITH is an on-chain graffiti wall.
-              One tile equals one constrained mark.
-              No edits. No deletes.
-            </p>
+        <div class="right">
+          <div class="badge">Coming Soon</div>
+          <a class="pill" href="https://x.com/monolith_wall" rel="noopener">
+            <span class="dot"></span>
+            <span>𝕏</span>
+          </a>
+        </div>
+      </header>
 
-            <ul class="bullets">
-              <li>A permanent wall made of tiles, each tile is a constrained slot for a mark</li>
-              <li>Every tile is time-stamped proof that you were present</li>
-              <li>Years from now, people check MONOLITH to see who was real</li>
-              <li><strong>If you were real back then, you are on MONOLITH.</strong></li>
-            </ul>
-          </div>
+      <section class="hero">
+        <h1>One tile. One mark. No edits. No deletes.</h1>
+        <p>
+          MONOLITH is a permanent on-chain wall. You do not just browse it. You leave a mark on it.
+        </p>
 
-          <div class="block">
-            <p class="kicker">THE WALL PREVIEW</p>
-
-            <div class="concept-frame">
-              <img src="/assets/monolith/monolith_concept.jpg" alt="MONOLITH concept preview" loading="lazy">
-            </div>
-
-            <p class="copy" style="margin-top:12px;color:rgba(245,247,255,0.78);font-size:0.86rem;">
-              This is the target experience. A living wall, browsable like a feed, permanent like a ledger.
-            </p>
-          </div>
+        <div class="lines">
+          <div class="line"><span class="tick"></span><span>Permanent public record</span></div>
+          <div class="line"><span class="tick"></span><span>One tile per mark</span></div>
+          <div class="line"><span class="tick"></span><span>No edits. No deletes.</span></div>
         </div>
 
-        <div class="footer">
-          <span>MONOLITH is a House of Cauliman project.</span>
-          <span><a href="https://houseofcauliman.com">houseofcauliman.com</a> • <a href="https://x.com/monolith_wall" target="_blank" rel="noopener">𝕏</a></span>
+        <div class="actions">
+          <div class="btn primary disabled" aria-disabled="true">Minting soon</div>
+          <a class="btn" href="/" rel="noopener">Back to House</a>
         </div>
 
+        <div class="micro">
+          This page is a preview shell. The mint and the live wall will land on a host we control for correct caching and file types.
+        </div>
       </section>
-    </main>
 
+      <div class="grid">
+
+        <section class="card" id="wall-preview">
+          <div class="card-h">
+            <div class="card-title">THE WALL PREVIEW</div>
+            <div class="badge mono">v0</div>
+          </div>
+          <div class="card-b">
+            <div class="concept">
+              <img src="/assets/monolith/monolith_concept.jpg" alt="MONOLITH wall concept preview" />
+            </div>
+            <div class="micro">
+              Early concept preview. The live wall will be scrollable and filterable when minting goes live.
+            </div>
+
+            <div style="height:14px"></div>
+
+            <div class="card-title" style="margin-bottom:10px">RECENT</div>
+            <div class="feed" id="feed"></div>
+          </div>
+        </section>
+
+        <aside class="card">
+          <div class="card-h">
+            <div class="card-title">RULES</div>
+            <div class="badge">Final</div>
+          </div>
+          <div class="card-b">
+            <div class="rules">
+              <div class="rule">
+                <div class="k">One tile</div>
+                <div class="v">Each mark mints one tile. One tile stands on its own forever.</div>
+              </div>
+              <div class="rule">
+                <div class="k">No edits</div>
+                <div class="v">Once it is on the wall, it stays as is. No updates. No replacements.</div>
+              </div>
+              <div class="rule">
+                <div class="k">No deletes</div>
+                <div class="v">The wall is a record. The record does not get cleaned.</div>
+              </div>
+              <div class="rule">
+                <div class="k">Browse freely</div>
+                <div class="v">No wallet connect required to view the wall. Public data only.</div>
+              </div>
+            </div>
+
+            <div style="height:14px"></div>
+
+            <div class="micro">
+              When the wall goes live you will be able to search marks, filter by era, and jump to tiles by index.
+            </div>
+          </div>
+        </aside>
+
+      </div>
+
+      <div class="footer">
+        House of Cauliman
+      </div>
+
+    </div>
   </div>
 
   <script>
+    (async () => {
+      const el = document.getElementById("feed");
+      if (!el) return;
+
+      try {
+        const res = await fetch("/assets/monolith/feed.json?cb=" + Date.now(), { cache: "no-store" });
+        if (!res.ok) throw new Error("feed fetch failed");
+        const items = await res.json();
+
+        if (!Array.isArray(items) || items.length === 0) {
+          el.innerHTML = `<div class="feed-empty">Updates landing soon.</div>`;
+          return;
+        }
+
+        el.innerHTML = items.map(it => `
+          <div class="feed-item">
+            <div class="feed-top">
+              <div class="feed-title">${escapeHtml(it.title || "")}</div>
+              <div class="feed-ts">${escapeHtml(it.ts || "")}</div>
+            </div>
+            <div class="feed-body">${escapeHtml(it.body || "")}</div>
+          </div>
+        `).join("");
+      } catch (e) {
+        el.innerHTML = `<div class="feed-empty">Updates landing soon.</div>`;
+      }
+
+      function escapeHtml(s){
+        return String(s)
+          .replaceAll("&","&amp;")
+          .replaceAll("<","&lt;")
+          .replaceAll(">","&gt;")
+          .replaceAll('"',"&quot;")
+          .replaceAll("'","&#039;");
+      }
+    })();
   </script>
 </body>
 </html>
