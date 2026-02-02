@@ -4,7 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>AUGUR Runbook — House of Cauliman</title>
-  <meta name="description" content="AUGUR operator runbook. Install CLI, run API, add accounts, snapshot, monthly, export, troubleshoot." />
+  <meta name="description" content="AUGUR operator runbook. Box access, CLI install, API control, accounts, snapshots, monthly reports, export, troubleshooting." />
+
+  <meta property="og:title" content="AUGUR Runbook — House of Cauliman" />
+  <meta property="og:description" content="AUGUR operator runbook. Box access, CLI install, API control, accounts, snapshots, monthly reports, export, troubleshooting." />
+  <meta property="og:type" content="website" />
+
   <style>
     :root{
       --bg:#070a0e;
@@ -35,43 +40,54 @@
       padding:10px 0 18px;
       border-bottom:1px solid var(--line);
       margin-bottom:18px;
+      flex-wrap:wrap;
     }
-    .brand{ display:flex; align-items:baseline; gap:12px; font-weight:1000; letter-spacing:.3px; }
-    .brand .muted{ color:var(--muted); font-weight:800; }
-    .nav{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      font-weight:1000; letter-spacing:.3px;
+    }
+    .brand img{ height:40px; width:auto; display:block; }
+    .pillnav{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
     .btn{
-      display:inline-block; padding:10px 14px; border-radius:12px;
-      border:1px solid var(--line); background:rgba(13,20,29,.65); color:var(--fg); font-weight:900;
+      display:inline-block;
+      padding:10px 14px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(13,20,29,.65);
+      color:var(--fg);
+      font-weight:900;
     }
-    .btn.primary{ background:var(--a); color:#070a0e; border-color:transparent; }
+    .btn.primary{
+      background:var(--a);
+      color:#070a0e;
+      border-color:transparent;
+    }
+
     .card{
       background:rgba(13,20,29,.7);
       border:1px solid var(--line);
       border-radius:16px;
       padding:16px;
-      margin-top:14px;
+      margin-top:16px;
     }
-    h1{ margin:0; font-size:28px; letter-spacing:.2px; }
-    h2{ margin:0 0 10px 0; font-size:18px; letter-spacing:.2px; }
-    p{ margin:10px 0 0; color:var(--muted); line-height:1.55; }
-    .notice{
-      margin-top:12px; padding:10px 12px; border-radius:14px;
-      border:1px solid var(--line); background:rgba(11,17,24,.6);
-      color:var(--muted); font-size:13px; line-height:1.5;
+    h1{
+      font-size:30px;
+      margin:0 0 8px 0;
+      line-height:1.1;
+      font-weight:1000;
+      letter-spacing:.3px;
     }
-    .pillrow{ display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
-    .pill{
-      display:flex; align-items:center; gap:8px;
-      padding:8px 10px; border:1px solid var(--line); border-radius:999px;
-      background:rgba(11,17,24,.6); font-weight:900; font-size:13px;
+    h2{
+      margin:0 0 10px 0;
+      font-size:18px;
+      letter-spacing:.2px;
     }
-    .dot{ width:8px; height:8px; border-radius:999px; display:inline-block; }
-    .dot.good{ background:var(--good); }
-    .dot.warn{ background:var(--warn); }
-    .dot.bad{ background:var(--bad); }
-
+    p{ margin:10px 0 0; color:var(--muted); line-height:1.6; }
+    ul{ margin:10px 0 0 18px; color:var(--muted); }
+    li{ margin:6px 0; }
+    .small{ color:var(--muted); font-size:13px; line-height:1.55; }
     .code{
-      margin-top:10px;
+      margin-top:12px;
       background:rgba(7,10,14,.9);
       border:1px solid var(--line);
       border-radius:14px;
@@ -82,66 +98,116 @@
       overflow:auto;
       white-space:pre;
     }
-    ul{ margin:10px 0 0 18px; color:var(--muted); }
-    li{ margin:6px 0; }
-    .foot{
-      margin-top:26px; padding-top:16px; border-top:1px solid var(--line);
-      color:var(--muted); font-size:13px; display:flex; gap:10px; flex-wrap:wrap; justify-content:space-between;
+    .notice{
+      margin-top:12px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(11,17,24,.6);
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.55;
     }
+    .pills{ display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
+    .pill{
+      display:flex; align-items:center; gap:8px;
+      padding:8px 10px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:rgba(11,17,24,.6);
+      font-weight:900;
+      color:var(--fg);
+      font-size:13px;
+    }
+    .dot{ width:8px; height:8px; border-radius:999px; display:inline-block; }
+    .dot.good{ background:var(--good); }
+    .dot.warn{ background:var(--warn); }
+    .dot.bad{ background:var(--bad); }
+
+    .foot{
+      margin-top:26px;
+      padding-top:16px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:13px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .foot b{ color:var(--fg); }
+    .k{ font-family:var(--mono); color:#cfe2ff; }
   </style>
 </head>
+
 <body>
   <div class="wrap">
     <div class="top">
       <div class="brand">
+        <img src="/augur/assets/augur_logo.png" alt="AUGUR" />
         <span>House of Cauliman</span>
-        <span class="muted">AUGUR Runbook</span>
+        <span style="color:var(--muted);font-weight:900">AUGUR Runbook</span>
       </div>
-      <div class="nav">
+      <div class="pillnav">
         <a class="btn" href="/">Home</a>
         <a class="btn" href="/augur.html">AUGUR Page</a>
-        <a class="btn primary" href="https://forms.gle/PquKmgsPf7fk1P446" target="_blank" rel="noopener">Waitlist</a>
+        <a class="btn primary" href="#ops">Ops</a>
       </div>
     </div>
 
     <div class="card">
       <h1>AUGUR operator runbook</h1>
-      <p>Use this to install the CLI, run the API, add wallets, generate snapshots, and export monthly summaries.</p>
-
-      <div class="pillrow">
+      <p>Command set to install the AUGUR CLI, run the local API, manage accounts, produce snapshots, produce monthly summaries, and export outputs.</p>
+      <div class="pills">
         <span class="pill"><span class="dot good"></span> read-only</span>
         <span class="pill"><span class="dot good"></span> public data only</span>
         <span class="pill"><span class="dot good"></span> no wallet connection</span>
         <span class="pill"><span class="dot good"></span> no keys</span>
         <span class="pill"><span class="dot good"></span> no custody</span>
       </div>
+    </div>
 
+    <div class="card" id="ops">
+      <h2>Get into the box and the right folders</h2>
+      <p>If you see <span class="k">mrcauliman@mrcauliman:~$</span>, you are at your home directory. Use these to land in the right place fast.</p>
+      <div class="code"># confirm who and where
+whoami
+pwd
+hostname
+
+# House site repo (AUGUR landing page)
+cd /var/www/houseofcauliman.com
+
+# AUGUR app repo (API + CLI)
+cd /var/www/augur</div>
       <div class="notice">
-        Default local API: http://127.0.0.1:8787<br/>
-        Contact: <a href="mailto:augurintel@gmail.com">augurintel@gmail.com</a>
+        If a cd fails, the folder path is wrong or the repo is not present on that machine.
+        Run <span class="k">ls -la /var/www</span> to confirm what exists.
       </div>
     </div>
 
     <div class="card">
       <h2>Install the AUGUR CLI</h2>
-      <p>Run this inside the repo on your server.</p>
-      <div class="code">cd /var/www/augur
+      <p>This installs <span class="k">/usr/local/bin/augur</span> from the repo copy.</p>
+      <div class="code">cd /var/www/augur || exit 1
 chmod +x scripts/install_augur_cli.sh
 bash scripts/install_augur_cli.sh
 
 command -v augur
 augur status</div>
       <div class="notice">
-        If you moved machines or paths, confirm the wrapper points to: /var/www/augur/cli/augur
+        If you edited <span class="k">cli/augur</span>, re-run the installer so <span class="k">/usr/local/bin/augur</span> matches.
       </div>
     </div>
 
     <div class="card">
-      <h2>Start and stop the API</h2>
+      <h2>API control</h2>
+      <p>Run the API on port <span class="k">8787</span>.</p>
       <div class="code"># start in background
 augur api:bg
 
-# confirm healthy
+# verify health
 curl -sS http://127.0.0.1:8787/health ; echo
 curl -sS http://127.0.0.1:8787/api/health ; echo
 
@@ -152,61 +218,105 @@ augur api:logs
 augur api:stop</div>
 
       <div class="notice">
-        If you see EADDRINUSE, something is already bound to 8787. Use augur api:stop, then retry.
+        If foreground API fails with EADDRINUSE, stop the background API first using <span class="k">augur api:stop</span>.
       </div>
     </div>
 
     <div class="card">
-      <h2>Add and list wallets</h2>
-      <p>Examples for XRPL. Replace rYOUR_ADDRESS and label.</p>
-      <div class="code"># list active
-augur accounts | python3 -m json.tool
+      <h2>Accounts</h2>
+      <p>List, add, pause, resume, delete. All account operations are read-only to wallets and store public identifiers only.</p>
+      <div class="code"># list active only
+augur accounts | python3 -m json.tool | head -n 120
 
-# list all (including paused)
-augur accounts:all | python3 -m json.tool
+# list all including paused
+augur accounts:all | python3 -m json.tool | head -n 220
 
-# add XRPL wallet
-augur add xrpl rYOUR_ADDRESS "My XRPL Wallet" mainnet | python3 -m json.tool</div>
+# add an XRPL wallet
+augur add xrpl rYOUR_ADDRESS "My XRPL Wallet" mainnet | python3 -m json.tool
+
+# pause an account
+augur pause ACCOUNT_ID | python3 -m json.tool
+
+# resume an account
+augur resume ACCOUNT_ID | python3 -m json.tool
+
+# delete an account
+augur delete ACCOUNT_ID | python3 -m json.tool</div>
 
       <div class="notice">
-        If JSON parsing fails, you got a non-JSON response. Run the command without python3 -m json.tool to see the raw output.
+        Replace <span class="k">rYOUR_ADDRESS</span> and <span class="k">ACCOUNT_ID</span>.
+        Use quotes around labels with spaces.
       </div>
     </div>
 
     <div class="card">
-      <h2>Snapshot and monthly summary</h2>
-      <div class="code"># pull fresh chain data into vault
-augur snapshot
-
-# generate month summary
-augur monthly YYYY-MM</div>
+      <h2>Snapshots</h2>
+      <p>Pull latest activity for all active accounts and write to the local vault.</p>
+      <div class="code"># run snapshot job
+augur snapshot</div>
       <div class="notice">
-        Use YYYY-MM like 2026-02
+        Vault path defaults to <span class="k">/var/www/augur/vault/sample_vault</span>.
+        Override with <span class="k">AUGUR_VAULT_PATH</span>.
       </div>
     </div>
 
     <div class="card">
-      <h2>Vault path override</h2>
-      <p>Default vault is /var/www/augur/vault/sample_vault. Override for production vaults.</p>
-      <div class="code">export AUGUR_VAULT_PATH="/var/www/augur/vault/YOUR_VAULT"
-augur status</div>
+      <h2>Monthly summaries</h2>
+      <p>Generate a monthly summary for a given YYYY-MM.</p>
+      <div class="code"># generate month
+augur monthly 2026-02
+
+# example view output path
+# vault/reports/monthly/YYYY-MM/summary.json</div>
     </div>
 
     <div class="card">
-      <h2>Troubleshooting</h2>
+      <h2>Export public summary</h2>
+      <p>Export the monthly summary to a public JSON location for the site or other consumers.</p>
+      <div class="code">cd /var/www/augur || exit 1
+chmod +x scripts/export_public.sh
+
+# export a month to public_data/summary.json
+MONTH="2026-02"
+bash scripts/export_public.sh "$MONTH"
+
+# inspect
+ls -la public_data
+cat public_data/summary.json | head -n 60</div>
+    </div>
+
+    <div class="card">
+      <h2>Common troubleshooting</h2>
       <ul>
-        <li><b>API not healthy yet</b>: check /tmp/augur_api.log and wait for the listen line, then re-test /health</li>
-        <li><b>Port not listening</b>: run augur api:bg, then ss -ltnp | grep 8787</li>
-        <li><b>JSONDecodeError</b>: remove the python pipe and inspect raw output, fix the underlying command</li>
-        <li><b>EADDRINUSE</b>: run augur api:stop, confirm nothing listening, then start again</li>
+        <li><b>API says up but curl fails</b>: verify port and process, then retry health</li>
+        <li><b>EADDRINUSE</b>: stop background API before starting foreground</li>
+        <li><b>Stale CLI</b>: re-run installer</li>
+        <li><b>Wrong vault</b>: set <span class="k">AUGUR_VAULT_PATH</span></li>
       </ul>
-      <div class="code">tail -n 200 /tmp/augur_api.log
-ss -ltnp | grep 8787 || echo "8787 not listening"</div>
+
+      <div class="code"># port check
+ss -ltnp | grep 8787 || echo "8787 not listening"
+
+# log tail
+ls -la /tmp/augur_api.log || true
+tail -n 120 /tmp/augur_api.log || true
+
+# stop any listener on 8787 via CLI
+augur api:stop
+
+# start again
+augur api:bg
+curl -sS http://127.0.0.1:8787/health ; echo</div>
+    </div>
+
+    <div class="card">
+      <h2>Contacts</h2>
+      <p class="small">Support and ops: <a href="mailto:augurintel@gmail.com">augurintel@gmail.com</a></p>
     </div>
 
     <div class="foot">
-      <span>Runbook file: <b>/augur_runbook.html</b></span>
-      <span>Contact: <a href="mailto:augurintel@gmail.com">augurintel@gmail.com</a></span>
+      <div><b>House of Cauliman</b> • AUGUR Runbook</div>
+      <div class="small">Read-only. Public data only. No wallet connection. No keys. No custody.</div>
     </div>
   </div>
 </body>
