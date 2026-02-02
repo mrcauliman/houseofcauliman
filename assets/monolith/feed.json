@@ -1,0 +1,17 @@
+[
+  {
+    "ts": "2026-02-02",
+    "title": "Concept locked",
+    "body": "The Wall Preview is live. One tile. One mark. No edits. No deletes."
+  },
+  {
+    "ts": "2026-02-02",
+    "title": "App shell online",
+    "body": "PWA hooks are disabled on Pages. Real PWA lands after MONOLITH moves to an nginx host."
+  },
+  {
+    "ts": "2026-02-02",
+    "title": "Next build",
+    "body": "Tile claim flow, wallet sign-in, and on-chain indexing are next."
+  }
+]
