@@ -475,7 +475,28 @@
       font-size:0.80rem;
       letter-spacing:0.06em;
     }
-  </style>
+  
+    /* MONOLITH CONCEPT IMAGE */
+    .concept-frame{
+      margin-top:12px;
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid rgba(148,163,184,0.22);
+      background:linear-gradient(135deg, rgba(15,23,42,0.55), rgba(0,0,0,0.65));
+      box-shadow:0 16px 36px rgba(0,0,0,0.75);
+    }
+    .concept-frame img{
+      display:block;
+      width:100%;
+      max-width:100%;
+      height:auto;
+      object-fit:contain;
+    }
+    @media(max-width:520px){
+      .concept-frame img{ max-height:72vh; }
+    }
+
+</style>
 </head>
 
 <body>
@@ -549,7 +570,11 @@
             <div class="wall-top">
               <div class="left">
                 <h2>The Wall Preview</h2>
-                <p>
+                
+            <div class="concept-frame">
+              <img src="/assets/monolith/monolith_concept.jpg" alt="MONOLITH concept preview">
+            </div>
+<p>
                   This is the vibe. A disciplined grid with real graffiti energy.
                   Tiles are constrained so the wall stays clean and readable.
                 </p>
@@ -559,7 +584,7 @@
               </div>
 
               <div class="right">
-                <a class="mini primary disabled" href="#" onclick="return false;">Claim Tile</a>
+                <a class="mini primary disabled disabled" href="#" onclick="return false;">Claim Tile</a>
                 <a class="mini disabled" href="#" onclick="return false;">Post Mark</a>
                 <a class="mini" href="/monolith/rules.html">Read Rules</a>
               </div>
