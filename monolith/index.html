@@ -7,7 +7,7 @@
 
   
    <title>MONOLITH - House of Cauliman</title>
-  <meta name="build" content="73b412e" />
+  <meta name="build" content="105d2f5" />
   <meta name="description" content="MONOLITH is a permanent on-chain wall. One tile. One mark. No edits. No deletes." />
 
   <meta property="og:title" content="MONOLITH - House of Cauliman" />
@@ -513,43 +513,6 @@
     </div>
   </div>
 
-  <script>
-    (async () => {
-      const el = document.getElementById("feed");
-      if (!el) return;
-
-      try {
-        const res = await fetch("/assets/monolith/feed.json?cb=" + Date.now(), { cache: "no-store" });
-        if (!res.ok) throw new Error("feed fetch failed");
-        const items = await res.json();
-
-        if (!Array.isArray(items) || items.length === 0) {
-          el.innerHTML = `<div class="feed-empty">Updates landing soon.</div>`;
-          return;
-        }
-
-        el.innerHTML = items.map(it => `
-          <div class="feed-item">
-            <div class="feed-top">
-              <div class="feed-title">${escapeHtml(it.title || "")}</div>
-              <div class="feed-ts">${escapeHtml(it.ts || "")}</div>
-            </div>
-            <div class="feed-body">${escapeHtml(it.body || "")}</div>
-          </div>
-        `).join("");
-      } catch (e) {
-        el.innerHTML = `<div class="feed-empty">Updates landing soon.</div>`;
-      }
-
-      function escapeHtml(s){
-        return String(s)
-          .replaceAll("&","&amp;")
-          .replaceAll("<","&lt;")
-          .replaceAll(">","&gt;")
-          .replaceAll('"',"&quot;")
-          .replaceAll("'","&#039;");
-      }
-    })();
-  </script>
+  <!-- feed inlined: pages-safe -->
 </body>
 </html>
