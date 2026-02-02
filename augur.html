@@ -83,41 +83,29 @@
  <a class="btn secondary" href="/dl/app/">Open App</a>
  <a class="btn secondary" href="/collections/">Back to House</a>
  </div>
- <p style="margin:10px 0 0">Local-first finance vault. Public wallets in. Monthly clarity out.</p>
+ <p style="margin:10px 0 0">Chain Oracle for public wallets. Read-only. Public data only. No wallet connection. No keys. No custody.</p>
  </div>
  </div>
 
  <div class="grid">
  <div class="card">
  <span class="k">what we built</span><span class="k">why it matters</span>
- <p> is a vault-backed ledger for digital finances. You add public addresses. pulls history. writes events and snapshots to a local vault. Then generates monthly summaries you can actually use.</p>
+ <p>AUGUR reads public wallet activity and produces plain-English statements. You add public addresses and labels. AUGUR indexes public ledger data and outputs clean summaries you can save and share.</p>
 
  <div class="hr"></div>
 
  <div class="row">
- <div class="pill"><span class="good">local-first</span> your vault, your data</div>
- <div class="pill"><span class="good">audit-ready</span> JSONL event trail</div>
+ <div class="pill"><span class="good">read-only</span> no signing, no custody</div>
+ <div class="pill"><span class="good">public data</span> verifiable sources</div>
  <div class="pill"><span class="good">multi-chain</span> XRPL first, then more</div>
- <div class="pill"><span class="warn">no keys stored</span> public addresses only</div>
+ <div class="pill"><span class="warn">no wallet connection</span> add addresses only</div>
  </div>
 
  <div class="hr"></div>
 
  <span class="k"> v1 scope</span>
  <ul>
- <li>XRPL ingest: transfers in, transfers out, fees</li>
- <li>Monthly report: totals and counts per account</li>
- <li>Indexes: last_seen + tx_dedupe so re-runs stay clean</li>
- <li>Observers for EVM, BTC, SOL exist as stubs, wired later</li>
- </ul>
-
- <div class="hr"></div>
-
- <span class="k">what this does that others don’t</span>
- <ul>
- <li>Most trackers show a dashboard, then your data disappears into their platform</li>
- <li> writes a vault you can version, back up, and prove</li>
- <li> produces a clean monthly ledger output, not a “pretty chart” addiction loop</li>
+ <li>Produces a clean statement output, not a “pretty chart” addiction loop</li>
  </ul>
  </div>
 
@@ -130,15 +118,15 @@
  data/snapshots
  data/indexes
 4) Monthly job outputs:
- reports/monthly/YYYY-MM/summary.json</pre>
+ statements/latest/summary.json</pre>
 
  <div class="hr"></div>
 
  <span class="k">sample commands</span>
  <pre>pnpm snapshot
-pnpm monthly 2026-01
+pnpm snapshot
 
-cat vault/sample_vault/reports/monthly/2026-01/summary.json</pre>
+cat public_data/statement.json</pre>
 
  <div class="hr"></div>
 
@@ -152,7 +140,7 @@ cat vault/sample_vault/reports/monthly/2026-01/summary.json</pre>
 
  <div class="card" style="margin-top:12px">
  <span class="k">next</span><span class="k">ship</span>
- <p>Next we publish the app shell under <span class="k">/dl/app/</span> and render the monthly summary in a clean UI. Then we mount the API behind nginx and make it reachable by the House site.</p>
+ <p>Next we ship the MVP statement view and export. Then we publish a public demo statement so anyone can see what AUGUR outputs.</p>
  </div>
 
  <div class="foot">House of Cauliman Project — AUGUR </div>
