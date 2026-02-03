@@ -1,5 +1,5 @@
 [
-  {"id":"m0001","tile":"0421","gx":23,"gy":-11,"tag":"CONCEPT LOCKED","ts":"2026-02-02"},
-  {"id":"m0002","tile":"0907","gx":24,"gy":-11,"tag":"APP SHELL","ts":"2026-02-02"},
-  {"id":"m0003","tile":"1337","gx":25,"gy":-11,"tag":"NEXT BUILD","ts":"2026-02-02"}
+  {"id":"m0001","tile":"E23-N11","gx":23,"gy":-11,"tag":"CONCEPT LOCKED","ts":"2026-02-02"},
+  {"id":"m0002","tile":"E24-N11","gx":24,"gy":-11,"tag":"APP SHELL","ts":"2026-02-02"},
+  {"id":"m0003","tile":"E25-N11","gx":25,"gy":-11,"tag":"NEXT BUILD","ts":"2026-02-02"}
 ]
