@@ -1,17 +1,5 @@
 [
-  {
-    "ts": "2026-02-02",
-    "title": "Concept locked",
-    "body": "The Wall Preview is live. One tile. One mark. No edits. No deletes."
-  },
-  {
-    "ts": "2026-02-02",
-    "title": "App shell online",
-    "body": "PWA hooks are disabled on Pages. Real PWA lands after MONOLITH moves to an nginx host."
-  },
-  {
-    "ts": "2026-02-02",
-    "title": "Next build",
-    "body": "Tile claim flow, wallet sign-in, and on-chain indexing are next."
-  }
+  {"id":"m0001","tile":"0421","gx":23,"gy":-11,"tag":"CONCEPT LOCKED","ts":"2026-02-02"},
+  {"id":"m0002","tile":"0907","gx":24,"gy":-11,"tag":"APP SHELL","ts":"2026-02-02"},
+  {"id":"m0003","tile":"1337","gx":25,"gy":-11,"tag":"NEXT BUILD","ts":"2026-02-02"}
 ]
