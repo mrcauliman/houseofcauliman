@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -10,106 +10,108 @@
   <meta property="og:image" content="https://houseofcauliman.com/assets/monolith/monolith_logo.webp" />
   <meta property="og:url" content="https://houseofcauliman.com/monolith/" />
   <meta property="og:type" content="website" />
-
   <style>
     :root{
       --bg:#07090b;
-      --panel:#0c1116;
-      --panel2:#0f151c;
-      --line:#1f2a36;
+      --panel:#0b1b13;
+      --panel2:#0d2217;
       --fg:#f5f7f4;
-      --muted:#a9b3bd;
+      --muted:#aeb7af;
+      --line:#173524;
       --green:#2fbf6b;
       --warn:#ffe175;
       --red:#ff5b5b;
+
       --shadow:rgba(0,0,0,.45);
       --radius:18px;
 
       --step:128px;
       --tile:118px;
     }
-
     *{box-sizing:border-box}
     html,body{height:100%;margin:0}
     body{
-      background:var(--bg);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background: radial-gradient(1200px 700px at 20% 0%, rgba(47,191,107,.12), transparent 55%),
+                  radial-gradient(900px 650px at 85% 25%, rgba(255,225,117,.10), transparent 55%),
+                  var(--bg);
       color:var(--fg);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
       overflow:hidden;
     }
     a{color:inherit;text-decoration:none}
 
-    .hud{
-      position:fixed;
-      top:12px;
-      left:12px;
-      right:12px;
-      z-index:50;
-      display:flex;
-      align-items:stretch;
-      justify-content:space-between;
-      gap:12px;
+    .top{
+      position:absolute;left:0;right:0;top:0;
+      padding:14px 14px 10px 14px;
       pointer-events:none;
+      z-index:20;
     }
-    .hud .card{
+    .bar{
+      display:flex;align-items:center;gap:12px;
       pointer-events:auto;
-      border:1px solid var(--line);
-      background:rgba(12,17,22,.86);
-      backdrop-filter: blur(6px);
-      border-radius:var(--radius);
-      box-shadow:0 14px 34px var(--shadow);
-      padding:12px 12px;
+      background:rgba(7,9,11,.62);
+      border:1px solid rgba(23,53,36,.9);
+      box-shadow:0 12px 32px rgba(0,0,0,.35);
+      border-radius:18px;
+      padding:10px 10px;
+      backdrop-filter: blur(10px);
     }
     .brand{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      min-width:320px;
+      display:flex;align-items:center;gap:10px;
+      min-width:210px;
     }
-    .dot{width:10px;height:10px;border-radius:999px;background:var(--green);box-shadow:0 0 18px rgba(47,191,107,.25)}
-    .brand h1{margin:0;font-size:14px;letter-spacing:.2px}
-    .brand .sub{margin-top:4px;color:var(--muted);font-size:12px;line-height:1.35}
-
-    .actions{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      flex-wrap:wrap;
-      justify-content:flex-end;
+    .brand img{
+      width:38px;height:38px;object-fit:contain;
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,.35));
     }
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      border-radius:999px;
-      padding:9px 12px;
+    .brand .t{
+      font-weight:1000;letter-spacing:.6px;font-size:13px;
+      text-transform:uppercase;
+      line-height:1.1;
+    }
+    .brand .s{
+      margin-top:3px;
+      color:rgba(245,247,244,.7);
       font-size:12px;
-      color:var(--muted);
+      line-height:1.2;
+    }
+    .sp{flex:1}
+
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(23,53,36,.9);
+      background: linear-gradient(180deg, rgba(11,27,19,.92), rgba(7,9,11,.92));
+      box-shadow:0 10px 22px rgba(0,0,0,.35);
+      font-weight:900;
+      cursor:pointer;
       user-select:none;
+      white-space:nowrap;
     }
-    .btn:hover{color:var(--fg);border-color:rgba(47,191,107,.55)}
+    .btn .k{
+      display:block;
+      font-size:10px;
+      color:rgba(245,247,244,.62);
+      letter-spacing:.6px;
+      text-transform:uppercase;
+    }
     .btn.primary{
-      background:rgba(47,191,107,.15);
-      border-color:rgba(47,191,107,.45);
-      color:var(--fg);
-      font-weight:800;
+      border-color:rgba(47,191,107,.7);
+      background: linear-gradient(180deg, rgba(47,191,107,.18), rgba(11,27,19,.9));
     }
+    .btn:active{transform:translateY(1px)}
 
     .viewport{
-      position:fixed;
-      inset:0;
-      overflow:hidden;
+      position:absolute;inset:0;
       touch-action:none;
       cursor:grab;
     }
     .viewport.dragging{cursor:grabbing}
 
     .world{
-      position:absolute;
-      left:0;
-      top:0;
+      position:absolute;left:0;top:0;
+      width:1px;height:1px;
       transform:translate(0px,0px);
       will-change:transform;
     }
@@ -119,178 +121,194 @@
       width:var(--tile);
       height:var(--tile);
       border-radius:16px;
-      border:1px solid rgba(31,42,54,.95);
-      background:rgba(255,255,255,.02);
+      border:1px solid rgba(23,53,36,.85);
+      background: linear-gradient(180deg, rgba(11,27,19,.70), rgba(7,9,11,.72));
+      box-shadow:0 10px 24px rgba(0,0,0,.35);
       overflow:hidden;
       user-select:none;
-      box-shadow:0 10px 24px rgba(0,0,0,.28);
     }
     .tcell:before{
       content:"";
-      position:absolute;
-      inset:0;
+      position:absolute;inset:0;
       background:
-        radial-gradient(circle at 30% 20%, rgba(255,255,255,.06), transparent 40%),
-        radial-gradient(circle at 70% 80%, rgba(255,255,255,.05), transparent 45%);
-      pointer-events:none;
-    }
-    .tcell .meta{
-      position:absolute;
-      inset:auto 10px 10px 10px;
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      gap:8px;
+        radial-gradient(140px 80px at 30% 20%, rgba(47,191,107,.10), transparent 60%),
+        radial-gradient(120px 80px at 85% 75%, rgba(255,225,117,.08), transparent 60%);
       pointer-events:none;
     }
     .tcell .id{
+      position:absolute;left:10px;top:8px;
+      font-size:10px;font-weight:1000;
+      color:rgba(245,247,244,.72);
+      letter-spacing:.3px;
+    }
+    .tcell .meta{
+      position:absolute;left:10px;right:10px;bottom:10px;
+      display:flex;gap:8px;align-items:flex-end;justify-content:space-between;
+    }
+    .pill{
+      display:inline-flex;align-items:center;
+      padding:6px 8px;
+      border-radius:999px;
+      border:1px solid rgba(23,53,36,.9);
+      background:rgba(7,9,11,.58);
       font-size:10px;
       font-weight:900;
-      color:rgba(245,247,244,.85);
-      letter-spacing:.2px;
+      letter-spacing:.3px;
+      color:rgba(245,247,244,.75);
+      text-transform:uppercase;
+      max-width:100%;
+      overflow:hidden;text-overflow:ellipsis;
+      white-space:nowrap;
     }
-    .tcell .coord{
-      font-size:10px;
-      color:rgba(169,179,189,.85);
-    }
-
-    .tcell .spray{
-      position:absolute;
-      inset:0;
+    .spray{
+      position:absolute;inset:0;
       opacity:.0;
-      transform:scale(1.02);
-      transition:opacity .2s ease;
+      transition:opacity .18s ease;
       pointer-events:none;
+      mix-blend-mode:screen;
     }
-
     .tcell.taken{
-      border-color:rgba(255,225,117,.45);
-      background:rgba(255,255,255,.03);
+      border-color:rgba(47,191,107,.55);
+      box-shadow:0 0 0 2px rgba(47,191,107,.12) inset, 0 10px 24px rgba(0,0,0,.35);
     }
     .tcell.taken .spray{opacity:1}
-    .tcell.taken:after{
-      content:"";
-      position:absolute;
-      inset:0;
-      box-shadow:0 0 0 2px rgba(255,225,117,.06) inset;
-      pointer-events:none;
-    }
+    .tcell:hover{border-color:rgba(47,191,107,.55)}
 
     .panel{
-      position:fixed;
-      top:86px;
-      right:12px;
-      width:min(420px, calc(100vw - 24px));
-      max-height:calc(100vh - 98px);
-      overflow:auto;
-      z-index:60;
-      border:1px solid var(--line);
-      background:rgba(12,17,22,.92);
-      backdrop-filter: blur(6px);
-      border-radius:var(--radius);
-      box-shadow:0 18px 46px var(--shadow);
-      padding:14px;
-      display:none;
+      position:absolute;
+      right:14px;top:74px;
+      width:min(420px, calc(100vw - 28px));
+      max-height:calc(100vh - 88px);
+      border-radius:18px;
+      border:1px solid rgba(23,53,36,.9);
+      background:rgba(7,9,11,.72);
+      box-shadow:0 18px 44px rgba(0,0,0,.42);
+      backdrop-filter: blur(10px);
+      overflow:hidden;
+      z-index:30;
+      pointer-events:auto;
     }
-    .panel.show{display:block}
-    .panelTop{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:12px;
+    .panelHeader{
+      padding:12px 12px;
+      display:flex;align-items:flex-start;gap:10px;
+      border-bottom:1px solid rgba(23,53,36,.65);
+      background:linear-gradient(180deg, rgba(11,27,19,.70), rgba(7,9,11,.72));
     }
-    .panel h2{
+    .panelHeader .h{
+      flex:1;
+      min-width:0;
+    }
+    .panelHeader h2{
       margin:0;
       font-size:14px;
-      letter-spacing:.2px;
+      font-weight:1000;
+      letter-spacing:.4px;
+      text-transform:uppercase;
     }
-    .panel .small{
+    .panelHeader .sub{
       margin-top:6px;
-      color:var(--muted);
+      color:rgba(245,247,244,.72);
       font-size:12px;
-      line-height:1.45;
+      line-height:1.25;
     }
     .xbtn{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      color:var(--muted);
-      border-radius:12px;
-      padding:8px 10px;
-      font-size:12px;
+      width:38px;height:38px;
+      border-radius:14px;
+      border:1px solid rgba(23,53,36,.9);
+      background:rgba(7,9,11,.55);
       cursor:pointer;
+      display:flex;align-items:center;justify-content:center;
+      font-weight:1000;
+      user-select:none;
     }
-    .xbtn:hover{color:var(--fg);border-color:rgba(47,191,107,.55)}
-
-    .kv{
-      margin-top:12px;
-      border-top:1px solid rgba(31,42,54,.8);
-      padding-top:12px;
+    .panelBody{
+      padding:12px 12px 14px 12px;
       display:grid;
-      grid-template-columns:120px 1fr;
-      gap:8px 12px;
-      font-size:12px;
-    }
-    .kv .k{color:var(--muted)}
-    .kv .v{color:rgba(245,247,244,.9)}
-    .mono-link{
-      margin-top:12px;
-      display:flex;
       gap:10px;
-      flex-wrap:wrap;
     }
-    .mono-link a{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      border-radius:999px;
-      padding:8px 10px;
-      font-size:12px;
-      color:var(--muted);
+    .row{
+      display:grid;
+      grid-template-columns: 90px 1fr;
+      gap:10px;
+      align-items:start;
+      padding:10px 10px;
+      border:1px solid rgba(23,53,36,.65);
+      border-radius:16px;
+      background:rgba(11,27,19,.55);
     }
-    .mono-link a:hover{color:var(--fg);border-color:rgba(47,191,107,.55)}
+    .row .k{
+      color:rgba(245,247,244,.68);
+      font-size:11px;
+      letter-spacing:.5px;
+      text-transform:uppercase;
+      font-weight:900;
+    }
+    .row .v{
+      font-size:13px;
+      font-weight:900;
+      color:rgba(245,247,244,.92);
+      word-break:break-word;
+      line-height:1.25;
+    }
+    .monoLink{
+      display:flex;gap:10px;flex-wrap:wrap;
+      padding-top:4px;
+    }
+    .linkBtn{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(23,53,36,.85);
+      background:rgba(7,9,11,.55);
+      font-weight:900;
+      cursor:pointer;
+      user-select:none;
+    }
 
     .toast{
-      position:fixed;
-      left:12px;
-      bottom:12px;
-      z-index:80;
-      border:1px solid var(--line);
-      background:rgba(12,17,22,.92);
-      backdrop-filter: blur(6px);
-      border-radius:14px;
-      padding:10px 12px;
-      color:var(--muted);
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+      bottom:14px;
+      background:rgba(7,9,11,.78);
+      border:1px solid rgba(23,53,36,.9);
+      border-radius:999px;
+      padding:10px 14px;
+      box-shadow:0 16px 42px rgba(0,0,0,.45);
+      font-weight:900;
       font-size:12px;
-      box-shadow:0 12px 30px var(--shadow);
+      color:rgba(245,247,244,.92);
       opacity:0;
-      transform:translateY(10px);
-      transition:opacity .18s ease, transform .18s ease;
       pointer-events:none;
+      transition:opacity .18s ease, transform .18s ease;
+      z-index:40;
     }
-    .toast.show{opacity:1;transform:translateY(0px)}
-    .toast.good{border-color:rgba(47,191,107,.45);color:rgba(245,247,244,.9)}
-    .toast.warn{border-color:rgba(255,225,117,.55);color:rgba(245,247,244,.9)}
-    .toast.bad{border-color:rgba(255,91,91,.45);color:rgba(245,247,244,.9)}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(-2px)}
+    .toast.good{border-color:rgba(47,191,107,.7)}
+    .toast.bad{border-color:rgba(255,91,91,.7)}
+    .toast.warn{border-color:rgba(255,225,117,.7)}
   </style>
 </head>
-
 <body>
-  <div class="hud">
-    <div class="card brand">
-      <div class="dot"></div>
-      <div>
-        <h1>MONOLITH — The Wall of Record</h1>
-        <div class="sub">Drag to move. Tap a tile to inspect.</div>
-      </div>
-    </div>
 
-    <div class="card actions">
+  <div class="top">
+    <div class="bar">
+      <div class="brand" aria-label="monolith header">
+        <img src="/assets/monolith/monolith_logo.webp" alt="MONOLITH" />
+        <div>
+          <div class="t">MONOLITH</div>
+          <div class="s">Drag to move. Tap a tile to inspect.</div>
+        </div>
+      </div>
+      <div class="sp"></div>
       <a class="btn primary" href="/monolith/claim/" aria-label="claim a tile">
-        <span class="k">ACTION</span> Claim a Tile
+        <span class="k">ACTION</span>
+        <span>Claim a Tile</span>
       </a>
       <a class="btn" href="/assets/monolith/feed.json" target="_blank" rel="noreferrer" aria-label="view feed json">
-        Feed
+        <span class="k">SOURCE</span>
+        <span>feed.json</span>
       </a>
-      <a class="btn" href="/" aria-label="home">Home</a>
     </div>
   </div>
 
@@ -299,37 +317,33 @@
   </div>
 
   <aside class="panel" id="panel" aria-label="tile detail panel">
-    <div class="panelTop">
-      <div>
+    <div class="panelHeader">
+      <div class="h">
         <h2 id="ptitle">Tile</h2>
-        <div class="small" id="psub">Tap a tile to inspect details.</div>
+        <div class="sub" id="psub">Tap a tile to inspect details.</div>
       </div>
-      <button class="xbtn" id="pclose" type="button">Close</button>
+      <div class="xbtn" id="pclose" aria-label="close panel">X</div>
     </div>
-
-    <div class="kv">
-      <div class="k">Tile</div><div class="v" id="vTile">None</div>
-      <div class="k">Coords</div><div class="v" id="vCoords">0, 0</div>
-      <div class="k">Taken</div><div class="v" id="vTaken">No</div>
-      <div class="k">Tag</div><div class="v" id="vTag">None</div>
-      <div class="k">Date</div><div class="v" id="vTs">None</div>
-      <div class="k">Body</div><div class="v" id="vBody">None</div>
-    </div>
-
-    <div class="mono-link" aria-label="tile links">
-      <a href="/monolith/claim/" id="lnkClaim">Claim flow</a>
-      <a href="/assets/monolith/feed.json" target="_blank" rel="noreferrer">feed.json</a>
+    <div class="panelBody">
+      <div class="row"><div class="k">Tile</div><div class="v" id="vTile">None</div></div>
+      <div class="row"><div class="k">Coords</div><div class="v" id="vCoords">0, 0</div></div>
+      <div class="row"><div class="k">Tag</div><div class="v" id="vTag">Open</div></div>
+      <div class="row"><div class="k">Date</div><div class="v" id="vTs">None</div></div>
+      <div class="row"><div class="k">Status</div><div class="v" id="vStatus">Open</div></div>
+      <div class="monoLink" aria-label="tile links">
+        <a class="linkBtn" id="toClaim" href="/monolith/claim/" aria-label="go to claim">Claim page</a>
+        <button class="linkBtn" id="copyTile" type="button" aria-label="copy tile id">Copy tile</button>
+      </div>
     </div>
   </aside>
 
-  <div class="toast" id="toast"></div>
+  <div class="toast" id="toast" aria-label="toast"></div>
 
 <script>
-(function(){
+(() => {
   "use strict";
 
   const FEED_URL = "/assets/monolith/feed.json";
-
   const vp = document.getElementById("vp");
   const world = document.getElementById("world");
 
@@ -337,22 +351,17 @@
   const pclose = document.getElementById("pclose");
   const ptitle = document.getElementById("ptitle");
   const psub = document.getElementById("psub");
-
   const vTile = document.getElementById("vTile");
   const vCoords = document.getElementById("vCoords");
-  const vTaken = document.getElementById("vTaken");
   const vTag = document.getElementById("vTag");
   const vTs = document.getElementById("vTs");
-  const vBody = document.getElementById("vBody");
-
+  const vStatus = document.getElementById("vStatus");
+  const toClaim = document.getElementById("toClaim");
+  const copyTile = document.getElementById("copyTile");
   const toast = document.getElementById("toast");
 
   const STEP = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--step").trim(), 10) || 128;
   const TILE = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--tile").trim(), 10) || 118;
-
-  const POOL_COLS = 9;
-  const POOL_ROWS = 7;
-  const POOL_PAD = 2;
 
   const state = {
     camX: 0,
@@ -364,30 +373,26 @@
     downY: 0,
     lastX: 0,
     lastY: 0,
-    lastT: 0,
-
-    cols: POOL_COLS,
-    rows: POOL_ROWS,
+    moved: 0,
+    cols: 0,
+    rows: 0,
     pool: [],
     poolGX0: 0,
     poolGY0: 0,
-
     taken: new Set(),
     marksByTile: new Map(),
-
-    lastRenderKey: ""
+    lastTouchTs: 0
   };
 
-  function toastShow(msg, kind){
-    if(!toast) return;
-    toast.className = "toast" + (kind ? (" " + kind) : "");
-    toast.textContent = msg;
-    toast.classList.remove("show");
-    requestAnimationFrame(()=>toast.classList.add("show"));
-    setTimeout(()=>toast.classList.remove("show"), 1400);
-  }
-
   function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
+
+  function toastShow(msg, cls){
+    toast.className = "toast";
+    if(cls) toast.classList.add(cls);
+    toast.textContent = msg;
+    requestAnimationFrame(() => toast.classList.add("show"));
+    setTimeout(() => toast.classList.remove("show"), 1400);
+  }
 
   function tileIdFromCoords(gx, gy){
     const ax = Math.abs(gx);
@@ -397,52 +402,50 @@
     return sx + ax + "-" + sy + ay;
   }
 
-  function parseTileToCoords(tile){
-    if(typeof tile !== "string") return null;
-    const raw = tile.trim().toUpperCase();
-    const m = raw.match(/^([EW])(\d+)-([NS])(\d+)$/);
-    if(!m) return null;
-    const gx = (m[1] === "W") ? -parseInt(m[2],10) : parseInt(m[2],10);
-    const gy = (m[3] === "N") ? -parseInt(m[4],10) : parseInt(m[4],10);
-    if(!Number.isFinite(gx) || !Number.isFinite(gy)) return null;
-    return { gx, gy, tile: tileIdFromCoords(gx, gy) };
-  }
+  function parseCoordsFromAny(raw){
+    if(!raw) return null;
+    const s = String(raw).trim().toUpperCase();
 
-  function normalizeMark(m){
-    if(!m || typeof m !== "object") return null;
-
-    const gx = Number.isFinite(+m.gx) ? +m.gx : null;
-    const gy = Number.isFinite(+m.gy) ? +m.gy : null;
-
-    const raw = (typeof m.tile === "string" && m.tile) ? String(m.tile).trim().toUpperCase() : null;
-
-    if(raw){
-      const c = parseTileToCoords(raw);
-      if(c) return { gx: c.gx, gy: c.gy, tile: c.tile, raw: c.tile };
+    // Accept E23-N11
+    let m = s.match(/^(E|W)\s*(\d+)\s*-\s*(N|S)\s*(\d+)$/i);
+    if(m){
+      const gx = (m[1].toUpperCase()==="W") ? -parseInt(m[2],10) : parseInt(m[2],10);
+      const gy = (m[3].toUpperCase()==="N") ? -parseInt(m[4],10) : parseInt(m[4],10);
       if(Number.isFinite(gx) && Number.isFinite(gy)) return { gx, gy, tile: tileIdFromCoords(gx, gy), raw };
-      return { gx: 0, gy: 0, tile: raw, raw };
     }
 
-    if(Number.isFinite(gx) && Number.isFinite(gy)){
-      return { gx, gy, tile: tileIdFromCoords(gx, gy), raw: tileIdFromCoords(gx, gy) };
+    // Accept 23,-11
+    m = s.match(/^(-?\d+)\s*,\s*(-?\d+)$/);
+    if(m){
+      const gx = parseInt(m[1],10);
+      const gy = parseInt(m[2],10);
+      if(Number.isFinite(gx) && Number.isFinite(gy)) return { gx, gy, tile: tileIdFromCoords(gx, gy), raw };
+    }
+
+    // Accept gx gy
+    m = s.match(/^(-?\d+)\s+(-?\d+)$/);
+    if(m){
+      const gx = parseInt(m[1],10);
+      const gy = parseInt(m[2],10);
+      if(Number.isFinite(gx) && Number.isFinite(gy)) return { gx, gy, tile: tileIdFromCoords(gx, gy), raw };
     }
 
     return null;
   }
 
   function mulberry32(seed){
-    let t = seed >>> 0;
+    let a = seed >>> 0;
     return function(){
-      t += 0x6D2B79F5;
-      let x = Math.imul(t ^ (t >>> 15), 1 | t);
-      x ^= x + Math.imul(x ^ (x >>> 7), 61 | x);
-      return ((x ^ (x >>> 14)) >>> 0) / 4294967296;
+      a |= 0; a = (a + 0x6D2B79F5) | 0;
+      let t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
     };
   }
 
   function hashSeed(str){
-    const s = String(str || "");
-    let h = 2166136261 >>> 0;
+    const s = String(str);
+    let h = 2166136261;
     for(let i=0;i<s.length;i++){
       h ^= s.charCodeAt(i);
       h = Math.imul(h, 16777619);
@@ -453,34 +456,23 @@
   function makeSpraySVG(seedStr){
     const seed = hashSeed(seedStr);
     const rnd = mulberry32(seed);
-
     const p = [];
-    const n = 16 + Math.floor(rnd()*12);
-
-    for(let i=0;i<n;i++){
+    const blobs = 16 + Math.floor(rnd()*10);
+    for(let i=0;i<blobs;i++){
       const cx = Math.floor(rnd()*TILE);
       const cy = Math.floor(rnd()*TILE);
-      const r = 6 + Math.floor(rnd()*22);
-
-      const o = 0.05 + rnd()*0.12;
-      p.push(
-        `<circle cx="${cx}" cy="${cy}" r="${r}" fill="rgba(47,191,107,${o.toFixed(3)})"/>`
-      );
+      const r  = 10 + Math.floor(rnd()*28);
+      const a  = 0.10 + rnd()*0.18;
+      const hue = 105 + Math.floor(rnd()*30);
+      p.push(`<circle cx="${cx}" cy="${cy}" r="${r}" fill="hsla(${hue},70%,60%,${a})"/>`);
     }
-
-    const streaks = 8 + Math.floor(rnd()*10);
-    for(let i=0;i<streaks;i++){
-      const x1 = Math.floor(rnd()*TILE);
-      const y1 = Math.floor(rnd()*TILE);
-      const x2 = clamp(x1 + Math.floor((rnd()-0.5)*70), 0, TILE);
-      const y2 = clamp(y1 + Math.floor((rnd()-0.5)*70), 0, TILE);
-      const w = 1 + Math.floor(rnd()*3);
-      const o = 0.06 + rnd()*0.14;
-      p.push(
-        `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="rgba(255,225,117,${o.toFixed(3)})" stroke-width="${w}" stroke-linecap="round"/>`
-      );
+    for(let i=0;i<14;i++){
+      const x1 = Math.floor(rnd()*TILE), y1 = Math.floor(rnd()*TILE);
+      const x2 = Math.floor(rnd()*TILE), y2 = Math.floor(rnd()*TILE);
+      const w = 1 + Math.floor(rnd()*2);
+      const a = 0.10 + rnd()*0.14;
+      p.push(`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="rgba(255,225,117,${a})" stroke-width="${w}" stroke-linecap="round"/>`);
     }
-
     return `<svg viewBox="0 0 ${TILE} ${TILE}" width="${TILE}" height="${TILE}" xmlns="http://www.w3.org/2000/svg">${p.join("")}</svg>`;
   }
 
@@ -488,30 +480,61 @@
     const mark = state.marksByTile.get(tile) || null;
     const taken = state.taken.has(tile);
 
-    if(ptitle) ptitle.textContent = tile;
-    if(psub) psub.textContent = "Tile detail";
-
-    if(vTile) vTile.textContent = tile;
-    if(vCoords) vCoords.textContent = `${gx}, ${gy}`;
-    if(vTaken) vTaken.textContent = taken ? "Yes" : "No";
+    ptitle.textContent = "Tile " + tile;
+    vTile.textContent = tile;
+    vCoords.textContent = gx + ", " + gy;
 
     if(mark){
-      if(vTag) vTag.textContent = mark.tag || "None";
-      if(vTs) vTs.textContent = mark.ts || "None";
-      if(vBody) vBody.textContent = mark.body || "This tile is marked.";
-    }else{
-      if(vTag) vTag.textContent = "None";
-      if(vTs) vTs.textContent = "None";
-      if(vBody) vBody.textContent = taken ? "This tile exists in feed but has no display fields." : "This tile is open.";
+      vTag.textContent = mark.tag || "Taken";
+      vTs.textContent = mark.ts || "Unknown";
+      psub.textContent = "Taken tile from feed";
+    } else {
+      vTag.textContent = "Open";
+      vTs.textContent = "None";
+      psub.textContent = taken ? "Taken tile" : "Open tile";
     }
 
-    if(panel){
-      panel.classList.add("show");
-    }
+    vStatus.textContent = taken ? "Taken" : "Open";
+    toClaim.href = "/monolith/claim/?tile=" + encodeURIComponent(tile);
+
+    panel.style.display = "block";
   }
 
   function closePanel(){
-    if(panel) panel.classList.remove("show");
+    panel.style.display = "none";
+  }
+
+  async function copyText(txt){
+    try{
+      await navigator.clipboard.writeText(txt);
+      toastShow("copied", "good");
+    } catch(e){
+      toastShow("clipboard blocked", "warn");
+    }
+  }
+
+  copyTile.addEventListener("click", () => copyText(vTile.textContent || ""));
+  pclose.addEventListener("click", closePanel);
+
+  function makeCell(){
+    const d = document.createElement("div");
+    d.className = "tcell";
+    d.innerHTML = `
+      <div class="spray"></div>
+      <div class="id"></div>
+      <div class="meta">
+        <div class="pill"></div>
+      </div>
+    `;
+    d.addEventListener("click", (ev) => {
+      if(state.dragging) return;
+      const gx = parseInt(d.getAttribute("data-gx") || "0", 10);
+      const gy = parseInt(d.getAttribute("data-gy") || "0", 10);
+      const tile = d.getAttribute("data-tile") || tileIdFromCoords(gx, gy);
+      openPanel(tile, gx, gy);
+      ev.stopPropagation();
+    });
+    return d;
   }
 
   function setCell(cell, gx, gy){
@@ -524,247 +547,177 @@
     cell.setAttribute("data-gx", String(gx));
     cell.setAttribute("data-gy", String(gy));
     cell.setAttribute("data-tile", tile);
-    cell.setAttribute("aria-label", `Tile ${tile} ${taken ? "taken" : "open"}`);
-
-    cell.classList.toggle("taken", taken);
+    cell.setAttribute("aria-label", "Tile " + tile + " " + (taken ? "taken" : "open"));
 
     const id = cell.querySelector(".id");
-    const coord = cell.querySelector(".coord");
+    if(id) id.textContent = tile;
+
+    const pill = cell.querySelector(".pill");
+    if(pill){
+      pill.textContent = (mark && mark.tag) ? String(mark.tag) : (taken ? "TAKEN" : "OPEN");
+    }
+
     const spray = cell.querySelector(".spray");
-
-    if(id) id.textContent = mark && mark.tag ? mark.tag : tile;
-    if(coord) coord.textContent = `${gx},${gy}`;
-    if(spray) spray.innerHTML = makeSpraySVG(tile);
-  }
-
-  function ensurePool(){
-    if(!world) return;
-
-    if(state.pool.length) return;
-
-    const total = state.cols * state.rows;
-    for(let i=0;i<total;i++){
-      const d = document.createElement("div");
-      d.className = "tcell";
-
-      const spray = document.createElement("div");
-      spray.className = "spray";
-      d.appendChild(spray);
-
-      const meta = document.createElement("div");
-      meta.className = "meta";
-
-      const id = document.createElement("div");
-      id.className = "id";
-      id.textContent = "Tile";
-
-      const coord = document.createElement("div");
-      coord.className = "coord";
-      coord.textContent = "0,0";
-
-      meta.appendChild(id);
-      meta.appendChild(coord);
-      d.appendChild(meta);
-
-      d.addEventListener("click", (ev)=>{
-        ev.preventDefault();
-        ev.stopPropagation();
-        const gx = parseInt(d.getAttribute("data-gx") || "0", 10);
-        const gy = parseInt(d.getAttribute("data-gy") || "0", 10);
-        const tile = d.getAttribute("data-tile") || tileIdFromCoords(gx, gy);
-        openPanel(tile, gx, gy);
-      });
-
-      world.appendChild(d);
-      state.pool.push(d);
+    if(taken){
+      cell.classList.add("taken");
+      if(spray) spray.innerHTML = makeSpraySVG(tile);
+    } else {
+      cell.classList.remove("taken");
+      if(spray) spray.innerHTML = "";
     }
   }
 
   function renderPool(){
-    if(!world) return;
+    const w = vp.clientWidth;
+    const h = vp.clientHeight;
+    const cols = Math.ceil(w / STEP) + 4;
+    const rows = Math.ceil(h / STEP) + 4;
 
-    const startGX = Math.floor(state.camX / STEP) - POOL_PAD;
-    const startGY = Math.floor(state.camY / STEP) - POOL_PAD;
+    if(cols !== state.cols || rows !== state.rows){
+      state.cols = cols;
+      state.rows = rows;
+      world.innerHTML = "";
+      state.pool = [];
+      const total = cols * rows;
+      for(let i=0;i<total;i++){
+        const c = makeCell();
+        state.pool.push(c);
+        world.appendChild(c);
+      }
+    }
 
-    const key = `${startGX},${startGY},${state.cols},${state.rows},${state.taken.size}`;
-    if(key === state.lastRenderKey) return;
-    state.lastRenderKey = key;
+    world.style.transform = "translate(" + (-state.camX) + "px, " + (-state.camY) + "px)";
+
+    const startGX = Math.floor(state.camX / STEP) - 2;
+    const startGY = Math.floor(state.camY / STEP) - 2;
 
     let i = 0;
-    for(let ry=0; ry<state.rows; ry++){
-      for(let rx=0; rx<state.cols; rx++){
+    for(let ry=0;ry<rows;ry++){
+      for(let rx=0;rx<cols;rx++){
         const gx = startGX + rx;
         const gy = startGY + ry;
-        const cell = state.pool[i++];
-        setCell(cell, gx, gy);
+        setCell(state.pool[i++], gx, gy);
       }
     }
   }
 
   function tick(){
-    state.vx *= 0.92;
-    state.vy *= 0.92;
-
-    state.camX += state.vx;
-    state.camY += state.vy;
-
-    if(world){
-      world.style.transform = `translate(${-state.camX}px, ${-state.camY}px)`;
+    if(!state.dragging){
+      state.vx *= 0.92;
+      state.vy *= 0.92;
+      if(Math.abs(state.vx) < 0.05) state.vx = 0;
+      if(Math.abs(state.vy) < 0.05) state.vy = 0;
+      state.camX += state.vx;
+      state.camY += state.vy;
     }
-
     renderPool();
     requestAnimationFrame(tick);
   }
 
   function onDown(ev){
-    if(!vp) return;
-    vp.classList.add("dragging");
     state.dragging = true;
     state.downX = ev.clientX;
     state.downY = ev.clientY;
     state.lastX = ev.clientX;
     state.lastY = ev.clientY;
-    state.lastT = performance.now();
-    state.vx = 0;
-    state.vy = 0;
-
-    try{ vp.setPointerCapture(ev.pointerId); }catch(e){}
+    state.moved = 0;
+    vp.classList.add("dragging");
+    vp.setPointerCapture(ev.pointerId);
     ev.preventDefault();
   }
 
   function onMove(ev){
     if(!state.dragging) return;
-
-    const now = performance.now();
-    const dt = Math.max(1, now - state.lastT);
-
     const dx = ev.clientX - state.lastX;
     const dy = ev.clientY - state.lastY;
+    state.lastX = ev.clientX;
+    state.lastY = ev.clientY;
 
     state.camX -= dx;
     state.camY -= dy;
 
-    state.vx = (-dx) / dt * 16;
-    state.vy = (-dy) / dt * 16;
+    state.vx = -dx;
+    state.vy = -dy;
 
-    state.lastX = ev.clientX;
-    state.lastY = ev.clientY;
-    state.lastT = now;
-
-    if(world){
-      world.style.transform = `translate(${-state.camX}px, ${-state.camY}px)`;
-    }
-
-    renderPool();
+    state.moved += Math.abs(dx) + Math.abs(dy);
     ev.preventDefault();
   }
 
   function onUp(ev){
-    if(!vp) return;
-    vp.classList.remove("dragging");
+    if(!state.dragging) return;
     state.dragging = false;
-    try{ vp.releasePointerCapture(ev.pointerId); }catch(e){}
+    vp.classList.remove("dragging");
+    try{ vp.releasePointerCapture(ev.pointerId); } catch(e) {}
     ev.preventDefault();
   }
 
   async function loadFeed(){
     try{
       const res = await fetch(FEED_URL + "?cb=" + Date.now(), { cache:"no-store" });
-      if(!res.ok) throw new Error("feed http " + res.status);
-      const data = await res.json();
+      if(!res.ok) throw new Error("bad feed");
+      const json = await res.json();
 
       state.taken = new Set();
       state.marksByTile = new Map();
 
-      if(Array.isArray(data)){
-        for(const raw of data){
-          const n = normalizeMark(raw);
-          if(!n) continue;
+      if(Array.isArray(json)){
+        for(const m of json){
+          const gx = Number.isFinite(+m.gx) ? +m.gx : null;
+          const gy = Number.isFinite(+m.gy) ? +m.gy : null;
 
-          const tile = n.tile;
+          let tile = (typeof m.tile === "string" && m.tile) ? String(m.tile).trim().toUpperCase() : null;
+          if(!tile && gx !== null && gy !== null) tile = tileIdFromCoords(gx, gy);
+          if(!tile) continue;
+
           state.taken.add(tile);
-
           state.marksByTile.set(tile, {
-            id: (typeof raw.id === "string" ? raw.id : ""),
+            id: (m.id ? String(m.id) : ""),
             tile,
-            gx: n.gx,
-            gy: n.gy,
-            tag: (typeof raw.tag === "string" ? raw.tag : ""),
-            ts: (typeof raw.ts === "string" ? raw.ts : ""),
-            body: (typeof raw.body === "string" ? raw.body : "")
+            gx: gx !== null ? gx : 0,
+            gy: gy !== null ? gy : 0,
+            tag: (m.tag ? String(m.tag) : ""),
+            ts: (m.ts ? String(m.ts) : "")
           });
         }
       }
 
-      state.lastRenderKey = "";
       renderPool();
-      toastShow("feed loaded " + state.taken.size, "good");
-    }catch(e){
+      return true;
+    } catch(e){
       toastShow("feed load failed", "warn");
+      return false;
     }
   }
 
   function startNearSeed(){
-    let gx = 0, gy = 0;
-
     for(const v of state.marksByTile.values()){
-      if(Number.isFinite(v.gx) && Number.isFinite(v.gy)){
-        gx = v.gx;
-        gy = v.gy;
-        break;
-      }
-    }
-
-    state.camX = gx * STEP - (window.innerWidth / 2) + (TILE / 2);
-    state.camY = gy * STEP - (window.innerHeight / 2) + (TILE / 2);
-
-    if(world){
-      world.style.transform = `translate(${-state.camX}px, ${-state.camY}px)`;
-    }
-    state.lastRenderKey = "";
-    renderPool();
-
-    toastShow("start " + tileIdFromCoords(gx, gy), "good");
-
-    const t = tileIdFromCoords(gx, gy);
-    const mark = state.marksByTile.get(t) || null;
-    if(mark){
-      openPanel(t, mark.gx, mark.gy);
-    }else{
+      const gx = v.gx || 0;
+      const gy = v.gy || 0;
+      state.camX = gx * STEP - Math.floor(vp.clientWidth/2) + Math.floor(TILE/2);
+      state.camY = gy * STEP - Math.floor(vp.clientHeight/2) + Math.floor(TILE/2);
+      toastShow("start " + tileIdFromCoords(gx, gy), "good");
+      const t = tileIdFromCoords(gx, gy);
       openPanel(t, gx, gy);
+      return;
     }
+    state.camX = 0;
+    state.camY = 0;
+    toastShow("start origin", "good");
   }
 
-  function boot(){
-    ensurePool();
+  vp.addEventListener("pointerdown", onDown, { passive:false });
+  vp.addEventListener("pointermove", onMove, { passive:false });
+  vp.addEventListener("pointerup", onUp, { passive:false });
+  vp.addEventListener("pointercancel", onUp, { passive:false });
 
-    if(vp){
-      vp.addEventListener("pointerdown", onDown, { passive:false });
-      vp.addEventListener("pointermove", onMove, { passive:false });
-      vp.addEventListener("pointerup", onUp, { passive:false });
-      vp.addEventListener("pointercancel", onUp, { passive:false });
-      vp.addEventListener("click", ()=>closePanel());
-    }
+  panel.style.display = "block";
+  renderPool();
+  requestAnimationFrame(tick);
 
-    if(panel){
-      panel.addEventListener("click", (ev)=>ev.stopPropagation());
-    }
-    if(pclose){
-      pclose.addEventListener("click", (ev)=>{
-        ev.preventDefault();
-        ev.stopPropagation();
-        closePanel();
-      });
-    }
+  loadFeed().then(() => startNearSeed());
+  setInterval(loadFeed, 15000);
 
-    requestAnimationFrame(tick);
-    loadFeed().then(()=>startNearSeed());
-    setInterval(loadFeed, 15000);
-  }
-
-  boot();
 })();
 </script>
-
 </body>
 </html>

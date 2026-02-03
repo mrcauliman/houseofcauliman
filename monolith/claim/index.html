@@ -1,137 +1,110 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
-  <title>MONOLITH — Claim</title>
-  <meta name="description" content="Pick a tile. Leave a mark. No edits. No deletes." />
-  <meta property="og:title" content="MONOLITH — Claim" />
-  <meta property="og:description" content="Pick a tile. Leave a mark. No edits. No deletes." />
-  <meta property="og:image" content="https://houseofcauliman.com/assets/monolith/monolith_logo.webp" />
-  <meta property="og:url" content="https://houseofcauliman.com/monolith/claim/" />
-  <meta property="og:type" content="website" />
-
+  <title>MONOLITH — Claim a Tile</title>
+  <meta name="description" content="Claim a MONOLITH tile. Download a claim packet. One tile. One mark. No edits. No deletes." />
   <style>
     :root{
       --bg:#07090b;
-      --panel:#0c1116;
-      --panel2:#0f151c;
-      --line:#1f2a36;
+      --panel:#0b1b13;
+      --panel2:#0d2217;
       --fg:#f5f7f4;
-      --muted:#a9b3bd;
+      --muted:#aeb7af;
+      --line:#173524;
       --green:#2fbf6b;
       --warn:#ffe175;
       --red:#ff5b5b;
-      --shadow:rgba(0,0,0,.45);
-      --radius:16px;
+      --shadow:rgba(0,0,0,.42);
+      --radius:18px;
     }
     *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial}
+    html,body{margin:0;background:var(--bg);color:var(--fg);font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial}
     a{color:inherit;text-decoration:none}
-    code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px;color:rgba(245,247,244,.85)}
-    .wrap{max-width:1040px;margin:0 auto;padding:18px 14px 80px}
-    .top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .wrap{max-width:1100px;margin:0 auto;padding:16px}
+    .top{
+      display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+      padding:12px 12px;
+      border:1px solid rgba(23,53,36,.9);
+      border-radius:18px;
+      background:rgba(7,9,11,.62);
+      box-shadow:0 18px 44px rgba(0,0,0,.35);
+      backdrop-filter: blur(10px);
+    }
     .brand{display:flex;align-items:center;gap:10px}
-    .dot{width:10px;height:10px;border-radius:999px;background:var(--green);box-shadow:0 0 18px rgba(47,191,107,.25)}
-    h1{margin:0;font-size:18px;letter-spacing:.2px}
-    .sub{color:var(--muted);font-size:12px;margin-top:4px;line-height:1.4}
-    .pill{border:1px solid var(--line);background:rgba(255,255,255,.03);padding:7px 10px;border-radius:999px;font-size:12px;color:var(--muted)}
+    .brand img{width:36px;height:36px;object-fit:contain}
+    .brand .t{font-weight:1000;letter-spacing:.6px;font-size:13px;text-transform:uppercase;line-height:1.1}
+    .brand .s{margin-top:3px;color:rgba(245,247,244,.72);font-size:12px;line-height:1.2}
+    .sp{flex:1}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 12px;border-radius:14px;
+      border:1px solid rgba(23,53,36,.9);
+      background: linear-gradient(180deg, rgba(11,27,19,.92), rgba(7,9,11,.92));
+      box-shadow:0 10px 22px rgba(0,0,0,.35);
+      font-weight:900;cursor:pointer;user-select:none;white-space:nowrap
+    }
+    .btn.primary{border-color:rgba(47,191,107,.7);background: linear-gradient(180deg, rgba(47,191,107,.18), rgba(11,27,19,.9))}
+    .btn:active{transform:translateY(1px)}
     .grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:12px}
-    @media(min-width:980px){.grid{grid-template-columns:1.15fr .85fr}}
-    .card{border:1px solid var(--line);background:var(--panel);border-radius:var(--radius);padding:14px;box-shadow:0 12px 30px var(--shadow)}
-    h2{margin:0 0 10px;font-size:14px}
-    .small{color:var(--muted);font-size:12px;line-height:1.45}
-    .kpiRow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
-    .kpi{border:1px solid var(--line);background:rgba(255,255,255,.03);border-radius:14px;padding:10px}
-    .kpi .k{color:var(--muted);font-size:11px;letter-spacing:.2px}
-    .kpi .v{font-weight:900;font-size:18px;margin-top:6px}
-    label{display:block;color:var(--muted);font-size:12px;margin:10px 0 6px}
-    input,textarea,select{
-      width:100%;
-      background:var(--panel2);
-      border:1px solid var(--line);
-      color:var(--fg);
-      border-radius:12px;
-      padding:10px 10px;
-      font-size:14px;
-      outline:none;
+    @media(min-width:940px){.grid{grid-template-columns:1.2fr .8fr}}
+    .card{
+      border:1px solid rgba(23,53,36,.9);
+      border-radius:18px;
+      background:rgba(7,9,11,.62);
+      box-shadow:0 18px 44px rgba(0,0,0,.35);
+      backdrop-filter: blur(10px);
+      overflow:hidden;
     }
-    textarea{min-height:110px;resize:vertical}
-    .row{display:grid;grid-template-columns:1fr;gap:10px}
-    @media(min-width:620px){.row{grid-template-columns:1fr 1fr}}
-    .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    button,.btn{
-      background:rgba(47,191,107,.15);
-      border:1px solid rgba(47,191,107,.45);
-      color:var(--fg);
-      padding:10px 12px;
-      border-radius:12px;
-      font-size:13px;
-      cursor:pointer;
-      user-select:none;
+    .card .hd{
+      padding:12px 12px;
+      border-bottom:1px solid rgba(23,53,36,.65);
+      background:linear-gradient(180deg, rgba(11,27,19,.70), rgba(7,9,11,.72));
+      display:flex;align-items:flex-start;gap:10px;justify-content:space-between;
     }
-    button:hover,.btn:hover{border-color:rgba(47,191,107,.7)}
-    .btn.secondary{
-      background:rgba(255,255,255,.04);
-      border:1px solid var(--line);
-      color:var(--muted);
+    .card .hd .h{min-width:0}
+    .card .hd .t{font-weight:1000;letter-spacing:.5px;text-transform:uppercase;font-size:13px}
+    .card .hd .s{margin-top:6px;color:rgba(245,247,244,.72);font-size:12px;line-height:1.25}
+    .card .bd{padding:12px 12px 14px 12px}
+    .pill{
+      display:inline-flex;align-items:center;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(23,53,36,.85);
+      background:rgba(7,9,11,.55);
+      font-weight:900;
+      font-size:12px;
+      color:rgba(245,247,244,.78);
     }
-    .btn.secondary:hover{color:var(--fg)}
-    .btn.danger{
-      background:rgba(255,91,91,.12);
-      border:1px solid rgba(255,91,91,.45);
-    }
-    .hint{margin-top:10px;border:1px solid var(--line);background:rgba(255,255,255,.03);border-radius:12px;padding:10px;color:var(--muted);font-size:12px;line-height:1.45}
-    .hint.good{border-color:rgba(47,191,107,.45);color:rgba(245,247,244,.9)}
-    .hint.bad{border-color:rgba(255,91,91,.45);color:rgba(245,247,244,.9)}
-    .hint.warn{border-color:rgba(255,225,117,.55);color:rgba(245,247,244,.9)}
-    .links{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-    .link{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--line);background:rgba(255,255,255,.03);border-radius:999px;padding:8px 10px;font-size:12px;color:var(--muted)}
-    .link:hover{color:var(--fg)}
-    .tilegridWrap{
-      display:flex;
-      gap:12px;
-      flex-direction:column;
-    }
+    .tilegridWrap{display:flex;gap:12px;flex-direction:column}
     .tilegridTop{
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-end;
-      gap:12px;
-      flex-wrap:wrap;
-      padding-bottom:10px;
-      border-bottom:1px solid rgba(31,42,54,.8);
+      display:flex;gap:10px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap
     }
     .tilegridTop .left .t{font-size:13px;font-weight:900}
     .tilegridTop .left .s{margin-top:4px;color:var(--muted);font-size:12px}
-    .tilegridTop .kpis{
-      display:flex;
-      gap:10px;
-      align-items:stretch;
-      flex-wrap:wrap;
-    }
+    .tilegridTop .kpis{display:flex;gap:8px;flex-wrap:wrap}
     .tilegridTop .kpiMini{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      border-radius:14px;
-      padding:10px 12px;
-      min-width:140px;
+      border:1px solid rgba(23,53,36,.65);
+      border-radius:16px;
+      background:rgba(11,27,19,.55);
+      padding:10px 10px;
+      min-width:120px;
     }
-    .tilegridTop .kpiMini .k{color:var(--muted);font-size:11px}
-    .tilegridTop .kpiMini .v{font-size:18px;font-weight:900;margin-top:6px}
+    .tilegridTop .kpiMini .k{color:var(--muted);font-size:11px;letter-spacing:.5px;text-transform:uppercase;font-weight:900}
+    .tilegridTop .kpiMini .v{font-size:18px;font-weight:1000;margin-top:6px}
     .tilegrid{
       display:grid;
       grid-template-columns:repeat(10, 1fr);
       gap:6px;
-      margin-top:12px;
     }
     @media(max-width:520px){.tilegrid{grid-template-columns:repeat(8, 1fr)}}
     .tcell{
       position:relative;
-      border:1px solid rgba(31,42,54,.9);
-      background:rgba(255,255,255,.02);
-      border-radius:12px;
       height:44px;
+      border-radius:12px;
+      border:1px solid rgba(23,53,36,.85);
+      background:linear-gradient(180deg, rgba(11,27,19,.70), rgba(7,9,11,.72));
       cursor:pointer;
       user-select:none;
       overflow:hidden;
@@ -143,110 +116,158 @@
     .tcell i{position:absolute;inset:8px auto auto 8px;font-style:normal;font-size:10px;color:rgba(169,179,189,.85)}
     .tcell.taken:after{
       content:"TAKEN";
-      position:absolute;
-      inset:auto 8px 8px auto;
-      font-size:10px;
-      font-weight:900;
+      position:absolute;right:8px;top:8px;
+      font-size:10px;font-weight:1000;letter-spacing:.4px;
       color:rgba(255,225,117,.9);
-      letter-spacing:.3px;
     }
-    .footerNote{margin-top:12px;color:var(--muted);font-size:12px;line-height:1.5}
+    .row{display:grid;grid-template-columns:1fr;gap:10px}
+    @media(min-width:620px){.row{grid-template-columns:1fr 1fr}}
+    .field{
+      border:1px solid rgba(23,53,36,.65);
+      border-radius:16px;
+      background:rgba(11,27,19,.55);
+      padding:10px 10px;
+    }
+    .field .k{color:rgba(245,247,244,.68);font-size:11px;letter-spacing:.5px;text-transform:uppercase;font-weight:900}
+    .field input{
+      margin-top:8px;
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(23,53,36,.85);
+      background:rgba(7,9,11,.55);
+      color:var(--fg);
+      font-weight:900;
+      font-size:14px;
+      outline:none;
+    }
+    .field input:focus{border-color:rgba(47,191,107,.7);box-shadow:0 0 0 2px rgba(47,191,107,.12)}
+    .hint{
+      margin-top:12px;
+      padding:10px 12px;
+      border-radius:16px;
+      border:1px solid rgba(23,53,36,.65);
+      background:rgba(11,27,19,.55);
+      font-weight:900;
+      font-size:12px;
+      color:rgba(245,247,244,.85);
+    }
+    .hint.good{border-color:rgba(47,191,107,.7)}
+    .hint.bad{border-color:rgba(255,91,91,.7)}
+    .hint.warn{border-color:rgba(255,225,117,.7)}
+    code{color:rgba(245,247,244,.9)}
+    .link{color:rgba(245,247,244,.85);text-decoration:underline}
   </style>
 </head>
-
 <body>
   <div class="wrap">
+
     <div class="top">
       <div class="brand">
-        <div class="dot"></div>
+        <img src="/assets/monolith/monolith_logo.webp" alt="MONOLITH" />
         <div>
-          <h1>MONOLITH — Claim</h1>
-          <div class="sub">Pick a tile. Leave a mark. No edits. No deletes.</div>
+          <div class="t">MONOLITH Claim</div>
+          <div class="s">Pick a tile. Download claim.json. One tile. One mark.</div>
         </div>
       </div>
-      <div class="pill">Output schema: <code>monolith.claim.v1</code></div>
+      <div class="sp"></div>
+      <a class="btn" href="/monolith/" aria-label="back to wall">Back to Wall</a>
+      <a class="btn" href="/assets/monolith/feed.json" target="_blank" rel="noreferrer" aria-label="view feed json">feed.json</a>
     </div>
 
     <div class="grid">
       <div class="card">
-        <h2>Pick a tile</h2>
-        <div class="small">
-          Tap a tile or type coords. Taken tiles come from <code>/assets/monolith/feed.json</code>.
-        </div>
-
-        <div class="links">
-          <a class="link" href="/monolith/" aria-label="back to wall">Wall</a>
-          <a class="link" href="/assets/monolith/feed.json" target="_blank" rel="noreferrer">feed.json</a>
-        </div>
-
-        <div class="tilegridWrap">
-          <div class="tilegridTop">
-            <div class="left">
-              <div class="t">Grid</div>
-              <div class="s">Source: <code>/assets/monolith/feed.json</code></div>
-            </div>
-            <div class="kpis">
-              <div class="kpiMini">
-                <div class="k">Taken tiles</div>
-                <div class="v" id="kTaken">0</div>
-              </div>
-              <div class="kpiMini">
-                <div class="k">Selected</div>
-                <div class="v" id="kSel">None</div>
-              </div>
+        <div class="hd">
+          <div class="h">
+            <div class="t">Tile picker</div>
+            <div class="s">
+              Source: <code>/assets/monolith/feed.json</code><br />
+              Output schema: <code>monolith.claim.v1</code>
             </div>
           </div>
-
-          <div class="tilegrid" id="tilegrid" aria-label="tile grid"></div>
+          <div class="pill">Download packet</div>
         </div>
+        <div class="bd">
+          <div class="tilegridWrap">
+            <div class="tilegridTop">
+              <div class="left">
+                <div class="t">Select an open tile</div>
+                <div class="s">Taken tiles are read from feed.json and blocked</div>
+              </div>
+              <div class="kpis">
+                <div class="kpiMini">
+                  <div class="k">Taken tiles</div>
+                  <div class="v" id="kTaken">0</div>
+                </div>
+                <div class="kpiMini">
+                  <div class="k">Selected</div>
+                  <div class="v" id="kSel">None</div>
+                </div>
+              </div>
+            </div>
 
-        <div class="footerNote">
-          Tip: feed tiles are locked. You can still claim other tiles.
+            <div class="tilegrid" id="tilegrid" aria-label="tile grid"></div>
+
+            <div class="row">
+              <div class="field">
+                <div class="k">Tile</div>
+                <input id="tile" autocomplete="off" placeholder="e.g. E23-N11" maxlength="16" />
+              </div>
+              <div class="field">
+                <div class="k">Coords</div>
+                <input id="coords" autocomplete="off" placeholder="e.g. 23,-11" maxlength="16" />
+              </div>
+            </div>
+
+            <div>
+              <button class="btn primary" id="download" type="button">Download claim.json</button>
+            </div>
+
+            <div class="hint" id="hint">Pick a tile from the grid or type a tile id like E23-N11.</div>
+          </div>
         </div>
       </div>
 
       <div class="card">
-        <h2>Claim packet</h2>
-        <div class="small">
-          This page generates a JSON claim packet. You can copy or download it.
-        </div>
-
-        <div class="row">
-          <div>
-            <label for="tile">Tile ID</label>
-            <input id="tile" autocomplete="off" placeholder="e.g. E23-N11" maxlength="16" />
+        <div class="hd">
+          <div class="h">
+            <div class="t">How it works</div>
+            <div class="s">
+              This tool does not connect a wallet. It generates a local packet you can submit later.
+            </div>
           </div>
-          <div>
-            <label for="coords">Coords gx,gy</label>
-            <input id="coords" autocomplete="off" placeholder="e.g. 23,-11" maxlength="24" />
+          <div class="pill">monolith.claim.v1</div>
+        </div>
+        <div class="bd">
+          <div class="field">
+            <div class="k">What you download</div>
+            <div style="margin-top:8px;color:rgba(245,247,244,.78);font-size:13px;line-height:1.35;font-weight:900">
+              A JSON claim packet containing tile id, coords, timestamp, and feed reference.
+            </div>
           </div>
-        </div>
 
-        <label for="tag">Tag</label>
-        <input id="tag" autocomplete="off" placeholder="short label" maxlength="48" />
+          <div class="field" style="margin-top:10px">
+            <div class="k">Wall</div>
+            <div style="margin-top:8px;color:rgba(245,247,244,.78);font-size:13px;line-height:1.35;font-weight:900">
+              The wall viewer reads the same feed and renders taken tiles as graffiti marks.
+              Open the wall: <a class="link" href="/monolith/">/monolith/</a>
+            </div>
+          </div>
 
-        <label for="body">Body</label>
-        <textarea id="body" placeholder="your mark text"></textarea>
-
-        <div class="btnrow">
-          <button class="btn" id="copy" type="button">Copy claim.json</button>
-          <button class="btn primary" id="download" type="button">Download claim.json</button>
-          <button class="btn secondary" id="refresh" type="button">Refresh feed</button>
-          <button class="btn danger" id="clear" type="button">Clear</button>
-        </div>
-
-        <div class="hint" id="hint">Pick a tile to begin.</div>
-
-        <div class="footerNote">
-          Output schema: <code>monolith.claim.v1</code><br/>
-          Feed: <code>https://houseofcauliman.com/assets/monolith/feed.json</code>
+          <div class="field" style="margin-top:10px">
+            <div class="k">Feed</div>
+            <div style="margin-top:8px;color:rgba(245,247,244,.78);font-size:13px;line-height:1.35;font-weight:900">
+              View the live feed: <a class="link" href="/assets/monolith/feed.json" target="_blank" rel="noreferrer">/assets/monolith/feed.json</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
   </div>
 
 <script>
-(function(){
+(() => {
   "use strict";
 
   const FEED_URL = "/assets/monolith/feed.json";
@@ -258,28 +279,23 @@
     tilegrid: document.getElementById("tilegrid"),
     tile: document.getElementById("tile"),
     coords: document.getElementById("coords"),
-    tag: document.getElementById("tag"),
-    body: document.getElementById("body"),
-    copy: document.getElementById("copy"),
     download: document.getElementById("download"),
-    refresh: document.getElementById("refresh"),
-    clear: document.getElementById("clear"),
     hint: document.getElementById("hint"),
     kTaken: document.getElementById("kTaken"),
     kSel: document.getElementById("kSel")
   };
 
   const state = {
-    taken: new Set(),
-    marksByTile: new Map(),
     selectedTile: null,
-    selectedGX: 0,
-    selectedGY: 0
+    selectedGX: null,
+    selectedGY: null,
+    taken: new Set(),
+    marksByTile: new Map()
   };
 
-  function setHint(msg, kind){
-    if(!el.hint) return;
-    el.hint.className = "hint" + (kind ? (" " + kind) : "");
+  function setHint(msg, cls){
+    el.hint.className = "hint";
+    if(cls) el.hint.classList.add(cls);
     el.hint.textContent = msg;
   }
 
@@ -293,145 +309,129 @@
 
   function parseTileToCoords(tile){
     if(typeof tile !== "string") return null;
-    const raw = tile.trim().toUpperCase();
-    const m = raw.match(/^([EW])(\d+)-([NS])(\d+)$/);
+    const s = tile.trim().toUpperCase();
+    const m = s.match(/^(E|W)\s*(\d+)\s*-\s*(N|S)\s*(\d+)$/i);
     if(!m) return null;
-    const gx = (m[1] === "W") ? -parseInt(m[2],10) : parseInt(m[2],10);
-    const gy = (m[3] === "N") ? -parseInt(m[4],10) : parseInt(m[4],10);
+    const gx = (m[1].toUpperCase()==="W") ? -parseInt(m[2],10) : parseInt(m[2],10);
+    const gy = (m[3].toUpperCase()==="N") ? -parseInt(m[4],10) : parseInt(m[4],10);
     if(!Number.isFinite(gx) || !Number.isFinite(gy)) return null;
     return { gx, gy, tile: tileIdFromCoords(gx, gy) };
   }
 
-  function parseCoords(str){
-    if(typeof str !== "string") return null;
-    const s = str.trim();
-    if(!s) return null;
-    const parts = s.split(",").map(x=>x.trim());
-    if(parts.length !== 2) return null;
-    const gx = parseInt(parts[0],10);
-    const gy = parseInt(parts[1],10);
+  function parseCoordsAny(raw){
+    if(!raw) return null;
+    const s = String(raw).trim();
+    let m = s.match(/^(-?\d+)\s*,\s*(-?\d+)$/);
+    if(!m) m = s.match(/^(-?\d+)\s+(-?\d+)$/);
+    if(!m) return null;
+    const gx = parseInt(m[1],10);
+    const gy = parseInt(m[2],10);
     if(!Number.isFinite(gx) || !Number.isFinite(gy)) return null;
     return { gx, gy, tile: tileIdFromCoords(gx, gy) };
   }
 
-  function refreshUI(){
+  function updateKpis(){
     if(el.kTaken) el.kTaken.textContent = String(state.taken.size);
     if(el.kSel) el.kSel.textContent = state.selectedTile ? state.selectedTile : "None";
-
-    if(el.tilegrid){
-      buildGrid();
-
-      if(state.selectedTile){
-        const btn = el.tilegrid.querySelector('[data-tile="'+state.selectedTile+'"]');
-        if(btn) btn.classList.add("selected");
-      }
-    }
   }
 
-  function selectTileByCoords(gx, gy){
+  function clearSelected(){
+    state.selectedTile = null;
+    state.selectedGX = null;
+    state.selectedGY = null;
+    el.tilegrid.querySelectorAll(".tcell.selected").forEach(x => x.classList.remove("selected"));
+    updateKpis();
+  }
+
+  function selectByCoords(gx, gy){
     const tile = tileIdFromCoords(gx, gy);
     if(state.taken.has(tile)){
       setHint("That tile is taken. Pick another.", "bad");
-      return;
+      return false;
     }
 
     state.selectedTile = tile;
     state.selectedGX = gx;
     state.selectedGY = gy;
 
-    if(el.tile) el.tile.value = tile;
-    if(el.coords) el.coords.value = `${gx},${gy}`;
-    refreshUI();
-    setHint("Tile selected.", "good");
+    el.tile.value = tile;
+    el.coords.value = `${gx},${gy}`;
+
+    el.tilegrid.querySelectorAll(".tcell.selected").forEach(x => x.classList.remove("selected"));
+    const btn = el.tilegrid.querySelector('[data-gx="' + gx + '"][data-gy="' + gy + '"]');
+    if(btn) btn.classList.add("selected");
+
+    setHint("Selected " + tile + ". Download claim.json.", "good");
+    updateKpis();
+    return true;
   }
 
-  function selectTileByTileId(tile){
-    const c = parseTileToCoords(tile);
-    if(!c){
-      setHint("Invalid tile id. Use E23-N11 format.", "warn");
-      return;
+  function selectByTileStr(tileStr){
+    const fromTile = parseTileToCoords(tileStr);
+    if(!fromTile){
+      setHint("Tile format invalid. Use E23-N11 or W5-S2.", "warn");
+      return false;
     }
-    selectTileByCoords(c.gx, c.gy);
+    return selectByCoords(fromTile.gx, fromTile.gy);
   }
 
   function buildGrid(){
     if(!el.tilegrid) return;
     el.tilegrid.innerHTML = "";
+    for(let gy=0; gy<GRID_H; gy++){
+      for(let gx=0; gx<GRID_W; gx++){
+        const tile = tileIdFromCoords(gx, gy);
+        const cell = document.createElement("div");
+        cell.className = "tcell" + (state.taken.has(tile) ? " taken" : "");
+        cell.setAttribute("data-gx", String(gx));
+        cell.setAttribute("data-gy", String(gy));
+        cell.setAttribute("data-tile", tile);
+        cell.setAttribute("aria-label", "Tile " + tile);
 
-    const total = GRID_W * GRID_H;
-    for(let i=0;i<total;i++){
-      const gx = i % GRID_W;
-      const gy = Math.floor(i / GRID_W);
-      const tile = tileIdFromCoords(gx, gy);
+        const labelA = document.createElement("i");
+        labelA.textContent = `${gx},${gy}`;
+        const labelB = document.createElement("b");
+        labelB.textContent = tile;
 
-      const cell = document.createElement("div");
-      cell.className = "tcell" + (state.taken.has(tile) ? " taken" : "");
-      cell.setAttribute("data-gx", String(gx));
-      cell.setAttribute("data-gy", String(gy));
-      cell.setAttribute("data-tile", tile);
-      cell.setAttribute("aria-label", `Tile ${tile} ${state.taken.has(tile) ? "taken" : "open"}`);
+        cell.appendChild(labelA);
+        cell.appendChild(labelB);
 
-      const iEl = document.createElement("i");
-      iEl.textContent = tile;
-      cell.appendChild(iEl);
+        cell.addEventListener("click", () => {
+          if(state.taken.has(tile)){
+            setHint("That tile is taken. Pick another.", "bad");
+            return;
+          }
+          selectByCoords(gx, gy);
+        });
 
-      const bEl = document.createElement("b");
-      bEl.textContent = String(i+1).padStart(2,"0");
-      cell.appendChild(bEl);
+        el.tilegrid.appendChild(cell);
+      }
+    }
 
-      cell.addEventListener("click", ()=>{
-        if(state.taken.has(tile)){
-          setHint("That tile is taken. Pick another.", "bad");
-          return;
-        }
-        state.selectedTile = tile;
-        state.selectedGX = gx;
-        state.selectedGY = gy;
-        if(el.tile) el.tile.value = tile;
-        if(el.coords) el.coords.value = `${gx},${gy}`;
-        refreshUI();
-        setHint("Tile selected.", "good");
-      });
-
-      el.tilegrid.appendChild(cell);
+    if(state.selectedTile){
+      const btn = el.tilegrid.querySelector('[data-tile="' + state.selectedTile + '"]');
+      if(btn) btn.classList.add("selected");
     }
   }
 
-  function buildPacket(){
-    const now = new Date().toISOString().slice(0,10);
+  function makePacket(){
+    const now = new Date();
+    const iso = now.toISOString().slice(0,10);
 
-    let gx = null, gy = null, tile = null;
-
-    const tileStr = (el.tile && el.tile.value) ? el.tile.value.trim() : "";
-    const coordStr = (el.coords && el.coords.value) ? el.coords.value.trim() : "";
-
-    if(tileStr){
-      const fromTile = parseTileToCoords(tileStr);
-      if(fromTile){
-        gx = fromTile.gx;
-        gy = fromTile.gy;
-        tile = fromTile.tile;
-      }
-    }
-
-    if(tile === null && coordStr){
-      const fromCoords = parseCoords(coordStr);
-      if(fromCoords){
-        gx = fromCoords.gx;
-        gy = fromCoords.gy;
-        tile = fromCoords.tile;
-      }
-    }
-
-    if(tile === null && state.selectedTile){
-      tile = state.selectedTile;
-      gx = state.selectedGX;
-      gy = state.selectedGY;
-    }
+    let gx = state.selectedGX, gy = state.selectedGY, tile = state.selectedTile;
 
     if(!tile){
-      setHint("Pick a tile first.", "warn");
-      return null;
+      const tileStr = el.tile.value || "";
+      const coordsStr = el.coords.value || "";
+      const fromTile = parseTileToCoords(tileStr);
+      const fromCoords = parseCoordsAny(coordsStr);
+
+      if(fromTile){ gx = fromTile.gx; gy = fromTile.gy; tile = fromTile.tile; }
+      else if(fromCoords){ gx = fromCoords.gx; gy = fromCoords.gy; tile = fromCoords.tile; }
+      else{
+        setHint("Pick a tile first.", "warn");
+        return null;
+      }
     }
 
     if(state.taken.has(tile)){
@@ -439,19 +439,13 @@
       return null;
     }
 
-    const tag = (el.tag && el.tag.value) ? el.tag.value.trim() : "";
-    const body = (el.body && el.body.value) ? el.body.value.trim() : "";
-
     const packet = {
       schema: "monolith.claim.v1",
-      ts: now,
+      ts: iso,
       tile,
-      gx: Number.isFinite(gx) ? gx : 0,
-      gy: Number.isFinite(gy) ? gy : 0,
-      tag: tag || "",
-      body: body || "",
-      meta: {
-        site: "https://houseofcauliman.com/monolith/claim/",
+      gx,
+      gy,
+      source: {
         feed: "https://houseofcauliman.com/assets/monolith/feed.json"
       }
     };
@@ -459,17 +453,8 @@
     return packet;
   }
 
-  async function copyText(txt){
-    try{
-      await navigator.clipboard.writeText(txt);
-      return true;
-    }catch(e){
-      return false;
-    }
-  }
-
-  function downloadText(filename, text){
-    const blob = new Blob([text], { type:"application/json" });
+  function downloadJSON(obj, filename){
+    const blob = new Blob([JSON.stringify(obj, null, 2)], { type:"application/json" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
@@ -477,143 +462,113 @@
     document.body.appendChild(a);
     a.click();
     a.remove();
-    URL.revokeObjectURL(url);
+    setTimeout(() => URL.revokeObjectURL(url), 400);
   }
 
   async function loadFeed(){
     try{
       const res = await fetch(FEED_URL + "?cb=" + Date.now(), { cache:"no-store" });
-      if(!res.ok) throw new Error("feed http " + res.status);
-      const data = await res.json();
+      if(!res.ok) throw new Error("bad feed");
+      const json = await res.json();
 
       state.taken = new Set();
       state.marksByTile = new Map();
 
-      if(Array.isArray(data)){
-        for(const m of data){
-          if(!m || typeof m !== "object") continue;
-
+      if(Array.isArray(json)){
+        for(const m of json){
           const gx = Number.isFinite(+m.gx) ? +m.gx : null;
           const gy = Number.isFinite(+m.gy) ? +m.gy : null;
 
           let tile = (typeof m.tile === "string" && m.tile) ? String(m.tile).trim().toUpperCase() : null;
           if(!tile && gx !== null && gy !== null) tile = tileIdFromCoords(gx, gy);
 
-          if(!tile) continue;
-
-          const c = parseTileToCoords(tile);
+          const c = tile ? parseTileToCoords(tile) : null;
           tile = (c ? c.tile : tile);
 
+          if(!tile) continue;
           state.taken.add(tile);
-          state.marksByTile.set(tile, {
-            id: (typeof m.id === "string" ? m.id : ""),
-            tile,
-            gx: gx !== null ? gx : (c ? c.gx : 0),
-            gy: gy !== null ? gy : (c ? c.gy : 0),
-            tag: (typeof m.tag === "string" ? m.tag : ""),
-            ts: (typeof m.ts === "string" ? m.ts : "")
-          });
         }
       }
 
+      updateKpis();
+      buildGrid();
+
       if(state.selectedTile && state.taken.has(state.selectedTile)){
-        state.selectedTile = null;
-        if(el.tile) el.tile.value = "";
-        if(el.coords) el.coords.value = "";
+        clearSelected();
         setHint("Selection was taken by feed. Pick a new tile.", "warn");
       }
 
-      refreshUI();
-      if(state.taken.size > 0) setHint("Feed loaded. Taken tiles are marked.", "good");
-      else setHint("Feed loaded. No taken tiles.", "warn");
-    }catch(err){
-      refreshUI();
+      return true;
+    } catch(e){
+      updateKpis();
+      buildGrid();
       setHint("Feed load failed. You can still pick tiles, but taken tiles will not be marked.", "warn");
+      return false;
     }
   }
 
-  function wire(){
-    if(el.tile){
-      el.tile.addEventListener("input", ()=>{
-        const v = el.tile.value.trim();
-        if(!v){
-          state.selectedTile = null;
-          refreshUI();
-          return;
+  function autoCenterNearFirstMark(){
+    // This claim grid is fixed size. We just auto fill the tile input from url if present
+    const u = new URL(window.location.href);
+    const t = (u.searchParams.get("tile") || "").trim();
+    if(t){
+      el.tile.value = t.toUpperCase();
+      const fromTile = parseTileToCoords(el.tile.value);
+      if(fromTile){
+        el.coords.value = `${fromTile.gx},${fromTile.gy}`;
+        if(state.taken.has(fromTile.tile)){
+          setHint("That tile is taken. Pick another.", "bad");
+        } else {
+          selectByCoords(fromTile.gx, fromTile.gy);
         }
-        const c = parseTileToCoords(v);
-        if(!c){
-          refreshUI();
-          return;
-        }
-        state.selectedTile = c.tile;
-        state.selectedGX = c.gx;
-        state.selectedGY = c.gy;
-        if(el.coords) el.coords.value = `${c.gx},${c.gy}`;
-        refreshUI();
-      });
-    }
-
-    if(el.coords){
-      el.coords.addEventListener("input", ()=>{
-        const v = el.coords.value.trim();
-        if(!v) return;
-        const c = parseCoords(v);
-        if(!c) return;
-        state.selectedTile = c.tile;
-        state.selectedGX = c.gx;
-        state.selectedGY = c.gy;
-        if(el.tile) el.tile.value = c.tile;
-        refreshUI();
-      });
-    }
-
-    if(el.copy){
-      el.copy.addEventListener("click", async ()=>{
-        const pkt = buildPacket();
-        if(!pkt) return;
-        const txt = JSON.stringify(pkt, null, 2);
-        const ok = await copyText(txt);
-        if(ok) setHint("Copied claim.json to clipboard.", "good");
-        else setHint("Clipboard blocked, use Download claim.json", "warn");
-      });
-    }
-
-    if(el.download){
-      el.download.addEventListener("click", ()=>{
-        const pkt = buildPacket();
-        if(!pkt) return;
-        const txt = JSON.stringify(pkt, null, 2);
-        downloadText("claim.json", txt);
-        setHint("Downloaded claim.json", "good");
-      });
-    }
-
-    if(el.refresh){
-      el.refresh.addEventListener("click", async ()=>{
-        setHint("Refreshing feed...", "warn");
-        await loadFeed();
-      });
-    }
-
-    if(el.clear){
-      el.clear.addEventListener("click", ()=>{
-        if(el.tile) el.tile.value = "";
-        if(el.coords) el.coords.value = "";
-        if(el.tag) el.tag.value = "";
-        if(el.body) el.body.value = "";
-        state.selectedTile = null;
-        refreshUI();
-        setHint("Cleared.", "warn");
-      });
+      }
     }
   }
+
+  el.tile.addEventListener("input", () => {
+    const t = (el.tile.value || "").trim();
+    if(!t){ clearSelected(); setHint("Pick a tile from the grid or type a tile id like E23-N11.", ""); return; }
+    const fromTile = parseTileToCoords(t);
+    if(fromTile){
+      el.coords.value = `${fromTile.gx},${fromTile.gy}`;
+      if(state.taken.has(fromTile.tile)){
+        setHint("Selected tile exists in feed. It is taken.", "bad");
+      } else {
+        selectByCoords(fromTile.gx, fromTile.gy);
+      }
+    } else {
+      setHint("Tile format invalid. Use E23-N11 or W5-S2.", "warn");
+    }
+  });
+
+  el.coords.addEventListener("input", () => {
+    const c = parseCoordsAny(el.coords.value || "");
+    if(!c) return;
+    el.tile.value = tileIdFromCoords(c.gx, c.gy);
+    if(state.taken.has(el.tile.value)){
+      setHint("That tile is taken. Pick another.", "bad");
+    } else {
+      selectByCoords(c.gx, c.gy);
+    }
+  });
+
+  el.download.addEventListener("click", async () => {
+    const packet = makePacket();
+    if(!packet) return;
+
+    try{
+      await navigator.clipboard.writeText(JSON.stringify(packet, null, 2));
+      setHint("Claim packet copied to clipboard. Download also started.", "good");
+    } catch(e){
+      setHint("Clipboard blocked, use Download claim.json", "warn");
+    }
+    downloadJSON(packet, "claim.json");
+  });
 
   buildGrid();
-  wire();
-  loadFeed();
+  loadFeed().then(autoCenterNearFirstMark);
+
 })();
 </script>
-
 </body>
 </html>
