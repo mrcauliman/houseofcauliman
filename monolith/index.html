@@ -4,7 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
   <title>MONOLITH — The Wall of Record</title>
-
   <meta name="description" content="MONOLITH is a permanent on-chain wall. One tile. One mark. No edits. No deletes." />
   <meta property="og:title" content="MONOLITH — The Wall of Record" />
   <meta property="og:description" content="A permanent on-chain wall. One tile. One mark. No edits. No deletes." />
@@ -20,240 +19,119 @@
       --line:#1f2a36;
       --fg:#f5f7f4;
       --muted:#a9b3bd;
-
       --green:#2fbf6b;
       --warn:#ffe175;
       --red:#ff5b5b;
-
       --shadow:rgba(0,0,0,.45);
       --radius:18px;
 
-      --step:128px;     /* tile spacing */
-      --tile:118px;     /* visible tile size */
+      --step:128px;
+      --tile:118px;
     }
 
     *{box-sizing:border-box}
     html,body{height:100%;margin:0}
     body{
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      background:
-        radial-gradient(1200px 600px at 50% -10%, rgba(47,191,107,.10), transparent 55%),
-        radial-gradient(900px 500px at 20% 0%, rgba(255,255,255,.05), transparent 55%),
-        var(--bg);
+      background:var(--bg);
       color:var(--fg);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
       overflow:hidden;
     }
     a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block}
 
-    .app{
-      height:100%;
-      display:grid;
-      grid-template-rows:auto 1fr;
-    }
-
-    header{
-      padding:14px 14px 10px;
-      border-bottom:1px solid rgba(255,255,255,.06);
-      background:linear-gradient(180deg, rgba(12,17,22,.88), rgba(12,17,22,.55));
-      backdrop-filter: blur(8px);
-    }
-    .topbar{
+    .hud{
+      position:fixed;
+      top:12px;
+      left:12px;
+      right:12px;
+      z-index:50;
       display:flex;
-      align-items:center;
+      align-items:stretch;
       justify-content:space-between;
       gap:12px;
-      flex-wrap:wrap;
+      pointer-events:none;
+    }
+    .hud .card{
+      pointer-events:auto;
+      border:1px solid var(--line);
+      background:rgba(12,17,22,.86);
+      backdrop-filter: blur(6px);
+      border-radius:var(--radius);
+      box-shadow:0 14px 34px var(--shadow);
+      padding:12px 12px;
     }
     .brand{
       display:flex;
-      align-items:center;
       gap:10px;
-      min-width:260px;
+      align-items:center;
+      min-width:320px;
     }
-    .brand img{
-      width:46px;height:46px;
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.03);
-      padding:6px;
-      box-shadow:0 12px 30px var(--shadow);
-    }
-    .brand .t{
-      display:flex;
-      flex-direction:column;
-      gap:2px;
-    }
-    .brand h1{
-      margin:0;
-      font-size:14px;
-      letter-spacing:.2px;
-      line-height:1.1;
-    }
-    .brand .sub{
-      margin:0;
-      font-size:12px;
-      color:rgba(169,179,189,.92);
-      line-height:1.2;
-    }
+    .dot{width:10px;height:10px;border-radius:999px;background:var(--green);box-shadow:0 0 18px rgba(47,191,107,.25)}
+    .brand h1{margin:0;font-size:14px;letter-spacing:.2px}
+    .brand .sub{margin-top:4px;color:var(--muted);font-size:12px;line-height:1.35}
 
     .actions{
       display:flex;
-      align-items:center;
       gap:10px;
+      align-items:center;
       flex-wrap:wrap;
       justify-content:flex-end;
-      flex:1;
     }
     .btn{
       display:inline-flex;
       align-items:center;
-      gap:10px;
-      padding:10px 12px;
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.04);
-      box-shadow:0 12px 30px var(--shadow);
+      gap:8px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:999px;
+      padding:9px 12px;
       font-size:12px;
-      color:var(--fg);
-      cursor:pointer;
+      color:var(--muted);
       user-select:none;
-      -webkit-tap-highlight-color: transparent;
     }
-    .btn:hover{border-color:rgba(255,255,255,.18)}
+    .btn:hover{color:var(--fg);border-color:rgba(47,191,107,.55)}
     .btn.primary{
-      border-color:rgba(47,191,107,.55);
-      background:rgba(47,191,107,.14);
-    }
-    .btn.primary:hover{border-color:rgba(47,191,107,.85)}
-    .btn .k{
-      font-weight:800;
-      letter-spacing:.35px;
-      font-size:10px;
-      color:rgba(245,247,244,.80);
-      padding:3px 8px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.04);
-    }
-
-    .hud{
-      margin-top:10px;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:space-between;
-    }
-    .hud .left{
-      display:flex;gap:10px;flex-wrap:wrap;align-items:center;
-    }
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.03);
-      color:rgba(169,179,189,.92);
-      font-size:12px;
-      user-select:none;
-    }
-    .dot{
-      width:10px;height:10px;border-radius:999px;
-      background:var(--green);
-      box-shadow:0 0 18px rgba(47,191,107,.25);
-    }
-    .kbd{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size:11px;
-      color:rgba(245,247,244,.75);
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.03);
-      padding:2px 6px;
-      border-radius:8px;
-    }
-    .hud .right{
-      display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:flex-end;
-    }
-    .jump{
-      display:flex;
-      gap:8px;
-      align-items:center;
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.03);
-    }
-    .jump input{
-      width:140px;
-      max-width:44vw;
-      background:transparent;
-      border:0;
-      outline:none;
+      background:rgba(47,191,107,.15);
+      border-color:rgba(47,191,107,.45);
       color:var(--fg);
-      font-size:12px;
-    }
-    .jump input::placeholder{color:rgba(169,179,189,.55)}
-    .jump button{
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.04);
-      color:rgba(245,247,244,.90);
-      padding:6px 10px;
-      border-radius:999px;
-      font-size:12px;
-      cursor:pointer;
-    }
-    .jump button:hover{border-color:rgba(255,255,255,.18)}
-
-    main{
-      position:relative;
-      height:100%;
-      display:grid;
-      grid-template-columns:1fr;
+      font-weight:800;
     }
 
     .viewport{
-      position:absolute;
+      position:fixed;
       inset:0;
       overflow:hidden;
       touch-action:none;
       cursor:grab;
-      background:
-        radial-gradient(1100px 700px at 60% 30%, rgba(255,255,255,.04), transparent 60%),
-        radial-gradient(900px 500px at 10% 75%, rgba(47,191,107,.06), transparent 60%),
-        transparent;
     }
     .viewport.dragging{cursor:grabbing}
 
     .world{
       position:absolute;
-      left:0;top:0;
-      width:1px;height:1px;
-      will-change: transform;
+      left:0;
+      top:0;
+      transform:translate(0px,0px);
+      will-change:transform;
     }
 
-    /* tile cell */
     .tcell{
       position:absolute;
       width:var(--tile);
       height:var(--tile);
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.03);
-      box-shadow:0 12px 30px var(--shadow);
+      border-radius:16px;
+      border:1px solid rgba(31,42,54,.95);
+      background:rgba(255,255,255,.02);
       overflow:hidden;
       user-select:none;
-      -webkit-tap-highlight-color: transparent;
+      box-shadow:0 10px 24px rgba(0,0,0,.28);
     }
-    .tcell:hover{border-color:rgba(47,191,107,.45)}
     .tcell:before{
       content:"";
-      position:absolute;inset:0;
+      position:absolute;
+      inset:0;
       background:
-        radial-gradient(90px 60px at 25% 20%, rgba(255,255,255,.06), transparent 60%),
-        radial-gradient(90px 60px at 80% 80%, rgba(255,255,255,.04), transparent 60%);
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,.06), transparent 40%),
+        radial-gradient(circle at 70% 80%, rgba(255,255,255,.05), transparent 45%);
       pointer-events:none;
     }
     .tcell .meta{
@@ -262,742 +140,631 @@
       display:flex;
       align-items:flex-end;
       justify-content:space-between;
-      gap:10px;
+      gap:8px;
+      pointer-events:none;
     }
-    .tcell b{
-      margin:0;
-      font-size:11px;
-      font-weight:900;
-      letter-spacing:.35px;
-      color:rgba(245,247,244,.88);
-      text-shadow:0 2px 10px rgba(0,0,0,.45);
-      white-space:nowrap;
-    }
-    .tcell i{
-      font-style:normal;
+    .tcell .id{
       font-size:10px;
-      color:rgba(169,179,189,.82);
-      white-space:nowrap;
+      font-weight:900;
+      color:rgba(245,247,244,.85);
+      letter-spacing:.2px;
+    }
+    .tcell .coord{
+      font-size:10px;
+      color:rgba(169,179,189,.85);
     }
 
     .tcell .spray{
       position:absolute;
       inset:0;
-      opacity:0;
-      transition:opacity .18s ease;
+      opacity:.0;
+      transform:scale(1.02);
+      transition:opacity .2s ease;
+      pointer-events:none;
     }
+
     .tcell.taken{
-      border-color:rgba(47,191,107,.55);
-      background:rgba(47,191,107,.08);
+      border-color:rgba(255,225,117,.45);
+      background:rgba(255,255,255,.03);
     }
     .tcell.taken .spray{opacity:1}
     .tcell.taken:after{
       content:"";
       position:absolute;
       inset:0;
-      background: radial-gradient(140px 90px at 30% 20%, rgba(47,191,107,.12), transparent 60%);
+      box-shadow:0 0 0 2px rgba(255,225,117,.06) inset;
       pointer-events:none;
     }
 
-    /* right panel */
     .panel{
-      position:absolute;
-      right:14px;
-      top:14px;
-      width:340px;
-      max-width:calc(100vw - 28px);
-      border:1px solid rgba(255,255,255,.10);
+      position:fixed;
+      top:86px;
+      right:12px;
+      width:min(420px, calc(100vw - 24px));
+      max-height:calc(100vh - 98px);
+      overflow:auto;
+      z-index:60;
+      border:1px solid var(--line);
       background:rgba(12,17,22,.92);
-      border-radius:18px;
-      box-shadow:0 18px 55px rgba(0,0,0,.55);
-      backdrop-filter: blur(10px);
-      overflow:hidden;
+      backdrop-filter: blur(6px);
+      border-radius:var(--radius);
+      box-shadow:0 18px 46px var(--shadow);
+      padding:14px;
+      display:none;
     }
-    .panel .head{
+    .panel.show{display:block}
+    .panelTop{
       display:flex;
       align-items:flex-start;
       justify-content:space-between;
-      gap:10px;
-      padding:12px 12px 10px;
-      border-bottom:1px solid rgba(255,255,255,.06);
-      background:linear-gradient(180deg, rgba(255,255,255,.04), transparent);
+      gap:12px;
     }
     .panel h2{
       margin:0;
-      font-size:13px;
+      font-size:14px;
       letter-spacing:.2px;
-      line-height:1.2;
     }
     .panel .small{
-      margin-top:4px;
+      margin-top:6px;
+      color:var(--muted);
       font-size:12px;
-      color:rgba(169,179,189,.92);
-      line-height:1.35;
+      line-height:1.45;
     }
-    .panel .x{
-      width:36px;height:36px;
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.04);
-      cursor:pointer;
-      display:flex;align-items:center;justify-content:center;
-      color:rgba(245,247,244,.9);
-      user-select:none;
-    }
-    .panel .x:hover{border-color:rgba(255,255,255,.18)}
-    .panel .body{
-      padding:12px;
-      display:grid;
-      gap:10px;
-    }
-    .kv{
-      display:grid;
-      grid-template-columns:110px 1fr;
-      gap:8px;
-      padding:10px 10px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.08);
+    .xbtn{
+      border:1px solid var(--line);
       background:rgba(255,255,255,.03);
-    }
-    .kv .k{
-      color:rgba(169,179,189,.92);
-      font-size:11px;
-      letter-spacing:.25px;
-      font-weight:800;
-      text-transform:uppercase;
-    }
-    .kv .v{
-      color:rgba(245,247,244,.92);
+      color:var(--muted);
+      border-radius:12px;
+      padding:8px 10px;
       font-size:12px;
-      line-height:1.35;
-      word-break:break-word;
+      cursor:pointer;
     }
+    .xbtn:hover{color:var(--fg);border-color:rgba(47,191,107,.55)}
+
+    .kv{
+      margin-top:12px;
+      border-top:1px solid rgba(31,42,54,.8);
+      padding-top:12px;
+      display:grid;
+      grid-template-columns:120px 1fr;
+      gap:8px 12px;
+      font-size:12px;
+    }
+    .kv .k{color:var(--muted)}
+    .kv .v{color:rgba(245,247,244,.9)}
     .mono-link{
+      margin-top:12px;
       display:flex;
       gap:10px;
       flex-wrap:wrap;
-      align-items:center;
-      justify-content:space-between;
     }
     .mono-link a{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.04);
-      padding:10px 12px;
-      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:999px;
+      padding:8px 10px;
       font-size:12px;
-      color:rgba(245,247,244,.92);
+      color:var(--muted);
     }
-    .mono-link a:hover{border-color:rgba(255,255,255,.18)}
-    .mono-link a.primary{
-      border-color:rgba(47,191,107,.55);
-      background:rgba(47,191,107,.14);
-    }
+    .mono-link a:hover{color:var(--fg);border-color:rgba(47,191,107,.55)}
 
-    /* toast */
     .toast{
-      position:absolute;
-      left:50%;
-      bottom:14px;
-      transform:translateX(-50%);
+      position:fixed;
+      left:12px;
+      bottom:12px;
+      z-index:80;
+      border:1px solid var(--line);
       background:rgba(12,17,22,.92);
-      border:1px solid rgba(255,255,255,.10);
-      border-radius:999px;
+      backdrop-filter: blur(6px);
+      border-radius:14px;
       padding:10px 12px;
-      box-shadow:0 18px 55px rgba(0,0,0,.55);
-      backdrop-filter: blur(10px);
-      display:none;
-      align-items:center;
-      gap:10px;
-      max-width:calc(100vw - 28px);
-    }
-    .toast.show{display:flex}
-    .toast .badge{
-      font-size:10px;
-      font-weight:900;
-      letter-spacing:.35px;
-      padding:3px 8px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.04);
-      color:rgba(245,247,244,.88);
-      white-space:nowrap;
-    }
-    .toast .msg{
+      color:var(--muted);
       font-size:12px;
-      color:rgba(245,247,244,.92);
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
+      box-shadow:0 12px 30px var(--shadow);
+      opacity:0;
+      transform:translateY(10px);
+      transition:opacity .18s ease, transform .18s ease;
+      pointer-events:none;
     }
-    .badge.warn{border-color:rgba(255,225,117,.40);background:rgba(255,225,117,.12)}
-    .badge.bad{border-color:rgba(255,91,91,.40);background:rgba(255,91,91,.12)}
-    .badge.good{border-color:rgba(47,191,107,.40);background:rgba(47,191,107,.12)}
-
-    @media (max-width:860px){
-      .panel{right:10px;top:auto;bottom:74px}
-    }
+    .toast.show{opacity:1;transform:translateY(0px)}
+    .toast.good{border-color:rgba(47,191,107,.45);color:rgba(245,247,244,.9)}
+    .toast.warn{border-color:rgba(255,225,117,.55);color:rgba(245,247,244,.9)}
+    .toast.bad{border-color:rgba(255,91,91,.45);color:rgba(245,247,244,.9)}
   </style>
 </head>
+
 <body>
-  <div class="app">
-    <header>
-      <div class="topbar">
-        <div class="brand" aria-label="monolith brand">
-          <img src="/assets/monolith/monolith_logo.webp" alt="MONOLITH">
-          <div class="t">
-            <h1>One tile. One mark. No edits. No deletes.</h1>
-            <p class="sub">Drag to move. Tap a tile to inspect.</p>
-          </div>
-        </div>
-
-        <div class="actions">
-          <a class="btn primary" href="/monolith/claim/" aria-label="claim a tile">
-            <span class="k">ACTION</span> Claim a Tile
-          </a>
-          <a class="btn" href="/assets/monolith/feed.json" target="_blank" rel="noreferrer" aria-label="view feed json">
-            <span class="k">FEED</span> feed.json
-          </a>
-        </div>
+  <div class="hud">
+    <div class="card brand">
+      <div class="dot"></div>
+      <div>
+        <h1>MONOLITH — The Wall of Record</h1>
+        <div class="sub">Drag to move. Tap a tile to inspect.</div>
       </div>
+    </div>
 
-      <div class="hud">
-        <div class="left">
-          <div class="pill"><span class="dot"></span> Live preview wall</div>
-          <div class="pill">Finger drag or mouse drag</div>
-          <div class="pill">Tap tiles to open panel</div>
-        </div>
-
-        <div class="right">
-          <div class="jump" aria-label="jump to tile">
-            <span class="kbd">JUMP</span>
-            <input id="jumpIn" autocomplete="off" spellcheck="false" placeholder="E23-N11 or 23,-11" />
-            <button id="jumpBtn" type="button">Go</button>
-          </div>
-          <button class="btn" id="recenter" type="button" aria-label="recenter">
-            <span class="k">VIEW</span> Recenter
-          </button>
-        </div>
-      </div>
-    </header>
-
-    <main>
-      <div class="viewport" id="vp" aria-label="monolith wall viewport">
-        <div class="world" id="world" aria-label="monolith wall world"></div>
-      </div>
-
-      <aside class="panel" id="panel" aria-label="tile detail panel">
-        <div class="head">
-          <div>
-            <h2 id="ptitle">Tile</h2>
-            <div class="small" id="psub">Tap a tile to inspect details.</div>
-          </div>
-          <div class="x" id="pclose" aria-label="close panel">✕</div>
-        </div>
-
-        <div class="body">
-          <div class="kv">
-            <div class="k">Tile</div><div class="v" id="vTile">None</div>
-          </div>
-          <div class="kv">
-            <div class="k">Coords</div><div class="v" id="vCoords">0, 0</div>
-          </div>
-          <div class="kv">
-            <div class="k">Status</div><div class="v" id="vStatus">Open</div>
-          </div>
-          <div class="kv">
-            <div class="k">Tag</div><div class="v" id="vTag">None</div>
-          </div>
-          <div class="kv">
-            <div class="k">Date</div><div class="v" id="vTs">None</div>
-          </div>
-
-          <div class="mono-link" aria-label="tile links">
-            <a class="primary" id="panelClaim" href="/monolith/claim/" aria-label="claim flow">Claim flow</a>
-            <a id="panelFeed" href="/assets/monolith/feed.json" target="_blank" rel="noreferrer" aria-label="feed">Open feed</a>
-          </div>
-        </div>
-      </aside>
-
-      <div class="toast" id="toast" aria-label="toast">
-        <div class="badge good" id="tBadge">OK</div>
-        <div class="msg" id="tMsg">Ready</div>
-      </div>
-    </main>
+    <div class="card actions">
+      <a class="btn primary" href="/monolith/claim/" aria-label="claim a tile">
+        <span class="k">ACTION</span> Claim a Tile
+      </a>
+      <a class="btn" href="/assets/monolith/feed.json" target="_blank" rel="noreferrer" aria-label="view feed json">
+        Feed
+      </a>
+      <a class="btn" href="/" aria-label="home">Home</a>
+    </div>
   </div>
 
-  <script>
-    "use strict";
+  <div class="viewport" id="vp" aria-label="monolith wall viewport">
+    <div class="world" id="world" aria-label="monolith wall world"></div>
+  </div>
 
-    const FEED_URL = "/assets/monolith/feed.json";
+  <aside class="panel" id="panel" aria-label="tile detail panel">
+    <div class="panelTop">
+      <div>
+        <h2 id="ptitle">Tile</h2>
+        <div class="small" id="psub">Tap a tile to inspect details.</div>
+      </div>
+      <button class="xbtn" id="pclose" type="button">Close</button>
+    </div>
 
-    const vp = document.getElementById("vp");
-    const world = document.getElementById("world");
+    <div class="kv">
+      <div class="k">Tile</div><div class="v" id="vTile">None</div>
+      <div class="k">Coords</div><div class="v" id="vCoords">0, 0</div>
+      <div class="k">Taken</div><div class="v" id="vTaken">No</div>
+      <div class="k">Tag</div><div class="v" id="vTag">None</div>
+      <div class="k">Date</div><div class="v" id="vTs">None</div>
+      <div class="k">Body</div><div class="v" id="vBody">None</div>
+    </div>
 
-    const panel = document.getElementById("panel");
-    const ptitle = document.getElementById("ptitle");
-    const psub = document.getElementById("psub");
-    const pclose = document.getElementById("pclose");
+    <div class="mono-link" aria-label="tile links">
+      <a href="/monolith/claim/" id="lnkClaim">Claim flow</a>
+      <a href="/assets/monolith/feed.json" target="_blank" rel="noreferrer">feed.json</a>
+    </div>
+  </aside>
 
-    const vTile = document.getElementById("vTile");
-    const vCoords = document.getElementById("vCoords");
-    const vStatus = document.getElementById("vStatus");
-    const vTag = document.getElementById("vTag");
-    const vTs = document.getElementById("vTs");
+  <div class="toast" id="toast"></div>
 
-    const jumpIn = document.getElementById("jumpIn");
-    const jumpBtn = document.getElementById("jumpBtn");
-    const recenterBtn = document.getElementById("recenter");
+<script>
+(function(){
+  "use strict";
 
-    const toast = document.getElementById("toast");
-    const tBadge = document.getElementById("tBadge");
-    const tMsg = document.getElementById("tMsg");
+  const FEED_URL = "/assets/monolith/feed.json";
 
-    const STEP = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--step").trim(), 10) || 128;
-    const TILE = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--tile").trim(), 10) || 118;
+  const vp = document.getElementById("vp");
+  const world = document.getElementById("world");
 
-    const POOL_PAD = 3;
+  const panel = document.getElementById("panel");
+  const pclose = document.getElementById("pclose");
+  const ptitle = document.getElementById("ptitle");
+  const psub = document.getElementById("psub");
 
-    const state = {
-      camX: 0,
-      camY: 0,
-      vx: 0,
-      vy: 0,
-      dragging: false,
-      pid: null,
-      lastX: 0,
-      lastY: 0,
-      lastT: 0,
+  const vTile = document.getElementById("vTile");
+  const vCoords = document.getElementById("vCoords");
+  const vTaken = document.getElementById("vTaken");
+  const vTag = document.getElementById("vTag");
+  const vTs = document.getElementById("vTs");
+  const vBody = document.getElementById("vBody");
 
-      cols: 0,
-      rows: 0,
+  const toast = document.getElementById("toast");
 
-      pool: [],
-      poolSize: 0,
+  const STEP = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--step").trim(), 10) || 128;
+  const TILE = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--tile").trim(), 10) || 118;
 
-      taken: new Set(),
-      marksByTile: new Map(),
+  const POOL_COLS = 9;
+  const POOL_ROWS = 7;
+  const POOL_PAD = 2;
 
-      lastPoolKey: "",
-      lastPick: null
+  const state = {
+    camX: 0,
+    camY: 0,
+    vx: 0,
+    vy: 0,
+    dragging: false,
+    downX: 0,
+    downY: 0,
+    lastX: 0,
+    lastY: 0,
+    lastT: 0,
+
+    cols: POOL_COLS,
+    rows: POOL_ROWS,
+    pool: [],
+    poolGX0: 0,
+    poolGY0: 0,
+
+    taken: new Set(),
+    marksByTile: new Map(),
+
+    lastRenderKey: ""
+  };
+
+  function toastShow(msg, kind){
+    if(!toast) return;
+    toast.className = "toast" + (kind ? (" " + kind) : "");
+    toast.textContent = msg;
+    toast.classList.remove("show");
+    requestAnimationFrame(()=>toast.classList.add("show"));
+    setTimeout(()=>toast.classList.remove("show"), 1400);
+  }
+
+  function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
+
+  function tileIdFromCoords(gx, gy){
+    const ax = Math.abs(gx);
+    const ay = Math.abs(gy);
+    const sx = gx < 0 ? "W" : "E";
+    const sy = gy < 0 ? "N" : "S";
+    return sx + ax + "-" + sy + ay;
+  }
+
+  function parseTileToCoords(tile){
+    if(typeof tile !== "string") return null;
+    const raw = tile.trim().toUpperCase();
+    const m = raw.match(/^([EW])(\d+)-([NS])(\d+)$/);
+    if(!m) return null;
+    const gx = (m[1] === "W") ? -parseInt(m[2],10) : parseInt(m[2],10);
+    const gy = (m[3] === "N") ? -parseInt(m[4],10) : parseInt(m[4],10);
+    if(!Number.isFinite(gx) || !Number.isFinite(gy)) return null;
+    return { gx, gy, tile: tileIdFromCoords(gx, gy) };
+  }
+
+  function normalizeMark(m){
+    if(!m || typeof m !== "object") return null;
+
+    const gx = Number.isFinite(+m.gx) ? +m.gx : null;
+    const gy = Number.isFinite(+m.gy) ? +m.gy : null;
+
+    const raw = (typeof m.tile === "string" && m.tile) ? String(m.tile).trim().toUpperCase() : null;
+
+    if(raw){
+      const c = parseTileToCoords(raw);
+      if(c) return { gx: c.gx, gy: c.gy, tile: c.tile, raw: c.tile };
+      if(Number.isFinite(gx) && Number.isFinite(gy)) return { gx, gy, tile: tileIdFromCoords(gx, gy), raw };
+      return { gx: 0, gy: 0, tile: raw, raw };
+    }
+
+    if(Number.isFinite(gx) && Number.isFinite(gy)){
+      return { gx, gy, tile: tileIdFromCoords(gx, gy), raw: tileIdFromCoords(gx, gy) };
+    }
+
+    return null;
+  }
+
+  function mulberry32(seed){
+    let t = seed >>> 0;
+    return function(){
+      t += 0x6D2B79F5;
+      let x = Math.imul(t ^ (t >>> 15), 1 | t);
+      x ^= x + Math.imul(x ^ (x >>> 7), 61 | x);
+      return ((x ^ (x >>> 14)) >>> 0) / 4294967296;
     };
+  }
 
-    function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
+  function hashSeed(str){
+    const s = String(str || "");
+    let h = 2166136261 >>> 0;
+    for(let i=0;i<s.length;i++){
+      h ^= s.charCodeAt(i);
+      h = Math.imul(h, 16777619);
+    }
+    return h >>> 0;
+  }
 
-    function toastShow(msg, kind){
-      tMsg.textContent = String(msg || "");
-      const k = (kind === "warn" || kind === "bad" || kind === "good") ? kind : "good";
-      tBadge.className = "badge " + k;
-      tBadge.textContent = k.toUpperCase();
-      toast.classList.add("show");
-      clearTimeout(toastShow._t);
-      toastShow._t = setTimeout(()=>toast.classList.remove("show"), 1600);
+  function makeSpraySVG(seedStr){
+    const seed = hashSeed(seedStr);
+    const rnd = mulberry32(seed);
+
+    const p = [];
+    const n = 16 + Math.floor(rnd()*12);
+
+    for(let i=0;i<n;i++){
+      const cx = Math.floor(rnd()*TILE);
+      const cy = Math.floor(rnd()*TILE);
+      const r = 6 + Math.floor(rnd()*22);
+
+      const o = 0.05 + rnd()*0.12;
+      p.push(
+        `<circle cx="${cx}" cy="${cy}" r="${r}" fill="rgba(47,191,107,${o.toFixed(3)})"/>`
+      );
     }
 
-    function tileIdFromCoords(gx, gy){
-      const ax = Math.abs(gx);
-      const ay = Math.abs(gy);
-      const sx = gx < 0 ? "W" : "E";
-      const sy = gy < 0 ? "N" : "S";
-      return sx + ax + "-" + sy + ay;
+    const streaks = 8 + Math.floor(rnd()*10);
+    for(let i=0;i<streaks;i++){
+      const x1 = Math.floor(rnd()*TILE);
+      const y1 = Math.floor(rnd()*TILE);
+      const x2 = clamp(x1 + Math.floor((rnd()-0.5)*70), 0, TILE);
+      const y2 = clamp(y1 + Math.floor((rnd()-0.5)*70), 0, TILE);
+      const w = 1 + Math.floor(rnd()*3);
+      const o = 0.06 + rnd()*0.14;
+      p.push(
+        `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="rgba(255,225,117,${o.toFixed(3)})" stroke-width="${w}" stroke-linecap="round"/>`
+      );
     }
 
-    function parseTileOrCoords(s){
-      const raw = (s || "").trim();
-      if(!raw) return null;
+    return `<svg viewBox="0 0 ${TILE} ${TILE}" width="${TILE}" height="${TILE}" xmlns="http://www.w3.org/2000/svg">${p.join("")}</svg>`;
+  }
 
-      // coords form "23,-11"
-      if(raw.includes(",")){
-        const parts = raw.split(",").map(x=>x.trim());
-        if(parts.length === 2){
-          const gx = parseInt(parts[0], 10);
-          const gy = parseInt(parts[1], 10);
-          if(Number.isFinite(gx) && Number.isFinite(gy)) return { gx, gy, tile: tileIdFromCoords(gx, gy) };
+  function openPanel(tile, gx, gy){
+    const mark = state.marksByTile.get(tile) || null;
+    const taken = state.taken.has(tile);
+
+    if(ptitle) ptitle.textContent = tile;
+    if(psub) psub.textContent = "Tile detail";
+
+    if(vTile) vTile.textContent = tile;
+    if(vCoords) vCoords.textContent = `${gx}, ${gy}`;
+    if(vTaken) vTaken.textContent = taken ? "Yes" : "No";
+
+    if(mark){
+      if(vTag) vTag.textContent = mark.tag || "None";
+      if(vTs) vTs.textContent = mark.ts || "None";
+      if(vBody) vBody.textContent = mark.body || "This tile is marked.";
+    }else{
+      if(vTag) vTag.textContent = "None";
+      if(vTs) vTs.textContent = "None";
+      if(vBody) vBody.textContent = taken ? "This tile exists in feed but has no display fields." : "This tile is open.";
+    }
+
+    if(panel){
+      panel.classList.add("show");
+    }
+  }
+
+  function closePanel(){
+    if(panel) panel.classList.remove("show");
+  }
+
+  function setCell(cell, gx, gy){
+    const tile = tileIdFromCoords(gx, gy);
+    const taken = state.taken.has(tile);
+    const mark = state.marksByTile.get(tile) || null;
+
+    cell.style.left = (gx * STEP) + "px";
+    cell.style.top  = (gy * STEP) + "px";
+    cell.setAttribute("data-gx", String(gx));
+    cell.setAttribute("data-gy", String(gy));
+    cell.setAttribute("data-tile", tile);
+    cell.setAttribute("aria-label", `Tile ${tile} ${taken ? "taken" : "open"}`);
+
+    cell.classList.toggle("taken", taken);
+
+    const id = cell.querySelector(".id");
+    const coord = cell.querySelector(".coord");
+    const spray = cell.querySelector(".spray");
+
+    if(id) id.textContent = mark && mark.tag ? mark.tag : tile;
+    if(coord) coord.textContent = `${gx},${gy}`;
+    if(spray) spray.innerHTML = makeSpraySVG(tile);
+  }
+
+  function ensurePool(){
+    if(!world) return;
+
+    if(state.pool.length) return;
+
+    const total = state.cols * state.rows;
+    for(let i=0;i<total;i++){
+      const d = document.createElement("div");
+      d.className = "tcell";
+
+      const spray = document.createElement("div");
+      spray.className = "spray";
+      d.appendChild(spray);
+
+      const meta = document.createElement("div");
+      meta.className = "meta";
+
+      const id = document.createElement("div");
+      id.className = "id";
+      id.textContent = "Tile";
+
+      const coord = document.createElement("div");
+      coord.className = "coord";
+      coord.textContent = "0,0";
+
+      meta.appendChild(id);
+      meta.appendChild(coord);
+      d.appendChild(meta);
+
+      d.addEventListener("click", (ev)=>{
+        ev.preventDefault();
+        ev.stopPropagation();
+        const gx = parseInt(d.getAttribute("data-gx") || "0", 10);
+        const gy = parseInt(d.getAttribute("data-gy") || "0", 10);
+        const tile = d.getAttribute("data-tile") || tileIdFromCoords(gx, gy);
+        openPanel(tile, gx, gy);
+      });
+
+      world.appendChild(d);
+      state.pool.push(d);
+    }
+  }
+
+  function renderPool(){
+    if(!world) return;
+
+    const startGX = Math.floor(state.camX / STEP) - POOL_PAD;
+    const startGY = Math.floor(state.camY / STEP) - POOL_PAD;
+
+    const key = `${startGX},${startGY},${state.cols},${state.rows},${state.taken.size}`;
+    if(key === state.lastRenderKey) return;
+    state.lastRenderKey = key;
+
+    let i = 0;
+    for(let ry=0; ry<state.rows; ry++){
+      for(let rx=0; rx<state.cols; rx++){
+        const gx = startGX + rx;
+        const gy = startGY + ry;
+        const cell = state.pool[i++];
+        setCell(cell, gx, gy);
+      }
+    }
+  }
+
+  function tick(){
+    state.vx *= 0.92;
+    state.vy *= 0.92;
+
+    state.camX += state.vx;
+    state.camY += state.vy;
+
+    if(world){
+      world.style.transform = `translate(${-state.camX}px, ${-state.camY}px)`;
+    }
+
+    renderPool();
+    requestAnimationFrame(tick);
+  }
+
+  function onDown(ev){
+    if(!vp) return;
+    vp.classList.add("dragging");
+    state.dragging = true;
+    state.downX = ev.clientX;
+    state.downY = ev.clientY;
+    state.lastX = ev.clientX;
+    state.lastY = ev.clientY;
+    state.lastT = performance.now();
+    state.vx = 0;
+    state.vy = 0;
+
+    try{ vp.setPointerCapture(ev.pointerId); }catch(e){}
+    ev.preventDefault();
+  }
+
+  function onMove(ev){
+    if(!state.dragging) return;
+
+    const now = performance.now();
+    const dt = Math.max(1, now - state.lastT);
+
+    const dx = ev.clientX - state.lastX;
+    const dy = ev.clientY - state.lastY;
+
+    state.camX -= dx;
+    state.camY -= dy;
+
+    state.vx = (-dx) / dt * 16;
+    state.vy = (-dy) / dt * 16;
+
+    state.lastX = ev.clientX;
+    state.lastY = ev.clientY;
+    state.lastT = now;
+
+    if(world){
+      world.style.transform = `translate(${-state.camX}px, ${-state.camY}px)`;
+    }
+
+    renderPool();
+    ev.preventDefault();
+  }
+
+  function onUp(ev){
+    if(!vp) return;
+    vp.classList.remove("dragging");
+    state.dragging = false;
+    try{ vp.releasePointerCapture(ev.pointerId); }catch(e){}
+    ev.preventDefault();
+  }
+
+  async function loadFeed(){
+    try{
+      const res = await fetch(FEED_URL + "?cb=" + Date.now(), { cache:"no-store" });
+      if(!res.ok) throw new Error("feed http " + res.status);
+      const data = await res.json();
+
+      state.taken = new Set();
+      state.marksByTile = new Map();
+
+      if(Array.isArray(data)){
+        for(const raw of data){
+          const n = normalizeMark(raw);
+          if(!n) continue;
+
+          const tile = n.tile;
+          state.taken.add(tile);
+
+          state.marksByTile.set(tile, {
+            id: (typeof raw.id === "string" ? raw.id : ""),
+            tile,
+            gx: n.gx,
+            gy: n.gy,
+            tag: (typeof raw.tag === "string" ? raw.tag : ""),
+            ts: (typeof raw.ts === "string" ? raw.ts : ""),
+            body: (typeof raw.body === "string" ? raw.body : "")
+          });
         }
       }
 
-      // tile form "E23-N11"
-      const m = raw.toUpperCase().match(/^([EW])(\d+)\-([NS])(\d+)$/);
-      if(m){
-        const gx = (m[1] === "W" ? -1 : 1) * parseInt(m[2], 10);
-        const gy = (m[3] === "N" ? -1 : 1) * parseInt(m[4], 10);
-        return { gx, gy, tile: raw.toUpperCase() };
-      }
-
-      return null;
-    }
-
-    function makeSpraySVG(seedStr){
-      // deterministic pseudo random from seed string
-      const s = String(seedStr || "0");
-      let h = 2166136261;
-      for(let i=0;i<s.length;i++){
-        h ^= s.charCodeAt(i);
-        h = Math.imul(h, 16777619);
-      }
-      function rnd(){
-        h += 0x6D2B79F5;
-        let t = Math.imul(h ^ (h >>> 15), 1 | h);
-        t ^= t + Math.imul(t ^ (t >>> 7), 61 | t);
-        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-      }
-
-      const p = [];
-      const cx = TILE * 0.52;
-      const cy = TILE * 0.44;
-
-      const blobs = 9 + Math.floor(rnd()*6);
-      for(let i=0;i<blobs;i++){
-        const a = rnd() * Math.PI * 2;
-        const r = (TILE * 0.12) + rnd() * (TILE * 0.22);
-        const x = cx + Math.cos(a) * (TILE * 0.14 + rnd()*TILE*0.18);
-        const y = cy + Math.sin(a) * (TILE * 0.10 + rnd()*TILE*0.16);
-        const rx = r * (0.55 + rnd()*0.8);
-        const ry = r * (0.55 + rnd()*0.8);
-        p.push(`<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="${rx.toFixed(1)}" ry="${ry.toFixed(1)}" fill="rgba(47,191,107,${(0.10 + rnd()*0.22).toFixed(3)})" />`);
-      }
-
-      const dots = 24 + Math.floor(rnd()*24);
-      for(let i=0;i<dots;i++){
-        const x = TILE * rnd();
-        const y = TILE * rnd();
-        const r = 0.7 + rnd()*2.0;
-        p.push(`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(2)}" fill="rgba(245,247,244,${(0.06 + rnd()*0.12).toFixed(3)})" />`);
-      }
-
-      return `<svg viewBox="0 0 ${TILE} ${TILE}" width="${TILE}" height="${TILE}" xmlns="http://www.w3.org/2000/svg">${p.join("")}</svg>`;
-    }
-
-    function openPanel(tile, gx, gy){
-      const mark = state.marksByTile.get(tile) || null;
-      const taken = state.taken.has(tile);
-
-      ptitle.textContent = "Tile " + tile;
-      psub.textContent = taken ? "This tile is taken on the wall." : "This tile is open.";
-
-      vTile.textContent = tile;
-      vCoords.textContent = gx + ", " + gy;
-      vStatus.textContent = taken ? "Taken" : "Open";
-
-      if(mark){
-        vTag.textContent = mark.tag || "None";
-        vTs.textContent = mark.ts || "None";
-      }else{
-        vTag.textContent = taken ? "Taken" : "None";
-        vTs.textContent = "None";
-      }
-    }
-
-    function closePanel(){
-      state.lastPick = null;
-      ptitle.textContent = "Tile";
-      psub.textContent = "Tap a tile to inspect details.";
-      vTile.textContent = "None";
-      vCoords.textContent = "0, 0";
-      vStatus.textContent = "Open";
-      vTag.textContent = "None";
-      vTs.textContent = "None";
-    }
-
-    function setCell(cell, gx, gy){
-      const tile = tileIdFromCoords(gx, gy);
-      const taken = state.taken.has(tile);
-      const mark = state.marksByTile.get(tile) || null;
-
-      cell.style.left = (gx * STEP) + "px";
-      cell.style.top  = (gy * STEP) + "px";
-      cell.setAttribute("data-gx", String(gx));
-      cell.setAttribute("data-gy", String(gy));
-      cell.setAttribute("data-tile", tile);
-      cell.setAttribute("aria-label", "Tile " + tile + " " + (taken ? "taken" : "open"));
-
-      cell.className = "tcell" + (taken ? " taken" : "");
-
-      const idEl = cell.querySelector("b");
-      const metaEl = cell.querySelector("i");
-      const spray = cell.querySelector(".spray");
-
-      if(idEl) idEl.textContent = tile;
-      if(metaEl){
-        if(mark && mark.tag){
-          metaEl.textContent = String(mark.tag).slice(0, 16);
-        }else{
-          metaEl.textContent = taken ? "TAKEN" : "OPEN";
-        }
-      }
-      if(spray){
-        if(taken){
-          spray.innerHTML = makeSpraySVG(tile);
-        }else{
-          spray.innerHTML = "";
-        }
-      }
-    }
-
-    function ensurePoolSize(){
-      const r = vp.getBoundingClientRect();
-      const w = Math.max(1, r.width);
-      const h = Math.max(1, r.height);
-
-      const cols = Math.ceil(w / STEP) + (POOL_PAD * 2);
-      const rows = Math.ceil(h / STEP) + (POOL_PAD * 2);
-      const size = cols * rows;
-
-      state.cols = cols;
-      state.rows = rows;
-      state.poolSize = size;
-
-      if(state.pool.length === size) return;
-
-      // rebuild pool
-      world.innerHTML = "";
-      state.pool = [];
-      for(let i=0;i<size;i++){
-        const d = document.createElement("div");
-        d.className = "tcell";
-        d.innerHTML = `
-          <div class="spray" aria-hidden="true"></div>
-          <div class="meta"><b></b><i></i></div>
-        `;
-        d.addEventListener("click", (ev)=>{
-          ev.preventDefault();
-          ev.stopPropagation();
-          const gx = parseInt(d.getAttribute("data-gx") || "0", 10);
-          const gy = parseInt(d.getAttribute("data-gy") || "0", 10);
-          const tile = d.getAttribute("data-tile") || tileIdFromCoords(gx, gy);
-          state.lastPick = { tile, gx, gy };
-          openPanel(tile, gx, gy);
-          toastShow("tile " + tile, state.taken.has(tile) ? "good" : "warn");
-        }, { passive:false });
-
-        world.appendChild(d);
-        state.pool.push(d);
-      }
-    }
-
-    function renderPool(){
-      ensurePoolSize();
-
-      const startGX = Math.floor(state.camX / STEP) - POOL_PAD;
-      const startGY = Math.floor(state.camY / STEP) - POOL_PAD;
-
-      const key = startGX + "," + startGY + "," + state.cols + "," + state.rows + "," + state.taken.size;
-      if(key === state.lastPoolKey) return;
-      state.lastPoolKey = key;
-
-      let i = 0;
-      for(let ry=0; ry<state.rows; ry++){
-        for(let rx=0; rx<state.cols; rx++){
-          const gx = startGX + rx;
-          const gy = startGY + ry;
-          setCell(state.pool[i++], gx, gy);
-        }
-      }
-    }
-
-    function applyTransform(){
-      world.style.transform = "translate(" + (-state.camX) + "px, " + (-state.camY) + "px)";
-    }
-
-    function tick(){
-      // inertia
-      if(!state.dragging){
-        const f = 0.92;
-        state.vx *= f;
-        state.vy *= f;
-
-        if(Math.abs(state.vx) < 0.08) state.vx = 0;
-        if(Math.abs(state.vy) < 0.08) state.vy = 0;
-
-        state.camX += state.vx;
-        state.camY += state.vy;
-      }
-
-      applyTransform();
+      state.lastRenderKey = "";
       renderPool();
-
-      requestAnimationFrame(tick);
+      toastShow("feed loaded " + state.taken.size, "good");
+    }catch(e){
+      toastShow("feed load failed", "warn");
     }
+  }
 
-    function onDown(ev){
-      state.dragging = true;
-      vp.classList.add("dragging");
-      state.pid = ev.pointerId;
-      vp.setPointerCapture(ev.pointerId);
+  function startNearSeed(){
+    let gx = 0, gy = 0;
 
-      state.lastX = ev.clientX;
-      state.lastY = ev.clientY;
-      state.lastT = performance.now();
-      state.vx = 0;
-      state.vy = 0;
-    }
-
-    function onMove(ev){
-      if(!state.dragging || ev.pointerId !== state.pid) return;
-
-      const x = ev.clientX;
-      const y = ev.clientY;
-      const now = performance.now();
-      const dt = Math.max(1, now - state.lastT);
-
-      const dx = x - state.lastX;
-      const dy = y - state.lastY;
-
-      state.camX -= dx;
-      state.camY -= dy;
-
-      // pixels per frame scaled to dt
-      state.vx = (state.vx * 0.25) + ((-dx) * (16 / dt)) * 0.75;
-      state.vy = (state.vy * 0.25) + ((-dy) * (16 / dt)) * 0.75;
-
-      state.lastX = x;
-      state.lastY = y;
-      state.lastT = now;
-    }
-
-    function onUp(ev){
-      if(ev.pointerId !== state.pid) return;
-      state.dragging = false;
-      vp.classList.remove("dragging");
-      state.pid = null;
-    }
-
-    async function loadFeed(){
-      try{
-        const res = await fetch(FEED_URL + "?cb=" + Date.now(), { cache:"no-store" });
-        if(!res.ok) throw new Error("feed http " + res.status);
-        const data = await res.json();
-
-        state.taken = new Set();
-        state.marksByTile = new Map();
-
-        // Accept array of marks
-        // Each entry should contain tile and coords
-        // Example:
-        // { "id":"m0001","tile":"E23-N11","gx":23,"gy":-11,"tag":"CONCEPT LOCKED","ts":"2026-02-02" }
-
-        if(Array.isArray(data)){
-          for(const m of data){
-            const gx = Number.isFinite(+m.gx) ? +m.gx : null;
-            const gy = Number.isFinite(+m.gy) ? +m.gy : null;
-
-            let tile = (typeof m.tile === "string" && m.tile) ? String(m.tile).toUpperCase() : null;
-            if(!tile && gx !== null && gy !== null){
-              tile = tileIdFromCoords(gx, gy);
-            }
-            if(!tile) continue;
-
-            state.taken.add(tile);
-            state.marksByTile.set(tile, {
-              id: (m.id ? String(m.id) : ""),
-              tile,
-              gx: gx !== null ? gx : 0,
-              gy: gy !== null ? gy : 0,
-              tag: (m.tag ? String(m.tag) : ""),
-              ts: (m.ts ? String(m.ts) : "")
-            });
-          }
-        }
-
-        // keep panel in sync if open
-        if(state.lastPick){
-          const t = state.lastPick.tile;
-          const mark = state.marksByTile.get(t);
-          if(mark){
-            openPanel(t, mark.gx, mark.gy);
-          }
-        }
-
-        state.lastPoolKey = "";
-        toastShow("feed synced " + state.taken.size, "good");
-      }catch(err){
-        toastShow("feed error", "bad");
-      }
-    }
-
-    function centerOn(gx, gy){
-      const r = vp.getBoundingClientRect();
-      const w = Math.max(1, r.width);
-      const h = Math.max(1, r.height);
-
-      const targetX = (gx * STEP) - (w * 0.5) + (TILE * 0.5);
-      const targetY = (gy * STEP) - (h * 0.5) + (TILE * 0.5);
-
-      state.camX = targetX;
-      state.camY = targetY;
-      state.vx = 0;
-      state.vy = 0;
-
-      applyTransform();
-      state.lastPoolKey = "";
-      renderPool();
-    }
-
-    function startNearSeed(){
-      // Start near first feed mark if present, else a calm default
-      let gx = 23;
-      let gy = -11;
-
-      // pick first mark by array order
-      for(const v of state.marksByTile.values()){
-        gx = Number.isFinite(+v.gx) ? +v.gx : gx;
-        gy = Number.isFinite(+v.gy) ? +v.gy : gy;
+    for(const v of state.marksByTile.values()){
+      if(Number.isFinite(v.gx) && Number.isFinite(v.gy)){
+        gx = v.gx;
+        gy = v.gy;
         break;
       }
-      centerOn(gx, gy);
-      toastShow("start " + tileIdFromCoords(gx, gy), "good");
     }
 
-    function onResize(){
-      state.lastPoolKey = "";
-      ensurePoolSize();
-      renderPool();
+    state.camX = gx * STEP - (window.innerWidth / 2) + (TILE / 2);
+    state.camY = gy * STEP - (window.innerHeight / 2) + (TILE / 2);
+
+    if(world){
+      world.style.transform = `translate(${-state.camX}px, ${-state.camY}px)`;
+    }
+    state.lastRenderKey = "";
+    renderPool();
+
+    toastShow("start " + tileIdFromCoords(gx, gy), "good");
+
+    const t = tileIdFromCoords(gx, gy);
+    const mark = state.marksByTile.get(t) || null;
+    if(mark){
+      openPanel(t, mark.gx, mark.gy);
+    }else{
+      openPanel(t, gx, gy);
+    }
+  }
+
+  function boot(){
+    ensurePool();
+
+    if(vp){
+      vp.addEventListener("pointerdown", onDown, { passive:false });
+      vp.addEventListener("pointermove", onMove, { passive:false });
+      vp.addEventListener("pointerup", onUp, { passive:false });
+      vp.addEventListener("pointercancel", onUp, { passive:false });
+      vp.addEventListener("click", ()=>closePanel());
     }
 
-    function doJump(){
-      const p = parseTileOrCoords(jumpIn.value);
-      if(!p){
-        toastShow("bad jump", "warn");
-        return;
-      }
-      centerOn(p.gx, p.gy);
-      openPanel(p.tile, p.gx, p.gy);
-      state.lastPick = { tile:p.tile, gx:p.gx, gy:p.gy };
-      toastShow("jump " + p.tile, "good");
+    if(panel){
+      panel.addEventListener("click", (ev)=>ev.stopPropagation());
+    }
+    if(pclose){
+      pclose.addEventListener("click", (ev)=>{
+        ev.preventDefault();
+        ev.stopPropagation();
+        closePanel();
+      });
     }
 
-    pclose.addEventListener("click", (e)=>{ e.preventDefault(); closePanel(); }, { passive:false });
-
-    jumpBtn.addEventListener("click", (e)=>{ e.preventDefault(); doJump(); }, { passive:false });
-    jumpIn.addEventListener("keydown", (e)=>{
-      if(e.key === "Enter"){
-        e.preventDefault();
-        doJump();
-      }
-    });
-
-    recenterBtn.addEventListener("click", (e)=>{
-      e.preventDefault();
-      startNearSeed();
-    }, { passive:false });
-
-    vp.addEventListener("pointerdown", onDown, { passive:false });
-    vp.addEventListener("pointermove", onMove, { passive:false });
-    vp.addEventListener("pointerup", onUp, { passive:false });
-    vp.addEventListener("pointercancel", onUp, { passive:false });
-    vp.addEventListener("lostpointercapture", ()=>{ state.dragging=false; vp.classList.remove("dragging"); });
-
-    window.addEventListener("resize", onResize);
-
-    // boot
-    ensurePoolSize();
-    applyTransform();
     requestAnimationFrame(tick);
-
     loadFeed().then(()=>startNearSeed());
     setInterval(loadFeed, 15000);
-  </script>
+  }
+
+  boot();
+})();
+</script>
+
 </body>
 </html>
