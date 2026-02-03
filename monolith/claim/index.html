@@ -5,11 +5,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
   <title>MONOLITH — Claim</title>
   <meta name="description" content="Pick a tile. Leave a mark. No edits. No deletes." />
+
   <meta property="og:title" content="MONOLITH — Claim" />
   <meta property="og:description" content="Pick a tile. Leave a mark. No edits. No deletes." />
   <meta property="og:image" content="https://houseofcauliman.com/assets/monolith/monolith_logo.webp" />
   <meta property="og:url" content="https://houseofcauliman.com/monolith/claim/" />
   <meta property="og:type" content="website" />
+
   <style>
     :root{
       --bg:#07090b;
@@ -19,347 +21,422 @@
       --fg:#f5f7f4;
       --muted:#a9b3bd;
       --green:#2fbf6b;
-      --warn:#ffe175;
       --red:#ff5b5b;
       --shadow:rgba(0,0,0,.45);
+      --radius:18px;
     }
     *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 600px at 50% -10%, rgba(47,191,107,.10), transparent 55%),
+                  radial-gradient(900px 500px at 20% 0%, rgba(255,255,255,.05), transparent 55%),
+                  var(--bg);
+      color:var(--fg);
+    }
     a{color:inherit;text-decoration:none}
-    .wrap{max-width:980px;margin:0 auto;padding:18px 14px 80px}
-    .top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .wrap{max-width:1100px;margin:0 auto;padding:28px 16px 60px}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px}
     .brand{display:flex;align-items:center;gap:10px}
-    .dot{width:10px;height:10px;border-radius:999px;background:var(--green);box-shadow:0 0 18px rgba(47,191,107,.25)}
-    h1{margin:0;font-size:18px;letter-spacing:.2px}
-    .sub{color:var(--muted);font-size:12px;margin-top:4px;line-height:1.4}
-    .pill{border:1px solid var(--line);background:rgba(255,255,255,.03);padding:7px 10px;border-radius:999px;font-size:12px;color:var(--muted)}
-    .grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:12px}
-    @media(min-width:940px){.grid{grid-template-columns:1.2fr .8fr}}
-    .card{border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:14px;box-shadow:0 12px 30px var(--shadow)}
-    h2{margin:0 0 10px;font-size:14px}
-    label{display:block;color:var(--muted);font-size:12px;margin:10px 0 6px}
-    input,textarea,select{
-      width:100%;
-      background:var(--panel2);
-      border:1px solid var(--line);
-      color:var(--fg);
-      border-radius:12px;
-      padding:10px 10px;
-      font-size:14px;
-      outline:none;
-    }
-    textarea{min-height:96px;resize:vertical}
-    .row{display:grid;grid-template-columns:1fr;gap:10px}
-    @media(min-width:620px){.row{grid-template-columns:1fr 1fr}}
-    .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    button{
-      background:rgba(47,191,107,.15);
-      border:1px solid rgba(47,191,107,.45);
-      color:var(--fg);
-      padding:10px 12px;
-      border-radius:12px;
-      cursor:pointer;
-      font-weight:650;
-      letter-spacing:.2px;
-    }
-    button.secondary{
+    .brand img{width:44px;height:44px;border-radius:12px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.04)}
+    .brand .t{display:flex;flex-direction:column;line-height:1.05}
+    .brand .t b{font-size:14px;letter-spacing:.3px}
+    .brand .t span{font-size:12px;color:var(--muted)}
+    .navlinks{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    .pill{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:10px 12px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
       background:rgba(255,255,255,.04);
-      border:1px solid var(--line);
-      color:var(--muted);
-      font-weight:600;
+      font-size:12px;color:var(--fg);
     }
-    button.danger{
-      background:rgba(255,91,91,.12);
-      border:1px solid rgba(255,91,91,.35);
+    .pill:hover{border-color:rgba(47,191,107,.55)}
+    h1{margin:10px 0 6px;font-size:34px;letter-spacing:.2px}
+    .sub{margin:0 0 18px;color:var(--muted);max-width:820px;line-height:1.45}
+    .grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:14px;
+      align-items:start;
     }
-    button:disabled{opacity:.55;cursor:not-allowed}
+    @media(max-width:980px){
+      .grid{grid-template-columns:1fr}
+      h1{font-size:30px}
+    }
+    .card{
+      border:1px solid rgba(255,255,255,.10);
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border-radius:var(--radius);
+      padding:16px;
+      box-shadow:0 18px 36px var(--shadow);
+    }
+    .card h2{margin:0 0 10px;font-size:16px;letter-spacing:.3px}
+    .row{display:grid;grid-template-columns: 1fr 1fr;gap:10px}
+    @media(max-width:560px){.row{grid-template-columns:1fr}}
+    label{display:block;font-size:12px;color:var(--muted);margin:10px 0 6px}
+    input, textarea, select{
+      width:100%;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.25);
+      color:var(--fg);
+      padding:12px 12px;
+      outline:none;
+      font-size:14px;
+    }
+    textarea{min-height:120px;resize:vertical}
+    input:focus, textarea:focus, select:focus{border-color:rgba(47,191,107,.65)}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      gap:8px;
+      padding:12px 14px;border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      color:var(--fg);
+      font-size:13px;
+      cursor:pointer;
+      user-select:none;
+    }
+    .btn:hover{border-color:rgba(47,191,107,.55)}
+    .btn.primary{background:rgba(47,191,107,.16);border-color:rgba(47,191,107,.40)}
+    .btn.primary:hover{border-color:rgba(47,191,107,.80)}
+    .btn.danger{background:rgba(255,91,91,.12);border-color:rgba(255,91,91,.30)}
+    .btn.danger:hover{border-color:rgba(255,91,91,.65)}
     .note{
-      margin-top:10px;
-      padding:10px;
-      border-radius:12px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
+      margin-top:12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.22);
+      padding:12px;
       color:var(--muted);
       font-size:12px;
       line-height:1.45;
     }
-    .note.warn{border-left:3px solid var(--warn)}
-    .note.ok{border-left:3px solid var(--green)}
-    .note.bad{border-left:3px solid var(--red)}
-    .canvas{
-      width:100%;
-      aspect-ratio:1/1;
-      border:1px dashed rgba(255,255,255,.16);
+    .note strong{color:var(--fg)}
+    .note.warn{border-color:rgba(255,255,255,.12)}
+    .note.ok{border-color:rgba(47,191,107,.30)}
+    .kv{display:grid;grid-template-columns:110px 1fr;gap:8px 10px;margin-top:10px}
+    .kv div{font-size:12px;color:var(--muted)}
+    .kv b{color:var(--fg);font-weight:700}
+    pre{
+      margin:12px 0 0;
       border-radius:14px;
-      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      overflow:hidden;
-      position:relative;
-    }
-    .tile{
-      width:82%;
-      aspect-ratio:1/1;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.12);
-      background:#0b0f14;
-      position:relative;
-    }
-    .tile::before{
-      content:"";
-      position:absolute;inset:0;
-      background:
-        radial-gradient(circle at 30% 20%, rgba(255,255,255,.08), transparent 42%),
-        radial-gradient(circle at 70% 80%, rgba(47,191,107,.10), transparent 46%);
-      opacity:.55;
-      pointer-events:none;
-    }
-    .mark{
-      position:absolute;
-      inset:14%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      font-weight:900;
-      letter-spacing:.6px;
-      line-height:1.05;
-      font-size:26px;
-      text-transform:uppercase;
-      padding:10px;
-      word-break:break-word;
-    }
-    .meta{
-      margin-top:10px;
-      display:grid;
-      grid-template-columns:1fr;
-      gap:8px;
-      color:var(--muted);
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.30);
+      padding:12px;
+      color:#e8efe9;
       font-size:12px;
+      overflow:auto;
+      max-height:340px;
     }
-    .kv{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid rgba(255,255,255,.06);padding-bottom:8px}
-    .kv b{color:var(--fg);font-weight:650}
-    .foot{
-      margin-top:18px;
-      color:var(--muted);
-      font-size:12px;
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
-    }
+
+    /* TILE GRID */
+    .tilepanel{margin-top:12px}
+    .tilegrid{display:grid;grid-template-columns:repeat(10,1fr);gap:6px}
+    @media(max-width:520px){.tilegrid{grid-template-columns:repeat(8,1fr)}}
+    .tcell{aspect-ratio:1/1;border-radius:10px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.03);cursor:pointer;position:relative;overflow:hidden}
+    .tcell:hover{border-color:rgba(47,191,107,.55)}
+    .tcell.selected{border-color:rgba(47,191,107,.95);box-shadow:0 0 0 2px rgba(47,191,107,.18) inset}
+    .tcell.taken{opacity:.35;cursor:not-allowed}
+    .tcell b{position:absolute;inset:auto 8px 6px 8px;font-size:10px;color:rgba(245,247,244,.75);font-weight:700;letter-spacing:.3px}
+    .tilehint{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px}
+    .badge{font-size:11px;color:var(--muted);border:1px solid var(--line);background:rgba(255,255,255,.03);padding:6px 10px;border-radius:999px}
+    .badge strong{color:var(--fg)}
+    .mini{width:10px;height:10px;border-radius:3px;display:inline-block;margin-right:6px;vertical-align:middle}
+    .mini.sel{background:rgba(47,191,107,.85)}
+    .mini.free{background:rgba(255,255,255,.18)}
+    .mini.taken{background:rgba(255,91,91,.65)}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="top">
+    <div class="topbar">
       <div class="brand">
-        <div class="dot"></div>
-        <div>
-          <h1>MONOLITH — Claim</h1>
-          <div class="sub">Prototype. Draft your claim. Save locally. No chain calls.</div>
+        <img src="/assets/monolith/monolith_logo.webp" alt="MONOLITH" />
+        <div class="t">
+          <b>MONOLITH</b>
+          <span>Claim a tile</span>
         </div>
       </div>
-      <div class="pill"><a href="/monolith/">Back to MONOLITH</a></div>
+      <div class="navlinks">
+        <a class="pill" href="/monolith/">Back to MONOLITH</a>
+        <a class="pill" href="/">House</a>
+      </div>
     </div>
+
+    <h1>Claim</h1>
+    <p class="sub">
+      Pick a tile. Leave a mark. No edits. No deletes.
+      This page is a selector and claim packet builder.
+    </p>
 
     <div class="grid">
       <div class="card">
-        <h2>Draft your mark</h2>
-
-        <label for="handle">Handle or name</label>
-        <input id="handle" autocomplete="off" placeholder="@name or text" maxlength="32" />
+        <h2>Claim details</h2>
 
         <div class="row">
           <div>
             <label for="tile">Tile ID</label>
-            <input id="tile" autocomplete="off" placeholder="e.g. 0421" maxlength="8" />
+            <input id="tile" inputmode="numeric" placeholder="0001" maxlength="4" />
           </div>
           <div>
-            <label for="style">Mark style</label>
+            <label for="handle">Handle</label>
+            <input id="handle" placeholder="@yourhandle" maxlength="32" />
+          </div>
+        </div>
+
+        <label for="wallet">XRPL address</label>
+        <input id="wallet" placeholder="r..." maxlength="64" />
+
+        <label for="mark">Your mark</label>
+        <textarea id="mark" placeholder="Your one-line vow, signature, or statement"></textarea>
+
+        <div class="row">
+          <div>
+            <label for="style">Style</label>
             <select id="style">
-              <option value="block">Block</option>
-              <option value="thin">Thin</option>
-              <option value="tag">Tag</option>
+              <option value="classic">Classic</option>
+              <option value="bold">Bold</option>
+              <option value="steel">Steel</option>
+              <option value="obsidian">Obsidian</option>
+            </select>
+          </div>
+          <div>
+            <label for="privacy">Privacy</label>
+            <select id="privacy">
+              <option value="public">Public</option>
+              <option value="unlisted">Unlisted</option>
             </select>
           </div>
         </div>
 
-        <label for="mark">Mark text</label>
-        <textarea id="mark" placeholder="Short. Permanent. No edits." maxlength="120"></textarea>
-
-        <div class="btnrow">
-          <button id="save">Save draft</button>
-          <button id="load" class="secondary">Load draft</button>
-          <button id="clear" class="danger">Clear draft</button>
-          <button id="connect" class="secondary" disabled>Connect wallet</button>
-          <button id="sign" disabled>Sign claim</button>
+        <div class="actions">
+          <button class="btn primary" id="download" type="button">Download claim.json</button>
+          <button class="btn" id="save" type="button">Save draft</button>
+          <button class="btn danger" id="reset" type="button">Reset</button>
         </div>
 
-        <div id="msg" class="note warn">
-          Prototype only. This page does not connect a wallet. It just prepares your claim.
+        <div class="note warn">
+          <strong>Important</strong><br>
+          This does not move funds and does not sign anything yet.
+          It creates a claim packet so you can wire signing later.
+        </div>
+      </div>
+
+      <div class="card tilepanel">
+        <h2>Select a tile</h2>
+        <div class="tilegrid" id="tilegrid" aria-label="tile grid"></div>
+
+        <div class="tilehint">
+          <span class="badge"><span class="mini free"></span>Free</span>
+          <span class="badge"><span class="mini sel"></span><strong>Selected</strong></span>
+          <span class="badge"><span class="mini taken"></span>Taken soon</span>
+          <span class="badge">Click a tile to auto-fill Tile ID</span>
+        </div>
+
+        <div class="note warn" style="margin-top:12px">
+          Selector only. Taken state wiring comes later.
         </div>
       </div>
 
       <div class="card">
         <h2>Preview</h2>
-        <div class="canvas">
-          <div class="tile">
-            <div id="preview" class="mark">YOUR MARK</div>
-          </div>
+
+        <div class="kv">
+          <div>Tile</div><div><b id="pvTile">0000</b></div>
+          <div>Handle</div><div><b id="pvHandle">none</b></div>
+          <div>Wallet</div><div><b id="pvWallet">none</b></div>
+          <div>Style</div><div><b id="pvStyle">classic</b></div>
+          <div>Privacy</div><div><b id="pvPrivacy">public</b></div>
         </div>
 
-        <div class="meta">
-          <div class="kv"><span>Handle</span><b id="mHandle">-</b></div>
-          <div class="kv"><span>Tile</span><b id="mTile">-</b></div>
-          <div class="kv"><span>Saved</span><b id="mSaved">-</b></div>
-        </div>
+        <pre id="pvJson">{}</pre>
 
         <div class="note ok">
-          Later, “Sign claim” becomes a wallet signature. No keys. No custody.
+          Next step is to turn this packet into a signed XRPL action.
         </div>
       </div>
-    </div>
-
-    <div class="foot">
-      <span>Local-only draft storage. Clearing site data clears the draft.</span>
-      <span>houseofcauliman.com</span>
     </div>
   </div>
 
   <script>
-    const $ = (id) => document.getElementById(id);
-
-    const el = {
-      handle: $("handle"),
-      tile: $("tile"),
-      style: $("style"),
-      mark: $("mark"),
-      preview: $("preview"),
-      mHandle: $("mHandle"),
-      mTile: $("mTile"),
-      mSaved: $("mSaved"),
-      msg: $("msg"),
-      save: $("save"),
-      load: $("load"),
-      clear: $("clear"),
-      connect: $("connect"),
-      sign: $("sign"),
-    };
-
     const KEY = "monolith_claim_draft_v1";
 
-    function normalizeTile(v){
-      const s = (v || "").trim();
-      return s.replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 8);
+    const el = {
+      tile: document.getElementById("tile"),
+      handle: document.getElementById("handle"),
+      wallet: document.getElementById("wallet"),
+      mark: document.getElementById("mark"),
+      style: document.getElementById("style"),
+      privacy: document.getElementById("privacy"),
+      download: document.getElementById("download"),
+      save: document.getElementById("save"),
+      reset: document.getElementById("reset"),
+      pvTile: document.getElementById("pvTile"),
+      pvHandle: document.getElementById("pvHandle"),
+      pvWallet: document.getElementById("pvWallet"),
+      pvStyle: document.getElementById("pvStyle"),
+      pvPrivacy: document.getElementById("pvPrivacy"),
+      pvJson: document.getElementById("pvJson"),
+      tilegrid: document.getElementById("tilegrid"),
+    };
+
+    function nowIso(){
+      return new Date().toISOString();
     }
 
-    function stylePreview(mode){
-      const base = el.preview.style;
-      if(mode === "thin"){
-        base.fontWeight = "650";
-        base.letterSpacing = "1px";
-        base.fontSize = "22px";
-        base.textTransform = "uppercase";
-      }else if(mode === "tag"){
-        base.fontWeight = "800";
-        base.letterSpacing = "0.2px";
-        base.fontSize = "24px";
-        base.textTransform = "none";
-      }else{
-        base.fontWeight = "900";
-        base.letterSpacing = "0.6px";
-        base.fontSize = "26px";
-        base.textTransform = "uppercase";
-      }
+    function cleanTile(v){
+      const n = String(v || "").replace(/[^0-9]/g,"").slice(0,4);
+      return n.padStart(4,"0");
+    }
+
+    function buildPacket(){
+      return {
+        version: "claim_packet_v1",
+        createdAt: nowIso(),
+        tile: cleanTile(el.tile.value),
+        handle: (el.handle.value || "").trim().slice(0,32),
+        wallet: (el.wallet.value || "").trim().slice(0,64),
+        mark: (el.mark.value || "").trim().slice(0,320),
+        style: el.style.value,
+        privacy: el.privacy.value,
+        route: "/monolith/claim/",
+        host: "houseofcauliman.com"
+      };
     }
 
     function render(){
-      const handle = (el.handle.value || "").trim().slice(0, 32);
-      const tile = normalizeTile(el.tile.value);
-      const mark = (el.mark.value || "").trim().slice(0, 120);
-      const style = el.style.value;
+      const p = buildPacket();
+      el.pvTile.textContent = p.tile;
+      el.pvHandle.textContent = p.handle || "none";
+      el.pvWallet.textContent = p.wallet || "none";
+      el.pvStyle.textContent = p.style;
+      el.pvPrivacy.textContent = p.privacy;
+      el.pvJson.textContent = JSON.stringify(p, null, 2);
 
-      el.tile.value = tile;
-
-      stylePreview(style);
-
-      el.preview.textContent = mark || "YOUR MARK";
-
-      el.mHandle.textContent = handle || "-";
-      el.mTile.textContent = tile || "-";
-
-      const valid = handle.length >= 2 && tile.length >= 2 && mark.length >= 2;
-      el.sign.disabled = true;
-      el.connect.disabled = true;
-
-      if(valid){
-        el.msg.className = "note ok";
-        el.msg.textContent = "Draft looks valid. Save it. Wallet signing comes later.";
-      }else{
-        el.msg.className = "note warn";
-        el.msg.textContent = "Fill handle, tile ID, and mark text. Keep it short. Permanent.";
+      // sync tile selection highlight
+      if(el.tilegrid){
+        el.tilegrid.querySelectorAll(".tcell.selected").forEach(x=>x.classList.remove("selected"));
+        const btn = el.tilegrid.querySelector(`[data-tile="${p.tile}"]`);
+        if(btn && !btn.disabled) btn.classList.add("selected");
       }
     }
 
-    function save(){
-      const payload = {
-        v: 1,
-        handle: (el.handle.value || "").trim().slice(0, 32),
-        tile: normalizeTile(el.tile.value),
-        style: el.style.value,
-        mark: (el.mark.value || "").trim().slice(0, 120),
-        savedAt: new Date().toISOString()
-      };
-      localStorage.setItem(KEY, JSON.stringify(payload));
-      el.mSaved.textContent = payload.savedAt;
-      el.msg.className = "note ok";
-      el.msg.textContent = "Saved locally.";
-    }
-
-    function load(){
-      const raw = localStorage.getItem(KEY);
-      if(!raw){
-        el.msg.className = "note bad";
-        el.msg.textContent = "No saved draft found on this browser.";
-        return;
-      }
-      try{
-        const p = JSON.parse(raw);
-        el.handle.value = p.handle || "";
-        el.tile.value = p.tile || "";
-        el.style.value = p.style || "block";
-        el.mark.value = p.mark || "";
-        el.mSaved.textContent = p.savedAt || "-";
-        render();
-        el.msg.className = "note ok";
-        el.msg.textContent = "Draft loaded.";
-      }catch(e){
-        el.msg.className = "note bad";
-        el.msg.textContent = "Draft is corrupted. Clear it and save again.";
-      }
-    }
-
-    function clearDraft(){
-      localStorage.removeItem(KEY);
-      el.mSaved.textContent = "-";
-      el.msg.className = "note warn";
-      el.msg.textContent = "Draft cleared.";
+    function saveDraft(){
+      const p = buildPacket();
+      localStorage.setItem(KEY, JSON.stringify(p));
       render();
     }
 
-    ["input","change"].forEach(evt=>{
+    function loadDraft(){
+      try{
+        const raw = localStorage.getItem(KEY);
+        if(!raw) return;
+        const p = JSON.parse(raw);
+        el.tile.value = cleanTile(p.tile || "");
+        el.handle.value = p.handle || "";
+        el.wallet.value = p.wallet || "";
+        el.mark.value = p.mark || "";
+        if(p.style) el.style.value = p.style;
+        if(p.privacy) el.privacy.value = p.privacy;
+      }catch(_){}
+    }
+
+    function resetAll(){
+      localStorage.removeItem(KEY);
+      el.tile.value = "0001";
+      el.handle.value = "";
+      el.wallet.value = "";
+      el.mark.value = "";
+      el.style.value = "classic";
+      el.privacy.value = "public";
+      render();
+    }
+
+    function downloadJson(){
+      const p = buildPacket();
+      const blob = new Blob([JSON.stringify(p, null, 2)], {type:"application/json"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `monolith_claim_${p.tile || "0000"}.json`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    // tile grid config
+    const GRID_W = 10;
+    const GRID_H = 10;
+    const TAKEN = new Set(); // later: load from json
+
+    function tileId(n){
+      return String(n).padStart(4,"0");
+    }
+
+    function buildGrid(){
+      const host = el.tilegrid;
+      if(!host) return;
+
+      host.innerHTML = "";
+      const total = GRID_W * GRID_H;
+
+      for(let i=1;i<=total;i++){
+        const id = tileId(i);
+
+        const cell = document.createElement("button");
+        cell.type = "button";
+        cell.className = "tcell";
+        cell.dataset.tile = id;
+        cell.setAttribute("aria-label", `tile ${id}`);
+
+        if(TAKEN.has(id)){
+          cell.classList.add("taken");
+          cell.disabled = true;
+        }
+
+        const lab = document.createElement("b");
+        lab.textContent = id;
+        cell.appendChild(lab);
+
+        cell.addEventListener("click", () => {
+          if(cell.disabled) return;
+          host.querySelectorAll(".tcell.selected").forEach(x=>x.classList.remove("selected"));
+          cell.classList.add("selected");
+          el.tile.value = id;
+          render();
+        });
+
+        host.appendChild(cell);
+      }
+
+      const current = cleanTile(el.tile.value || "");
+      const btn = host.querySelector(`[data-tile="${current}"]`);
+      if(btn && !btn.disabled) btn.classList.add("selected");
+    }
+
+    // wire inputs
+    ["input","change"].forEach(evt => {
+      el.tile.addEventListener(evt, () => { el.tile.value = cleanTile(el.tile.value); render(); });
       el.handle.addEventListener(evt, render);
-      el.tile.addEventListener(evt, render);
-      el.style.addEventListener(evt, render);
+      el.wallet.addEventListener(evt, render);
       el.mark.addEventListener(evt, render);
+      el.style.addEventListener(evt, render);
+      el.privacy.addEventListener(evt, render);
     });
 
-    el.save.addEventListener("click", save);
-    el.load.addEventListener("click", load);
-    el.clear.addEventListener("click", clearDraft);
+    el.save.addEventListener("click", saveDraft);
+    el.reset.addEventListener("click", resetAll);
+    el.download.addEventListener("click", downloadJson);
 
+    // init
+    loadDraft();
+    if(!el.tile.value) el.tile.value = "0001";
+    el.tile.value = cleanTile(el.tile.value);
+    buildGrid();
     render();
   </script>
 </body>
