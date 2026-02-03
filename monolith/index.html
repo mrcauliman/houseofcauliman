@@ -26,119 +26,141 @@
       --shadow:rgba(0,0,0,.45);
       --radius:18px;
 
-      --step:128px;     /* tile spacing */
-      --tile:118px;     /* visible tile size */
+      --step:128px;
+      --tile:118px;
     }
 
     *{box-sizing:border-box}
     html,body{height:100%;margin:0}
     body{
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
       background:
         radial-gradient(1200px 600px at 50% -10%, rgba(47,191,107,.10), transparent 55%),
         radial-gradient(900px 500px at 20% 0%, rgba(255,255,255,.05), transparent 55%),
         var(--bg);
       color:var(--fg);
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
       overflow:hidden;
     }
-    a{color:inherit;text-decoration:none}
-    .wrap{
-      position:fixed; inset:0;
-      display:flex;
-      flex-direction:column;
-    }
 
-    /* top bar */
+    a{color:inherit;text-decoration:none}
     .topbar{
-      position:relative;
-      z-index:30;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding:14px 14px 10px;
+      position:fixed;
+      left:0; right:0; top:0;
+      z-index:50;
+      background:linear-gradient(to bottom, rgba(7,9,11,.92), rgba(7,9,11,.55), rgba(7,9,11,0));
+      padding:16px 14px 12px;
       pointer-events:none;
     }
-    .topbar > *{pointer-events:auto}
+    .topbar .row{
+      max-width:1180px;
+      margin:0 auto;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      pointer-events:none;
+    }
     .brand{
-      display:flex;align-items:center;gap:10px;
-      padding:10px 12px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      border-radius:999px;
-      box-shadow:0 12px 30px var(--shadow);
-      backdrop-filter: blur(8px);
+      display:flex;
+      align-items:center;
+      gap:10px;
+      pointer-events:none;
     }
-    .dot{
-      width:10px;height:10px;border-radius:999px;
-      background:var(--green);
-      box-shadow:0 0 18px rgba(47,191,107,.25);
+    .brand img{
+      width:44px;height:44px;
+      object-fit:contain;
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,.35));
     }
+    .brand .txt{pointer-events:none}
     .brand h1{
       margin:0;
-      font-size:13px;
-      letter-spacing:.25px;
-      line-height:1.05;
-      font-weight:900;
+      font-size:14px;
+      letter-spacing:.2px;
+      opacity:.95;
     }
     .brand .sub{
-      margin:2px 0 0;
-      .2px;
-      font-size:11px;
-      color:rgba(245,247,244,.70);
-      line-height:1.15;
-      white-space:nowrap;
+      margin-top:4px;
+      color:rgba(169,179,189,.9);
+      font-size:12px;
+      line-height:1.35;
     }
 
     .actions{
-      display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      pointer-events:auto;
     }
     .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      padding:10px 12px;
-      border-radius:14px;
-      border:1px solid var(--line);
+      border:1px solid rgba(255,255,255,.12);
       background:rgba(255,255,255,.03);
       color:var(--fg);
-      font-weight:900;
+      border-radius:999px;
+      padding:10px 14px;
       font-size:12px;
       letter-spacing:.2px;
-      box-shadow:0 12px 30px var(--shadow);
-      backdrop-filter: blur(8px);
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
       cursor:pointer;
       user-select:none;
+      -webkit-tap-highlight-color: transparent;
     }
-    .btn:hover{border-color:rgba(47,191,107,.55)}
+    .btn:hover{border-color:rgba(47,191,107,.45)}
     .btn.primary{
-      border-color:rgba(47,191,107,.45);
       background:rgba(47,191,107,.14);
+      border-color:rgba(47,191,107,.38);
     }
-    .btn.primary:hover{border-color:rgba(47,191,107,.85)}
     .btn .k{
-      font-size:10px;
-      opacity:.8;
       font-weight:800;
-      letter-spacing:.35px;
+      font-size:10px;
+      letter-spacing:.6px;
+      color:rgba(245,247,244,.78);
     }
 
-    /* viewport */
-    .viewport{
-      position:relative;
-      flex:1;
-      border-top:1px solid rgba(255,255,255,.06);
-      touch-action:none;
-      overscroll-behavior:none;
+    .hud{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      pointer-events:auto;
     }
+    .pill{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      padding:8px 10px;
+      border-radius:999px;
+      font-size:12px;
+      color:rgba(169,179,189,.95);
+      white-space:nowrap;
+    }
+    .pill b{color:rgba(245,247,244,.92)}
+    .pill .dot{
+      display:inline-block;
+      width:10px;height:10px;
+      border-radius:999px;
+      background:var(--green);
+      box-shadow:0 0 16px rgba(47,191,107,.25);
+      margin-right:8px;
+      transform:translateY(1px);
+    }
+
+    .viewport{
+      position:absolute;
+      inset:0;
+      touch-action:none;
+      cursor:grab;
+    }
+    .viewport.drag{cursor:grabbing}
+
     .world{
       position:absolute;
       left:0; top:0;
       will-change:transform;
     }
 
-    /* tile cell */
     .tcell{
       position:absolute;
       width:var(--tile);
@@ -146,259 +168,247 @@
       border-radius:14px;
       border:1px solid rgba(255,255,255,.10);
       background:
-        radial-gradient(120px 120px at 30% 20%, rgba(255,255,255,.06), transparent 60%),
-        rgba(255,255,255,.02);
-      box-shadow:0 10px 28px rgba(0,0,0,.35);
-      cursor:pointer;
+        radial-gradient(120px 80px at 30% 20%, rgba(255,255,255,.05), transparent 55%),
+        rgba(255,255,255,.03);
       overflow:hidden;
+      box-shadow:0 16px 30px rgba(0,0,0,.35);
       user-select:none;
+      -webkit-tap-highlight-color: transparent;
     }
-    .tcell:hover{border-color:rgba(47,191,107,.55)}
     .tcell:before{
       content:"";
-      position:absolute; inset:0;
+      position:absolute;
+      inset:0;
       background:
-        linear-gradient(135deg, rgba(255,255,255,.06), transparent 40%),
-        radial-gradient(120px 80px at 70% 10%, rgba(47,191,107,.10), transparent 70%);
-      opacity:.65;
+        linear-gradient(140deg, rgba(47,191,107,.08), transparent 40%),
+        linear-gradient(0deg, rgba(0,0,0,.25), transparent 50%);
+      opacity:.95;
       pointer-events:none;
     }
     .tcell .meta{
       position:absolute;
-      left:10px;
-      right:10px;
-      bottom:8px;
+      left:10px; right:10px; bottom:10px;
       display:flex;
+      align-items:flex-end;
       justify-content:space-between;
-      gap:10px;
-      font-size:10px;
-      color:rgba(245,247,244,.78);
-      font-weight:900;
-      letter-spacing:.35px;
-      text-transform:uppercase;
+      gap:8px;
       pointer-events:none;
     }
-    .tcell .meta .id{opacity:.85}
-    .tcell .meta .st{opacity:.75}
-
+    .tcell .id{
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:.6px;
+      color:rgba(245,247,244,.82);
+      text-shadow:0 8px 18px rgba(0,0,0,.55);
+    }
+    .tcell .xy{
+      font-size:10px;
+      font-weight:800;
+      letter-spacing:.3px;
+      color:rgba(169,179,189,.85);
+    }
     .tcell .spray{
       position:absolute;
       inset:0;
       opacity:0;
-      transform:translateZ(0);
-      pointer-events:none;
       transition:opacity .18s ease;
-      mix-blend-mode:screen;
-      filter:saturate(1.2) contrast(1.05);
+      pointer-events:none;
     }
-
     .tcell.taken{
-      border-color:rgba(47,191,107,.28);
-      background:
-        radial-gradient(120px 120px at 30% 20%, rgba(47,191,107,.08), transparent 60%),
-        rgba(255,255,255,.02);
+      border-color:rgba(47,191,107,.65);
+      box-shadow:0 0 0 2px rgba(47,191,107,.12) inset, 0 18px 36px rgba(0,0,0,.42);
     }
     .tcell.taken .spray{opacity:1}
-    .tcell.taken:after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:radial-gradient(120px 120px at 50% 60%, rgba(0,0,0,.00), rgba(0,0,0,.18));
-      pointer-events:none;
-    }
+    .tcell:hover{border-color:rgba(47,191,107,.45)}
+    .tcell:active{transform:scale(.995)}
 
-    /* hint */
-    .hint{
-      position:absolute;
-      left:14px;
-      bottom:14px;
-      z-index:20;
-      max-width:min(520px, calc(100% - 28px));
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      border-radius:14px;
-      padding:10px 12px;
-      color:rgba(245,247,244,.85);
-      font-size:12px;
-      line-height:1.35;
-      box-shadow:0 12px 30px var(--shadow);
-      backdrop-filter: blur(8px);
-      pointer-events:none;
-    }
-    .hint b{color:var(--fg)}
-    .hint .mini{display:block;color:rgba(169,179,189,.85);font-size:11px;margin-top:4px}
-    .hint .mini code{color:rgba(245,247,244,.88)}
-
-    /* panel */
-    .panelMask{
-      position:fixed; inset:0;
-      background:rgba(0,0,0,.55);
-      opacity:0;
-      pointer-events:none;
-      transition:opacity .18s ease;
-      z-index:60;
-    }
     .panel{
       position:fixed;
-      top:0; right:0;
-      height:100%;
-      width:min(420px, 92vw);
-      background:linear-gradient(180deg, rgba(12,17,22,.98), rgba(12,17,22,.92));
-      border-left:1px solid rgba(255,255,255,.08);
-      transform:translateX(102%);
-      transition:transform .22s ease;
-      z-index:70;
-      box-shadow:-24px 0 60px rgba(0,0,0,.55);
-      display:flex;
-      flex-direction:column;
+      right:14px;
+      top:86px;
+      width:min(430px, calc(100vw - 28px));
+      max-height:calc(100vh - 110px);
+      overflow:auto;
+      z-index:60;
+      border:1px solid var(--line);
+      background:rgba(12,17,22,.92);
+      backdrop-filter: blur(10px);
+      border-radius:18px;
+      box-shadow:0 18px 50px var(--shadow);
+      transform:translateY(6px);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .16s ease, transform .16s ease;
     }
-    .panel.open{transform:translateX(0)}
-    .panelMask.open{opacity:1;pointer-events:auto}
-    .pTop{
-      padding:14px 14px 10px;
+    .panel.open{
+      opacity:1;
+      transform:translateY(0);
+      pointer-events:auto;
+    }
+    .panel .head{
       display:flex;
       align-items:flex-start;
       justify-content:space-between;
       gap:10px;
-      border-bottom:1px solid rgba(255,255,255,.08);
+      padding:14px 14px 10px;
+      border-bottom:1px solid rgba(31,42,54,.8);
     }
-    .pTop h2{margin:0;font-size:14px;letter-spacing:.2px;font-weight:950}
-    .pTop .small{margin:4px 0 0;color:rgba(169,179,189,.85);font-size:12px;line-height:1.35}
-    .xbtn{
+    .panel h2{
+      margin:0;
+      font-size:14px;
+      letter-spacing:.2px;
+    }
+    .panel .small{
+      margin-top:6px;
+      color:rgba(169,179,189,.92);
+      font-size:12px;
+      line-height:1.35;
+    }
+    .panel .x{
       border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.04);
-      color:var(--fg);
-      width:36px; height:36px;
-      border-radius:12px;
-      cursor:pointer;
-      font-weight:950;
-      font-size:16px;
-    }
-    .xbtn:hover{border-color:rgba(47,191,107,.55)}
-    .pBody{
-      padding:14px;
-      overflow:auto;
-    }
-    .kv{
-      display:grid;
-      grid-template-columns:110px 1fr;
-      gap:8px 10px;
-      padding:12px;
-      border:1px solid rgba(255,255,255,.08);
       background:rgba(255,255,255,.03);
-      border-radius:14px;
-    }
-    .kv .k{color:rgba(169,179,189,.9);font-size:12px;font-weight:900;letter-spacing:.2px}
-    .kv .v{color:rgba(245,247,244,.9);font-size:12px;line-height:1.35}
-    .tag{
+      color:rgba(245,247,244,.92);
+      width:34px;height:34px;
+      border-radius:12px;
       display:inline-flex;
       align-items:center;
-      gap:6px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.03);
-      padding:6px 10px;
-      border-radius:999px;
-      font-size:11px;
-      font-weight:900;
-      color:rgba(245,247,244,.88);
+      justify-content:center;
+      cursor:pointer;
+      user-select:none;
+    }
+    .panel .x:hover{border-color:rgba(47,191,107,.45)}
+    .panel .body{padding:12px 14px 14px}
+    .kv{
+      display:grid;
+      grid-template-columns:130px 1fr;
+      gap:8px 10px;
+      align-items:start;
       margin-top:10px;
     }
-    .tag.good{border-color:rgba(47,191,107,.35);background:rgba(47,191,107,.10)}
-    .tag.bad{border-color:rgba(255,91,91,.30);background:rgba(255,91,91,.08)}
-    .tag.warn{border-color:rgba(255,225,117,.30);background:rgba(255,225,117,.08)}
-    .mono-link{
-      margin-top:12px;
-      display:flex;gap:10px;flex-wrap:wrap;
+    .kv .k{
+      color:rgba(169,179,189,.92);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.2px;
     }
-    .mono-link a{
+    .kv .v{
+      color:rgba(245,247,244,.92);
+      font-size:12px;
+      line-height:1.35;
+      word-break:break-word;
+    }
+    .kv .v.muted{color:rgba(169,179,189,.92)}
+    .divider{
+      height:1px;
+      background:rgba(31,42,54,.9);
+      margin:12px 0 10px;
+    }
+    .mono-links{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .link{
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.03);
+      border-radius:999px;
+      padding:9px 12px;
+      font-size:12px;
+      color:rgba(245,247,244,.92);
       display:inline-flex;
       align-items:center;
       gap:8px;
-      padding:10px 12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.03);
-      font-weight:900;
-      font-size:12px;
     }
-    .mono-link a:hover{border-color:rgba(47,191,107,.55)}
-    .mono-link a.primary{
-      border-color:rgba(47,191,107,.45);
-      background:rgba(47,191,107,.14);
-    }
+    .link:hover{border-color:rgba(47,191,107,.45)}
 
-    /* mobile safe area */
-    @supports(padding: max(0px)){
-      .topbar{padding-top:max(14px, env(safe-area-inset-top))}
-      .hint{bottom:max(14px, env(safe-area-inset-bottom))}
-      .panel{padding-bottom:env(safe-area-inset-bottom)}
+    .toast{
+      position:fixed;
+      left:14px;
+      bottom:14px;
+      z-index:70;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(12,17,22,.90);
+      backdrop-filter: blur(10px);
+      border-radius:14px;
+      padding:10px 12px;
+      color:rgba(245,247,244,.92);
+      font-size:12px;
+      box-shadow:0 18px 50px var(--shadow);
+      opacity:0;
+      transform:translateY(10px);
+      transition:opacity .18s ease, transform .18s ease;
+      pointer-events:none;
+      max-width:min(520px, calc(100vw - 28px));
     }
+    .toast.show{opacity:1;transform:translateY(0)}
+    .toast b{font-weight:900}
+    .toast .warn{color:var(--warn)}
+    .toast .ok{color:var(--green)}
+    .toast .bad{color:var(--red)}
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="topbar">
-      <div class="brand" aria-label="monolith brand">
-        <span class="dot" aria-hidden="true"></span>
-        <div>
-          <h1>MONOLITH</h1>
-          <div class="sub">Drag to move. Tap a tile to inspect.</div>
+  <div class="topbar">
+    <div class="row">
+      <div class="brand">
+        <img src="/assets/monolith/monolith_logo.webp" alt="MONOLITH">
+        <div class="txt">
+          <h1>One tile. One mark. No edits. No deletes.</h1>
+          <div class="sub">Drag to move. Tap a tile to inspect details.</div>
         </div>
       </div>
 
-      <div class="actions" aria-label="monolith actions">
+      <div class="actions">
         <a class="btn primary" href="/monolith/claim/" aria-label="claim a tile">
           <span class="k">ACTION</span> Claim a Tile
         </a>
-        <button class="btn" id="recenter" type="button" aria-label="recenter view">
-          <span class="k">VIEW</span> Recenter
-        </button>
-        <a class="btn" href="/assets/monolith/feed.json" target="_blank" rel="noreferrer" aria-label="open feed json">
-          <span class="k">DATA</span> feed.json
-        </a>
-      </div>
-    </div>
-
-    <div class="viewport" id="vp" aria-label="monolith wall viewport">
-      <div class="world" id="world" aria-label="monolith wall world"></div>
-
-      <div class="hint" id="hint" aria-live="polite">
-        <b>Move freely</b> in any direction. Inertia is on. Endless wall.
-        <span class="mini">Feed source <code>/assets/monolith/feed.json</code></span>
+        <div class="hud">
+          <div class="pill"><span class="dot"></span><b id="kpiTaken">0</b> taken</div>
+          <div class="pill"><b id="kpiTile">E0-S0</b> focus</div>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="panelMask" id="mask" aria-hidden="true"></div>
+  <div class="viewport" id="vp" aria-label="monolith wall viewport">
+    <div class="world" id="world" aria-label="monolith wall world"></div>
+  </div>
 
   <aside class="panel" id="panel" aria-label="tile detail panel">
-    <div class="pTop">
+    <div class="head">
       <div>
         <h2 id="ptitle">Tile</h2>
         <div class="small" id="psub">Tap a tile to inspect details.</div>
       </div>
-      <button class="xbtn" id="close" type="button" aria-label="close panel">×</button>
+      <div class="x" id="pclose" aria-label="close">✕</div>
     </div>
-
-    <div class="pBody">
-      <div class="kv" id="kv">
+    <div class="body">
+      <div class="kv">
         <div class="k">Tile</div><div class="v" id="vTile">None</div>
-        <div class="k">Status</div><div class="v" id="vStatus">None</div>
-        <div class="k">Coords</div><div class="v" id="vCoords">None</div>
-        <div class="k">Title</div><div class="v" id="vTitle">None</div>
-        <div class="k">Body</div><div class="v" id="vBody">None</div>
-        <div class="k">When</div><div class="v" id="vWhen">None</div>
+        <div class="k">Coords</div><div class="v" id="vCoords" class="muted">0, 0</div>
+        <div class="k">Status</div><div class="v" id="vStatus" class="muted">Open</div>
+        <div class="k">Tag</div><div class="v" id="vTag" class="muted">None</div>
+        <div class="k">Time</div><div class="v" id="vTs" class="muted">None</div>
+        <div class="k">Mark ID</div><div class="v" id="vId" class="muted">None</div>
       </div>
 
-      <div class="tag warn" id="tag">Status</div>
+      <div class="divider"></div>
 
-      <div class="mono-link" aria-label="tile links">
-        <a class="primary" href="/monolith/claim/" id="claimLink">Claim flow</a>
-        <a href="/assets/monolith/feed.json" target="_blank" rel="noreferrer">View feed.json</a>
+      <div class="kv">
+        <div class="k">Title</div><div class="v" id="vTitle" class="muted">None</div>
+        <div class="k">Body</div><div class="v" id="vBody" class="muted">This tile is open.</div>
+      </div>
+
+      <div class="mono-links" aria-label="tile links">
+        <a class="link" href="/monolith/claim/" aria-label="claim flow">Claim flow</a>
+        <a class="link" href="/assets/monolith/feed.json" target="_blank" rel="noreferrer">View feed.json</a>
       </div>
     </div>
   </aside>
+
+  <div class="toast" id="toast"></div>
 
   <script>
     "use strict";
@@ -408,25 +418,27 @@
     const vp = document.getElementById("vp");
     const world = document.getElementById("world");
 
-    const hint = document.getElementById("hint");
-    const recenterBtn = document.getElementById("recenter");
-
     const panel = document.getElementById("panel");
-    const mask = document.getElementById("mask");
-    const closeBtn = document.getElementById("close");
+    const pclose = document.getElementById("pclose");
+    const ptitle = document.getElementById("ptitle");
+    const psub = document.getElementById("psub");
 
     const vTile = document.getElementById("vTile");
-    const vStatus = document.getElementById("vStatus");
     const vCoords = document.getElementById("vCoords");
+    const vStatus = document.getElementById("vStatus");
+    const vTag = document.getElementById("vTag");
+    const vTs = document.getElementById("vTs");
+    const vId = document.getElementById("vId");
     const vTitle = document.getElementById("vTitle");
     const vBody = document.getElementById("vBody");
-    const vWhen = document.getElementById("vWhen");
-    const tag = document.getElementById("tag");
+
+    const kpiTaken = document.getElementById("kpiTaken");
+    const kpiTile = document.getElementById("kpiTile");
+
+    const toast = document.getElementById("toast");
 
     const STEP = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--step").trim(), 10) || 128;
     const TILE = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--tile").trim(), 10) || 118;
-
-    const POOL_PAD = 2;
 
     const state = {
       camX: 0,
@@ -434,162 +446,165 @@
       vx: 0,
       vy: 0,
       dragging: false,
+      moved: false,
       lastX: 0,
       lastY: 0,
       lastT: 0,
-      moved: false,
-      pointerId: null,
-      w: 0,
-      h: 0,
+      downX: 0,
+      downY: 0,
+      downCamX: 0,
+      downCamY: 0,
+      lastDragDX: 0,
+      lastDragDY: 0,
+
       cols: 0,
       rows: 0,
-
-      feedRaw: null,
-      taken: new Set(),
-      marksByTile: new Map(),
-
       pool: [],
+      poolPad: 3,
       poolGX0: 0,
       poolGY0: 0,
-      lastRenderKey: ""
+
+      taken: new Set(),
+      marksByTile: new Map(),
+      marksById: new Map(),
+
+      selectedTile: null,
+      selectedGX: 0,
+      selectedGY: 0
     };
 
-    function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
+    function toastMsg(msg, tone){
+      toast.className = "toast";
+      let cls = "";
+      if(tone === "ok") cls = "ok";
+      if(tone === "warn") cls = "warn";
+      if(tone === "bad") cls = "bad";
+      toast.innerHTML = cls ? ("<b class='"+cls+"'>"+tone.toUpperCase()+"</b> " + escapeHtml(msg)) : escapeHtml(msg);
+      requestAnimationFrame(()=>toast.classList.add("show"));
+      setTimeout(()=>toast.classList.remove("show"), 1700);
+    }
+
+    function escapeHtml(s){
+      return String(s || "").replace(/[&<>"']/g, c => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+      }[c]));
+    }
 
     function tileIdFromCoords(gx, gy){
-      const ax = Math.abs(gx);
-      const ay = Math.abs(gy);
       const sx = gx < 0 ? "W" : "E";
       const sy = gy < 0 ? "N" : "S";
-      return `${sy}${ay.toString().padStart(4,"0")}-${sx}${ax.toString().padStart(4,"0")}`;
+      const ax = Math.abs(gx);
+      const ay = Math.abs(gy);
+      return sx + ax + "-" + sy + ay;
     }
 
-    function mulberry32(seed){
-      let a = seed >>> 0;
-      return function(){
-        a |= 0;
-        a = a + 0x6D2B79F5 | 0;
-        let t = Math.imul(a ^ a >>> 15, 1 | a);
-        t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
-        return ((t ^ t >>> 14) >>> 0) / 4294967296;
-      };
-    }
-
-    function hashStr(s){
-      let h = 2166136261 >>> 0;
+    function hashStrToInt(s){
+      let h = 2166136261;
       for(let i=0;i<s.length;i++){
         h ^= s.charCodeAt(i);
         h = Math.imul(h, 16777619);
       }
-      return h >>> 0;
+      return (h >>> 0);
     }
 
     function makeSpraySVG(seedStr){
-      const rnd = mulberry32(hashStr(seedStr));
-      const w = 120, h = 120;
-      const blobs = 10 + Math.floor(rnd()*8);
-      const pts = [];
-      for(let i=0;i<blobs;i++){
-        const cx = 20 + rnd()*80;
-        const cy = 18 + rnd()*84;
-        const r = 8 + rnd()*18;
-        pts.push({cx,cy,r});
-      }
+      const h = hashStrToInt(seedStr);
+      const r1 = 18 + (h % 22);
+      const r2 = 24 + ((h >>> 5) % 28);
+      const r3 = 30 + ((h >>> 9) % 34);
+      const x1 = 20 + ((h >>> 13) % 60);
+      const y1 = 18 + ((h >>> 17) % 64);
+      const x2 = 30 + ((h >>> 21) % 50);
+      const y2 = 32 + ((h >>> 25) % 46);
 
-      const hues = [120, 102, 145, 165, 92];
-      const hue = hues[Math.floor(rnd()*hues.length)];
-      const c1 = `hsla(${hue}, 85%, 58%, .34)`;
-      const c2 = `hsla(${hue+18}, 92%, 64%, .22)`;
-
-      let circles = "";
-      for(const p of pts){
-        circles += `<circle cx="${p.cx.toFixed(1)}" cy="${p.cy.toFixed(1)}" r="${p.r.toFixed(1)}" fill="${c1}" />`;
-        circles += `<circle cx="${(p.cx + (rnd()*10-5)).toFixed(1)}" cy="${(p.cy + (rnd()*10-5)).toFixed(1)}" r="${(p.r*0.55).toFixed(1)}" fill="${c2}" />`;
-      }
-
-      return `
-<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <defs>
-    <filter id="blur">
-      <feGaussianBlur stdDeviation="1.25" />
-    </filter>
-  </defs>
-  <g filter="url(#blur)">${circles}</g>
-</svg>`.trim();
-    }
-
-    function setHint(text){
-      hint.innerHTML = text;
+      const g = [
+        `<svg viewBox="0 0 120 120" width="120" height="120" xmlns="http://www.w3.org/2000/svg">`,
+        `<defs>`,
+        `<radialGradient id="g" cx="50%" cy="40%" r="70%">`,
+        `<stop offset="0%" stop-color="rgba(47,191,107,.55)"/>`,
+        `<stop offset="60%" stop-color="rgba(47,191,107,.18)"/>`,
+        `<stop offset="100%" stop-color="rgba(47,191,107,0)"/>`,
+        `</radialGradient>`,
+        `</defs>`,
+        `<rect width="120" height="120" fill="url(#g)" opacity="0.9"/>`,
+        `<g opacity="0.85" fill="rgba(47,191,107,.30)">`,
+        `<circle cx="${x1}" cy="${y1}" r="${r1}"/>`,
+        `<circle cx="${x2}" cy="${y2}" r="${r2}"/>`,
+        `<circle cx="${72}" cy="${66}" r="${r3}" opacity="0.55"/>`,
+        `</g>`,
+        `<g opacity="0.75" fill="rgba(255,255,255,.12)">`,
+        `<circle cx="${20 + ((h>>>2)%80)}" cy="${18 + ((h>>>6)%80)}" r="${6 + ((h>>>10)%10)}"/>`,
+        `<circle cx="${18 + ((h>>>14)%86)}" cy="${22 + ((h>>>18)%74)}" r="${5 + ((h>>>22)%9)}"/>`,
+        `</g>`,
+        `</svg>`
+      ];
+      return g.join("");
     }
 
     function openPanel(tile, gx, gy){
+      state.selectedTile = tile;
+      state.selectedGX = gx;
+      state.selectedGY = gy;
+
       const mark = state.marksByTile.get(tile) || null;
       const taken = state.taken.has(tile);
 
-      vTile.textContent = tile;
-      vCoords.textContent = `${gx}, ${gy}`;
-      vStatus.textContent = taken ? "Taken" : "Open";
+      kpiTile.textContent = tile;
 
-      if(mark){
-        vTitle.textContent = (mark.title || "Mark");
-        vBody.textContent = (mark.body || "No body");
-        vWhen.textContent = (mark.ts || "Unknown");
+      vTile.textContent = tile;
+      vCoords.textContent = gx + ", " + gy;
+
+      if(taken){
+        vStatus.textContent = "Taken";
+        vStatus.style.color = "rgba(47,191,107,.95)";
       } else {
-        vTitle.textContent = taken ? "Claimed mark" : "No mark";
-        vBody.textContent = taken ? "This tile exists in feed but has no display fields." : "This tile is open.";
-        vWhen.textContent = "None";
+        vStatus.textContent = "Open";
+        vStatus.style.color = "rgba(169,179,189,.92)";
       }
 
-      tag.className = "tag " + (taken ? "good" : "warn");
-      tag.textContent = taken ? "Taken" : "Open";
+      if(mark){
+        vTag.textContent = mark.tag || "None";
+        vTs.textContent = mark.ts || "None";
+        vId.textContent = mark.id || "None";
+        vTitle.textContent = mark.title || mark.tag || "None";
+        vBody.textContent = mark.body || "This tile is taken.";
+        ptitle.textContent = "Tile " + tile;
+        psub.textContent = (mark.tag ? mark.tag + " " : "") + "Coords " + gx + ", " + gy;
+      } else {
+        vTag.textContent = "None";
+        vTs.textContent = "None";
+        vId.textContent = "None";
+        vTitle.textContent = "None";
+        vBody.textContent = taken ? "This tile exists in feed but has no display fields." : "This tile is open.";
+        ptitle.textContent = "Tile " + tile;
+        psub.textContent = "Coords " + gx + ", " + gy;
+      }
 
       panel.classList.add("open");
-      mask.classList.add("open");
-      mask.setAttribute("aria-hidden", "false");
     }
 
     function closePanel(){
       panel.classList.remove("open");
-      mask.classList.remove("open");
-      mask.setAttribute("aria-hidden", "true");
     }
 
-    closeBtn.addEventListener("click", closePanel);
-    mask.addEventListener("click", closePanel);
-
-    function createCell(){
+    function makeCell(){
       const d = document.createElement("div");
       d.className = "tcell";
-      d.style.left = "0px";
-      d.style.top = "0px";
-      d.setAttribute("role","button");
-      d.setAttribute("tabindex","0");
-
-      const spray = document.createElement("div");
-      spray.className = "spray";
-      d.appendChild(spray);
-
-      const meta = document.createElement("div");
-      meta.className = "meta";
-      meta.innerHTML = `<span class="id"></span><span class="st"></span>`;
-      d.appendChild(meta);
-
-      d.addEventListener("click", (e)=>{
-        if(state.moved){ return; }
+      d.innerHTML = `
+        <div class="spray"></div>
+        <div class="meta">
+          <div class="id"></div>
+          <div class="xy"></div>
+        </div>
+      `;
+      d.addEventListener("click", (ev)=>{
+        ev.preventDefault();
+        ev.stopPropagation();
         const gx = parseInt(d.getAttribute("data-gx") || "0", 10);
         const gy = parseInt(d.getAttribute("data-gy") || "0", 10);
-        const tile = d.getAttribute("data-tile") || tileIdFromCoords(gx,gy);
+        const tile = d.getAttribute("data-tile") || tileIdFromCoords(gx, gy);
         openPanel(tile, gx, gy);
       });
-
-      d.addEventListener("keydown", (e)=>{
-        if(e.key === "Enter" || e.key === " "){
-          e.preventDefault();
-          d.click();
-        }
-      });
-
-      world.appendChild(d);
       return d;
     }
 
@@ -599,64 +614,68 @@
 
       cell.style.left = (gx * STEP) + "px";
       cell.style.top  = (gy * STEP) + "px";
-
       cell.setAttribute("data-gx", String(gx));
       cell.setAttribute("data-gy", String(gy));
       cell.setAttribute("data-tile", tile);
-      cell.setAttribute("aria-label", `Tile ${tile} ${taken ? "taken" : "open"}`);
+      cell.setAttribute("aria-label", "Tile " + tile + " " + (taken ? "taken" : "open"));
 
-      cell.className = "tcell" + (taken ? " taken" : "");
-
-      const meta = cell.querySelector(".meta");
-      if(meta){
-        const id = meta.querySelector(".id");
-        const st = meta.querySelector(".st");
-        if(id) id.textContent = tile;
-        if(st) st.textContent = taken ? "TAKEN" : "OPEN";
-      }
-
+      const id = cell.querySelector(".id");
+      const xy = cell.querySelector(".xy");
       const spray = cell.querySelector(".spray");
-      if(spray){
-        if(taken){
-          spray.innerHTML = makeSpraySVG(tile);
-        } else {
-          spray.innerHTML = "";
-        }
+
+      if(id) id.textContent = tile;
+      if(xy) xy.textContent = gx + "," + gy;
+
+      if(taken){
+        cell.classList.add("taken");
+        if(spray) spray.innerHTML = makeSpraySVG(tile);
+      } else {
+        cell.classList.remove("taken");
+        if(spray) spray.innerHTML = "";
       }
     }
 
-    function layoutPool(){
-      const rect = vp.getBoundingClientRect();
-      state.w = Math.max(1, Math.floor(rect.width));
-      state.h = Math.max(1, Math.floor(rect.height));
+    function ensurePool(){
+      const w = Math.max(320, vp.clientWidth || window.innerWidth || 0);
+      const h = Math.max(480, vp.clientHeight || window.innerHeight || 0);
+      const cols = Math.ceil(w / STEP) + state.poolPad * 2;
+      const rows = Math.ceil(h / STEP) + state.poolPad * 2;
 
-      state.cols = Math.ceil(state.w / STEP) + (POOL_PAD * 2);
-      state.rows = Math.ceil(state.h / STEP) + (POOL_PAD * 2);
-
-      const need = state.cols * state.rows;
-
-      while(state.pool.length < need){
-        state.pool.push(createCell());
+      if(cols === state.cols && rows === state.rows && state.pool.length > 0){
+        return;
       }
-      while(state.pool.length > need){
-        const x = state.pool.pop();
-        if(x && x.parentNode) x.parentNode.removeChild(x);
+
+      state.cols = cols;
+      state.rows = rows;
+
+      world.innerHTML = "";
+      state.pool = [];
+
+      const total = cols * rows;
+      for(let i=0;i<total;i++){
+        const c = makeCell();
+        state.pool.push(c);
+        world.appendChild(c);
       }
     }
 
-    function render(){
-      world.style.transform = `translate(${-state.camX}px, ${-state.camY}px)`;
+    function renderPool(){
+      ensurePool();
 
-      const startGX = Math.floor(state.camX / STEP) - POOL_PAD;
-      const startGY = Math.floor(state.camY / STEP) - POOL_PAD;
+      world.style.transform = "translate(" + (-state.camX) + "px, " + (-state.camY) + "px)";
 
-      const key = `${startGX},${startGY},${state.cols},${state.rows},${state.taken.size}`;
-      if(key === state.lastRenderKey){ return; }
-      state.lastRenderKey = key;
+      const startGX = Math.floor(state.camX / STEP) - state.poolPad;
+      const startGY = Math.floor(state.camY / STEP) - state.poolPad;
+
+      if(startGX === state.poolGX0 && startGY === state.poolGY0){
+        return;
+      }
+      state.poolGX0 = startGX;
+      state.poolGY0 = startGY;
 
       let i = 0;
-      for(let ry=0; ry<state.rows; ry++){
-        for(let rx=0; rx<state.cols; rx++){
+      for(let ry=0;ry<state.rows;ry++){
+        for(let rx=0;rx<state.cols;rx++){
           const gx = startGX + rx;
           const gy = startGY + ry;
           setCell(state.pool[i++], gx, gy);
@@ -666,164 +685,165 @@
 
     function tick(){
       if(!state.dragging){
-        const friction = 0.92;
-        const minV = 0.06;
-
+        state.vx *= 0.92;
+        state.vy *= 0.92;
+        if(Math.abs(state.vx) < 0.02) state.vx = 0;
+        if(Math.abs(state.vy) < 0.02) state.vy = 0;
         state.camX += state.vx;
         state.camY += state.vy;
-
-        state.vx *= friction;
-        state.vy *= friction;
-
-        if(Math.abs(state.vx) < minV) state.vx = 0;
-        if(Math.abs(state.vy) < minV) state.vy = 0;
       }
-      render();
+      renderPool();
       requestAnimationFrame(tick);
     }
 
-    function onDown(e){
+    function onDown(ev){
       state.dragging = true;
-      state.pointerId = e.pointerId;
-      vp.setPointerCapture(e.pointerId);
-
-      state.lastX = e.clientX;
-      state.lastY = e.clientY;
-      state.lastT = performance.now();
       state.moved = false;
+      vp.classList.add("drag");
 
+      state.lastX = ev.clientX;
+      state.lastY = ev.clientY;
+      state.downX = ev.clientX;
+      state.downY = ev.clientY;
+      state.downCamX = state.camX;
+      state.downCamY = state.camY;
+
+      state.lastT = performance.now();
       state.vx = 0;
       state.vy = 0;
+
+      try{ vp.setPointerCapture(ev.pointerId); }catch(e){}
     }
 
-    function onMove(e){
-      if(!state.dragging || e.pointerId !== state.pointerId){ return; }
+    function onMove(ev){
+      if(!state.dragging) return;
 
-      const x = e.clientX;
-      const y = e.clientY;
+      const now = performance.now();
+      const dt = Math.max(1, now - state.lastT);
 
-      const dx = x - state.lastX;
-      const dy = y - state.lastY;
+      const dx = ev.clientX - state.lastX;
+      const dy = ev.clientY - state.lastY;
 
-      if(Math.abs(dx) + Math.abs(dy) > 2){ state.moved = true; }
+      const dist = Math.hypot(ev.clientX - state.downX, ev.clientY - state.downY);
+      if(dist > 4) state.moved = true;
 
       state.camX -= dx;
       state.camY -= dy;
 
-      const now = performance.now();
-      const dt = Math.max(8, now - state.lastT);
-
       state.vx = (-dx) / dt * 16;
       state.vy = (-dy) / dt * 16;
 
-      state.lastX = x;
-      state.lastY = y;
+      state.lastX = ev.clientX;
+      state.lastY = ev.clientY;
       state.lastT = now;
-
-      render();
     }
 
-    function onUp(e){
-      if(e.pointerId !== state.pointerId){ return; }
+    function onUp(ev){
+      if(!state.dragging) return;
       state.dragging = false;
-      state.pointerId = null;
-      try{ vp.releasePointerCapture(e.pointerId); }catch(_){}
-      setTimeout(()=>{ state.moved = false; }, 0);
+      vp.classList.remove("drag");
+      try{ vp.releasePointerCapture(ev.pointerId); }catch(e){}
     }
 
-    function recenter(){
-      state.camX = 3000;
-      state.camY = 1800;
+    function onWheel(ev){
+      ev.preventDefault();
+      state.camX += ev.deltaX;
+      state.camY += ev.deltaY;
       state.vx = 0;
       state.vy = 0;
-      render();
-      setHint(`<b>Recentered.</b> Move freely in any direction. Inertia is on. Endless wall.<span class="mini">Feed source <code>/assets/monolith/feed.json</code></span>`);
+      renderPool();
     }
-
-    recenterBtn.addEventListener("click", recenter);
 
     async function loadFeed(){
       try{
         const res = await fetch(FEED_URL + "?cb=" + Date.now(), { cache:"no-store" });
-        if(!res.ok){ throw new Error("feed http " + res.status); }
         const data = await res.json();
-        state.feedRaw = data;
 
-        state.taken = new Set();
-        state.marksByTile = new Map();
+        const taken = new Set();
+        const byTile = new Map();
+        const byId = new Map();
 
-        /*
-          Supported feed shapes
+        if(Array.isArray(data)){
+          for(const m of data){
+            if(!m) continue;
+            const gx = Number.isFinite(+m.gx) ? +m.gx : null;
+            const gy = Number.isFinite(+m.gy) ? +m.gy : null;
 
-          1) Array of marks with tile + coords
-          [
-            { "tile":"S0001-E0001", "gx":1, "gy":1, "ts":"2026-02-03", "title":"...", "body":"..." }
-          ]
+            let tile = (typeof m.tile === "string" && m.tile) ? m.tile : null;
+            if(!tile && gx !== null && gy !== null){
+              tile = tileIdFromCoords(gx, gy);
+            }
+            if(!tile) continue;
 
-          2) Object with marks list
-          { "marks":[ ... ] }
+            taken.add(tile);
 
-          3) Legacy info posts
-          [
-            { "ts":"2026-02-02", "title":"...", "body":"..." }
-          ]
-          This renders no taken tiles, but does not break the wall
-        */
+            const obj = {
+              id: (typeof m.id === "string" ? m.id : ""),
+              tile: tile,
+              gx: gx !== null ? gx : 0,
+              gy: gy !== null ? gy : 0,
+              tag: (typeof m.tag === "string" ? m.tag : ""),
+              ts: (typeof m.ts === "string" ? m.ts : ""),
+              title: (typeof m.title === "string" ? m.title : ""),
+              body: (typeof m.body === "string" ? m.body : "")
+            };
 
-        let marks = [];
-        if(Array.isArray(data)){ marks = data; }
-        else if(data && Array.isArray(data.marks)){ marks = data.marks; }
-
-        for(const m of marks){
-          if(!m || typeof m !== "object"){ continue; }
-          const gx = Number.isFinite(+m.gx) ? +m.gx : null;
-          const gy = Number.isFinite(+m.gy) ? +m.gy : null;
-
-          let tile = (typeof m.tile === "string" && m.tile) ? m.tile : null;
-          if(!tile && gx !== null && gy !== null){
-            tile = tileIdFromCoords(gx, gy);
+            byTile.set(tile, obj);
+            if(obj.id) byId.set(obj.id, obj);
           }
-          if(!tile){ continue; }
-
-          state.taken.add(tile);
-          state.marksByTile.set(tile, {
-            tile,
-            gx: gx !== null ? gx : 0,
-            gy: gy !== null ? gy : 0,
-            ts: (m.ts || ""),
-            title: (m.title || ""),
-            body: (m.body || "")
-          });
         }
 
-        render();
-      } catch(err){
-        setHint(`<b>Feed load failed.</b> ${String(err.message || err)}<span class="mini">Tried <code>${FEED_URL}</code></span>`);
+        state.taken = taken;
+        state.marksByTile = byTile;
+        state.marksById = byId;
+
+        kpiTaken.textContent = String(state.taken.size);
+
+        renderPool();
+
+        if(panel.classList.contains("open") && state.selectedTile){
+          const tile = state.selectedTile;
+          const gx = state.selectedGX;
+          const gy = state.selectedGY;
+          openPanel(tile, gx, gy);
+        }
+      } catch(e){
+        toastMsg("feed load failed", "warn");
       }
     }
 
-    function init(){
-      layoutPool();
-
-      vp.addEventListener("pointerdown", onDown);
-      vp.addEventListener("pointermove", onMove);
-      vp.addEventListener("pointerup", onUp);
-      vp.addEventListener("pointercancel", onUp);
-      vp.addEventListener("pointerleave", onUp);
-
-      window.addEventListener("resize", ()=>{
-        layoutPool();
-        render();
-      });
-
-      recenter();
-      loadFeed();
-      setInterval(loadFeed, 15000);
-
-      requestAnimationFrame(tick);
+    function startNearSeed(){
+      const gx0 = 24;
+      const gy0 = -11;
+      const w = Math.max(320, vp.clientWidth || window.innerWidth || 0);
+      const h = Math.max(480, vp.clientHeight || window.innerHeight || 0);
+      state.camX = (gx0 * STEP) - Math.floor(w * 0.5);
+      state.camY = (gy0 * STEP) - Math.floor(h * 0.5);
+      renderPool();
     }
 
-    init();
+    pclose.addEventListener("click", closePanel);
+    vp.addEventListener("pointerdown", onDown);
+    vp.addEventListener("pointermove", onMove);
+    vp.addEventListener("pointerup", onUp);
+    vp.addEventListener("pointercancel", onUp);
+    vp.addEventListener("wheel", onWheel, { passive:false });
+
+    window.addEventListener("keydown", (e)=>{
+      if(e.key === "Escape") closePanel();
+    });
+
+    window.addEventListener("resize", ()=>{
+      state.cols = 0;
+      state.rows = 0;
+      ensurePool();
+      renderPool();
+    });
+
+    startNearSeed();
+    loadFeed();
+    setInterval(loadFeed, 15000);
+    requestAnimationFrame(tick);
   </script>
 </body>
 </html>
