@@ -10,3 +10,8 @@ AUGUR_RUNBOOK.html
 
 # local backups
 index.html.bak.*
+
+# private ops docs
+*RUNBOOK*
+*runbook*
+private_ops/
