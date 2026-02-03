@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
   <title>MONOLITH — Claim</title>
-
   <meta name="description" content="Pick a tile. Leave a mark. No edits. No deletes." />
+
   <meta property="og:title" content="MONOLITH — Claim" />
   <meta property="og:description" content="Pick a tile. Leave a mark. No edits. No deletes." />
   <meta property="og:image" content="https://houseofcauliman.com/assets/monolith/monolith_logo.webp" />
@@ -24,163 +24,97 @@
       --warn:#ffe175;
       --red:#ff5b5b;
       --shadow:rgba(0,0,0,.45);
-      --radius:16px;
+      --radius:18px;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
       background:
         radial-gradient(1200px 600px at 50% -10%, rgba(47,191,107,.10), transparent 55%),
         radial-gradient(900px 500px at 20% 0%, rgba(255,255,255,.05), transparent 55%),
         var(--bg);
       color:var(--fg);
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
     }
     a{color:inherit;text-decoration:none}
-    .wrap{max-width:1120px;margin:0 auto;padding:18px 14px 80px}
-    .top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-bottom:12px;
-    }
+    .wrap{max-width:1100px;margin:0 auto;padding:22px 14px 80px}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:14px}
     .brand{display:flex;align-items:center;gap:10px}
-    .dot{width:10px;height:10px;border-radius:999px;background:var(--green);box-shadow:0 0 18px rgba(47,191,107,.25)}
+    .dot{width:10px;height:10px;border-radius:999px;background:var(--green);box-shadow:0 0 18px rgba(47,191,107,.22)}
     h1{margin:0;font-size:18px;letter-spacing:.2px}
-    .sub{color:var(--muted);font-size:12px;margin-top:4px;line-height:1.4}
-    .pill{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      padding:7px 10px;
-      border-radius:999px;
-      font-size:12px;
-      color:var(--muted);
-      display:flex;
-      align-items:center;
-      gap:8px;
-    }
-    .pill b{color:var(--fg);font-size:12px}
-    .grid{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:12px;
-      margin-top:12px;
-    }
+    .sub{margin:4px 0 0;color:var(--muted);font-size:12px;line-height:1.4}
+    .pill{border:1px solid var(--line);background:rgba(255,255,255,.03);padding:7px 10px;border-radius:999px;font-size:12px;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:12px}
     @media(min-width:980px){.grid{grid-template-columns:1.25fr .75fr}}
     .card{
       border:1px solid var(--line);
-      background:rgba(12,17,22,.92);
+      background:rgba(12,17,22,.85);
       border-radius:var(--radius);
       padding:14px;
-      box-shadow:0 12px 30px var(--shadow);
+      box-shadow:0 14px 34px var(--shadow);
+      backdrop-filter: blur(6px);
     }
-    .card h2{margin:0 0 10px;font-size:14px;letter-spacing:.2px}
-    .hint{
-      margin-top:10px;
-      font-size:12px;
-      color:var(--muted);
-      line-height:1.45;
-    }
-    .hint strong{color:var(--fg)}
-    .hint.ok{color:rgba(47,191,107,.95)}
-    .hint.warn{color:rgba(255,225,117,.95)}
-    .hint.bad{color:rgba(255,91,91,.95)}
-    label{
-      display:block;
-      color:var(--muted);
-      font-size:12px;
-      margin:10px 0 6px;
-    }
-    input,textarea,select{
+    h2{margin:0 0 10px;font-size:14px;letter-spacing:.2px}
+    .tiny{font-size:12px;color:var(--muted);line-height:1.5}
+    .row{display:grid;grid-template-columns:1fr;gap:10px}
+    @media(min-width:620px){.row{grid-template-columns:1fr 1fr}}
+    label{display:block;color:var(--muted);font-size:12px;margin:10px 0 6px}
+    input,textarea{
       width:100%;
       background:var(--panel2);
       border:1px solid var(--line);
       color:var(--fg);
-      border-radius:12px;
+      border-radius:14px;
       padding:10px 10px;
       font-size:14px;
       outline:none;
     }
-    textarea{min-height:92px;resize:vertical}
-    input:focus,textarea:focus,select:focus{
-      border-color:rgba(47,191,107,.45);
-      box-shadow:0 0 0 3px rgba(47,191,107,.10);
-    }
-    .row{display:grid;grid-template-columns:1fr;gap:10px}
-    @media(min-width:620px){.row{grid-template-columns:1fr 1fr}}
+    textarea{min-height:96px;resize:vertical}
+    input:focus,textarea:focus{border-color:rgba(47,191,107,.55)}
     .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    button{
-      background:rgba(47,191,107,.14);
-      border:1px solid rgba(47,191,107,.42);
-      color:var(--fg);
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      border-radius:14px;
       padding:10px 12px;
-      border-radius:12px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      color:var(--fg);
+      cursor:pointer;
       font-weight:800;
       letter-spacing:.2px;
-      cursor:pointer;
+      user-select:none;
     }
-    button:hover{border-color:rgba(47,191,107,.75)}
-    button.secondary{
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.14);
-      color:rgba(245,247,244,.92);
+    .btn:hover{border-color:rgba(255,255,255,.18)}
+    .btn.primary{
+      border-color:rgba(47,191,107,.55);
+      background:rgba(47,191,107,.14);
     }
-    button.secondary:hover{border-color:rgba(255,255,255,.26)}
-    button.danger{
+    .btn.primary:hover{border-color:rgba(47,191,107,.85)}
+    .btn.danger{
+      border-color:rgba(255,91,91,.55);
       background:rgba(255,91,91,.10);
-      border:1px solid rgba(255,91,91,.35);
     }
-    button.danger:hover{border-color:rgba(255,91,91,.62)}
-    .small{
-      font-size:12px;
-      color:var(--muted);
+    .btn.danger:hover{border-color:rgba(255,91,91,.85)}
+    .hint{
       margin-top:10px;
-      line-height:1.45;
-    }
-    .small code{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.10);
-      border-radius:8px;
-      padding:2px 6px;
-      color:rgba(245,247,244,.92);
-    }
-
-    .tilegridWrap{
       border:1px solid var(--line);
       background:rgba(255,255,255,.03);
       border-radius:14px;
-      padding:10px;
-    }
-    .tilegridTop{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-bottom:10px;
-    }
-    .tilegridTop .kpis{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      align-items:center;
-    }
-    .kpi{
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(0,0,0,.22);
-      padding:6px 10px;
-      border-radius:999px;
+      padding:10px 10px;
       font-size:12px;
       color:var(--muted);
-      display:flex;
-      gap:8px;
-      align-items:center;
+      line-height:1.45;
+      word-break:break-word;
     }
-    .kpi b{color:var(--fg)}
+    .hint.ok{border-color:rgba(47,191,107,.45);color:rgba(245,247,244,.92)}
+    .hint.warn{border-color:rgba(255,225,117,.45);color:rgba(255,225,117,.95)}
+    .hint.err{border-color:rgba(255,91,91,.55);color:rgba(255,91,91,.95)}
+    .monohr{height:1px;background:rgba(255,255,255,.06);margin:12px 0}
+    .stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    .stat{border:1px solid var(--line);background:rgba(255,255,255,.03);padding:8px 10px;border-radius:14px;font-size:12px;color:var(--muted)}
+    .stat b{color:var(--fg)}
+    .tilegridwrap{display:flex;gap:12px;flex-direction:column}
     .tilegrid{
       display:grid;
       grid-template-columns:repeat(10,1fr);
@@ -195,27 +129,27 @@
       cursor:pointer;
       position:relative;
       overflow:hidden;
-      user-select:none;
+      transform:translateZ(0);
     }
     .tcell:hover{border-color:rgba(47,191,107,.55)}
     .tcell.selected{
       border-color:rgba(47,191,107,.95);
-      box-shadow:0 0 0 2px rgba(47,191,107,.18) inset, 0 0 18px rgba(47,191,107,.10);
-      background:rgba(47,191,107,.06);
+      box-shadow:0 0 0 2px rgba(47,191,107,.18) inset;
+      background:rgba(47,191,107,.08);
     }
     .tcell.taken{
       opacity:.30;
       cursor:not-allowed;
-      filter:saturate(.6);
+      filter:saturate(.7);
     }
     .tcell b{
       position:absolute;
       inset:auto 8px 6px 8px;
       font-size:10px;
-      color:rgba(245,247,244,.78);
-      font-weight:800;
-      letter-spacing:.3px;
-      text-shadow:0 1px 0 rgba(0,0,0,.35);
+      color:rgba(245,247,244,.75);
+      font-weight:900;
+      letter-spacing:.35px;
+      text-transform:uppercase;
     }
     .tcell i{
       position:absolute;
@@ -223,409 +157,493 @@
       font-style:normal;
       font-size:10px;
       color:rgba(169,179,189,.85);
-    }
-    .tcell.taken:after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:linear-gradient(135deg, rgba(255,91,91,.00) 0%, rgba(255,91,91,.12) 100%);
-    }
-
-    .footerNav{
-      margin-top:12px;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:space-between;
-    }
-    .link{
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.04);
-      padding:9px 12px;
-      border-radius:12px;
-      font-size:12px;
-      color:rgba(245,247,244,.92);
       font-weight:800;
-      letter-spacing:.2px;
     }
-    .link:hover{border-color:rgba(255,255,255,.26)}
-    .dangerLink{border-color:rgba(255,91,91,.35);background:rgba(255,91,91,.08)}
-    .dangerLink:hover{border-color:rgba(255,91,91,.62)}
-    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
+    .tcell .x{
+      position:absolute;
+      inset:10px 10px auto auto;
+      width:18px;height:18px;border-radius:999px;
+      display:none;
+      align-items:center;justify-content:center;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.25);
+      color:rgba(245,247,244,.85);
+      font-weight:900;
+      font-size:12px;
+    }
+    .tcell.taken .x{display:flex}
+    .foot{
+      margin-top:12px;
+      color:rgba(169,179,189,.85);
+      font-size:12px;
+      line-height:1.6;
+    }
+    .mono-link{
+      display:inline-flex;gap:6px;align-items:center;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      padding:7px 10px;border-radius:999px;
+      font-size:12px;color:var(--muted)
+    }
+    code{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
   </style>
 </head>
 
 <body>
   <div class="wrap">
-    <div class="top">
+    <div class="topbar">
       <div class="brand">
-        <span class="dot" aria-hidden="true"></span>
+        <span class="dot"></span>
         <div>
-          <h1>MONOLITH — Claim a Tile</h1>
-          <div class="sub">Pick a tile, write your mark, export <span class="mono">claim.json</span>. No edits. No deletes.</div>
+          <h1>MONOLITH — Claim</h1>
+          <div class="sub">Pick a tile. Leave a mark. No edits. No deletes.</div>
         </div>
       </div>
-      <div class="pill">
-        <span class="dot" style="width:8px;height:8px;box-shadow:none"></span>
-        <b id="statusText">loading feed</b>
-        <span id="statusMeta">syncing</span>
-      </div>
+      <div class="pill" id="netpill">feed: loading</div>
     </div>
 
     <div class="grid">
       <div class="card">
-        <h2>Pick a tile</h2>
+        <h2>Choose a Tile</h2>
+        <div class="tiny">Green selects. Dim means taken. Your claim packet is local only. You download it and submit it in the next step.</div>
 
-        <div class="tilegridWrap">
-          <div class="tilegridTop">
-            <div class="kpis">
-              <div class="kpi"><span>Grid</span><b id="gridSize">10×100</b></div>
-              <div class="kpi"><span>Total</span><b id="gridTotal">1000</b></div>
-              <div class="kpi"><span>Taken</span><b id="takenCount">0</b></div>
-              <div class="kpi"><span>Selected</span><b id="selectedTile">none</b></div>
-            </div>
+        <div class="stats" aria-label="grid stats">
+          <div class="stat">grid <b id="gridSize">10×10</b></div>
+          <div class="stat">taken <b id="takenCount">0</b></div>
+          <div class="stat">available <b id="freeCount">100</b></div>
+          <div class="stat">selected <b id="selTile">none</b></div>
+        </div>
 
-            <div class="kpis">
-              <button class="secondary" id="refresh" type="button">Refresh feed</button>
-              <button class="danger" id="clear" type="button">Clear</button>
-            </div>
-          </div>
+        <div class="monohr"></div>
 
+        <div class="tilegridwrap">
           <div class="tilegrid" id="tilegrid" aria-label="tile grid"></div>
-        </div>
-
-        <div class="hint" id="hint">
-          Tile <strong class="mono">0001</strong> to <strong class="mono">1000</strong>. Taken tiles are dimmed.
-        </div>
-
-        <div class="footerNav">
-          <a class="link" href="/monolith/">Back to MONOLITH</a>
-          <a class="link" href="/assets/monolith/feed.json" target="_blank" rel="noreferrer">View feed.json</a>
+          <div class="foot">
+            Source of truth for taken tiles is <code>/assets/monolith/feed.json</code>
+          </div>
         </div>
       </div>
 
       <div class="card">
-        <h2>Claim packet</h2>
-
-        <label for="tile">Tile</label>
-        <input id="tile" autocomplete="off" placeholder="e.g. 0421" maxlength="4" inputmode="numeric" />
+        <h2>Build claim.json</h2>
 
         <div class="row">
           <div>
-            <label for="wallet">XRPL wallet</label>
-            <input id="wallet" autocomplete="off" placeholder="r..." spellcheck="false" />
+            <label for="tile">Tile</label>
+            <input id="tile" autocomplete="off" placeholder="e.g. 0042" maxlength="8" />
           </div>
           <div>
-            <label for="handle">Handle</label>
-            <input id="handle" autocomplete="off" placeholder="@name" spellcheck="false" />
+            <label for="display">Display name</label>
+            <input id="display" autocomplete="off" placeholder="name or handle" maxlength="42" />
           </div>
         </div>
 
+        <label for="wallet">XRPL address</label>
+        <input id="wallet" autocomplete="off" placeholder="r..." maxlength="60" />
+
         <label for="mark">Your mark</label>
-        <textarea id="mark" placeholder="Your message. One mark. No edits." maxlength="280"></textarea>
+        <textarea id="mark" placeholder="One mark. One tile. Permanent." maxlength="280"></textarea>
 
         <div class="btnrow">
-          <button class="btn" id="download" type="button">Download claim.json</button>
-          <button class="secondary" id="copy" type="button">Copy JSON</button>
+          <button class="btn" id="copy" type="button">Copy claim JSON</button>
+          <button class="btn primary" id="download" type="button">Download claim.json</button>
+          <button class="btn danger" id="reset" type="button">Reset</button>
         </div>
 
-        <div class="small">
-          This page generates a local file only. No wallet connection. No keys. No custody.
+        <div class="hint" id="hint">
+          Select a tile, fill your details, then export claim.json
         </div>
 
-        <div class="hint" id="packetHint"></div>
+        <div class="monohr"></div>
+
+        <div class="tiny">
+          Claim packet schema <b>monolith.claim.v1</b><br />
+          This does not connect a wallet. No keys. No custody.
+        </div>
+
+        <div class="monohr"></div>
+
+        <a class="mono-link" href="/monolith/" title="Back to MONOLITH">
+          Back to MONOLITH
+        </a>
       </div>
     </div>
   </div>
 
   <script>
-    (function(){
-      "use strict";
+    "use strict";
 
-      const GRID_W = 10;
-      const GRID_H = 100;
-      const TOTAL = GRID_W * GRID_H;
+    const GRID_W = 10;
+    const GRID_H = 10;
 
-      const FEED_URL = "/assets/monolith/feed.json";
+    const el = {
+      netpill: document.getElementById("netpill"),
+      tilegrid: document.getElementById("tilegrid"),
+      gridSize: document.getElementById("gridSize"),
+      takenCount: document.getElementById("takenCount"),
+      freeCount: document.getElementById("freeCount"),
+      selTile: document.getElementById("selTile"),
+      tile: document.getElementById("tile"),
+      display: document.getElementById("display"),
+      wallet: document.getElementById("wallet"),
+      mark: document.getElementById("mark"),
+      hint: document.getElementById("hint"),
+      copy: document.getElementById("copy"),
+      download: document.getElementById("download"),
+      reset: document.getElementById("reset"),
+    };
 
-      const el = {
-        statusText: document.getElementById("statusText"),
-        statusMeta: document.getElementById("statusMeta"),
-        gridSize: document.getElementById("gridSize"),
-        gridTotal: document.getElementById("gridTotal"),
-        takenCount: document.getElementById("takenCount"),
-        selectedTile: document.getElementById("selectedTile"),
-        tilegrid: document.getElementById("tilegrid"),
-        hint: document.getElementById("hint"),
-        packetHint: document.getElementById("packetHint"),
-        tile: document.getElementById("tile"),
-        wallet: document.getElementById("wallet"),
-        handle: document.getElementById("handle"),
-        mark: document.getElementById("mark"),
-        download: document.getElementById("download"),
-        copy: document.getElementById("copy"),
-        refresh: document.getElementById("refresh"),
-        clear: document.getElementById("clear")
-      };
+    const state = {
+      taken: new Set(),
+      selected: "",
+      feedEtag: "",
+      feedCount: 0,
+      feedUrl: "/assets/monolith/feed.json",
+      lastFeedOk: false,
+    };
 
-      let TAKEN = new Set();
-      let selected = "";
+    function pad4(n){
+      const s = String(n);
+      return s.length >= 4 ? s : ("0000".slice(s.length) + s);
+    }
 
-      function pad4(n){
-        const s = String(n);
-        if(s.length >= 4) return s.slice(-4);
-        return ("0000" + s).slice(-4);
+    function setPill(text, mode){
+      el.netpill.textContent = text;
+      el.netpill.style.borderColor =
+        mode === "ok" ? "rgba(47,191,107,.45)" :
+        mode === "warn" ? "rgba(255,225,117,.45)" :
+        mode === "err" ? "rgba(255,91,91,.55)" :
+        "var(--line)";
+      el.netpill.style.color =
+        mode === "ok" ? "rgba(245,247,244,.92)" :
+        mode === "warn" ? "rgba(255,225,117,.95)" :
+        mode === "err" ? "rgba(255,91,91,.95)" :
+        "var(--muted)";
+    }
+
+    function setHint(text, kind){
+      el.hint.className = "hint" + (kind ? (" " + kind) : "");
+      el.hint.textContent = text;
+    }
+
+    function normalizeTile(v){
+      const raw = String(v || "").trim();
+      if(!raw) return "";
+      const digits = raw.replace(/[^\d]/g, "");
+      if(!digits) return "";
+      if(digits.length <= 4) return pad4(parseInt(digits, 10));
+      return digits.slice(0, 8);
+    }
+
+    function isTaken(t){
+      return state.taken.has(String(t));
+    }
+
+    function updateStats(){
+      const total = GRID_W * GRID_H;
+      el.gridSize.textContent = GRID_W + "×" + GRID_H;
+      el.takenCount.textContent = String(state.taken.size);
+      el.freeCount.textContent = String(Math.max(0, total - state.taken.size));
+      el.selTile.textContent = state.selected ? state.selected : "none";
+    }
+
+    function clearSelection(){
+      state.selected = "";
+      el.tile.value = "";
+      el.tilegrid.querySelectorAll(".tcell.selected").forEach(x => x.classList.remove("selected"));
+      updateStats();
+    }
+
+    function selectTile(t){
+      t = normalizeTile(t);
+      if(!t){
+        clearSelection();
+        setHint("Select a tile", "");
+        return;
       }
-
-      function setStatus(kind, meta){
-        el.statusText.textContent = kind;
-        el.statusMeta.textContent = meta || "";
+      if(isTaken(t)){
+        clearSelection();
+        setHint("Tile " + t + " is taken", "err");
+        return;
       }
+      state.selected = t;
+      el.tile.value = t;
+      el.tilegrid.querySelectorAll(".tcell.selected").forEach(x => x.classList.remove("selected"));
+      const btn = el.tilegrid.querySelector('[data-tile="' + t + '"]');
+      if(btn) btn.classList.add("selected");
+      updateStats();
+      setHint("Selected tile " + t, "ok");
+    }
 
-      function setHint(msg, level){
-        el.hint.className = "hint" + (level ? " " + level : "");
-        el.hint.textContent = msg;
-      }
+    function buildGrid(){
+      const host = el.tilegrid;
+      host.innerHTML = "";
+      const total = GRID_W * GRID_H;
 
-      function setPacketHint(msg, level){
-        el.packetHint.className = "hint" + (level ? " " + level : "");
-        el.packetHint.textContent = msg || "";
-      }
+      for(let i=0;i<total;i++){
+        const t = pad4(i+1);
+        const cell = document.createElement("div");
+        cell.className = "tcell";
+        cell.setAttribute("role","button");
+        cell.setAttribute("tabindex","0");
+        cell.setAttribute("data-tile", t);
 
-      function normalizeTile(v){
-        const raw = String(v || "").trim();
-        const digits = raw.replace(/[^\d]/g, "");
-        if(!digits) return "";
-        const n = parseInt(digits, 10);
-        if(!Number.isFinite(n)) return "";
-        if(n < 1 || n > TOTAL) return "";
-        return pad4(n);
-      }
+        const tl = document.createElement("i");
+        tl.textContent = t;
 
-      function buildGrid(){
-        el.gridSize.textContent = GRID_W + "×" + GRID_H;
-        el.gridTotal.textContent = String(TOTAL);
+        const lab = document.createElement("b");
+        lab.textContent = "tile";
 
-        const host = el.tilegrid;
-        host.innerHTML = "";
+        const x = document.createElement("div");
+        x.className = "x";
+        x.textContent = "×";
 
-        for(let i=1; i<=TOTAL; i++){
-          const t = pad4(i);
-          const cell = document.createElement("div");
-          cell.className = "tcell" + (TAKEN.has(t) ? " taken" : "");
-          cell.setAttribute("data-tile", t);
+        cell.appendChild(tl);
+        cell.appendChild(lab);
+        cell.appendChild(x);
 
-          const top = document.createElement("i");
-          top.textContent = t;
-          const bottom = document.createElement("b");
-          bottom.textContent = TAKEN.has(t) ? "TAKEN" : "OPEN";
-
-          cell.appendChild(top);
-          cell.appendChild(bottom);
-
-          cell.addEventListener("click", function(){
-            if(TAKEN.has(t)){
-              setHint("Tile " + t + " is taken", "bad");
-              return;
-            }
-            selectTile(t);
-          });
-
-          host.appendChild(cell);
-        }
-
-        el.takenCount.textContent = String(TAKEN.size);
-
-        if(selected){
-          const btn = host.querySelector('[data-tile="'+selected+'"]');
-          if(btn && !TAKEN.has(selected)) btn.classList.add("selected");
-        }
-      }
-
-      function selectTile(t){
-        selected = t;
-        el.selectedTile.textContent = t;
-        el.tile.value = t;
-
-        el.tilegrid.querySelectorAll(".tcell.selected").forEach(x=>x.classList.remove("selected"));
-        const btn = el.tilegrid.querySelector('[data-tile="'+t+'"]');
-        if(btn) btn.classList.add("selected");
-
-        setHint("Selected tile " + t, "ok");
-        setPacketHint("");
-      }
-
-      function clearSelection(){
-        selected = "";
-        el.selectedTile.textContent = "none";
-        el.tile.value = "";
-        el.tilegrid.querySelectorAll(".tcell.selected").forEach(x=>x.classList.remove("selected"));
-        setHint("Selection cleared", "warn");
-        setPacketHint("");
-      }
-
-      function parseTakenFromFeed(feed){
-        const set = new Set();
-
-        if(!feed) return set;
-
-        const arr = Array.isArray(feed) ? feed
-                  : (Array.isArray(feed.items) ? feed.items
-                  : (Array.isArray(feed.feed) ? feed.feed : []));
-
-        for(const it of arr){
-          if(!it) continue;
-
-          const tileCandidate = it.tile ?? it.t ?? it.id ?? it.tile_id;
-          const t = normalizeTile(tileCandidate);
-          if(t) set.add(t);
-
-          const mark = it.mark ?? it.text ?? it.message;
-          if(!t && typeof mark === "string"){
-            const m = mark.match(/\b(\d{1,4})\b/);
-            if(m){
-              const t2 = normalizeTile(m[1]);
-              if(t2) set.add(t2);
-            }
-          }
-        }
-
-        return set;
-      }
-
-      async function loadFeed(){
-        try{
-          setStatus("loading feed", "syncing");
-          const ts = Date.now();
-          const res = await fetch(FEED_URL + "?cb=" + ts, { cache: "no-store" });
-          if(!res.ok) throw new Error("feed http " + res.status);
-          const data = await res.json();
-          TAKEN = parseTakenFromFeed(data);
-
-          setStatus("feed loaded", "taken " + TAKEN.size);
-          buildGrid();
-
-          if(selected && TAKEN.has(selected)){
-            clearSelection();
-            setHint("Previous selection is now taken", "bad");
-          } else if(selected){
-            setHint("Selected tile " + selected, "ok");
-          } else {
-            setHint("Pick a tile, open tiles are ready", "ok");
-          }
-        }catch(e){
-          TAKEN = new Set();
-          setStatus("feed offline", "using empty set");
-          buildGrid();
-          setHint("Feed not available, showing all tiles as open", "warn");
-        }
-      }
-
-      function buildClaimPacket(){
-        const tile = normalizeTile(el.tile.value) || selected;
-        const wallet = String(el.wallet.value || "").trim();
-        const handle = String(el.handle.value || "").trim();
-        const mark = String(el.mark.value || "").trim();
-
-        if(!tile){
-          setPacketHint("Pick a tile first", "bad");
-          return null;
-        }
-        if(TAKEN.has(tile)){
-          setPacketHint("Tile " + tile + " is taken", "bad");
-          return null;
-        }
-        if(!mark){
-          setPacketHint("Write your mark", "bad");
-          return null;
-        }
-
-        const packet = {
-          schema: "monolith.claim.v1",
-          created_utc: new Date().toISOString(),
-          tile: tile,
-          wallet: wallet || null,
-          handle: handle || null,
-          mark: mark,
-          source: {
-            page: "https://houseofcauliman.com/monolith/claim/",
-            ua: navigator.userAgent
-          }
+        const click = () => {
+          if(cell.classList.contains("taken")) return;
+          selectTile(t);
         };
 
-        return packet;
+        cell.addEventListener("click", click);
+        cell.addEventListener("keydown", (e) => {
+          if(e.key === "Enter" || e.key === " "){
+            e.preventDefault();
+            click();
+          }
+        });
+
+        host.appendChild(cell);
       }
 
-      function downloadJSON(obj){
-        const json = JSON.stringify(obj, null, 2);
-        const blob = new Blob([json], { type: "application/json" });
-        const url = URL.createObjectURL(blob);
+      updateStats();
+    }
 
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "claim.json";
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-
-        setTimeout(()=>URL.revokeObjectURL(url), 250);
-      }
-
-      async function copyJSON(obj){
-        const json = JSON.stringify(obj, null, 2);
-        try{
-          await navigator.clipboard.writeText(json);
-          setPacketHint("Copied JSON to clipboard", "ok");
-        }catch(e){
-          setPacketHint("clipboard blocked, use Download claim.json", "warn");
+    function applyTakenToGrid(){
+      el.tilegrid.querySelectorAll(".tcell").forEach(cell => {
+        const t = cell.getAttribute("data-tile");
+        if(t && isTaken(t)){
+          cell.classList.add("taken");
+          cell.classList.remove("selected");
+        } else {
+          cell.classList.remove("taken");
         }
+      });
+
+      if(state.selected && isTaken(state.selected)){
+        clearSelection();
+        setHint("Your selected tile became taken, pick another", "warn");
       }
 
-      function init(){
-        el.gridSize.textContent = GRID_W + "×" + GRID_H;
-        el.gridTotal.textContent = String(TOTAL);
+      updateStats();
+    }
 
-        el.tile.addEventListener("input", function(){
-          const t = normalizeTile(el.tile.value);
-          if(!t){
-            el.selectedTile.textContent = selected || "none";
-            setPacketHint("");
-            return;
+    function safeJsonStringify(obj){
+      return JSON.stringify(obj, null, 2) + "\n";
+    }
+
+    function buildClaimPacket(){
+      const tile = normalizeTile(el.tile.value || state.selected);
+      const display = String(el.display.value || "").trim();
+      const wallet = String(el.wallet.value || "").trim();
+      const mark = String(el.mark.value || "").trim();
+
+      if(!tile){
+        setHint("Pick a tile first", "warn");
+        return null;
+      }
+      if(isTaken(tile)){
+        setHint("Tile " + tile + " is taken", "err");
+        return null;
+      }
+      if(!display){
+        setHint("Add a display name", "warn");
+        return null;
+      }
+      if(!mark){
+        setHint("Add your mark text", "warn");
+        return null;
+      }
+
+      const packet = {
+        schema: "monolith.claim.v1",
+        created_at_utc: new Date().toISOString(),
+        site: "https://houseofcauliman.com/monolith/claim/",
+        feed: {
+          url: "https://houseofcauliman.com" + state.feedUrl,
+          etag: state.feedEtag || "",
+          seen_count: state.feedCount || 0
+        },
+        tile: tile,
+        display: display,
+        wallet: wallet,
+        mark: mark,
+        user_agent: navigator.userAgent || "",
+        notes: [
+          "This packet does not connect a wallet",
+          "No keys. No custody",
+          "Submit this claim in the next step"
+        ]
+      };
+
+      state.selected = tile;
+      updateStats();
+
+      return packet;
+    }
+
+    async function copyClaim(){
+      const pkt = buildClaimPacket();
+      if(!pkt) return;
+
+      const text = safeJsonStringify(pkt);
+
+      try{
+        await navigator.clipboard.writeText(text);
+        setHint("Copied claim JSON to clipboard", "ok");
+      } catch(e){
+        setHint("Clipboard blocked, use Download claim.json", "warn");
+      }
+    }
+
+    function downloadClaim(){
+      const pkt = buildClaimPacket();
+      if(!pkt) return;
+
+      const text = safeJsonStringify(pkt);
+      const blob = new Blob([text], {type:"application/json"});
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "claim.json";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
+      setTimeout(() => URL.revokeObjectURL(url), 5000);
+      setHint("Downloaded claim.json", "ok");
+    }
+
+    function resetAll(){
+      el.display.value = "";
+      el.wallet.value = "";
+      el.mark.value = "";
+      clearSelection();
+      setHint("Reset complete", "");
+    }
+
+    function parseTakenFromFeed(feed){
+      const out = new Set();
+
+      const tryPush = (v) => {
+        const t = normalizeTile(v);
+        if(t) out.add(t);
+      };
+
+      if(!feed) return out;
+
+      if(Array.isArray(feed)){
+        for(const it of feed){
+          if(typeof it === "string" || typeof it === "number") tryPush(it);
+          else if(it && typeof it === "object"){
+            tryPush(it.tile);
+            tryPush(it.t);
+            tryPush(it.id);
+            tryPush(it.tile_id);
+            tryPush(it.tileId);
+            if(it.claim && typeof it.claim === "object"){
+              tryPush(it.claim.tile);
+              tryPush(it.claim.id);
+            }
           }
-          if(TAKEN.has(t)){
-            setPacketHint("Tile " + t + " is taken", "bad");
-            return;
-          }
-          selectTile(t);
-        });
+        }
+        return out;
+      }
 
-        el.refresh.addEventListener("click", function(){
-          loadFeed();
-        });
+      if(typeof feed === "object"){
+        const candidates = [];
+        if(Array.isArray(feed.items)) candidates.push(...feed.items);
+        if(Array.isArray(feed.marks)) candidates.push(...feed.marks);
+        if(Array.isArray(feed.claims)) candidates.push(...feed.claims);
+        if(Array.isArray(feed.entries)) candidates.push(...feed.entries);
+        if(Array.isArray(feed.feed)) candidates.push(...feed.feed);
 
-        el.clear.addEventListener("click", function(){
+        if(candidates.length){
+          const inner = parseTakenFromFeed(candidates);
+          inner.forEach(x => out.add(x));
+          return out;
+        }
+
+        tryPush(feed.tile);
+        tryPush(feed.id);
+      }
+
+      return out;
+    }
+
+    async function loadFeed(){
+      const bust = "cb=" + Date.now();
+      const url = state.feedUrl + (state.feedUrl.includes("?") ? "&" : "?") + bust;
+
+      setPill("feed: loading", "");
+
+      try{
+        const res = await fetch(url, { cache: "no-store" });
+        state.feedEtag = res.headers.get("etag") || "";
+        const text = await res.text();
+
+        let json = null;
+        try{
+          json = JSON.parse(text);
+        } catch(e){
+          json = null;
+        }
+
+        const taken = parseTakenFromFeed(json);
+        state.taken = taken;
+        state.feedCount = taken.size;
+        state.lastFeedOk = true;
+
+        applyTakenToGrid();
+        setPill("feed: ok (" + taken.size + " taken)", "ok");
+        setHint("Feed loaded. Pick a tile", "ok");
+      } catch(e){
+        state.lastFeedOk = false;
+        setPill("feed: failed", "err");
+        setHint("Feed fetch failed. Grid is unlocked locally. Do not claim a tile without verifying taken tiles.", "warn");
+      }
+    }
+
+    function wireInputs(){
+      el.tile.addEventListener("input", () => {
+        const t = normalizeTile(el.tile.value);
+        if(!t){
           clearSelection();
-        });
+          return;
+        }
+        if(isTaken(t)){
+          setHint("Tile " + t + " is taken", "err");
+          return;
+        }
+        selectTile(t);
+      });
 
-        el.download.addEventListener("click", function(){
-          const packet = buildClaimPacket();
-          if(!packet) return;
-          downloadJSON(packet);
-          setPacketHint("Downloaded claim.json", "ok");
-        });
+      el.copy.addEventListener("click", copyClaim);
+      el.download.addEventListener("click", downloadClaim);
+      el.reset.addEventListener("click", resetAll);
+    }
 
-        el.copy.addEventListener("click", async function(){
-          const packet = buildClaimPacket();
-          if(!packet) return;
-          await copyJSON(packet);
-        });
+    (function init(){
+      buildGrid();
+      wireInputs();
+      loadFeed();
 
-        buildGrid();
+      setInterval(() => {
         loadFeed();
-      }
-
-      init();
+      }, 30000);
     })();
   </script>
 </body>
