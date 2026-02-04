@@ -359,6 +359,12 @@
                 <div class="k">GY</div><div id="kvGY" class="v">-</div>
                 <div class="k">Image</div><div id="kvImg" class="v">none</div>
               </div>
+
+              <div class="kv">
+                <div class="k">Draft</div><div id="kvDraft" class="v">none</div>
+                <div class="k">Saved</div><div id="kvSavedAt" class="v">-</div>
+              </div>
+
               <img id="imgPreview" alt="preview" style="display:none" />
               <div id="imgNote" class="note">
                 If the image is too large, saving can fail. Keep it reasonable.
@@ -394,6 +400,9 @@
     const kvGY = document.getElementById("kvGY");
     const kvImg = document.getElementById("kvImg");
 
+    const kvDraft = document.getElementById("kvDraft");
+    const kvSavedAt = document.getElementById("kvSavedAt");
+
     const imgPreview = document.getElementById("imgPreview");
 
     let takenTiles = new Set();
@@ -407,6 +416,7 @@
     };
 
     let imageState = null;
+    let lastSavedAt = null;
 
     function tileIdFromCoords(gx, gy){
       const eastWest = gx >= 0 ? "E" + gx : "W" + Math.abs(gx);
@@ -442,6 +452,11 @@
       statusPill.className = "pill" + (kind === "ok" ? " ok" : kind === "bad" ? " bad" : "");
     }
 
+    function updateDraftKV(){
+      kvDraft.textContent = "Local only, key " + LS_KEY;
+      kvSavedAt.textContent = lastSavedAt ? lastSavedAt : "-";
+    }
+
     function updateKV(){
       kvTile.textContent = selected.tile || "none";
       kvGX.textContent = (selected.gx === null) ? "-" : String(selected.gx);
@@ -452,6 +467,8 @@
       }else{
         kvImg.textContent = "none";
       }
+
+      updateDraftKV();
     }
 
     function clearSelectionUI(){
@@ -489,8 +506,6 @@
           el.className = "tile";
           el.textContent = tile;
           el.dataset.tile = tile;
-          el.dataset.gx = String(gx);
-          el.dataset.gy = String(gy);
 
           if(takenTiles.has(tile)){
             el.classList.add("taken");
@@ -620,6 +635,8 @@
 
       try{
         localStorage.setItem(LS_KEY, JSON.stringify(payload));
+        lastSavedAt = payload.savedAt;
+        updateKV();
         setStatus("Saved locally", "ok");
       }catch(err){
         console.error(err);
@@ -633,6 +650,8 @@
         if(!raw) return;
         const d = JSON.parse(raw);
         if(!d || d.v !== 1) return;
+
+        if(typeof d.savedAt === "string") lastSavedAt = d.savedAt;
 
         if(typeof d.tile === "string" && Number.isFinite(d.gx) && Number.isFinite(d.gy)){
           selected = { tile: String(d.tile).toUpperCase(), gx: Number(d.gx), gy: Number(d.gy) };
