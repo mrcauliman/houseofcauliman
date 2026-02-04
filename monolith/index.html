@@ -1,641 +1,711 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>MONOLITH</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>MONOLITH — The Wall of Record</title>
+  <meta name="description" content="MONOLITH is a permanent on-chain wall. One tile. One mark. No edits. No deletes." />
+  <meta property="og:title" content="MONOLITH — The Wall of Record" />
+  <meta property="og:description" content="A permanent on-chain wall. One tile. One mark. No edits. No deletes." />
+  <meta property="og:image" content="https://houseofcauliman.com/assets/monolith/monolith_logo.webp" />
+  <meta property="og:url" content="https://houseofcauliman.com/monolith/" />
+  <meta property="og:type" content="website" />
+
   <style>
     :root{
-      --bg:#07090a;
-      --panel:#0f1316;
-      --panel2:#12181d;
-      --line:#22303a;
-      --text:#e9eef2;
-      --muted:#a9b6c2;
-      --accent:#7cf7c2;
-      --danger:#ff6b6b;
-      --tile:#10161b;
-      --tile2:#0b0f12;
-      --taken:#1e2b22;
-      --takenBorder:#2f6b4b;
-      --shadow: 0 10px 30px rgba(0,0,0,.45);
-      --radius: 14px;
-      --radius2: 10px;
-      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --bg:#07090b;
+      --panel:#0b1b13;
+      --panel2:#0d2217;
+      --fg:#f5f7f4;
+      --muted:#aeb7af;
+      --line:#173524;
+      --green:#2fbf6b;
+      --warn:#ffe175;
+      --red:#ff5b5b;
+
+      --shadow:rgba(0,0,0,.45);
+      --radius:18px;
+
+      --step:128px;
+      --tile:118px;
     }
-    html,body{height:100%; margin:0; background:var(--bg); color:var(--text); font-family:var(--font);}
     *{box-sizing:border-box}
-
-    .app{
-      position:fixed;
-      inset:0;
-      overflow:hidden;
-    }
-
-    .topbar{
-      position:absolute;
-      top:14px;
-      left:14px;
-      right:14px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      z-index:5;
-      pointer-events:none;
-    }
-
-    .brand{
-      pointer-events:auto;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      padding:10px 12px;
-      background:rgba(15,19,22,.78);
-      border:1px solid rgba(34,48,58,.7);
-      border-radius:999px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 10px 30px rgba(0,0,0,.45);
-    }
-    .dot{
-      width:10px;height:10px;border-radius:50%;
-      background:var(--accent);
-      box-shadow:0 0 18px rgba(124,247,194,.55);
-    }
-    .brand .title{font-weight:800; letter-spacing:.6px;}
-    .brand .sub{color:var(--muted); font-size:12px; margin-left:6px}
-
-    .searchbox{
-      pointer-events:auto;
-      display:flex;
-      align-items:center;
-      gap:8px;
-      padding:10px 10px;
-      background:rgba(15,19,22,.78);
-      border:1px solid rgba(34,48,58,.7);
-      border-radius:999px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 10px 30px rgba(0,0,0,.45);
-      min-width: 290px;
-      max-width: 460px;
-      width: 46vw;
-    }
-    .searchbox input{
-      width:100%;
-      background:transparent;
-      border:0;
-      outline:none;
-      color:var(--text);
-      font-size:14px;
-    }
-    .btn{
-      border:1px solid rgba(34,48,58,.9);
-      background:rgba(18,24,29,.9);
-      color:var(--text);
-      padding:8px 12px;
-      border-radius:999px;
-      font-weight:700;
-      cursor:pointer;
-      user-select:none;
-      white-space:nowrap;
-    }
-    .btn:active{transform:translateY(1px)}
-    .btn.accent{
-      border-color: rgba(124,247,194,.35);
-      box-shadow: 0 0 0 2px rgba(124,247,194,.12) inset;
-    }
-
-    .canvas{
-      position:absolute;
-      inset:0;
-      cursor: grab;
-      touch-action:none;
+    html,body{height:100%;margin:0}
+    body{
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       background:
-        radial-gradient(circle at 20% 20%, rgba(124,247,194,.06), transparent 35%),
-        radial-gradient(circle at 80% 40%, rgba(124,247,194,.04), transparent 42%),
-        radial-gradient(circle at 50% 85%, rgba(124,247,194,.03), transparent 40%),
+        radial-gradient(1200px 700px at 20% 0%, rgba(47,191,107,.12), transparent 55%),
+        radial-gradient(900px 650px at 85% 25%, rgba(255,225,117,.10), transparent 55%),
         var(--bg);
-    }
-    .canvas.dragging{cursor:grabbing}
-
-    .grid{
-      position:absolute;
-      left:50%;
-      top:50%;
-      transform: translate3d(0,0,0);
-      will-change: transform;
-    }
-
-    .tile{
-      position:absolute;
-      width:84px;
-      height:84px;
-      border-radius: 10px;
-      background: linear-gradient(180deg, rgba(16,22,27,.95), rgba(11,15,18,.95));
-      border:1px solid rgba(34,48,58,.55);
-      display:flex;
-      flex-direction:column;
-      justify-content:flex-end;
-      padding:8px;
-      gap:6px;
-      box-shadow: 0 4px 14px rgba(0,0,0,.35);
-      user-select:none;
-      cursor:pointer;
-    }
-    .tile:hover{
-      border-color: rgba(124,247,194,.30);
-      box-shadow: 0 0 0 2px rgba(124,247,194,.10) inset, 0 6px 18px rgba(0,0,0,.42);
-    }
-    .tile .id{
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:.4px;
-      color: rgba(233,238,242,.95);
-      text-shadow: 0 1px 0 rgba(0,0,0,.5);
-    }
-    .tile .tag{
-      font-size:10px;
-      font-weight:800;
-      letter-spacing:.6px;
-      color: rgba(169,182,194,.95);
-      text-transform:uppercase;
-      max-width:100%;
+      color:var(--fg);
       overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
     }
+    a{color:inherit;text-decoration:none}
 
-    .tile.taken{
-      background: linear-gradient(180deg, rgba(30,43,34,.96), rgba(16,24,20,.96));
-      border-color: rgba(47,107,75,.75);
-    }
-    .tile.taken .tag{color: rgba(124,247,194,.95)}
-    .tile.taken:hover{
-      border-color: rgba(124,247,194,.55);
-      box-shadow: 0 0 0 2px rgba(124,247,194,.14) inset, 0 6px 18px rgba(0,0,0,.42);
-    }
-
-    .panel{
-      position:absolute;
-      right:14px;
-      top:72px;
-      width:min(420px, calc(100vw - 28px));
-      max-height: calc(100vh - 92px);
-      background: rgba(15,19,22,.92);
-      border:1px solid rgba(34,48,58,.75);
-      border-radius: 14px;
+    /* top bar */
+    .top{
+      position:fixed;left:12px;right:12px;top:12px;
+      display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+      padding:10px 12px;
+      border:1px solid rgba(23,53,36,.9);
+      border-radius:18px;
+      background:rgba(7,9,11,.62);
+      box-shadow:0 18px 44px rgba(0,0,0,.35);
       backdrop-filter: blur(10px);
-      box-shadow: 0 10px 30px rgba(0,0,0,.45);
-      z-index:6;
-      display:none;
-      overflow:hidden;
+      z-index:20;
     }
-    .panel.open{display:flex; flex-direction:column}
-    .panel header{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      padding:12px 12px;
-      border-bottom:1px solid rgba(34,48,58,.6);
-      background: rgba(18,24,29,.85);
-    }
-    .panel header .h{
-      display:flex;
-      flex-direction:column;
-      gap:2px;
-      min-width:0;
-    }
-    .panel header .h .t{
+    .brand{display:flex;align-items:center;gap:10px}
+    .brand img{width:34px;height:34px;object-fit:contain}
+    .brand .t{font-weight:1000;letter-spacing:.6px;font-size:13px;text-transform:uppercase;line-height:1.1}
+    .brand .s{margin-top:3px;color:rgba(245,247,244,.72);font-size:12px;line-height:1.2}
+
+    .sp{flex:1}
+
+    .btn{
+      border:1px solid rgba(23,53,36,.95);
+      background:rgba(11,27,19,.85);
+      color:var(--fg);
+      border-radius:14px;
+      padding:10px 12px;
       font-weight:900;
-      letter-spacing:.6px;
+      letter-spacing:.3px;
+      cursor:pointer;
+      display:inline-flex;align-items:center;gap:8px;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
     }
-    .panel header .h .s{
-      color:var(--muted);
+    .btn:hover{border-color:rgba(47,191,107,.55)}
+    .btn.primary{
+      background:linear-gradient(180deg, rgba(47,191,107,.22), rgba(11,27,19,.88));
+      border-color:rgba(47,191,107,.65);
+    }
+
+    .kpi{
+      display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+      color:rgba(245,247,244,.84);
       font-size:12px;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
     }
-    .panel header .x{
+    .pill{
+      border:1px solid rgba(23,53,36,.95);
+      background:rgba(11,27,19,.72);
       padding:8px 10px;
       border-radius:999px;
-      border:1px solid rgba(34,48,58,.85);
-      background: rgba(15,19,22,.65);
-      cursor:pointer;
       font-weight:900;
-      user-select:none;
+      letter-spacing:.2px;
+      display:inline-flex;align-items:center;gap:8px;
+    }
+    .dot{width:8px;height:8px;border-radius:999px;background:var(--green);box-shadow:0 0 0 3px rgba(47,191,107,.18)}
+
+    /* search */
+    .search{
+      display:flex;align-items:center;gap:8px;
+      border:1px solid rgba(23,53,36,.95);
+      background:rgba(11,27,19,.72);
+      border-radius:14px;
+      padding:8px 10px;
+    }
+    .search input{
+      width:240px;
+      max-width:42vw;
+      border:0;
+      outline:0;
+      background:transparent;
+      color:var(--fg);
+      font-weight:900;
+      letter-spacing:.2px;
+      font-size:12px;
+    }
+    .search input::placeholder{color:rgba(174,183,175,.70)}
+    .search .btn{
+      padding:8px 10px;
+      border-radius:12px;
     }
 
-    .panel .body{
-      padding:12px;
-      overflow:auto;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
+    /* viewport */
+    #vp{
+      position:absolute;inset:0;
+      touch-action:none;
+      cursor:grab;
     }
+    #vp.dragging{cursor:grabbing}
+    #world{
+      position:absolute;left:0;top:0;
+      width:1px;height:1px;
+      transform:translate3d(0,0,0);
+      will-change:transform;
+    }
+
+    /* tile cell */
+    .cell{
+      position:absolute;
+      width:var(--tile);
+      height:var(--tile);
+      border-radius:16px;
+      border:1px solid rgba(23,53,36,.75);
+      background:
+        radial-gradient(120px 90px at 30% 25%, rgba(47,191,107,.14), transparent 55%),
+        rgba(11,27,19,.45);
+      box-shadow: 0 10px 28px rgba(0,0,0,.28);
+      overflow:hidden;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .cell:hover{border-color:rgba(47,191,107,.45)}
+    .cell .spray{position:absolute;inset:0;opacity:.95}
+    .cell .id{
+      position:absolute;left:10px;bottom:8px;right:10px;
+      font-size:10px;
+      font-weight:1000;
+      letter-spacing:.35px;
+      color:rgba(245,247,244,.72);
+      text-shadow:0 1px 0 rgba(0,0,0,.55);
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    }
+    .cell .tag{
+      position:absolute;left:10px;top:8px;
+      font-size:10px;
+      font-weight:1000;
+      letter-spacing:.5px;
+      color:rgba(255,225,117,.85);
+      text-transform:uppercase;
+      text-shadow:0 1px 0 rgba(0,0,0,.55);
+      max-width:calc(100% - 20px);
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    }
+    .cell.taken{border-color:rgba(47,191,107,.85)}
+    .cell.taken .tag{color:rgba(47,191,107,.92)}
+
+    /* side panel */
+    .panel{
+      position:fixed;
+      right:12px;
+      top:70px;
+      bottom:12px;
+      width:min(420px, calc(100vw - 24px));
+      border-radius:18px;
+      border:1px solid rgba(23,53,36,.95);
+      background:linear-gradient(180deg, rgba(13,34,23,.86), rgba(11,27,19,.92));
+      box-shadow:0 18px 44px rgba(0,0,0,.45);
+      backdrop-filter: blur(10px);
+      z-index:30;
+      transform:translate3d(110%,0,0);
+      transition:transform .18s ease;
+      display:flex;flex-direction:column;
+    }
+    .panel.open{transform:translate3d(0,0,0)}
+    .ph{
+      display:flex;align-items:center;gap:10px;
+      padding:12px;
+      border-bottom:1px solid rgba(23,53,36,.9);
+    }
+    .ph .ttl{font-weight:1000;letter-spacing:.4px}
+    .ph .sub{margin-top:3px;color:rgba(245,247,244,.70);font-size:12px}
+    .ph .sp{flex:1}
+    .xbtn{
+      width:40px;height:40px;border-radius:14px;
+      border:1px solid rgba(23,53,36,.95);
+      background:rgba(7,9,11,.4);
+      color:rgba(245,247,244,.9);
+      font-weight:1000;
+      cursor:pointer;
+    }
+    .pb{padding:12px;overflow:auto}
     .kv{
       display:grid;
-      grid-template-columns: 110px 1fr;
-      gap:8px 10px;
+      grid-template-columns:120px 1fr;
+      gap:10px 12px;
       padding:10px;
-      border:1px solid rgba(34,48,58,.6);
-      border-radius: 12px;
-      background: rgba(18,24,29,.62);
+      border-radius:14px;
+      border:1px solid rgba(23,53,36,.75);
+      background:rgba(7,9,11,.22);
     }
-    .k{color:var(--muted); font-size:12px; font-weight:800; letter-spacing:.4px; text-transform:uppercase}
-    .v{font-weight:700; overflow-wrap:anywhere}
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:10px 12px;
-      border:1px solid rgba(34,48,58,.6);
-      border-radius:999px;
-      background: rgba(18,24,29,.62);
-      font-weight:800;
-      letter-spacing:.3px;
-      width:fit-content;
-    }
-    .pill.good{border-color: rgba(47,107,75,.75); box-shadow: 0 0 0 2px rgba(124,247,194,.10) inset}
+    .kv .k{color:rgba(174,183,175,.85);font-size:12px;font-weight:900;letter-spacing:.4px;text-transform:uppercase}
+    .kv .v{font-size:13px;font-weight:1000;letter-spacing:.2px}
+    .muted{color:rgba(174,183,175,.86);font-size:12px;line-height:1.45;margin-top:10px}
 
-    .hint{
-      position:absolute;
-      left:14px;
+    /* toast */
+    .toast{
+      position:fixed;
+      left:50%;
       bottom:14px;
-      z-index:5;
+      transform:translate3d(-50%, 90px, 0);
+      opacity:0;
+      transition:transform .18s ease, opacity .18s ease;
+      z-index:40;
       padding:10px 12px;
-      border-radius: 999px;
-      background: rgba(15,19,22,.72);
-      border:1px solid rgba(34,48,58,.7);
+      border-radius:14px;
+      border:1px solid rgba(23,53,36,.95);
+      background:rgba(7,9,11,.72);
       backdrop-filter: blur(10px);
-      box-shadow: 0 10px 30px rgba(0,0,0,.45);
-      color: var(--muted);
-      font-size: 12px;
-      pointer-events:none;
-      max-width: calc(100vw - 28px);
+      font-weight:1000;
+      letter-spacing:.2px;
+      font-size:12px;
+      max-width:90vw;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
-
-    @media (max-width: 720px){
-      .searchbox{width: 56vw; min-width: 210px}
-      .tile{width:76px; height:76px}
-      .tile .id{font-size:11px}
-    }
+    .toast.show{transform:translate3d(-50%, 0, 0);opacity:1}
+    .toast.good{border-color:rgba(47,191,107,.75)}
+    .toast.warn{border-color:rgba(255,225,117,.75)}
+    .toast.bad{border-color:rgba(255,91,91,.75)}
   </style>
 </head>
+
 <body>
-  <div id="jsBanner" style="position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:9999;background:rgba(15,19,22,.92);border:1px solid rgba(34,48,58,.75);color:#e9eef2;padding:10px 12px;border-radius:999px;font:700 12px/1.2 system-ui;backdrop-filter:blur(10px);box-shadow:0 10px 30px rgba(0,0,0,.45)">
-    Loading wall
+  <header class="top">
+    <div class="brand">
+      <img src="/assets/monolith/monolith_logo.webp" alt="MONOLITH" />
+      <div>
+        <div class="t">MONOLITH</div>
+        <div class="s">Drag to move. Tap a tile to inspect.</div>
+      </div>
+    </div>
+
+    <div class="sp"></div>
+
+    <div class="search" aria-label="search tiles">
+      <input id="q" autocomplete="off" spellcheck="false" placeholder="Search tile E23-N11 or 23,-11" />
+      <button class="btn" id="go" type="button">Go</button>
+    </div>
+
+    <div class="kpi">
+      <div class="pill"><span class="dot"></span><span id="kTaken">0</span> taken</div>
+      <a class="btn primary" href="/monolith/claim/" aria-label="claim a tile"><span>Claim a Tile</span></a>
+    </div>
+  </header>
+
+  <div id="vp" aria-label="wall viewport">
+    <div id="world" aria-label="wall world"></div>
   </div>
-  <noscript>
-    <div style="position:fixed;top:64px;left:50%;transform:translateX(-50%);z-index:9999;background:rgba(255,107,107,.15);border:1px solid rgba(255,107,107,.55);color:#e9eef2;padding:10px 12px;border-radius:14px;font:700 12px/1.2 system-ui">
-      JavaScript is disabled or blocked. The wall can’t render.
-    </div>
-  </noscript>
 
-  <div class="app">
-    <div class="topbar">
-      <div class="brand">
-        <div class="dot"></div>
-        <div class="title">MONOLITH <span class="sub">The Wall</span></div>
+  <aside class="panel" id="panel" aria-label="tile detail panel">
+    <div class="ph">
+      <div>
+        <div class="ttl" id="ptitle">Tile</div>
+        <div class="sub" id="psub">Tap a tile to inspect details.</div>
       </div>
-
-      <div class="searchbox" aria-label="search">
-        <input id="searchInput" type="text" inputmode="text" autocomplete="off" spellcheck="false"
-               placeholder="Search tile E23-N11 or coords 23,-11" />
-        <button id="goBtn" class="btn accent" type="button">Go</button>
+      <div class="sp"></div>
+      <button class="xbtn" id="close" type="button" aria-label="close panel">X</button>
+    </div>
+    <div class="pb">
+      <div class="kv" aria-label="tile details">
+        <div class="k">Tile</div><div class="v" id="vTile">None</div>
+        <div class="k">Coords</div><div class="v" id="vCoords">0, 0</div>
+        <div class="k">Tag</div><div class="v" id="vTag">Open</div>
+        <div class="k">Date</div><div class="v" id="vTs">None</div>
       </div>
+      <div class="muted" id="vBody">Tap a tile to inspect details.</div>
     </div>
+  </aside>
 
-    <div id="canvas" class="canvas" role="application" aria-label="wall">
-      <div id="grid" class="grid"></div>
-    </div>
-
-    <div id="panel" class="panel" aria-label="details">
-      <header>
-        <div class="h">
-          <div id="panelTitle" class="t">Tile</div>
-          <div id="panelSub" class="s">Coords</div>
-        </div>
-        <div id="closePanel" class="x">X</div>
-      </header>
-      <div class="body">
-        <div id="panelStatus" class="pill">Status</div>
-        <div class="kv">
-          <div class="k">Tile</div><div id="kvTile" class="v"></div>
-          <div class="k">GX</div><div id="kvGX" class="v"></div>
-          <div class="k">GY</div><div id="kvGY" class="v"></div>
-          <div class="k">Tag</div><div id="kvTag" class="v"></div>
-          <div class="k">Mark ID</div><div id="kvMarkId" class="v"></div>
-          <div class="k">Timestamp</div><div id="kvTS" class="v"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="hint">Drag to pan. Click a tile for details. Search jumps only.</div>
-  </div>
+  <div class="toast" id="toast" aria-label="toast"></div>
 
   <script>
-    "use strict";
-
-    document.getElementById("jsBanner").textContent = "JS running";
-    setTimeout(() => {
-      const b = document.getElementById("jsBanner");
-      if(b) b.style.display = "none";
-    }, 1200);
-
     const FEED_URL = "/assets/monolith/feed.json";
 
-    const TILE = { size: 84, gap: 10 };
-    const VIEW = { halfRange: 18 };
-
-    const canvas = document.getElementById("canvas");
-    const grid = document.getElementById("grid");
-
+    const vp = document.getElementById("vp");
+    const world = document.getElementById("world");
     const panel = document.getElementById("panel");
-    const closePanel = document.getElementById("closePanel");
+    const toast = document.getElementById("toast");
 
-    const panelTitle = document.getElementById("panelTitle");
-    const panelSub = document.getElementById("panelSub");
-    const panelStatus = document.getElementById("panelStatus");
+    const el = {
+      q: document.getElementById("q"),
+      go: document.getElementById("go"),
+      kTaken: document.getElementById("kTaken"),
+      close: document.getElementById("close"),
 
-    const kvTile = document.getElementById("kvTile");
-    const kvGX = document.getElementById("kvGX");
-    const kvGY = document.getElementById("kvGY");
-    const kvTag = document.getElementById("kvTag");
-    const kvMarkId = document.getElementById("kvMarkId");
-    const kvTS = document.getElementById("kvTS");
+      ptitle: document.getElementById("ptitle"),
+      psub: document.getElementById("psub"),
+      vTile: document.getElementById("vTile"),
+      vCoords: document.getElementById("vCoords"),
+      vTag: document.getElementById("vTag"),
+      vTs: document.getElementById("vTs"),
+      vBody: document.getElementById("vBody")
+    };
 
-    const searchInput = document.getElementById("searchInput");
-    const goBtn = document.getElementById("goBtn");
+    const STEP = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--step").trim(), 10) || 128;
+    const TILE = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--tile").trim(), 10) || 118;
 
-    const stride = TILE.size + TILE.gap;
+    const state = {
+      camX: 0,
+      camY: 0,
+      vx: 0,
+      vy: 0,
 
-    let camX = 0;
-    let camY = 0;
+      down: false,
+      pid: null,
+      lastX: 0,
+      lastY: 0,
+      moved: false,
 
-    let activePointerId = null;
-    let panArmed = false;
-    let panning = false;
-    let dragStartX = 0;
-    let dragStartY = 0;
-    let camStartX = 0;
-    let camStartY = 0;
+      cols: 0,
+      rows: 0,
+      pool: [],
+      POOL_PAD: 3,
 
-    const DRAG_THRESHOLD = 4;
+      taken: new Set(),
+      marksByTile: new Map(),
 
-    let tiles = [];
-    let marksByTile = new Map();
+      lastKey: "",
+      raf: 0
+    };
 
-    function sanitizeInput(s){
-      return String(s || "")
-        .trim()
-        .toUpperCase()
-        .replace(/[–—−]/g, "-")
-        .replace(/\s+/g, "");
+    function toastShow(msg, kind){
+      toast.className = "toast " + (kind || "");
+      toast.textContent = msg;
+      requestAnimationFrame(() => toast.classList.add("show"));
+      clearTimeout(toast._t);
+      toast._t = setTimeout(() => toast.classList.remove("show"), 1400);
     }
+
+    function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
 
     function tileIdFromCoords(gx, gy){
-      const eastWest = gx >= 0 ? "E" + gx : "W" + Math.abs(gx);
-      const northSouth = gy >= 0 ? "N" + gy : "S" + Math.abs(gy);
-      return eastWest + "-" + northSouth;
+      const ax = Math.abs(gx);
+      const ay = Math.abs(gy);
+      const sx = gx < 0 ? "W" : "E";
+      const sy = gy < 0 ? "N" : "S";
+      return sx + ax + "-" + sy + ay;
     }
 
-    function parseTileId(input){
-      const s = sanitizeInput(input);
-      const m = /^([EW])(\d+)-([NS])(\d+)$/.exec(s);
-      if(!m) return null;
-      const gx = (m[1] === "E") ? Number(m[2]) : -Number(m[2]);
-      const gy = (m[3] === "N") ? Number(m[4]) : -Number(m[4]);
-      return { gx, gy, tile: tileIdFromCoords(gx, gy) };
-    }
+    function parseTileToCoords(raw){
+      if(!raw) return null;
+      const s = String(raw).trim().toUpperCase();
 
-    function parseCoords(input){
-      const s = String(input || "").trim().replace(/[–—−]/g, "-");
-      const m = /^(-?\d+)\s*,\s*(-?\d+)$/.exec(s);
-      if(!m) return null;
-      const gx = Number(m[1]);
-      const gy = Number(m[2]);
-      if(!Number.isFinite(gx) || !Number.isFinite(gy)) return null;
-      return { gx, gy, tile: tileIdFromCoords(gx, gy) };
-    }
-
-    function normalizeSearch(input){
-      return parseTileId(input) || parseCoords(input);
-    }
-
-    function setCamera(x, y){
-      camX = x;
-      camY = y;
-      render();
-    }
-
-    function jumpToTile(gx, gy){
-      setCamera(-gx * stride, -gy * stride);
-    }
-
-    function openPanelFor(gx, gy){
-      const tile = tileIdFromCoords(gx, gy);
-      const mark = marksByTile.get(tile) || null;
-
-      panelTitle.textContent = tile;
-      panelSub.textContent = "GX " + gx + "  GY " + gy;
-
-      kvTile.textContent = tile;
-      kvGX.textContent = String(gx);
-      kvGY.textContent = String(gy);
-
-      if(mark){
-        panelStatus.textContent = "Taken";
-        panelStatus.className = "pill good";
-        kvTag.textContent = mark.tag || "";
-        kvMarkId.textContent = mark.id || "";
-        kvTS.textContent = mark.ts || "";
-      }else{
-        panelStatus.textContent = "Open";
-        panelStatus.className = "pill";
-        kvTag.textContent = "";
-        kvMarkId.textContent = "";
-        kvTS.textContent = "";
-      }
-
-      panel.classList.add("open");
-    }
-
-    function closePanelNow(){
-      panel.classList.remove("open");
-    }
-
-    closePanel.addEventListener("click", closePanelNow);
-
-    function createTileEl(){
-      const el = document.createElement("div");
-      el.className = "tile";
-      el.innerHTML = '<div class="tag"></div><div class="id"></div>';
-      const tagEl = el.querySelector(".tag");
-      const idEl = el.querySelector(".id");
-
-      el.addEventListener("click", () => {
-        const gx = Number(el.dataset.gx);
-        const gy = Number(el.dataset.gy);
-        openPanelFor(gx, gy);
-      });
-
-      return { el, tagEl, idEl };
-    }
-
-    function ensurePool(count){
-      while(tiles.length < count){
-        const t = createTileEl();
-        grid.appendChild(t.el);
-        tiles.push(t);
-      }
-    }
-
-    function render(){
-      grid.style.transform = `translate3d(${camX}px, ${camY}px, 0)`;
-
-      const rect = canvas.getBoundingClientRect();
-      const cx = rect.width / 2;
-      const cy = rect.height / 2;
-
-      const centerGX = Math.round((-camX) / stride);
-      const centerGY = Math.round((-camY) / stride);
-
-      const minGX = centerGX - VIEW.halfRange;
-      const maxGX = centerGX + VIEW.halfRange;
-      const minGY = centerGY - VIEW.halfRange;
-      const maxGY = centerGY + VIEW.halfRange;
-
-      const needed = (maxGX - minGX + 1) * (maxGY - minGY + 1);
-      ensurePool(needed);
-
-      let i = 0;
-      for(let gy = minGY; gy <= maxGY; gy++){
-        for(let gx = minGX; gx <= maxGX; gx++){
-          const t = tiles[i++];
-          const tile = tileIdFromCoords(gx, gy);
-          const mark = marksByTile.get(tile) || null;
-
-          const x = gx * stride;
-          const y = gy * stride;
-
-          t.el.style.transform = `translate3d(${x + cx}px, ${y + cy}px, 0)`;
-          t.el.dataset.gx = String(gx);
-          t.el.dataset.gy = String(gy);
-          t.idEl.textContent = tile;
-
-          if(mark){
-            t.el.classList.add("taken");
-            t.tagEl.textContent = (mark.tag || "TAKEN").toUpperCase();
-          }else{
-            t.el.classList.remove("taken");
-            t.tagEl.textContent = "OPEN";
-          }
+      // "23,-11"
+      if(/^-?\d+\s*,\s*-?\d+$/.test(s)){
+        const parts = s.split(",");
+        const gx = parseInt(parts[0].trim(), 10);
+        const gy = parseInt(parts[1].trim(), 10);
+        if(Number.isFinite(gx) && Number.isFinite(gy)){
+          return { gx, gy, tile: tileIdFromCoords(gx, gy), raw: s };
         }
       }
 
-      for(; i < tiles.length; i++){
-        tiles[i].el.style.transform = "translate3d(-99999px,-99999px,0)";
+      // "E23-N11"
+      const m = s.match(/^([EW])(\d+)-([NS])(\d+)$/);
+      if(m){
+        const gx = parseInt(m[2], 10) * (m[1] === "W" ? -1 : 1);
+        const gy = parseInt(m[4], 10) * (m[3] === "N" ? -1 : 1);
+        if(Number.isFinite(gx) && Number.isFinite(gy)){
+          return { gx, gy, tile: tileIdFromCoords(gx, gy), raw: s };
+        }
       }
+
+      return null;
+    }
+
+    // deterministic spray
+    function mulberry32(seed){
+      let t = seed >>> 0;
+      return function(){
+        t += 0x6D2B79F5;
+        let x = Math.imul(t ^ (t >>> 15), 1 | t);
+        x ^= x + Math.imul(x ^ (x >>> 7), 61 | x);
+        return ((x ^ (x >>> 14)) >>> 0) / 4294967296;
+      };
+    }
+    function hashStr(str){
+      let h = 2166136261 >>> 0;
+      for(let i=0;i<str.length;i++){
+        h ^= str.charCodeAt(i);
+        h = Math.imul(h, 16777619);
+      }
+      return h >>> 0;
+    }
+    function makeSpraySVG(seedStr){
+      const rnd = mulberry32(hashStr(seedStr));
+      const p = [];
+      const count = 26;
+
+      for(let i=0;i<count;i++){
+        const x = Math.floor(rnd() * TILE);
+        const y = Math.floor(rnd() * TILE);
+        const r = 6 + Math.floor(rnd() * 20);
+        const a = 0.10 + rnd() * 0.22;
+        const g = rnd() < 0.72 ? "47,191,107" : "255,225,117";
+        p.push(`<circle cx="${x}" cy="${y}" r="${r}" fill="rgba(${g},${a.toFixed(3)})" />`);
+      }
+      return `<svg viewBox="0 0 ${TILE} ${TILE}" width="${TILE}" height="${TILE}" xmlns="http://www.w3.org/2000/svg">${p.join("")}</svg>`;
+    }
+
+    function closePanel(){
+      panel.classList.remove("open");
+    }
+
+    function openPanel(tile, gx, gy){
+      const mark = state.marksByTile.get(tile) || null;
+      const taken = state.taken.has(tile);
+
+      el.vTile.textContent = tile;
+      el.vCoords.textContent = `${gx}, ${gy}`;
+
+      if(mark){
+        el.vTag.textContent = mark.tag || "TAKEN";
+        el.vTs.textContent = mark.ts || "None";
+        el.vBody.textContent = "Taken tile. Locked in feed.";
+      } else {
+        el.vTag.textContent = taken ? "TAKEN" : "OPEN";
+        el.vTs.textContent = "None";
+        el.vBody.textContent = taken ? "This tile exists in feed but has no display fields." : "This tile is open.";
+      }
+
+      el.ptitle.textContent = "Tile " + tile;
+      el.psub.textContent = "Tap a tile to inspect. Drag to move.";
+      panel.classList.add("open");
+    }
+
+    function ensurePool(){
+      const w = vp.clientWidth;
+      const h = vp.clientHeight;
+      const cols = Math.ceil(w / STEP) + state.POOL_PAD * 2;
+      const rows = Math.ceil(h / STEP) + state.POOL_PAD * 2;
+
+      if(cols === state.cols && rows === state.rows && state.pool.length) return;
+
+      state.cols = cols;
+      state.rows = rows;
+      state.pool = [];
+      world.innerHTML = "";
+
+      const n = cols * rows;
+      for(let i=0;i<n;i++){
+        const d = document.createElement("div");
+        d.className = "cell";
+        d.innerHTML = `<div class="spray"></div><div class="tag"></div><div class="id"></div>`;
+        world.appendChild(d);
+        state.pool.push(d);
+
+        d.addEventListener("click", (e) => {
+          if(state.moved) return;
+          const gx = parseInt(d.getAttribute("data-gx") || "0", 10);
+          const gy = parseInt(d.getAttribute("data-gy") || "0", 10);
+          const tile = d.getAttribute("data-tile") || tileIdFromCoords(gx, gy);
+          openPanel(tile, gx, gy);
+        }, { passive:true });
+      }
+    }
+
+    function setCell(cell, gx, gy){
+      const tile = tileIdFromCoords(gx, gy);
+      const mark = state.marksByTile.get(tile) || null;
+      const taken = state.taken.has(tile);
+
+      cell.style.left = (gx * STEP) + "px";
+      cell.style.top  = (gy * STEP) + "px";
+
+      cell.setAttribute("data-gx", String(gx));
+      cell.setAttribute("data-gy", String(gy));
+      cell.setAttribute("data-tile", tile);
+
+      cell.className = "cell" + (taken ? " taken" : "");
+      cell.setAttribute("aria-label", `Tile ${tile} ${taken ? "taken" : "open"}`);
+
+      const spray = cell.querySelector(".spray");
+      const tag = cell.querySelector(".tag");
+      const id = cell.querySelector(".id");
+
+      if(id) id.textContent = tile;
+
+      if(tag){
+        if(mark && mark.tag) tag.textContent = mark.tag;
+        else tag.textContent = taken ? "TAKEN" : "";
+      }
+
+      if(spray) spray.innerHTML = makeSpraySVG(tile);
+    }
+
+    function renderPool(){
+      ensurePool();
+
+      const startGX = Math.floor(state.camX / STEP) - state.POOL_PAD;
+      const startGY = Math.floor(state.camY / STEP) - state.POOL_PAD;
+
+      const key = `${startGX},${startGY},${state.cols},${state.rows},${state.taken.size},${state.marksByTile.size}`;
+      if(key === state.lastKey) return;
+      state.lastKey = key;
+
+      let i = 0;
+      for(let ry=0; ry<state.rows; ry++){
+        for(let rx=0; rx<state.cols; rx++){
+          const gx = startGX + rx;
+          const gy = startGY + ry;
+          setCell(state.pool[i++], gx, gy);
+        }
+      }
+    }
+
+    function updateWorldTransform(){
+      const w = vp.clientWidth;
+      const h = vp.clientHeight;
+      const tx = Math.round(w * 0.5 - state.camX);
+      const ty = Math.round(h * 0.5 - state.camY);
+      world.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
+    }
+
+    function tick(){
+      // inertia
+      if(!state.down){
+        state.vx *= 0.92;
+        state.vy *= 0.92;
+        if(Math.abs(state.vx) < 0.02) state.vx = 0;
+        if(Math.abs(state.vy) < 0.02) state.vy = 0;
+        state.camX -= state.vx;
+        state.camY -= state.vy;
+      }
+
+      updateWorldTransform();
+      renderPool();
+
+      state.raf = requestAnimationFrame(tick);
+    }
+
+    function onDown(e){
+      state.down = true;
+      state.pid = e.pointerId;
+      state.lastX = e.clientX;
+      state.lastY = e.clientY;
+      state.moved = false;
+
+      vp.classList.add("dragging");
+      try{ vp.setPointerCapture(state.pid); } catch(_){}
+    }
+
+    function onMove(e){
+      if(!state.down || e.pointerId !== state.pid) return;
+
+      const dx = e.clientX - state.lastX;
+      const dy = e.clientY - state.lastY;
+
+      state.lastX = e.clientX;
+      state.lastY = e.clientY;
+
+      if(Math.abs(dx) + Math.abs(dy) > 2) state.moved = true;
+
+      state.camX -= dx;
+      state.camY -= dy;
+
+      state.vx = dx;
+      state.vy = dy;
+    }
+
+    function onUp(e){
+      if(e.pointerId !== state.pid) return;
+      state.down = false;
+      state.pid = null;
+      vp.classList.remove("dragging");
+
+      // prevent click after drag
+      setTimeout(() => { state.moved = false; }, 0);
     }
 
     async function loadFeed(){
       try{
-        const res = await fetch(FEED_URL, { cache: "no-store" });
-        if(!res.ok) throw new Error("feed http " + res.status);
+        const res = await fetch(FEED_URL + "?cb=" + Date.now(), { cache:"no-store" });
         const data = await res.json();
-        if(!Array.isArray(data)) throw new Error("feed not array");
 
-        marksByTile.clear();
-        for(const m of data){
-          if(!m) continue;
-          const gx = Number(m.gx);
-          const gy = Number(m.gy);
-          const tileRaw = sanitizeInput(m.tile || "");
-          if(!tileRaw) continue;
+        state.taken = new Set();
+        state.marksByTile = new Map();
 
-          const canonTile = (Number.isFinite(gx) && Number.isFinite(gy)) ? tileIdFromCoords(gx, gy) : tileRaw;
-          marksByTile.set(canonTile, {
-            id: m.id || "",
-            tile: canonTile,
-            gx: Number.isFinite(gx) ? gx : null,
-            gy: Number.isFinite(gy) ? gy : null,
-            tag: m.tag || "",
-            ts: m.ts || ""
-          });
+        if(Array.isArray(data)){
+          for(const m of data){
+            const gx = Number.isFinite(+m.gx) ? +m.gx : null;
+            const gy = Number.isFinite(+m.gy) ? +m.gy : null;
+            let tile = (typeof m.tile === "string" && m.tile) ? String(m.tile).trim().toUpperCase() : null;
+            if(!tile && gx !== null && gy !== null) tile = tileIdFromCoords(gx, gy);
+            if(!tile) continue;
+
+            state.taken.add(tile);
+
+            state.marksByTile.set(tile, {
+              tile,
+              gx: gx !== null ? gx : 0,
+              gy: gy !== null ? gy : 0,
+              tag: (typeof m.tag === "string" ? m.tag : "") || "",
+              ts: (typeof m.ts === "string" ? m.ts : "") || ""
+            });
+          }
         }
 
-        render();
-      }catch(err){
-        console.error(err);
-        render();
+        if(el.kTaken) el.kTaken.textContent = String(state.taken.size);
+      } catch(_){
+        if(el.kTaken) el.kTaken.textContent = "0";
+        toastShow("feed load failed", "warn");
       }
     }
 
-    function onGo(){
-      const raw = String(searchInput.value || "").replace(/[–—−]/g, "-");
-      const q = normalizeSearch(raw);
-      if(!q) return;
+    // IMPORTANT: no auto-open, ever
+    function startNearSeed(){
+      // center near first mark if it exists, but do NOT open panel
+      let gx = 0, gy = 0;
 
-      searchInput.value = q.tile;
-      closePanelNow();
-      jumpToTile(q.gx, q.gy);
-    }
-
-    goBtn.addEventListener("click", onGo);
-    searchInput.addEventListener("keydown", (e) => {
-      if(e.key === "Enter") onGo();
-    });
-
-    function armPan(e){
-      if(e.button !== undefined && e.button !== 0) return;
-
-      const onTile = e.target && e.target.closest && e.target.closest(".tile");
-      if(onTile) return;
-
-      activePointerId = e.pointerId;
-      panArmed = true;
-      panning = false;
-
-      dragStartX = e.clientX;
-      dragStartY = e.clientY;
-      camStartX = camX;
-      camStartY = camY;
-    }
-
-    function movePan(e){
-      if(!panArmed || activePointerId !== e.pointerId) return;
-
-      const dx = e.clientX - dragStartX;
-      const dy = e.clientY - dragStartY;
-
-      if(!panning){
-        if(Math.abs(dx) + Math.abs(dy) < DRAG_THRESHOLD) return;
-        panning = true;
-        canvas.classList.add("dragging");
+      for(const v of state.marksByTile.values()){
+        gx = Number.isFinite(v.gx) ? v.gx : 0;
+        gy = Number.isFinite(v.gy) ? v.gy : 0;
+        break;
       }
 
-      camX = camStartX + dx;
-      camY = camStartY + dy;
-      render();
+      state.camX = gx * STEP;
+      state.camY = gy * STEP;
+
+      closePanel();
+      toastShow("start " + tileIdFromCoords(gx, gy), "good");
     }
 
-    function endPan(e){
-      if(activePointerId !== e.pointerId) return;
-      activePointerId = null;
-      panArmed = false;
-      panning = false;
-      canvas.classList.remove("dragging");
+    function parseQueryToCoords(str){
+      const p = parseTileToCoords(str);
+      if(p) return p;
+
+      // allow "E23 N11" or "E23-N11" already handled
+      const s = String(str || "").trim().toUpperCase();
+      const m = s.match(/^([EW])\s*(\d+)\s*[, ]\s*([NS])\s*(\d+)$/);
+      if(m){
+        const gx = parseInt(m[2], 10) * (m[1] === "W" ? -1 : 1);
+        const gy = parseInt(m[4], 10) * (m[3] === "N" ? -1 : 1);
+        if(Number.isFinite(gx) && Number.isFinite(gy)){
+          return { gx, gy, tile: tileIdFromCoords(gx, gy), raw: s };
+        }
+      }
+
+      return null;
     }
 
-    canvas.addEventListener("pointerdown", armPan);
-    canvas.addEventListener("pointermove", movePan);
-    canvas.addEventListener("pointerup", endPan);
-    canvas.addEventListener("pointercancel", endPan);
+    function handleGo(){
+      const q = (el.q && el.q.value) ? el.q.value : "";
+      const p = parseQueryToCoords(q);
+      if(!p){
+        toastShow("bad search", "warn");
+        return;
+      }
+      state.camX = p.gx * STEP;
+      state.camY = p.gy * STEP;
 
-    render();
-    loadFeed();
+      // do NOT open the panel on search
+      closePanel();
+
+      toastShow("jump " + p.tile, "good");
+    }
+
+    // wire up
+    el.close.addEventListener("click", closePanel, { passive:true });
+    el.go.addEventListener("click", handleGo, { passive:true });
+    el.q.addEventListener("keydown", (e) => {
+      if(e.key === "Enter") handleGo();
+    }, { passive:true });
+
+    vp.addEventListener("pointerdown", onDown, { passive:false });
+    vp.addEventListener("pointermove", onMove, { passive:false });
+    vp.addEventListener("pointerup", onUp, { passive:false });
+    vp.addEventListener("pointercancel", onUp, { passive:false });
+
+    // boot
+    updateWorldTransform();
+    renderPool();
+    requestAnimationFrame(tick);
+
+    loadFeed().then(() => startNearSeed());
+    setInterval(loadFeed, 15000);
   </script>
 </body>
 </html>
