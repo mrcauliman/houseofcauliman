@@ -1,250 +1,322 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
-  <title>MONOLITH — Claim a Tile</title>
-  <meta name="description" content="Claim a MONOLITH tile. One tile. One mark. No edits. No deletes." />
-
-  <meta property="og:title" content="MONOLITH — Claim a Tile" />
-  <meta property="og:description" content="Pick a tile. Upload a mark image. Save locally. On-chain claim flow comes next." />
-  <meta property="og:image" content="https://houseofcauliman.com/assets/monolith/monolith_logo.webp" />
-  <meta property="og:url" content="https://houseofcauliman.com/monolith/claim/" />
-  <meta property="og:type" content="website" />
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>MONOLITH Claim</title>
   <style>
     :root{
-      --bg:#07090b;
-      --panel:#0b1b13;
-      --panel2:#0d2217;
-      --fg:#f5f7f4;
-      --muted:#aeb7af;
-      --line:#173524;
-      --green:#2fbf6b;
-      --warn:#ffe175;
-      --red:#ff5b5b;
-      --shadow:rgba(0,0,0,.42);
-      --radius:18px;
+      --bg:#07090a;
+      --card:#0f1316;
+      --card2:#12181d;
+      --line:#22303a;
+      --text:#e9eef2;
+      --muted:#a9b6c2;
+      --accent:#7cf7c2;
+      --danger:#ff6b6b;
+      --ok:#2f6b4b;
+      --shadow: 0 10px 30px rgba(0,0,0,.45);
+      --radius: 16px;
+      --radius2: 12px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
     }
+    html,body{height:100%; margin:0; background:var(--bg); color:var(--text); font-family:var(--font);}
     *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--fg);font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial}
-    a{color:inherit;text-decoration:none}
 
-    .wrap{max-width:1100px;margin:0 auto;padding:16px}
+    .wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 18px 14px 40px;
+    }
 
     .top{
-      display:flex;align-items:center;gap:12px;flex-wrap:wrap;
-      padding:12px 12px;
-      border:1px solid rgba(23,53,36,.9);
-      border-radius:18px;
-      background:rgba(7,9,11,.62);
-      box-shadow:0 18px 44px rgba(0,0,0,.35);
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom: 12px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:999px;
+      background: rgba(15,19,22,.82);
+      border:1px solid rgba(34,48,58,.75);
+      box-shadow: var(--shadow);
       backdrop-filter: blur(10px);
     }
-    .brand{display:flex;align-items:center;gap:10px}
-    .brand img{width:36px;height:36px;object-fit:contain}
-    .brand .t{font-weight:1000;letter-spacing:.6px;font-size:13px;text-transform:uppercase;line-height:1.1}
-    .brand .s{margin-top:3px;color:rgba(245,247,244,.72);font-size:12px;line-height:1.2}
-    .sp{flex:1}
+    .dot{
+      width:10px;height:10px;border-radius:50%;
+      background:var(--accent);
+      box-shadow:0 0 18px rgba(124,247,194,.55);
+    }
+    .brand .t{font-weight:900; letter-spacing:.6px}
+    .brand .s{color:var(--muted); font-size:12px; margin-left:6px}
 
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
     .btn{
-      border:1px solid rgba(23,53,36,.95);
-      background:linear-gradient(180deg, rgba(13,34,23,.85), rgba(11,27,19,.85));
-      color:var(--fg);
-      padding:9px 12px;
-      border-radius:14px;
+      border:1px solid rgba(34,48,58,.9);
+      background: rgba(18,24,29,.9);
+      color: var(--text);
+      padding:10px 14px;
+      border-radius:999px;
       font-weight:900;
-      letter-spacing:.3px;
       cursor:pointer;
       user-select:none;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      white-space:nowrap;
+      box-shadow: 0 0 0 2px rgba(124,247,194,.10) inset;
     }
-    .btn.primary{border-color:rgba(47,191,107,.8);box-shadow:0 10px 26px rgba(47,191,107,.12)}
-    .btn.danger{border-color:rgba(255,91,91,.55)}
     .btn:active{transform:translateY(1px)}
+    .btn.ghost{
+      box-shadow:none;
+      background: rgba(15,19,22,.82);
+    }
+    .btn.danger{
+      border-color: rgba(255,107,107,.5);
+      box-shadow: 0 0 0 2px rgba(255,107,107,.10) inset;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 14px;
+      align-items:start;
+      margin-top: 14px;
+    }
+    @media (max-width: 900px){
+      .grid{grid-template-columns: 1fr}
+    }
 
     .card{
-      margin-top:14px;
-      border:1px solid rgba(23,53,36,.9);
-      border-radius:18px;
-      background:rgba(7,9,11,.62);
-      box-shadow:0 18px 44px rgba(0,0,0,.25);
+      background: rgba(15,19,22,.86);
+      border:1px solid rgba(34,48,58,.75);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
       backdrop-filter: blur(10px);
       overflow:hidden;
     }
-    .card .head{
-      padding:12px 12px;
-      border-bottom:1px solid rgba(23,53,36,.7);
-      background:linear-gradient(180deg, rgba(13,34,23,.72), rgba(7,9,11,.62));
+    .card header{
+      padding: 12px 14px;
+      border-bottom:1px solid rgba(34,48,58,.6);
+      background: rgba(18,24,29,.85);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
     }
-    .card .head .t{font-weight:1000;letter-spacing:.5px;text-transform:uppercase;font-size:13px}
-    .card .head .s{margin-top:6px;color:rgba(245,247,244,.70);font-size:12px;line-height:1.35}
-    .card .body{padding:12px 12px 14px}
-
-    .kpis{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-    .kpi{
-      padding:10px 12px;
-      border-radius:16px;
-      border:1px solid rgba(23,53,36,.85);
-      background:rgba(11,27,19,.50);
-      min-width:140px;
+    .card header .h{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
     }
-    .kpi .k{color:rgba(245,247,244,.62);font-size:11px;letter-spacing:.6px;text-transform:uppercase;font-weight:1000}
-    .kpi .v{margin-top:6px;font-size:18px;font-weight:1000}
+    .card header .h .t{
+      font-weight: 900;
+      letter-spacing:.5px;
+    }
+    .card header .h .s{
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .card .body{
+      padding: 14px;
+    }
 
-    .tilegridWrap{display:flex;flex-direction:column;gap:12px}
+    .picker{
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+    }
+
     .tilegrid{
       display:grid;
-      grid-template-columns:repeat(12, 1fr);
-      gap:8px;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 8px;
       user-select:none;
     }
-    @media(max-width:920px){.tilegrid{grid-template-columns:repeat(10, 1fr)}}
-    @media(max-width:720px){.tilegrid{grid-template-columns:repeat(9, 1fr)}}
-    @media(max-width:520px){.tilegrid{grid-template-columns:repeat(8, 1fr)}}
+    @media (max-width: 520px){
+      .tilegrid{grid-template-columns: repeat(8, 1fr)}
+    }
 
-    .tcell{
-      position:relative;
-      aspect-ratio:1/1;
-      border-radius:16px;
-      border:1px solid rgba(23,53,36,.85);
-      background:
-        radial-gradient(120px 80px at 30% 25%, rgba(47,191,107,.08), transparent 55%),
-        rgba(11,27,19,.55);
+    .tile{
+      border-radius: 12px;
+      border:1px solid rgba(34,48,58,.6);
+      background: rgba(18,24,29,.65);
+      padding: 10px 8px;
+      text-align:center;
+      font-weight: 900;
+      letter-spacing:.2px;
       cursor:pointer;
-      overflow:hidden;
-      transition: transform .08s ease, border-color .08s ease;
+      min-height: 44px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
     }
-    .tcell:hover{border-color:rgba(47,191,107,.55);transform:translateY(-1px)}
-    .tcell.selected{
-      border-color:rgba(47,191,107,.95);
-      box-shadow:0 0 0 2px rgba(47,191,107,.18) inset;
+    .tile:hover{
+      border-color: rgba(124,247,194,.35);
+      box-shadow: 0 0 0 2px rgba(124,247,194,.10) inset;
     }
-    .tcell.taken{opacity:.26;cursor:not-allowed;transform:none}
-    .tcell b{
-      position:absolute;inset:auto 8px 6px 8px;
-      font-size:10px;color:rgba(245,247,244,.75);
-      font-weight:1000;letter-spacing:.3px;text-transform:uppercase;
-      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    .tile.selected{
+      border-color: rgba(124,247,194,.65);
+      box-shadow: 0 0 0 2px rgba(124,247,194,.20) inset;
     }
-    .tcell i{
-      position:absolute;inset:8px auto auto 8px;
-      font-style:normal;font-size:10px;color:rgba(169,179,189,.85);
-      font-weight:900;letter-spacing:.2px;
+    .tile.taken{
+      border-color: rgba(47,107,75,.75);
+      background: rgba(30,43,34,.75);
+      color: rgba(124,247,194,.95);
+      cursor:not-allowed;
+      opacity:.85;
     }
-    .tcell.taken:after{
-      content:"TAKEN";
-      position:absolute;right:8px;top:8px;
-      padding:4px 7px;border-radius:999px;
-      background:rgba(255,91,91,.16);
-      border:1px solid rgba(255,91,91,.32);
-      color:rgba(245,247,244,.86);
-      font-size:10px;font-weight:1000;letter-spacing:.35px;
-    }
+    .tile.taken:hover{box-shadow:none}
 
-    .hint{
-      margin-top:10px;
+    .subrow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      margin-top: 8px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(34,48,58,.6);
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
       padding:10px 12px;
-      border-radius:16px;
-      border:1px solid rgba(23,53,36,.85);
-      background:rgba(11,27,19,.50);
-      color:rgba(245,247,244,.78);
-      font-size:12px;
-      line-height:1.35;
+      border:1px solid rgba(34,48,58,.6);
+      border-radius:999px;
+      background: rgba(18,24,29,.62);
+      font-weight:900;
+      letter-spacing:.2px;
+      width: fit-content;
     }
-    .hint.good{border-color:rgba(47,191,107,.6)}
-    .hint.warn{border-color:rgba(255,225,117,.55)}
-    .hint.bad{border-color:rgba(255,91,91,.55)}
+    .pill.ok{border-color: rgba(47,107,75,.75); box-shadow: 0 0 0 2px rgba(124,247,194,.10) inset}
+    .pill.bad{border-color: rgba(255,107,107,.55); box-shadow: 0 0 0 2px rgba(255,107,107,.10) inset}
 
-    input[type="file"]{display:none}
-    .uploader{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;align-items:center}
-    .preview{
-      margin-top:10px;
-      border:1px solid rgba(23,53,36,.9);
-      border-radius:18px;
-      background:rgba(11,27,19,.45);
-      padding:10px;
+    .upload{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .upload .row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .upload input[type="file"]{
       display:none;
     }
-    .preview img{
+    .preview{
       width:100%;
-      max-height:380px;
-      object-fit:contain;
-      border-radius:14px;
-      display:block;
+      border-radius: var(--radius2);
+      border:1px solid rgba(34,48,58,.6);
+      background: rgba(18,24,29,.62);
+      padding: 12px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
     }
-
-    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-    .pill{
-      padding:7px 10px;border-radius:999px;
-      border:1px solid rgba(23,53,36,.85);
-      background:rgba(11,27,19,.50);
-      color:rgba(245,247,244,.78);
-      font-size:12px;
-      font-weight:900;
-      letter-spacing:.3px;
+    .preview img{
+      max-width:100%;
+      height:auto;
+      border-radius: 12px;
+      border:1px solid rgba(34,48,58,.6);
+      background: rgba(7,9,10,.8);
+    }
+    .kv{
+      display:grid;
+      grid-template-columns: 120px 1fr;
+      gap:8px 10px;
+      padding: 10px;
+      border:1px solid rgba(34,48,58,.6);
+      border-radius: 12px;
+      background: rgba(18,24,29,.62);
+      overflow-wrap:anywhere;
+    }
+    .k{color:var(--muted); font-size:12px; font-weight:900; letter-spacing:.4px; text-transform:uppercase}
+    .v{font-weight:800}
+    .note{
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
     }
   </style>
 </head>
-
 <body>
   <div class="wrap">
     <div class="top">
-      <a class="brand" href="/monolith/">
-        <img src="/assets/monolith/monolith_logo.webp" alt="monolith logo" />
-        <div>
-          <div class="t">MONOLITH</div>
-          <div class="s">Claim a Tile</div>
-        </div>
-      </a>
-      <div class="sp"></div>
-      <a class="btn" href="/monolith/">Back to Wall</a>
+      <div class="brand">
+        <div class="dot"></div>
+        <div class="t">MONOLITH <span class="s">Claim</span></div>
+      </div>
+
+      <div class="actions">
+        <a class="btn ghost" href="/monolith/">Back to Wall</a>
+        <button id="saveBtn" class="btn" type="button">Save Selection</button>
+      </div>
     </div>
 
-    <div class="card">
-      <div class="head">
-        <div class="t">Pick your tile</div>
-        <div class="s">Taken tiles are blocked. Pick an open tile. Add your mark image. This page saves your selection locally. On chain claim flow lands next.</div>
-        <div class="kpis">
-          <div class="kpi">
-            <div class="k">Selected</div>
-            <div class="v" id="kSelected">None</div>
+    <div class="grid">
+      <div class="card">
+        <header>
+          <div class="h">
+            <div class="t">Pick a Tile</div>
+            <div class="s">Taken tiles are disabled</div>
           </div>
-          <div class="kpi">
-            <div class="k">Taken in feed</div>
-            <div class="v" id="kTaken">0</div>
-          </div>
-          <div class="kpi">
-            <div class="k">Status</div>
-            <div class="v" id="kStatus">Ready</div>
+          <div id="statusPill" class="pill">No tile selected</div>
+        </header>
+        <div class="body">
+          <div class="picker">
+            <div id="tileGrid" class="tilegrid" aria-label="tile picker"></div>
+
+            <div class="subrow">
+              <div class="pill" id="selectedLabel">Selected: none</div>
+              <div class="pill" id="takenCount">Taken: 0</div>
+            </div>
+
+            <div class="note">
+              Selection is stored locally on this device only. No uploads happen here.
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="body">
-        <div class="tilegridWrap">
+      <div class="card">
+        <header>
+          <div class="h">
+            <div class="t">Attach Image</div>
+            <div class="s">Local only</div>
+          </div>
           <div class="row">
-            <div class="pill" id="pillRange">Grid: E0 S0</div>
-            <div class="pill" id="pillInfo">Tap a tile to select</div>
+            <label for="fileInput" class="btn" id="uploadBtn">Upload Image</label>
+            <button id="removeBtn" class="btn danger" type="button">Remove Image</button>
           </div>
-
-          <div class="tilegrid" id="tilegrid" aria-label="tile grid"></div>
-
-          <div class="hint" id="hint">Pick a tile. Upload an image if you want. Your selection saves locally.</div>
-
-          <div class="uploader">
-            <input id="file" type="file" accept="image/*" />
-            <button class="btn primary" id="btnUpload" type="button">Upload Image</button>
-            <button class="btn danger" id="btnClear" type="button">Remove Image</button>
-            <button class="btn" id="btnSave" type="button">Save Selection</button>
-          </div>
-
-          <div class="preview" id="preview">
-            <img id="imgPreview" alt="preview" />
+        </header>
+        <div class="body">
+          <div class="upload">
+            <input id="fileInput" type="file" accept="image/*" />
+            <div class="preview">
+              <div class="kv">
+                <div class="k">Tile</div><div id="kvTile" class="v">none</div>
+                <div class="k">GX</div><div id="kvGX" class="v">-</div>
+                <div class="k">GY</div><div id="kvGY" class="v">-</div>
+                <div class="k">Image</div><div id="kvImg" class="v">none</div>
+              </div>
+              <img id="imgPreview" alt="preview" style="display:none" />
+              <div id="imgNote" class="note">
+                If the image is too large, saving can fail. Keep it reasonable.
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -252,266 +324,266 @@
   </div>
 
   <script>
-  "use strict";
+    "use strict";
 
-  const FEED_URL = "/assets/monolith/feed.json";
-  const LS_KEY = "monolith_claim_v1";
+    const FEED_URL = "/assets/monolith/feed.json";
+    const LS_KEY = "monolith_claim_draft_v1";
+    const MAX_IMAGE_BYTES = 4_500_000;
 
-  const el = {
-    tilegrid: document.getElementById("tilegrid"),
-    hint: document.getElementById("hint"),
-    kSelected: document.getElementById("kSelected"),
-    kTaken: document.getElementById("kTaken"),
-    kStatus: document.getElementById("kStatus"),
-    pillRange: document.getElementById("pillRange"),
-    pillInfo: document.getElementById("pillInfo"),
+    const tileGrid = document.getElementById("tileGrid");
+    const statusPill = document.getElementById("statusPill");
+    const selectedLabel = document.getElementById("selectedLabel");
+    const takenCountEl = document.getElementById("takenCount");
 
-    file: document.getElementById("file"),
-    btnUpload: document.getElementById("btnUpload"),
-    btnClear: document.getElementById("btnClear"),
-    btnSave: document.getElementById("btnSave"),
-    preview: document.getElementById("preview"),
-    imgPreview: document.getElementById("imgPreview")
-  };
+    const saveBtn = document.getElementById("saveBtn");
+    const removeBtn = document.getElementById("removeBtn");
+    const fileInput = document.getElementById("fileInput");
 
-  const state = {
-    originGX: 0,
-    originGY: 0,
-    w: 12,
-    h: 8,
+    const kvTile = document.getElementById("kvTile");
+    const kvGX = document.getElementById("kvGX");
+    const kvGY = document.getElementById("kvGY");
+    const kvImg = document.getElementById("kvImg");
 
-    selectedTile: null,
-    selectedGX: null,
-    selectedGY: null,
+    const imgPreview = document.getElementById("imgPreview");
 
-    taken: new Set(),
-    imageDataUrl: null
-  };
+    let takenTiles = new Set();
 
-  function tileIdFromCoords(gx, gy){
-    const ax = Math.abs(gx);
-    const ay = Math.abs(gy);
-    const sx = gx < 0 ? "W" : "E";
-    const sy = gy < 0 ? "N" : "S";
-    return `${sx}${ax}-${sy}${ay}`;
-  }
+    let selected = {
+      tile: null,
+      gx: null,
+      gy: null
+    };
 
-  function setHint(msg, mode){
-    el.hint.className = "hint" + (mode ? " " + mode : "");
-    el.hint.textContent = msg;
-  }
+    let imageState = null;
 
-  function setStatus(msg){
-    el.kStatus.textContent = msg;
-  }
-
-  function syncKPIs(){
-    el.kSelected.textContent = state.selectedTile ? state.selectedTile : "None";
-    el.kTaken.textContent = String(state.taken.size);
-  }
-
-  function selectTile(gx, gy){
-    const tile = tileIdFromCoords(gx, gy);
-    if(state.taken.has(tile)){
-      setHint("That tile is taken. Pick another.", "bad");
-      return;
+    function tileIdFromCoords(gx, gy){
+      const eastWest = gx >= 0 ? "E" + gx : "W" + Math.abs(gx);
+      const northSouth = gy >= 0 ? "N" + gy : "S" + Math.abs(gy);
+      return eastWest + "-" + northSouth;
     }
 
-    state.selectedGX = gx;
-    state.selectedGY = gy;
-    state.selectedTile = tile;
+    function setStatus(text, kind){
+      statusPill.textContent = text;
+      statusPill.className = "pill" + (kind === "ok" ? " ok" : kind === "bad" ? " bad" : "");
+    }
 
-    el.tilegrid.querySelectorAll(".tcell.selected").forEach(x => x.classList.remove("selected"));
-    const btn = el.tilegrid.querySelector('[data-gx="' + gx + '"][data-gy="' + gy + '"]');
-    if(btn) btn.classList.add("selected");
+    function updateKV(){
+      kvTile.textContent = selected.tile || "none";
+      kvGX.textContent = (selected.gx === null) ? "-" : String(selected.gx);
+      kvGY.textContent = (selected.gy === null) ? "-" : String(selected.gy);
 
-    syncKPIs();
-    setHint("Selected " + tile + ". Upload an image if you want, then Save Selection.", "good");
-  }
+      if(imageState){
+        kvImg.textContent = imageState.name + " (" + Math.round(imageState.bytes / 1024) + " KB)";
+      }else{
+        kvImg.textContent = "none";
+      }
+    }
 
-  function renderGrid(){
-    if(!el.tilegrid) return;
+    function clearSelectionUI(){
+      const els = tileGrid.querySelectorAll(".tile.selected");
+      for(const el of els) el.classList.remove("selected");
+    }
 
-    el.tilegrid.innerHTML = "";
-    for(let y=0;y<state.h;y++){
-      for(let x=0;x<state.w;x++){
-        const gx = state.originGX + x;
-        const gy = state.originGY + y;
-        const tile = tileIdFromCoords(gx, gy);
+    function selectTile(gx, gy){
+      const tile = tileIdFromCoords(gx, gy);
+      if(takenTiles.has(tile)) return;
 
-        const cell = document.createElement("div");
-        cell.className = "tcell" + (state.taken.has(tile) ? " taken" : "");
-        cell.setAttribute("data-gx", String(gx));
-        cell.setAttribute("data-gy", String(gy));
-        cell.setAttribute("data-tile", tile);
+      selected = { tile, gx, gy };
+      selectedLabel.textContent = "Selected: " + tile;
 
-        cell.innerHTML = `<i>${gx},${gy}</i><b>${tile}</b>`;
+      clearSelectionUI();
+      const el = tileGrid.querySelector(`[data-tile="${tile}"]`);
+      if(el) el.classList.add("selected");
 
-        cell.addEventListener("click", () => {
-          if(state.taken.has(tile)){
-            setHint("That tile is taken. Pick another.", "bad");
-            return;
+      setStatus("Selected " + tile, "ok");
+      updateKV();
+    }
+
+    function buildGrid(){
+      tileGrid.innerHTML = "";
+
+      const startGX = 0;
+      const startGY = 0;
+
+      let nTakenVisible = 0;
+
+      for(let r = 0; r < 10; r++){
+        for(let c = 0; c < 10; c++){
+          const gx = startGX + c;
+          const gy = startGY + r;
+          const tile = tileIdFromCoords(gx, gy);
+
+          const el = document.createElement("div");
+          el.className = "tile";
+          el.textContent = tile;
+          el.dataset.tile = tile;
+          el.dataset.gx = String(gx);
+          el.dataset.gy = String(gy);
+
+          if(takenTiles.has(tile)){
+            el.classList.add("taken");
+            nTakenVisible++;
+          }else{
+            el.addEventListener("click", () => selectTile(gx, gy));
           }
-          selectTile(gx, gy);
-        });
 
-        el.tilegrid.appendChild(cell);
-      }
-    }
-
-    if(state.selectedTile){
-      const btn = el.tilegrid.querySelector('[data-tile="' + state.selectedTile + '"]');
-      if(btn && !btn.classList.contains("taken")) btn.classList.add("selected");
-      if(btn && btn.classList.contains("taken")){
-        state.selectedTile = null;
-        state.selectedGX = null;
-        state.selectedGY = null;
-        setHint("Your previous selection is now taken. Pick a new tile.", "warn");
-      }
-    }
-
-    el.pillRange.textContent = "Grid: " + tileIdFromCoords(state.originGX, state.originGY) + " to " +
-      tileIdFromCoords(state.originGX + state.w - 1, state.originGY + state.h - 1);
-  }
-
-  function readLocal(){
-    try{
-      const raw = localStorage.getItem(LS_KEY);
-      if(!raw) return;
-      const obj = JSON.parse(raw);
-      if(obj && typeof obj === "object"){
-        if(typeof obj.tile === "string") state.selectedTile = obj.tile;
-        if(Number.isFinite(+obj.gx)) state.selectedGX = +obj.gx;
-        if(Number.isFinite(+obj.gy)) state.selectedGY = +obj.gy;
-        if(typeof obj.imageDataUrl === "string") state.imageDataUrl = obj.imageDataUrl;
-      }
-    }catch(_){}
-  }
-
-  function writeLocal(){
-    try{
-      const obj = {
-        v: 1,
-        tile: state.selectedTile,
-        gx: state.selectedGX,
-        gy: state.selectedGY,
-        imageDataUrl: state.imageDataUrl,
-        ts: new Date().toISOString()
-      };
-      localStorage.setItem(LS_KEY, JSON.stringify(obj));
-      setStatus("Saved");
-      setHint("Saved locally. On chain claim flow comes next.", "good");
-    }catch(_){
-      setStatus("Error");
-      setHint("Local save failed in this browser.", "bad");
-    }
-  }
-
-  function applyImage(){
-    if(state.imageDataUrl){
-      el.imgPreview.src = state.imageDataUrl;
-      el.preview.style.display = "";
-      el.pillInfo.textContent = "Image added";
-    }else{
-      el.imgPreview.src = "";
-      el.preview.style.display = "none";
-      el.pillInfo.textContent = "No image";
-    }
-  }
-
-  async function loadFeed(){
-    try{
-      setStatus("Loading");
-      const res = await fetch(FEED_URL + "?cb=" + Date.now(), { cache:"no-store" });
-      if(!res.ok) throw new Error("bad");
-      const data = await res.json();
-
-      state.taken = new Set();
-
-      if(Array.isArray(data)){
-        for(const m of data){
-          let gx = Number.isFinite(+m.gx) ? +m.gx : null;
-          let gy = Number.isFinite(+m.gy) ? +m.gy : null;
-          let tile = (typeof m.tile === "string" && m.tile) ? String(m.tile).trim().toUpperCase() : null;
-
-          if(!tile && gx !== null && gy !== null) tile = tileIdFromCoords(gx, gy);
-          if(!tile) continue;
-
-          state.taken.add(tile);
+          tileGrid.appendChild(el);
         }
       }
 
-      syncKPIs();
-      renderGrid();
-
-      setStatus("Ready");
-      return true;
-    }catch(_){
-      setStatus("Offline");
-      syncKPIs();
-      renderGrid();
-      setHint("Feed load failed. You can still pick tiles, but taken tiles may not be accurate right now.", "warn");
-      return false;
-    }
-  }
-
-  function autoCenterNearFirstMark(){
-    return;
-  }
-
-  el.btnUpload.addEventListener("click", () => el.file.click());
-
-  el.file.addEventListener("change", () => {
-    const f = el.file.files && el.file.files[0] ? el.file.files[0] : null;
-    if(!f){
-      setHint("No file selected.", "warn");
-      return;
-    }
-    if(!f.type || !f.type.startsWith("image/")){
-      setHint("That is not an image file.", "bad");
-      return;
+      takenCountEl.textContent = "Taken: " + takenTiles.size;
+      if(nTakenVisible > 0){
+        takenCountEl.classList.add("ok");
+      }else{
+        takenCountEl.classList.remove("ok");
+      }
     }
 
-    const r = new FileReader();
-    r.onload = () => {
-      state.imageDataUrl = String(r.result || "");
-      applyImage();
-      setHint("Image loaded. Save Selection when ready.", "good");
-      setStatus("Ready");
-    };
-    r.onerror = () => {
-      setHint("Image load failed.", "bad");
-      setStatus("Error");
-    };
-    r.readAsDataURL(f);
-  });
+    async function loadFeed(){
+      try{
+        const res = await fetch(FEED_URL, { cache: "no-store" });
+        if(!res.ok) throw new Error("feed http " + res.status);
+        const data = await res.json();
+        if(!Array.isArray(data)) throw new Error("feed not array");
 
-  el.btnClear.addEventListener("click", () => {
-    state.imageDataUrl = null;
-    el.file.value = "";
-    applyImage();
-    setHint("Image removed.", "warn");
-  });
+        takenTiles = new Set();
+        for(const m of data){
+          if(!m) continue;
+          const tile = String(m.tile || "").toUpperCase();
+          if(tile) takenTiles.add(tile);
+        }
 
-  el.btnSave.addEventListener("click", () => {
-    if(!state.selectedTile){
-      setHint("Pick a tile first.", "bad");
-      return;
+        buildGrid();
+
+        if(selected.tile && takenTiles.has(selected.tile)){
+          selected = { tile: null, gx: null, gy: null };
+          selectedLabel.textContent = "Selected: none";
+          setStatus("Tile was taken, pick another", "bad");
+          updateKV();
+        }
+      }catch(err){
+        console.error(err);
+        buildGrid();
+        setStatus("Feed failed, showing grid anyway", "bad");
+      }
     }
-    writeLocal();
-  });
 
-  readLocal();
-  applyImage();
-  syncKPIs();
-  renderGrid();
-
-  loadFeed().then(() => {
-    if(state.selectedTile && Number.isFinite(state.selectedGX) && Number.isFinite(state.selectedGY)){
-      selectTile(state.selectedGX, state.selectedGY);
+    function setImagePreview(dataUrl){
+      if(!dataUrl){
+        imgPreview.style.display = "none";
+        imgPreview.src = "";
+        return;
+      }
+      imgPreview.src = dataUrl;
+      imgPreview.style.display = "block";
     }
-    autoCenterNearFirstMark();
-  });
+
+    function clearImage(){
+      imageState = null;
+      fileInput.value = "";
+      setImagePreview(null);
+      updateKV();
+    }
+
+    fileInput.addEventListener("change", async () => {
+      const file = fileInput.files && fileInput.files[0];
+      if(!file) return;
+
+      const bytes = file.size || 0;
+      if(bytes > MAX_IMAGE_BYTES){
+        setStatus("Image too large, pick a smaller one", "bad");
+        clearImage();
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        const dataUrl = String(reader.result || "");
+        imageState = {
+          name: file.name || "image",
+          type: file.type || "image/*",
+          dataUrl,
+          bytes
+        };
+        setImagePreview(dataUrl);
+        setStatus("Image attached", "ok");
+        updateKV();
+      };
+      reader.onerror = () => {
+        setStatus("Image read failed", "bad");
+        clearImage();
+      };
+      reader.readAsDataURL(file);
+    });
+
+    removeBtn.addEventListener("click", () => {
+      clearImage();
+      setStatus(selected.tile ? ("Selected " + selected.tile) : "No tile selected", selected.tile ? "ok" : "");
+    });
+
+    function saveDraft(){
+      if(!selected.tile){
+        setStatus("Pick a tile first", "bad");
+        return;
+      }
+
+      const payload = {
+        v: 1,
+        savedAt: new Date().toISOString(),
+        tile: selected.tile,
+        gx: selected.gx,
+        gy: selected.gy,
+        image: imageState ? {
+          name: imageState.name,
+          type: imageState.type,
+          dataUrl: imageState.dataUrl,
+          bytes: imageState.bytes
+        } : null
+      };
+
+      try{
+        localStorage.setItem(LS_KEY, JSON.stringify(payload));
+        setStatus("Saved locally", "ok");
+      }catch(err){
+        console.error(err);
+        setStatus("Save failed, image might be too large", "bad");
+      }
+    }
+
+    function loadDraft(){
+      try{
+        const raw = localStorage.getItem(LS_KEY);
+        if(!raw) return;
+        const d = JSON.parse(raw);
+        if(!d || d.v !== 1) return;
+
+        if(typeof d.tile === "string" && Number.isFinite(d.gx) && Number.isFinite(d.gy)){
+          selected = { tile: String(d.tile).toUpperCase(), gx: Number(d.gx), gy: Number(d.gy) };
+          selectedLabel.textContent = "Selected: " + selected.tile;
+          setStatus("Draft loaded", "ok");
+        }
+
+        if(d.image && typeof d.image.dataUrl === "string"){
+          imageState = {
+            name: String(d.image.name || "image"),
+            type: String(d.image.type || "image/*"),
+            dataUrl: String(d.image.dataUrl),
+            bytes: Number(d.image.bytes || 0)
+          };
+          setImagePreview(imageState.dataUrl);
+        }
+
+        updateKV();
+      }catch(err){
+        console.error(err);
+      }
+    }
+
+    saveBtn.addEventListener("click", saveDraft);
+
+    updateKV();
+    loadDraft();
+    loadFeed();
   </script>
 </body>
 </html>
