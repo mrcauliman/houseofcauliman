@@ -366,11 +366,15 @@
     let camX = 0;
     let camY = 0;
 
-    let isDragging = false;
+    let activePointerId = null;
+    let panArmed = false;
+    let panning = false;
     let dragStartX = 0;
     let dragStartY = 0;
     let camStartX = 0;
     let camStartY = 0;
+
+    const DRAG_THRESHOLD = 4;
 
     let tiles = [];
     let tileMap = new Map();
@@ -452,36 +456,6 @@
 
     closePanel.addEventListener("click", closePanelNow);
 
-    function onPointerDown(e){
-      isDragging = true;
-      canvas.classList.add("dragging");
-      dragStartX = e.clientX;
-      dragStartY = e.clientY;
-      camStartX = camX;
-      camStartY = camY;
-      canvas.setPointerCapture(e.pointerId);
-    }
-
-    function onPointerMove(e){
-      if(!isDragging) return;
-      const dx = e.clientX - dragStartX;
-      const dy = e.clientY - dragStartY;
-      camX = camStartX + dx;
-      camY = camStartY + dy;
-      render();
-    }
-
-    function onPointerUp(e){
-      isDragging = false;
-      canvas.classList.remove("dragging");
-      try{ canvas.releasePointerCapture(e.pointerId); }catch(_){}
-    }
-
-    canvas.addEventListener("pointerdown", onPointerDown);
-    canvas.addEventListener("pointermove", onPointerMove);
-    canvas.addEventListener("pointerup", onPointerUp);
-    canvas.addEventListener("pointercancel", onPointerUp);
-
     function createTileEl(){
       const el = document.createElement("div");
       el.className = "tile";
@@ -490,7 +464,6 @@
       const idEl = el.querySelector(".id");
 
       el.addEventListener("click", (ev) => {
-        if(isDragging) return;
         const gx = Number(el.dataset.gx);
         const gy = Number(el.dataset.gy);
         openPanelFor(gx, gy);
@@ -603,6 +576,52 @@
     searchInput.addEventListener("keydown", (e) => {
       if(e.key === "Enter") onGo();
     });
+
+    function armPan(e){
+      if(e.button !== undefined && e.button !== 0) return;
+
+      const onTile = e.target && e.target.closest && e.target.closest(".tile");
+      if(onTile) return;
+
+      activePointerId = e.pointerId;
+      panArmed = true;
+      panning = false;
+
+      dragStartX = e.clientX;
+      dragStartY = e.clientY;
+      camStartX = camX;
+      camStartY = camY;
+    }
+
+    function movePan(e){
+      if(!panArmed || activePointerId !== e.pointerId) return;
+
+      const dx = e.clientX - dragStartX;
+      const dy = e.clientY - dragStartY;
+
+      if(!panning){
+        if(Math.abs(dx) + Math.abs(dy) < DRAG_THRESHOLD) return;
+        panning = true;
+        canvas.classList.add("dragging");
+      }
+
+      camX = camStartX + dx;
+      camY = camStartY + dy;
+      render();
+    }
+
+    function endPan(e){
+      if(activePointerId !== e.pointerId) return;
+      activePointerId = null;
+      panArmed = false;
+      panning = false;
+      canvas.classList.remove("dragging");
+    }
+
+    canvas.addEventListener("pointerdown", armPan);
+    canvas.addEventListener("pointermove", movePan);
+    canvas.addEventListener("pointerup", endPan);
+    canvas.addEventListener("pointercancel", endPan);
 
     render();
     loadFeed();
