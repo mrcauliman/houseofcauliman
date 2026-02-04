@@ -40,231 +40,222 @@
       color:var(--fg);
       overflow:hidden;
     }
-
     a{color:inherit;text-decoration:none}
 
+    /* top bar */
     .top{
-      position:fixed;
-      left:12px; right:12px; top:12px;
-      z-index:50;
-      display:flex;
-      align-items:center;
-      gap:12px;
-      flex-wrap:wrap;
-      padding:12px 12px;
+      position:fixed;left:12px;right:12px;top:12px;
+      display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+      padding:10px 12px;
       border:1px solid rgba(23,53,36,.9);
       border-radius:18px;
-      background:rgba(7,9,11,.60);
+      background:rgba(7,9,11,.62);
       box-shadow:0 18px 44px rgba(0,0,0,.35);
       backdrop-filter: blur(10px);
+      z-index:20;
     }
     .brand{display:flex;align-items:center;gap:10px}
     .brand img{width:34px;height:34px;object-fit:contain}
     .brand .t{font-weight:1000;letter-spacing:.6px;font-size:13px;text-transform:uppercase;line-height:1.1}
     .brand .s{margin-top:3px;color:rgba(245,247,244,.72);font-size:12px;line-height:1.2}
+
     .sp{flex:1}
 
     .btn{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:10px 12px;
-      border-radius:14px;
       border:1px solid rgba(23,53,36,.95);
-      background:rgba(13,34,23,.55);
+      background:rgba(11,27,19,.85);
       color:var(--fg);
+      border-radius:14px;
+      padding:10px 12px;
+      font-weight:900;
+      letter-spacing:.3px;
+      cursor:pointer;
+      display:inline-flex;align-items:center;gap:8px;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn:hover{border-color:rgba(47,191,107,.55)}
+    .btn.primary{
+      background:linear-gradient(180deg, rgba(47,191,107,.22), rgba(11,27,19,.88));
+      border-color:rgba(47,191,107,.65);
+    }
+
+    .kpi{
+      display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+      color:rgba(245,247,244,.84);
+      font-size:12px;
+    }
+    .pill{
+      border:1px solid rgba(23,53,36,.95);
+      background:rgba(11,27,19,.72);
+      padding:8px 10px;
+      border-radius:999px;
       font-weight:900;
       letter-spacing:.2px;
-      cursor:pointer;
-      user-select:none;
-    }
-    .btn.primary{
-      border-color:rgba(47,191,107,.85);
-      background:linear-gradient(180deg, rgba(47,191,107,.22), rgba(13,34,23,.55));
-      box-shadow:0 10px 26px rgba(0,0,0,.30);
-    }
-    .btn:active{transform:translateY(1px)}
-    .pill{
       display:inline-flex;align-items:center;gap:8px;
-      padding:10px 12px;
-      border-radius:14px;
-      border:1px solid rgba(23,53,36,.95);
-      background:rgba(13,34,23,.35);
     }
-    .pill .k{font-size:11px;color:rgba(245,247,244,.70);font-weight:900;text-transform:uppercase;letter-spacing:.6px}
-    .pill .v{font-size:12px;font-weight:1000;color:rgba(245,247,244,.92)}
+    .dot{width:8px;height:8px;border-radius:999px;background:var(--green);box-shadow:0 0 0 3px rgba(47,191,107,.18)}
+
+    /* search */
     .search{
       display:flex;align-items:center;gap:8px;
-      padding:8px;
-      border-radius:16px;
       border:1px solid rgba(23,53,36,.95);
-      background:rgba(13,34,23,.35);
-      min-width:260px;
+      background:rgba(11,27,19,.72);
+      border-radius:14px;
+      padding:8px 10px;
     }
     .search input{
       width:240px;
+      max-width:42vw;
       border:0;
-      outline:none;
+      outline:0;
       background:transparent;
       color:var(--fg);
       font-weight:900;
       letter-spacing:.2px;
-      font-size:13px;
+      font-size:12px;
     }
-    .search input::placeholder{color:rgba(174,183,175,.70);font-weight:800}
+    .search input::placeholder{color:rgba(174,183,175,.70)}
+    .search .btn{
+      padding:8px 10px;
+      border-radius:12px;
+    }
 
-    .vp{
-      position:absolute; inset:0;
-      overflow:hidden;
+    /* viewport */
+    #vp{
+      position:absolute;inset:0;
       touch-action:none;
       cursor:grab;
     }
-    .vp:active{cursor:grabbing}
-
-    .world{
-      position:absolute;
-      left:0; top:0;
+    #vp.dragging{cursor:grabbing}
+    #world{
+      position:absolute;left:0;top:0;
+      width:1px;height:1px;
+      transform:translate3d(0,0,0);
       will-change:transform;
     }
 
+    /* tile cell */
     .cell{
       position:absolute;
       width:var(--tile);
       height:var(--tile);
       border-radius:16px;
-      border:1px solid rgba(23,53,36,.9);
+      border:1px solid rgba(23,53,36,.75);
       background:
-        radial-gradient(180px 140px at 30% 22%, rgba(47,191,107,.12), transparent 55%),
-        radial-gradient(240px 220px at 70% 85%, rgba(255,225,117,.08), transparent 62%),
-        rgba(13,34,23,.25);
-      box-shadow:0 14px 34px rgba(0,0,0,.35);
+        radial-gradient(120px 90px at 30% 25%, rgba(47,191,107,.14), transparent 55%),
+        rgba(11,27,19,.45);
+      box-shadow: 0 10px 28px rgba(0,0,0,.28);
       overflow:hidden;
       user-select:none;
+      -webkit-tap-highlight-color: transparent;
     }
-    .cell .spray{
-      position:absolute; inset:0;
-      opacity:.72;
-      filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
-    }
+    .cell:hover{border-color:rgba(47,191,107,.45)}
+    .cell .spray{position:absolute;inset:0;opacity:.95}
     .cell .id{
-      position:absolute;
-      left:10px; right:10px; bottom:8px;
-      display:flex; justify-content:space-between; gap:10px; align-items:flex-end;
-      pointer-events:none;
-    }
-    .cell .id b{
+      position:absolute;left:10px;bottom:8px;right:10px;
       font-size:10px;
       font-weight:1000;
-      letter-spacing:.3px;
-      color:rgba(245,247,244,.82);
+      letter-spacing:.35px;
+      color:rgba(245,247,244,.72);
+      text-shadow:0 1px 0 rgba(0,0,0,.55);
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
     }
-    .cell .id i{
-      font-style:normal;
+    .cell .tag{
+      position:absolute;left:10px;top:8px;
       font-size:10px;
-      font-weight:900;
-      color:rgba(174,183,175,.80);
+      font-weight:1000;
+      letter-spacing:.5px;
+      color:rgba(255,225,117,.85);
+      text-transform:uppercase;
+      text-shadow:0 1px 0 rgba(0,0,0,.55);
+      max-width:calc(100% - 20px);
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
     }
-    .cell.taken{border-color:rgba(47,191,107,.75)}
-    .cell.focus{
-      border-color:rgba(255,225,117,.92);
-      box-shadow:0 0 0 2px rgba(255,225,117,.22) inset, 0 18px 44px rgba(0,0,0,.42);
-    }
+    .cell.taken{border-color:rgba(47,191,107,.85)}
+    .cell.taken .tag{color:rgba(47,191,107,.92)}
 
+    /* side panel */
     .panel{
       position:fixed;
       right:12px;
-      top:84px;
+      top:70px;
+      bottom:12px;
       width:min(420px, calc(100vw - 24px));
-      z-index:60;
       border-radius:18px;
       border:1px solid rgba(23,53,36,.95);
-      background:rgba(11,27,19,.72);
-      box-shadow:0 22px 54px rgba(0,0,0,.45);
-      backdrop-filter: blur(10px);
-      transform:translateY(10px);
-      opacity:0;
-      pointer-events:none;
-      transition:opacity .18s ease, transform .18s ease;
-    }
-    .panel.open{
-      opacity:1;
-      transform:translateY(0);
-      pointer-events:auto;
-    }
-    .panel .h{
-      display:flex;align-items:flex-start;gap:10px;
-      padding:14px 14px 10px 14px;
-      border-bottom:1px solid rgba(23,53,36,.75);
-    }
-    .panel .h .twrap{flex:1}
-    .panel .h h2{margin:0;font-size:14px;font-weight:1000;letter-spacing:.4px;text-transform:uppercase}
-    .panel .h .sub{margin-top:4px;color:rgba(174,183,175,.88);font-size:12px;line-height:1.3}
-    .xbtn{
-      width:34px;height:34px;border-radius:12px;
-      border:1px solid rgba(23,53,36,.9);
-      background:rgba(13,34,23,.55);
-      color:rgba(245,247,244,.9);
-      cursor:pointer;
-      font-weight:1000;
-    }
-
-    .panel .b{
-      padding:12px 14px 14px 14px;
-      display:grid;
-      grid-template-columns:90px 1fr;
-      gap:10px 10px;
-      align-items:start;
-    }
-    .k{color:rgba(174,183,175,.92);font-size:11px;font-weight:1000;text-transform:uppercase;letter-spacing:.6px}
-    .v{color:rgba(245,247,244,.92);font-size:12px;font-weight:900;line-height:1.35;word-break:break-word}
-    .v.big{font-size:13px}
-    .badge{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid rgba(23,53,36,.95);
-      background:rgba(13,34,23,.40);
-      font-weight:1000;
-      letter-spacing:.4px;
-      text-transform:uppercase;
-      font-size:11px;
-      color:rgba(245,247,244,.9);
-    }
-
-    .toast{
-      position:fixed;
-      left:12px;
-      bottom:12px;
-      z-index:80;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      padding:12px 12px;
-      border-radius:16px;
-      border:1px solid rgba(23,53,36,.95);
-      background:rgba(7,9,11,.70);
+      background:linear-gradient(180deg, rgba(13,34,23,.86), rgba(11,27,19,.92));
       box-shadow:0 18px 44px rgba(0,0,0,.45);
       backdrop-filter: blur(10px);
-      transform:translateY(10px);
+      z-index:30;
+      transform:translate3d(110%,0,0);
+      transition:transform .18s ease;
+      display:flex;flex-direction:column;
+    }
+    .panel.open{transform:translate3d(0,0,0)}
+    .ph{
+      display:flex;align-items:center;gap:10px;
+      padding:12px;
+      border-bottom:1px solid rgba(23,53,36,.9);
+    }
+    .ph .ttl{font-weight:1000;letter-spacing:.4px}
+    .ph .sub{margin-top:3px;color:rgba(245,247,244,.70);font-size:12px}
+    .ph .sp{flex:1}
+    .xbtn{
+      width:40px;height:40px;border-radius:14px;
+      border:1px solid rgba(23,53,36,.95);
+      background:rgba(7,9,11,.4);
+      color:rgba(245,247,244,.9);
+      font-weight:1000;
+      cursor:pointer;
+    }
+    .pb{padding:12px;overflow:auto}
+    .kv{
+      display:grid;
+      grid-template-columns:120px 1fr;
+      gap:10px 12px;
+      padding:10px;
+      border-radius:14px;
+      border:1px solid rgba(23,53,36,.75);
+      background:rgba(7,9,11,.22);
+    }
+    .kv .k{color:rgba(174,183,175,.85);font-size:12px;font-weight:900;letter-spacing:.4px;text-transform:uppercase}
+    .kv .v{font-size:13px;font-weight:1000;letter-spacing:.2px}
+    .muted{color:rgba(174,183,175,.86);font-size:12px;line-height:1.45;margin-top:10px}
+
+    /* toast */
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:14px;
+      transform:translate3d(-50%, 90px, 0);
       opacity:0;
-      pointer-events:none;
-      transition:opacity .18s ease, transform .18s ease;
+      transition:transform .18s ease, opacity .18s ease;
+      z-index:40;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(23,53,36,.95);
+      background:rgba(7,9,11,.72);
+      backdrop-filter: blur(10px);
+      font-weight:1000;
+      letter-spacing:.2px;
+      font-size:12px;
+      max-width:90vw;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
-    .toast.show{opacity:1;transform:translateY(0)}
-    .dot{
-      width:10px;height:10px;border-radius:99px;
-      background:rgba(174,183,175,.9);
-    }
-    .dot.good{background:rgba(47,191,107,.95)}
-    .dot.warn{background:rgba(255,225,117,.95)}
-    .dot.bad{background:rgba(255,91,91,.95)}
-    .toast .msg{font-weight:900;font-size:12px;color:rgba(245,247,244,.92)}
-    .toast .small{font-size:11px;color:rgba(174,183,175,.85);font-weight:800;margin-top:2px}
+    .toast.show{transform:translate3d(-50%, 0, 0);opacity:1}
+    .toast.good{border-color:rgba(47,191,107,.75)}
+    .toast.warn{border-color:rgba(255,225,117,.75)}
+    .toast.bad{border-color:rgba(255,91,91,.75)}
   </style>
 </head>
 
 <body>
-  <header class="top" aria-label="top bar">
-    <div class="brand" aria-label="brand">
-      <img src="/assets/monolith/monolith_logo.webp" alt="MONOLITH logo" />
+  <header class="top">
+    <div class="brand">
+      <img src="/assets/monolith/monolith_logo.webp" alt="MONOLITH" />
       <div>
         <div class="t">MONOLITH</div>
         <div class="s">Drag to move. Tap a tile to inspect.</div>
@@ -278,68 +269,60 @@
       <button class="btn" id="go" type="button">Go</button>
     </div>
 
-    <div class="pill" aria-label="camera readout">
-      <div class="k">Focus</div>
-      <div class="v" id="focus">None</div>
+    <div class="kpi">
+      <div class="pill"><span class="dot"></span><span id="kTaken">0</span> taken</div>
+      <a class="btn primary" href="/monolith/claim/" aria-label="claim a tile"><span>Claim a Tile</span></a>
     </div>
-
-    <a class="btn primary" href="/monolith/claim/" aria-label="claim a tile">Claim a Tile</a>
   </header>
 
-  <div class="vp" id="vp" aria-label="wall viewport">
-    <div class="world" id="world" aria-label="wall world"></div>
+  <div id="vp" aria-label="wall viewport">
+    <div id="world" aria-label="wall world"></div>
   </div>
 
-  <aside class="panel" id="panel" aria-label="tile panel">
-    <div class="h">
-      <div class="twrap">
-        <h2 id="ptitle">Tile</h2>
+  <aside class="panel" id="panel" aria-label="tile detail panel">
+    <div class="ph">
+      <div>
+        <div class="ttl" id="ptitle">Tile</div>
         <div class="sub" id="psub">Tap a tile to inspect details.</div>
       </div>
-      <button class="xbtn" id="close" type="button" aria-label="close">X</button>
+      <div class="sp"></div>
+      <button class="xbtn" id="close" type="button" aria-label="close panel">X</button>
     </div>
-    <div class="b">
-      <div class="k">Tile</div><div class="v big" id="vTile">None</div>
-      <div class="k">Coords</div><div class="v" id="vCoords">0, 0</div>
-      <div class="k">Status</div><div class="v" id="vStatus"><span class="badge">OPEN</span></div>
-      <div class="k">Tag</div><div class="v" id="vTag">None</div>
-      <div class="k">Date</div><div class="v" id="vTs">None</div>
+    <div class="pb">
+      <div class="kv" aria-label="tile details">
+        <div class="k">Tile</div><div class="v" id="vTile">None</div>
+        <div class="k">Coords</div><div class="v" id="vCoords">0, 0</div>
+        <div class="k">Tag</div><div class="v" id="vTag">Open</div>
+        <div class="k">Date</div><div class="v" id="vTs">None</div>
+      </div>
+      <div class="muted" id="vBody">Tap a tile to inspect details.</div>
     </div>
   </aside>
 
-  <div class="toast" id="toast" aria-label="toast">
-    <div class="dot" id="tdot"></div>
-    <div>
-      <div class="msg" id="tmsg">Ready</div>
-      <div class="small" id="tsub">Wall online</div>
-    </div>
-  </div>
+  <div class="toast" id="toast" aria-label="toast"></div>
 
   <script>
-    "use strict";
-
     const FEED_URL = "/assets/monolith/feed.json";
 
     const vp = document.getElementById("vp");
     const world = document.getElementById("world");
-
     const panel = document.getElementById("panel");
-    const btnClose = document.getElementById("close");
-
-    const vTile = document.getElementById("vTile");
-    const vCoords = document.getElementById("vCoords");
-    const vStatus = document.getElementById("vStatus");
-    const vTag = document.getElementById("vTag");
-    const vTs = document.getElementById("vTs");
-
-    const q = document.getElementById("q");
-    const go = document.getElementById("go");
-    const focusEl = document.getElementById("focus");
-
     const toast = document.getElementById("toast");
-    const tdot = document.getElementById("tdot");
-    const tmsg = document.getElementById("tmsg");
-    const tsub = document.getElementById("tsub");
+
+    const el = {
+      q: document.getElementById("q"),
+      go: document.getElementById("go"),
+      kTaken: document.getElementById("kTaken"),
+      close: document.getElementById("close"),
+
+      ptitle: document.getElementById("ptitle"),
+      psub: document.getElementById("psub"),
+      vTile: document.getElementById("vTile"),
+      vCoords: document.getElementById("vCoords"),
+      vTag: document.getElementById("vTag"),
+      vTs: document.getElementById("vTs"),
+      vBody: document.getElementById("vBody")
+    };
 
     const STEP = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--step").trim(), 10) || 128;
     const TILE = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--tile").trim(), 10) || 118;
@@ -347,135 +330,104 @@
     const state = {
       camX: 0,
       camY: 0,
-      dragging: false,
-      pointerId: null,
-      lastX: 0,
-      lastY: 0,
       vx: 0,
       vy: 0,
-      marksByTile: new Map(),
-      taken: new Set(),
-      pool: [],
+
+      down: false,
+      pid: null,
+      lastX: 0,
+      lastY: 0,
+      moved: false,
+
       cols: 0,
       rows: 0,
-      poolGX0: 0,
-      poolGY0: 0,
-      focusTile: null,
-      focusGX: null,
-      focusGY: null
+      pool: [],
+      POOL_PAD: 3,
+
+      taken: new Set(),
+      marksByTile: new Map(),
+
+      lastKey: "",
+      raf: 0
     };
 
-    function toastShow(msg, tone){
-      tmsg.textContent = msg;
-      tsub.textContent = "";
-      tdot.className = "dot";
-      if(tone === "good") tdot.classList.add("good");
-      if(tone === "warn") tdot.classList.add("warn");
-      if(tone === "bad") tdot.classList.add("bad");
-      toast.classList.add("show");
-      window.clearTimeout(toast._t);
-      toast._t = window.setTimeout(() => toast.classList.remove("show"), 1600);
+    function toastShow(msg, kind){
+      toast.className = "toast " + (kind || "");
+      toast.textContent = msg;
+      requestAnimationFrame(() => toast.classList.add("show"));
+      clearTimeout(toast._t);
+      toast._t = setTimeout(() => toast.classList.remove("show"), 1400);
     }
 
-    function absInt(n){
-      const x = Math.abs(parseInt(String(n), 10));
-      if(!Number.isFinite(x)) return 0;
-      return x;
-    }
+    function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
 
     function tileIdFromCoords(gx, gy){
-      const ax = absInt(gx);
-      const ay = absInt(gy);
+      const ax = Math.abs(gx);
+      const ay = Math.abs(gy);
       const sx = gx < 0 ? "W" : "E";
       const sy = gy < 0 ? "N" : "S";
       return sx + ax + "-" + sy + ay;
     }
 
-    function parseTileToCoords(tile){
-      if(typeof tile !== "string") return null;
-      const t = tile.trim().toUpperCase();
-      const m = t.match(/^([EW])(\d+)\-([NS])(\d+)$/);
-      if(!m) return null;
-      let gx = parseInt(m[2], 10);
-      let gy = parseInt(m[4], 10);
-      if(m[1] === "W") gx = -gx;
-      if(m[3] === "N") gy = -gy;
-      if(!Number.isFinite(gx) || !Number.isFinite(gy)) return null;
-      return { gx, gy, tile: tileIdFromCoords(gx, gy) };
-    }
-
-    function parseQueryToCoords(str){
-      if(typeof str !== "string") return null;
-      const raw = str.trim();
+    function parseTileToCoords(raw){
       if(!raw) return null;
+      const s = String(raw).trim().toUpperCase();
 
-      // tile format E23-N11 or W1-S2
-      const fromTile = parseTileToCoords(raw);
-      if(fromTile) return fromTile;
-
-      // coord format 23,-11 or 23 -11 or 23  -11
-      const m = raw.match(/^\s*(-?\d+)\s*[, ]\s*(-?\d+)\s*$/);
-      if(m){
-        const gx = parseInt(m[1], 10);
-        const gy = parseInt(m[2], 10);
+      // "23,-11"
+      if(/^-?\d+\s*,\s*-?\d+$/.test(s)){
+        const parts = s.split(",");
+        const gx = parseInt(parts[0].trim(), 10);
+        const gy = parseInt(parts[1].trim(), 10);
         if(Number.isFinite(gx) && Number.isFinite(gy)){
-          return { gx, gy, tile: tileIdFromCoords(gx, gy) };
+          return { gx, gy, tile: tileIdFromCoords(gx, gy), raw: s };
+        }
+      }
+
+      // "E23-N11"
+      const m = s.match(/^([EW])(\d+)-([NS])(\d+)$/);
+      if(m){
+        const gx = parseInt(m[2], 10) * (m[1] === "W" ? -1 : 1);
+        const gy = parseInt(m[4], 10) * (m[3] === "N" ? -1 : 1);
+        if(Number.isFinite(gx) && Number.isFinite(gy)){
+          return { gx, gy, tile: tileIdFromCoords(gx, gy), raw: s };
         }
       }
 
       return null;
     }
 
-    function mulberry32(a){
+    // deterministic spray
+    function mulberry32(seed){
+      let t = seed >>> 0;
       return function(){
-        let t = a += 0x6D2B79F5;
-        t = Math.imul(t ^ (t >>> 15), t | 1);
-        t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+        t += 0x6D2B79F5;
+        let x = Math.imul(t ^ (t >>> 15), 1 | t);
+        x ^= x + Math.imul(x ^ (x >>> 7), 61 | x);
+        return ((x ^ (x >>> 14)) >>> 0) / 4294967296;
       };
     }
-
-    function hash32(str){
-      let h = 2166136261;
-      for(let i = 0; i < str.length; i++){
+    function hashStr(str){
+      let h = 2166136261 >>> 0;
+      for(let i=0;i<str.length;i++){
         h ^= str.charCodeAt(i);
         h = Math.imul(h, 16777619);
       }
       return h >>> 0;
     }
-
     function makeSpraySVG(seedStr){
-      const seed = hash32(String(seedStr));
-      const rnd = mulberry32(seed);
+      const rnd = mulberry32(hashStr(seedStr));
       const p = [];
+      const count = 26;
 
-      const blobs = 10;
-      for(let i = 0; i < blobs; i++){
-        const cx = Math.floor(rnd() * TILE);
-        const cy = Math.floor(rnd() * TILE);
-        const r = 8 + Math.floor(rnd() * 26);
-        const o = 0.12 + rnd() * 0.22;
-        const g = 160 + Math.floor(rnd() * 60);
-
-        p.push(
-          '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="rgba(47,' + g + ',107,' + o.toFixed(3) + ')" />'
-        );
+      for(let i=0;i<count;i++){
+        const x = Math.floor(rnd() * TILE);
+        const y = Math.floor(rnd() * TILE);
+        const r = 6 + Math.floor(rnd() * 20);
+        const a = 0.10 + rnd() * 0.22;
+        const g = rnd() < 0.72 ? "47,191,107" : "255,225,117";
+        p.push(`<circle cx="${x}" cy="${y}" r="${r}" fill="rgba(${g},${a.toFixed(3)})" />`);
       }
-
-      const streaks = 6;
-      for(let i = 0; i < streaks; i++){
-        const x1 = Math.floor(rnd() * TILE);
-        const y1 = Math.floor(rnd() * TILE);
-        const x2 = Math.floor(rnd() * TILE);
-        const y2 = Math.floor(rnd() * TILE);
-        const w = 2 + rnd() * 5;
-        const o2 = 0.10 + rnd() * 0.20;
-        p.push(
-          '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" stroke="rgba(255,225,117,' + o2.toFixed(3) + ')" stroke-width="' + w.toFixed(2) + '" stroke-linecap="round" />'
-        );
-      }
-
-      return '<svg viewBox="0 0 ' + TILE + ' ' + TILE + '" width="' + TILE + '" height="' + TILE + '" xmlns="http://www.w3.org/2000/svg">' + p.join("") + "</svg>";
+      return `<svg viewBox="0 0 ${TILE} ${TILE}" width="${TILE}" height="${TILE}" xmlns="http://www.w3.org/2000/svg">${p.join("")}</svg>`;
     }
 
     function closePanel(){
@@ -486,172 +438,150 @@
       const mark = state.marksByTile.get(tile) || null;
       const taken = state.taken.has(tile);
 
-      vTile.textContent = tile;
-      vCoords.textContent = String(gx) + ", " + String(gy);
+      el.vTile.textContent = tile;
+      el.vCoords.textContent = `${gx}, ${gy}`;
 
-      if(taken){
-        vStatus.innerHTML = '<span class="badge">TAKEN</span>';
+      if(mark){
+        el.vTag.textContent = mark.tag || "TAKEN";
+        el.vTs.textContent = mark.ts || "None";
+        el.vBody.textContent = "Taken tile. Locked in feed.";
       } else {
-        vStatus.innerHTML = '<span class="badge">OPEN</span>';
+        el.vTag.textContent = taken ? "TAKEN" : "OPEN";
+        el.vTs.textContent = "None";
+        el.vBody.textContent = taken ? "This tile exists in feed but has no display fields." : "This tile is open.";
       }
 
-      vTag.textContent = mark && mark.tag ? String(mark.tag) : "None";
-      vTs.textContent = mark && mark.ts ? String(mark.ts) : "None";
-
+      el.ptitle.textContent = "Tile " + tile;
+      el.psub.textContent = "Tap a tile to inspect. Drag to move.";
       panel.classList.add("open");
     }
 
-    function setFocus(tile, gx, gy){
-      state.focusTile = tile;
-      state.focusGX = gx;
-      state.focusGY = gy;
-      focusEl.textContent = tile;
-    }
-
-    function focusCameraOn(gx, gy){
-      const viewW = vp.clientWidth || window.innerWidth || 1024;
-      const viewH = vp.clientHeight || window.innerHeight || 768;
-
-      state.camX = (gx * STEP) - (viewW * 0.5) + (STEP * 0.5);
-      state.camY = (gy * STEP) - (viewH * 0.5) + (STEP * 0.5);
-    }
-
-    function startNearSeed(){
-      // Center near first mark, never open the panel.
-      closePanel();
-
-      let first = null;
-      for(const v of state.marksByTile.values()){
-        if(v && Number.isFinite(+v.gx) && Number.isFinite(+v.gy)){
-          first = { gx:+v.gx, gy:+v.gy, tile: tileIdFromCoords(+v.gx, +v.gy) };
-          break;
-        }
-      }
-
-      if(first){
-        setFocus(first.tile, first.gx, first.gy);
-        focusCameraOn(first.gx, first.gy);
-        toastShow("wall ready", "good");
-      } else {
-        setFocus(tileIdFromCoords(0, 0), 0, 0);
-        focusCameraOn(0, 0);
-      }
-    }
-
     function ensurePool(){
-      const w = vp.clientWidth || window.innerWidth || 1024;
-      const h = vp.clientHeight || window.innerHeight || 768;
+      const w = vp.clientWidth;
+      const h = vp.clientHeight;
+      const cols = Math.ceil(w / STEP) + state.POOL_PAD * 2;
+      const rows = Math.ceil(h / STEP) + state.POOL_PAD * 2;
 
-      const cols = Math.max(8, Math.ceil(w / STEP) + 4);
-      const rows = Math.max(8, Math.ceil(h / STEP) + 4);
-
-      if(cols === state.cols && rows === state.rows && state.pool.length > 0) return;
+      if(cols === state.cols && rows === state.rows && state.pool.length) return;
 
       state.cols = cols;
       state.rows = rows;
-
-      world.innerHTML = "";
       state.pool = [];
+      world.innerHTML = "";
 
-      const total = cols * rows;
-      for(let i = 0; i < total; i++){
+      const n = cols * rows;
+      for(let i=0;i<n;i++){
         const d = document.createElement("div");
         d.className = "cell";
-        d.innerHTML = '<div class="spray"></div><div class="id"><b></b><i></i></div>';
+        d.innerHTML = `<div class="spray"></div><div class="tag"></div><div class="id"></div>`;
         world.appendChild(d);
         state.pool.push(d);
+
+        d.addEventListener("click", (e) => {
+          if(state.moved) return;
+          const gx = parseInt(d.getAttribute("data-gx") || "0", 10);
+          const gy = parseInt(d.getAttribute("data-gy") || "0", 10);
+          const tile = d.getAttribute("data-tile") || tileIdFromCoords(gx, gy);
+          openPanel(tile, gx, gy);
+        }, { passive:true });
       }
     }
 
     function setCell(cell, gx, gy){
       const tile = tileIdFromCoords(gx, gy);
+      const mark = state.marksByTile.get(tile) || null;
       const taken = state.taken.has(tile);
 
-      cell.style.left = String(gx * STEP) + "px";
-      cell.style.top  = String(gy * STEP) + "px";
+      cell.style.left = (gx * STEP) + "px";
+      cell.style.top  = (gy * STEP) + "px";
 
       cell.setAttribute("data-gx", String(gx));
       cell.setAttribute("data-gy", String(gy));
       cell.setAttribute("data-tile", tile);
 
-      cell.classList.remove("taken");
-      cell.classList.remove("focus");
-
-      if(taken) cell.classList.add("taken");
-
-      if(state.focusTile && tile === state.focusTile){
-        cell.classList.add("focus");
-      }
+      cell.className = "cell" + (taken ? " taken" : "");
+      cell.setAttribute("aria-label", `Tile ${tile} ${taken ? "taken" : "open"}`);
 
       const spray = cell.querySelector(".spray");
-      if(spray) spray.innerHTML = makeSpraySVG(tile);
+      const tag = cell.querySelector(".tag");
+      const id = cell.querySelector(".id");
 
-      const b = cell.querySelector(".id b");
-      const i = cell.querySelector(".id i");
-      if(b) b.textContent = tile;
-      if(i) i.textContent = String(gx) + "," + String(gy);
+      if(id) id.textContent = tile;
+
+      if(tag){
+        if(mark && mark.tag) tag.textContent = mark.tag;
+        else tag.textContent = taken ? "TAKEN" : "";
+      }
+
+      if(spray) spray.innerHTML = makeSpraySVG(tile);
     }
 
     function renderPool(){
       ensurePool();
 
-      const pad = 2;
-      const startGX = Math.floor(state.camX / STEP) - pad;
-      const startGY = Math.floor(state.camY / STEP) - pad;
+      const startGX = Math.floor(state.camX / STEP) - state.POOL_PAD;
+      const startGY = Math.floor(state.camY / STEP) - state.POOL_PAD;
 
-      if(startGX === state.poolGX0 && startGY === state.poolGY0) return;
-      state.poolGX0 = startGX;
-      state.poolGY0 = startGY;
+      const key = `${startGX},${startGY},${state.cols},${state.rows},${state.taken.size},${state.marksByTile.size}`;
+      if(key === state.lastKey) return;
+      state.lastKey = key;
 
-      let idx = 0;
-      for(let ry = 0; ry < state.rows; ry++){
-        for(let rx = 0; rx < state.cols; rx++){
+      let i = 0;
+      for(let ry=0; ry<state.rows; ry++){
+        for(let rx=0; rx<state.cols; rx++){
           const gx = startGX + rx;
           const gy = startGY + ry;
-          setCell(state.pool[idx], gx, gy);
-          idx++;
+          setCell(state.pool[i++], gx, gy);
         }
       }
     }
 
+    function updateWorldTransform(){
+      const w = vp.clientWidth;
+      const h = vp.clientHeight;
+      const tx = Math.round(w * 0.5 - state.camX);
+      const ty = Math.round(h * 0.5 - state.camY);
+      world.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
+    }
+
     function tick(){
       // inertia
-      if(!state.dragging){
+      if(!state.down){
+        state.vx *= 0.92;
+        state.vy *= 0.92;
+        if(Math.abs(state.vx) < 0.02) state.vx = 0;
+        if(Math.abs(state.vy) < 0.02) state.vy = 0;
         state.camX -= state.vx;
         state.camY -= state.vy;
-        state.vx *= 0.88;
-        state.vy *= 0.88;
-        if(Math.abs(state.vx) < 0.03) state.vx = 0;
-        if(Math.abs(state.vy) < 0.03) state.vy = 0;
       }
 
-      world.style.transform = "translate(" + String(-state.camX) + "px," + String(-state.camY) + "px)";
+      updateWorldTransform();
       renderPool();
 
-      requestAnimationFrame(tick);
+      state.raf = requestAnimationFrame(tick);
     }
 
-    function onDown(ev){
-      state.dragging = true;
-      state.pointerId = ev.pointerId;
-      state.lastX = ev.clientX;
-      state.lastY = ev.clientY;
-      state.vx = 0;
-      state.vy = 0;
-      vp.setPointerCapture(ev.pointerId);
+    function onDown(e){
+      state.down = true;
+      state.pid = e.pointerId;
+      state.lastX = e.clientX;
+      state.lastY = e.clientY;
+      state.moved = false;
 
-      closePanel();
+      vp.classList.add("dragging");
+      try{ vp.setPointerCapture(state.pid); } catch(_){}
     }
 
-    function onMove(ev){
-      if(!state.dragging) return;
-      if(state.pointerId !== ev.pointerId) return;
+    function onMove(e){
+      if(!state.down || e.pointerId !== state.pid) return;
 
-      const dx = ev.clientX - state.lastX;
-      const dy = ev.clientY - state.lastY;
+      const dx = e.clientX - state.lastX;
+      const dy = e.clientY - state.lastY;
 
-      state.lastX = ev.clientX;
-      state.lastY = ev.clientY;
+      state.lastX = e.clientX;
+      state.lastY = e.clientY;
+
+      if(Math.abs(dx) + Math.abs(dy) > 2) state.moved = true;
 
       state.camX -= dx;
       state.camY -= dy;
@@ -660,26 +590,14 @@
       state.vy = dy;
     }
 
-    function onUp(ev){
-      if(state.pointerId !== ev.pointerId) return;
-      state.dragging = false;
-      state.pointerId = null;
-    }
+    function onUp(e){
+      if(e.pointerId !== state.pid) return;
+      state.down = false;
+      state.pid = null;
+      vp.classList.remove("dragging");
 
-    function onTap(ev){
-      // ignore if dragging happened
-      if(state.dragging) return;
-
-      const t = ev.target;
-      const cell = t.closest(".cell");
-      if(!cell) return;
-
-      const gx = parseInt(cell.getAttribute("data-gx") || "0", 10);
-      const gy = parseInt(cell.getAttribute("data-gy") || "0", 10);
-      const tile = cell.getAttribute("data-tile") || tileIdFromCoords(gx, gy);
-
-      setFocus(tile, gx, gy);
-      openPanel(tile, gx, gy);
+      // prevent click after drag
+      setTimeout(() => { state.moved = false; }, 0);
     }
 
     async function loadFeed(){
@@ -687,87 +605,106 @@
         const res = await fetch(FEED_URL + "?cb=" + Date.now(), { cache:"no-store" });
         const data = await res.json();
 
-        state.marksByTile = new Map();
         state.taken = new Set();
+        state.marksByTile = new Map();
 
         if(Array.isArray(data)){
           for(const m of data){
-            if(!m) continue;
-
-            let gx = null;
-            let gy = null;
-            if(Number.isFinite(+m.gx)) gx = +m.gx;
-            if(Number.isFinite(+m.gy)) gy = +m.gy;
-
-            let tile = null;
-            if(typeof m.tile === "string" && m.tile) tile = String(m.tile).trim().toUpperCase();
-
-            if((!tile || !parseTileToCoords(tile)) && gx !== null && gy !== null){
-              tile = tileIdFromCoords(gx, gy);
-            }
-
+            const gx = Number.isFinite(+m.gx) ? +m.gx : null;
+            const gy = Number.isFinite(+m.gy) ? +m.gy : null;
+            let tile = (typeof m.tile === "string" && m.tile) ? String(m.tile).trim().toUpperCase() : null;
+            if(!tile && gx !== null && gy !== null) tile = tileIdFromCoords(gx, gy);
             if(!tile) continue;
 
             state.taken.add(tile);
+
             state.marksByTile.set(tile, {
-              tile: tile,
+              tile,
               gx: gx !== null ? gx : 0,
               gy: gy !== null ? gy : 0,
-              tag: (m.tag ? String(m.tag) : ""),
-              ts: (m.ts ? String(m.ts) : "")
+              tag: (typeof m.tag === "string" ? m.tag : "") || "",
+              ts: (typeof m.ts === "string" ? m.ts : "") || ""
             });
           }
         }
 
-        // if focus was not set yet, initialize once after first successful feed
-        if(state.focusTile === null){
-          startNearSeed();
-        }
-
-      }catch(e){
-        if(state.focusTile === null){
-          setFocus(tileIdFromCoords(0, 0), 0, 0);
-          focusCameraOn(0, 0);
-        }
+        if(el.kTaken) el.kTaken.textContent = String(state.taken.size);
+      } catch(_){
+        if(el.kTaken) el.kTaken.textContent = "0";
         toastShow("feed load failed", "warn");
       }
     }
 
-    function handleGo(){
-      const parsed = parseQueryToCoords(q.value);
-      if(!parsed){
-        toastShow("invalid search", "bad");
-        return;
+    // IMPORTANT: no auto-open, ever
+    function startNearSeed(){
+      // center near first mark if it exists, but do NOT open panel
+      let gx = 0, gy = 0;
+
+      for(const v of state.marksByTile.values()){
+        gx = Number.isFinite(v.gx) ? v.gx : 0;
+        gy = Number.isFinite(v.gy) ? v.gy : 0;
+        break;
       }
 
-      const tile = parsed.tile;
-      setFocus(tile, parsed.gx, parsed.gy);
-      focusCameraOn(parsed.gx, parsed.gy);
+      state.camX = gx * STEP;
+      state.camY = gy * STEP;
 
       closePanel();
-      toastShow("jump " + tile, "good");
-      renderPool();
+      toastShow("start " + tileIdFromCoords(gx, gy), "good");
     }
 
-    btnClose.addEventListener("click", closePanel);
+    function parseQueryToCoords(str){
+      const p = parseTileToCoords(str);
+      if(p) return p;
+
+      // allow "E23 N11" or "E23-N11" already handled
+      const s = String(str || "").trim().toUpperCase();
+      const m = s.match(/^([EW])\s*(\d+)\s*[, ]\s*([NS])\s*(\d+)$/);
+      if(m){
+        const gx = parseInt(m[2], 10) * (m[1] === "W" ? -1 : 1);
+        const gy = parseInt(m[4], 10) * (m[3] === "N" ? -1 : 1);
+        if(Number.isFinite(gx) && Number.isFinite(gy)){
+          return { gx, gy, tile: tileIdFromCoords(gx, gy), raw: s };
+        }
+      }
+
+      return null;
+    }
+
+    function handleGo(){
+      const q = (el.q && el.q.value) ? el.q.value : "";
+      const p = parseQueryToCoords(q);
+      if(!p){
+        toastShow("bad search", "warn");
+        return;
+      }
+      state.camX = p.gx * STEP;
+      state.camY = p.gy * STEP;
+
+      // do NOT open the panel on search
+      closePanel();
+
+      toastShow("jump " + p.tile, "good");
+    }
+
+    // wire up
+    el.close.addEventListener("click", closePanel, { passive:true });
+    el.go.addEventListener("click", handleGo, { passive:true });
+    el.q.addEventListener("keydown", (e) => {
+      if(e.key === "Enter") handleGo();
+    }, { passive:true });
 
     vp.addEventListener("pointerdown", onDown, { passive:false });
     vp.addEventListener("pointermove", onMove, { passive:false });
     vp.addEventListener("pointerup", onUp, { passive:false });
     vp.addEventListener("pointercancel", onUp, { passive:false });
-    vp.addEventListener("click", onTap);
 
-    go.addEventListener("click", handleGo);
-    q.addEventListener("keydown", (e) => {
-      if(e.key === "Enter") handleGo();
-    });
-
-    // start closed, wall first
-    closePanel();
-    toastShow("loading wall", "good");
-
+    // boot
+    updateWorldTransform();
+    renderPool();
     requestAnimationFrame(tick);
-    loadFeed();
+
+    loadFeed().then(() => startNearSeed());
     setInterval(loadFeed, 15000);
   </script>
 </body>
