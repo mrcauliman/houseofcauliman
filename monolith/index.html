@@ -3,229 +3,230 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>MONOLITH</title>
+  <title>MONOLITH Claim</title>
   <style>
     :root{
       --bg:#07090a;
-      --panel:#0f1316;
+      --card:#0f1316;
+      --card2:#12181d;
       --line:#22303a;
       --text:#e9eef2;
       --muted:#a9b6c2;
       --accent:#7cf7c2;
       --danger:#ff6b6b;
+      --ok:#2f6b4b;
       --shadow: 0 10px 30px rgba(0,0,0,.45);
-      --radius: 14px;
-      --radius2: 10px;
+      --radius: 16px;
+      --radius2: 12px;
       --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
     }
     html,body{height:100%; margin:0; background:var(--bg); color:var(--text); font-family:var(--font);}
     *{box-sizing:border-box}
 
-    .app{position:fixed; inset:0; overflow:hidden;}
+    .wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 18px 14px 40px;
+    }
 
-    .topbar{
-      position:absolute;
-      top:14px; left:14px; right:14px;
+    .top{
       display:flex;
-      align-items:center;
+      align-items:flex-start;
       justify-content:space-between;
       gap:12px;
-      z-index:5;
-      pointer-events:none;
+      flex-wrap:wrap;
+      margin-bottom: 12px;
     }
 
     .brand{
-      pointer-events:auto;
       display:flex;
       align-items:center;
       gap:10px;
-      padding:10px 12px;
-      background:rgba(15,19,22,.78);
-      border:1px solid rgba(34,48,58,.7);
+      padding:12px 14px;
       border-radius:999px;
-      backdrop-filter: blur(10px);
+      background: rgba(15,19,22,.82);
+      border:1px solid rgba(34,48,58,.75);
       box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
     }
     .dot{
       width:10px;height:10px;border-radius:50%;
       background:var(--accent);
       box-shadow:0 0 18px rgba(124,247,194,.55);
     }
-    .brand .title{font-weight:800; letter-spacing:.6px;}
-    .brand .sub{color:var(--muted); font-size:12px; margin-left:6px}
+    .brand .t{font-weight:900; letter-spacing:.6px}
+    .brand .s{color:var(--muted); font-size:12px; margin-left:6px}
 
-    .searchbox{
-      pointer-events:auto;
+    .actions{
       display:flex;
+      gap:10px;
+      flex-wrap:wrap;
       align-items:center;
-      gap:8px;
-      padding:10px 10px;
-      background:rgba(15,19,22,.78);
-      border:1px solid rgba(34,48,58,.7);
-      border-radius:999px;
-      backdrop-filter: blur(10px);
-      box-shadow: var(--shadow);
-      min-width: 290px;
-      max-width: 520px;
-      width: 46vw;
     }
-    .searchbox input{
-      width:100%;
-      background:transparent;
-      border:0;
-      outline:none;
-      color:var(--text);
-      font-size:14px;
-    }
-    .searchbox.bad{
-      border-color: rgba(255,107,107,.65);
-      box-shadow: 0 0 0 2px rgba(255,107,107,.12) inset, var(--shadow);
-    }
-
     .btn{
       border:1px solid rgba(34,48,58,.9);
-      background:rgba(18,24,29,.9);
-      color:var(--text);
-      padding:8px 12px;
+      background: rgba(18,24,29,.9);
+      color: var(--text);
+      padding:10px 14px;
       border-radius:999px;
-      font-weight:700;
+      font-weight:900;
       cursor:pointer;
       user-select:none;
-      white-space:nowrap;
+      box-shadow: 0 0 0 2px rgba(124,247,194,.10) inset;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
     }
     .btn:active{transform:translateY(1px)}
-    .btn.accent{
-      border-color: rgba(124,247,194,.35);
-      box-shadow: 0 0 0 2px rgba(124,247,194,.12) inset;
+    .btn.ghost{
+      box-shadow:none;
+      background: rgba(15,19,22,.82);
     }
-
-    .canvas{
-      position:absolute;
-      inset:0;
-      cursor: grab;
-      touch-action:none;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(124,247,194,.06), transparent 35%),
-        radial-gradient(circle at 80% 40%, rgba(124,247,194,.04), transparent 42%),
-        radial-gradient(circle at 50% 85%, rgba(124,247,194,.03), transparent 40%),
-        var(--bg);
+    .btn.danger{
+      border-color: rgba(255,107,107,.5);
+      box-shadow: 0 0 0 2px rgba(255,107,107,.10) inset;
     }
-    .canvas.dragging{cursor:grabbing}
 
     .grid{
-      position:absolute;
-      left:50%;
-      top:50%;
-      transform: translate3d(0,0,0);
-      will-change: transform;
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 14px;
+      align-items:start;
+      margin-top: 14px;
+    }
+    @media (max-width: 900px){
+      .grid{grid-template-columns: 1fr}
     }
 
-    .tile{
-      position:absolute;
-      width:84px;
-      height:84px;
-      border-radius: var(--radius2);
-      background: linear-gradient(180deg, rgba(16,22,27,.95), rgba(11,15,18,.95));
-      border:1px solid rgba(34,48,58,.55);
-      display:flex;
-      flex-direction:column;
-      justify-content:flex-end;
-      padding:8px;
-      gap:6px;
-      box-shadow: 0 4px 14px rgba(0,0,0,.35);
-      user-select:none;
-      cursor:pointer;
-    }
-    .tile:hover{
-      border-color: rgba(124,247,194,.30);
-      box-shadow: 0 0 0 2px rgba(124,247,194,.10) inset, 0 6px 18px rgba(0,0,0,.42);
-    }
-    .tile .id{
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:.4px;
-      color: rgba(233,238,242,.95);
-      text-shadow: 0 1px 0 rgba(0,0,0,.5);
-    }
-    .tile .tag{
-      font-size:10px;
-      font-weight:800;
-      letter-spacing:.6px;
-      color: rgba(169,182,194,.95);
-      text-transform:uppercase;
-      max-width:100%;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-    }
-
-    .tile.taken{
-      background: linear-gradient(180deg, rgba(30,43,34,.96), rgba(16,24,20,.96));
-      border-color: rgba(47,107,75,.75);
-    }
-    .tile.taken .tag{color: rgba(124,247,194,.95)}
-
-    .panel{
-      position:absolute;
-      right:14px;
-      top:72px;
-      width:min(420px, calc(100vw - 28px));
-      max-height: calc(100vh - 92px);
-      background: rgba(15,19,22,.92);
+    .card{
+      background: rgba(15,19,22,.86);
       border:1px solid rgba(34,48,58,.75);
       border-radius: var(--radius);
-      backdrop-filter: blur(10px);
       box-shadow: var(--shadow);
-      z-index:6;
-      display:none;
+      backdrop-filter: blur(10px);
       overflow:hidden;
     }
-    .panel.open{display:flex; flex-direction:column}
-    .panel header{
+    .card header{
+      padding: 12px 14px;
+      border-bottom:1px solid rgba(34,48,58,.6);
+      background: rgba(18,24,29,.85);
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:10px;
-      padding:12px 12px;
-      border-bottom:1px solid rgba(34,48,58,.6);
-      background: rgba(18,24,29,.85);
+      flex-wrap:wrap;
     }
-    .panel header .h{
+    .card header .h{
       display:flex;
       flex-direction:column;
       gap:2px;
-      min-width:0;
+      min-width: 220px;
     }
-    .panel header .h .t{font-weight:900; letter-spacing:.6px;}
-    .panel header .h .s{color:var(--muted); font-size:12px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
-    .panel header .x{
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid rgba(34,48,58,.85);
-      background: rgba(15,19,22,.65);
-      cursor:pointer;
-      font-weight:900;
-      user-select:none;
+    .card header .h .t{
+      font-weight: 900;
+      letter-spacing:.5px;
+    }
+    .card header .h .s{
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .card .body{
+      padding: 14px;
     }
 
-    .panel .body{
-      padding:12px;
-      overflow:auto;
+    .picker{
       display:flex;
       flex-direction:column;
-      gap:10px;
+      gap: 10px;
     }
-    .kv{
-      display:grid;
-      grid-template-columns: 110px 1fr;
-      gap:8px 10px;
-      padding:10px;
+
+    .jump{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      padding: 12px;
+      border-radius: var(--radius2);
       border:1px solid rgba(34,48,58,.6);
-      border-radius: 12px;
       background: rgba(18,24,29,.62);
     }
-    .k{color:var(--muted); font-size:12px; font-weight:800; letter-spacing:.4px; text-transform:uppercase}
-    .v{font-weight:700; overflow-wrap:anywhere}
+    .jump input{
+      flex:1;
+      min-width: 220px;
+      background: rgba(7,9,10,.6);
+      border:1px solid rgba(34,48,58,.75);
+      border-radius: 999px;
+      padding: 10px 12px;
+      color: var(--text);
+      outline:none;
+      font-weight: 800;
+      letter-spacing:.2px;
+    }
+    .jump .mini{
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(34,48,58,.9);
+      background: rgba(18,24,29,.9);
+      font-weight: 900;
+      cursor:pointer;
+      user-select:none;
+      box-shadow: 0 0 0 2px rgba(124,247,194,.10) inset;
+      color: var(--text);
+    }
+
+    .tilegrid{
+      display:grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 8px;
+      user-select:none;
+    }
+    @media (max-width: 520px){
+      .tilegrid{grid-template-columns: repeat(8, 1fr)}
+    }
+
+    .tile{
+      border-radius: 12px;
+      border:1px solid rgba(34,48,58,.6);
+      background: rgba(18,24,29,.65);
+      padding: 10px 8px;
+      text-align:center;
+      font-weight: 900;
+      letter-spacing:.2px;
+      cursor:pointer;
+      min-height: 44px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+    }
+    .tile:hover{
+      border-color: rgba(124,247,194,.35);
+      box-shadow: 0 0 0 2px rgba(124,247,194,.10) inset;
+    }
+    .tile.selected{
+      border-color: rgba(124,247,194,.65);
+      box-shadow: 0 0 0 2px rgba(124,247,194,.20) inset;
+    }
+    .tile.taken{
+      border-color: rgba(47,107,75,.75);
+      background: rgba(30,43,34,.75);
+      color: rgba(124,247,194,.95);
+      cursor:not-allowed;
+      opacity:.85;
+    }
+    .tile.taken:hover{box-shadow:none}
+
+    .subrow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      margin-top: 8px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(34,48,58,.6);
+    }
     .pill{
       display:inline-flex;
       align-items:center;
@@ -234,137 +235,189 @@
       border:1px solid rgba(34,48,58,.6);
       border-radius:999px;
       background: rgba(18,24,29,.62);
-      font-weight:800;
-      letter-spacing:.3px;
-      width:fit-content;
+      font-weight:900;
+      letter-spacing:.2px;
+      width: fit-content;
     }
-    .pill.good{border-color: rgba(47,107,75,.75); box-shadow: 0 0 0 2px rgba(124,247,194,.10) inset}
+    .pill.ok{border-color: rgba(47,107,75,.75); box-shadow: 0 0 0 2px rgba(124,247,194,.10) inset}
+    .pill.bad{border-color: rgba(255,107,107,.55); box-shadow: 0 0 0 2px rgba(255,107,107,.10) inset}
 
-    .hint{
-      position:absolute;
-      left:14px;
-      bottom:14px;
-      z-index:5;
-      padding:10px 12px;
-      border-radius: 999px;
-      background: rgba(15,19,22,.72);
-      border:1px solid rgba(34,48,58,.7);
-      backdrop-filter: blur(10px);
-      box-shadow: var(--shadow);
+    .upload{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .upload .row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .upload input[type="file"]{
+      display:none;
+    }
+    .preview{
+      width:100%;
+      border-radius: var(--radius2);
+      border:1px solid rgba(34,48,58,.6);
+      background: rgba(18,24,29,.62);
+      padding: 12px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .preview img{
+      max-width:100%;
+      height:auto;
+      border-radius: 12px;
+      border:1px solid rgba(34,48,58,.6);
+      background: rgba(7,9,10,.8);
+    }
+    .kv{
+      display:grid;
+      grid-template-columns: 120px 1fr;
+      gap:8px 10px;
+      padding: 10px;
+      border:1px solid rgba(34,48,58,.6);
+      border-radius: 12px;
+      background: rgba(18,24,29,.62);
+      overflow-wrap:anywhere;
+    }
+    .k{color:var(--muted); font-size:12px; font-weight:900; letter-spacing:.4px; text-transform:uppercase}
+    .v{font-weight:800}
+    .note{
       color: var(--muted);
       font-size: 12px;
-      pointer-events:none;
-      max-width: calc(100vw - 28px);
-    }
-
-    @media (max-width: 720px){
-      .searchbox{width: 56vw; min-width: 210px}
-      .tile{width:76px; height:76px}
-      .tile .id{font-size:11px}
+      line-height: 1.35;
     }
   </style>
 </head>
 <body>
-  <div class="app">
-    <div class="topbar">
+  <div class="wrap">
+    <div class="top">
       <div class="brand">
         <div class="dot"></div>
-        <div class="title">MONOLITH <span class="sub">The Wall</span></div>
+        <div class="t">MONOLITH <span class="s">Claim</span></div>
       </div>
 
-      <div id="searchBox" class="searchbox" aria-label="search">
-        <input id="searchInput" type="text" inputmode="text" autocomplete="off" spellcheck="false"
-               placeholder="Search tile E23-N11 or coords 23,-11" />
-        <button id="goBtn" class="btn accent" type="button">Go</button>
+      <div class="actions">
+        <a class="btn ghost" href="/monolith/">Back to Wall</a>
+        <button id="saveBtn" class="btn" type="button">Save Selection</button>
       </div>
     </div>
 
-    <div id="canvas" class="canvas" role="application" aria-label="wall">
-      <div id="grid" class="grid"></div>
-    </div>
+    <div class="grid">
+      <div class="card">
+        <header>
+          <div class="h">
+            <div class="t">Pick a Tile</div>
+            <div class="s">Set a start tile, then pick from the 10×10 grid</div>
+          </div>
+          <div id="statusPill" class="pill">No tile selected</div>
+        </header>
+        <div class="body">
+          <div class="picker">
 
-    <div id="panel" class="panel" aria-label="details">
-      <header>
-        <div class="h">
-          <div id="panelTitle" class="t">Tile</div>
-          <div id="panelSub" class="s">Coords</div>
+            <div class="jump">
+              <input id="jumpInput" type="text" inputmode="text" autocomplete="off" spellcheck="false"
+                     placeholder="Start tile like E23-N11 or coords 23,-11" />
+              <button id="jumpBtn" class="mini" type="button">Set Grid</button>
+            </div>
+
+            <div id="tileGrid" class="tilegrid" aria-label="tile picker"></div>
+
+            <div class="subrow">
+              <div class="pill" id="selectedLabel">Selected: none</div>
+              <div class="pill" id="takenCount">Taken: 0</div>
+            </div>
+
+            <div class="note">
+              Selection is stored locally on this device only. No uploads happen here.
+            </div>
+          </div>
         </div>
-        <div id="closePanel" class="x">X</div>
-      </header>
-      <div class="body">
-        <div id="panelStatus" class="pill">Status</div>
-        <div class="kv">
-          <div class="k">Tile</div><div id="kvTile" class="v"></div>
-          <div class="k">GX</div><div id="kvGX" class="v"></div>
-          <div class="k">GY</div><div id="kvGY" class="v"></div>
-          <div class="k">Tag</div><div id="kvTag" class="v"></div>
-          <div class="k">Mark ID</div><div id="kvMarkId" class="v"></div>
-          <div class="k">Timestamp</div><div id="kvTS" class="v"></div>
+      </div>
+
+      <div class="card">
+        <header>
+          <div class="h">
+            <div class="t">Attach Image</div>
+            <div class="s">Local only</div>
+          </div>
+          <div class="row">
+            <label for="fileInput" class="btn" id="uploadBtn">Upload Image</label>
+            <button id="removeBtn" class="btn danger" type="button">Remove Image</button>
+          </div>
+        </header>
+        <div class="body">
+          <div class="upload">
+            <input id="fileInput" type="file" accept="image/*" />
+            <div class="preview">
+              <div class="kv">
+                <div class="k">Tile</div><div id="kvTile" class="v">none</div>
+                <div class="k">GX</div><div id="kvGX" class="v">-</div>
+                <div class="k">GY</div><div id="kvGY" class="v">-</div>
+                <div class="k">Image</div><div id="kvImg" class="v">none</div>
+              </div>
+
+              <div class="kv">
+                <div class="k">Draft</div><div id="kvDraft" class="v">none</div>
+                <div class="k">Saved</div><div id="kvSavedAt" class="v">-</div>
+              </div>
+
+              <img id="imgPreview" alt="preview" style="display:none" />
+              <div id="imgNote" class="note">
+                If the image is too large, saving can fail. Keep it reasonable.
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-
-    <div class="hint">Drag to pan. Click a tile for details. Search jumps only.</div>
   </div>
 
   <script>
     "use strict";
 
     const FEED_URL = "/assets/monolith/feed.json";
-    const TILE = { size: 84, gap: 10 };
-    const VIEW = { halfRange: 18 };
+    const LS_KEY = "monolith_claim_draft_v1";
+    const MAX_IMAGE_BYTES = 4_500_000;
 
-    const canvas = document.getElementById("canvas");
-    const grid = document.getElementById("grid");
+    const tileGrid = document.getElementById("tileGrid");
+    const statusPill = document.getElementById("statusPill");
+    const selectedLabel = document.getElementById("selectedLabel");
+    const takenCountEl = document.getElementById("takenCount");
 
-    const panel = document.getElementById("panel");
-    const closePanel = document.getElementById("closePanel");
+    const saveBtn = document.getElementById("saveBtn");
+    const removeBtn = document.getElementById("removeBtn");
+    const fileInput = document.getElementById("fileInput");
 
-    const panelTitle = document.getElementById("panelTitle");
-    const panelSub = document.getElementById("panelSub");
-    const panelStatus = document.getElementById("panelStatus");
+    const jumpInput = document.getElementById("jumpInput");
+    const jumpBtn = document.getElementById("jumpBtn");
 
     const kvTile = document.getElementById("kvTile");
     const kvGX = document.getElementById("kvGX");
     const kvGY = document.getElementById("kvGY");
-    const kvTag = document.getElementById("kvTag");
-    const kvMarkId = document.getElementById("kvMarkId");
-    const kvTS = document.getElementById("kvTS");
+    const kvImg = document.getElementById("kvImg");
 
-    const searchBox = document.getElementById("searchBox");
-    const searchInput = document.getElementById("searchInput");
-    const goBtn = document.getElementById("goBtn");
+    const kvDraft = document.getElementById("kvDraft");
+    const kvSavedAt = document.getElementById("kvSavedAt");
 
-    const stride = TILE.size + TILE.gap;
+    const imgPreview = document.getElementById("imgPreview");
 
-    let camX = 0;
-    let camY = 0;
+    let takenTiles = new Set();
+    let gridOrigin = { gx: 0, gy: 0, tile: "E0-N0" };
 
-    let activePointerId = null;
-    let panArmed = false;
-    let panning = false;
-    let dragStartX = 0;
-    let dragStartY = 0;
-    let camStartX = 0;
-    let camStartY = 0;
+    let selected = { tile: null, gx: null, gy: null };
+    let imageState = null;
+    let lastSavedAt = null;
 
-    const DRAG_THRESHOLD = 4;
-
-    let tiles = [];
-    let marksByTile = new Map();
-
-    function sanitizeForTile(s){
+    function sanitizeTileInput(s){
       return String(s || "")
         .trim()
         .toUpperCase()
         .replace(/[–—−]/g, "-")
         .replace(/\s+/g, "");
-    }
-
-    function sanitizeForCoords(s){
-      return String(s || "")
-        .trim()
-        .replace(/[–—−]/g, "-");
     }
 
     function tileIdFromCoords(gx, gy){
@@ -374,7 +427,7 @@
     }
 
     function parseTileId(input){
-      const s = sanitizeForTile(input);
+      const s = sanitizeTileInput(input);
       const m = /^([EW])(\d+)-([NS])(\d+)$/.exec(s);
       if(!m) return null;
       const gx = (m[1] === "E") ? Number(m[2]) : -Number(m[2]);
@@ -383,7 +436,7 @@
     }
 
     function parseCoords(input){
-      const s = sanitizeForCoords(input);
+      const s = String(input || "").trim();
       const m = /^(-?\d+)\s*,\s*(-?\d+)$/.exec(s);
       if(!m) return null;
       const gx = Number(m[1]);
@@ -396,118 +449,87 @@
       return parseTileId(input) || parseCoords(input);
     }
 
-    function setCamera(x, y){
-      camX = x;
-      camY = y;
-      render();
+    function setStatus(text, kind){
+      statusPill.textContent = text;
+      statusPill.className = "pill" + (kind === "ok" ? " ok" : kind === "bad" ? " bad" : "");
     }
 
-    function jumpToTile(gx, gy){
-      setCamera(-gx * stride, -gy * stride);
+    function updateDraftKV(){
+      kvDraft.textContent = "Local only, key " + LS_KEY;
+      kvSavedAt.textContent = lastSavedAt ? lastSavedAt : "-";
     }
 
-    function openPanelFor(gx, gy){
-      const tile = tileIdFromCoords(gx, gy);
-      const mark = marksByTile.get(tile) || null;
+    function updateKV(){
+      kvTile.textContent = selected.tile || "none";
+      kvGX.textContent = (selected.gx === null) ? "-" : String(selected.gx);
+      kvGY.textContent = (selected.gy === null) ? "-" : String(selected.gy);
 
-      panelTitle.textContent = tile;
-      panelSub.textContent = "GX " + gx + "  GY " + gy;
-
-      kvTile.textContent = tile;
-      kvGX.textContent = String(gx);
-      kvGY.textContent = String(gy);
-
-      if(mark){
-        panelStatus.textContent = "Taken";
-        panelStatus.className = "pill good";
-        kvTag.textContent = mark.tag || "";
-        kvMarkId.textContent = mark.id || "";
-        kvTS.textContent = mark.ts || "";
+      if(imageState){
+        kvImg.textContent = imageState.name + " (" + Math.round(imageState.bytes / 1024) + " KB)";
       }else{
-        panelStatus.textContent = "Open";
-        panelStatus.className = "pill";
-        kvTag.textContent = "";
-        kvMarkId.textContent = "";
-        kvTS.textContent = "";
+        kvImg.textContent = "none";
       }
 
-      panel.classList.add("open");
+      updateDraftKV();
     }
 
-    function closePanelNow(){
-      panel.classList.remove("open");
-    }
-    closePanel.addEventListener("click", closePanelNow);
-
-    function createTileEl(){
-      const el = document.createElement("div");
-      el.className = "tile";
-      el.innerHTML = '<div class="tag"></div><div class="id"></div>';
-      const tagEl = el.querySelector(".tag");
-      const idEl = el.querySelector(".id");
-
-      el.addEventListener("click", () => {
-        const gx = Number(el.dataset.gx);
-        const gy = Number(el.dataset.gy);
-        openPanelFor(gx, gy);
-      });
-
-      return { el, tagEl, idEl };
+    function clearSelectionUI(){
+      const els = tileGrid.querySelectorAll(".tile.selected");
+      for(const el of els) el.classList.remove("selected");
     }
 
-    function ensurePool(count){
-      while(tiles.length < count){
-        const t = createTileEl();
-        grid.appendChild(t.el);
-        tiles.push(t);
-      }
+    function selectTile(gx, gy){
+      const tile = tileIdFromCoords(gx, gy);
+      if(takenTiles.has(tile)) return;
+
+      selected = { tile, gx, gy };
+      selectedLabel.textContent = "Selected: " + tile;
+
+      clearSelectionUI();
+      const el = tileGrid.querySelector(`[data-tile="${tile}"]`);
+      if(el) el.classList.add("selected");
+
+      setStatus("Selected " + tile, "ok");
+      updateKV();
     }
 
-    function render(){
-      grid.style.transform = `translate3d(${camX}px, ${camY}px, 0)`;
+    function buildGrid(){
+      tileGrid.innerHTML = "";
 
-      const rect = canvas.getBoundingClientRect();
-      const cx = rect.width / 2;
-      const cy = rect.height / 2;
+      let visibleTaken = 0;
 
-      const centerGX = Math.round((-camX) / stride);
-      const centerGY = Math.round((-camY) / stride);
-
-      const minGX = centerGX - VIEW.halfRange;
-      const maxGX = centerGX + VIEW.halfRange;
-      const minGY = centerGY - VIEW.halfRange;
-      const maxGY = centerGY + VIEW.halfRange;
-
-      const needed = (maxGX - minGX + 1) * (maxGY - minGY + 1);
-      ensurePool(needed);
-
-      let i = 0;
-      for(let gy = minGY; gy <= maxGY; gy++){
-        for(let gx = minGX; gx <= maxGX; gx++){
-          const t = tiles[i++];
+      for(let r = 0; r < 10; r++){
+        for(let c = 0; c < 10; c++){
+          const gx = gridOrigin.gx + c;
+          const gy = gridOrigin.gy + r;
           const tile = tileIdFromCoords(gx, gy);
-          const mark = marksByTile.get(tile) || null;
 
-          const x = gx * stride;
-          const y = gy * stride;
+          const el = document.createElement("div");
+          el.className = "tile";
+          el.textContent = tile;
+          el.dataset.tile = tile;
 
-          t.el.style.transform = `translate3d(${x + cx}px, ${y + cy}px, 0)`;
-          t.el.dataset.gx = String(gx);
-          t.el.dataset.gy = String(gy);
-          t.idEl.textContent = tile;
-
-          if(mark){
-            t.el.classList.add("taken");
-            t.tagEl.textContent = (mark.tag || "TAKEN").toUpperCase();
+          if(takenTiles.has(tile)){
+            el.classList.add("taken");
+            visibleTaken++;
           }else{
-            t.el.classList.remove("taken");
-            t.tagEl.textContent = "OPEN";
+            el.addEventListener("click", () => selectTile(gx, gy));
           }
+
+          tileGrid.appendChild(el);
         }
       }
 
-      for(; i < tiles.length; i++){
-        tiles[i].el.style.transform = "translate3d(-99999px,-99999px,0)";
+      takenCountEl.textContent = "Taken: " + takenTiles.size;
+      if(visibleTaken > 0){
+        takenCountEl.classList.add("ok");
+      }else{
+        takenCountEl.classList.remove("ok");
+      }
+
+      if(selected.tile){
+        const el = tileGrid.querySelector(`[data-tile="${selected.tile}"]`);
+        if(el) el.classList.add("selected");
       }
     }
 
@@ -518,105 +540,165 @@
         const data = await res.json();
         if(!Array.isArray(data)) throw new Error("feed not array");
 
-        marksByTile.clear();
+        takenTiles = new Set();
         for(const m of data){
           if(!m) continue;
-          const gx = Number(m.gx);
-          const gy = Number(m.gy);
-          const tileRaw = sanitizeForTile(m.tile || "");
-          if(!tileRaw) continue;
-
-          const canonTile = (Number.isFinite(gx) && Number.isFinite(gy)) ? tileIdFromCoords(gx, gy) : tileRaw;
-          marksByTile.set(canonTile, {
-            id: m.id || "",
-            tile: canonTile,
-            gx: Number.isFinite(gx) ? gx : null,
-            gy: Number.isFinite(gy) ? gy : null,
-            tag: m.tag || "",
-            ts: m.ts || ""
-          });
+          const tile = sanitizeTileInput(m.tile || "");
+          if(tile) takenTiles.add(tile);
         }
 
-        render();
+        buildGrid();
+
+        if(selected.tile && takenTiles.has(selected.tile)){
+          selected = { tile: null, gx: null, gy: null };
+          selectedLabel.textContent = "Selected: none";
+          setStatus("Tile was taken, pick another", "bad");
+          updateKV();
+        }
       }catch(err){
         console.error(err);
-        render();
+        buildGrid();
+        setStatus("Feed failed, showing grid anyway", "bad");
       }
     }
 
-    function flashBad(){
-      searchBox.classList.add("bad");
-      setTimeout(() => searchBox.classList.remove("bad"), 450);
-    }
-
-    function onGo(){
-      try{
-        const raw = searchInput.value;
-        const q = normalizeSearch(raw);
-        if(!q){
-          flashBad();
-          return;
-        }
-        closePanelNow();
-        jumpToTile(q.gx, q.gy);
-      }catch(err){
-        console.error(err);
-        flashBad();
+    function setImagePreview(dataUrl){
+      if(!dataUrl){
+        imgPreview.style.display = "none";
+        imgPreview.src = "";
+        return;
       }
+      imgPreview.src = dataUrl;
+      imgPreview.style.display = "block";
     }
 
-    goBtn.addEventListener("click", onGo);
-    searchInput.addEventListener("keydown", (e) => {
-      if(e.key === "Enter") onGo();
+    function clearImage(){
+      imageState = null;
+      fileInput.value = "";
+      setImagePreview(null);
+      updateKV();
+    }
+
+    fileInput.addEventListener("change", () => {
+      const file = fileInput.files && fileInput.files[0];
+      if(!file) return;
+
+      const bytes = file.size || 0;
+      if(bytes > MAX_IMAGE_BYTES){
+        setStatus("Image too large, pick a smaller one", "bad");
+        clearImage();
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        const dataUrl = String(reader.result || "");
+        imageState = { name: file.name || "image", type: file.type || "image/*", dataUrl, bytes };
+        setImagePreview(dataUrl);
+        setStatus("Image attached", "ok");
+        updateKV();
+      };
+      reader.onerror = () => {
+        setStatus("Image read failed", "bad");
+        clearImage();
+      };
+      reader.readAsDataURL(file);
     });
 
-    function armPan(e){
-      if(e.button !== undefined && e.button !== 0) return;
+    removeBtn.addEventListener("click", () => {
+      clearImage();
+      setStatus(selected.tile ? ("Selected " + selected.tile) : "No tile selected", selected.tile ? "ok" : "");
+    });
 
-      const onTile = e.target && e.target.closest && e.target.closest(".tile");
-      if(onTile) return;
-
-      activePointerId = e.pointerId;
-      panArmed = true;
-      panning = false;
-
-      dragStartX = e.clientX;
-      dragStartY = e.clientY;
-      camStartX = camX;
-      camStartY = camY;
-    }
-
-    function movePan(e){
-      if(!panArmed || activePointerId !== e.pointerId) return;
-
-      const dx = e.clientX - dragStartX;
-      const dy = e.clientY - dragStartY;
-
-      if(!panning){
-        if(Math.abs(dx) + Math.abs(dy) < DRAG_THRESHOLD) return;
-        panning = true;
-        canvas.classList.add("dragging");
+    function saveDraft(){
+      if(!selected.tile){
+        setStatus("Pick a tile first", "bad");
+        return;
       }
 
-      camX = camStartX + dx;
-      camY = camStartY + dy;
-      render();
+      const payload = {
+        v: 1,
+        savedAt: new Date().toISOString(),
+        tile: selected.tile,
+        gx: selected.gx,
+        gy: selected.gy,
+        image: imageState ? {
+          name: imageState.name,
+          type: imageState.type,
+          dataUrl: imageState.dataUrl,
+          bytes: imageState.bytes
+        } : null
+      };
+
+      try{
+        localStorage.setItem(LS_KEY, JSON.stringify(payload));
+        lastSavedAt = payload.savedAt;
+        updateKV();
+        setStatus("Saved locally", "ok");
+      }catch(err){
+        console.error(err);
+        setStatus("Save failed, image might be too large", "bad");
+      }
     }
 
-    function endPan(e){
-      if(activePointerId !== e.pointerId) return;
-      activePointerId = null;
-      panArmed = false;
-      panning = false;
-      canvas.classList.remove("dragging");
+    function loadDraft(){
+      try{
+        const raw = localStorage.getItem(LS_KEY);
+        if(!raw) return;
+        const d = JSON.parse(raw);
+        if(!d || d.v !== 1) return;
+
+        if(typeof d.savedAt === "string") lastSavedAt = d.savedAt;
+
+        if(typeof d.tile === "string" && Number.isFinite(d.gx) && Number.isFinite(d.gy)){
+          selected = { tile: sanitizeTileInput(d.tile), gx: Number(d.gx), gy: Number(d.gy) };
+          selectedLabel.textContent = "Selected: " + selected.tile;
+          setStatus("Draft loaded", "ok");
+        }
+
+        if(d.image && typeof d.image.dataUrl === "string"){
+          imageState = {
+            name: String(d.image.name || "image"),
+            type: String(d.image.type || "image/*"),
+            dataUrl: String(d.image.dataUrl),
+            bytes: Number(d.image.bytes || 0)
+          };
+          setImagePreview(imageState.dataUrl);
+        }
+
+        if(selected.tile){
+          gridOrigin = { gx: selected.gx, gy: selected.gy, tile: selected.tile };
+          jumpInput.value = gridOrigin.tile;
+        }
+
+        updateKV();
+      }catch(err){
+        console.error(err);
+      }
     }
 
-    canvas.addEventListener("pointerdown", armPan);
-    canvas.addEventListener("pointermove", movePan);
-    canvas.addEventListener("pointerup", endPan);
-    canvas.addEventListener("pointercancel", endPan);
+    function setGridFromInput(){
+      const q = normalizeSearch(jumpInput.value);
+      if(!q){
+        setStatus("Invalid start tile", "bad");
+        return;
+      }
+      gridOrigin = { gx: q.gx, gy: q.gy, tile: q.tile };
+      jumpInput.value = q.tile;
+      buildGrid();
+      setStatus("Grid set to " + q.tile, "ok");
+    }
 
-    render();
+    jumpBtn.addEventListener("click", setGridFromInput);
+    jumpInput.addEventListener("keydown", (e) => {
+      if(e.key === "Enter") setGridFromInput();
+    });
+
+    saveBtn.addEventListener("click", saveDraft);
+
+    updateKV();
+    loadDraft();
+    buildGrid();
     loadFeed();
   </script>
 </body>
