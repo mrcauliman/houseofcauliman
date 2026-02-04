@@ -73,6 +73,10 @@
       cursor:pointer;
       user-select:none;
       box-shadow: 0 0 0 2px rgba(124,247,194,.10) inset;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
     }
     .btn:active{transform:translateY(1px)}
     .btn.ghost{
@@ -111,11 +115,13 @@
       align-items:center;
       justify-content:space-between;
       gap:10px;
+      flex-wrap:wrap;
     }
     .card header .h{
       display:flex;
       flex-direction:column;
       gap:2px;
+      min-width: 220px;
     }
     .card header .h .t{
       font-weight: 900;
@@ -133,6 +139,40 @@
       display:flex;
       flex-direction:column;
       gap: 10px;
+    }
+
+    .jump{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      padding: 12px;
+      border-radius: var(--radius2);
+      border:1px solid rgba(34,48,58,.6);
+      background: rgba(18,24,29,.62);
+    }
+    .jump input{
+      flex:1;
+      min-width: 220px;
+      background: rgba(7,9,10,.6);
+      border:1px solid rgba(34,48,58,.75);
+      border-radius: 999px;
+      padding: 10px 12px;
+      color: var(--text);
+      outline:none;
+      font-weight: 800;
+      letter-spacing:.2px;
+    }
+    .jump .mini{
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(34,48,58,.9);
+      background: rgba(18,24,29,.9);
+      font-weight: 900;
+      cursor:pointer;
+      user-select:none;
+      box-shadow: 0 0 0 2px rgba(124,247,194,.10) inset;
+      color: var(--text);
     }
 
     .tilegrid{
@@ -271,12 +311,19 @@
         <header>
           <div class="h">
             <div class="t">Pick a Tile</div>
-            <div class="s">Taken tiles are disabled</div>
+            <div class="s">Set a start tile, then pick from the 10×10 grid</div>
           </div>
           <div id="statusPill" class="pill">No tile selected</div>
         </header>
         <div class="body">
           <div class="picker">
+
+            <div class="jump">
+              <input id="jumpInput" type="text" inputmode="text" autocomplete="off" spellcheck="false"
+                     placeholder="Start tile like E23-N11 or coords 23,-11" />
+              <button id="jumpBtn" class="mini" type="button">Set Grid</button>
+            </div>
+
             <div id="tileGrid" class="tilegrid" aria-label="tile picker"></div>
 
             <div class="subrow">
@@ -339,6 +386,9 @@
     const removeBtn = document.getElementById("removeBtn");
     const fileInput = document.getElementById("fileInput");
 
+    const jumpInput = document.getElementById("jumpInput");
+    const jumpBtn = document.getElementById("jumpBtn");
+
     const kvTile = document.getElementById("kvTile");
     const kvGX = document.getElementById("kvGX");
     const kvGY = document.getElementById("kvGY");
@@ -347,6 +397,8 @@
     const imgPreview = document.getElementById("imgPreview");
 
     let takenTiles = new Set();
+
+    let gridOrigin = { gx: 0, gy: 0, tile: "E0-N0" };
 
     let selected = {
       tile: null,
@@ -360,6 +412,29 @@
       const eastWest = gx >= 0 ? "E" + gx : "W" + Math.abs(gx);
       const northSouth = gy >= 0 ? "N" + gy : "S" + Math.abs(gy);
       return eastWest + "-" + northSouth;
+    }
+
+    function parseTileId(input){
+      const s = (input || "").trim().toUpperCase();
+      const m = /^([EW])(\d+)-([NS])(\d+)$/.exec(s);
+      if(!m) return null;
+      const gx = (m[1] === "E") ? Number(m[2]) : -Number(m[2]);
+      const gy = (m[3] === "N") ? Number(m[4]) : -Number(m[4]);
+      return { gx, gy, tile: tileIdFromCoords(gx, gy) };
+    }
+
+    function parseCoords(input){
+      const s = (input || "").trim();
+      const m = /^(-?\d+)\s*,\s*(-?\d+)$/.exec(s);
+      if(!m) return null;
+      const gx = Number(m[1]);
+      const gy = Number(m[2]);
+      if(!Number.isFinite(gx) || !Number.isFinite(gy)) return null;
+      return { gx, gy, tile: tileIdFromCoords(gx, gy) };
+    }
+
+    function normalizeSearch(input){
+      return parseTileId(input) || parseCoords(input);
     }
 
     function setStatus(text, kind){
@@ -402,15 +477,12 @@
     function buildGrid(){
       tileGrid.innerHTML = "";
 
-      const startGX = 0;
-      const startGY = 0;
-
-      let nTakenVisible = 0;
+      let visibleTaken = 0;
 
       for(let r = 0; r < 10; r++){
         for(let c = 0; c < 10; c++){
-          const gx = startGX + c;
-          const gy = startGY + r;
+          const gx = gridOrigin.gx + c;
+          const gy = gridOrigin.gy + r;
           const tile = tileIdFromCoords(gx, gy);
 
           const el = document.createElement("div");
@@ -422,7 +494,7 @@
 
           if(takenTiles.has(tile)){
             el.classList.add("taken");
-            nTakenVisible++;
+            visibleTaken++;
           }else{
             el.addEventListener("click", () => selectTile(gx, gy));
           }
@@ -432,10 +504,15 @@
       }
 
       takenCountEl.textContent = "Taken: " + takenTiles.size;
-      if(nTakenVisible > 0){
+      if(visibleTaken > 0){
         takenCountEl.classList.add("ok");
       }else{
         takenCountEl.classList.remove("ok");
+      }
+
+      if(selected.tile){
+        const el = tileGrid.querySelector(`[data-tile="${selected.tile}"]`);
+        if(el) el.classList.add("selected");
       }
     }
 
@@ -573,16 +650,38 @@
           setImagePreview(imageState.dataUrl);
         }
 
+        if(selected.tile){
+          gridOrigin = { gx: selected.gx, gy: selected.gy, tile: selected.tile };
+          jumpInput.value = gridOrigin.tile;
+        }
+
         updateKV();
       }catch(err){
         console.error(err);
       }
     }
 
+    function setGridFromInput(){
+      const q = normalizeSearch(jumpInput.value);
+      if(!q){
+        setStatus("Invalid start tile", "bad");
+        return;
+      }
+      gridOrigin = { gx: q.gx, gy: q.gy, tile: q.tile };
+      buildGrid();
+      setStatus("Grid set to " + q.tile, "ok");
+    }
+
+    jumpBtn.addEventListener("click", setGridFromInput);
+    jumpInput.addEventListener("keydown", (e) => {
+      if(e.key === "Enter") setGridFromInput();
+    });
+
     saveBtn.addEventListener("click", saveDraft);
 
     updateKV();
     loadDraft();
+    buildGrid();
     loadFeed();
   </script>
 </body>
