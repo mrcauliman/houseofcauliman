@@ -7,7 +7,7 @@
   <meta name="description" content="MONOLITH is a permanent on-chain wall. One tile. One mark. No edits. No deletes." />
   <meta property="og:title" content="MONOLITH — The Wall of Record" />
   <meta property="og:description" content="A permanent on-chain wall. One tile. One mark. No edits. No deletes." />
-  <meta property="og:image" content="https://houseofcauliman.com/assets/monolith/monolith_logo.webp" />
+  <meta property="og:image" content="https://houseofcauliman.com/monolith/assets/monolith_logo.webp" />
   <meta property="og:url" content="https://houseofcauliman.com/monolith/" />
   <meta property="og:type" content="website" />
 
@@ -42,7 +42,6 @@
     }
     a{color:inherit;text-decoration:none}
 
-    /* top bar */
     .top{
       position:fixed;left:12px;right:12px;top:12px;
       display:flex;align-items:center;gap:12px;flex-wrap:wrap;
@@ -58,7 +57,6 @@
     .brand img{width:34px;height:34px;object-fit:contain}
     .brand .t{font-weight:1000;letter-spacing:.6px;font-size:13px;text-transform:uppercase;line-height:1.1}
     .brand .s{margin-top:3px;color:rgba(245,247,244,.72);font-size:12px;line-height:1.2}
-
     .sp{flex:1}
 
     .btn{
@@ -96,7 +94,6 @@
     }
     .dot{width:8px;height:8px;border-radius:999px;background:var(--green);box-shadow:0 0 0 3px rgba(47,191,107,.18)}
 
-    /* search */
     .search{
       display:flex;align-items:center;gap:8px;
       border:1px solid rgba(23,53,36,.95);
@@ -121,7 +118,6 @@
       border-radius:12px;
     }
 
-    /* viewport */
     #vp{
       position:absolute;inset:0;
       touch-action:none;
@@ -135,7 +131,6 @@
       will-change:transform;
     }
 
-    /* tile cell */
     .cell{
       position:absolute;
       width:var(--tile);
@@ -152,17 +147,35 @@
     }
     .cell:hover{border-color:rgba(47,191,107,.45)}
     .cell .spray{position:absolute;inset:0;opacity:.95}
-    .cell .logoWrap{
+
+    .cell .mediaWrap{
       position:absolute;inset:0;
       display:flex;align-items:center;justify-content:center;
       padding:10px;
     }
-    .cell .logoWrap img{
-      width:78%;
-      height:78%;
+    .cell .mediaWrap img{
+      width:88%;
+      height:88%;
       object-fit:contain;
-      opacity:.92;
+      opacity:.95;
+      filter: drop-shadow(0 8px 18px rgba(0,0,0,.35));
     }
+    .cell .legendText{
+      position:absolute;
+      left:8px;right:8px;bottom:10px;
+      text-align:center;
+      font-size:9px;
+      font-weight:1000;
+      letter-spacing:.6px;
+      text-transform:uppercase;
+      color:rgba(245,247,244,.92);
+      text-shadow:0 2px 0 rgba(0,0,0,.55);
+      pointer-events:none;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
     .cell .id{
       position:absolute;left:10px;bottom:8px;right:10px;
       font-size:10px;
@@ -186,7 +199,6 @@
     .cell.taken{border-color:rgba(47,191,107,.85)}
     .cell.taken .tag{color:rgba(47,191,107,.92)}
 
-    /* side panel */
     .panel{
       position:fixed;
       right:12px;
@@ -234,7 +246,6 @@
     .kv .v{font-size:13px;font-weight:1000;letter-spacing:.2px}
     .muted{color:rgba(174,183,175,.86);font-size:12px;line-height:1.45;margin-top:10px}
 
-    /* toast */
     .toast{
       position:fixed;
       left:50%;
@@ -266,7 +277,7 @@
 <body>
   <header class="top">
     <div class="brand">
-      <img src="/assets/monolith/monolith_logo.webp" alt="MONOLITH" />
+      <img src="/monolith/assets/monolith_logo.webp" alt="MONOLITH" />
       <div>
         <div class="t">MONOLITH</div>
         <div class="s">Drag to move. Tap a tile to inspect.</div>
@@ -314,9 +325,11 @@
 
   <script>
     const FEED_URL = "/assets/monolith/feed.json";
+
     const MONOLITH_TILE = "E0-N0";
     const MONOLITH_TAG = "MONOLITH";
-    const MONOLITH_LOGO = "/assets/monolith/monolith_logo.webp";
+    const MONOLITH_LOGO = "/monolith/assets/monolith_logo.webp";
+    const MONOLITH_LEGEND = "FIRST MARK OF THE WALL";
 
     const vp = document.getElementById("vp");
     const world = document.getElementById("world");
@@ -377,11 +390,7 @@
       const ax = Math.abs(gx);
       const ay = Math.abs(gy);
       const sx = gx < 0 ? "W" : "E";
-
-      // CANON LAW
-      // gy <= 0 => N, gy > 0 => S
       const sy = gy <= 0 ? "N" : "S";
-
       return sx + ax + "-" + sy + ay;
     }
 
@@ -418,8 +427,9 @@
       return `<svg viewBox="0 0 ${TILE} ${TILE}" width="${TILE}" height="${TILE}" xmlns="http://www.w3.org/2000/svg">${p.join("")}</svg>`;
     }
 
-    function monolithLogoHTML(){
-      return `<div class="logoWrap"><img src="${MONOLITH_LOGO}" alt="MONOLITH" /></div>`;
+    function mediaHTML(src, alt, legend){
+      const leg = legend ? `<div class="legendText">${legend}</div>` : "";
+      return `<div class="mediaWrap"><img src="${src}" alt="${alt || ""}" /></div>${leg}`;
     }
 
     function closePanel(){
@@ -508,7 +518,16 @@
       if(spray){
         const markTag = (mark && typeof mark.tag === "string") ? mark.tag.trim().toUpperCase() : "";
         const isMonolith = (tile === MONOLITH_TILE) || (markTag === MONOLITH_TAG);
-        spray.innerHTML = isMonolith ? monolithLogoHTML() : makeSpraySVG(tile);
+
+        const img = (mark && typeof mark.img === "string" && mark.img.trim()) ? mark.img.trim() : "";
+
+        if(isMonolith){
+          spray.innerHTML = mediaHTML(MONOLITH_LOGO, "MONOLITH", MONOLITH_LEGEND);
+        } else if(img){
+          spray.innerHTML = mediaHTML(img, tile, "");
+        } else {
+          spray.innerHTML = makeSpraySVG(tile);
+        }
       }
     }
 
@@ -605,6 +624,7 @@
           for(const m of data){
             const gx = Number.isFinite(+m.gx) ? +m.gx : null;
             const gy = Number.isFinite(+m.gy) ? +m.gy : null;
+
             let tile = (typeof m.tile === "string" && m.tile) ? String(m.tile).trim().toUpperCase().replace(/[–—−]/g, "-") : null;
             if(!tile && gx !== null && gy !== null) tile = tileIdFromCoords(gx, gy);
             if(!tile) continue;
@@ -616,7 +636,8 @@
               gx: gx !== null ? gx : 0,
               gy: gy !== null ? gy : 0,
               tag: (typeof m.tag === "string" ? m.tag : "") || "",
-              ts: (typeof m.ts === "string" ? m.ts : "") || ""
+              ts: (typeof m.ts === "string" ? m.ts : "") || "",
+              img: (typeof m.img === "string" ? m.img : "") || ""
             });
           }
         }
