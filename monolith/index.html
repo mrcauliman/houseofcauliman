@@ -265,7 +265,7 @@
     <div class="sp"></div>
 
     <div class="search" aria-label="search tiles">
-      <input id="q" autocomplete="off" spellcheck="false" placeholder="Search tile E23-N11 or 23,-11" />
+      <input id="q" autocomplete="off" spellcheck="false" placeholder="Search tile E23-N11 or E23N11 or 23,-11" />
       <button class="btn" id="go" type="button">Go</button>
     </div>
 
@@ -612,7 +612,7 @@
           for(const m of data){
             const gx = Number.isFinite(+m.gx) ? +m.gx : null;
             const gy = Number.isFinite(+m.gy) ? +m.gy : null;
-            let tile = (typeof m.tile === "string" && m.tile) ? String(m.tile).trim().toUpperCase() : null;
+            let tile = (typeof m.tile === "string" && m.tile) ? String(m.tile).trim().toUpperCase().replace(/[–—−]/g, "-") : null;
             if(!tile && gx !== null && gy !== null) tile = tileIdFromCoords(gx, gy);
             if(!tile) continue;
 
@@ -654,17 +654,36 @@
     }
 
     function parseQueryToCoords(str){
-      const p = parseTileToCoords(str);
-      if(p) return p;
+      let raw = String(str || "").trim().toUpperCase().replace(/[–—−]/g, "-");
+      raw = raw.replace(/\s+/g, "");
 
-      // allow "E23 N11" or "E23-N11" already handled
-      const s = String(str || "").trim().toUpperCase().replace(/[–—−]/g, "-");
-      const m = s.match(/^([EW])\s*(\d+)\s*[, ]\s*([NS])\s*(\d+)$/);
+      // coords: "23,-11"
+      if(/^-?\d+,\s*-?\d+$/.test(raw)){
+        const parts = raw.split(",");
+        const gx = parseInt(parts[0].trim(), 10);
+        const gy = parseInt(parts[1].trim(), 10);
+        if(Number.isFinite(gx) && Number.isFinite(gy)){
+          return { gx, gy, tile: tileIdFromCoords(gx, gy), raw };
+        }
+      }
+
+      // tile: "E23-N11"
+      let m = raw.match(/^([EW])(\d+)-([NS])(\d+)$/);
       if(m){
         const gx = parseInt(m[2], 10) * (m[1] === "W" ? -1 : 1);
         const gy = parseInt(m[4], 10) * (m[3] === "N" ? -1 : 1);
         if(Number.isFinite(gx) && Number.isFinite(gy)){
-          return { gx, gy, tile: tileIdFromCoords(gx, gy), raw: s };
+          return { gx, gy, tile: tileIdFromCoords(gx, gy), raw };
+        }
+      }
+
+      // tile: "E23N11"
+      m = raw.match(/^([EW])(\d+)([NS])(\d+)$/);
+      if(m){
+        const gx = parseInt(m[2], 10) * (m[1] === "W" ? -1 : 1);
+        const gy = parseInt(m[4], 10) * (m[3] === "N" ? -1 : 1);
+        if(Number.isFinite(gx) && Number.isFinite(gy)){
+          return { gx, gy, tile: tileIdFromCoords(gx, gy), raw };
         }
       }
 
