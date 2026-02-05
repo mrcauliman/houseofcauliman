@@ -697,6 +697,9 @@
         toastShow("bad search", "warn");
         return;
       }
+
+      el.q.value = p.tile;
+
       state.camX = p.gx * STEP;
       state.camY = p.gy * STEP;
 
