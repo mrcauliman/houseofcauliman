@@ -371,7 +371,7 @@
 
     function parseTileToCoords(raw){
       if(!raw) return null;
-      const s = String(raw).trim().toUpperCase();
+      const s = String(raw).trim().toUpperCase().replace(/[–—−]/g, "-");
 
       // "23,-11"
       if(/^-?\d+\s*,\s*-?\d+$/.test(s)){
@@ -658,7 +658,7 @@
       if(p) return p;
 
       // allow "E23 N11" or "E23-N11" already handled
-      const s = String(str || "").trim().toUpperCase();
+      const s = String(str || "").trim().toUpperCase().replace(/[–—−]/g, "-");
       const m = s.match(/^([EW])\s*(\d+)\s*[, ]\s*([NS])\s*(\d+)$/);
       if(m){
         const gx = parseInt(m[2], 10) * (m[1] === "W" ? -1 : 1);
