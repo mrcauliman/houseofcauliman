@@ -250,6 +250,34 @@
     }
     .copy:hover{border-color:rgba(47,191,107,.55)}
 
+    .linka{
+      border:1px solid rgba(23,53,36,.95);
+      background:rgba(7,9,11,.26);
+      color:rgba(245,247,244,.94);
+      border-radius:999px;
+      padding:6px 10px;
+      font-weight:1000;
+      letter-spacing:.2px;
+      font-size:11px;
+      display:inline-flex;align-items:center;gap:8px;
+      max-width:100%;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+    .linka:hover{border-color:rgba(47,191,107,.55)}
+
+    .badge{
+      border:1px solid rgba(47,191,107,.55);
+      background:rgba(47,191,107,.12);
+      color:rgba(245,247,244,.92);
+      border-radius:999px;
+      padding:5px 9px;
+      font-weight:1000;
+      letter-spacing:.2px;
+      font-size:11px;
+    }
+
     .toast{
       position:fixed;
       left:50%;
@@ -323,11 +351,17 @@
 
         <div class="k">Wallet</div>
         <div class="v" id="vWalletWrap">
+          <span class="badge" id="vVerified" style="display:none">Verified owner</span>
           <span id="vWalletMasked">None</span>
           <span id="vWalletFull" style="display:none">None</span>
           <button class="copy" id="revealWallet" type="button" style="display:none">Reveal</button>
           <button class="copy" id="hideWallet" type="button" style="display:none">Hide</button>
           <button class="copy" id="copyWallet" type="button" style="display:none">Copy</button>
+        </div>
+
+        <div class="k">Link or Handle</div>
+        <div class="v" id="vLinkWrap">
+          <span id="vLink">None</span>
         </div>
 
         <div class="k">Note</div><div class="v" id="vNote">None</div>
@@ -375,12 +409,17 @@
       vTag: document.getElementById("vTag"),
       vTs: document.getElementById("vTs"),
 
+      vVerified: document.getElementById("vVerified"),
+
       vWalletWrap: document.getElementById("vWalletWrap"),
       vWalletMasked: document.getElementById("vWalletMasked"),
       vWalletFull: document.getElementById("vWalletFull"),
       revealWallet: document.getElementById("revealWallet"),
       hideWallet: document.getElementById("hideWallet"),
       copyWallet: document.getElementById("copyWallet"),
+
+      vLinkWrap: document.getElementById("vLinkWrap"),
+      vLink: document.getElementById("vLink"),
 
       vNote: document.getElementById("vNote"),
       vBody: document.getElementById("vBody")
@@ -524,7 +563,7 @@
       return `${a}...${b}`;
     }
 
-    function setWalletUI(addr, isPublic){
+    function setWalletUI(addr, isPublic, verified){
       const w = String(addr || "").trim();
 
       state.walletFull = w;
@@ -532,14 +571,16 @@
       state.walletPublic = !!isPublic;
       state.walletRevealed = false;
 
+      el.vVerified.style.display = (verified && w) ? "inline-flex" : "none";
+
+      // Always show masked if wallet exists
       el.vWalletMasked.textContent = state.walletMasked ? state.walletMasked : "None";
       el.vWalletFull.textContent = w ? w : "None";
 
-      // Default state
-      el.vWalletMasked.style.display = w ? "inline" : "inline";
+      el.vWalletMasked.style.display = "inline";
       el.vWalletFull.style.display = "none";
 
-      // Public can reveal and copy only after reveal
+      // Reveal button only when public
       el.revealWallet.style.display = (w && state.walletPublic) ? "inline-flex" : "none";
       el.hideWallet.style.display = "none";
       el.copyWallet.style.display = "none";
@@ -600,6 +641,71 @@
       return !!(a || b || c || d);
     }
 
+    function cleanLinkRaw(s){
+      let v = String(s || "").trim();
+      v = v.replace(/\s+/g, "");
+      return v;
+    }
+
+    function isXHandle(v){
+      return /^@[A-Za-z0-9_]{1,15}$/.test(v);
+    }
+
+    function isHttpsUrl(v){
+      if(!v.startsWith("https://")) return false;
+      if(v.length < 9) return false;
+      if(v.length > 120) return false;
+      if(/[<>\s]/.test(v)) return false;
+      return true;
+    }
+
+    function shortUrl(u){
+      if(u.length <= 44) return u;
+      const a = u.slice(0, 26);
+      const b = u.slice(-14);
+      return a + "…" + b;
+    }
+
+    function setLinkUI(linkStr){
+      const raw = cleanLinkRaw(linkStr);
+      el.vLinkWrap.innerHTML = "";
+      if(!raw){
+        const s = document.createElement("span");
+        s.id = "vLink";
+        s.textContent = "None";
+        el.vLinkWrap.appendChild(s);
+        return;
+      }
+
+      if(isXHandle(raw)){
+        const user = raw.slice(1);
+        const a = document.createElement("a");
+        a.className = "linka";
+        a.href = "https://x.com/" + encodeURIComponent(user);
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.textContent = raw;
+        el.vLinkWrap.appendChild(a);
+        return;
+      }
+
+      if(isHttpsUrl(raw)){
+        const a = document.createElement("a");
+        a.className = "linka";
+        a.href = raw;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.textContent = shortUrl(raw);
+        el.vLinkWrap.appendChild(a);
+        return;
+      }
+
+      const s = document.createElement("span");
+      s.id = "vLink";
+      s.textContent = "None";
+      el.vLinkWrap.appendChild(s);
+    }
+
     async function resolveFirstWorking(cands){
       for(const url of cands){
         try{
@@ -635,12 +741,13 @@
         if(isCreator  && !mark.note) el.vNote.textContent = "Foundational wallet. First liquidity. First fuel.";
 
         if(isMonolith){
-          // Always verified-hidden
-          setWalletUI(MONOLITH_WALLET, false);
+          setWalletUI(MONOLITH_WALLET, false, true);
         } else {
           const w = mark.wallet ? String(mark.wallet) : "";
-          setWalletUI(w, isPublicWallet(mark));
+          setWalletUI(w, isPublicWallet(mark), !!w);
         }
+
+        setLinkUI(mark.link || "");
 
         el.vBody.textContent = mark.note ? String(mark.note) : "Taken tile. Locked in feed.";
       } else {
@@ -648,15 +755,17 @@
         el.vTs.textContent  = "None";
 
         if(isMonolith){
-          setWalletUI(MONOLITH_WALLET, false);
+          setWalletUI(MONOLITH_WALLET, false, true);
           el.vNote.textContent = "Leave your mark. Live forever.";
         } else if(isCreator){
-          setWalletUI("", false);
+          setWalletUI("", false, false);
           el.vNote.textContent = "Foundational wallet. First liquidity. First fuel.";
         } else {
-          setWalletUI("", false);
+          setWalletUI("", false, false);
           el.vNote.textContent = "None";
         }
+
+        setLinkUI("");
 
         el.vBody.textContent = taken ? "This tile exists in feed but has no display fields." : "This tile is open.";
       }
@@ -999,6 +1108,7 @@
               visibility: it.visibility || null,
               public_wallet: it.public_wallet || null,
 
+              link: it.link || null,
               note: it.note || null
             });
           }
@@ -1039,7 +1149,6 @@
     renderPool();
     requestAnimationFrame(tick);
 
-    // Fix MRCAULIMAN logo without guessing extension
     resolveFirstWorking(CREATOR_LOGO_CANDIDATES).then((u) => {
       CREATOR_LOGO = u;
       state.lastKey = "";

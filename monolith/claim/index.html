@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
-  <title>MONOLITH — Claim</title>
-  <meta name="description" content="Pick one tile. Attach one image. Save locally. On-chain claim is coming." />
-  <meta property="og:title" content="MONOLITH — Claim" />
-  <meta property="og:description" content="Pick one tile. Attach one image. Save locally. On-chain claim is coming." />
+  <title>MONOLITH — Claim a Tile</title>
+  <meta name="description" content="Claim a MONOLITH tile. Verified owner. Optional public wallet. Optional link or handle." />
+  <meta property="og:title" content="MONOLITH — Claim a Tile" />
+  <meta property="og:description" content="Claim a tile. Verified owner. Optional public wallet. Optional link or handle." />
   <meta property="og:image" content="https://houseofcauliman.com/monolith/assets/monolith_logo.webp" />
   <meta property="og:url" content="https://houseofcauliman.com/monolith/claim/" />
   <meta property="og:type" content="website" />
@@ -22,12 +22,7 @@
       --green:#2fbf6b;
       --warn:#ffe175;
       --red:#ff5b5b;
-
-      --shadow:rgba(0,0,0,.45);
       --radius:18px;
-
-      --step:128px;
-      --tile:118px;
     }
     *{box-sizing:border-box}
     html,body{height:100%;margin:0}
@@ -40,24 +35,22 @@
       color:var(--fg);
     }
     a{color:inherit;text-decoration:none}
-
+    .wrap{max-width:860px;margin:0 auto;padding:16px}
     .top{
-      position:sticky;top:0;z-index:10;
-      margin:12px;
       display:flex;align-items:center;gap:12px;flex-wrap:wrap;
-      padding:10px 12px;
+      padding:12px 12px;
       border:1px solid rgba(23,53,36,.9);
       border-radius:18px;
-      background:rgba(7,9,11,.72);
+      background:rgba(7,9,11,.62);
       box-shadow:0 18px 44px rgba(0,0,0,.35);
       backdrop-filter: blur(10px);
+      position:sticky;top:10px;z-index:10;
     }
     .brand{display:flex;align-items:center;gap:10px}
     .brand img{width:34px;height:34px;object-fit:contain}
     .brand .t{font-weight:1000;letter-spacing:.6px;font-size:13px;text-transform:uppercase;line-height:1.1}
     .brand .s{margin-top:3px;color:rgba(245,247,244,.72);font-size:12px;line-height:1.2}
     .sp{flex:1}
-
     .btn{
       border:1px solid rgba(23,53,36,.95);
       background:rgba(11,27,19,.85);
@@ -76,270 +69,193 @@
       background:linear-gradient(180deg, rgba(47,191,107,.22), rgba(11,27,19,.88));
       border-color:rgba(47,191,107,.65);
     }
-    .btn.danger{
-      border-color:rgba(255,91,91,.55);
-      background:rgba(40,10,10,.35);
+    .card{
+      margin-top:14px;
+      border:1px solid rgba(23,53,36,.9);
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(13,34,23,.78), rgba(11,27,19,.88));
+      box-shadow:0 18px 44px rgba(0,0,0,.35);
+      padding:14px;
     }
-
-    .pill{
-      border:1px solid rgba(23,53,36,.95);
-      background:rgba(11,27,19,.72);
-      padding:8px 10px;
-      border-radius:999px;
-      font-weight:900;
-      letter-spacing:.2px;
-      display:inline-flex;align-items:center;gap:8px;
-      color:rgba(245,247,244,.86);
-      font-size:12px;
-    }
-    .dot{width:8px;height:8px;border-radius:999px;background:var(--green);box-shadow:0 0 0 3px rgba(47,191,107,.18)}
-
-    .wrap{
-      padding:0 12px 18px;
-      max-width:1100px;
-      margin:0 auto;
-    }
-
-    .row{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      align-items:center;
-      margin:12px 0;
-    }
-
+    .h1{font-weight:1000;letter-spacing:.4px;font-size:18px;margin:0}
+    .p{color:rgba(174,183,175,.90);font-size:12px;line-height:1.55;margin:8px 0 0;white-space:pre-wrap}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+    @media (max-width:760px){ .grid{grid-template-columns:1fr} }
     .field{
-      display:flex;align-items:center;gap:8px;
-      border:1px solid rgba(23,53,36,.95);
-      background:rgba(11,27,19,.72);
-      border-radius:14px;
-      padding:8px 10px;
+      border:1px solid rgba(23,53,36,.9);
+      background:rgba(7,9,11,.22);
+      border-radius:16px;
+      padding:12px;
     }
-    .field input{
-      width:260px;
-      max-width:60vw;
-      border:0;
-      outline:0;
-      background:transparent;
+    label{display:block;font-size:12px;font-weight:1000;letter-spacing:.4px;text-transform:uppercase;color:rgba(174,183,175,.92);margin-bottom:8px}
+    input,select,textarea{
+      width:100%;
+      border:1px solid rgba(23,53,36,.9);
+      border-radius:14px;
+      padding:10px 10px;
+      background:rgba(7,9,11,.35);
       color:var(--fg);
       font-weight:900;
       letter-spacing:.2px;
-      font-size:12px;
+      outline:none;
     }
-    .field input::placeholder{color:rgba(174,183,175,.70)}
-
-    .card{
+    textarea{min-height:88px;resize:vertical}
+    .hint{margin-top:8px;color:rgba(174,183,175,.85);font-size:12px;line-height:1.45}
+    .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .pill{
       border:1px solid rgba(23,53,36,.9);
-      border-radius:18px;
-      background:rgba(7,9,11,.28);
-      box-shadow:0 18px 44px rgba(0,0,0,.25);
-      overflow:hidden;
-    }
-    .card .hd{
-      padding:12px;
-      border-bottom:1px solid rgba(23,53,36,.75);
-      display:flex;align-items:center;gap:10px;flex-wrap:wrap;
-    }
-    .card .hd .ttl{font-weight:1000;letter-spacing:.4px}
-    .card .hd .sub{color:rgba(245,247,244,.72);font-size:12px}
-    .card .bd{padding:12px}
-
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
-      gap:10px;
-    }
-    .tile{
-      height:118px;
-      border-radius:16px;
-      border:1px solid rgba(23,53,36,.75);
-      background:
-        radial-gradient(120px 90px at 30% 25%, rgba(47,191,107,.14), transparent 55%),
-        rgba(11,27,19,.45);
-      position:relative;
-      overflow:hidden;
-      cursor:pointer;
-      user-select:none;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .tile:hover{border-color:rgba(47,191,107,.45)}
-    .tile.disabled{
-      opacity:.35;
-      cursor:not-allowed;
-      filter:saturate(.5);
-    }
-    .tile.selected{
-      border-color:rgba(47,191,107,.95);
-      box-shadow:0 0 0 2px rgba(47,191,107,.18) inset;
-    }
-    .tile .id{
-      position:absolute;left:10px;bottom:8px;right:10px;
-      font-size:10px;
-      font-weight:1000;
-      letter-spacing:.35px;
-      color:rgba(245,247,244,.78);
-      text-shadow:0 1px 0 rgba(0,0,0,.55);
-      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-      z-index:3;
-    }
-    .tile .tag{
-      position:absolute;left:10px;top:8px;right:10px;
-      font-size:10px;
-      font-weight:1000;
-      letter-spacing:.5px;
-      color:rgba(255,225,117,.85);
-      text-transform:uppercase;
-      text-shadow:0 1px 0 rgba(0,0,0,.55);
-      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-      z-index:3;
-    }
-    .tile .spray{position:absolute;inset:0;opacity:.95;z-index:1}
-    .tile .media{
-      position:absolute;inset:0;
-      display:flex;align-items:center;justify-content:center;
-      z-index:2;
-    }
-    .tile .media img{
-      width:74%;
-      height:74%;
-      object-fit:contain;
-      filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
-      pointer-events:none;
-      user-select:none;
-    }
-
-    .kv{
-      display:grid;
-      grid-template-columns: 140px 1fr;
-      gap:10px 12px;
-      padding:10px;
-      border-radius:14px;
-      border:1px solid rgba(23,53,36,.75);
       background:rgba(7,9,11,.22);
-      margin-top:10px;
-    }
-    .kv .k{color:rgba(174,183,175,.85);font-size:12px;font-weight:900;letter-spacing:.4px;text-transform:uppercase}
-    .kv .v{font-size:13px;font-weight:1000;letter-spacing:.2px}
-
-    .muted{color:rgba(174,183,175,.86);font-size:12px;line-height:1.45}
-
-    .toast{
-      position:fixed;
-      left:50%;
-      bottom:14px;
-      transform:translate3d(-50%, 90px, 0);
-      opacity:0;
-      transition:transform .18s ease, opacity .18s ease;
-      z-index:40;
-      padding:10px 12px;
-      border-radius:14px;
-      border:1px solid rgba(23,53,36,.95);
-      background:rgba(7,9,11,.72);
-      backdrop-filter: blur(10px);
+      border-radius:999px;
+      padding:8px 10px;
       font-weight:1000;
       letter-spacing:.2px;
       font-size:12px;
-      max-width:90vw;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
+      color:rgba(245,247,244,.88);
+    }
+    .toast{
+      position:fixed;left:50%;bottom:14px;transform:translate3d(-50%, 90px, 0);
+      opacity:0;transition:transform .18s ease, opacity .18s ease;
+      z-index:40;padding:10px 12px;border-radius:14px;border:1px solid rgba(23,53,36,.95);
+      background:rgba(7,9,11,.72);backdrop-filter: blur(10px);
+      font-weight:1000;letter-spacing:.2px;font-size:12px;max-width:92vw;
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
     }
     .toast.show{transform:translate3d(-50%, 0, 0);opacity:1}
     .toast.good{border-color:rgba(47,191,107,.75)}
     .toast.warn{border-color:rgba(255,225,117,.75)}
     .toast.bad{border-color:rgba(255,91,91,.75)}
+    .mono{
+      margin-top:12px;
+      border:1px solid rgba(23,53,36,.9);
+      border-radius:16px;
+      background:rgba(7,9,11,.22);
+      padding:12px;
+      overflow:auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size:12px;
+      color:rgba(245,247,244,.92);
+      white-space:pre;
+    }
+    .check{
+      display:flex;align-items:flex-start;gap:10px;margin-top:12px;
+      border:1px solid rgba(23,53,36,.9);
+      border-radius:16px;
+      background:rgba(7,9,11,.22);
+      padding:12px;
+    }
+    .check input{width:auto;margin-top:2px}
+    .check .t{font-weight:1000;letter-spacing:.2px}
+    .check .s{color:rgba(174,183,175,.88);font-size:12px;line-height:1.45;margin-top:4px}
   </style>
 </head>
-
 <body>
-  <header class="top">
-    <div class="brand">
-      <img src="/monolith/assets/monolith_logo.webp" alt="MONOLITH" />
-      <div>
-        <div class="t">MONOLITH</div>
-        <div class="s">Pick one tile. Attach one image. Save locally.</div>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <img src="/monolith/assets/monolith_logo.webp" alt="MONOLITH" />
+        <div>
+          <div class="t">MONOLITH</div>
+          <div class="s">Claim a tile. Verified owner.</div>
+        </div>
       </div>
-    </div>
-
-    <div class="sp"></div>
-
-    <a class="btn" href="/monolith/" aria-label="back to wall">Back to Wall</a>
-  </header>
-
-  <main class="wrap">
-    <div class="row">
-      <div class="field" aria-label="start tile input">
-        <input id="start" autocomplete="off" spellcheck="false" placeholder="Start tile like E23-N11 or E23N11 or 23,-11" />
-        <button class="btn" id="setGrid" type="button">Set Grid</button>
-      </div>
-
-      <div class="pill"><span class="dot"></span><span id="takenCount">0</span> taken</div>
-      <div class="pill">Draft: <span id="draftStatus">none</span></div>
-    </div>
+      <div class="sp"></div>
+      <a class="btn" href="/monolith/" aria-label="back to wall">Back to Wall</a>
+      <button class="btn primary" id="copyBtn" type="button">Copy Claim Payload</button>
+    </header>
 
     <section class="card">
-      <div class="hd">
+      <h1 class="h1">Claim a Tile</h1>
+      <div class="p">
+Rules locked
+
+Wallet is always masked on the wall
+Reveal exists only if you choose public visibility
+One Link or Handle only
+No markdown, no HTML, no spam formatting
+      </div>
+
+      <div class="grid">
+        <div class="field">
+          <label for="tile">Tile</label>
+          <input id="tile" autocomplete="off" spellcheck="false" placeholder="E23-N11 or E23N11 or 23,-11" />
+          <div class="hint">Accepted formats: E23-N11, E23N11, 23,-11</div>
+        </div>
+
+        <div class="field">
+          <label for="tag">Tag</label>
+          <input id="tag" autocomplete="off" spellcheck="false" placeholder="YOURTAG" />
+          <div class="hint">Short identity label. Keep it clean.</div>
+        </div>
+
+        <div class="field">
+          <label for="wallet">Wallet</label>
+          <input id="wallet" autocomplete="off" spellcheck="false" placeholder="r..." />
+          <div class="hint">Full XRPL address. Stored, but only masked by default.</div>
+        </div>
+
+        <div class="field">
+          <label for="visibility">Wallet visibility</label>
+          <select id="visibility">
+            <option value="hidden" selected>Hidden</option>
+            <option value="public">Public</option>
+          </select>
+          <div class="hint">Hidden means no Reveal button exists on the wall.</div>
+        </div>
+
+        <div class="field">
+          <label for="link">Link or Handle</label>
+          <input id="link" autocomplete="off" spellcheck="false" placeholder="@username or https://example.com" />
+          <div class="hint">
+One value only
+@username: letters numbers underscore, max 15
+URL: https only, max 120 chars
+No spaces. No markdown. No HTML.
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="note">Note</label>
+          <textarea id="note" spellcheck="false" placeholder="Legacy line. Short message."></textarea>
+          <div class="hint">This is the legacy line. People will abuse it. Keep it short.</div>
+        </div>
+      </div>
+
+      <div class="check">
+        <input type="checkbox" id="confirm" />
         <div>
-          <div class="ttl">Tile Picker</div>
-          <div class="sub">Taken tiles are disabled using the feed. Your selection saves locally.</div>
-        </div>
-        <div class="sp"></div>
-        <button class="btn primary" id="save" type="button">Save Selection</button>
-      </div>
-      <div class="bd">
-        <div class="grid" id="grid" aria-label="tile picker grid"></div>
-
-        <div class="kv" aria-label="selection">
-          <div class="k">Selected</div><div class="v" id="selTile">None</div>
-          <div class="k">Coords</div><div class="v" id="selCoords">0, 0</div>
-          <div class="k">Image</div><div class="v" id="selImg">None</div>
-        </div>
-
-        <div class="row" style="margin-top:12px">
-          <input id="img" type="file" accept="image/*" style="display:none" />
-          <button class="btn" id="upload" type="button">Upload Image</button>
-          <button class="btn danger" id="removeImg" type="button">Remove Image</button>
-          <div class="muted">Image stays local for now.</div>
+          <div class="t">I confirm I control this wallet</div>
+          <div class="s">Verification is tied to claim record and on-chain confirmation, not visibility.</div>
         </div>
       </div>
+
+      <div class="row">
+        <div class="pill" id="previewTile">Tile: None</div>
+        <div class="pill" id="previewWallet">Wallet: None</div>
+        <div class="pill" id="previewVis">Visibility: hidden</div>
+      </div>
+
+      <div class="mono" id="out">{}</div>
     </section>
-  </main>
+  </div>
 
-  <div class="toast" id="toast" aria-label="toast"></div>
+  <div class="toast" id="toast"></div>
 
   <script>
-    const FEED_URL = "/assets/monolith/feed.json";
-    const LS_KEY = "monolith_claim_draft_v1";
-
-    const MONOLITH_TILE = "E0-N0";
-    const MONOLITH_LOGO = "/monolith/assets/monolith_logo.webp";
-
+  (() => {
     const toast = document.getElementById("toast");
     const el = {
-      start: document.getElementById("start"),
-      setGrid: document.getElementById("setGrid"),
-      grid: document.getElementById("grid"),
-      takenCount: document.getElementById("takenCount"),
-      draftStatus: document.getElementById("draftStatus"),
-
-      selTile: document.getElementById("selTile"),
-      selCoords: document.getElementById("selCoords"),
-      selImg: document.getElementById("selImg"),
-
-      save: document.getElementById("save"),
-      img: document.getElementById("img"),
-      upload: document.getElementById("upload"),
-      removeImg: document.getElementById("removeImg"),
-    };
-
-    const state = {
-      baseGX: 0,
-      baseGY: 0,
-      radius: 2,
-      taken: new Set(),
-      marksByTile: new Map(),
-      selected: null,
-      imgDataUrl: null,
+      tile: document.getElementById("tile"),
+      tag: document.getElementById("tag"),
+      wallet: document.getElementById("wallet"),
+      visibility: document.getElementById("visibility"),
+      link: document.getElementById("link"),
+      note: document.getElementById("note"),
+      confirm: document.getElementById("confirm"),
+      copyBtn: document.getElementById("copyBtn"),
+      out: document.getElementById("out"),
+      previewTile: document.getElementById("previewTile"),
+      previewWallet: document.getElementById("previewWallet"),
+      previewVis: document.getElementById("previewVis")
     };
 
     function toastShow(msg, kind){
@@ -358,7 +274,7 @@
       return sx + ax + "-" + sy + ay;
     }
 
-    function parseQueryToCoords(str){
+    function parseTileInput(str){
       let raw = String(str || "").trim().toUpperCase().replace(/[–—−]/g, "-");
       raw = raw.replace(/\s+/g, "");
 
@@ -367,7 +283,7 @@
         const gx = parseInt(parts[0].trim(), 10);
         const gy = parseInt(parts[1].trim(), 10);
         if(Number.isFinite(gx) && Number.isFinite(gy)){
-          return { gx, gy, tile: tileIdFromCoords(gx, gy), raw };
+          return { gx, gy, tile: tileIdFromCoords(gx, gy) };
         }
       }
 
@@ -377,7 +293,7 @@
         const gyN = parseInt(m[4], 10);
         const gy = (m[3] === "N" ? -gyN : gyN);
         if(Number.isFinite(gx) && Number.isFinite(gy)){
-          return { gx, gy, tile: tileIdFromCoords(gx, gy), raw };
+          return { gx, gy, tile: tileIdFromCoords(gx, gy) };
         }
       }
 
@@ -387,271 +303,153 @@
         const gyN = parseInt(m[4], 10);
         const gy = (m[3] === "N" ? -gyN : gyN);
         if(Number.isFinite(gx) && Number.isFinite(gy)){
-          return { gx, gy, tile: tileIdFromCoords(gx, gy), raw };
+          return { gx, gy, tile: tileIdFromCoords(gx, gy) };
         }
       }
 
       return null;
     }
 
-    function mulberry32(seed){
-      let t = seed >>> 0;
-      return function(){
-        t += 0x6D2B79F5;
-        let x = Math.imul(t ^ (t >>> 15), 1 | t);
-        x ^= x + Math.imul(x ^ (x >>> 7), 61 | x);
-        return ((x ^ (x >>> 14)) >>> 0) / 4294967296;
-      };
-    }
-    function hashStr(str){
-      let h = 2166136261 >>> 0;
-      for(let i=0;i<str.length;i++){
-        h ^= str.charCodeAt(i);
-        h = Math.imul(h, 16777619);
-      }
-      return h >>> 0;
-    }
-    function makeSpraySVG(seedStr){
-      const rnd = mulberry32(hashStr(seedStr));
-      const p = [];
-      const count = 22;
-
-      for(let i=0;i<count;i++){
-        const x = Math.floor(rnd() * 118);
-        const y = Math.floor(rnd() * 118);
-        const r = 6 + Math.floor(rnd() * 18);
-        const a = 0.10 + rnd() * 0.22;
-        const g = rnd() < 0.72 ? "47,191,107" : "255,225,117";
-        p.push(`<circle cx="${x}" cy="${y}" r="${r}" fill="rgba(${g},${a.toFixed(3)})" />`);
-      }
-      return `<svg viewBox="0 0 118 118" width="118" height="118" xmlns="http://www.w3.org/2000/svg">${p.join("")}</svg>`;
+    function cleanNoSpaces(s){
+      return String(s || "").trim().replace(/\s+/g, "");
     }
 
-    function mediaHTML(src, alt){
-      if(!src) return "";
-      const safeAlt = String(alt || "").replace(/"/g, "");
-      return `<div class="media"><img src="${src}" alt="${safeAlt}" loading="lazy" decoding="async" /></div>`;
+    function isXHandle(v){
+      return /^@[A-Za-z0-9_]{1,15}$/.test(v);
     }
 
-    function setSelection(gx, gy){
-      const tile = tileIdFromCoords(gx, gy);
-      state.selected = { gx, gy, tile };
-      el.selTile.textContent = tile;
-      el.selCoords.textContent = `${gx}, ${gy}`;
-      el.selImg.textContent = state.imgDataUrl ? "Attached" : "None";
-
-      const nodes = el.grid.querySelectorAll(".tile");
-      nodes.forEach(n => {
-        const t = n.getAttribute("data-tile");
-        if(t === tile) n.classList.add("selected");
-        else n.classList.remove("selected");
-      });
+    function isHttpsUrl(v){
+      if(!v.startsWith("https://")) return false;
+      if(v.length < 9) return false;
+      if(v.length > 120) return false;
+      if(/[<>\s]/.test(v)) return false;
+      return true;
     }
 
-    function buildGrid(){
-      el.grid.innerHTML = "";
-
-      const r = state.radius;
-      let firstSet = false;
-
-      for(let dy=-r; dy<=r; dy++){
-        for(let dx=-r; dx<=r; dx++){
-          const gx = state.baseGX + dx;
-          const gy = state.baseGY + dy;
-          const tile = tileIdFromCoords(gx, gy);
-
-          const taken = state.taken.has(tile);
-          const mark = state.marksByTile.get(tile) || null;
-
-          const d = document.createElement("div");
-          d.className = "tile" + (taken ? " disabled" : "");
-          d.setAttribute("data-gx", String(gx));
-          d.setAttribute("data-gy", String(gy));
-          d.setAttribute("data-tile", tile);
-          d.innerHTML = `<div class="spray"></div><div class="tag"></div><div class="id"></div>`;
-
-          const spray = d.querySelector(".spray");
-          const tag = d.querySelector(".tag");
-          const id = d.querySelector(".id");
-
-          if(spray) spray.innerHTML = makeSpraySVG(tile);
-          if(id) id.textContent = tile;
-
-          if(tag){
-            if(mark && mark.tag) tag.textContent = mark.tag;
-            else tag.textContent = taken ? "TAKEN" : "";
-          }
-
-          if(tile === MONOLITH_TILE){
-            d.insertAdjacentHTML("beforeend", mediaHTML(MONOLITH_LOGO, "MONOLITH"));
-          }
-
-          d.addEventListener("click", () => {
-            if(taken) return;
-            setSelection(gx, gy);
-          }, { passive:true });
-
-          el.grid.appendChild(d);
-
-          if(!firstSet && !taken){
-            firstSet = true;
-            setSelection(gx, gy);
-          }
-        }
-      }
+    function validateTag(tag){
+      const t = String(tag || "").trim();
+      if(!t) return null;
+      if(t.length > 24) return "tag too long";
+      if(/[<>\n\r\t]/.test(t)) return "tag invalid";
+      return null;
     }
 
-    function saveDraft(){
-      if(!state.selected){
-        toastShow("pick a tile", "warn");
-        return;
-      }
+    function validateWallet(w){
+      const v = String(w || "").trim();
+      if(!v) return "wallet required";
+      if(!/^r[1-9A-HJ-NP-Za-km-z]{24,34}$/.test(v)) return "wallet invalid";
+      return null;
+    }
+
+    function validateLink(link){
+      const v = cleanNoSpaces(link);
+      if(!v) return null;
+      if(isXHandle(v)) return null;
+      if(isHttpsUrl(v)) return null;
+      return "link invalid";
+    }
+
+    function buildPayload(){
+      const t = parseTileInput(el.tile.value);
+      if(!t) return { err:"tile invalid" };
+
+      const tagErr = validateTag(el.tag.value);
+      if(tagErr) return { err: tagErr };
+
+      const walletErr = validateWallet(el.wallet.value);
+      if(walletErr) return { err: walletErr };
+
+      const vis = String(el.visibility.value || "hidden").toLowerCase() === "public" ? "public" : "hidden";
+      const wallet_public = (vis === "public");
+
+      const linkRaw = cleanNoSpaces(el.link.value);
+      const linkErr = validateLink(linkRaw);
+      if(linkErr) return { err: linkErr };
+
+      const note = String(el.note.value || "").trim();
+      if(note.length > 140) return { err:"note too long" };
+      if(/[<>]/.test(note)) return { err:"note invalid" };
+
+      if(!el.confirm.checked) return { err:"confirm required" };
+
+      const now = new Date();
+      const ts = now.toISOString().slice(0,10);
 
       const payload = {
-        v: 1,
-        tile: state.selected.tile,
-        gx: state.selected.gx,
-        gy: state.selected.gy,
-        imageDataUrl: state.imgDataUrl || null,
-        ts: new Date().toISOString()
+        tile: t.tile,
+        gx: t.gx,
+        gy: t.gy,
+        tag: String(el.tag.value || "").trim() || null,
+        wallet: String(el.wallet.value || "").trim(),
+        wallet_public: wallet_public,
+        link: linkRaw ? linkRaw : null,
+        note: note ? note : null,
+        ts: ts
       };
 
-      try{
-        localStorage.setItem(LS_KEY, JSON.stringify(payload));
-        el.draftStatus.textContent = "saved";
-        toastShow("saved", "good");
-      }catch(_){
-        toastShow("save failed", "bad");
+      return { payload };
+    }
+
+    function updatePreview(){
+      const t = parseTileInput(el.tile.value);
+      el.previewTile.textContent = "Tile: " + (t ? t.tile : "None");
+
+      const w = String(el.wallet.value || "").trim();
+      el.previewWallet.textContent = "Wallet: " + (w ? (w.slice(0,4) + "..." + w.slice(-3)) : "None");
+
+      const vis = String(el.visibility.value || "hidden").toLowerCase() === "public" ? "public" : "hidden";
+      el.previewVis.textContent = "Visibility: " + vis;
+
+      const built = buildPayload();
+      if(built.err){
+        el.out.textContent = JSON.stringify({ error: built.err }, null, 2);
+      } else {
+        el.out.textContent = JSON.stringify(built.payload, null, 2);
       }
     }
 
-    function loadDraft(){
-      try{
-        const raw = localStorage.getItem(LS_KEY);
-        if(!raw){
-          el.draftStatus.textContent = "none";
-          return null;
-        }
-        const d = JSON.parse(raw);
-        if(!d || typeof d !== "object"){
-          el.draftStatus.textContent = "none";
-          return null;
-        }
-        el.draftStatus.textContent = "saved";
-        return d;
-      }catch(_){
-        el.draftStatus.textContent = "none";
-        return null;
-      }
-    }
-
-    async function loadFeed(){
-      try{
-        const res = await fetch(FEED_URL + "?cb=" + Date.now(), { cache:"no-store" });
-        const data = await res.json();
-
-        state.taken = new Set();
-        state.marksByTile = new Map();
-
-        if(Array.isArray(data)){
-          for(const m of data){
-            const gx = Number.isFinite(+m.gx) ? +m.gx : null;
-            const gy = Number.isFinite(+m.gy) ? +m.gy : null;
-            let tile = (typeof m.tile === "string" && m.tile) ? String(m.tile).trim().toUpperCase().replace(/[–—−]/g, "-") : null;
-            if(!tile && gx !== null && gy !== null) tile = tileIdFromCoords(gx, gy);
-            if(!tile) continue;
-
-            state.taken.add(tile);
-            state.marksByTile.set(tile, {
-              tile,
-              gx: gx !== null ? gx : 0,
-              gy: gy !== null ? gy : 0,
-              tag: (typeof m.tag === "string" ? m.tag : "") || "",
-              ts: (typeof m.ts === "string" ? m.ts : "") || ""
-            });
-          }
-        }
-
-        el.takenCount.textContent = String(state.taken.size);
-      }catch(_){
-        el.takenCount.textContent = "0";
-      }
-    }
-
-    function handleSetGrid(){
-      const q = el.start.value || "";
-      const p = parseQueryToCoords(q);
-      if(!p){
-        toastShow("bad start tile", "warn");
+    async function copyPayload(){
+      const built = buildPayload();
+      if(built.err){
+        toastShow(built.err, "bad");
         return;
       }
-
-      el.start.value = p.tile;
-
-      state.baseGX = p.gx;
-      state.baseGY = p.gy;
-
-      buildGrid();
-      toastShow("grid " + p.tile, "good");
-    }
-
-    function handleUpload(){
-      el.img.value = "";
-      el.img.click();
-    }
-
-    function handleRemoveImg(){
-      state.imgDataUrl = null;
-      el.selImg.textContent = "None";
-      toastShow("image removed", "good");
-    }
-
-    function wire(){
-      el.setGrid.addEventListener("click", handleSetGrid, { passive:true });
-      el.start.addEventListener("keydown", (e) => {
-        if(e.key === "Enter") handleSetGrid();
-      }, { passive:true });
-
-      el.save.addEventListener("click", saveDraft, { passive:true });
-      el.upload.addEventListener("click", handleUpload, { passive:true });
-      el.removeImg.addEventListener("click", handleRemoveImg, { passive:true });
-
-      el.img.addEventListener("change", () => {
-        const file = el.img.files && el.img.files[0];
-        if(!file) return;
-
-        const reader = new FileReader();
-        reader.onload = () => {
-          state.imgDataUrl = String(reader.result || "");
-          el.selImg.textContent = state.imgDataUrl ? "Attached" : "None";
-          toastShow("image attached", "good");
-        };
-        reader.onerror = () => toastShow("image failed", "bad");
-        reader.readAsDataURL(file);
-      });
-    }
-
-    wire();
-
-    const draft = loadDraft();
-
-    loadFeed().then(() => {
-      state.baseGX = 0;
-      state.baseGY = 0;
-
-      if(draft && Number.isFinite(+draft.gx) && Number.isFinite(+draft.gy)){
-        state.baseGX = +draft.gx;
-        state.baseGY = +draft.gy;
-        state.imgDataUrl = draft.imageDataUrl || null;
+      const txt = JSON.stringify(built.payload, null, 2);
+      try{
+        await navigator.clipboard.writeText(txt);
+        toastShow("copied", "good");
+      }catch(_){
+        try{
+          const ta = document.createElement("textarea");
+          ta.value = txt;
+          ta.style.position = "fixed";
+          ta.style.left = "-9999px";
+          document.body.appendChild(ta);
+          ta.focus();
+          ta.select();
+          document.execCommand("copy");
+          ta.remove();
+          toastShow("copied", "good");
+        }catch(__){
+          toastShow("copy fail", "bad");
+        }
       }
+    }
 
-      el.start.value = tileIdFromCoords(state.baseGX, state.baseGY);
-      buildGrid();
-
-      if(state.imgDataUrl) el.selImg.textContent = "Attached";
+    ["input","change","keyup"].forEach((ev) => {
+      el.tile.addEventListener(ev, updatePreview, { passive:true });
+      el.tag.addEventListener(ev, updatePreview, { passive:true });
+      el.wallet.addEventListener(ev, updatePreview, { passive:true });
+      el.visibility.addEventListener(ev, updatePreview, { passive:true });
+      el.link.addEventListener(ev, updatePreview, { passive:true });
+      el.note.addEventListener(ev, updatePreview, { passive:true });
+      el.confirm.addEventListener(ev, updatePreview, { passive:true });
     });
 
-    setInterval(loadFeed, 15000);
+    el.copyBtn.addEventListener("click", copyPayload, { passive:true });
+
+    updatePreview();
+  })();
   </script>
 </body>
 </html>
