@@ -1,10 +1,35 @@
 [
   {
-    "id": "m0001",
+    "tile": "E2-N2",
+    "gx": 2,
+    "gy": -2,
+    "tag": "TEMP",
+    "wallet": "rfgFM8z2abu2uahXFaRre8aWw9PEv48QbS",
+    "wallet_public": false,
+    "link": "@mrcauliman",
+    "note": "temp",
+    "ts": "2026-02-06"
+  },
+  {
     "tile": "E0-N0",
     "gx": 0,
     "gy": 0,
     "tag": "MONOLITH",
-    "ts": "2026-02-05"
+    "wallet": "r9iKXkMGF2HxAEsCLqdrghWpJmfFZN1Gw8",
+    "wallet_public": false,
+    "link": "@monolith_wall",
+    "note": "Leave your mark. Live forever.",
+    "ts": "2026-02-06"
+  },
+  {
+    "tile": "E1-N0",
+    "gx": 1,
+    "gy": 0,
+    "tag": "MRCAULIMAN",
+    "wallet": "rfgFM8z2abu2uahXFaRre8aWw9PEv48QbS",
+    "wallet_public": false,
+    "link": "@mrcauliman",
+    "note": "Foundational wallet. First liquidity. First fuel.",
+    "ts": "2026-02-06"
   }
 ]
