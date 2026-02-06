@@ -146,6 +146,7 @@
       -webkit-tap-highlight-color: transparent;
     }
     .cell:hover{border-color:rgba(47,191,107,.45)}
+
     .cell .spray{position:absolute;inset:0;opacity:.95}
 
     .cell .mediaWrap{
@@ -169,6 +170,7 @@
       color:rgba(245,247,244,.72);
       text-shadow:0 1px 0 rgba(0,0,0,.55);
       white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+      z-index:3;
     }
     .cell .tag{
       position:absolute;left:10px;top:8px;
@@ -180,6 +182,7 @@
       text-shadow:0 1px 0 rgba(0,0,0,.55);
       max-width:calc(100% - 20px);
       white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+      z-index:3;
     }
     .cell.taken{border-color:rgba(47,191,107,.85)}
     .cell.taken .tag{color:rgba(47,191,107,.92)}
@@ -218,6 +221,7 @@
       cursor:pointer;
     }
     .pb{padding:12px;overflow:auto}
+
     .kv{
       display:grid;
       grid-template-columns:120px 1fr;
@@ -228,8 +232,8 @@
       background:rgba(7,9,11,.22);
     }
     .kv .k{color:rgba(174,183,175,.85);font-size:12px;font-weight:900;letter-spacing:.4px;text-transform:uppercase}
-    .kv .v{font-size:13px;font-weight:1000;letter-spacing:.2px}
-    .muted{color:rgba(174,183,175,.86);font-size:12px;line-height:1.45;margin-top:10px}
+    .kv .v{font-size:13px;font-weight:1000;letter-spacing:.2px;word-break:break-word}
+    .muted{color:rgba(174,183,175,.86);font-size:12px;line-height:1.45;margin-top:10px;white-space:pre-wrap}
 
     .toast{
       position:fixed;
@@ -311,6 +315,7 @@
   <div class="toast" id="toast" aria-label="toast"></div>
 
   <script>
+  (() => {
     const FEED_URL = "/assets/monolith/feed.json";
 
     const MONOLITH_TILE = "E0-N0";
@@ -321,12 +326,6 @@
     const CREATOR_TAG = "MRCAULIMAN";
     const CREATOR_WALLET = "rfgFM8z2abu2uahXFaRre8aWw9PEv48QbS";
     const CREATOR_LOGO = "/monolith/assets/mrcauliman_logo.webp";
-
-
-
-
-
-
 
     const vp = document.getElementById("vp");
     const world = document.getElementById("world");
@@ -345,9 +344,9 @@
       vCoords: document.getElementById("vCoords"),
       vTag: document.getElementById("vTag"),
       vTs: document.getElementById("vTs"),
-            vWallet: document.getElementById("vWallet"),
+      vWallet: document.getElementById("vWallet"),
       vNote: document.getElementById("vNote"),
-vBody: document.getElementById("vBody")
+      vBody: document.getElementById("vBody")
     };
 
     const STEP = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--step").trim(), 10) || 128;
@@ -391,6 +390,42 @@ vBody: document.getElementById("vBody")
       const sx = gx < 0 ? "W" : "E";
       const sy = gy <= 0 ? "N" : "S";
       return sx + ax + "-" + sy + ay;
+    }
+
+    function parseQueryToCoords(str){
+      let raw = String(str || "").trim().toUpperCase().replace(/[–—−]/g, "-");
+      raw = raw.replace(/\s+/g, "");
+
+      if(/^-?\d+,\s*-?\d+$/.test(raw)){
+        const parts = raw.split(",");
+        const gx = parseInt(parts[0].trim(), 10);
+        const gy = parseInt(parts[1].trim(), 10);
+        if(Number.isFinite(gx) && Number.isFinite(gy)){
+          return { gx, gy, tile: tileIdFromCoords(gx, gy), raw };
+        }
+      }
+
+      let m = raw.match(/^([EW])(\d+)-([NS])(\d+)$/);
+      if(m){
+        const gx = parseInt(m[2], 10) * (m[1] === "W" ? -1 : 1);
+        const gyN = parseInt(m[4], 10);
+        const gy = (m[3] === "N" ? -gyN : gyN);
+        if(Number.isFinite(gx) && Number.isFinite(gy)){
+          return { gx, gy, tile: tileIdFromCoords(gx, gy), raw };
+        }
+      }
+
+      m = raw.match(/^([EW])(\d+)([NS])(\d+)$/);
+      if(m){
+        const gx = parseInt(m[2], 10) * (m[1] === "W" ? -1 : 1);
+        const gyN = parseInt(m[4], 10);
+        const gy = (m[3] === "N" ? -gyN : gyN);
+        if(Number.isFinite(gx) && Number.isFinite(gy)){
+          return { gx, gy, tile: tileIdFromCoords(gx, gy), raw };
+        }
+      }
+
+      return null;
     }
 
     function mulberry32(seed){
@@ -437,6 +472,7 @@ vBody: document.getElementById("vBody")
     function openPanel(tile, gx, gy){
       const mark = state.marksByTile.get(tile) || null;
       const taken = state.taken.has(tile);
+
       const markTag = (mark && typeof mark.tag === "string") ? mark.tag.trim().toUpperCase() : "";
       const isMonolith = (tile === MONOLITH_TILE) || (markTag === MONOLITH_TAG);
       const isCreator = (tile === CREATOR_TILE) || (markTag === CREATOR_TAG);
@@ -447,16 +483,21 @@ vBody: document.getElementById("vBody")
       if(mark){
         el.vTag.textContent = mark.tag || "TAKEN";
         el.vTs.textContent = mark.ts || "None";
-        el.vBody.textContent = "Taken tile. Locked in feed.";
-        el.vWallet.textContent = (mark && mark.wallet) ? String(mark.wallet) : "None";
-        el.vNote.textContent = (mark && mark.note) ? String(mark.note) : "None";
+        el.vWallet.textContent = mark.wallet ? String(mark.wallet) : "None";
+        el.vNote.textContent = mark.note ? String(mark.note) : "None";
 
-        if(isMonolith && (!mark || !mark.note)) el.vNote.textContent = "Leave your mark. Live forever.";
-        if(isCreator && (!mark || !mark.note)) el.vNote.textContent = "Foundational wallet. First liquidity. First fuel.";
-        if(isCreator && (!mark || !mark.wallet)) el.vWallet.textContent = CREATOR_WALLET;
+        if(isMonolith && !mark.note) el.vNote.textContent = "Leave your mark. Live forever.";
+        if(isCreator && !mark.note) el.vNote.textContent = "Foundational wallet. First liquidity. First fuel.";
+        if(isCreator && !mark.wallet) el.vWallet.textContent = CREATOR_WALLET;
+
+        el.vBody.textContent = mark.note ? String(mark.note) : "Taken tile. Locked in feed.";
       } else {
         el.vTag.textContent = taken ? "TAKEN" : "OPEN";
         el.vTs.textContent = "None";
+        el.vWallet.textContent = isCreator ? CREATOR_WALLET : "None";
+        if(isMonolith) el.vNote.textContent = "Leave your mark. Live forever.";
+        else if(isCreator) el.vNote.textContent = "Foundational wallet. First liquidity. First fuel.";
+        else el.vNote.textContent = "None";
         el.vBody.textContent = taken ? "This tile exists in feed but has no display fields." : "This tile is open.";
       }
 
@@ -539,6 +580,7 @@ vBody: document.getElementById("vBody")
           spray.innerHTML = makeSpraySVG(tile);
         }
       }
+    }
 
     function renderPool(){
       ensurePool();
@@ -621,108 +663,67 @@ vBody: document.getElementById("vBody")
       setTimeout(() => { state.moved = false; }, 0);
     }
 
+    function centerOn(gx, gy){
+      state.camX = gx * STEP;
+      state.camY = gy * STEP;
+      updateWorldTransform();
+      renderPool();
+    }
+
+    function handleGo(){
+      const p = parseQueryToCoords(el.q.value);
+      if(!p){
+        toastShow("bad query", "bad");
+        return;
+      }
+      centerOn(p.gx, p.gy);
+      toastShow("jump " + p.tile, "good");
+    }
+
     async function loadFeed(){
       try{
-        const res = await fetch(FEED_URL + "?cb=" + Date.now(), { cache:"no-store" });
+        const res = await fetch(FEED_URL, { cache: "no-store" });
+        if(!res.ok) throw new Error("feed http " + res.status);
         const data = await res.json();
 
-        state.taken = new Set();
-        state.marksByTile = new Map();
+        const taken = new Set();
+        const marks = new Map();
 
         if(Array.isArray(data)){
-          for(const m of data){
-            const gx = Number.isFinite(+m.gx) ? +m.gx : null;
-            const gy = Number.isFinite(+m.gy) ? +m.gy : null;
-
-            let tile = (typeof m.tile === "string" && m.tile) ? String(m.tile).trim().toUpperCase().replace(/[–—−]/g, "-") : null;
-            if(!tile && gx !== null && gy !== null) tile = tileIdFromCoords(gx, gy);
+          for(const it of data){
+            if(!it) continue;
+            const tile = String(it.tile || "").trim().toUpperCase();
             if(!tile) continue;
-
-            state.taken.add(tile);
-
-            state.marksByTile.set(tile, {
+            taken.add(tile);
+            marks.set(tile, {
+              id: it.id || null,
               tile,
-              gx: gx !== null ? gx : 0,
-              gy: gy !== null ? gy : 0,
-              tag: (typeof m.tag === "string" ? m.tag : "") || "",
-              ts: (typeof m.ts === "string" ? m.ts : "") || "",
-              img: (typeof m.img === "string" ? m.img : "") || ""
+              gx: Number.isFinite(it.gx) ? it.gx : null,
+              gy: Number.isFinite(it.gy) ? it.gy : null,
+              tag: it.tag || null,
+              ts: it.ts || null,
+              img: it.img || null,
+              wallet: it.wallet || null,
+              note: it.note || null
             });
           }
         }
 
-        if(el.kTaken) el.kTaken.textContent = String(state.taken.size);
-      } catch(_){
-        if(el.kTaken) el.kTaken.textContent = "0";
-        toastShow("feed load failed", "warn");
+        state.taken = taken;
+        state.marksByTile = marks;
+
+        el.kTaken.textContent = String(state.taken.size);
+
+        state.lastKey = "";
+        renderPool();
+      }catch(e){
+        toastShow("feed fail", "warn");
       }
     }
 
     function startNearSeed(){
-      let gx = 0, gy = 0;
-
-      for(const v of state.marksByTile.values()){
-        gx = Number.isFinite(v.gx) ? v.gx : 0;
-        gy = Number.isFinite(v.gy) ? v.gy : 0;
-        break;
-      }
-
-      state.camX = gx * STEP;
-      state.camY = gy * STEP;
-
-      closePanel();
-      toastShow("start " + tileIdFromCoords(gx, gy), "good");
-    }
-
-    function parseQueryToCoords(str){
-      let raw = String(str || "").trim().toUpperCase().replace(/[–—−]/g, "-");
-      raw = raw.replace(/\s+/g, "");
-
-      if(/^-?\d+,\s*-?\d+$/.test(raw)){
-        const parts = raw.split(",");
-        const gx = parseInt(parts[0].trim(), 10);
-        const gy = parseInt(parts[1].trim(), 10);
-        if(Number.isFinite(gx) && Number.isFinite(gy)){
-          return { gx, gy, tile: tileIdFromCoords(gx, gy), raw };
-        }
-      }
-
-      let m = raw.match(/^([EW])(\d+)-([NS])(\d+)$/);
-      if(m){
-        const gx = parseInt(m[2], 10) * (m[1] === "W" ? -1 : 1);
-        const gy = parseInt(m[4], 10) * (m[3] === "N" ? -1 : 1);
-        if(Number.isFinite(gx) && Number.isFinite(gy)){
-          return { gx, gy, tile: tileIdFromCoords(gx, gy), raw };
-        }
-      }
-
-      m = raw.match(/^([EW])(\d+)([NS])(\d+)$/);
-      if(m){
-        const gx = parseInt(m[2], 10) * (m[1] === "W" ? -1 : 1);
-        const gy = parseInt(m[4], 10) * (m[3] === "N" ? -1 : 1);
-        if(Number.isFinite(gx) && Number.isFinite(gy)){
-          return { gx, gy, tile: tileIdFromCoords(gx, gy), raw };
-        }
-      }
-
-      return null;
-    }
-
-    function handleGo(){
-      const q = (el.q && el.q.value) ? el.q.value : "";
-      const p = parseQueryToCoords(q);
-      if(!p){
-        toastShow("bad search", "warn");
-        return;
-      }
-
-      el.q.value = p.tile;
-
-      state.camX = p.gx * STEP;
-      state.camY = p.gy * STEP;
-
-      closePanel();
-      toastShow("jump " + p.tile, "good");
+      centerOn(0, 0);
+      openPanel(MONOLITH_TILE, 0, 0);
     }
 
     el.close.addEventListener("click", closePanel, { passive:true });
@@ -742,6 +743,7 @@ vBody: document.getElementById("vBody")
 
     loadFeed().then(() => startNearSeed());
     setInterval(loadFeed, 15000);
+  })();
   </script>
 </body>
 </html>
