@@ -146,7 +146,6 @@
       -webkit-tap-highlight-color: transparent;
     }
     .cell:hover{border-color:rgba(47,191,107,.45)}
-
     .cell .spray{position:absolute;inset:0;opacity:.95}
 
     .cell .mediaWrap{
@@ -276,7 +275,6 @@
     .toast.warn{border-color:rgba(255,225,117,.75)}
     .toast.bad{border-color:rgba(255,91,91,.75)}
 
-    /* DEBUG BADGE */
     #dbg{
       position:fixed;
       left:12px;
@@ -357,21 +355,21 @@
     const FEED_URL = "/assets/monolith/feed.json";
 
     const MONOLITH_TILE = "E0-N0";
-    const MONOLITH_TAG = "MONOLITH";
+    const MONOLITH_TAG  = "MONOLITH";
     const MONOLITH_LOGO = "/monolith/assets/monolith_logo.webp";
 
-    /* SET THIS */
+    /* SET THIS TO THE REAL MONOLITH WALLET */
     const MONOLITH_WALLET = "PUT_MONOLITH_WALLET_ADDRESS_HERE";
 
     const CREATOR_TILE = "E1-N0";
-    const CREATOR_TAG = "MRCAULIMAN";
+    const CREATOR_TAG  = "MRCAULIMAN";
     const CREATOR_LOGO = "/monolith/assets/mrcauliman_logo.webp";
 
-    const vp = document.getElementById("vp");
+    const vp    = document.getElementById("vp");
     const world = document.getElementById("world");
     const panel = document.getElementById("panel");
     const toast = document.getElementById("toast");
-    const dbg = document.getElementById("dbg");
+    const dbg   = document.getElementById("dbg");
 
     const el = {
       q: document.getElementById("q"),
@@ -396,19 +394,14 @@
     const TILE = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--tile").trim(), 10) || 118;
 
     const state = {
-      camX: 0,
-      camY: 0,
-      vx: 0,
-      vy: 0,
-
+      camX: 0, camY: 0,
+      vx: 0, vy: 0,
       down: false,
       pid: null,
-      lastX: 0,
-      lastY: 0,
+      lastX: 0, lastY: 0,
       moved: false,
 
-      cols: 0,
-      rows: 0,
+      cols: 0, rows: 0,
       pool: [],
       POOL_PAD: 3,
 
@@ -557,18 +550,18 @@
 
       const markTag = (mark && typeof mark.tag === "string") ? mark.tag.trim().toUpperCase() : "";
       const isMonolith = (tile === MONOLITH_TILE) || (markTag === MONOLITH_TAG);
-      const isCreator = (tile === CREATOR_TILE) || (markTag === CREATOR_TAG);
+      const isCreator  = (tile === CREATOR_TILE)  || (markTag === CREATOR_TAG);
 
       el.vTile.textContent = tile;
       el.vCoords.textContent = `${gx}, ${gy}`;
 
       if(mark){
         el.vTag.textContent = mark.tag || "TAKEN";
-        el.vTs.textContent = mark.ts || "None";
+        el.vTs.textContent  = mark.ts || "None";
         el.vNote.textContent = mark.note ? String(mark.note) : "None";
 
         if(isMonolith && !mark.note) el.vNote.textContent = "Leave your mark. Live forever.";
-        if(isCreator && !mark.note) el.vNote.textContent = "Foundational wallet. First liquidity. First fuel.";
+        if(isCreator  && !mark.note) el.vNote.textContent = "Foundational wallet. First liquidity. First fuel.";
 
         if(isMonolith){
           setWalletUI(mark.wallet ? String(mark.wallet) : MONOLITH_WALLET);
@@ -579,7 +572,7 @@
         el.vBody.textContent = mark.note ? String(mark.note) : "Taken tile. Locked in feed.";
       } else {
         el.vTag.textContent = taken ? "TAKEN" : "OPEN";
-        el.vTs.textContent = "None";
+        el.vTs.textContent  = "None";
 
         if(isMonolith){
           setWalletUI(MONOLITH_WALLET);
@@ -664,7 +657,7 @@
       if(spray){
         const markTag = (mark && typeof mark.tag === "string") ? mark.tag.trim().toUpperCase() : "";
         const isMonolith = (tile === MONOLITH_TILE) || (markTag === MONOLITH_TAG);
-        const isCreator  = (tile === CREATOR_TILE) || (markTag === CREATOR_TAG);
+        const isCreator  = (tile === CREATOR_TILE)  || (markTag === CREATOR_TAG);
 
         const img = (mark && typeof mark.img === "string" && mark.img.trim()) ? mark.img.trim() : "";
 
@@ -718,10 +711,8 @@
         state.camX -= state.vx;
         state.camY -= state.vy;
       }
-
       updateWorldTransform();
       renderPool();
-
       state.raf = requestAnimationFrame(tick);
     }
 
@@ -731,25 +722,19 @@
       state.lastX = e.clientX;
       state.lastY = e.clientY;
       state.moved = false;
-
       vp.classList.add("dragging");
       try{ vp.setPointerCapture(state.pid); } catch(_){}
     }
 
     function onMove(e){
       if(!state.down || e.pointerId !== state.pid) return;
-
       const dx = e.clientX - state.lastX;
       const dy = e.clientY - state.lastY;
-
       state.lastX = e.clientX;
       state.lastY = e.clientY;
-
       if(Math.abs(dx) + Math.abs(dy) > 2) state.moved = true;
-
       state.camX -= dx;
       state.camY -= dy;
-
       state.vx = dx;
       state.vy = dy;
     }
@@ -771,10 +756,7 @@
 
     function handleGo(){
       const p = parseQueryToCoords(el.q.value);
-      if(!p){
-        toastShow("bad query", "bad");
-        return;
-      }
+      if(!p){ toastShow("bad query", "bad"); return; }
       centerOn(p.gx, p.gy);
       toastShow("jump " + p.tile, "good");
     }
