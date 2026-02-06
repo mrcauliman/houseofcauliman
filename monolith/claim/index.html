@@ -362,7 +362,6 @@
       let raw = String(str || "").trim().toUpperCase().replace(/[–—−]/g, "-");
       raw = raw.replace(/\s+/g, "");
 
-      // coords: "23,-11"
       if(/^-?\d+,\s*-?\d+$/.test(raw)){
         const parts = raw.split(",");
         const gx = parseInt(parts[0].trim(), 10);
@@ -372,7 +371,6 @@
         }
       }
 
-      // tile: "E23-N11"
       let m = raw.match(/^([EW])(\d+)-([NS])(\d+)$/);
       if(m){
         const gx = parseInt(m[2], 10) * (m[1] === "W" ? -1 : 1);
@@ -383,7 +381,6 @@
         }
       }
 
-      // tile: "E23N11"
       m = raw.match(/^([EW])(\d+)([NS])(\d+)$/);
       if(m){
         const gx = parseInt(m[2], 10) * (m[1] === "W" ? -1 : 1);
@@ -397,7 +394,6 @@
       return null;
     }
 
-    // deterministic spray
     function mulberry32(seed){
       let t = seed >>> 0;
       return function(){
@@ -486,7 +482,6 @@
             else tag.textContent = taken ? "TAKEN" : "";
           }
 
-          // MONOLITH tile gets logo, no overlay text
           if(tile === MONOLITH_TILE){
             d.insertAdjacentHTML("beforeend", mediaHTML(MONOLITH_LOGO, "MONOLITH"));
           }
@@ -636,7 +631,6 @@
       });
     }
 
-    // boot
     wire();
 
     const draft = loadDraft();
