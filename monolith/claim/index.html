@@ -180,6 +180,7 @@
       color:rgba(245,247,244,.78);
       text-shadow:0 1px 0 rgba(0,0,0,.55);
       white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+      z-index:3;
     }
     .tile .tag{
       position:absolute;left:10px;top:8px;right:10px;
@@ -190,20 +191,21 @@
       text-transform:uppercase;
       text-shadow:0 1px 0 rgba(0,0,0,.55);
       white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+      z-index:3;
     }
-    .tile .spray{position:absolute;inset:0;opacity:.95}
-
-    .tile .mediaWrap{
+    .tile .spray{position:absolute;inset:0;opacity:.95;z-index:1}
+    .tile .media{
       position:absolute;inset:0;
       display:flex;align-items:center;justify-content:center;
-      padding:10px;
+      z-index:2;
     }
-    .tile .mediaWrap img{
-      width:88%;
-      height:88%;
+    .tile .media img{
+      width:74%;
+      height:74%;
       object-fit:contain;
-      opacity:.95;
-      filter: drop-shadow(0 8px 18px rgba(0,0,0,.35));
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
+      pointer-events:none;
+      user-select:none;
     }
 
     .kv{
@@ -279,7 +281,7 @@
       <div class="hd">
         <div>
           <div class="ttl">Tile Picker</div>
-          <div class="sub">Taken tiles are disabled using the feed. Upload auto-fits to 512x512 WebP.</div>
+          <div class="sub">Taken tiles are disabled using the feed. Your selection saves locally.</div>
         </div>
         <div class="sp"></div>
         <button class="btn primary" id="save" type="button">Save Selection</button>
@@ -310,11 +312,7 @@
     const LS_KEY = "monolith_claim_draft_v1";
 
     const MONOLITH_TILE = "E0-N0";
-    const MONOLITH_TAG = "MONOLITH";
     const MONOLITH_LOGO = "/monolith/assets/monolith_logo.webp";
-
-    const MAX_SIDE = 512;
-    const WEBP_QUALITY = 0.92;
 
     const toast = document.getElementById("toast");
     const el = {
@@ -364,6 +362,7 @@
       let raw = String(str || "").trim().toUpperCase().replace(/[–—−]/g, "-");
       raw = raw.replace(/\s+/g, "");
 
+      // coords: "23,-11"
       if(/^-?\d+,\s*-?\d+$/.test(raw)){
         const parts = raw.split(",");
         const gx = parseInt(parts[0].trim(), 10);
@@ -373,19 +372,23 @@
         }
       }
 
+      // tile: "E23-N11"
       let m = raw.match(/^([EW])(\d+)-([NS])(\d+)$/);
       if(m){
         const gx = parseInt(m[2], 10) * (m[1] === "W" ? -1 : 1);
-        const gy = parseInt(m[4], 10) * (m[3] === "N" ? -1 : 1);
+        const gyN = parseInt(m[4], 10);
+        const gy = (m[3] === "N" ? -gyN : gyN);
         if(Number.isFinite(gx) && Number.isFinite(gy)){
           return { gx, gy, tile: tileIdFromCoords(gx, gy), raw };
         }
       }
 
+      // tile: "E23N11"
       m = raw.match(/^([EW])(\d+)([NS])(\d+)$/);
       if(m){
         const gx = parseInt(m[2], 10) * (m[1] === "W" ? -1 : 1);
-        const gy = parseInt(m[4], 10) * (m[3] === "N" ? -1 : 1);
+        const gyN = parseInt(m[4], 10);
+        const gy = (m[3] === "N" ? -gyN : gyN);
         if(Number.isFinite(gx) && Number.isFinite(gy)){
           return { gx, gy, tile: tileIdFromCoords(gx, gy), raw };
         }
@@ -394,6 +397,7 @@
       return null;
     }
 
+    // deterministic spray
     function mulberry32(seed){
       let t = seed >>> 0;
       return function(){
@@ -428,7 +432,9 @@
     }
 
     function mediaHTML(src, alt){
-      return `<div class="mediaWrap"><img src="${src}" alt="${alt || ""}" /></div>`;
+      if(!src) return "";
+      const safeAlt = String(alt || "").replace(/"/g, "");
+      return `<div class="media"><img src="${src}" alt="${safeAlt}" loading="lazy" decoding="async" /></div>`;
     }
 
     function setSelection(gx, gy){
@@ -472,6 +478,7 @@
           const tag = d.querySelector(".tag");
           const id = d.querySelector(".id");
 
+          if(spray) spray.innerHTML = makeSpraySVG(tile);
           if(id) id.textContent = tile;
 
           if(tag){
@@ -479,18 +486,9 @@
             else tag.textContent = taken ? "TAKEN" : "";
           }
 
-          if(spray){
-            const markTag = (mark && typeof mark.tag === "string") ? mark.tag.trim().toUpperCase() : "";
-            const isMonolith = (tile === MONOLITH_TILE) || (markTag === MONOLITH_TAG);
-            const img = (mark && typeof mark.img === "string" && mark.img.trim()) ? mark.img.trim() : "";
-
-            if(isMonolith){
-              spray.innerHTML = mediaHTML(MONOLITH_LOGO, "MONOLITH");
-            } else if(img){
-              spray.innerHTML = mediaHTML(img, tile);
-            } else {
-              spray.innerHTML = makeSpraySVG(tile);
-            }
+          // MONOLITH tile gets logo, no overlay text
+          if(tile === MONOLITH_TILE){
+            d.insertAdjacentHTML("beforeend", mediaHTML(MONOLITH_LOGO, "MONOLITH"));
           }
 
           d.addEventListener("click", () => {
@@ -564,7 +562,6 @@
           for(const m of data){
             const gx = Number.isFinite(+m.gx) ? +m.gx : null;
             const gy = Number.isFinite(+m.gy) ? +m.gy : null;
-
             let tile = (typeof m.tile === "string" && m.tile) ? String(m.tile).trim().toUpperCase().replace(/[–—−]/g, "-") : null;
             if(!tile && gx !== null && gy !== null) tile = tileIdFromCoords(gx, gy);
             if(!tile) continue;
@@ -575,8 +572,7 @@
               gx: gx !== null ? gx : 0,
               gy: gy !== null ? gy : 0,
               tag: (typeof m.tag === "string" ? m.tag : "") || "",
-              ts: (typeof m.ts === "string" ? m.ts : "") || "",
-              img: (typeof m.img === "string" ? m.img : "") || ""
+              ts: (typeof m.ts === "string" ? m.ts : "") || ""
             });
           }
         }
@@ -615,50 +611,6 @@
       toastShow("image removed", "good");
     }
 
-    function loadImageFromFile(file){
-      return new Promise((resolve, reject) => {
-        const url = URL.createObjectURL(file);
-        const img = new Image();
-        img.onload = () => { URL.revokeObjectURL(url); resolve(img); };
-        img.onerror = () => { URL.revokeObjectURL(url); reject(new Error("image load failed")); };
-        img.src = url;
-      });
-    }
-
-    function canvasToWebpDataUrl(canvas){
-      try{
-        const d = canvas.toDataURL("image/webp", WEBP_QUALITY);
-        if(d && d.startsWith("data:image/webp")) return d;
-      }catch(_){}
-      return canvas.toDataURL("image/png");
-    }
-
-    async function fitTo512Webp(file){
-      const img = await loadImageFromFile(file);
-      const w = img.naturalWidth || img.width || 0;
-      const h = img.naturalHeight || img.height || 0;
-
-      if(!w || !h) throw new Error("bad image");
-
-      const scale = Math.min(1, MAX_SIDE / Math.max(w, h));
-      const tw = Math.max(1, Math.round(w * scale));
-      const th = Math.max(1, Math.round(h * scale));
-
-      const canvas = document.createElement("canvas");
-      canvas.width = tw;
-      canvas.height = th;
-
-      const ctx = canvas.getContext("2d", { alpha:true });
-      if(!ctx) throw new Error("no canvas");
-
-      ctx.clearRect(0, 0, tw, th);
-      ctx.imageSmoothingEnabled = true;
-      ctx.imageSmoothingQuality = "high";
-      ctx.drawImage(img, 0, 0, tw, th);
-
-      return canvasToWebpDataUrl(canvas);
-    }
-
     function wire(){
       el.setGrid.addEventListener("click", handleSetGrid, { passive:true });
       el.start.addEventListener("keydown", (e) => {
@@ -669,21 +621,22 @@
       el.upload.addEventListener("click", handleUpload, { passive:true });
       el.removeImg.addEventListener("click", handleRemoveImg, { passive:true });
 
-      el.img.addEventListener("change", async () => {
+      el.img.addEventListener("change", () => {
         const file = el.img.files && el.img.files[0];
         if(!file) return;
 
-        try{
-          const dataUrl = await fitTo512Webp(file);
-          state.imgDataUrl = String(dataUrl || "");
+        const reader = new FileReader();
+        reader.onload = () => {
+          state.imgDataUrl = String(reader.result || "");
           el.selImg.textContent = state.imgDataUrl ? "Attached" : "None";
-          toastShow("image fitted 512", "good");
-        }catch(_){
-          toastShow("image rejected", "bad");
-        }
+          toastShow("image attached", "good");
+        };
+        reader.onerror = () => toastShow("image failed", "bad");
+        reader.readAsDataURL(file);
       });
     }
 
+    // boot
     wire();
 
     const draft = loadDraft();
