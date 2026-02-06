@@ -6,16 +6,5 @@
     "gy": 0,
     "tag": "MONOLITH",
     "ts": "2026-02-05"
-  },
-  {
-    "tile": "E2-N2",
-    "gx": 2,
-    "gy": -2,
-    "tag": "TEMP",
-    "wallet": "rfgFM8z2abu2uahXFaRre8aWw9PEv48QbS",
-    "wallet_public": false,
-    "link": "@mrcauliman",
-    "note": "temp",
-    "ts": "2026-02-06"
   }
 ]
