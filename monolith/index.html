@@ -265,7 +265,7 @@
       <img src="/monolith/assets/monolith_logo.webp" alt="MONOLITH" />
       <div>
         <div class="t">MONOLITH</div>
-        <div class="s">Drag to move. Tap a tile to inspect.</div>
+        <div class="s">Leave your mark. Live forever.</div>
       </div>
     </div>
 
@@ -301,6 +301,8 @@
         <div class="k">Coords</div><div class="v" id="vCoords">0, 0</div>
         <div class="k">Tag</div><div class="v" id="vTag">Open</div>
         <div class="k">Date</div><div class="v" id="vTs">None</div>
+        <div class="k">Wallet</div><div class="v" id="vWallet">None</div>
+        <div class="k">Note</div><div class="v" id="vNote">None</div>
       </div>
       <div class="muted" id="vBody">Tap a tile to inspect details.</div>
     </div>
@@ -314,6 +316,17 @@
     const MONOLITH_TILE = "E0-N0";
     const MONOLITH_TAG = "MONOLITH";
     const MONOLITH_LOGO = "/monolith/assets/monolith_logo.webp";
+
+    const CREATOR_TILE = "E1-N0";
+    const CREATOR_TAG = "MRCAULIMAN";
+    const CREATOR_WALLET = "rfgFM8z2abu2uahXFaRre8aWw9PEv48QbS";
+    const CREATOR_LOGO = "/monolith/assets/mrcauliman_logo.webp";
+
+
+
+
+
+
 
     const vp = document.getElementById("vp");
     const world = document.getElementById("world");
@@ -332,7 +345,9 @@
       vCoords: document.getElementById("vCoords"),
       vTag: document.getElementById("vTag"),
       vTs: document.getElementById("vTs"),
-      vBody: document.getElementById("vBody")
+            vWallet: document.getElementById("vWallet"),
+      vNote: document.getElementById("vNote"),
+vBody: document.getElementById("vBody")
     };
 
     const STEP = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--step").trim(), 10) || 128;
@@ -422,6 +437,9 @@
     function openPanel(tile, gx, gy){
       const mark = state.marksByTile.get(tile) || null;
       const taken = state.taken.has(tile);
+      const markTag = (mark && typeof mark.tag === "string") ? mark.tag.trim().toUpperCase() : "";
+      const isMonolith = (tile === MONOLITH_TILE) || (markTag === MONOLITH_TAG);
+      const isCreator = (tile === CREATOR_TILE) || (markTag === CREATOR_TAG);
 
       el.vTile.textContent = tile;
       el.vCoords.textContent = `${gx}, ${gy}`;
@@ -430,6 +448,12 @@
         el.vTag.textContent = mark.tag || "TAKEN";
         el.vTs.textContent = mark.ts || "None";
         el.vBody.textContent = "Taken tile. Locked in feed.";
+        el.vWallet.textContent = (mark && mark.wallet) ? String(mark.wallet) : "None";
+        el.vNote.textContent = (mark && mark.note) ? String(mark.note) : "None";
+
+        if(isMonolith && (!mark || !mark.note)) el.vNote.textContent = "Leave your mark. Live forever.";
+        if(isCreator && (!mark || !mark.note)) el.vNote.textContent = "Foundational wallet. First liquidity. First fuel.";
+        if(isCreator && (!mark || !mark.wallet)) el.vWallet.textContent = CREATOR_WALLET;
       } else {
         el.vTag.textContent = taken ? "TAKEN" : "OPEN";
         el.vTs.textContent = "None";
@@ -501,18 +525,20 @@
       if(spray){
         const markTag = (mark && typeof mark.tag === "string") ? mark.tag.trim().toUpperCase() : "";
         const isMonolith = (tile === MONOLITH_TILE) || (markTag === MONOLITH_TAG);
+        const isCreator  = (tile === CREATOR_TILE) || (markTag === CREATOR_TAG);
 
         const img = (mark && typeof mark.img === "string" && mark.img.trim()) ? mark.img.trim() : "";
 
         if(isMonolith){
           spray.innerHTML = mediaHTML(MONOLITH_LOGO, "MONOLITH");
+        } else if(isCreator){
+          spray.innerHTML = mediaHTML(CREATOR_LOGO, "MRCAULIMAN");
         } else if(img){
           spray.innerHTML = mediaHTML(img, tile);
         } else {
           spray.innerHTML = makeSpraySVG(tile);
         }
       }
-    }
 
     function renderPool(){
       ensurePool();
