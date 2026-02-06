@@ -275,26 +275,6 @@
     .toast.good{border-color:rgba(47,191,107,.75)}
     .toast.warn{border-color:rgba(255,225,117,.75)}
     .toast.bad{border-color:rgba(255,91,91,.75)}
-
-    #dbg{
-      position:fixed;
-      left:12px;
-      bottom:12px;
-      z-index:60;
-      border:1px solid rgba(23,53,36,.95);
-      background:rgba(7,9,11,.72);
-      backdrop-filter: blur(10px);
-      border-radius:14px;
-      padding:10px 12px;
-      font-weight:1000;
-      letter-spacing:.2px;
-      font-size:12px;
-      max-width:92vw;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      color:rgba(245,247,244,.9);
-    }
   </style>
 </head>
 
@@ -340,8 +320,16 @@
         <div class="k">Coords</div><div class="v" id="vCoords">0, 0</div>
         <div class="k">Tag</div><div class="v" id="vTag">Open</div>
         <div class="k">Date</div><div class="v" id="vTs">None</div>
+
         <div class="k">Wallet</div>
-        <div class="v" id="vWalletWrap"><span id="vWallet">None</span><button class="copy" id="copyWallet" type="button">Copy</button></div>
+        <div class="v" id="vWalletWrap">
+          <span id="vWalletMasked">None</span>
+          <span id="vWalletFull" style="display:none">None</span>
+          <button class="copy" id="revealWallet" type="button" style="display:none">Reveal</button>
+          <button class="copy" id="hideWallet" type="button" style="display:none">Hide</button>
+          <button class="copy" id="copyWallet" type="button" style="display:none">Copy</button>
+        </div>
+
         <div class="k">Note</div><div class="v" id="vNote">None</div>
       </div>
       <div class="muted" id="vBody">Tap a tile to inspect details.</div>
@@ -349,7 +337,6 @@
   </aside>
 
   <div class="toast" id="toast" aria-label="toast"></div>
-  <div id="dbg">dbg: boot</div>
 
   <script>
   (() => {
@@ -359,17 +346,24 @@
     const MONOLITH_TAG  = "MONOLITH";
     const MONOLITH_LOGO = "/monolith/assets/monolith_logo.webp";
 
+    // MONOLITH wallet is always "verified but hidden"
     const MONOLITH_WALLET = "r9iKXkMGF2HxAEsCLqdrghWpJmfFZN1Gw8";
 
     const CREATOR_TILE = "E1-N0";
     const CREATOR_TAG  = "MRCAULIMAN";
-    const CREATOR_LOGO = "/monolith/assets/mrcauliman_logo.webp";
+    const CREATOR_LOGO_CANDIDATES = [
+      "/monolith/assets/mrcauliman_logo.webp",
+      "/monolith/assets/mrcauliman_logo.png",
+      "/monolith/assets/mrcauliman_logo.jpg",
+      "/monolith/assets/mrcauliman_logo.jpeg",
+      "/monolith/assets/mrcauliman_logo.svg"
+    ];
+    let CREATOR_LOGO = CREATOR_LOGO_CANDIDATES[0];
 
     const vp    = document.getElementById("vp");
     const world = document.getElementById("world");
     const panel = document.getElementById("panel");
     const toast = document.getElementById("toast");
-    const dbg   = document.getElementById("dbg");
 
     const el = {
       q: document.getElementById("q"),
@@ -383,9 +377,14 @@
       vCoords: document.getElementById("vCoords"),
       vTag: document.getElementById("vTag"),
       vTs: document.getElementById("vTs"),
-      vWallet: document.getElementById("vWallet"),
+
       vWalletWrap: document.getElementById("vWalletWrap"),
+      vWalletMasked: document.getElementById("vWalletMasked"),
+      vWalletFull: document.getElementById("vWalletFull"),
+      revealWallet: document.getElementById("revealWallet"),
+      hideWallet: document.getElementById("hideWallet"),
       copyWallet: document.getElementById("copyWallet"),
+
       vNote: document.getElementById("vNote"),
       vBody: document.getElementById("vBody")
     };
@@ -411,7 +410,10 @@
       lastKey: "",
       raf: 0,
 
-      activeWallet: "",
+      walletFull: "",
+      walletMasked: "",
+      walletPublic: false,
+      walletRevealed: false,
 
       zoom: 1,
       ZMIN: 0.55,
@@ -422,12 +424,6 @@
     };
 
     function clamp(v, a, b){ return Math.max(a, Math.min(b, v)); }
-
-    function dbgSet(){
-      const cells = state.pool.length;
-      const taken = state.taken.size;
-      dbg.textContent = `dbg: step=${STEP} tile=${TILE} cells=${cells} taken=${taken} cam=${Math.round(state.camX)},${Math.round(state.camY)} zoom=${state.zoom.toFixed(2)}`;
-    }
 
     function toastShow(msg, kind){
       toast.className = "toast " + (kind || "");
@@ -522,16 +518,61 @@
 
     function closePanel(){ panel.classList.remove("open"); }
 
-    function setWalletUI(addr){
+    function maskWallet(addr){
       const w = String(addr || "").trim();
-      state.activeWallet = w;
-      el.vWallet.textContent = w ? w : "None";
-      el.vWalletWrap.style.display = w ? "flex" : "none";
+      if(!w) return "";
+      if(w.length <= 10) return w;
+      const a = w.slice(0,4);
+      const b = w.slice(-3);
+      return `${a}...${b}`;
+    }
+
+    function setWalletUI(addr, isPublic){
+      const w = String(addr || "").trim();
+
+      state.walletFull = w;
+      state.walletMasked = w ? maskWallet(w) : "";
+      state.walletPublic = !!isPublic;
+      state.walletRevealed = false;
+
+      el.vWalletMasked.textContent = state.walletMasked ? state.walletMasked : "None";
+      el.vWalletFull.textContent = w ? w : "None";
+
+      // Default state
+      el.vWalletMasked.style.display = w ? "inline" : "inline";
+      el.vWalletFull.style.display = "none";
+
+      // Public can reveal and copy only after reveal
+      el.revealWallet.style.display = (w && state.walletPublic) ? "inline-flex" : "none";
+      el.hideWallet.style.display = "none";
+      el.copyWallet.style.display = "none";
+    }
+
+    function revealWallet(){
+      if(!state.walletPublic || !state.walletFull) return;
+      state.walletRevealed = true;
+      el.vWalletFull.style.display = "inline";
+      el.vWalletMasked.style.display = "none";
+      el.revealWallet.style.display = "none";
+      el.hideWallet.style.display = "inline-flex";
+      el.copyWallet.style.display = "inline-flex";
+    }
+
+    function hideWallet(){
+      state.walletRevealed = false;
+      el.vWalletFull.style.display = "none";
+      el.vWalletMasked.style.display = "inline";
+      el.hideWallet.style.display = "none";
+      el.copyWallet.style.display = "none";
+      el.revealWallet.style.display = (state.walletFull && state.walletPublic) ? "inline-flex" : "none";
     }
 
     async function copyWallet(){
-      const w = String(state.activeWallet || "").trim();
-      if(!w){ toastShow("no wallet", "warn"); return; }
+      if(!state.walletPublic || !state.walletRevealed || !state.walletFull){
+        toastShow("reveal first", "warn");
+        return;
+      }
+      const w = String(state.walletFull || "").trim();
       try{
         await navigator.clipboard.writeText(w);
         toastShow("copied", "good");
@@ -551,6 +592,30 @@
           toastShow("copy fail", "bad");
         }
       }
+    }
+
+    function isPublicWallet(mark){
+      if(!mark) return false;
+      const a = mark.wallet_public === true;
+      const b = String(mark.wallet_visibility || "").toLowerCase() === "public";
+      const c = String(mark.visibility || "").toLowerCase() === "public";
+      const d = String(mark.public_wallet || "").toLowerCase() === "true";
+      return !!(a || b || c || d);
+    }
+
+    async function resolveFirstWorking(cands){
+      for(const url of cands){
+        try{
+          const ok = await new Promise((res) => {
+            const img = new Image();
+            img.onload = () => res(true);
+            img.onerror = () => res(false);
+            img.src = url + "?cb=" + Date.now();
+          });
+          if(ok) return url;
+        }catch(_){}
+      }
+      return cands[0];
     }
 
     function openPanel(tile, gx, gy){
@@ -573,9 +638,11 @@
         if(isCreator  && !mark.note) el.vNote.textContent = "Foundational wallet. First liquidity. First fuel.";
 
         if(isMonolith){
-          setWalletUI(mark.wallet ? String(mark.wallet) : MONOLITH_WALLET);
+          // Always verified-hidden
+          setWalletUI(MONOLITH_WALLET, false);
         } else {
-          setWalletUI("");
+          const w = mark.wallet ? String(mark.wallet) : "";
+          setWalletUI(w, isPublicWallet(mark));
         }
 
         el.vBody.textContent = mark.note ? String(mark.note) : "Taken tile. Locked in feed.";
@@ -584,13 +651,13 @@
         el.vTs.textContent  = "None";
 
         if(isMonolith){
-          setWalletUI(MONOLITH_WALLET);
+          setWalletUI(MONOLITH_WALLET, false);
           el.vNote.textContent = "Leave your mark. Live forever.";
         } else if(isCreator){
-          setWalletUI("");
+          setWalletUI("", false);
           el.vNote.textContent = "Foundational wallet. First liquidity. First fuel.";
         } else {
-          setWalletUI("");
+          setWalletUI("", false);
           el.vNote.textContent = "None";
         }
 
@@ -613,7 +680,6 @@
       const rows = Math.ceil(visH / STEP) + state.POOL_PAD * 2;
 
       if(cols === state.cols && rows === state.rows && state.pool.length){
-        dbgSet();
         return;
       }
 
@@ -638,7 +704,6 @@
           openPanel(tile, gx, gy);
         }, { passive:true });
       }
-      dbgSet();
     }
 
     function setCell(cell, gx, gy){
@@ -710,7 +775,6 @@
           setCell(state.pool[i++], gx, gy);
         }
       }
-      dbgSet();
     }
 
     function updateWorldTransform(){
@@ -738,16 +802,18 @@
     }
 
     function onDown(e){
-      state.down = true;
-      state.pid = e.pointerId;
-      state.lastX = e.clientX;
-      state.lastY = e.clientY;
-      state.moved = false;
-
       state.ptrs.set(e.pointerId, { x:e.clientX, y:e.clientY });
 
-      vp.classList.add("dragging");
-      try{ vp.setPointerCapture(state.pid); } catch(_){}
+      if(state.pid === null){
+        state.down = true;
+        state.pid = e.pointerId;
+        state.lastX = e.clientX;
+        state.lastY = e.clientY;
+        state.moved = false;
+        vp.classList.add("dragging");
+      }
+
+      try{ vp.setPointerCapture(e.pointerId); } catch(_){}
     }
 
     function beginPinchIfReady(){
@@ -771,7 +837,6 @@
       state.pinch = {
         startDist: dist,
         startZoom: state.zoom,
-        midX, midY,
         anchorWX, anchorWY
       };
     }
@@ -791,7 +856,6 @@
       state.lastKey = "";
       updateWorldTransform();
       renderPool();
-      dbgSet();
     }
 
     function onMove(e){
@@ -853,20 +917,24 @@
         state.pinch = null;
       }
 
-      if(e.pointerId !== state.pid){
-        if(state.ptrs.size === 0){
-          state.down = false;
-          state.pid = null;
-          vp.classList.remove("dragging");
-          setTimeout(() => { state.moved = false; }, 0);
+      if(e.pointerId === state.pid){
+        if(state.ptrs.size > 0){
+          const nextId = Array.from(state.ptrs.keys())[0];
+          const nextPt = state.ptrs.get(nextId);
+          state.pid = nextId;
+          state.lastX = nextPt ? nextPt.x : state.lastX;
+          state.lastY = nextPt ? nextPt.y : state.lastY;
+          state.down = true;
+          return;
         }
-        return;
       }
 
-      state.down = false;
-      state.pid = null;
-      vp.classList.remove("dragging");
-      setTimeout(() => { state.moved = false; }, 0);
+      if(state.ptrs.size === 0){
+        state.down = false;
+        state.pid = null;
+        vp.classList.remove("dragging");
+        setTimeout(() => { state.moved = false; }, 0);
+      }
     }
 
     function onWheel(e){
@@ -928,6 +996,12 @@
               ts: it.ts || null,
               img: it.img || null,
               wallet: it.wallet || null,
+
+              wallet_public: it.wallet_public === true,
+              wallet_visibility: it.wallet_visibility || null,
+              visibility: it.visibility || null,
+              public_wallet: it.public_wallet || null,
+
               note: it.note || null
             });
           }
@@ -940,10 +1014,8 @@
 
         state.lastKey = "";
         renderPool();
-        dbgSet();
-      }catch(e){
+      }catch(_){
         toastShow("feed fail", "warn");
-        dbgSet();
       }
     }
 
@@ -953,6 +1025,9 @@
     }
 
     el.copyWallet.addEventListener("click", copyWallet, { passive:true });
+    el.revealWallet.addEventListener("click", revealWallet, { passive:true });
+    el.hideWallet.addEventListener("click", hideWallet, { passive:true });
+
     el.close.addEventListener("click", closePanel, { passive:true });
     el.go.addEventListener("click", handleGo, { passive:true });
     el.q.addEventListener("keydown", (e) => { if(e.key === "Enter") handleGo(); }, { passive:true });
@@ -966,6 +1041,13 @@
     updateWorldTransform();
     renderPool();
     requestAnimationFrame(tick);
+
+    // Fix MRCAULIMAN logo without guessing extension
+    resolveFirstWorking(CREATOR_LOGO_CANDIDATES).then((u) => {
+      CREATOR_LOGO = u;
+      state.lastKey = "";
+      renderPool();
+    });
 
     loadFeed().then(() => startNearSeed());
     setInterval(loadFeed, 15000);
