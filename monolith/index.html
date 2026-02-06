@@ -160,21 +160,6 @@
       opacity:.95;
       filter: drop-shadow(0 8px 18px rgba(0,0,0,.35));
     }
-    .cell .legendText{
-      position:absolute;
-      left:8px;right:8px;bottom:10px;
-      text-align:center;
-      font-size:9px;
-      font-weight:1000;
-      letter-spacing:.6px;
-      text-transform:uppercase;
-      color:rgba(245,247,244,.92);
-      text-shadow:0 2px 0 rgba(0,0,0,.55);
-      pointer-events:none;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
 
     .cell .id{
       position:absolute;left:10px;bottom:8px;right:10px;
@@ -329,7 +314,6 @@
     const MONOLITH_TILE = "E0-N0";
     const MONOLITH_TAG = "MONOLITH";
     const MONOLITH_LOGO = "/monolith/assets/monolith_logo.webp";
-    const MONOLITH_LEGEND = "FIRST MARK OF THE WALL";
 
     const vp = document.getElementById("vp");
     const world = document.getElementById("world");
@@ -427,9 +411,8 @@
       return `<svg viewBox="0 0 ${TILE} ${TILE}" width="${TILE}" height="${TILE}" xmlns="http://www.w3.org/2000/svg">${p.join("")}</svg>`;
     }
 
-    function mediaHTML(src, alt, legend){
-      const leg = legend ? `<div class="legendText">${legend}</div>` : "";
-      return `<div class="mediaWrap"><img src="${src}" alt="${alt || ""}" /></div>${leg}`;
+    function mediaHTML(src, alt){
+      return `<div class="mediaWrap"><img src="${src}" alt="${alt || ""}" /></div>`;
     }
 
     function closePanel(){
@@ -522,9 +505,9 @@
         const img = (mark && typeof mark.img === "string" && mark.img.trim()) ? mark.img.trim() : "";
 
         if(isMonolith){
-          spray.innerHTML = mediaHTML(MONOLITH_LOGO, "MONOLITH", MONOLITH_LEGEND);
+          spray.innerHTML = mediaHTML(MONOLITH_LOGO, "MONOLITH");
         } else if(img){
-          spray.innerHTML = mediaHTML(img, tile, "");
+          spray.innerHTML = mediaHTML(img, tile);
         } else {
           spray.innerHTML = makeSpraySVG(tile);
         }
