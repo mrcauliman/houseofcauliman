@@ -326,6 +326,7 @@
     <div class="kpi">
       <div class="pill"><span class="dot"></span><span id="kTaken">0</span> taken</div>
       <a class="btn primary" href="/monolith/claim/" aria-label="claim a tile"><span>Claim a Tile</span></a>
+      <button class="btn" id="btnCenter" type="button" aria-label="return to center"><span>Return to Center</span></button>
     </div>
   </header>
 
@@ -1158,7 +1159,24 @@ const FEED_URL = "/assets/monolith/feed_live_v2.json?cb=" + Date.now();
     loadFeed().then(() => startNearSeed());
     setInterval(loadFeed, 15000);
   })();
-  </script>
+  
+    // Return to Center button
+    (function(){
+      const btn = document.getElementById("btnCenter");
+      if(!btn) return;
+      btn.addEventListener("click", () => {
+        try {
+          if (typeof startNearSeed === "function") { startNearSeed(); return; }
+          if (typeof centerView === "function") { centerView(); return; }
+          if (typeof recenter === "function") { recenter(); return; }
+        } catch (e) {}
+        try { window.scrollTo({ top: 0, left: 0, behavior: "smooth" }); }
+        catch (e) { window.scrollTo(0, 0); }
+      });
+    })();
+
+  
+</script>
 </body>
 </html>
 
