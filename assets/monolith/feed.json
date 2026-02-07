@@ -1,5 +1,6 @@
 [
   {
+    "id": "m0001",
     "tile": "E0-N0",
     "gx": 0,
     "gy": 0,
@@ -8,9 +9,10 @@
     "wallet_public": false,
     "link": "@monolith_wall",
     "note": "Leave your mark. Live forever.",
-    "ts": "2026-02-06"
+    "ts": "2026-02-07"
   },
   {
+    "id": "m0002",
     "tile": "E1-N0",
     "gx": 1,
     "gy": 0,
@@ -19,6 +21,6 @@
     "wallet_public": false,
     "link": "@mrcauliman",
     "note": "Foundational wallet. First liquidity. First fuel.",
-    "ts": "2026-02-06"
+    "ts": "2026-02-07"
   }
 ]
