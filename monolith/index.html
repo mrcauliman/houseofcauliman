@@ -1174,61 +1174,8 @@ const FEED_URL = "/assets/monolith/feed_live_v2.json?cb=" + Date.now();
       if (typeof startNearSeed === "function") { startNearSeed(); return; }
       if (typeof centerOn === "function") { centerOn(0, 0); return; }
     } catch (e) {}
-    try { window.scrollTo({ top: 0, left: 0, behavior: "smooth" }); }
-    catch (e) { window.scrollTo(0, 0); }
   });
 })();
-// center=1 hard recenter hooks
-  (function(){
-    function hasCenterFlag(){
-      try { return new URLSearchParams(location.search).get("center") === "1"; }
-      catch(e){ return false; }
-    }
-
-    function cleanCenterFlag(){
-      try {
-        const u = new URL(location.href);
-        u.searchParams.delete("center");
-        u.searchParams.delete("cb");
-        history.replaceState(null, "", u.pathname + (u.searchParams.toString() ? ("?" + u.searchParams.toString()) : "") + (u.hash || ""));
-      } catch (e) {}
-    }
-
-    // Always force recenter via URL jump so it works even if internal camera funcs change
-    const btn = document.getElementById("btnCenter");
-    if (btn) {
-      btn.addEventListener("click", () => {
-        try {
-          const u = new URL(location.href);
-          u.searchParams.set("center", "1");
-          u.searchParams.set("cb", String(Date.now()));
-          location.href = u.pathname + "?" + u.searchParams.toString() + (u.hash || "");
-        } catch (e) {
-          location.href = "/monolith/?center=1&cb=" + Date.now();
-        }
-      });
-    }
-
-    // If center=1 present, recenter after feed load has run
-    if (hasCenterFlag()) {
-      const once = () => {
-        try { if (typeof startNearSeed === "function") startNearSeed(); } catch(e) {}
-        cleanCenterFlag();
-      };
-
-      // If loadFeed is around, wait for it, else just fire
-      try {
-        if (typeof loadFeed === "function") {
-          Promise.resolve(loadFeed()).then(() => setTimeout(once, 50)).catch(() => setTimeout(once, 50));
-        } else {
-          setTimeout(once, 50);
-        }
-      } catch (e) {
-        setTimeout(once, 50);
-      }
-    }
-  })();
-
 </script>
 </body>
 </html>
