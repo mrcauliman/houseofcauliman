@@ -465,7 +465,10 @@
       ZMAX: 2.75,
 
       ptrs: new Map(),
-      pinch: null
+      pinch: null,
+
+      movedDist: 0,
+      justPinchedUntil: 0
     };
 
     function clamp(v, a, b){ return Math.max(a, Math.min(b, v)); }
@@ -931,6 +934,7 @@
 
         state.moved = false;
         state.dragging = false;
+        state.movedDist = 0;
 
         state.vx = 0;
         state.vy = 0;
@@ -965,6 +969,8 @@
         startZoom: state.zoom,
         anchorWX, anchorWY
       };
+
+      state.justPinchedUntil = performance.now() + 120;
 
       state.dragging = false;
       vp.classList.remove("dragging");
@@ -1026,28 +1032,25 @@
       const dx = e.clientX - state.lastX;
       const dy = e.clientY - state.lastY;
 
+      state.lastX = e.clientX;
+      state.lastY = e.clientY;
+
+      state.movedDist += Math.abs(dx) + Math.abs(dy);
+
       const distFromStart = Math.abs(e.clientX - state.dragStartX) + Math.abs(e.clientY - state.dragStartY);
       const thresh = (e.pointerType === "mouse") ? state.DRAG_MOUSE : state.DRAG_TOUCH;
 
       if(!state.dragging){
-        if(distFromStart < thresh){
-          return;
-        }
+        if(distFromStart < thresh) return;
 
         state.dragging = true;
         state.moved = true;
         vp.classList.add("dragging");
 
-        state.lastX = e.clientX;
-        state.lastY = e.clientY;
-
         state.vx = 0;
         state.vy = 0;
         return;
       }
-
-      state.lastX = e.clientX;
-      state.lastY = e.clientY;
 
       const s = Math.max(0.2, state.zoom);
       state.camX -= dx / s;
@@ -1065,6 +1068,9 @@
       state.ptrs.delete(e.pointerId);
 
       if(state.ptrs.size < 2){
+        if(state.pinch){
+          state.justPinchedUntil = performance.now() + 140;
+        }
         state.pinch = null;
       }
 
@@ -1072,12 +1078,16 @@
         if(state.ptrs.size > 0){
           const nextId = Array.from(state.ptrs.keys())[0];
           const nextPt = state.ptrs.get(nextId);
+
           state.pid = nextId;
           state.lastX = nextPt ? nextPt.x : state.lastX;
           state.lastY = nextPt ? nextPt.y : state.lastY;
+
           state.dragStartX = state.lastX;
           state.dragStartY = state.lastY;
+
           state.down = true;
+
           state.dragging = false;
           vp.classList.remove("dragging");
           return;
@@ -1090,7 +1100,9 @@
         state.dragging = false;
         vp.classList.remove("dragging");
 
-        if(!state.moved){
+        const recentlyPinched = performance.now() < state.justPinchedUntil;
+
+        if(!state.moved || recentlyPinched || state.movedDist < 12){
           state.vx = 0;
           state.vy = 0;
         }
@@ -1114,8 +1126,13 @@
       const sx = clamp(e.clientX - rect.left, 0, w);
       const sy = clamp(e.clientY - rect.top, 0, h);
 
-      const delta = e.deltaY;
-      const factor = Math.exp(-delta * 0.0012);
+      const dy = e.deltaY || 0;
+
+      const isTrackpad = (e.deltaMode === 0) && (Math.abs(dy) < 50);
+      const base = isTrackpad ? 0.0016 : 0.00115;
+      const ctrlBoost = (e.ctrlKey || e.metaKey) ? 2.6 : 1.0;
+
+      const factor = Math.exp(-dy * base * ctrlBoost);
       const newZoom = state.zoom * factor;
 
       applyZoomAtScreen(newZoom, sx, sy);
