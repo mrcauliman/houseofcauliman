@@ -1017,12 +1017,36 @@ const FEED_URL = "/assets/monolith/feed_live_v2.json?cb=" + Date.now();
       state.vy = (dy / s);
     }
 
-    function onUp(e){
-      state.ptrs.delete(e.pointerId);
+function onUp(e){
+  state.ptrs.delete(e.pointerId);
 
-      if(state.ptrs.size < 2){
-        state.pinch = null;
-      }
+  // If we were pinching and one finger lifts, drop pinch cleanly
+  if(state.ptrs.size < 2){
+    state.pinch = null;
+  }
+
+  // If the active drag pointer lifted but another pointer is still down,
+  // hand off drag control to the remaining pointer without snapping
+  if(e.pointerId === state.pid){
+    if(state.ptrs.size > 0){
+      const nextId = Array.from(state.ptrs.keys())[0];
+      const nextPt = state.ptrs.get(nextId);
+      state.pid = nextId;
+      state.lastX = nextPt ? nextPt.x : state.lastX;
+      state.lastY = nextPt ? nextPt.y : state.lastY;
+      state.down = true;
+      return;
+    }
+  }
+
+  // No pointers left
+  if(state.ptrs.size === 0){
+    state.down = false;
+    state.pid = null;
+    vp.classList.remove("dragging");
+    setTimeout(() => { state.moved = false; }, 0);
+  }
+}
 
       if(e.pointerId === state.pid){
         if(state.ptrs.size > 0){
@@ -1055,7 +1079,8 @@ const FEED_URL = "/assets/monolith/feed_live_v2.json?cb=" + Date.now();
       const sy = clamp(e.clientY - rect.top, 0, h);
 
       const delta = e.deltaY;
-      const factor = Math.exp(-delta * 0.0012);
+const boost = e.ctrlKey ? 2.4 : 1.0;
+const factor = Math.exp(-delta * 0.0012 * boost);
       const newZoom = state.zoom * factor;
 
       applyZoomAtScreen(newZoom, sx, sy);
