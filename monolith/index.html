@@ -250,34 +250,6 @@
     }
     .copy:hover{border-color:rgba(47,191,107,.55)}
 
-    .linka{
-      border:1px solid rgba(23,53,36,.95);
-      background:rgba(7,9,11,.26);
-      color:rgba(245,247,244,.94);
-      border-radius:999px;
-      padding:6px 10px;
-      font-weight:1000;
-      letter-spacing:.2px;
-      font-size:11px;
-      display:inline-flex;align-items:center;gap:8px;
-      max-width:100%;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-    }
-    .linka:hover{border-color:rgba(47,191,107,.55)}
-
-    .badge{
-      border:1px solid rgba(47,191,107,.55);
-      background:rgba(47,191,107,.12);
-      color:rgba(245,247,244,.92);
-      border-radius:999px;
-      padding:5px 9px;
-      font-weight:1000;
-      letter-spacing:.2px;
-      font-size:11px;
-    }
-
     .toast{
       position:fixed;
       left:50%;
@@ -303,6 +275,26 @@
     .toast.good{border-color:rgba(47,191,107,.75)}
     .toast.warn{border-color:rgba(255,225,117,.75)}
     .toast.bad{border-color:rgba(255,91,91,.75)}
+
+    #dbg{
+      position:fixed;
+      left:12px;
+      bottom:12px;
+      z-index:60;
+      border:1px solid rgba(23,53,36,.95);
+      background:rgba(7,9,11,.72);
+      backdrop-filter: blur(10px);
+      border-radius:14px;
+      padding:10px 12px;
+      font-weight:1000;
+      letter-spacing:.2px;
+      font-size:12px;
+      max-width:92vw;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      color:rgba(245,247,244,.9);
+    }
   </style>
 </head>
 
@@ -326,7 +318,6 @@
     <div class="kpi">
       <div class="pill"><span class="dot"></span><span id="kTaken">0</span> taken</div>
       <a class="btn primary" href="/monolith/claim/" aria-label="claim a tile"><span>Claim a Tile</span></a>
-      <button class="btn" id="btnCenter" type="button" aria-label="return to center"><span>Return to Center</span></button>
     </div>
   </header>
 
@@ -349,22 +340,8 @@
         <div class="k">Coords</div><div class="v" id="vCoords">0, 0</div>
         <div class="k">Tag</div><div class="v" id="vTag">Open</div>
         <div class="k">Date</div><div class="v" id="vTs">None</div>
-
         <div class="k">Wallet</div>
-        <div class="v" id="vWalletWrap">
-          <span class="badge" id="vVerified" style="display:none">Verified owner</span>
-          <span id="vWalletMasked">None</span>
-          <span id="vWalletFull" style="display:none">None</span>
-          <button class="copy" id="revealWallet" type="button" style="display:none">Reveal</button>
-          <button class="copy" id="hideWallet" type="button" style="display:none">Hide</button>
-          <button class="copy" id="copyWallet" type="button" style="display:none">Copy</button>
-        </div>
-
-        <div class="k">Link or Handle</div>
-        <div class="v" id="vLinkWrap">
-          <span id="vLink">None</span>
-        </div>
-
+        <div class="v" id="vWalletWrap"><span id="vWallet">None</span><button class="copy" id="copyWallet" type="button">Copy</button></div>
         <div class="k">Note</div><div class="v" id="vNote">None</div>
       </div>
       <div class="muted" id="vBody">Tap a tile to inspect details.</div>
@@ -372,30 +349,27 @@
   </aside>
 
   <div class="toast" id="toast" aria-label="toast"></div>
+  <div id="dbg">dbg: boot</div>
 
   <script>
   (() => {
-const FEED_URL = "/assets/monolith/feed_live_v2.json?cb=" + Date.now();
+    const FEED_URL = "/assets/monolith/feed.json";
 
     const MONOLITH_TILE = "E0-N0";
     const MONOLITH_TAG  = "MONOLITH";
     const MONOLITH_LOGO = "/monolith/assets/monolith_logo.webp";
 
-    // MONOLITH wallet is always "verified but hidden"
     const MONOLITH_WALLET = "r9iKXkMGF2HxAEsCLqdrghWpJmfFZN1Gw8";
 
     const CREATOR_TILE = "E1-N0";
     const CREATOR_TAG  = "MRCAULIMAN";
-    const CREATOR_LOGO_CANDIDATES = [
-      "/assets/monolith/mrcauliman_logo.webp",
-      "/assets/monolith/mrcauliman_logo.png"
-    ];
-    let CREATOR_LOGO = CREATOR_LOGO_CANDIDATES[0];
+    const CREATOR_LOGO = "/monolith/assets/mrcauliman_logo.webp";
 
     const vp    = document.getElementById("vp");
     const world = document.getElementById("world");
     const panel = document.getElementById("panel");
     const toast = document.getElementById("toast");
+    const dbg   = document.getElementById("dbg");
 
     const el = {
       q: document.getElementById("q"),
@@ -409,19 +383,9 @@ const FEED_URL = "/assets/monolith/feed_live_v2.json?cb=" + Date.now();
       vCoords: document.getElementById("vCoords"),
       vTag: document.getElementById("vTag"),
       vTs: document.getElementById("vTs"),
-
-      vVerified: document.getElementById("vVerified"),
-
+      vWallet: document.getElementById("vWallet"),
       vWalletWrap: document.getElementById("vWalletWrap"),
-      vWalletMasked: document.getElementById("vWalletMasked"),
-      vWalletFull: document.getElementById("vWalletFull"),
-      revealWallet: document.getElementById("revealWallet"),
-      hideWallet: document.getElementById("hideWallet"),
       copyWallet: document.getElementById("copyWallet"),
-
-      vLinkWrap: document.getElementById("vLinkWrap"),
-      vLink: document.getElementById("vLink"),
-
       vNote: document.getElementById("vNote"),
       vBody: document.getElementById("vBody")
     };
@@ -447,10 +411,7 @@ const FEED_URL = "/assets/monolith/feed_live_v2.json?cb=" + Date.now();
       lastKey: "",
       raf: 0,
 
-      walletFull: "",
-      walletMasked: "",
-      walletPublic: false,
-      walletRevealed: false,
+      activeWallet: "",
 
       zoom: 1,
       ZMIN: 0.55,
@@ -461,6 +422,12 @@ const FEED_URL = "/assets/monolith/feed_live_v2.json?cb=" + Date.now();
     };
 
     function clamp(v, a, b){ return Math.max(a, Math.min(b, v)); }
+
+    function dbgSet(){
+      const cells = state.pool.length;
+      const taken = state.taken.size;
+      dbg.textContent = `dbg: step=${STEP} tile=${TILE} cells=${cells} taken=${taken} cam=${Math.round(state.camX)},${Math.round(state.camY)} zoom=${state.zoom.toFixed(2)}`;
+    }
 
     function toastShow(msg, kind){
       toast.className = "toast " + (kind || "");
@@ -555,63 +522,16 @@ const FEED_URL = "/assets/monolith/feed_live_v2.json?cb=" + Date.now();
 
     function closePanel(){ panel.classList.remove("open"); }
 
-    function maskWallet(addr){
+    function setWalletUI(addr){
       const w = String(addr || "").trim();
-      if(!w) return "";
-      if(w.length <= 10) return w;
-      const a = w.slice(0,4);
-      const b = w.slice(-3);
-      return `${a}...${b}`;
-    }
-
-    function setWalletUI(addr, isPublic, verified){
-      const w = String(addr || "").trim();
-
-      state.walletFull = w;
-      state.walletMasked = w ? maskWallet(w) : "";
-      state.walletPublic = !!isPublic;
-      state.walletRevealed = false;
-
-      el.vVerified.style.display = (verified && w) ? "inline-flex" : "none";
-
-      // Always show masked if wallet exists
-      el.vWalletMasked.textContent = state.walletMasked ? state.walletMasked : "None";
-      el.vWalletFull.textContent = w ? w : "None";
-
-      el.vWalletMasked.style.display = "inline";
-      el.vWalletFull.style.display = "none";
-
-      // Reveal button only when public
-      el.revealWallet.style.display = (w && state.walletPublic) ? "inline-flex" : "none";
-      el.hideWallet.style.display = "none";
-      el.copyWallet.style.display = "none";
-    }
-
-    function revealWallet(){
-      if(!state.walletPublic || !state.walletFull) return;
-      state.walletRevealed = true;
-      el.vWalletFull.style.display = "inline";
-      el.vWalletMasked.style.display = "none";
-      el.revealWallet.style.display = "none";
-      el.hideWallet.style.display = "inline-flex";
-      el.copyWallet.style.display = "inline-flex";
-    }
-
-    function hideWallet(){
-      state.walletRevealed = false;
-      el.vWalletFull.style.display = "none";
-      el.vWalletMasked.style.display = "inline";
-      el.hideWallet.style.display = "none";
-      el.copyWallet.style.display = "none";
-      el.revealWallet.style.display = (state.walletFull && state.walletPublic) ? "inline-flex" : "none";
+      state.activeWallet = w;
+      el.vWallet.textContent = w ? w : "None";
+      el.vWalletWrap.style.display = w ? "flex" : "none";
     }
 
     async function copyWallet(){
-      if(!state.walletPublic || !state.walletRevealed || !state.walletFull){
-        toastShow("reveal first", "warn");
-        return;
-      }
-      const w = String(state.walletFull || "").trim();
+      const w = String(state.activeWallet || "").trim();
+      if(!w){ toastShow("no wallet", "warn"); return; }
       try{
         await navigator.clipboard.writeText(w);
         toastShow("copied", "good");
@@ -631,95 +551,6 @@ const FEED_URL = "/assets/monolith/feed_live_v2.json?cb=" + Date.now();
           toastShow("copy fail", "bad");
         }
       }
-    }
-
-    function isPublicWallet(mark){
-      if(!mark) return false;
-      const a = mark.wallet_public === true;
-      const b = String(mark.wallet_visibility || "").toLowerCase() === "public";
-      const c = String(mark.visibility || "").toLowerCase() === "public";
-      const d = String(mark.public_wallet || "").toLowerCase() === "true";
-      return !!(a || b || c || d);
-    }
-
-    function cleanLinkRaw(s){
-      let v = String(s || "").trim();
-      v = v.replace(/\s+/g, "");
-      return v;
-    }
-
-    function isXHandle(v){
-      return /^@[A-Za-z0-9_]{1,15}$/.test(v);
-    }
-
-    function isHttpsUrl(v){
-      if(!v.startsWith("https://")) return false;
-      if(v.length < 9) return false;
-      if(v.length > 120) return false;
-      if(/[<>\s]/.test(v)) return false;
-      return true;
-    }
-
-    function shortUrl(u){
-      if(u.length <= 44) return u;
-      const a = u.slice(0, 26);
-      const b = u.slice(-14);
-      return a + "…" + b;
-    }
-
-    function setLinkUI(linkStr){
-      const raw = cleanLinkRaw(linkStr);
-      el.vLinkWrap.innerHTML = "";
-      if(!raw){
-        const s = document.createElement("span");
-        s.id = "vLink";
-        s.textContent = "None";
-        el.vLinkWrap.appendChild(s);
-        return;
-      }
-
-      if(isXHandle(raw)){
-        const user = raw.slice(1);
-        const a = document.createElement("a");
-        a.className = "linka";
-        a.href = "https://x.com/" + encodeURIComponent(user);
-        a.target = "_blank";
-        a.rel = "noopener noreferrer";
-        a.textContent = raw;
-        el.vLinkWrap.appendChild(a);
-        return;
-      }
-
-      if(isHttpsUrl(raw)){
-        const a = document.createElement("a");
-        a.className = "linka";
-        a.href = raw;
-        a.target = "_blank";
-        a.rel = "noopener noreferrer";
-        a.textContent = shortUrl(raw);
-        el.vLinkWrap.appendChild(a);
-        return;
-      }
-
-      const s = document.createElement("span");
-      s.id = "vLink";
-      s.textContent = "None";
-      el.vLinkWrap.appendChild(s);
-    }
-
-    async function resolveFirstWorking(cands){
-      for(const url of cands){
-        try{
-          const ok = await new Promise((res) => {
-            const img = new Image();
-            img.onload = () => res(true);
-            img.onerror = () => res(false);
-            img.src = url + "?cb=" + Date.now();
-          });
-          if(ok) return url;
-        }catch(_){}
-      }
-      return cands[0];
     }
 
     function openPanel(tile, gx, gy){
@@ -742,13 +573,10 @@ const FEED_URL = "/assets/monolith/feed_live_v2.json?cb=" + Date.now();
         if(isCreator  && !mark.note) el.vNote.textContent = "Foundational wallet. First liquidity. First fuel.";
 
         if(isMonolith){
-          setWalletUI(MONOLITH_WALLET, false, true);
+          setWalletUI(mark.wallet ? String(mark.wallet) : MONOLITH_WALLET);
         } else {
-          const w = mark.wallet ? String(mark.wallet) : "";
-          setWalletUI(w, isPublicWallet(mark), !!w);
+          setWalletUI("");
         }
-
-        setLinkUI(mark.link || "");
 
         el.vBody.textContent = mark.note ? String(mark.note) : "Taken tile. Locked in feed.";
       } else {
@@ -756,17 +584,15 @@ const FEED_URL = "/assets/monolith/feed_live_v2.json?cb=" + Date.now();
         el.vTs.textContent  = "None";
 
         if(isMonolith){
-          setWalletUI(MONOLITH_WALLET, false, true);
+          setWalletUI(MONOLITH_WALLET);
           el.vNote.textContent = "Leave your mark. Live forever.";
         } else if(isCreator){
-          setWalletUI("", false, false);
+          setWalletUI("");
           el.vNote.textContent = "Foundational wallet. First liquidity. First fuel.";
         } else {
-          setWalletUI("", false, false);
+          setWalletUI("");
           el.vNote.textContent = "None";
         }
-
-        setLinkUI("");
 
         el.vBody.textContent = taken ? "This tile exists in feed but has no display fields." : "This tile is open.";
       }
@@ -787,6 +613,7 @@ const FEED_URL = "/assets/monolith/feed_live_v2.json?cb=" + Date.now();
       const rows = Math.ceil(visH / STEP) + state.POOL_PAD * 2;
 
       if(cols === state.cols && rows === state.rows && state.pool.length){
+        dbgSet();
         return;
       }
 
@@ -811,6 +638,7 @@ const FEED_URL = "/assets/monolith/feed_live_v2.json?cb=" + Date.now();
           openPanel(tile, gx, gy);
         }, { passive:true });
       }
+      dbgSet();
     }
 
     function setCell(cell, gx, gy){
@@ -882,6 +710,7 @@ const FEED_URL = "/assets/monolith/feed_live_v2.json?cb=" + Date.now();
           setCell(state.pool[i++], gx, gy);
         }
       }
+      dbgSet();
     }
 
     function updateWorldTransform(){
@@ -909,18 +738,16 @@ const FEED_URL = "/assets/monolith/feed_live_v2.json?cb=" + Date.now();
     }
 
     function onDown(e){
+      state.down = true;
+      state.pid = e.pointerId;
+      state.lastX = e.clientX;
+      state.lastY = e.clientY;
+      state.moved = false;
+
       state.ptrs.set(e.pointerId, { x:e.clientX, y:e.clientY });
 
-      if(state.pid === null){
-        state.down = true;
-        state.pid = e.pointerId;
-        state.lastX = e.clientX;
-        state.lastY = e.clientY;
-        state.moved = false;
-        vp.classList.add("dragging");
-      }
-
-      try{ vp.setPointerCapture(e.pointerId); } catch(_){}
+      vp.classList.add("dragging");
+      try{ vp.setPointerCapture(state.pid); } catch(_){}
     }
 
     function beginPinchIfReady(){
@@ -944,6 +771,7 @@ const FEED_URL = "/assets/monolith/feed_live_v2.json?cb=" + Date.now();
       state.pinch = {
         startDist: dist,
         startZoom: state.zoom,
+        midX, midY,
         anchorWX, anchorWY
       };
     }
@@ -963,6 +791,7 @@ const FEED_URL = "/assets/monolith/feed_live_v2.json?cb=" + Date.now();
       state.lastKey = "";
       updateWorldTransform();
       renderPool();
+      dbgSet();
     }
 
     function onMove(e){
@@ -1017,55 +846,27 @@ const FEED_URL = "/assets/monolith/feed_live_v2.json?cb=" + Date.now();
       state.vy = (dy / s);
     }
 
-function onUp(e){
-  state.ptrs.delete(e.pointerId);
+    function onUp(e){
+      state.ptrs.delete(e.pointerId);
 
-  // If we were pinching and one finger lifts, drop pinch cleanly
-  if(state.ptrs.size < 2){
-    state.pinch = null;
-  }
+      if(state.ptrs.size < 2){
+        state.pinch = null;
+      }
 
-  // If the active drag pointer lifted but another pointer is still down,
-  // hand off drag control to the remaining pointer without snapping
-  if(e.pointerId === state.pid){
-    if(state.ptrs.size > 0){
-      const nextId = Array.from(state.ptrs.keys())[0];
-      const nextPt = state.ptrs.get(nextId);
-      state.pid = nextId;
-      state.lastX = nextPt ? nextPt.x : state.lastX;
-      state.lastY = nextPt ? nextPt.y : state.lastY;
-      state.down = true;
-      return;
-    }
-  }
-
-  // No pointers left
-  if(state.ptrs.size === 0){
-    state.down = false;
-    state.pid = null;
-    vp.classList.remove("dragging");
-    setTimeout(() => { state.moved = false; }, 0);
-  }
-}
-
-      if(e.pointerId === state.pid){
-        if(state.ptrs.size > 0){
-          const nextId = Array.from(state.ptrs.keys())[0];
-          const nextPt = state.ptrs.get(nextId);
-          state.pid = nextId;
-          state.lastX = nextPt ? nextPt.x : state.lastX;
-          state.lastY = nextPt ? nextPt.y : state.lastY;
-          state.down = true;
-          return;
+      if(e.pointerId !== state.pid){
+        if(state.ptrs.size === 0){
+          state.down = false;
+          state.pid = null;
+          vp.classList.remove("dragging");
+          setTimeout(() => { state.moved = false; }, 0);
         }
+        return;
       }
 
-      if(state.ptrs.size === 0){
-        state.down = false;
-        state.pid = null;
-        vp.classList.remove("dragging");
-        setTimeout(() => { state.moved = false; }, 0);
-      }
+      state.down = false;
+      state.pid = null;
+      vp.classList.remove("dragging");
+      setTimeout(() => { state.moved = false; }, 0);
     }
 
     function onWheel(e){
@@ -1079,30 +880,15 @@ function onUp(e){
       const sy = clamp(e.clientY - rect.top, 0, h);
 
       const delta = e.deltaY;
-const boost = e.ctrlKey ? 2.4 : 1.0;
-const factor = Math.exp(-delta * 0.0012 * boost);
+      const factor = Math.exp(-delta * 0.0012);
       const newZoom = state.zoom * factor;
 
       applyZoomAtScreen(newZoom, sx, sy);
     }
 
     function centerOn(gx, gy){
-      // hard snap to coords
       state.camX = gx * STEP;
       state.camY = gy * STEP;
-
-      // kill momentum so it cannot drift after recenter
-      state.vx = 0;
-      state.vy = 0;
-
-      // clear drag and pinch state
-      state.down = false;
-      state.pinch = null;
-      state.pid = null;
-      try{ if(state.ptrs && state.ptrs.clear) state.ptrs.clear(); }catch(e){}
-      try{ vp.classList.remove("dragging"); }catch(e){}
-
-      // force redraw
       state.lastKey = "";
       updateWorldTransform();
       renderPool();
@@ -1142,13 +928,6 @@ const factor = Math.exp(-delta * 0.0012 * boost);
               ts: it.ts || null,
               img: it.img || null,
               wallet: it.wallet || null,
-
-              wallet_public: it.wallet_public === true,
-              wallet_visibility: it.wallet_visibility || null,
-              visibility: it.visibility || null,
-              public_wallet: it.public_wallet || null,
-
-              link: it.link || null,
               note: it.note || null
             });
           }
@@ -1161,23 +940,19 @@ const factor = Math.exp(-delta * 0.0012 * boost);
 
         state.lastKey = "";
         renderPool();
-      }catch(_){
+        dbgSet();
+      }catch(e){
         toastShow("feed fail", "warn");
+        dbgSet();
       }
     }
 
     function startNearSeed(){
-      try{ centerOn(0, 0); }catch(e){}
-      try{ closePanel(); }catch(e){}
-      try{ state.lastKey = ""; }catch(e){}
-      try{ updateWorldTransform(); }catch(e){}
-      try{ renderPool(); }catch(e){}
+      centerOn(0, 0);
+      closePanel();
     }
 
     el.copyWallet.addEventListener("click", copyWallet, { passive:true });
-    el.revealWallet.addEventListener("click", revealWallet, { passive:true });
-    el.hideWallet.addEventListener("click", hideWallet, { passive:true });
-
     el.close.addEventListener("click", closePanel, { passive:true });
     el.go.addEventListener("click", handleGo, { passive:true });
     el.q.addEventListener("keydown", (e) => { if(e.key === "Enter") handleGo(); }, { passive:true });
@@ -1192,34 +967,9 @@ const factor = Math.exp(-delta * 0.0012 * boost);
     renderPool();
     requestAnimationFrame(tick);
 
-    resolveFirstWorking(CREATOR_LOGO_CANDIDATES).then((u) => {
-      CREATOR_LOGO = u;
-      state.lastKey = "";
-      renderPool();
-    });
-
     loadFeed().then(() => startNearSeed());
     setInterval(loadFeed, 15000);
   })();
-  
-    // Return to Center button
-    (function(){
-      const btn = document.getElementById("btnCenter");
-      if(!btn) return;
-      btn.addEventListener("click", () => {
-        try {
-          if (typeof startNearSeed === "function") { startNearSeed(); return; }
-          if (typeof centerView === "function") { centerView(); return; }
-          if (typeof recenter === "function") { recenter(); return; }
-        } catch (e) {}
-        try { window.scrollTo({ top: 0, left: 0, behavior: "smooth" }); }
-        catch (e) { window.scrollTo(0, 0); }
-      });
-    })();
-
-  
-</script>
+  </script>
 </body>
 </html>
-
-<!-- rebuild 2026-02-06T23:41:16Z -->
