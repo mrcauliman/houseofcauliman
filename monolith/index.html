@@ -1062,8 +1062,22 @@ const FEED_URL = "/assets/monolith/feed_live_v2.json?cb=" + Date.now();
     }
 
     function centerOn(gx, gy){
+      // hard snap to coords
       state.camX = gx * STEP;
       state.camY = gy * STEP;
+
+      // kill momentum so it cannot drift after recenter
+      state.vx = 0;
+      state.vy = 0;
+
+      // clear drag and pinch state
+      state.down = false;
+      state.pinch = null;
+      state.pid = null;
+      try{ if(state.ptrs && state.ptrs.clear) state.ptrs.clear(); }catch(e){}
+      try{ vp.classList.remove("dragging"); }catch(e){}
+
+      // force redraw
       state.lastKey = "";
       updateWorldTransform();
       renderPool();
@@ -1128,8 +1142,11 @@ const FEED_URL = "/assets/monolith/feed_live_v2.json?cb=" + Date.now();
     }
 
     function startNearSeed(){
-      centerOn(0, 0);
-      closePanel();
+      try{ centerOn(0, 0); }catch(e){}
+      try{ closePanel(); }catch(e){}
+      try{ state.lastKey = ""; }catch(e){}
+      try{ updateWorldTransform(); }catch(e){}
+      try{ renderPool(); }catch(e){}
     }
 
     el.copyWallet.addEventListener("click", copyWallet, { passive:true });
