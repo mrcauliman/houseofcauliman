@@ -33,6 +33,7 @@
       display:flex;align-items:center;justify-content:space-between;gap:12px;
       padding:14px 14px;border:1px solid var(--line);border-radius:16px;
       background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      flex-wrap:wrap;
     }
     .brand{display:flex;align-items:center;gap:10px}
     .mark{
@@ -61,7 +62,7 @@
     .grid{
       margin-top:14px;
       display:grid;
-      grid-template-columns: 1.1fr .9fr;
+      grid-template-columns: 1.15fr .85fr;
       gap:14px;
     }
     @media (max-width: 900px){
@@ -97,6 +98,9 @@
       outline:none;
       font-size:14px;
     }
+    input[type="file"]{
+      padding:10px;
+    }
     textarea{min-height:92px;resize:vertical}
     .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
     @media (max-width: 540px){
@@ -120,12 +124,10 @@
     .msg.bad{
       border-color:rgba(255,107,107,.45);
       background:rgba(255,107,107,.08);
-      color:var(--text);
     }
     .msg.good{
       border-color:rgba(139,242,139,.35);
       background:rgba(139,242,139,.06);
-      color:var(--text);
     }
     pre{
       margin:10px 0 0;
@@ -166,6 +168,29 @@
       color:var(--muted);
       margin-right:8px;
     }
+    .preview{
+      display:none;
+      margin-top:10px;
+      padding:10px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.20);
+      gap:10px;
+      align-items:center;
+    }
+    .preview img{
+      width:64px;height:64px;border-radius:14px;
+      object-fit:cover;
+      border:1px solid var(--line2);
+      background:rgba(255,255,255,.03);
+    }
+    .preview .meta{
+      color:var(--muted);
+      font-size:12.5px;
+      overflow-wrap:anywhere;
+    }
+    .rules ul{margin:8px 0 0 18px;padding:0}
+    .rules li{margin:6px 0}
   </style>
 </head>
 <body>
@@ -175,7 +200,7 @@
         <div class="mark">M</div>
         <div class="hgroup">
           <h1>MONOLITH Claim</h1>
-          <p class="sub">Create a claim payload, operator adds tile after verification</p>
+          <p class="sub">Generate a claim payload. Operator verifies and writes the tile.</p>
         </div>
       </div>
       <div class="nav">
@@ -189,8 +214,7 @@
       <div class="card">
         <h2>Claim form</h2>
         <p class="hint">
-          Enter your tile coordinate and your wallet. Add a tag, link, and note if you want.
-          This page stays clean by default. Errors show only after submit.
+          This page stays clean by default. Errors show only after submit or copy. Debug output requires <code>?debug=1</code>.
         </p>
 
         <form id="claimForm" autocomplete="off">
@@ -219,6 +243,13 @@
           <label for="note">Note</label>
           <textarea id="note" name="note" placeholder="Short message, keep it clean"></textarea>
 
+          <label for="image">Image upload</label>
+          <input id="image" name="image" type="file" accept="image/*" />
+          <div id="imgPreview" class="preview">
+            <img id="imgThumb" alt="preview" />
+            <div class="meta" id="imgMeta"></div>
+          </div>
+
           <div class="bar">
             <button type="submit" class="btn primary">Generate claim payload</button>
             <button type="button" id="copyBtn" class="btn">Copy payload</button>
@@ -231,35 +262,34 @@
           <pre id="claimOut"></pre>
         </form>
 
+        <div class="mini rules">
+          <span class="k">Rules</span><b>Claim requirements</b>
+          <ul>
+            <li>Tile must be <code>E###-N###</code> with optional negative numbers</li>
+            <li>Wallet must be a valid XRPL classic address starting with <code>r</code></li>
+            <li>Tag is optional, 1 to 18 chars, letters numbers underscore only</li>
+            <li>Link is optional, either <code>@handle</code> or <code>https://</code></li>
+            <li>Note is optional, max 160, no angle brackets</li>
+            <li>Image is optional, PNG JPG WEBP only, max 2 MB</li>
+            <li>Payload includes image metadata. Base64 image data is included only if 200 KB or smaller</li>
+          </ul>
+        </div>
+
         <div class="mini">
-          <span class="k">Operator</span>
-          <b>What happens next</b><br />
-          You submit this payload to the operator flow.
-          The operator verifies payment and wallet control, then runs <code>monolith_feed_add</code> and pushes.
+          <span class="k">Operator</span><b>What happens next</b><br />
+          Operator verifies payment and wallet control, then writes to the feed and pushes the update.
         </div>
       </div>
 
       <div class="card">
-        <h2>Formatting</h2>
+        <h2>Notes</h2>
         <div class="mini">
-          <b>Tile format</b><br />
-          Must be <code>E###-N###</code> with optional minus. Examples <code>E0-N0</code>, <code>E7-N12</code>, <code>E-3-N0</code>, <code>E0-N-9</code>.
+          <b>Clean default law</b><br />
+          No error blocks on load. No debug output without <code>?debug=1</code>. Output appears only after you act.
         </div>
         <div class="mini">
-          <b>Wallet</b><br />
-          XRPL classic address starting with <code>r</code>. Must pass base58 charset rules and length guard.
-        </div>
-        <div class="mini">
-          <b>Tag</b><br />
-          1 to 18 chars. Letters, numbers, underscore. No spaces.
-        </div>
-        <div class="mini">
-          <b>Link</b><br />
-          Either <code>@handle</code> or <code>https://</code>.
-        </div>
-        <div class="mini">
-          <b>Law</b><br />
-          Clean default. No debug noise on load. Debug output only with <code>?debug=1</code> and only after submit.
+          <b>Image handling</b><br />
+          This page does not upload to a server. Operator will host the final image and set the final image URL.
         </div>
       </div>
     </div>
@@ -275,6 +305,10 @@
       tag: document.getElementById("tag"),
       link: document.getElementById("link"),
       note: document.getElementById("note"),
+      img: document.getElementById("image"),
+      imgPreview: document.getElementById("imgPreview"),
+      imgThumb: document.getElementById("imgThumb"),
+      imgMeta: document.getElementById("imgMeta"),
       err: document.getElementById("claimError"),
       ok: document.getElementById("claimOk"),
       out: document.getElementById("claimOut"),
@@ -289,34 +323,22 @@
     let claimLastOut = null;
     let claimLastDebug = null;
 
-    function showOnceTriggered() {
+    let imageInfo = null;
+    let imageDataSmall = null;
+
+    function canShow() {
       return claimSubmitted;
     }
 
-    function setClaimError(msg) {
-      claimLastError = msg || null;
-      renderClaim();
-    }
-
-    function setClaimOk(msg) {
-      claimLastOk = msg || null;
-      renderClaim();
-    }
-
-    function setClaimOut(obj) {
-      claimLastOut = obj || null;
-      renderClaim();
-    }
-
-    function setClaimDebug(obj) {
-      claimLastDebug = obj || null;
-      renderClaim();
-    }
+    function setClaimError(msg) { claimLastError = msg || null; renderClaim(); }
+    function setClaimOk(msg) { claimLastOk = msg || null; renderClaim(); }
+    function setClaimOut(obj) { claimLastOut = obj || null; renderClaim(); }
+    function setClaimDebug(obj) { claimLastDebug = obj || null; renderClaim(); }
 
     function renderClaim() {
-      const canShow = showOnceTriggered();
+      const show = canShow();
 
-      if (canShow && claimLastError) {
+      if (show && claimLastError) {
         el.err.style.display = "block";
         el.err.textContent = String(claimLastError);
       } else {
@@ -324,7 +346,7 @@
         el.err.textContent = "";
       }
 
-      if (canShow && claimLastOk) {
+      if (show && claimLastOk) {
         el.ok.style.display = "block";
         el.ok.textContent = String(claimLastOk);
       } else {
@@ -332,7 +354,7 @@
         el.ok.textContent = "";
       }
 
-      if (canShow && claimLastOut) {
+      if (show && claimLastOut) {
         el.out.style.display = "block";
         el.out.textContent = JSON.stringify(claimLastOut, null, 2);
       } else {
@@ -340,7 +362,7 @@
         el.out.textContent = "";
       }
 
-      if (DEBUG_ENABLED && canShow && claimLastDebug) {
+      if (DEBUG_ENABLED && show && claimLastDebug) {
         el.dbg.style.display = "block";
         try {
           el.dbg.textContent = typeof claimLastDebug === "string"
@@ -404,41 +426,90 @@
       return v;
     }
 
+    function isAllowedImageType(type) {
+      return type === "image/png" || type === "image/jpeg" || type === "image/webp";
+    }
+
+    function resetImageState() {
+      imageInfo = null;
+      imageDataSmall = null;
+      el.img.value = "";
+      el.imgPreview.style.display = "none";
+      el.imgThumb.src = "";
+      el.imgMeta.textContent = "";
+    }
+
+    function readFileAsDataURL(file) {
+      return new Promise((resolve, reject) => {
+        const r = new FileReader();
+        r.onload = () => resolve(String(r.result || ""));
+        r.onerror = () => reject(new Error("image read failed"));
+        r.readAsDataURL(file);
+      });
+    }
+
+    el.img.addEventListener("change", async () => {
+      const f = el.img.files && el.img.files[0] ? el.img.files[0] : null;
+      imageInfo = null;
+      imageDataSmall = null;
+
+      if (!f) {
+        el.imgPreview.style.display = "none";
+        return;
+      }
+
+      if (!isAllowedImageType(f.type)) {
+        claimSubmitted = true;
+        setClaimError("Image type not allowed");
+        setClaimDebug({ error: "image type", type: f.type });
+        resetImageState();
+        return;
+      }
+
+      if (f.size > 2 * 1024 * 1024) {
+        claimSubmitted = true;
+        setClaimError("Image too large");
+        setClaimDebug({ error: "image size", size: f.size });
+        resetImageState();
+        return;
+      }
+
+      imageInfo = { name: f.name, type: f.type, size: f.size };
+
+      try {
+        const dataUrl = await readFileAsDataURL(f);
+        el.imgThumb.src = dataUrl;
+        el.imgPreview.style.display = "flex";
+        el.imgMeta.textContent = `${f.name}  |  ${f.type}  |  ${Math.round(f.size/1024)} KB`;
+
+        if (f.size <= 200 * 1024) {
+          imageDataSmall = dataUrl;
+        } else {
+          imageDataSmall = null;
+        }
+      } catch (e) {
+        claimSubmitted = true;
+        setClaimError("Image read failed");
+        setClaimDebug({ error: "image read failed" });
+        resetImageState();
+      }
+    });
+
     function buildPayload() {
       const t = parseTileInput(el.tile.value);
-      if (!t) {
-        setClaimError("Tile invalid");
-        setClaimDebug({ error: "tile invalid", input: el.tile.value });
-        return null;
-      }
+      if (!t) { setClaimError("Tile invalid"); setClaimDebug({ error: "tile invalid", input: el.tile.value }); return null; }
 
       const w = String(el.wallet.value || "").trim();
-      if (!looksLikeXrplClassicAddress(w)) {
-        setClaimError("Wallet invalid");
-        setClaimDebug({ error: "wallet invalid", input: w });
-        return null;
-      }
+      if (!looksLikeXrplClassicAddress(w)) { setClaimError("Wallet invalid"); setClaimDebug({ error: "wallet invalid", input: w }); return null; }
 
       const tag = sanitizeTag(el.tag.value);
-      if (tag === null) {
-        setClaimError("Tag invalid");
-        setClaimDebug({ error: "tag invalid", input: el.tag.value });
-        return null;
-      }
+      if (tag === null) { setClaimError("Tag invalid"); setClaimDebug({ error: "tag invalid", input: el.tag.value }); return null; }
 
       const link = sanitizeLink(el.link.value);
-      if (link === null) {
-        setClaimError("Link invalid");
-        setClaimDebug({ error: "link invalid", input: el.link.value });
-        return null;
-      }
+      if (link === null) { setClaimError("Link invalid"); setClaimDebug({ error: "link invalid", input: el.link.value }); return null; }
 
       const note = sanitizeNote(el.note.value);
-      if (note === null) {
-        setClaimError("Note invalid");
-        setClaimDebug({ error: "note invalid", input: el.note.value });
-        return null;
-      }
+      if (note === null) { setClaimError("Note invalid"); setClaimDebug({ error: "note invalid", input: el.note.value }); return null; }
 
       const payload = {
         v: 1,
@@ -450,6 +521,12 @@
       if (tag) payload.tag = tag;
       if (link) payload.link = link;
       if (note) payload.note = note;
+
+      if (imageInfo) {
+        payload.image = { ...imageInfo };
+        if (imageDataSmall) payload.imageData = imageDataSmall;
+        else payload.imageNote = "image too large for inline, operator must host and set final URL";
+      }
 
       return payload;
     }
@@ -484,10 +561,7 @@
       setClaimDebug(null);
 
       const payload = buildPayload();
-      if (!payload) {
-        setClaimOut(null);
-        return;
-      }
+      if (!payload) return;
 
       setClaimOut(payload);
       setClaimOk("Payload generated");
@@ -525,6 +599,7 @@
       el.tag.value = "";
       el.link.value = "";
       el.note.value = "";
+      resetImageState();
       renderClaim();
     });
 
