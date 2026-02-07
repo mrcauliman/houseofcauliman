@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
   <title>MONOLITH | Claim a Tile</title>
+
   <style>
     :root{
       --bg:#07090b;
@@ -17,48 +18,109 @@
       --bad:#ff6b6b;
       --warn:#ffd166;
       --accent:#6aa9ff;
+
+      /* match MONOLITH wall top bar vibe */
+      --shadow:rgba(0,0,0,.45);
+      --radius:18px;
+      --green:#2fbf6b;
     }
+
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
-      background:var(--bg);
+      background:
+        radial-gradient(1200px 700px at 20% 0%, rgba(47,191,107,.12), transparent 55%),
+        radial-gradient(900px 650px at 85% 25%, rgba(255,209,102,.10), transparent 55%),
+        var(--bg);
       color:var(--text);
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       line-height:1.45;
       letter-spacing:.2px;
+      overflow-x:hidden;
+      padding-top:86px;
     }
+
     a{color:inherit;text-decoration:none}
+
     .wrap{max-width:980px;margin:0 auto;padding:18px 16px 44px}
+
+    /* TOP BAR parity */
     .top{
-      display:flex;align-items:center;justify-content:space-between;gap:12px;
-      padding:14px 14px;border:1px solid var(--line);border-radius:16px;
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      flex-wrap:wrap;
+      position:fixed;left:12px;right:12px;top:12px;
+      display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+      padding:10px 12px;
+      border:1px solid rgba(23,53,36,.9);
+      border-radius:18px;
+      background:rgba(7,9,11,.62);
+      box-shadow:0 18px 44px rgba(0,0,0,.35);
+      backdrop-filter: blur(10px);
+      z-index:999;
     }
     .brand{display:flex;align-items:center;gap:10px}
-    .mark{
-      width:34px;height:34px;border-radius:12px;
-      border:1px solid var(--line2);
-      background:rgba(255,255,255,.03);
-      display:grid;place-items:center;
-      font-weight:800;letter-spacing:.6px;
-    }
-    .hgroup{display:flex;flex-direction:column}
-    h1{margin:0;font-size:15px;letter-spacing:.6px;text-transform:uppercase}
-    .sub{margin:0;color:var(--muted);font-size:12.5px}
-    .nav{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    .brand img{width:34px;height:34px;object-fit:contain}
+    .brand .t{font-weight:1000;letter-spacing:.6px;font-size:13px;text-transform:uppercase;line-height:1.1}
+    .brand .s{margin-top:3px;color:rgba(233,238,247,.72);font-size:12px;line-height:1.2}
+    .sp{flex:1}
+
     .btn{
       display:inline-flex;align-items:center;justify-content:center;
       padding:10px 12px;border-radius:14px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.02);
+      border:1px solid rgba(23,53,36,.95);
+      background:rgba(11,27,19,.85);
       font-size:13px;color:var(--text);
       cursor:pointer;user-select:none;
+      letter-spacing:.3px;
+      font-weight:900;
+      -webkit-tap-highlight-color: transparent;
     }
+    .btn:hover{border-color:rgba(47,191,107,.55)}
     .btn.primary{
-      border-color:rgba(106,169,255,.45);
-      background:rgba(106,169,255,.10);
+      background:linear-gradient(180deg, rgba(47,191,107,.22), rgba(11,27,19,.88));
+      border-color:rgba(47,191,107,.65);
     }
+
+    .kpi{
+      display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+      color:rgba(233,238,247,.84);
+      font-size:12px;
+    }
+    .pill{
+      border:1px solid rgba(23,53,36,.95);
+      background:rgba(11,27,19,.72);
+      padding:8px 10px;
+      border-radius:999px;
+      font-weight:900;
+      letter-spacing:.2px;
+      display:inline-flex;align-items:center;gap:8px;
+    }
+    .dot{width:8px;height:8px;border-radius:999px;background:var(--green);box-shadow:0 0 0 3px rgba(47,191,107,.18)}
+
+    .search{
+      display:flex;align-items:center;gap:8px;
+      border:1px solid rgba(23,53,36,.95);
+      background:rgba(11,27,19,.72);
+      border-radius:14px;
+      padding:8px 10px;
+    }
+    .search input{
+      width:240px;
+      max-width:42vw;
+      border:0;
+      outline:0;
+      background:transparent;
+      color:var(--text);
+      font-weight:900;
+      letter-spacing:.2px;
+      font-size:12px;
+    }
+    .search input::placeholder{color:rgba(166,176,194,.70)}
+    .search .btn{
+      padding:8px 10px;
+      border-radius:12px;
+    }
+
+    /* content */
     .grid{
       margin-top:14px;
       display:grid;
@@ -67,27 +129,32 @@
     }
     @media (max-width: 900px){
       .grid{grid-template-columns:1fr}
-      .nav{justify-content:flex-start}
+      .kpi{justify-content:flex-start}
     }
+
     .card{
       border:1px solid var(--line);
       border-radius:16px;
-      background:var(--panel);
+      background:rgba(14,17,22,.92);
       padding:14px;
     }
+
     h2{
       margin:0 0 10px 0;
       font-size:14px;
       letter-spacing:.6px;
       text-transform:uppercase;
     }
+
     .hint{color:var(--muted);font-size:13px;margin:0 0 10px 0}
+
     label{
       display:block;
       margin:10px 0 6px;
       color:var(--muted);
       font-size:12.5px;
     }
+
     input, textarea{
       width:100%;
       border:1px solid var(--line);
@@ -98,18 +165,18 @@
       outline:none;
       font-size:14px;
     }
-    input[type="file"]{
-      padding:10px;
-    }
+
+    input[type="file"]{padding:10px}
     textarea{min-height:92px;resize:vertical}
+
     .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    @media (max-width: 540px){
-      .row{grid-template-columns:1fr}
-    }
+    @media (max-width: 540px){ .row{grid-template-columns:1fr} }
+
     .bar{
       display:flex;gap:10px;flex-wrap:wrap;
       margin-top:12px;
     }
+
     .msg{
       display:none;
       margin-top:10px;
@@ -129,6 +196,7 @@
       border-color:rgba(139,242,139,.35);
       background:rgba(139,242,139,.06);
     }
+
     pre{
       margin:10px 0 0;
       padding:10px;
@@ -141,6 +209,7 @@
       display:none;
       white-space:pre-wrap;
     }
+
     code{
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       font-size:12.5px;
@@ -149,12 +218,13 @@
       padding:2px 6px;
       border-radius:10px;
     }
+
     .mini{
       margin-top:10px;
       padding:12px;
       border-radius:16px;
       border:1px solid var(--line);
-      background:var(--panel2);
+      background:rgba(11,15,20,.92);
       color:var(--muted);
       font-size:13px;
     }
@@ -168,6 +238,7 @@
       color:var(--muted);
       margin-right:8px;
     }
+
     .preview{
       display:none;
       margin-top:10px;
@@ -189,27 +260,40 @@
       font-size:12.5px;
       overflow-wrap:anywhere;
     }
+
     .rules ul{margin:8px 0 0 18px;padding:0}
     .rules li{margin:6px 0}
   </style>
 </head>
+
 <body>
-  <div class="wrap">
-    <div class="top">
-      <div class="brand">
-        <div class="mark">M</div>
-        <div class="hgroup">
-          <h1>MONOLITH Claim</h1>
-          <p class="sub">Generate a claim payload. Operator verifies and writes the tile.</p>
-        </div>
-      </div>
-      <div class="nav">
-        <a class="btn" href="/monolith/">Back to Wall</a>
-        <a class="btn" href="/monolith/rules.html">Rules</a>
-        <a class="btn" href="/monolith/monolith_laws.html">Laws</a>
+  <header class="top">
+    <div class="brand">
+      <img src="/monolith/assets/monolith_logo.webp" alt="MONOLITH" />
+      <div>
+        <div class="t">MONOLITH</div>
+        <div class="s">Claim a tile. Leave your mark.</div>
       </div>
     </div>
 
+    <div class="sp"></div>
+
+    <div class="search" aria-label="jump to claim form">
+      <input id="claimJump" autocomplete="off" spellcheck="false" placeholder="Jump to claim form" />
+      <button class="btn" id="btnJump" type="button">Go</button>
+    </div>
+
+    <div class="kpi">
+      <div class="pill"><span class="dot"></span><span>CLAIM</span></div>
+      <a class="btn primary" href="/monolith/" aria-label="view wall"><span>View Wall</span></a>
+      <a class="btn" href="/monolith/?center=1&amp;cb=1" aria-label="return to center"><span>Return to Center</span></a>
+      <button class="btn" id="btnToForm" type="button" aria-label="scroll to claim form"><span>Claim Form</span></button>
+      <a class="btn" href="/monolith/rules.html" aria-label="rules"><span>Rules</span></a>
+      <a class="btn" href="/monolith/monolith_laws.html" aria-label="laws"><span>Laws</span></a>
+    </div>
+  </header>
+
+  <div class="wrap">
     <div class="grid">
       <div class="card">
         <h2>Claim form</h2>
@@ -315,6 +399,10 @@
       dbg: document.getElementById("claimDebug"),
       copy: document.getElementById("copyBtn"),
       clear: document.getElementById("clearBtn"),
+
+      btnToForm: document.getElementById("btnToForm"),
+      btnJump: document.getElementById("btnJump"),
+      claimJump: document.getElementById("claimJump"),
     };
 
     let claimSubmitted = false;
@@ -326,9 +414,7 @@
     let imageInfo = null;
     let imageDataSmall = null;
 
-    function canShow() {
-      return claimSubmitted;
-    }
+    function canShow() { return claimSubmitted; }
 
     function setClaimError(msg) { claimLastError = msg || null; renderClaim(); }
     function setClaimOk(msg) { claimLastOk = msg || null; renderClaim(); }
@@ -602,6 +688,27 @@
       resetImageState();
       renderClaim();
     });
+
+    function toForm(){
+      const target = document.getElementById("claimForm");
+      if(target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    if(el.btnToForm) el.btnToForm.addEventListener("click", toForm, { passive:true });
+
+    if(el.btnJump){
+      el.btnJump.addEventListener("click", () => {
+        const v = String(el.claimJump ? el.claimJump.value : "").trim();
+        if(v){
+          const m = v.match(/^#([A-Za-z0-9_-]+)$/);
+          if(m){
+            const t = document.getElementById(m[1]);
+            if(t){ t.scrollIntoView({ behavior:"smooth", block:"start" }); return; }
+          }
+        }
+        toForm();
+      }, { passive:true });
+    }
 
     renderClaim();
   </script>
