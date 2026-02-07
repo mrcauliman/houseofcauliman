@@ -1007,7 +1007,9 @@ const FEED_URL = "/assets/monolith/feed_live_v2.json?cb=" + Date.now();
       state.lastX = e.clientX;
       state.lastY = e.clientY;
 
-      if(Math.abs(dx) + Math.abs(dy) > 2) state.moved = true;
+const thresh = (e.pointerType === "mouse") ? 6 : 3;
+if(Math.abs(dx) + Math.abs(dy) > thresh) state.moved = true;
+
 
       const s = Math.max(0.2, state.zoom);
       state.camX -= dx / s;
