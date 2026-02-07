@@ -375,13 +375,12 @@
 
   <script>
   (() => {
-const FEED_URL = "/assets/monolith/feed_live_v2.json?cb=" + Date.now();
+    const FEED_URL = "/assets/monolith/feed_live_v2.json?cb=" + Date.now();
 
     const MONOLITH_TILE = "E0-N0";
     const MONOLITH_TAG  = "MONOLITH";
     const MONOLITH_LOGO = "/monolith/assets/monolith_logo.webp";
 
-    // MONOLITH wallet is always "verified but hidden"
     const MONOLITH_WALLET = "r9iKXkMGF2HxAEsCLqdrghWpJmfFZN1Gw8";
 
     const CREATOR_TILE = "E1-N0";
@@ -423,7 +422,9 @@ const FEED_URL = "/assets/monolith/feed_live_v2.json?cb=" + Date.now();
       vLink: document.getElementById("vLink"),
 
       vNote: document.getElementById("vNote"),
-      vBody: document.getElementById("vBody")
+      vBody: document.getElementById("vBody"),
+
+      btnCenter: document.getElementById("btnCenter")
     };
 
     const STEP = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--step").trim(), 10) || 128;
@@ -432,10 +433,17 @@ const FEED_URL = "/assets/monolith/feed_live_v2.json?cb=" + Date.now();
     const state = {
       camX: 0, camY: 0,
       vx: 0, vy: 0,
+
       down: false,
       pid: null,
       lastX: 0, lastY: 0,
+
       moved: false,
+      dragging: false,
+      dragStartX: 0,
+      dragStartY: 0,
+      DRAG_MOUSE: 7,
+      DRAG_TOUCH: 4,
 
       cols: 0, rows: 0,
       pool: [],
@@ -574,14 +582,12 @@ const FEED_URL = "/assets/monolith/feed_live_v2.json?cb=" + Date.now();
 
       el.vVerified.style.display = (verified && w) ? "inline-flex" : "none";
 
-      // Always show masked if wallet exists
       el.vWalletMasked.textContent = state.walletMasked ? state.walletMasked : "None";
       el.vWalletFull.textContent = w ? w : "None";
 
       el.vWalletMasked.style.display = "inline";
       el.vWalletFull.style.display = "none";
 
-      // Reveal button only when public
       el.revealWallet.style.display = (w && state.walletPublic) ? "inline-flex" : "none";
       el.hideWallet.style.display = "none";
       el.copyWallet.style.display = "none";
@@ -894,10 +900,12 @@ const FEED_URL = "/assets/monolith/feed_live_v2.json?cb=" + Date.now();
 
     function tick(){
       if(!state.down && !state.pinch){
-        state.vx *= 0.92;
-        state.vy *= 0.92;
-        if(Math.abs(state.vx) < 0.02) state.vx = 0;
-        if(Math.abs(state.vy) < 0.02) state.vy = 0;
+        state.vx *= 0.85;
+        state.vy *= 0.85;
+
+        if(Math.abs(state.vx) < 0.06) state.vx = 0;
+        if(Math.abs(state.vy) < 0.06) state.vy = 0;
+
         state.camX -= state.vx;
         state.camY -= state.vy;
       }
@@ -914,10 +922,18 @@ const FEED_URL = "/assets/monolith/feed_live_v2.json?cb=" + Date.now();
       if(state.pid === null){
         state.down = true;
         state.pid = e.pointerId;
+
         state.lastX = e.clientX;
         state.lastY = e.clientY;
+
+        state.dragStartX = e.clientX;
+        state.dragStartY = e.clientY;
+
         state.moved = false;
-        vp.classList.add("dragging");
+        state.dragging = false;
+
+        state.vx = 0;
+        state.vy = 0;
       }
 
       try{ vp.setPointerCapture(e.pointerId); } catch(_){}
@@ -941,11 +957,17 @@ const FEED_URL = "/assets/monolith/feed_live_v2.json?cb=" + Date.now();
       const anchorWX = state.camX + (midX - w*0.5) / state.zoom;
       const anchorWY = state.camY + (midY - h*0.5) / state.zoom;
 
+      state.vx = 0;
+      state.vy = 0;
+
       state.pinch = {
         startDist: dist,
         startZoom: state.zoom,
         anchorWX, anchorWY
       };
+
+      state.dragging = false;
+      vp.classList.remove("dragging");
     }
 
     function applyZoomAtScreen(newZoom, screenX, screenY){
@@ -1004,19 +1026,39 @@ const FEED_URL = "/assets/monolith/feed_live_v2.json?cb=" + Date.now();
       const dx = e.clientX - state.lastX;
       const dy = e.clientY - state.lastY;
 
+      const distFromStart = Math.abs(e.clientX - state.dragStartX) + Math.abs(e.clientY - state.dragStartY);
+      const thresh = (e.pointerType === "mouse") ? state.DRAG_MOUSE : state.DRAG_TOUCH;
+
+      if(!state.dragging){
+        if(distFromStart < thresh){
+          return;
+        }
+
+        state.dragging = true;
+        state.moved = true;
+        vp.classList.add("dragging");
+
+        state.lastX = e.clientX;
+        state.lastY = e.clientY;
+
+        state.vx = 0;
+        state.vy = 0;
+        return;
+      }
+
       state.lastX = e.clientX;
       state.lastY = e.clientY;
-
-const thresh = (e.pointerType === "mouse") ? 6 : 3;
-if(Math.abs(dx) + Math.abs(dy) > thresh) state.moved = true;
-
 
       const s = Math.max(0.2, state.zoom);
       state.camX -= dx / s;
       state.camY -= dy / s;
 
-      state.vx = (dx / s);
-      state.vy = (dy / s);
+      const vx = (dx / s);
+      const vy = (dy / s);
+
+      const vmax = 45;
+      state.vx = clamp(vx, -vmax, vmax);
+      state.vy = clamp(vy, -vmax, vmax);
     }
 
     function onUp(e){
@@ -1033,7 +1075,11 @@ if(Math.abs(dx) + Math.abs(dy) > thresh) state.moved = true;
           state.pid = nextId;
           state.lastX = nextPt ? nextPt.x : state.lastX;
           state.lastY = nextPt ? nextPt.y : state.lastY;
+          state.dragStartX = state.lastX;
+          state.dragStartY = state.lastY;
           state.down = true;
+          state.dragging = false;
+          vp.classList.remove("dragging");
           return;
         }
       }
@@ -1041,13 +1087,25 @@ if(Math.abs(dx) + Math.abs(dy) > thresh) state.moved = true;
       if(state.ptrs.size === 0){
         state.down = false;
         state.pid = null;
+        state.dragging = false;
         vp.classList.remove("dragging");
+
+        if(!state.moved){
+          state.vx = 0;
+          state.vy = 0;
+        }
+
         setTimeout(() => { state.moved = false; }, 0);
       }
     }
 
     function onWheel(e){
       e.preventDefault();
+
+      state.vx = 0;
+      state.vy = 0;
+      state.dragging = false;
+      vp.classList.remove("dragging");
 
       const w = vp.clientWidth;
       const h = vp.clientHeight;
@@ -1066,6 +1124,17 @@ if(Math.abs(dx) + Math.abs(dy) > thresh) state.moved = true;
     function centerOn(gx, gy){
       state.camX = gx * STEP;
       state.camY = gy * STEP;
+
+      state.vx = 0;
+      state.vy = 0;
+
+      state.down = false;
+      state.dragging = false;
+      state.pinch = null;
+      state.pid = null;
+      try{ if(state.ptrs && state.ptrs.clear) state.ptrs.clear(); }catch(e){}
+      vp.classList.remove("dragging");
+
       state.lastKey = "";
       updateWorldTransform();
       renderPool();
@@ -1148,6 +1217,13 @@ if(Math.abs(dx) + Math.abs(dy) > thresh) state.moved = true;
     vp.addEventListener("pointercancel", onUp, { passive:false });
     vp.addEventListener("wheel", onWheel, { passive:false });
 
+    if(el.btnCenter){
+      el.btnCenter.addEventListener("click", () => {
+        startNearSeed();
+        toastShow("centered", "good");
+      }, { passive:true });
+    }
+
     updateWorldTransform();
     renderPool();
     requestAnimationFrame(tick);
@@ -1158,45 +1234,11 @@ if(Math.abs(dx) + Math.abs(dy) > thresh) state.moved = true;
       renderPool();
     });
 
-    
-    // Force recenter when center=1 is present
-    (function(){
-      try {
-        const q = new URLSearchParams(location.search);
-        if (q.get("center") !== "1") return;
-        // Clean URL immediately so refresh stays clean
-        q.delete("center");
-        q.delete("cb");
-        const clean = location.pathname + (q.toString() ? ("?" + q.toString()) : "") + (location.hash || "");
-        history.replaceState(null, "", clean);
-      } catch (e) {}
-    })();
-
-    loadFeed().then(() => {
-      try {
-        const q = new URLSearchParams(location.search);
-        // If center flag was present, we already cleaned it above, so we cache the intent
-      } catch (e) {}
-      startNearSeed();
-    });
-  
+    loadFeed().then(() => startNearSeed());
     setInterval(loadFeed, 15000);
   })();
-  
-    // Return to Center button
-(function(){
-  const btn = document.getElementById("btnCenter");
-  if(!btn) return;
-  btn.addEventListener("click", () => {
-    const u = new URL(location.href);
-    u.searchParams.set("center", "1");
-    u.searchParams.set("cb", String(Date.now()));
-    location.href = u.pathname + "?" + u.searchParams.toString() + (u.hash || "");
-  });
-})();
-
-</script>
+  </script>
 </body>
 </html>
 
-<!-- rebuild 2026-02-06T23:41:16Z -->
+<!-- rebuild 2026-02-07T00:00:00Z -->
