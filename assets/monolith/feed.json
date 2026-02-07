@@ -22,5 +22,16 @@
     "link": "@mrcauliman",
     "note": "Foundational wallet. First liquidity. First fuel.",
     "ts": "2026-02-07"
+  },
+  {
+    "tile": "E2-N0",
+    "gx": 2,
+    "gy": 0,
+    "tag": "NAME",
+    "wallet": "rXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "wallet_public": false,
+    "link": "@handle",
+    "note": "optional note",
+    "ts": "2026-02-06"
   }
 ]
