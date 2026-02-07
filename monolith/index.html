@@ -1154,28 +1154,28 @@ const FEED_URL = "/assets/monolith/feed_live_v2.json?cb=" + Date.now();
       CREATOR_LOGO = u;
       state.lastKey = "";
       renderPool();
-    });    loadFeed().then(() => {
-      try {
-        const q = new URLSearchParams(location.search);
-        // If center flag was present, we already cleaned it above, so we cache the intent
-      } catch (e) {}
-      startNearSeed();
     });
-  
+
+    loadFeed().then(() => startNearSeed());
     setInterval(loadFeed, 15000);
   })();
   
     // Return to Center button
-(function(){
-  const btn = document.getElementById("btnCenter");
-  if(!btn) return;
-  btn.addEventListener("click", () => {
-    try {
-      if (typeof startNearSeed === "function") { startNearSeed(); return; }
-      if (typeof centerOn === "function") { centerOn(0, 0); return; }
-    } catch (e) {}
-  });
-})();
+    (function(){
+      const btn = document.getElementById("btnCenter");
+      if(!btn) return;
+      btn.addEventListener("click", () => {
+        try {
+          if (typeof startNearSeed === "function") { startNearSeed(); return; }
+          if (typeof centerView === "function") { centerView(); return; }
+          if (typeof recenter === "function") { recenter(); return; }
+        } catch (e) {}
+        try { window.scrollTo({ top: 0, left: 0, behavior: "smooth" }); }
+        catch (e) { window.scrollTo(0, 0); }
+      });
+    })();
+
+  
 </script>
 </body>
 </html>
