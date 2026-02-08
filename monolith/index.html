@@ -1026,11 +1026,24 @@ function updateWorldTransform(){
       renderPool();
     }
 
-    function onMove(e){
-      if(state.ptrs.has(e.pointerId)){
-        state.ptrs.set(e.pointerId, { x:e.clientX, y:e.clientY });
-      }
+function onMove(e){
+  // DESKTOP SAFETY: if no mouse button is pressed, we are NOT dragging
+  // This prevents the stuck "always grabbing" state that blocks tile clicks on desktop
+  if (e && e.pointerType === "mouse" && typeof e.buttons === "number" && e.buttons === 0) {
+    state.down = false;
+    state.dragging = false;
+    state.moved = false;
+    state.movedDist = 0;
+    vp.classList.remove("dragging");
+    try { vp.releasePointerCapture(state.pid); } catch(_){}
+      try { vp.releasePointerCapture(e.pointerId); } catch(_){}
+    state.pid = null;
+    return;
+  }
 
+  if(state.ptrs.has(e.pointerId)){
+    state.ptrs.set(e.pointerId, { x:e.clientX, y:e.clientY });
+  }
       if(state.ptrs.size === 2){
         if(!state.pinch) beginPinchIfReady();
         if(state.pinch){
