@@ -838,7 +838,6 @@ const isCreator  = hasCreator && (
         state.pool.push(d);
 
         d.addEventListener("click", () => {
-            try{ toastShow("click tile", "good"); }catch(_){ }
           if(state.moved) return;
           const gx = parseInt(d.getAttribute("data-gx") || "0", 10);
           const gy = parseInt(d.getAttribute("data-gy") || "0", 10);
@@ -1127,13 +1126,6 @@ function onMove(e){
     }
 
     function onUp(e){
-
-        // DEBUG_UP_TOAST: prove mouse onUp runs
-        try{
-          if(e && e.pointerType === "mouse"){
-            toastShow("onUp mouse d="+(state.dragging?1:0)+" md="+(state.movedDist||0), "good");
-          }
-        }catch(_){ }
       state.ptrs.delete(e.pointerId);
 
       if(state.ptrs.size < 2){
@@ -1318,6 +1310,29 @@ function onWheel(e){
 
     vp.addEventListener("wheel", onWheel, { passive:false });
 
+
+
+    function hardResetDrag(){
+      try{
+        state.down = false;
+        state.dragging = false;
+        state.moved = false;
+        state.movedDist = 0;
+        state.pid = null;
+        try{ if(state.ptrs && state.ptrs.clear) state.ptrs.clear(); }catch(_){ }
+        vp.classList.remove("dragging");
+        try{ document.documentElement.classList.remove("grabbing"); }catch(_){ }
+        try{ document.body.classList.remove("grabbing"); }catch(_){ }
+      }catch(_){ }
+    }
+
+    window.addEventListener("mousemove", function(e){
+      if(e && typeof e.buttons === "number" && e.buttons === 0) hardResetDrag();
+    }, true);
+    window.addEventListener("mouseup", hardResetDrag, true);
+    window.addEventListener("mouseleave", hardResetDrag, true);
+    window.addEventListener("blur", hardResetDrag, true);
+    document.addEventListener("visibilitychange", function(){ if(document.hidden) hardResetDrag(); }, true);
 
     // DESKTOP MOUSE WATCHDOG: if mouse buttons are up, drag must be off
     window.addEventListener("mousemove", function(e){
