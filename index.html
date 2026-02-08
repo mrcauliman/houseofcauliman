@@ -1,16 +1,3 @@
-# nano commands
-cd /var/www/houseofcauliman.com || exit 1
-nano index.html
-
-# push commands
-cd /var/www/houseofcauliman.com || exit 1
-git add index.html
-git commit -m "site: split MONOLITH and AUGUR blocks, reorder side-by-side" || true
-git push
-
-TS=$(date +%s)
-curl -sS "https://houseofcauliman.com/?cb=$TS" | grep -n "feature-split\|MONOLITH\|AUGUR" | head -n 40
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -931,3 +918,4 @@ curl -sS "https://houseofcauliman.com/?cb=$TS" | grep -n "feature-split\|MONOLIT
 </main>
 </body>
 </html>
+
