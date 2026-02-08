@@ -1055,6 +1055,17 @@ function updateWorldTransform(){
 }
 
 function onMove(e){
+
+    // DESKTOP CAPTURE FIX: if mouse buttons are up, we missed pointerup, so kill drag + release capture
+    if(e && e.pointerType === "mouse" && typeof e.buttons === "number" && e.buttons === 0){
+      try{ vp.releasePointerCapture(e.pointerId); }catch(_){ }
+      try{ hardResetDrag(); }catch(_){
+        // fallback if hardResetDrag is not in scope
+        try{ state.down=false; state.dragging=false; state.moved=false; state.movedDist=0; state.pid=null; if(state.ptrs&&state.ptrs.clear) state.ptrs.clear(); vp.classList.remove("dragging"); }catch(__){}
+      }
+      return;
+    }
+
       if(state.ptrs.has(e.pointerId)){
         state.ptrs.set(e.pointerId, { x:e.clientX, y:e.clientY });
       }
