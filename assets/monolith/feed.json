@@ -18,7 +18,8 @@
     "gx": -1,
     "gy": 0,
     "tag": "AUGUR",
-    "link": "https://houseofcauliman.com/augur.html"
+    "link": "https://houseofcauliman.com/augur.html",
+    "img": "/monolith/assets/augur_logo.webp"
   },
   {
     "tile": "E0-N1",
@@ -26,7 +27,8 @@
     "gy": 1,
     "tag": "CONTINENTAL WICK",
     "wallet": "rpFVEydkZrUjf4tcbLeDeVqXm5zYQGtXWm",
-    "link": "https://www.continentalwick.com/"
+    "link": "https://www.continentalwick.com/",
+    "img": "/monolith/assets/wck_logo.webp"
   },
   {
     "tile": "E0-S1",
@@ -34,7 +36,8 @@
     "gy": -1,
     "tag": "Rad Garlington",
     "wallet": "rKpaNoTRdXa48W7emkKgtCLz2MuhEroU7V",
-    "link": "https://radgarlington.io/"
+    "link": "https://radgarlington.io/",
+    "img": "/monolith/assets/rad_logo.webp"
   },
   {
     "tile": "W1-S1",
@@ -42,6 +45,7 @@
     "gy": -1,
     "tag": "GET THE $BAG",
     "wallet": "rNeYbfb9EDV8c7mNfUuooEEYYzMcEuDFbr",
-    "link": "https://getthebag.io/"
+    "link": "https://getthebag.io/",
+    "img": "/monolith/assets/bag_logo.webp"
   }
 ]
