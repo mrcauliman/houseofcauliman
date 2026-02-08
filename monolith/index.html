@@ -1029,7 +1029,7 @@ function updateWorldTransform(){
 function onMove(e){
   // DESKTOP SAFETY: if no mouse button is pressed, we are NOT dragging
   // This prevents the stuck "always grabbing" state that blocks tile clicks on desktop
-  if (e && e.pointerType === "mouse" && typeof e.buttons === "number" && e.buttons === 0) {
+  if (e && typeof e.buttons === "number" && e.buttons === 0) {
     state.down = false;
     state.dragging = false;
     state.moved = false;
@@ -1310,6 +1310,26 @@ function onWheel(e){
     setInterval(loadFeed, 15000);
   })();
   
+/* HARD_RESET_DRAG_STUCK_V1 */(function(){
+  function hard(){
+    try{
+      state.down = false;
+      state.dragging = false;
+      state.moved = false;
+      state.movedDist = 0;
+      state.pid = null;
+      if(state.ptrs && state.ptrs.clear) state.ptrs.clear();
+      vp.classList.remove("dragging");
+    }catch(e){}
+  }
+  ["pointerup","pointercancel","mouseup","mouseleave"].forEach(function(ev){
+    window.addEventListener(ev, hard, true);
+    document.addEventListener(ev, hard, true);
+  });
+  window.addEventListener("blur", hard, true);
+  document.addEventListener("visibilitychange", function(){ if(document.hidden) hard(); }, true);
+})();
+
 /* RESET_GRAB_STUCK_V2 */(function(){function r(){try{document.documentElement.classList.remove("grabbing")}catch(e){}try{document.body.classList.remove("grabbing")}catch(e){}}["pointerup","pointercancel","mouseup"].forEach(function(ev){document.addEventListener(ev,r,true)});window.addEventListener("blur",r,true);})();
 </script>
 <!-- monolith-build: wheel-zoom-v2 2026-02-07 -->
