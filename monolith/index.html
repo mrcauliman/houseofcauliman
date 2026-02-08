@@ -837,7 +837,8 @@ const isCreator  = hasCreator && (
         world.appendChild(d);
         state.pool.push(d);
 
-        d.addEventListener("click", () => {
+        d.addEventListener("click", (ev) => {
+            ev.stopPropagation();
             console.log("[tileclick]", {dragging:state.dragging, moved:state.moved, movedDist:state.movedDist, down:state.down, pid:state.pid, ptrs:(state.ptrs?state.ptrs.size:null)});
           if(state.movedDist >= 24) return;
           state.moved = false;
@@ -846,8 +847,7 @@ const isCreator  = hasCreator && (
           const gy = parseInt(d.getAttribute("data-gy") || "0", 10);
           const tile = d.getAttribute("data-tile") || tileIdFromCoords(gx, gy);
           openPanel(tile, gx, gy);
-        }, { passive:true });
-      }
+        }, { capture:true });
     }
 
     function setCell(cell, gx, gy){
@@ -1297,9 +1297,7 @@ function onWheel(e){
 
     el.close.addEventListener("click", closePanel, { passive:true });
     el.go.addEventListener("click", handleGo, { passive:true });
-    el.q.addEventListener("keydown", (e) => { if(e.key === "Enter") handleGo(); }, { passive:true });
-
-    vp.addEventListener("pointerdown", onDown, { passive:false });
+    el.q.addEventListener("keydown", (e) => { if(e.key === "Enter") handleGo(); }, { capture:true });vp.addEventListener("pointerdown", onDown, { passive:false });
     vp.addEventListener("pointermove", onMove, { passive:false });
     vp.addEventListener("pointerup", onUp, { passive:false });
     vp.addEventListener("pointercancel", onUp, { passive:false });
@@ -1309,8 +1307,7 @@ function onWheel(e){
       el.btnCenter.addEventListener("click", () => {
         startNearSeed();
         toastShow("centered", "good");
-      }, { passive:true });
-    }
+      }, { capture:true });
 
     updateWorldTransform();
     renderPool();
