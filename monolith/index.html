@@ -1042,7 +1042,20 @@ function updateWorldTransform(){
       renderPool();
     }
 
-    function onMove(e){
+    function hardResetDrag(){
+  try{
+    state.down = false;
+    state.dragging = false;
+    state.moved = false;
+    state.movedDist = 0;
+    state.pid = null;
+    state.pinch = null;
+    try{ if(state.ptrs && state.ptrs.clear) state.ptrs.clear(); }catch(_){ }
+    vp.classList.remove("dragging");
+  }catch(_){ }
+}
+
+function onMove(e){
       if(state.ptrs.has(e.pointerId)){
         state.ptrs.set(e.pointerId, { x:e.clientX, y:e.clientY });
       }
@@ -1304,6 +1317,16 @@ function onWheel(e){
     window.addEventListener("pointercancel", onUp, { passive:false, capture:true });
 
     vp.addEventListener("wheel", onWheel, { passive:false });
+
+
+    // DESKTOP MOUSE WATCHDOG: if mouse buttons are up, drag must be off
+    window.addEventListener("mousemove", function(e){
+      if(e && typeof e.buttons === "number" && e.buttons === 0){
+        hardResetDrag();
+      }
+    }, true);
+    window.addEventListener("mouseup", function(){ hardResetDrag(); }, true);
+    window.addEventListener("blur", function(){ hardResetDrag(); }, true);
 
     if(el.btnCenter){
       el.btnCenter.addEventListener("click", () => {
