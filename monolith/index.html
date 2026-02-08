@@ -893,13 +893,16 @@
       }
     }
 
-    function updateWorldTransform(){
-      const w = vp.clientWidth;
-      const h = vp.clientHeight;
-      const tx = Math.round(w * 0.5 - state.camX * state.zoom);
-      const ty = Math.round(h * 0.5 - state.camY * state.zoom);
-      world.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(${state.zoom})`;
-    }
+function updateWorldTransform(){
+  const w = vp.clientWidth;
+  const h = vp.clientHeight;
+
+  // No rounding. Rounding causes jitter on high-res trackpads
+  const tx = (w * 0.5) - (state.camX * state.zoom);
+  const ty = (h * 0.5) - (state.camY * state.zoom);
+
+  world.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(${state.zoom})`;
+}
 
     function tick(){
       if(!state.down && !state.pinch){
@@ -1111,32 +1114,41 @@
       }
     }
 
-    function onWheel(e){
-      e.preventDefault();
+function onWheel(e){
+  e.preventDefault();
 
-      state.vx = 0;
-      state.vy = 0;
-      state.dragging = false;
-      vp.classList.remove("dragging");
+  state.vx = 0;
+  state.vy = 0;
+  state.dragging = false;
+  vp.classList.remove("dragging");
 
-      const w = vp.clientWidth;
-      const h = vp.clientHeight;
+  const w = vp.clientWidth;
+  const h = vp.clientHeight;
 
-      const rect = vp.getBoundingClientRect();
-      const sx = clamp(e.clientX - rect.left, 0, w);
-      const sy = clamp(e.clientY - rect.top, 0, h);
+  const rect = vp.getBoundingClientRect();
+  const sx = clamp(e.clientX - rect.left, 0, w);
+  const sy = clamp(e.clientY - rect.top, 0, h);
 
-      const dy = e.deltaY || 0;
+  let delta = e.deltaY || 0;
 
-      const isTrackpad = (e.deltaMode === 0) && (Math.abs(dy) < 50);
-      const base = isTrackpad ? 0.0016 : 0.00115;
-      const ctrlBoost = (e.ctrlKey || e.metaKey) ? 2.6 : 1.0;
+  // normalize wheel units across devices
+  if(e.deltaMode === 1) delta *= 16;       // lines -> px
+  else if(e.deltaMode === 2) delta *= 800; // pages -> px
 
-      const factor = Math.exp(-dy * base * ctrlBoost);
-      const newZoom = state.zoom * factor;
+  // trackpad tends to be small deltas at high frequency
+  const isTrackpad = Math.abs(delta) < 80;
 
-      applyZoomAtScreen(newZoom, sx, sy);
-    }
+  // tune sensitivity per device
+  const k = isTrackpad ? 0.0014 : 0.0011;
+
+  // ctrlKey or metaKey means gesture zoom on some browsers, damp it
+  const ctrlBoost = (e.ctrlKey || e.metaKey) ? 0.65 : 1.0;
+
+  const factor = Math.exp(-delta * k * ctrlBoost);
+  const newZoom = state.zoom * factor;
+
+  applyZoomAtScreen(newZoom, sx, sy);
+}
 
     function centerOn(gx, gy){
       state.camX = gx * STEP;
@@ -1255,6 +1267,7 @@
     setInterval(loadFeed, 15000);
   })();
   </script>
+<!-- monolith-build: wheel-zoom-v2 2026-02-07 -->
 </body>
 </html>
 
