@@ -1113,6 +1113,19 @@ function onMove(e){
     function onUp(e){
       state.ptrs.delete(e.pointerId);
 
+        // DESKTOP HARD STOP: mouse should never carry multi-pointer handoff logic
+        if (e && e.pointerType === "mouse") {
+          try{ if(state.ptrs && state.ptrs.clear) state.ptrs.clear(); }catch(_){ }
+          state.down = false;
+          state.pid = null;
+          state.dragging = false;
+          state.moved = false;
+          state.movedDist = 0;
+          vp.classList.remove("dragging");
+          try { vp.releasePointerCapture(e.pointerId); } catch(_){ }
+          return;
+        }
+
       if(state.ptrs.size < 2){
         if(state.pinch){
           state.justPinchedUntil = performance.now() + 140;
