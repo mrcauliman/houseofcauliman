@@ -1289,6 +1289,12 @@ function onWheel(e){
     vp.addEventListener("pointermove", onMove, { passive:false });
     vp.addEventListener("pointerup", onUp, { passive:false });
     vp.addEventListener("pointercancel", onUp, { passive:false });
+
+    // DESKTOP SAFETY: ensure pointer events always reach handlers even if pointer leaves vp
+    window.addEventListener("pointermove", onMove, { passive:false, capture:true });
+    window.addEventListener("pointerup", onUp, { passive:false, capture:true });
+    window.addEventListener("pointercancel", onUp, { passive:false, capture:true });
+
     vp.addEventListener("wheel", onWheel, { passive:false });
 
     if(el.btnCenter){
