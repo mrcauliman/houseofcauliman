@@ -305,7 +305,6 @@
     .toast.bad{border-color:rgba(255,91,91,.75)}
   
     /* panel tile image */
-/* panel media at bottom */
 
 .vMedia{display:flex;justify-content:center;align-items:center;padding:10px 0;}
 #vMedia img{width:100%;max-width:260px;height:auto;display:block;border-radius:10px;}
@@ -390,7 +389,9 @@
     const MONOLITH_TAG  = "MONOLITH";
     const MONOLITH_LOGO = "/monolith/assets/monolith_logo.webp";
 
-    const MONOLITH_WALLET = "r9iKXkMGF2HxAEsCLqdrghWpJmfFZN1Gw8";
+    
+      const PLACEHOLDER_IMG = "/monolith/assets/placeholder.webp";
+const MONOLITH_WALLET = "r9iKXkMGF2HxAEsCLqdrghWpJmfFZN1Gw8";
 
 const CREATOR_TILE = "";
 const CREATOR_TAG  = "";
@@ -792,6 +793,19 @@ const isCreator  = hasCreator && (
 
       el.ptitle.textContent = "Tile " + tile;
       el.psub.textContent = "Tap a tile to inspect. Drag to move. Wheel or pinch to zoom.";
+
+        // panel media
+        if(el.vMedia){
+          const img=(mark&&typeof mark.img==="string"&&mark.img.trim())?mark.img.trim():"";
+          const src=
+            isMonolith?MONOLITH_LOGO:
+            isCreator ?CREATOR_LOGO :
+            img?img:
+            taken?PLACEHOLDER_IMG:
+            "";
+          el.vMedia.innerHTML=src?mediaHTML(src,tile):"";
+        }
+
       panel.classList.add("open");
     }
 
@@ -871,17 +885,6 @@ const isCreator  = hasCreator && (
 
         if(isMonolith){
           spray.innerHTML = mediaHTML(MONOLITH_LOGO, "MONOLITH");
-        
-      /* panel media */
-      if(el.vMedia){
-        const src =
-          isMonolith ? MONOLITH_LOGO :
-          isCreator  ? CREATOR_LOGO  :
-          img        ? img          :
-          taken      ? PLACEHOLDER_IMG :
-          "";
-        el.vMedia.innerHTML = src ? mediaHTML(src, tile) : "";
-      }
 
 } else if(isCreator){
           spray.innerHTML = mediaHTML(CREATOR_LOGO, "MRCAULIMAN");
