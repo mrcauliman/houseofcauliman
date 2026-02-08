@@ -1,636 +1,620 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-  <title>MONOLITH | Claim a Tile</title>
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>MONOLITH Claim Draft</title>
+  <meta name="description" content="MONOLITH claim draft. Single source of truth feed. Clean UI. Local-only draft save." />
+  <link rel="icon" href="/favicon.ico" />
   <style>
     :root{
-      --bg:#07090b;
-      --panel:#0e1116;
-      --panel2:#0b0f14;
-      --text:#e9eef7;
-      --muted:#a6b0c2;
-      --line:rgba(255,255,255,.10);
-      --line2:rgba(255,255,255,.16);
-      --good:#8bf28b;
-      --bad:#ff6b6b;
-      --warn:#ffd166;
-      --accent:#6aa9ff;
-
-      /* style parity with MONOLITH wall top bar */
-      --shadow:rgba(0,0,0,.45);
-      --radius:18px;
-      --green:#2fbf6b;
+      --bg:#0b0f14;
+      --panel:rgba(255,255,255,.06);
+      --panel2:rgba(255,255,255,.09);
+      --line:rgba(255,255,255,.12);
+      --fg:#e9eef7;
+      --muted:rgba(233,238,247,.70);
+      --bad:#ff5a6a;
+      --ok:#62ffa8;
+      --accent:#7ad3ff;
+      --shadow:rgba(0,0,0,.35);
+      --r:14px;
+      --pad:14px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
     }
-
-    *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      background:
-        radial-gradient(1200px 700px at 20% 0%, rgba(47,191,107,.12), transparent 55%),
-        radial-gradient(900px 650px at 85% 25%, rgba(255,209,102,.10), transparent 55%),
-        var(--bg);
-      color:var(--text);
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      line-height:1.45;
-      letter-spacing:.2px;
-      overflow-x:hidden;
-      padding-top:86px;
+      font-family:var(--sans);
+      background:radial-gradient(1200px 700px at 10% 0%, rgba(122,211,255,.15), transparent 55%),
+                 radial-gradient(900px 600px at 90% 10%, rgba(98,255,168,.12), transparent 50%),
+                 var(--bg);
+      color:var(--fg);
     }
-
-    a{color:inherit;text-decoration:none}
-
-    .wrap{max-width:980px;margin:0 auto;padding:18px 16px 44px}
-
-    /* TOP BAR style parity only */
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:980px;margin:0 auto;padding:18px}
     .top{
-      position:fixed;left:12px;right:12px;top:12px;
-      display:flex;align-items:center;gap:12px;flex-wrap:wrap;
-      padding:10px 12px;
-      border:1px solid rgba(23,53,36,.9);
-      border-radius:18px;
-      background:rgba(7,9,11,.62);
-      box-shadow:0 18px 44px rgba(0,0,0,.35);
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:12px 14px;border:1px solid var(--line);border-radius:var(--r);
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.05));
+      box-shadow:0 10px 30px var(--shadow);
+      position:sticky;top:0;z-index:10;
       backdrop-filter: blur(10px);
-      z-index:999;
     }
-
     .brand{display:flex;align-items:center;gap:10px}
-    .brand img{width:34px;height:34px;object-fit:contain}
-    .brand .t{font-weight:1000;letter-spacing:.6px;font-size:13px;text-transform:uppercase;line-height:1.1}
-    .brand .s{margin-top:3px;color:rgba(233,238,247,.72);font-size:12px;line-height:1.2}
-    .sp{flex:1}
-
-    .nav{
-      display:flex;align-items:center;gap:10px;flex-wrap:wrap;
-      color:rgba(233,238,247,.84);
-      font-size:12px;
-      justify-content:flex-end;
+    .brand img{width:34px;height:34px;border-radius:10px}
+    .brand .t{font-weight:800;letter-spacing:.4px}
+    .btns{display:flex;gap:10px;flex-wrap:wrap}
+    .pill{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.06);
+      color:var(--fg);
+      padding:10px 12px;
+      border-radius:999px;
+      font-weight:700;
+      cursor:pointer;
+      user-select:none;
     }
-
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;
-      padding:10px 12px;border-radius:14px;
-      border:1px solid rgba(23,53,36,.95);
-      background:rgba(11,27,19,.85);
-      font-size:13px;color:var(--text);
-      cursor:pointer;user-select:none;
-      letter-spacing:.3px;
-      font-weight:900;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .btn:hover{border-color:rgba(47,191,107,.55)}
-    .btn.primary{
-      background:linear-gradient(180deg, rgba(47,191,107,.22), rgba(11,27,19,.88));
-      border-color:rgba(47,191,107,.65);
-    }
-
-    @media (max-width: 900px){
-      .nav{justify-content:flex-start}
-    }
-
-    /* content */
+    .pill:hover{background:rgba(255,255,255,.10)}
+    .pill:active{transform:translateY(1px)}
     .grid{
-      margin-top:14px;
       display:grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: 1.1fr .9fr;
       gap:14px;
+      margin-top:14px;
     }
-
+    @media (max-width: 900px){
+      .grid{grid-template-columns:1fr}
+      .top{position:static}
+    }
     .card{
       border:1px solid var(--line);
-      border-radius:16px;
-      background:rgba(14,17,22,.92);
-      padding:14px;
+      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      border-radius:var(--r);
+      box-shadow:0 10px 30px var(--shadow);
+      overflow:hidden;
     }
-
-    h2{
-      margin:0 0 10px 0;
-      font-size:14px;
-      letter-spacing:.6px;
-      text-transform:uppercase;
+    .card .hd{
+      padding:12px 14px;
+      border-bottom:1px solid var(--line);
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
     }
-
-    .hint{color:var(--muted);font-size:13px;margin:0 0 10px 0}
-
-    label{
-      display:block;
-      margin:10px 0 6px;
-      color:var(--muted);
-      font-size:12.5px;
-    }
-
-    input, textarea{
+    .card .hd .h{font-weight:800}
+    .card .bd{padding:14px}
+    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .row + .row{margin-top:10px}
+    label{font-size:12px;color:var(--muted);font-weight:800;letter-spacing:.4px;text-transform:uppercase}
+    input[type="text"], input[type="number"]{
       width:100%;
+      padding:12px 12px;
+      border-radius:12px;
       border:1px solid var(--line);
       background:rgba(0,0,0,.25);
-      color:var(--text);
-      padding:10px 10px;
-      border-radius:14px;
+      color:var(--fg);
       outline:none;
+      font-family:var(--mono);
       font-size:14px;
     }
-
-    input[type="file"]{padding:10px}
-    textarea{min-height:92px;resize:vertical}
-
-    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    @media (max-width: 540px){ .row{grid-template-columns:1fr} }
-
-    .bar{
-      display:flex;gap:10px;flex-wrap:wrap;
+    input[type="number"]{font-family:var(--sans)}
+    .field{flex:1;min-width:220px}
+    .small{max-width:160px}
+    .help{color:var(--muted);font-size:13px;line-height:1.35}
+    .status{
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.22);
+      font-size:13px;
+      line-height:1.4;
+    }
+    .status b{color:var(--fg)}
+    .status .ok{color:var(--ok);font-weight:900}
+    .status .bad{color:var(--bad);font-weight:900}
+    .tiles{
+      display:grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap:8px;
       margin-top:12px;
     }
-
-    .msg{
-      display:none;
-      margin-top:10px;
-      padding:10px 10px;
-      border-radius:14px;
-      border:1px solid var(--line2);
-      background:rgba(255,255,255,.02);
-      font-size:13.5px;
-      white-space:pre-wrap;
-      overflow-wrap:anywhere;
+    @media (max-width: 520px){
+      .tiles{grid-template-columns: repeat(4, minmax(0, 1fr))}
     }
-    .msg.bad{
-      border-color:rgba(255,107,107,.45);
-      background:rgba(255,107,107,.08);
-    }
-    .msg.good{
-      border-color:rgba(139,242,139,.35);
-      background:rgba(139,242,139,.06);
-    }
-
-    pre{
-      margin:10px 0 0;
-      padding:10px;
-      border-radius:14px;
+    .tile{
       border:1px solid var(--line);
-      background:rgba(0,0,0,.30);
-      color:var(--text);
-      overflow:auto;
-      font-size:12.5px;
-      display:none;
-      white-space:pre-wrap;
-    }
-
-    code{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size:12.5px;
-      background:rgba(0,0,0,.25);
-      border:1px solid var(--line);
-      padding:2px 6px;
-      border-radius:10px;
-    }
-
-    .mini{
-      margin-top:10px;
-      padding:12px;
-      border-radius:16px;
-      border:1px solid var(--line);
-      background:rgba(11,15,20,.92);
-      color:var(--muted);
-      font-size:13px;
-    }
-    .mini b{color:var(--text)}
-    .k{
-      display:inline-block;
-      padding:2px 8px;
-      border:1px solid var(--line2);
-      border-radius:999px;
-      font-size:12px;
-      color:var(--muted);
-      margin-right:8px;
-    }
-
-    .preview{
-      display:none;
-      margin-top:10px;
-      padding:10px;
-      border-radius:16px;
-      border:1px solid var(--line);
-      background:rgba(0,0,0,.20);
-      gap:10px;
+      background:rgba(255,255,255,.05);
+      border-radius:12px;
+      padding:10px 8px;
+      text-align:center;
+      cursor:pointer;
+      user-select:none;
+      min-height:52px;
+      display:flex;
+      flex-direction:column;
       align-items:center;
+      justify-content:center;
+      gap:5px;
     }
-    .preview img{
-      width:64px;height:64px;border-radius:14px;
+    .tile:hover{background:rgba(255,255,255,.10)}
+    .tile:active{transform:translateY(1px)}
+    .tile .id{font-family:var(--mono);font-size:12px;font-weight:900}
+    .tile .meta{font-size:11px;color:var(--muted);font-weight:800}
+    .tile.taken{
+      opacity:.55;
+      cursor:not-allowed;
+      background:rgba(255,90,106,.08);
+      border-color:rgba(255,90,106,.22);
+    }
+    .tile.sel{
+      background:rgba(122,211,255,.14);
+      border-color:rgba(122,211,255,.35);
+    }
+    .imgbox{
+      border:1px dashed rgba(255,255,255,.18);
+      border-radius:14px;
+      padding:12px;
+      background:rgba(0,0,0,.18);
+    }
+    .imgbox img{
+      width:100%;
+      display:block;
+      border-radius:12px;
+      max-height:320px;
       object-fit:cover;
-      border:1px solid var(--line2);
-      background:rgba(255,255,255,.03);
     }
-    .preview .meta{
-      color:var(--muted);
-      font-size:12.5px;
-      overflow-wrap:anywhere;
+    .kvs{display:grid;grid-template-columns:160px 1fr;gap:10px 12px}
+    .k{color:var(--muted);font-weight:900;font-size:12px;letter-spacing:.3px}
+    .v{font-family:var(--mono);font-size:13px;word-break:break-word}
+    .hr{height:1px;background:var(--line);margin:12px 0}
+    pre{
+      font-family:var(--mono);
+      font-size:12px;
+      background:rgba(0,0,0,.35);
+      border:1px solid var(--line);
+      padding:12px;
+      border-radius:12px;
+      overflow:auto;
+      margin:0;
+      display:none;
     }
-
-    .rules ul{margin:8px 0 0 18px;padding:0}
-    .rules li{margin:6px 0}
+    pre.show{display:block}
   </style>
 </head>
-
 <body>
-  <header class="top">
-    <div class="brand">
-      <img src="/monolith/assets/monolith_logo.webp" alt="MONOLITH" />
-      <div>
-        <div class="t">MONOLITH</div>
-        <div class="s">Claim a tile. Leave your mark.</div>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">
+        <img src="/monolith/assets/monolith_logo.webp" alt="MONOLITH" />
+        <div>
+          <div class="t">MONOLITH</div>
+          <div class="help">Claim draft. Clean by default. Debug only with <span style="font-family:var(--mono)">?debug=1</span>.</div>
+        </div>
+      </div>
+      <div class="btns">
+        <a class="pill" href="/monolith/">Back to Wall</a>
+        <a class="pill" href="/monolith/monolith_laws.html">Laws</a>
+        <a class="pill" href="/monolith/rules.html">Rules</a>
       </div>
     </div>
 
-    <div class="sp"></div>
-
-    <div class="nav">
-      <a class="btn primary" href="/monolith/" aria-label="back to wall"><span>Back to Wall</span></a>
-      <a class="btn" href="/monolith/rules.html" aria-label="rules"><span>Rules</span></a>
-      <a class="btn" href="/monolith/monolith_laws.html" aria-label="laws"><span>Laws</span></a>
-    </div>
-  </header>
-
-  <div class="wrap">
     <div class="grid">
       <div class="card">
-        <h2>Claim form</h2>
-        <p class="hint">
-          This page stays clean by default. Errors show only after submit or copy. Debug output requires <code>?debug=1</code>.
-        </p>
-
-        <form id="claimForm" autocomplete="off">
-          <div class="row">
-            <div>
-              <label for="tile">Tile</label>
-              <input id="tile" name="tile" placeholder="E7-N12" inputmode="text" />
-            </div>
-            <div>
-              <label for="wallet">Wallet</label>
-              <input id="wallet" name="wallet" placeholder="r..." inputmode="text" />
-            </div>
-          </div>
-
-          <div class="row">
-            <div>
-              <label for="tag">Tag</label>
-              <input id="tag" name="tag" placeholder="TAG" inputmode="text" />
-            </div>
-            <div>
-              <label for="link">Link</label>
-              <input id="link" name="link" placeholder="@handle or https://..." inputmode="text" />
-            </div>
-          </div>
-
-          <label for="note">Note</label>
-          <textarea id="note" name="note" placeholder="Short message, keep it clean"></textarea>
-
-          <label for="image">Image upload</label>
-          <input id="image" name="image" type="file" accept="image/*" />
-          <div id="imgPreview" class="preview">
-            <img id="imgThumb" alt="preview" />
-            <div class="meta" id="imgMeta"></div>
-          </div>
-
-          <div class="bar">
-            <button type="submit" class="btn primary">Generate claim payload</button>
-            <button type="button" id="copyBtn" class="btn">Copy payload</button>
-            <button type="button" id="clearBtn" class="btn">Clear</button>
-          </div>
-
-          <div id="claimError" class="msg bad"></div>
-          <div id="claimOk" class="msg good"></div>
-          <pre id="claimDebug"></pre>
-          <pre id="claimOut"></pre>
-        </form>
-
-        <div class="mini rules">
-          <span class="k">Rules</span><b>Claim requirements</b>
-          <ul>
-            <li>Tile must be <code>E###-N###</code> with optional negative numbers</li>
-            <li>Wallet must be a valid XRPL classic address starting with <code>r</code></li>
-            <li>Tag is optional, 1 to 18 chars, letters numbers underscore only</li>
-            <li>Link is optional, either <code>@handle</code> or <code>https://</code></li>
-            <li>Note is optional, max 160, no angle brackets</li>
-            <li>Image is optional, PNG JPG WEBP only, max 2 MB</li>
-            <li>Payload includes image metadata. Base64 image data is included only if 200 KB or smaller</li>
-          </ul>
+        <div class="hd">
+          <div class="h">Start tile</div>
+          <div class="help">Formats: E23-N11, E23N11, 23,-11</div>
         </div>
+        <div class="bd">
+          <div class="row">
+            <div class="field">
+              <label>Start tile</label>
+              <input id="start" type="text" inputmode="text" placeholder="E23-N11 or 23,-11" />
+            </div>
+            <div class="field small">
+              <label>Radius</label>
+              <input id="radius" type="number" min="1" max="6" step="1" value="2" />
+            </div>
+          </div>
 
-        <div class="mini">
-          <span class="k">Operator</span><b>What happens next</b><br />
-          Operator verifies payment and wallet control, then writes to the feed and pushes the update.
+          <div class="row">
+            <button class="pill" id="setGrid">Set Grid</button>
+            <button class="pill" id="clearSel">Clear Selection</button>
+            <div class="help" id="feedStat">Feed: not loaded yet</div>
+          </div>
+
+          <div class="status" id="status">
+            <b>Status</b>
+            <div id="statusLine">No selection yet</div>
+          </div>
+
+          <div class="tiles" id="tiles"></div>
+
+          <div class="hr"></div>
+
+          <div class="row">
+            <button class="pill" id="saveDraft">Save Selection</button>
+            <button class="pill" id="copyDraft">Copy Summary</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="hd">
+          <div class="h">Image</div>
+          <div class="help">Optional</div>
+        </div>
+        <div class="bd">
+          <div class="row">
+            <input id="file" type="file" accept="image/*" style="display:none" />
+            <button class="pill" id="uploadBtn">Upload Image</button>
+            <button class="pill" id="removeBtn">Remove Image</button>
+          </div>
+
+          <div class="row">
+            <div class="field imgbox" id="imgBox">
+              <div class="help" id="imgHelp">No image selected</div>
+            </div>
+          </div>
+
+          <div class="hr"></div>
+
+          <div class="kvs">
+            <div class="k">Selected tile</div><div class="v" id="vTile">None</div>
+            <div class="k">Coords</div><div class="v" id="vCoords">None</div>
+            <div class="k">Taken</div><div class="v" id="vTaken">Unknown</div>
+          </div>
+
+          <div class="hr"></div>
+
+          <pre id="debug"></pre>
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    const DEBUG_ENABLED = (new URLSearchParams(location.search).get("debug") === "1");
+    const DRAFT_KEY = "monolith_claim_draft_v1";
+    const FEED_URL = "/assets/monolith/feed.json?cb=" + Date.now();
 
     const el = {
-      form: document.getElementById("claimForm"),
-      tile: document.getElementById("tile"),
-      wallet: document.getElementById("wallet"),
-      tag: document.getElementById("tag"),
-      link: document.getElementById("link"),
-      note: document.getElementById("note"),
-      img: document.getElementById("image"),
-      imgPreview: document.getElementById("imgPreview"),
-      imgThumb: document.getElementById("imgThumb"),
-      imgMeta: document.getElementById("imgMeta"),
-      err: document.getElementById("claimError"),
-      ok: document.getElementById("claimOk"),
-      out: document.getElementById("claimOut"),
-      dbg: document.getElementById("claimDebug"),
-      copy: document.getElementById("copyBtn"),
-      clear: document.getElementById("clearBtn"),
+      start: document.getElementById("start"),
+      radius: document.getElementById("radius"),
+      setGrid: document.getElementById("setGrid"),
+      clearSel: document.getElementById("clearSel"),
+      tiles: document.getElementById("tiles"),
+      feedStat: document.getElementById("feedStat"),
+      statusLine: document.getElementById("statusLine"),
+      vTile: document.getElementById("vTile"),
+      vCoords: document.getElementById("vCoords"),
+      vTaken: document.getElementById("vTaken"),
+      file: document.getElementById("file"),
+      uploadBtn: document.getElementById("uploadBtn"),
+      removeBtn: document.getElementById("removeBtn"),
+      imgBox: document.getElementById("imgBox"),
+      imgHelp: document.getElementById("imgHelp"),
+      saveDraft: document.getElementById("saveDraft"),
+      copyDraft: document.getElementById("copyDraft"),
+      debug: document.getElementById("debug"),
     };
 
-    let claimSubmitted = false;
-    let claimLastError = null;
-    let claimLastOk = null;
-    let claimLastOut = null;
-    let claimLastDebug = null;
+    const DEBUG = new URLSearchParams(location.search).get("debug") === "1";
 
-    let imageInfo = null;
-    let imageDataSmall = null;
+    const state = {
+      taken: new Set(),
+      startTile: "",
+      start: { gx: 0, gy: 0 },
+      radius: 2,
+      selectedTile: "",
+      selected: { gx: 0, gy: 0 },
+      imageDataUrl: null,
+      feedLoaded: false,
+      lastError: "",
+      lastDebug: null,
+    };
 
-    function canShow() { return claimSubmitted; }
-
-    function setClaimError(msg) { claimLastError = msg || null; renderClaim(); }
-    function setClaimOk(msg) { claimLastOk = msg || null; renderClaim(); }
-    function setClaimOut(obj) { claimLastOut = obj || null; renderClaim(); }
-    function setClaimDebug(obj) { claimLastDebug = obj || null; renderClaim(); }
-
-    function renderClaim() {
-      const show = canShow();
-
-      if (show && claimLastError) {
-        el.err.style.display = "block";
-        el.err.textContent = String(claimLastError);
-      } else {
-        el.err.style.display = "none";
-        el.err.textContent = "";
-      }
-
-      if (show && claimLastOk) {
-        el.ok.style.display = "block";
-        el.ok.textContent = String(claimLastOk);
-      } else {
-        el.ok.style.display = "none";
-        el.ok.textContent = "";
-      }
-
-      if (show && claimLastOut) {
-        el.out.style.display = "block";
-        el.out.textContent = JSON.stringify(claimLastOut, null, 2);
-      } else {
-        el.out.style.display = "none";
-        el.out.textContent = "";
-      }
-
-      if (DEBUG_ENABLED && show && claimLastDebug) {
-        el.dbg.style.display = "block";
-        try {
-          el.dbg.textContent = typeof claimLastDebug === "string"
-            ? claimLastDebug
-            : JSON.stringify(claimLastDebug, null, 2);
-        } catch (e) {
-          el.dbg.textContent = String(claimLastDebug);
-        }
-      } else {
-        el.dbg.style.display = "none";
-        el.dbg.textContent = "";
-      }
+    function dbg(obj){
+      state.lastDebug = obj;
+      if(!DEBUG) return;
+      el.debug.classList.add("show");
+      el.debug.textContent = typeof obj === "string" ? obj : JSON.stringify(obj, null, 2);
     }
 
-    function parseTileInput(s) {
-      const raw = String(s || "").trim().toUpperCase();
-      if (!raw) return null;
-      const m = raw.match(/^E(-?\d+)-N(-?\d+)$/);
-      if (!m) return null;
-      const e = parseInt(m[1], 10);
-      const n = parseInt(m[2], 10);
-      if (!Number.isFinite(e) || !Number.isFinite(n)) return null;
-      if (Math.abs(e) > 99999 || Math.abs(n) > 99999) return null;
-      return { tile: `E${e}-N${n}`, e, n };
+    function setStatus(msg, isBad){
+      const cls = isBad ? "bad" : "ok";
+      el.statusLine.innerHTML = "<span class='" + cls + "'>" + msg + "</span>";
     }
 
-    function looksLikeXrplClassicAddress(addr) {
-      const a = String(addr || "").trim();
-      if (!a) return false;
-      if (a.length < 25 || a.length > 35) return false;
-      if (a[0] !== "r") return false;
-      if (!/^[r1-9A-HJ-NP-Za-km-z]+$/.test(a)) return false;
-      return true;
+    function normalizeDash(s){
+      return (s || "").trim()
+        .replace(/[–—−]/g, "-")
+        .replace(/\s+/g, "");
     }
 
-    function sanitizeTag(s) {
-      const t = String(s || "").trim();
-      if (!t) return "";
-      if (t.length > 18) return null;
-      if (!/^[A-Za-z0-9_]+$/.test(t)) return null;
-      return t;
+    function tileFromCoords(gx, gy){
+      const ew = gx >= 0 ? "E" : "W";
+      const ns = gy >= 0 ? "N" : "S";
+      return ew + Math.abs(gx) + "-" + ns + Math.abs(gy);
     }
 
-    function sanitizeLink(s) {
-      const v = String(s || "").trim();
-      if (!v) return "";
-      if (v.length > 120) return null;
-      if (v.startsWith("@")) {
-        if (!/^@[A-Za-z0-9_]{1,15}$/.test(v)) return null;
-        return v;
+    function parseTileOrCoords(input){
+      const raw = normalizeDash(input);
+      if(!raw) return null;
+
+      const coord = raw.match(/^(-?\d+),(-?\d+)$/);
+      if(coord){
+        const gx = parseInt(coord[1], 10);
+        const gy = parseInt(coord[2], 10);
+        if(!Number.isFinite(gx) || !Number.isFinite(gy)) return null;
+        return { gx, gy, tile: tileFromCoords(gx, gy) };
       }
-      if (v.startsWith("https://")) return v;
+
+      const t1 = raw.match(/^([EW])(\d+)-([NS])(\d+)$/i);
+      if(t1){
+        const gx = (t1[1].toUpperCase() === "E" ? 1 : -1) * parseInt(t1[2], 10);
+        const gy = (t1[3].toUpperCase() === "N" ? 1 : -1) * parseInt(t1[4], 10);
+        return { gx, gy, tile: tileFromCoords(gx, gy) };
+      }
+
+      const t2 = raw.match(/^([EW])(\d+)([NS])(\d+)$/i);
+      if(t2){
+        const gx = (t2[1].toUpperCase() === "E" ? 1 : -1) * parseInt(t2[2], 10);
+        const gy = (t2[3].toUpperCase() === "N" ? 1 : -1) * parseInt(t2[4], 10);
+        return { gx, gy, tile: tileFromCoords(gx, gy) };
+      }
+
       return null;
     }
 
-    function sanitizeNote(s) {
-      const v = String(s || "").trim();
-      if (!v) return "";
-      if (v.length > 160) return null;
-      if (/[<>]/.test(v)) return null;
-      return v;
+    async function loadFeedTaken(){
+      const t0 = performance.now();
+      try{
+        const r = await fetch(FEED_URL, { cache: "no-store" });
+        if(!r.ok) throw new Error("feed http " + r.status);
+        const arr = await r.json();
+        const taken = new Set();
+        for(const m of (Array.isArray(arr) ? arr : [])){
+          if(m && typeof m.tile === "string" && m.tile) taken.add(m.tile);
+        }
+        state.feedLoaded = true;
+        state.taken = taken;
+        const ms = Math.round(performance.now() - t0);
+        el.feedStat.textContent = "Feed loaded, tiles taken: " + taken.size + ", " + ms + "ms";
+        dbg({ feed: "ok", taken: taken.size, ms });
+        return taken;
+      }catch(e){
+        state.feedLoaded = false;
+        state.taken = new Set();
+        el.feedStat.textContent = "Feed failed, grid is not authoritative";
+        dbg({ feed: "fail", error: String(e) });
+        return state.taken;
+      }
     }
 
-    function isAllowedImageType(type) {
-      return type === "image/png" || type === "image/jpeg" || type === "image/webp";
+    function clampInt(v, a, b, d){
+      const n = parseInt(v, 10);
+      if(!Number.isFinite(n)) return d;
+      return Math.max(a, Math.min(b, n));
     }
 
-    function resetImageState() {
-      imageInfo = null;
-      imageDataSmall = null;
-      el.img.value = "";
-      el.imgPreview.style.display = "none";
-      el.imgThumb.src = "";
-      el.imgMeta.textContent = "";
-    }
+    function setSelection(tile, gx, gy){
+      state.selectedTile = tile;
+      state.selected = { gx, gy };
 
-    function readFileAsDataURL(file) {
-      return new Promise((resolve, reject) => {
-        const r = new FileReader();
-        r.onload = () => resolve(String(r.result || ""));
-        r.onerror = () => reject(new Error("image read failed"));
-        r.readAsDataURL(file);
-      });
-    }
+      el.vTile.textContent = tile || "None";
+      el.vCoords.textContent = tile ? (gx + "," + gy) : "None";
+      el.vTaken.textContent = tile ? (state.taken.has(tile) ? "YES" : "NO") : "Unknown";
 
-    el.img.addEventListener("change", async () => {
-      const f = el.img.files && el.img.files[0] ? el.img.files[0] : null;
-      imageInfo = null;
-      imageDataSmall = null;
-
-      if (!f) {
-        el.imgPreview.style.display = "none";
+      if(!tile){
+        setStatus("No selection yet", false);
         return;
       }
 
-      if (!isAllowedImageType(f.type)) {
-        claimSubmitted = true;
-        setClaimError("Image type not allowed");
-        setClaimDebug({ error: "image type", type: f.type });
-        resetImageState();
+      if(state.taken.has(tile)){
+        setStatus("Tile is taken. Pick another", true);
+      }else{
+        setStatus("Tile selected. Save when ready", false);
+      }
+    }
+
+    function clearSelection(){
+      state.selectedTile = "";
+      setSelection("", 0, 0);
+      [...el.tiles.querySelectorAll(".tile")].forEach(x => x.classList.remove("sel"));
+    }
+
+    function renderGrid(){
+      el.tiles.innerHTML = "";
+      const r = state.radius;
+
+      const cells = [];
+      for(let dy = r; dy >= -r; dy--){
+        for(let dx = -r; dx <= r; dx++){
+          const gx = state.start.gx + dx;
+          const gy = state.start.gy + dy;
+          const tile = tileFromCoords(gx, gy);
+          cells.push({ tile, gx, gy });
+        }
+      }
+
+      for(const c of cells){
+        const div = document.createElement("div");
+        div.className = "tile";
+        div.dataset.tile = c.tile;
+
+        const isTaken = state.taken.has(c.tile);
+        if(isTaken) div.classList.add("taken");
+        if(state.selectedTile === c.tile) div.classList.add("sel");
+
+        div.innerHTML = `
+          <div class="id">${c.tile}</div>
+          <div class="meta">${isTaken ? "taken" : "open"}</div>
+        `;
+
+        div.addEventListener("click", () => {
+          if(isTaken){
+            setSelection(c.tile, c.gx, c.gy);
+            return;
+          }
+          [...el.tiles.querySelectorAll(".tile")].forEach(x => x.classList.remove("sel"));
+          div.classList.add("sel");
+          setSelection(c.tile, c.gx, c.gy);
+        });
+
+        el.tiles.appendChild(div);
+      }
+    }
+
+    async function setGridFromInput(){
+      const p = parseTileOrCoords(el.start.value);
+      if(!p){
+        setSelection("", 0, 0);
+        setStatus("Start tile invalid", true);
+        if(DEBUG) dbg({ error: "start invalid", input: el.start.value });
         return;
       }
 
-      if (f.size > 2 * 1024 * 1024) {
-        claimSubmitted = true;
-        setClaimError("Image too large");
-        setClaimDebug({ error: "image size", size: f.size });
-        resetImageState();
+      state.radius = clampInt(el.radius.value, 1, 6, 2);
+      el.radius.value = String(state.radius);
+
+      state.startTile = p.tile;
+      state.start = { gx: p.gx, gy: p.gy };
+      el.start.value = p.tile;
+
+      await loadFeedTaken();
+      clearSelection();
+      renderGrid();
+
+      setStatus("Grid ready. Pick an open tile", false);
+    }
+
+    function setImageData(url){
+      state.imageDataUrl = url || null;
+      el.imgBox.innerHTML = "";
+      if(!state.imageDataUrl){
+        el.imgHelp = document.createElement("div");
+        el.imgHelp.className = "help";
+        el.imgHelp.textContent = "No image selected";
+        el.imgBox.appendChild(el.imgHelp);
         return;
       }
+      const img = document.createElement("img");
+      img.src = state.imageDataUrl;
+      img.alt = "Claim image preview";
+      el.imgBox.appendChild(img);
+    }
 
-      imageInfo = { name: f.name, type: f.type, size: f.size };
-
-      try {
-        const dataUrl = await readFileAsDataURL(f);
-        el.imgThumb.src = dataUrl;
-        el.imgPreview.style.display = "flex";
-        el.imgMeta.textContent = `${f.name}  |  ${f.type}  |  ${Math.round(f.size/1024)} KB`;
-
-        if (f.size <= 200 * 1024) imageDataSmall = dataUrl;
-        else imageDataSmall = null;
-      } catch (e) {
-        claimSubmitted = true;
-        setClaimError("Image read failed");
-        setClaimDebug({ error: "image read failed" });
-        resetImageState();
+    function buildDraftPayload(){
+      const tile = state.selectedTile;
+      if(!tile){
+        state.lastError = "Select a tile first";
+        if(DEBUG) dbg({ error: "no tile selected" });
+        return null;
       }
-    });
+      const gx = state.selected.gx;
+      const gy = state.selected.gy;
 
-    function buildPayload() {
-      const t = parseTileInput(el.tile.value);
-      if (!t) { setClaimError("Tile invalid"); setClaimDebug({ error: "tile invalid", input: el.tile.value }); return null; }
+      if(state.taken.has(tile)){
+        state.lastError = "Tile is taken";
+        if(DEBUG) dbg({ error: "tile taken", tile });
+        return null;
+      }
 
-      const w = String(el.wallet.value || "").trim();
-      if (!looksLikeXrplClassicAddress(w)) { setClaimError("Wallet invalid"); setClaimDebug({ error: "wallet invalid", input: w }); return null; }
-
-      const tag = sanitizeTag(el.tag.value);
-      if (tag === null) { setClaimError("Tag invalid"); setClaimDebug({ error: "tag invalid", input: el.tag.value }); return null; }
-
-      const link = sanitizeLink(el.link.value);
-      if (link === null) { setClaimError("Link invalid"); setClaimDebug({ error: "link invalid", input: el.link.value }); return null; }
-
-      const note = sanitizeNote(el.note.value);
-      if (note === null) { setClaimError("Note invalid"); setClaimDebug({ error: "note invalid", input: el.note.value }); return null; }
-
-      const payload = {
+      return {
         v: 1,
-        ts: new Date().toISOString(),
-        tile: t.tile,
-        wallet: w,
+        tile,
+        gx,
+        gy,
+        imageDataUrl: state.imageDataUrl || null,
+        ts: Date.now()
       };
-
-      if (tag) payload.tag = tag;
-      if (link) payload.link = link;
-      if (note) payload.note = note;
-
-      if (imageInfo) {
-        payload.image = { ...imageInfo };
-        if (imageDataSmall) payload.imageData = imageDataSmall;
-        else payload.imageNote = "image too large for inline, operator must host and set final URL";
-      }
-
-      return payload;
     }
 
-    async function copyText(s) {
-      const text = String(s || "");
-      try {
-        await navigator.clipboard.writeText(text);
-        return true;
-      } catch (e) {
-        const ta = document.createElement("textarea");
-        ta.value = text;
-        ta.style.position = "fixed";
-        ta.style.left = "-9999px";
-        document.body.appendChild(ta);
-        ta.focus();
-        ta.select();
-        let ok = false;
-        try { ok = document.execCommand("copy"); } catch (e2) { ok = false; }
-        document.body.removeChild(ta);
-        return ok;
-      }
-    }
-
-    el.form.addEventListener("submit", async (ev) => {
-      ev.preventDefault();
-
-      claimSubmitted = true;
-      setClaimError(null);
-      setClaimOk(null);
-      setClaimOut(null);
-      setClaimDebug(null);
-
-      const payload = buildPayload();
-      if (!payload) return;
-
-      setClaimOut(payload);
-      setClaimOk("Payload generated");
-      setClaimDebug({ ok: true, payload });
-    });
-
-    el.copy.addEventListener("click", async () => {
-      claimSubmitted = true;
-
-      if (!claimLastOut) {
-        setClaimError("Generate a payload first");
-        setClaimDebug({ error: "copy without payload" });
+    function saveDraft(){
+      const payload = buildDraftPayload();
+      if(!payload){
+        setStatus(state.lastError || "Unable to save", true);
         return;
       }
-
-      const ok = await copyText(JSON.stringify(claimLastOut, null, 2));
-      if (ok) {
-        setClaimOk("Copied");
-        setClaimError(null);
-        setClaimDebug({ ok: true, action: "copy" });
-      } else {
-        setClaimError("Copy failed");
-        setClaimDebug({ error: "copy failed" });
+      try{
+        localStorage.setItem(DRAFT_KEY, JSON.stringify(payload));
+        setStatus("Saved draft locally", false);
+        if(DEBUG) dbg({ saved: true, key: DRAFT_KEY, tile: payload.tile });
+      }catch(e){
+        setStatus("Save failed", true);
+        if(DEBUG) dbg({ saved: false, error: String(e) });
       }
+    }
+
+    async function copySummary(){
+      const payload = buildDraftPayload();
+      if(!payload){
+        setStatus(state.lastError || "Unable to copy", true);
+        return;
+      }
+      const summary =
+        "MONOLITH claim draft\n" +
+        "Tile: " + payload.tile + "\n" +
+        "Coords: " + payload.gx + "," + payload.gy + "\n" +
+        "Image: " + (payload.imageDataUrl ? "yes" : "no") + "\n" +
+        "Saved key: " + DRAFT_KEY;
+
+      try{
+        await navigator.clipboard.writeText(summary);
+        setStatus("Copied summary to clipboard", false);
+        if(DEBUG) dbg({ copied: true, tile: payload.tile });
+      }catch(e){
+        setStatus("Copy failed", true);
+        if(DEBUG) dbg({ copied: false, error: String(e) });
+      }
+    }
+
+    function restoreDraft(){
+      try{
+        const raw = localStorage.getItem(DRAFT_KEY);
+        if(!raw) return;
+        const p = JSON.parse(raw);
+        if(!p || typeof p.tile !== "string") return;
+
+        const parsed = parseTileOrCoords(p.tile);
+        if(!parsed) return;
+
+        el.start.value = parsed.tile;
+        state.startTile = parsed.tile;
+        state.start = { gx: parsed.gx, gy: parsed.gy };
+
+        if(typeof p.imageDataUrl === "string" && p.imageDataUrl) setImageData(p.imageDataUrl);
+
+        dbg({ restored: true, tile: parsed.tile });
+      }catch(e){
+        if(DEBUG) dbg({ restored: false, error: String(e) });
+      }
+    }
+
+    el.setGrid.addEventListener("click", () => { setGridFromInput(); });
+    el.clearSel.addEventListener("click", () => { clearSelection(); });
+
+    el.uploadBtn.addEventListener("click", () => { el.file.click(); });
+    el.removeBtn.addEventListener("click", () => { setImageData(null); });
+
+    el.file.addEventListener("change", () => {
+      const f = el.file.files && el.file.files[0];
+      if(!f){ return; }
+      const rd = new FileReader();
+      rd.onload = () => { setImageData(String(rd.result || "")); };
+      rd.readAsDataURL(f);
     });
 
-    el.clear.addEventListener("click", () => {
-      claimSubmitted = false;
-      claimLastError = null;
-      claimLastOk = null;
-      claimLastOut = null;
-      claimLastDebug = null;
-      el.tile.value = "";
-      el.wallet.value = "";
-      el.tag.value = "";
-      el.link.value = "";
-      el.note.value = "";
-      resetImageState();
-      renderClaim();
-    });
+    el.saveDraft.addEventListener("click", () => { saveDraft(); });
+    el.copyDraft.addEventListener("click", () => { copySummary(); });
 
-    renderClaim();
+    if(DEBUG){
+      el.debug.classList.add("show");
+      dbg("Debug enabled");
+    }
+
+    setImageData(null);
+    restoreDraft();
+    setStatus("Enter a start tile, then set grid", false);
   </script>
 </body>
 </html>
