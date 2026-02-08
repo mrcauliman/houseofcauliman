@@ -838,6 +838,7 @@ const isCreator  = hasCreator && (
         state.pool.push(d);
 
         d.addEventListener("click", () => {
+            try{ toastShow("click tile", "good"); }catch(_){ }
           if(state.moved) return;
           const gx = parseInt(d.getAttribute("data-gx") || "0", 10);
           const gy = parseInt(d.getAttribute("data-gy") || "0", 10);
@@ -1113,6 +1114,13 @@ function updateWorldTransform(){
     }
 
     function onUp(e){
+
+        // DEBUG_UP_TOAST: prove mouse onUp runs
+        try{
+          if(e && e.pointerType === "mouse"){
+            toastShow("onUp mouse d="+(state.dragging?1:0)+" md="+(state.movedDist||0), "good");
+          }
+        }catch(_){ }
       state.ptrs.delete(e.pointerId);
 
       if(state.ptrs.size < 2){
