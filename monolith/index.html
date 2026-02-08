@@ -367,6 +367,7 @@
         </div>
 
         <div class="k">Link or Handle</div>
+        <div class="k">Handle</div><div class="v" id="vHandle">None</div>
         <div class="v" id="vLinkWrap">
           <span id="vLink">None</span>
         </div>
@@ -429,6 +430,7 @@ let CREATOR_LOGO = "";
 
       vLinkWrap: document.getElementById("vLinkWrap"),
       vLink: document.getElementById("vLink"),
+      vHandle: document.getElementById("vHandle"),
       vMedia: document.getElementById("vMedia"),
 
       vNote: document.getElementById("vNote"),
@@ -688,7 +690,13 @@ zoom: 0.65,
 
     function setLinkUI(linkStr){
       const raw = cleanLinkRaw(linkStr);
-      el.vLinkWrap.innerHTML = "";
+      
+      // HANDLE
+      if(el.vHandle){
+        const h = (mark && mark.handle) ? mark.handle : "";
+        el.vHandle.textContent = h || "None";
+      }
+el.vLinkWrap.innerHTML = "";
       if(!raw){
         const s = document.createElement("span");
         s.id = "vLink";
