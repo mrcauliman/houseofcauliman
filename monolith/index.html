@@ -842,6 +842,7 @@ const isCreator  = hasCreator && (
           const gx = parseInt(d.getAttribute("data-gx") || "0", 10);
           const gy = parseInt(d.getAttribute("data-gy") || "0", 10);
           const tile = d.getAttribute("data-tile") || tileIdFromCoords(gx, gy);
+          toastShow("tap " + tile, "good");
           openPanel(tile, gx, gy);
         }, { passive:true });
       }
