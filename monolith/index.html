@@ -734,7 +734,11 @@ zoom: 0.65,
 
       const markTag = (mark && typeof mark.tag === "string") ? mark.tag.trim().toUpperCase() : "";
       const isMonolith = (tile === MONOLITH_TILE) || (markTag === MONOLITH_TAG);
-      const isCreator  = (tile === CREATOR_TILE)  || (markTag === CREATOR_TAG);
+const hasCreator = !!(CREATOR_TILE || CREATOR_TAG);
+const isCreator  = hasCreator && (
+  (CREATOR_TILE && tile === CREATOR_TILE) ||
+  (CREATOR_TAG  && markTag === CREATOR_TAG)
+);
 
       el.vTile.textContent = tile;
       el.vCoords.textContent = `${gx}, ${gy}`;
@@ -745,7 +749,7 @@ zoom: 0.65,
         el.vNote.textContent = mark.note ? String(mark.note) : "None";
 
         if(isMonolith && !mark.note) el.vNote.textContent = "Leave your mark. Live forever.";
-        if(isCreator  && !mark.note) el.vNote.textContent = "Foundational wallet. First liquidity. First fuel.";
+// no creator fallback note
 
         if(isMonolith){
           setWalletUI(MONOLITH_WALLET, false, true);
@@ -848,7 +852,11 @@ zoom: 0.65,
       if(spray){
         const markTag = (mark && typeof mark.tag === "string") ? mark.tag.trim().toUpperCase() : "";
         const isMonolith = (tile === MONOLITH_TILE) || (markTag === MONOLITH_TAG);
-        const isCreator  = (tile === CREATOR_TILE)  || (markTag === CREATOR_TAG);
+const hasCreator = !!(CREATOR_TILE || CREATOR_TAG);
+const isCreator  = hasCreator && (
+  (CREATOR_TILE && tile === CREATOR_TILE) ||
+  (CREATOR_TAG  && markTag === CREATOR_TAG)
+);
 
         const img = (mark && typeof mark.img === "string" && mark.img.trim()) ? mark.img.trim() : "";
 
