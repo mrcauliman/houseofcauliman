@@ -1296,7 +1296,9 @@ function onWheel(e){
     loadFeed().then(() => startNearSeed());
     setInterval(loadFeed, 15000);
   })();
-  </script>
+  
+/* RESET_GRAB_STUCK_V2 */(function(){function r(){try{document.documentElement.classList.remove("grabbing")}catch(e){}try{document.body.classList.remove("grabbing")}catch(e){}}["pointerup","pointercancel","mouseup"].forEach(function(ev){document.addEventListener(ev,r,true)});window.addEventListener("blur",r,true);})();
+</script>
 <!-- monolith-build: wheel-zoom-v2 2026-02-07 -->
 <!-- monolith-lock: TRUE -->
 <!-- monolith-lock-ts: 2026-02-07T00:00:00Z -->
