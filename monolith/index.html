@@ -838,7 +838,8 @@ const isCreator  = hasCreator && (
         state.pool.push(d);
 
         d.addEventListener("click", () => {
-          if(state.dragging || state.movedDist >= 12) return;
+            console.log("[tileclick]", {dragging:state.dragging, moved:state.moved, movedDist:state.movedDist, down:state.down, pid:state.pid, ptrs:(state.ptrs?state.ptrs.size:null)});
+          if(state.movedDist >= 24) return;
           state.moved = false;
           state.movedDist = 0;
           const gx = parseInt(d.getAttribute("data-gx") || "0", 10);
