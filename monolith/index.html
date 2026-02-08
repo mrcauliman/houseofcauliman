@@ -1297,7 +1297,9 @@ function onWheel(e){
 
     el.close.addEventListener("click", closePanel, { passive:true });
     el.go.addEventListener("click", handleGo, { passive:true });
-    el.q.addEventListener("keydown", (e) => { if(e.key === "Enter") handleGo(); }, { capture:true });vp.addEventListener("pointerdown", onDown, { passive:false });
+    el.q.addEventListener("keydown", (e) => { if(e.key === "Enter") handleGo(); }, { capture:true });
+
+    vp.addEventListener("pointerdown", onDown, { passive:false });
     vp.addEventListener("pointermove", onMove, { passive:false });
     vp.addEventListener("pointerup", onUp, { passive:false });
     vp.addEventListener("pointercancel", onUp, { passive:false });
