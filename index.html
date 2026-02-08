@@ -1,3 +1,16 @@
+# nano commands
+cd /var/www/houseofcauliman.com || exit 1
+nano index.html
+
+# push commands
+cd /var/www/houseofcauliman.com || exit 1
+git add index.html
+git commit -m "site: split MONOLITH and AUGUR blocks, reorder side-by-side" || true
+git push
+
+TS=$(date +%s)
+curl -sS "https://houseofcauliman.com/?cb=$TS" | grep -n "feature-split\|MONOLITH\|AUGUR" | head -n 40
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -269,6 +282,30 @@
         linear-gradient(135deg, rgba(10,12,22,0.92), rgba(0,0,0,0.98));
     }
 
+    /* NEW: split AUGUR + MONOLITH side-by-side on desktop */
+    .feature-split{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:18px;
+      margin:0 0 18px;
+    }
+    @media(min-width:900px){
+      .feature-split{
+        grid-template-columns:1fr 1fr;
+        align-items:stretch;
+      }
+    }
+    .feature-split .dl-soon{
+      margin:0;
+      height:100%;
+    }
+    .feature-split .dl-copy{
+      max-width:none;
+    }
+    .feature-split .dl-bullets{
+      grid-template-columns:1fr;
+    }
+
     .dl-kicker{
       font-size:0.78rem;
       letter-spacing:0.18em;
@@ -484,78 +521,83 @@
       </p>
     </section>
 
-    <!-- AUGUR -->
-    <section class="dl-soon">
-      <div class="augur-head">
-        <div class="augur-mark">
-          <img src="/augur/assets/augur_logo.png" alt="AUGUR" class="augur-logo">
+    <!-- MONOLITH + AUGUR split -->
+    <section class="feature-split">
+
+      <!-- MONOLITH (left on desktop) -->
+      <section class="dl-soon mono">
+        <div class="augur-head">
+          <div class="augur-mark">
+            <img src="/assets/monolith/monolith_logo.webp" alt="MONOLITH" class="augur-logo">
+          </div>
+          <div>
+            <p class="dl-kicker">Coming Soon</p>
+            <h2 class="dl-title" style="margin:0;">MONOLITH</h2>
+            <p class="augur-sub">The Wall of Record</p>
+          </div>
         </div>
-        <div>
-          <p class="dl-kicker">Coming Soon</p>
-          <h2 class="dl-title" style="margin:0;">AUGUR</h2>
-          <p class="augur-sub">Chain Oracle</p>
+
+        <p class="dl-copy" style="margin-top:12px;">
+          MONOLITH is an on-chain graffiti wall.
+          You claim a tile, leave a mark, and the ledger keeps it forever.
+          Not a gallery. A credibility layer.
+        </p>
+
+        <ul class="dl-bullets">
+          <li>Each post is constrained to a tile so it stays clean and readable</li>
+          <li>Logos, tags, and artwork live inside the wall without wrecking it</li>
+          <li>Proof of presence is the product, the chain is the receipt</li>
+          <li>Years from now, people check MONOLITH to see who was real</li>
+        </ul>
+
+        <p class="dl-copy" style="margin-top:6px; font-size:0.82rem; color:var(--text-soft);">
+          The Wall of Record. An on-chain monument of proof and presence. Leave your mark. History keeps it.
+        </p>
+
+        <div class="dl-cta">
+          <a class="dl-btn primary" href="/monolith/">Enter MONOLITH</a>
+          <a class="dl-btn" href="/monolith/rules.html">Rules</a>
+          <a class="dl-btn" href="https://x.com/monolith_wall" target="_blank" rel="noopener">𝕏 PROFILE</a>
         </div>
-      </div>
+      </section>
 
-      <p class="dl-copy" style="margin-top:12px;">
-        Paste a public wallet address and AUGUR reads the chain for you.
-        It forges clean statements in plain English so you see what changed, where it moved, and what it cost.
-        No wallet connection. No keys. No custody.
-      </p>
-
-      <ul class="dl-bullets">
-        <li>Add multiple wallets across chains under one account, clean and organized</li>
-        <li>See inflows, outflows, fees, and net change, explained like a real statement</li>
-        <li>Tokens and NFTs included, not just the main coin</li>
-        <li>Monthly snapshots plus exports so you can track progress over time</li>
-      </ul>
-
-      <p class="dl-copy" style="margin-top:6px; font-size:0.82rem; color:var(--text-soft);">
-        Non-custodial. Read-only. Public data only.
-      </p>
-
-      <div class="dl-cta">
-        <a class="dl-btn primary" href="/augur.html">View AUGUR</a>
-        <a class="dl-btn" href="/augur.html#waitlist">Join Waitlist</a>
-        <a class="dl-btn" href="https://x.com/augurintel" target="_blank" rel="noopener">𝕏 PROFILE</a>
-      </div>
-    </section>
-
-    <!-- MONOLITH -->
-    <section class="dl-soon mono">
-      <div class="augur-head">
-        <div class="augur-mark">
-          <img src="/assets/monolith/monolith_logo.webp" alt="MONOLITH" class="augur-logo">
+      <!-- AUGUR (right on desktop) -->
+      <section class="dl-soon">
+        <div class="augur-head">
+          <div class="augur-mark">
+            <img src="/augur/assets/augur_logo.png" alt="AUGUR" class="augur-logo">
+          </div>
+          <div>
+            <p class="dl-kicker">Coming Soon</p>
+            <h2 class="dl-title" style="margin:0;">AUGUR</h2>
+            <p class="augur-sub">Chain Oracle</p>
+          </div>
         </div>
-        <div>
-          <p class="dl-kicker">Coming Soon</p>
-          <h2 class="dl-title" style="margin:0;">MONOLITH</h2>
-          <p class="augur-sub">The Wall of Record</p>
+
+        <p class="dl-copy" style="margin-top:12px;">
+          Paste a public wallet address and AUGUR reads the chain for you.
+          It forges clean statements in plain English so you see what changed, where it moved, and what it cost.
+          No wallet connection. No keys. No custody.
+        </p>
+
+        <ul class="dl-bullets">
+          <li>Add multiple wallets across chains under one account, clean and organized</li>
+          <li>See inflows, outflows, fees, and net change, explained like a real statement</li>
+          <li>Tokens and NFTs included, not just the main coin</li>
+          <li>Monthly snapshots plus exports so you can track progress over time</li>
+        </ul>
+
+        <p class="dl-copy" style="margin-top:6px; font-size:0.82rem; color:var(--text-soft);">
+          Non-custodial. Read-only. Public data only.
+        </p>
+
+        <div class="dl-cta">
+          <a class="dl-btn primary" href="/augur.html">View AUGUR</a>
+          <a class="dl-btn" href="/augur.html#waitlist">Join Waitlist</a>
+          <a class="dl-btn" href="https://x.com/augurintel" target="_blank" rel="noopener">𝕏 PROFILE</a>
         </div>
-      </div>
+      </section>
 
-      <p class="dl-copy" style="margin-top:12px;">
-        MONOLITH is an on-chain graffiti wall.
-        You claim a tile, leave a mark, and the ledger keeps it forever.
-        Not a gallery. A credibility layer.
-      </p>
-
-      <ul class="dl-bullets">
-        <li>Each post is constrained to a tile so it stays clean and readable</li>
-        <li>Logos, tags, and artwork live inside the wall without wrecking it</li>
-        <li>Proof of presence is the product, the chain is the receipt</li>
-        <li>Years from now, people check MONOLITH to see who was real</li>
-      </ul>
-
-      <p class="dl-copy" style="margin-top:6px; font-size:0.82rem; color:var(--text-soft);">
-        The Wall of Record. An on-chain monument of proof and presence. Leave your mark. History keeps it.
-      </p>
-
-      <div class="dl-cta">
-        <a class="dl-btn primary" href="/monolith/">Enter MONOLITH</a>
-        <a class="dl-btn" href="/monolith/rules.html">Rules</a>
-        <a class="dl-btn" href="https://x.com/monolith_wall" target="_blank" rel="noopener">𝕏 PROFILE</a>
-      </div>
     </section>
 
     <section class="hoc-grid">
@@ -889,4 +931,3 @@
 </main>
 </body>
 </html>
-
