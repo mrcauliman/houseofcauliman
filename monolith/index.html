@@ -320,6 +320,18 @@
       display:block;
     }
 
+
+    /* panel media at bottom */
+    #vMedia{
+      grid-column:1 / -1;
+      height:180px;
+      border-radius:14px;
+      overflow:hidden;
+      background:rgba(0,0,0,.18);
+      border:1px solid rgba(255,255,255,.06);
+    }
+    #vMedia img{width:100%;height:100%;object-fit:cover;display:block;}
+
 </style>
 </head>
 
@@ -364,7 +376,6 @@
       <div class="kv" aria-label="tile details">
         <div class="k">Tile</div><div class="v" id="vTile">None</div>
         <div class="k">Coords</div><div class="v" id="vCoords">0, 0</div>
-                <div class="k">Image</div><div class="v vMedia" id="vMedia"></div>
 <div class="k">Tag</div>
 <div class="v" id="vTag">Open</div>
         <div class="k">Date</div><div class="v" id="vTs">None</div>
@@ -385,7 +396,8 @@
         </div>
 
         <div class="k">Note</div><div class="v" id="vNote">None</div>
-      </div>
+      </div>      <div class="k">Image</div><div class="v vMedia" id="vMedia"></div>
+
       <div class="muted" id="vBody">Tap a tile to inspect details.</div>
     </div>
   </aside>
@@ -881,7 +893,19 @@ const isCreator  = hasCreator && (
 
         if(isMonolith){
           spray.innerHTML = mediaHTML(MONOLITH_LOGO, "MONOLITH");
-        } else if(isCreator){
+        
+      /* panel media */
+      if(el.vMedia){
+        const src =
+          isMonolith ? MONOLITH_LOGO :
+          isCreator  ? CREATOR_LOGO  :
+          img        ? img          :
+          taken      ? PLACEHOLDER_IMG :
+          "";
+        el.vMedia.innerHTML = src ? mediaHTML(src, tile) : "";
+      }
+
+} else if(isCreator){
           spray.innerHTML = mediaHTML(CREATOR_LOGO, "MRCAULIMAN");
         } else if(img){
           spray.innerHTML = mediaHTML(img, tile);
