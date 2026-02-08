@@ -22,5 +22,56 @@
     "link": "@mrcauliman",
     "note": "Foundational wallet. First liquidity. First fuel.",
     "ts": "2026-02-07"
+  },
+  {
+    "id": "m0003",
+    "tile": "E2-N0",
+    "gx": 2,
+    "gy": 0,
+    "tag": "CONTINENTAL WICK $WCK",
+    "wallet": "rpFVEydkZrUjf4tcbLeDeVqXm5zYQGtXWm",
+    "wallet_public": false,
+    "img": "/assets/wck_logo.webp",
+    "link": "https://continentalwick.com",
+    "note": "Reserved. House system tile.",
+    "ts": "2026-02-07"
+  },
+  {
+    "id": "m0004",
+    "tile": "E3-N0",
+    "gx": 3,
+    "gy": 0,
+    "tag": "GET THE $BAG",
+    "wallet": "rNeYbfb9EDV8c7mNfUuooEEYYzMcEuDFbr",
+    "wallet_public": false,
+    "img": "/assets/bag_logo.webp",
+    "link": "https://getthebag.io",
+    "note": "Reserved. House system tile.",
+    "ts": "2026-02-07"
+  },
+  {
+    "id": "m0005",
+    "tile": "E4-N0",
+    "gx": 4,
+    "gy": 0,
+    "tag": "Rad Garlington $RAD",
+    "wallet": "rKpaNoTRdXa48W7emkKgtCLz2MuhEroU7V",
+    "wallet_public": false,
+    "img": "/assets/rad_logo.webp",
+    "link": "https://radgarlington.io",
+    "note": "Reserved. House system tile.",
+    "ts": "2026-02-07"
+  },
+  {
+    "id": "m0006",
+    "tile": "E5-N0",
+    "gx": 5,
+    "gy": 0,
+    "tag": "AUGUR",
+    "wallet_public": false,
+    "img": "/augur/assets/augur_logo.png",
+    "link": "https://houseofcauliman.com/augur.html",
+    "note": "Reserved. Wallet not live yet.",
+    "ts": "2026-02-07"
   }
 ]
