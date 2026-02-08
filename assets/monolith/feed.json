@@ -5,10 +5,13 @@
     "gx": 0,
     "gy": 0,
     "tag": "MONOLITH",
+    "title": "MONOLITH",
     "wallet": "r9iKXkMGF2HxAEsCLqdrghWpJmfFZN1Gw8",
     "wallet_public": false,
-    "link": "@monolith_wall",
-    "note": "Leave your mark. Live forever.",
+    "handle": "@monolith_wall",
+    "link": "",
+    "img": "/monolith/assets/monolith_logo.webp",
+    "note": "The Wall. The origin. One mark. Forever.",
     "ts": "2026-02-07"
-  },
+  }
 ]
