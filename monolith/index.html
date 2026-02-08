@@ -303,7 +303,24 @@
     .toast.good{border-color:rgba(47,191,107,.75)}
     .toast.warn{border-color:rgba(255,225,117,.75)}
     .toast.bad{border-color:rgba(255,91,91,.75)}
-  </style>
+  
+    /* panel tile image */
+    #vMedia{
+      height:160px;
+      border-radius:14px;
+      overflow:hidden;
+      background:rgba(0,0,0,.18);
+      border:1px solid rgba(255,255,255,.06);
+      margin:0;
+    }
+    #vMedia img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+</style>
 </head>
 
 <body>
@@ -347,7 +364,9 @@
       <div class="kv" aria-label="tile details">
         <div class="k">Tile</div><div class="v" id="vTile">None</div>
         <div class="k">Coords</div><div class="v" id="vCoords">0, 0</div>
-        <div class="k">Tag</div><div class="v" id="vTag">Open</div>
+                <div class="k">Image</div><div class="v vMedia" id="vMedia"></div>
+<div class="k">Tag</div>
+<div class="v" id="vTag">Open</div>
         <div class="k">Date</div><div class="v" id="vTs">None</div>
 
         <div class="k">Wallet</div>
