@@ -1538,6 +1538,138 @@ function onWheel(e){
   }catch(e){ console.log("[HUD_TAIL] err", e); }
 })();
 </script>
+<script>
+/* FORCE_OPEN_CLICK v3: discover real tile key and open */
+(function(){
+  function hudSet(msg){
+    var h=document.getElementById("hud")||document.getElementById("hudStatic");
+    if(h) h.textContent=msg;
+  }
+  function isDrag(){
+    try{
+      var s=window.state||window.MONOLITH_STATE;
+      if(!s) return false;
+      return !!(s.dragging || ((s.movedDist||0) >= 8));
+    }catch(e){ return false; }
+  }
+  function pickCell(x,y){
+    var els=document.elementsFromPoint?document.elementsFromPoint(x,y):[];
+    for(var i=0;i<els.length;i++){
+      var el=els[i];
+      if(!el) continue;
+      var c=(el.classList&&el.classList.contains("cell"))?el:(el.closest?el.closest(".cell"):null);
+      if(c) return c;
+    }
+    return null;
+  }
+  function getLabel(cell){
+    try{
+      var idEl=cell.querySelector?cell.querySelector(".id"):null;
+      var t=idEl&&idEl.textContent?idEl.textContent.trim():"";
+      return t;
+    }catch(e){ return ""; }
+  }
+  function getPanelState(){
+    try{
+      var p=document.querySelector(".panel");
+      if(!p) return "panel=none";
+      var open=p.classList&&p.classList.contains("open");
+      var t=(p.getAttribute("data-open")||p.getAttribute("data-tile")||"");
+      return "panelOpen="+open+" panelData="+(t||"none");
+    }catch(e){ return "panel=err"; }
+  }
+  function gridFromCell(cell){
+    try{
+      var cs=getComputedStyle(cell);
+      var left=parseFloat(cs.left), top=parseFloat(cs.top);
+      var step=parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--step")) || 128;
+      var gx=(isFinite(left)&&step)?Math.round(left/step):0;
+      var gy=(isFinite(top)&&step)?Math.round(top/step):0;
+      return {gx:gx, gy:gy};
+    }catch(e){ return {gx:0, gy:0}; }
+  }
+  function attrDump(cell){
+    try{
+      var dsKeys=[];
+      if(cell.dataset){ for(var k in cell.dataset){ dsKeys.push(k+"="+cell.dataset[k]); } }
+      var aTile=cell.getAttribute("data-tile")||"";
+      var aId=cell.getAttribute("data-id")||"";
+      var aKey=cell.getAttribute("data-key")||"";
+      var aIdx=cell.getAttribute("data-idx")||cell.getAttribute("data-index")||"";
+      return "ds{"+dsKeys.slice(0,8).join(",")+"} aTile="+(aTile||"-")+" aId="+(aId||"-")+" aKey="+(aKey||"-")+" aIdx="+(aIdx||"-");
+    }catch(e){ return "dump=err"; }
+  }
+  function uniq(list){
+    var out=[]; var seen={};
+    for(var i=0;i<list.length;i++){
+      var v=list[i];
+      if(v===null||v===undefined) continue;
+      v=(""+v).trim();
+      if(!v) continue;
+      if(seen[v]) continue;
+      seen[v]=1; out.push(v);
+    }
+    return out;
+  }
+
+  document.addEventListener("click", function(ev){
+    try{
+      var drag=isDrag();
+      var cell=pickCell(ev.clientX, ev.clientY);
+      var label=cell?getLabel(cell):"";
+      var canOpen=(typeof window.openPanel === "function");
+
+      if(!cell){ hudSet("CLICK drag="+drag+" cell=false"); return; }
+      if(drag){ hudSet("CLICK drag=true cell=true"); return; }
+      if(!canOpen){ hudSet("CLICK openPanel=false"); return; }
+
+      // stop anything else from eating the click
+      ev.preventDefault();
+      ev.stopPropagation();
+
+      var g=gridFromCell(cell);
+
+      // candidate ids in priority order
+      var cands=[];
+      // dataset candidates
+      if(cell.dataset){
+        cands.push(cell.dataset.tile);
+        cands.push(cell.dataset.id);
+        cands.push(cell.dataset.key);
+        cands.push(cell.dataset.idx);
+        cands.push(cell.dataset.index);
+      }
+      // attribute candidates
+      cands.push(cell.getAttribute("data-tile"));
+      cands.push(cell.getAttribute("data-id"));
+      cands.push(cell.getAttribute("data-key"));
+      cands.push(cell.getAttribute("data-idx"));
+      cands.push(cell.getAttribute("data-index"));
+      // DOM id and label last
+      cands.push(cell.id);
+      cands.push(label);
+      cands=uniq(cands);
+
+      var before=getPanelState();
+      hudSet("CLICK cell=true label="+(label||"-")+" gx="+g.gx+" gy="+g.gy+" | " + before);
+
+      var worked="none";
+      for(var i=0;i<cands.length;i++){
+        var key=cands[i];
+        try{
+          window.openPanel(key, g.gx, g.gy);
+        }catch(e){ /* ignore */ }
+        var after=getPanelState();
+        if(after.indexOf("panelOpen=true")>=0){ worked=key; break; }
+      }
+
+      hudSet("OPEN tried="+cands.length+" worked="+worked+" | "+getPanelState()+" | "+attrDump(cell));
+    }catch(e){
+      hudSet("CLICK err");
+    }
+  }, true);
+})();
+</script>
 </body>
 </html>
 
