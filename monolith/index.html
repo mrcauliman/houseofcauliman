@@ -366,6 +366,28 @@ background-repeat:no-repeat;
       background-color:transparent !important;
     }
   
+
+
+    /* VP_BG_XRP_LOCK */
+    html,body{
+      background:#020703 !important;
+      background-image:none !important;
+    }
+
+    /* kill bubble gradients on the viewport canvas */
+    #vp{
+      background-color:#020703 !important;
+      background-image:url("/monolith/assets/xrp_logo.webp"), url("/monolith/assets/xrp_logo.png") !important;
+      background-repeat:no-repeat !important;
+      background-position:center !important;
+      background-size:160% 160% !important; /* enlarge it */
+    }
+
+    /* if gradients are attached to wall wrapper instead of vp, kill them too */
+    #wall{
+      background-image:none !important;
+    }
+  
 </style>
 </head>
 
