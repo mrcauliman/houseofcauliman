@@ -34,8 +34,6 @@
     body{
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       background:
-        radial-gradient(1200px 700px at 20% 0%, rgba(47,191,107,.12), transparent 55%),
-        radial-gradient(900px 650px at 85% 25%, rgba(255,225,117,.10), transparent 55%),
         var(--bg);
       color:var(--fg);
       overflow:hidden;
@@ -145,7 +143,6 @@
       border-radius:16px;
       border:1px solid rgba(23,53,36,.75);
       background:
-        radial-gradient(120px 90px at 30% 25%, rgba(47,191,107,.14), transparent 55%),
         rgba(11,27,19,.45);
       box-shadow: 0 10px 28px rgba(0,0,0,.28);
       overflow:hidden;
@@ -319,6 +316,17 @@
 
 .vMedia{display:flex;justify-content:center;align-items:center;padding:10px 0;}
 #vMedia img{width:100%;max-width:260px;height:auto;display:block;border-radius:10px;}
+
+      /* EMPTY_TILE_XRP_BG_FINAL */
+      #wall .cell:not(.taken){
+        background-color:#020703 !important;
+        background-image:url("/monolith/assets/xrp_logo.webp"), url("/monolith/assets/xrp_logo.png") !important;
+        background-repeat:no-repeat !important;
+        background-position:center !important;
+        background-size:cover !important;
+      }
+
+  
 </style>
 </head>
 
