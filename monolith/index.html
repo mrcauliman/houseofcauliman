@@ -1530,6 +1530,67 @@ function onWheel(e){
   }catch(e){ console.log("[HUD_TAIL] err", e); }
 })();
 </script>
+<script>
+/* FORCE_OPEN_CLICK v1 */
+(function(){
+  function hudSet(msg){
+    var h = document.getElementById("hud") || document.getElementById("hudStatic");
+    if(h) h.textContent = msg;
+  }
+  function isDrag(){
+    try{
+      if(!window.state) return false;
+      return !!(state.dragging || ((state.movedDist||0) >= 8));
+    }catch(e){ return false; }
+  }
+  function pickCell(x,y){
+    var els = document.elementsFromPoint ? document.elementsFromPoint(x,y) : [];
+    for(var i=0;i<els.length;i++){
+      var el = els[i];
+      if(!el) continue;
+      var c = (el.classList && el.classList.contains("cell")) ? el : (el.closest ? el.closest(".cell") : null);
+      if(c) return c;
+    }
+    return null;
+  }
+  function tileFromCell(cell){
+    try{
+      var idEl = cell.querySelector ? cell.querySelector(".id") : null;
+      var t = idEl && idEl.textContent ? idEl.textContent.trim() : "";
+      return t || cell.getAttribute("data-tile") || cell.getAttribute("data-id") || cell.id || "";
+    }catch(e){ return ""; }
+  }
+  function coordsFromCell(cell){
+    try{
+      var step = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--step")) || 128;
+      var cs = getComputedStyle(cell);
+      var left = parseFloat(cs.left), top = parseFloat(cs.top);
+      var gx = (isFinite(left) && step) ? Math.round(left/step) : 0;
+      var gy = (isFinite(top) && step) ? Math.round(top/step) : 0;
+      return {gx:gx, gy:gy};
+    }catch(e){ return {gx:0, gy:0}; }
+  }
+
+  document.addEventListener("click", function(ev){
+    try{
+      var x = ev.clientX, y = ev.clientY;
+      var drag = isDrag();
+      var cell = pickCell(x,y);
+      var tile = cell ? tileFromCell(cell) : "";
+      var hasOpen = (typeof window.openPanel === "function");
+      hudSet("CLICK x="+x+" y="+y+" drag="+drag+" cell="+(!!cell)+" tile="+(tile||"none")+" openPanel="+hasOpen);
+
+      if(drag) return;
+      if(!cell) return;
+      if(!tile) return;
+      if(!hasOpen) return;
+
+      var c = coordsFromCell(cell);
+      window.openPanel(tile, c.gx, c.gy);
+    }catch(e){ hudSet("CLICK err"); }
+  }, true);
+})();
+</script>
 </body>
 </html>
 
