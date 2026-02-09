@@ -152,6 +152,9 @@
       user-select:none;
       -webkit-tap-highlight-color: transparent;
     }
+      .cell .mediaWrap{width:100%;height:100%;}
+      .cell .mediaWrap img{width:100%;height:100%;object-fit:cover;opacity:.22;}
+
 
 .cell img{
   -webkit-user-drag: none;
@@ -942,7 +945,7 @@ const isCreator  = hasCreator && (
         } else if(img){
           spray.innerHTML = mediaHTML(img, tile);
         } else {
-          spray.innerHTML = "";
+          spray.innerHTML = mediaHTML(PLACEHOLDER_IMG, "XRP");
         }
       }
     }
