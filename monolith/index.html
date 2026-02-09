@@ -750,6 +750,33 @@ zoom: 0.65,
       return cands[0];
     }
 
+    function pickCellFromPoint(x,y){
+      try{
+        var els = document.elementsFromPoint ? document.elementsFromPoint(x,y) : [];
+        for(var i=0;i<els.length;i++){
+          var el=els[i]; if(!el) continue;
+          var c=(el.classList&&el.classList.contains("cell"))?el:(el.closest?el.closest(".cell"):null);
+          if(c) return c;
+        }
+      }catch(_){}
+      return null;
+    }
+
+    function tileFromCell(cell){
+      try{
+        if(!cell) return "";
+        var gx = parseInt(cell.getAttribute("data-gx")||"",10);
+        var gy = parseInt(cell.getAttribute("data-gy")||"",10);
+        var t =
+          cell.getAttribute("data-tile") ||
+          cell.getAttribute("data-id") ||
+          cell.id ||
+          (Number.isFinite(gx) && Number.isFinite(gy) ? tileIdFromCoords(gx, gy) : "");
+        return (t||"").toString().trim();
+      }catch(_){ return ""; }
+    }
+
+
     function openPanel(tile, gx, gy){
       const mark = state.marksByTile.get(tile) || null;
       const taken = state.taken.has(tile);
@@ -763,33 +790,7 @@ const isCreator  = hasCreator && (
 );
 
       el.vTile.textContent = tile;
-      el.vCoords.textContent = `${gx}
-
-    function pickCellFromPoint(x,y){
-      try{
-        var els = document.elementsFromPoint ? document.elementsFromPoint(x,y) : [];
-        for(var i=0;i<els.length;i++){
-          var el=els[i]; if(!el) continue;
-          var c=(el.classList&&el.classList.contains("cell"))?el:(el.closest?el.closest(".cell"):null);
-          if(c) return c;
-        }
-      }catch(_){ }
-      return null;
-    }
-
-    function cellKey(cell){
-      try{
-        if(!cell) return "";
-        var k = (cell.dataset && (cell.dataset.tile||cell.dataset.id||cell.dataset.key||cell.dataset.idx||cell.dataset.index)) ||
-                cell.getAttribute("data-tile") || cell.getAttribute("data-id") || cell.getAttribute("data-key") ||
-                cell.getAttribute("data-idx") || cell.getAttribute("data-index") || cell.id || "";
-        if(k) return (""+k).trim();
-        var idEl = cell.querySelector ? cell.querySelector(".id") : null;
-        var t = idEl && idEl.textContent ? idEl.textContent.trim() : "";
-        return t;
-      }catch(_){ return ""; }
-    }
-, ${gy}`;
+      el.vCoords.textContent = `${gx}, ${gy}`;
 
       if(mark){
         el.vTag.textContent = mark.tag || "TAKEN";
@@ -1197,6 +1198,18 @@ function onMove(e){
     function onUp(e){
 
         // FORCE_OPEN_REALCELL
+        try{
+          var drag = false;
+          try{ drag = !!(state && (state.dragging || (state.movedDist||0) >= 12)); }catch(_){ }
+          if(!drag && e && e.clientX != null && e.clientY != null){
+            var cell = pickCellFromPoint(e.clientX, e.clientY);
+            var tile = tileFromCell(cell);
+            if(tile){
+              try{ openPanel(tile, 0, 0); }catch(_){ }
+            }
+          }
+        }catch(_){ }
+
     // DESKTOP OPEN FIX: click is unreliable after pointer capture. Open tile on mouse pointerup when not dragging
 
     const _upIsMouse = !!(e && e.pointerType === "mouse");
@@ -1220,20 +1233,6 @@ function onMove(e){
           const n = parseInt(v, 10);
 
           if(Number.isFinite(n)) return n;
-        try{
-          if(typeof openPanel === "function"){
-            var drag = false;
-            try{ drag = !!(state && (state.dragging || (state.movedDist||0) >= 8)); }catch(_){ }
-            if(!drag){
-              var cell = pickCellFromPoint(e.clientX, e.clientY);
-              var key = cellKey(cell);
-              if(key){
-                try{ openPanel(key, 0, 0); }catch(_){ }
-              }
-            }
-          }
-        }catch(_){ }
-
 
         }
 
