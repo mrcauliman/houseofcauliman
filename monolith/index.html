@@ -1021,6 +1021,7 @@ function updateWorldTransform(){
       vp.classList.remove("dragging");
 
 
+          if(_upIsMouse && !_upWasDrag && _upX !== null && _upY !== null){ _openCellUnderPoint(_upX,_upY); }
           if(_upIsMouse && !_upWasDrag && _upX !== null && _upY !== null){
 
             _openCellUnderPoint(_upX, _upY);
