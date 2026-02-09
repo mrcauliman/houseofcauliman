@@ -576,6 +576,20 @@ zoom: 0.65,
       }
       return h >>> 0;
     }
+
+    function makeSpraySVG(seedStr){
+      const rnd = mulberry32(hashStr(seedStr));
+      const p = [];
+      const count = 26;
+
+      for(let i=0;i<count;i++){
+        const x = Math.floor(rnd() * TILE);
+        const y = Math.floor(rnd() * TILE);
+        const r = 6 + Math.floor(rnd() * 20);
+        const a = 0.10 + rnd() * 0.22;
+        const g = rnd() < 0.72 ? "47,191,107" : "255,225,117";
+        p.push(`<circle cx="${x}" cy="${y}" r="${r}" fill="rgba(${g},${a.toFixed(3)})" />`);
+      }
       return `<svg viewBox="0 0 ${TILE} ${TILE}" width="${TILE}" height="${TILE}" xmlns="http://www.w3.org/2000/svg">${p.join("")}</svg>`;
     }
 
