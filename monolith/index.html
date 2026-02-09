@@ -1502,22 +1502,6 @@ function onWheel(e){
 <!-- monolith-build: wheel-zoom-v2 2026-02-07 -->
 <!-- monolith-lock: TRUE -->
 <!-- monolith-lock-ts: 2026-02-07T00:00:00Z -->
-<script>
-// DESKTOP ANCHOR BYPASS: navigate to tile link on short mouse up
-(function(){
-  function isDrag(){ return !!(window.state && (state.dragging || (state.movedDist||0) >= 8)); }
-  document.addEventListener("pointerup", function(ev){
-    try{
-      if(!ev || ev.pointerType !== "mouse") return;
-      if(window.state && isDrag()) return;
-      const el = document.elementFromPoint(ev.clientX, ev.clientY);
-      if(!el) return;
-      const a = (el.closest ? el.closest("a") : null);
-      if(a && a.href){ window.location.href = a.href; }
-    }catch(_){ }
-  }, {capture:true});
-})();
-</script>
 </body>
 </html>
 
