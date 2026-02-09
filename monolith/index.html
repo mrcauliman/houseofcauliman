@@ -319,6 +319,15 @@
 
 .vMedia{display:flex;justify-content:center;align-items:center;padding:10px 0;}
 #vMedia img{width:100%;max-width:260px;height:auto;display:block;border-radius:10px;}
+
+    /* EMPTY_TILE_XRP_BG */
+    .cell:not(.taken){
+      background-image:url("/monolith/assets/xrp_logo.webp"), url("/monolith/assets/xrp_logo.png");
+      background-repeat:no-repeat;
+      background-position:center;
+      background-size:64px 64px;
+    }
+
 </style>
 </head>
 
@@ -846,6 +855,9 @@ const isCreator  = hasCreator && (
         }
 
       panel.classList.add("open");
+
+      /* DISABLE_DEBUG_TOAST */
+      try{ if(typeof toast === "function"){ toast = function(){}; } }catch(_){ }
     }
 
     function ensurePool(){
