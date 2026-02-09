@@ -1020,6 +1020,13 @@ function updateWorldTransform(){
       state.dragging = false;
       vp.classList.remove("dragging");
 
+
+          if(_upIsMouse && !_upWasDrag && _upX !== null && _upY !== null){
+
+            _openCellUnderPoint(_upX, _upY);
+
+          }
+
         // DESKTOP CLICK-FALLBACK: if we did not really drag, open the tile under cursor
         if (e && e.pointerType === "mouse" && state.movedDist < 12) {
           const rect = vp.getBoundingClientRect();
@@ -1162,6 +1169,63 @@ function onMove(e){
     }
 
     function onUp(e){
+
+    // DESKTOP OPEN FIX: click is unreliable after pointer capture. Open tile on mouse pointerup when not dragging
+
+    const _upIsMouse = !!(e && e.pointerType === "mouse");
+
+    const _upX = (e && typeof e.clientX === "number") ? e.clientX : null;
+
+    const _upY = (e && typeof e.clientY === "number") ? e.clientY : null;
+
+    const _upMoved = (state.movedDist || 0);
+
+    const _upWasDrag = !!(state.dragging || _upMoved >= 12);
+
+    function _intAttr(el, keys){
+
+      for(const k of keys){
+
+        const v = el.getAttribute(k);
+
+        if(v !== null && v !== ""){
+
+          const n = parseInt(v, 10);
+
+          if(Number.isFinite(n)) return n;
+
+        }
+
+      }
+
+      return 0;
+
+    }
+
+    function _openCellUnderPoint(x,y){
+
+      try{
+
+        const elAt = document.elementFromPoint(x,y);
+
+        const cell = elAt && elAt.closest ? elAt.closest(".cell") : null;
+
+        if(!cell) return false;
+
+        const gx = _intAttr(cell, ["data-gx","data-x","data-col","data-c","data-i"]);
+
+        const gy = _intAttr(cell, ["data-gy","data-y","data-row","data-r","data-j"]);
+
+        const tile = cell.getAttribute("data-tile") || cell.getAttribute("data-id") || cell.id || tileIdFromCoords(gx, gy);
+
+        openPanel(tile, gx, gy);
+
+        return true;
+
+      }catch(_){ return false; }
+
+    }
+
       state.ptrs.delete(e.pointerId);
 
       if(state.ptrs.size < 2){
@@ -1209,11 +1273,7 @@ function onMove(e){
     }
 
 function onWheel(e){
-  if(state.dragging){
-          if(state.dragging || (state.movedDist||0) >= 12){
-          e.preventDefault();
-        }
-        }
+  e.preventDefault();
   state.vx = 0;
   state.vy = 0;
   state.dragging = false;
