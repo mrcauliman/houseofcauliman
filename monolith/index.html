@@ -1329,6 +1329,25 @@ function onWheel(e){
     vp.addEventListener("pointercancel", onUp, { passive:false });
 
 
+
+    // DESKTOP CAPTURE FIX: if capture is lost, vp\.dragging can stick forever
+    vp.addEventListener("lostpointercapture", function(e){
+      try{
+        if(state.ptrs && state.ptrs.delete) state.ptrs.delete(e.pointerId);
+      }catch(_){ }
+      try{ hardResetDrag(); }catch(_){
+        try{
+          state.down = false;
+          state.dragging = false;
+          state.moved = false;
+          state.movedDist = 0;
+          state.pid = null;
+          try{ if(state.ptrs && state.ptrs.clear) state.ptrs.clear(); }catch(__){ }
+          vp.classList.remove("dragging");
+        }catch(__){ }
+      }
+    }, { passive:true });
+
     // DESKTOP CAPTURE FIX: if capture is lost, force-reset drag state
     function onLostPointerCapture(e){
       try{
@@ -1341,9 +1360,7 @@ function onWheel(e){
         state.movedDist = 0;
         state.pid = null;
         try{ if(state.ptrs && state.ptrs.clear) state.ptrs.clear(); }catch(_){ }
-        vp.classList.remove("dragging");
-        try{ document.documentElement.classList.remove("grabbing"); }catch(_){ }
-        try{ document.body.classList.remove("grabbing"); }catch(_){ }
+        vp.classList.remove("dragging");try{ document.body.classList.remove("grabbing"); }catch(_){ }
       }catch(_){ }
     }
     vp.addEventListener("lostpointercapture", onLostPointerCapture, { passive:true });
@@ -1365,9 +1382,7 @@ function onWheel(e){
         state.movedDist = 0;
         state.pid = null;
         try{ if(state.ptrs && state.ptrs.clear) state.ptrs.clear(); }catch(_){ }
-        vp.classList.remove("dragging");
-        try{ document.documentElement.classList.remove("grabbing"); }catch(_){ }
-        try{ document.body.classList.remove("grabbing"); }catch(_){ }
+        vp.classList.remove("dragging");try{ document.body.classList.remove("grabbing"); }catch(_){ }
       }catch(_){ }
     }
 
