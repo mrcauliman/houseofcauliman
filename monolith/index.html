@@ -1021,7 +1021,6 @@ function updateWorldTransform(){
       vp.classList.remove("dragging");
 
 
-          if(_upIsMouse && !_upWasDrag && _upX !== null && _upY !== null){ _openCellUnderPoint(_upX,_upY); }
           if(_upIsMouse && !_upWasDrag && _upX !== null && _upY !== null){
 
             _openCellUnderPoint(_upX, _upY);
@@ -1502,14 +1501,6 @@ function onWheel(e){
 <!-- monolith-build: wheel-zoom-v2 2026-02-07 -->
 <!-- monolith-lock: TRUE -->
 <!-- monolith-lock-ts: 2026-02-07T00:00:00Z -->
-<script>
-(function(){
-  const b=document.createElement("div");
-  b.id="hud";
-  b.style.cssText="position:fixed;left:8px;bottom:8px;z-index:999999;background:#000;color:#0f0;padding:6px 8px;font:12px monospace;border:1px solid #0f0";
-  document.body.appendChild(b);
-})();
-</script>
 </body>
 </html>
 
