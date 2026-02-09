@@ -1,3 +1,4 @@
+const CACHE_NAME="monolith-cache-999999";
 const CACHE = "monolith-v3";
 const ASSETS = [
   "/monolith/",
