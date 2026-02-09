@@ -1350,6 +1350,7 @@ function onWheel(e){
 
     // DESKTOP CAPTURE FIX: if capture is lost, force-reset drag state
     function onLostPointerCapture(e){
+    try{ toastShow("lost capture", "bad"); }catch(_){ }
       try{
         if(state && state.ptrs){
           try{ state.ptrs.delete(e.pointerId); }catch(_){ }
