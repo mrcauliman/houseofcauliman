@@ -358,30 +358,6 @@
       </div>
       <div class="sp"></div>
       <button class="xbtn" id="close" type="button" aria-label="close panel">X</button>
-<script>
-/* CLOSE_FIX v1 */
-(function(){
-  function closeNow(){
-    try{
-      var p=document.getElementById("panel");
-      if(p) p.classList.remove("open");
-    }catch(_){}
-  }
-  function wire(){
-    var btn=document.getElementById("close");
-    if(!btn) return setTimeout(wire, 50);
-    btn.addEventListener("click", function(e){
-      e.preventDefault();
-      e.stopPropagation();
-      if(e.stopImmediatePropagation) e.stopImmediatePropagation();
-      closeNow();
-    }, true);
-    // if anything left it open on load, slam it shut
-    closeNow();
-  }
-  wire();
-})();
-</script>
     </div>
     <div class="pb">
       <div class="kv" aria-label="tile details">
