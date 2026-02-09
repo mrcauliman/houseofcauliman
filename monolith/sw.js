@@ -1,4 +1,4 @@
-const CACHE = "monolith-v2";
+const CACHE = "monolith-v3";
 const ASSETS = [
   "/monolith/",
   "/monolith/index.html",
