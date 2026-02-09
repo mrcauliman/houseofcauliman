@@ -1501,6 +1501,10 @@ function onWheel(e){
       if(typeof openPanel === "function") window.openPanel = openPanel;
       if(typeof state !== "undefined") window.MONOLITH_STATE = state;
     }catch(_){ }
+    try{
+      if(typeof openPanel === "function") window.openPanel = openPanel;
+      if(typeof state !== "undefined") window.MONOLITH_STATE = state;
+    }catch(_){ }
   })();
   </script>
 <!-- monolith-build: wheel-zoom-v2 2026-02-07 -->
