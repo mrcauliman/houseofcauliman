@@ -1511,6 +1511,25 @@ function onWheel(e){
   document.body.appendChild(b);
 })();
 </script>
+<script>
+/* HUD_TAIL v1 */
+(function(){
+  try{
+    function getHud(){ return document.getElementById("hud") || document.getElementById("hudStatic"); }
+    let last = "boot";
+    setInterval(function(){
+      const h = getHud();
+      if(h) h.textContent = "HUD TAIL tick " + Date.now() + " | " + last;
+    }, 200);
+
+    window.addEventListener("pointerup", function(e){
+      last = "pup pt=" + (e.pointerType||"na") + " x=" + (e.clientX||0) + " y=" + (e.clientY||0);
+    }, true);
+
+    window.addEventListener("click", function(){ last = "click " + Date.now(); }, true);
+  }catch(e){ console.log("[HUD_TAIL] err", e); }
+})();
+</script>
 </body>
 </html>
 
