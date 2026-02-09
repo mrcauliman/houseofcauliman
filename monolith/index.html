@@ -133,6 +133,12 @@
     }
 
     .cell{
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  user-drag: none;
+  touch-action: none;
       position:absolute;
       width:var(--tile);
       height:var(--tile);
@@ -146,6 +152,11 @@
       user-select:none;
       -webkit-tap-highlight-color: transparent;
     }
+
+.cell img{
+  -webkit-user-drag: none;
+  user-drag: none;
+}
     .cell:hover{border-color:rgba(47,191,107,.45)}
     .cell .spray{position:absolute;inset:0;opacity:.95}
 
@@ -1350,7 +1361,6 @@ function onWheel(e){
 
     // DESKTOP CAPTURE FIX: if capture is lost, force-reset drag state
     function onLostPointerCapture(e){
-    try{ toastShow("lost capture", "bad"); }catch(_){ }
       try{
         if(state && state.ptrs){
           try{ state.ptrs.delete(e.pointerId); }catch(_){ }
