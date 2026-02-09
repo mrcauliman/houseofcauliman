@@ -33,10 +33,7 @@
     html,body{height:100%;margin:0}
     body{
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      background:
-        radial-gradient(1200px 700px at 20% 0%, rgba(47,191,107,.12), transparent 55%),
-        radial-gradient(900px 650px at 85% 25%, rgba(255,225,117,.10), transparent 55%),
-        var(--bg);
+
       color:var(--fg);
       overflow:hidden;
     }
@@ -144,9 +141,7 @@
       height:var(--tile);
       border-radius:16px;
       border:1px solid rgba(23,53,36,.75);
-      background:
-        radial-gradient(120px 90px at 30% 25%, rgba(47,191,107,.14), transparent 55%),
-        rgba(11,27,19,.45);
+
       box-shadow: 0 10px 28px rgba(0,0,0,.28);
       overflow:hidden;
       user-select:none;
@@ -333,6 +328,23 @@ background-repeat:no-repeat;
       background-size:64px 64px;
     }
 
+
+
+    /* TILE_BG_LOCK_XRP */
+    #wall .cell{
+      background-image:url("/monolith/assets/xrp_logo.webp"), url("/monolith/assets/xrp_logo.png") !important;
+      background-repeat:no-repeat !important;
+      background-position:center !important;
+      background-size:100% 100% !important;
+      background-color:transparent !important;
+    }
+    #wall .cell::before,
+    #wall .cell::after{
+      background:none !important;
+      opacity:0 !important;
+      content:none !important;
+    }
+  
 </style>
 </head>
 
