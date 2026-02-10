@@ -1,5 +1,5 @@
 const CACHE_NAME="monolith-cache-999999";
-const CACHE="monolith-v3-1770683452";
+const CACHE="monolith-v3-1770683485";
 const ASSETS = [
   "/monolith/",
   "/monolith/index.html",
