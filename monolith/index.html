@@ -712,6 +712,17 @@ zoom: 0.65,
       const b = u.slice(-14);
       return a + "…" + b;
     }
+    function setHandleUI(raw){
+      const v = (raw || "").toString().trim();
+      if(!el.vHandleWrap) return;
+
+      el.vHandleWrap.innerHTML = "";
+
+      const s = document.createElement("span");
+      s.id = "vHandle";
+      s.textContent = v || "None";
+      el.vHandleWrap.appendChild(s);
+    }
 
     function setLinkUI(linkStr){
       const raw = cleanLinkRaw(linkStr);
