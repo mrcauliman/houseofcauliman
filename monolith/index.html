@@ -1096,7 +1096,7 @@ function updateWorldTransform(){
       state.camY = wy - (screenY - h*0.5) / state.zoom;
 
       state.lastKey = "";
-      updateWorldTransform();
+            state.justPinchedUntil = performance.now() + 350;      updateWorldTransform();
       renderPool();
     }
 
@@ -1168,7 +1168,7 @@ function onMove(e){
           state.vy = 0;
 
           state.lastKey = "";
-          return;
+            state.justPinchedUntil = performance.now() + 350;          return;
         }
       }
 
@@ -1376,7 +1376,7 @@ function onWheel(e){
       vp.classList.remove("dragging");
 
       state.lastKey = "";
-      updateWorldTransform();
+            state.justPinchedUntil = performance.now() + 350;      updateWorldTransform();
       renderPool();
     }
 
@@ -1432,7 +1432,7 @@ function onWheel(e){
         el.kTaken.textContent = String(state.taken.size);
 
         state.lastKey = "";
-        renderPool();
+            state.justPinchedUntil = performance.now() + 350;        renderPool();
       }catch(_){
         toastShow("feed fail", "warn");
       }
@@ -1550,7 +1550,7 @@ el.close.addEventListener("click", function(e){
     resolveFirstWorking(CREATOR_LOGO_CANDIDATES).then((u) => {
       CREATOR_LOGO = u;
       state.lastKey = "";
-      renderPool();
+            state.justPinchedUntil = performance.now() + 350;      renderPool();
     });
 
     loadFeed().then(() => startNearSeed());
