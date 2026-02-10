@@ -1168,7 +1168,8 @@ function onMove(e){
           state.vy = 0;
 
           state.lastKey = "";
-            state.justPinchedUntil = performance.now() + 350;          return;
+            state.justPinchedUntil = performance.now() + 350;
+            return;
         }
       }
 
@@ -1215,6 +1216,14 @@ function onMove(e){
         try{
           var drag = false;
           try{ drag = !!(state && (state.dragging || (state.movedDist||0) >= 12)); }catch(_){ }
+            try{
+              if(e && e.pointerType === "touch"){
+                if(state && state.ptrs && state.ptrs.size >= 2) drag = true;
+                if(state && state.pinch) drag = true;
+                if(performance.now() < (state.justPinchedUntil||0)) drag = true;
+                if((state.movedDist||0) >= 8) drag = true;
+              }
+            }catch(_){ }
           if(!drag && e && e.clientX != null && e.clientY != null){
             var cell = pickCellFromPoint(e.clientX, e.clientY);
             var tile = tileFromCell(cell);
