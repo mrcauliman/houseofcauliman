@@ -5,7 +5,9 @@
     "gy": 0,
     "tag": "MONOLITH",
     "wallet": "r9iKXkMGF2HxAEsCLqdrghWpJmfFZN1Gw8",
-    "handle": "@monolith_xrpl"
+    "handle": "@monolith_xrpl",
+    "ts": "2/10/1026",
+    "link": "https://houseofcauliman.com/monolith/"
   },
   {
     "tile": "W1-N1",
@@ -14,7 +16,10 @@
     "tag": "MRCAULIMAN",
     "wallet": "rfgFM8z2abu2uahXFaRre8aWw9PEv48QbS",
     "img": "/monolith/assets/mrcauliman_logo.webp",
-    "handle": "@mrcauliman"
+    "handle": "@mrcauliman",
+    "ts": "2/10/2026",
+    "link": "https://houseofcauliman.com/",
+    "note": "Founder of House of Cauliman. I build culture on the XRPL, then I bolt it to the chain so it can\u2019t be erased. This wall is proof. This mark is permanent."
   },
   {
     "tile": "W1-N0",
@@ -23,7 +28,8 @@
     "tag": "AUGUR",
     "link": "https://houseofcauliman.com/augur.html",
     "img": "/monolith/assets/augur_logo.webp",
-    "handle": "@augurintel"
+    "handle": "@augurintel",
+    "note": "AUGUR is a read-only Chain Oracle. It reads public wallets and turns them into plain-English statements. No wallet connection, no keys, no custody. It reads everywhere and writes nowhere."
   },
   {
     "tile": "E0-N1",
@@ -33,7 +39,9 @@
     "wallet": "rpFVEydkZrUjf4tcbLeDeVqXm5zYQGtXWm",
     "link": "https://www.continentalwick.com/",
     "img": "/monolith/assets/wck_logo.webp",
-    "handle": "@wck_token"
+    "handle": "@wick_token",
+    "ts": "2/10/2016",
+    "note": "GPK x John Wick energy. Sticker-slap violence, neon pulp grit, collector-grade chaos. Continental Wick turns legendary hits into XRPL history, one iconic card at a time."
   },
   {
     "tile": "E0-S1",
@@ -53,6 +61,8 @@
     "wallet": "rNeYbfb9EDV8c7mNfUuooEEYYzMcEuDFbr",
     "link": "https://getthebag.io/",
     "img": "/monolith/assets/bag_logo.webp",
-    "handle": "@getthebag_io"
+    "handle": "getthebag_io",
+    "ts": "2/10/2026",
+    "note": "$BAG is skill league money. Real games, real competition, real outcomes. Built on XRPL rails so wins, losses, and payouts stay provable and transparent."
   }
 ]

@@ -390,10 +390,13 @@
           <button class="copy" id="copyWallet" type="button" style="display:none">Copy</button>
         </div>
 
-        <div class="k">Link or Handle</div>
-        <div class="v" id="vLinkWrap">
-          <span id="vLink">None</span>
-        </div>
+        <div class="k">Handle</div>
+          <div class="v" id="vHandleWrap"><span id="vHandle">None</span></div>
+
+          <div class="k">Link</div>
+          <div class="v" id="vLinkWrap">
+            <span id="vLink">None</span>
+          </div>
 
         <div class="k">Note</div><div class="v" id="vNote">None</div>
 <div class="k">Image</div><div class="v vMedia" id="vMedia"></div>
@@ -442,6 +445,9 @@ let CREATOR_LOGO = "";
       vVerified: document.getElementById("vVerified"),
 
       vWalletWrap: document.getElementById("vWalletWrap"),
+
+        vHandleWrap: document.getElementById("vHandleWrap"),
+        vHandle: document.getElementById("vHandle"),
       vWalletMasked: document.getElementById("vWalletMasked"),
       vWalletFull: document.getElementById("vWalletFull"),
       revealWallet: document.getElementById("revealWallet"),
@@ -818,7 +824,9 @@ const isCreator  = hasCreator && (
           setWalletUI(w, isPublicWallet(mark), !!w);
         }
 
-        setLinkUI(mark.link || "");
+        setHandleUI(mark.handle || "");
+
+          setLinkUI(mark.link || "");
 
         el.vBody.textContent = mark.note ? String(mark.note) : "Taken tile. Locked in feed.";
       } else {
@@ -836,7 +844,9 @@ const isCreator  = hasCreator && (
           el.vNote.textContent = "None";
         }
 
-        setLinkUI("");
+        setHandleUI("");
+
+          setLinkUI("");
 
         el.vBody.textContent = taken ? "This tile exists in feed but has no display fields." : "This tile is open.";
       }
@@ -1422,7 +1432,8 @@ function onWheel(e){
               visibility: it.visibility || null,
               public_wallet: it.public_wallet || null,
 
-              link: it.link || null,
+              handle: it.handle || null,
+                link: it.link || null,
               note: it.note || null
             });
           }
