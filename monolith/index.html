@@ -376,7 +376,6 @@
     <div class="pb">
       <div class="kv" aria-label="tile details">
         <div class="k">Tile</div><div class="v" id="vTile">None</div>
-        <div class="k">Coords</div><div class="v" id="vCoords">0, 0</div>
 <div class="k">Tag</div>
 <div class="v" id="vTag">Open</div>
         <div class="k">Date</div><div class="v" id="vTs">None</div>
@@ -437,7 +436,6 @@ let CREATOR_LOGO = "";
       ptitle: document.getElementById("ptitle"),
       psub: document.getElementById("psub"),
       vTile: document.getElementById("vTile"),
-      vCoords: document.getElementById("vCoords"),
       vTag: document.getElementById("vTag"),
       vTs: document.getElementById("vTs"),
 
@@ -804,7 +802,6 @@ const isCreator  = hasCreator && (
 );
 
       el.vTile.textContent = tile;
-      el.vCoords.textContent = `${gx}, ${gy}`;
 
       if(mark){
         el.vTag.textContent = mark.tag || "TAKEN";
