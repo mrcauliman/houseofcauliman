@@ -548,12 +548,24 @@ zoom: 0.65,
       toast._t = setTimeout(() => toast.classList.remove("show"), 1400);
     }
 
+    function coordLabelFromG(gx, gy){
+      gx = Number(gx)||0;
+      gy = Number(gy)||0;
+
+  if(gx===0 && gy===0) return "ORIGIN";
+
+  const ax = Math.abs(gx);
+  const ay = Math.abs(gy);
+
+  const x = gx>0 ? `E-${ax}` : gx<0 ? `W-${ax}` : "";
+  const y = gy<0 ? `N-${ay}` : gy>0 ? `S-${ay}` : "";
+
+  if(x && y) return `${y} / ${x}`;
+  return x || y;
+    }
+
     function tileIdFromCoords(gx, gy){
-      const ax = Math.abs(gx);
-      const ay = Math.abs(gy);
-      const sx = gx < 0 ? "W" : "E";
-      const sy = gy <= 0 ? "N" : "S";
-      return sx + ax + "-" + sy + ay;
+      return coordLabelFromG(gx, gy);
     }
 
     function parseQueryToCoords(str){
@@ -566,8 +578,8 @@ zoom: 0.65,
         const gy = parseInt(parts[1].trim(), 10);
         if(Number.isFinite(gx) && Number.isFinite(gy)){
           return { gx, gy, tile: tileIdFromCoords(gx, gy), raw };
-        }
-      }
+            }
+          }
 
       let m = raw.match(/^([EW])(\d+)-([NS])(\d+)$/);
       if(m){
@@ -576,8 +588,8 @@ zoom: 0.65,
         const gy = (m[3] === "N" ? -gyN : gyN);
         if(Number.isFinite(gx) && Number.isFinite(gy)){
           return { gx, gy, tile: tileIdFromCoords(gx, gy), raw };
-        }
-      }
+            }
+          }
 
       m = raw.match(/^([EW])(\d+)([NS])(\d+)$/);
       if(m){
@@ -586,8 +598,8 @@ zoom: 0.65,
         const gy = (m[3] === "N" ? -gyN : gyN);
         if(Number.isFinite(gx) && Number.isFinite(gy)){
           return { gx, gy, tile: tileIdFromCoords(gx, gy), raw };
-        }
-      }
+            }
+          }
 
       return null;
     }
@@ -831,8 +843,8 @@ zoom: 0.65,
           cell.getAttribute("data-id") ||
           cell.id ||
           (Number.isFinite(gx) && Number.isFinite(gy) ? tileIdFromCoords(gx, gy) : "");
-        return (t||"").toString().trim();
-      }catch(_){ return ""; }
+            return (t||"").toString().trim();
+          }catch(_){ return ""; }
     }
 
 
@@ -942,15 +954,15 @@ const isCreator  = hasCreator && (
           const gx = parseInt(d.getAttribute("data-gx") || "0", 10);
           const gy = parseInt(d.getAttribute("data-gy") || "0", 10);
           const tile = d.getAttribute("data-tile") || tileIdFromCoords(gx, gy);
-          openPanel(tile, gx, gy);
-        }, { passive:true });
+              openPanel(tile, gx, gy);
+            }, { passive:true });
       }
     }
 
     function setCell(cell, gx, gy){
       const tile = tileIdFromCoords(gx, gy);
-      const mark = state.marksByTile.get(tile) || null;
-      const taken = state.taken.has(tile);
+          const mark = state.marksByTile.get(tile) || null;
+          const taken = state.taken.has(tile);
 
       cell.style.left = (gx * STEP) + "px";
       cell.style.top  = (gy * STEP) + "px";
@@ -1125,8 +1137,8 @@ function updateWorldTransform(){
           const gx = Math.round(wx / STEP);
           const gy = Math.round(wy / STEP);
           const tile = tileIdFromCoords(gx, gy);
-          openPanel(tile, gx, gy);
-        }
+              openPanel(tile, gx, gy);
+            }
 
     }
 
@@ -1326,7 +1338,7 @@ function onMove(e){
 
         const tile = cell.getAttribute("data-tile") || cell.getAttribute("data-id") || cell.id || tileIdFromCoords(gx, gy);
 
-        openPanel(tile, gx, gy);
+            openPanel(tile, gx, gy);
 
         return true;
 
