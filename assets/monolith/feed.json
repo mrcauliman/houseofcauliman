@@ -1,6 +1,6 @@
 [
   {
-    "tile": "E0-N0",
+    "tile": "ORIGIN",
     "gx": 0,
     "gy": 0,
     "tag": "MONOLITH",
@@ -10,7 +10,7 @@
     "link": "https://houseofcauliman.com/monolith/"
   },
   {
-    "tile": "W1-S1",
+    "tile": "N-1 / W-1",
     "gx": -1,
     "gy": 1,
     "tag": "MRCAULIMAN",
@@ -19,10 +19,10 @@
     "handle": "@mrcauliman",
     "ts": "2/10/2026",
     "link": "https://houseofcauliman.com/",
-    "note": "Founder of House of Cauliman. I build culture on the XRPL, then I bolt it to the chain so it can\u2019t be erased. This wall is proof. This mark is permanent."
+    "note": "Founder of House of Cauliman. I build culture on the XRPL, then I bolt it to the chain so it can’t be erased. This wall is proof. This mark is permanent."
   },
   {
-    "tile": "W1-N0",
+    "tile": "W-1",
     "gx": -1,
     "gy": 0,
     "tag": "AUGUR",
@@ -32,7 +32,7 @@
     "note": "AUGUR is a read-only Chain Oracle. It reads public wallets and turns them into plain-English statements. No wallet connection, no keys, no custody. It reads everywhere and writes nowhere."
   },
   {
-    "tile": "E0-S1",
+    "tile": "N-1",
     "gx": 0,
     "gy": 1,
     "tag": "CONTINENTAL WICK",
@@ -44,7 +44,7 @@
     "note": "GPK x John Wick energy. Sticker-slap violence, neon pulp grit, collector-grade chaos. Continental Wick turns legendary hits into XRPL history, one iconic card at a time."
   },
   {
-    "tile": "E0-N1",
+    "tile": "S-1",
     "gx": 0,
     "gy": -1,
     "tag": "Rad Garlington",
@@ -52,11 +52,11 @@
     "link": "https://radgarlington.io/",
     "img": "/monolith/assets/rad_logo.webp",
     "handle": "@radgarlington",
-    "note": "RAD is the enforcement layer. The RAD Ledger is a public record of what\u2019s real, what\u2019s verified, and what\u2019s suspect across XRPL tokens and drops. Certification, receipts, and accountability, no excuses.",
+    "note": "RAD is the enforcement layer. The RAD Ledger is a public record of what’s real, what’s verified, and what’s suspect across XRPL tokens and drops. Certification, receipts, and accountability, no excuses.",
     "ts": "2/10/2026"
   },
   {
-    "tile": "W1-N1",
+    "tile": "S-1 / W-1",
     "gx": -1,
     "gy": -1,
     "tag": "GET THE $BAG",
