@@ -557,8 +557,12 @@ zoom: 0.65,
     }
 
     function tileIdFromCoords(gx, gy){
-      return window.tileLegacyFromG(gx, gy);
-    }
+  if(window.coordDisplayFromG) return window.coordDisplayFromG(gx, gy);
+  const ax=Math.abs(gx), ay=Math.abs(gy);
+  const sx=gx<0?"W":"E";
+  const sy=gy<=0?"N":"S";
+  return sx+ax+"-"+sy+ay;
+}
 
 function coordLabelFromG(gx, gy){
   gx = Number(gx)||0;
