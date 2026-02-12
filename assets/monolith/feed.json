@@ -10,7 +10,7 @@
     "link": "https://houseofcauliman.com/monolith/"
   },
   {
-    "tile": "W1-N1",
+    "tile": "W1-S1",
     "gx": -1,
     "gy": 1,
     "tag": "MRCAULIMAN",
@@ -32,7 +32,7 @@
     "note": "AUGUR is a read-only Chain Oracle. It reads public wallets and turns them into plain-English statements. No wallet connection, no keys, no custody. It reads everywhere and writes nowhere."
   },
   {
-    "tile": "E0-N1",
+    "tile": "E0-S1",
     "gx": 0,
     "gy": 1,
     "tag": "CONTINENTAL WICK",
@@ -44,7 +44,7 @@
     "note": "GPK x John Wick energy. Sticker-slap violence, neon pulp grit, collector-grade chaos. Continental Wick turns legendary hits into XRPL history, one iconic card at a time."
   },
   {
-    "tile": "E0-S1",
+    "tile": "E0-N1",
     "gx": 0,
     "gy": -1,
     "tag": "Rad Garlington",
@@ -56,7 +56,7 @@
     "ts": "2/10/2026"
   },
   {
-    "tile": "W1-S1",
+    "tile": "W1-N1",
     "gx": -1,
     "gy": -1,
     "tag": "GET THE $BAG",
