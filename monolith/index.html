@@ -858,8 +858,8 @@ const isCreator  = hasCreator && (
 
           setLinkUI(mark.link || "");
 
-        el.vBody.textContent = mark.note ? String(mark.note) : "Taken tile. Locked in feed.";
-      } else {
+        el.vBody.textContent = "Scroll to read. Status: " + (taken ? "TAKEN" : "MARKED") + ".";
+} else {
         el.vTag.textContent = taken ? "TAKEN" : "OPEN";
         el.vTs.textContent  = "None";
 
@@ -878,8 +878,8 @@ const isCreator  = hasCreator && (
 
           setLinkUI("");
 
-        el.vBody.textContent = taken ? "This tile exists in feed but has no display fields." : "This tile is open.";
-      }
+        el.vBody.textContent = taken ? "Status: TAKEN. No display fields in feed." : "Status: OPEN.";
+}
 
       el.ptitle.textContent = "Tile " + tile;
       el.psub.textContent = "Tap a tile to inspect. Drag to move. Wheel or pinch to zoom.";
