@@ -386,7 +386,7 @@ body.debug #dbg{display:block;}
     <div class="sp"></div>
 
     <div class="search" aria-label="search tiles">
-      <input id="q" autocomplete="off" spellcheck="false" placeholder="Search tile E23-N11 or E23N11 or 23,-11" />
+      <input id="q" autocomplete="off" spellcheck="false" placeholder="Search tile N-11 / E-23 or N-11/E-23 or 23,-11 or E23-N11" />
       <button class="btn" id="go" type="button">Go</button>
     </div>
 
@@ -450,7 +450,7 @@ body.debug #dbg{display:block;}
   (() => {
 const FEED_URL = "/assets/monolith/feed.json?cb=" + Date.now();
 
-    const MONOLITH_TILE = "E0-N0";
+    const MONOLITH_TILE = "ORIGIN";
     const MONOLITH_TAG  = "MONOLITH";
     const MONOLITH_LOGO = "/monolith/assets/monolith_logo.webp";
 
@@ -578,6 +578,31 @@ function coordLabelFromG(gx, gy){
 
     function parseQueryToCoords(str){
       let raw = String(str || "").trim().toUpperCase().replace(/[–—−]/g, "-");
+      // Option A labels: "N-11 / E-23" or "N-11/E-23" or "W-5"
+      const raw0 = String(str || "").trim().toUpperCase();
+      if(raw0 === "ORIGIN"){
+        return { gx:0, gy:0, tile: tileIdFromCoords(0,0), raw: raw0 };
+      }
+      if(raw0.includes("N-") || raw0.includes("S-") || raw0.includes("E-") || raw0.includes("W-")){
+        const parts = raw0.replace(/\s+/g,"").split("/");
+        let gx = null, gy = null;
+        for(const part of parts){
+          const m = part.match(/^([NSEW])\-?(\d+)$/);
+          if(!m) continue;
+          const d = m[1];
+          const n = parseInt(m[2], 10);
+          if(d === "E") gx = n;
+          else if(d === "W") gx = -n;
+          else if(d === "N") gy = n;
+          else if(d === "S") gy = -n;
+        }
+        if(gx !== null || gy !== null){
+          gx = (gx === null) ? 0 : gx;
+          gy = (gy === null) ? 0 : gy;
+          return { gx, gy, tile: tileIdFromCoords(gx,gy), raw: raw0 };
+        }
+      }
+
       raw = raw.replace(/\s+/g, "");
 
       if(/^-?\d+,\s*-?\d+$/.test(raw)){
