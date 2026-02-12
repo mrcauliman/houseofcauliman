@@ -1015,7 +1015,7 @@ const isCreator  = hasCreator && (
       const tag = cell.querySelector(".tag");
       const id = cell.querySelector(".id");
 
-      if(id) id.textContent = tile;
+      if(id){ id.textContent = (gx===0 && gy===0) ? "ORIGIN" : tile; }
 
       if(tag){
         if(mark && mark.tag) tag.textContent = mark.tag;
