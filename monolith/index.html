@@ -858,7 +858,7 @@ const isCreator  = hasCreator && (
 
           setLinkUI(mark.link || "");
 
-        el.vBody.textContent = "Scroll to read. Status: " + (taken ? "TAKEN" : "MARKED") + ".";
+        el.vBody.textContent = "";
 } else {
         el.vTag.textContent = taken ? "TAKEN" : "OPEN";
         el.vTs.textContent  = "None";
@@ -878,7 +878,7 @@ const isCreator  = hasCreator && (
 
           setLinkUI("");
 
-        el.vBody.textContent = taken ? "Status: TAKEN. No display fields in feed." : "Status: OPEN.";
+        el.vBody.textContent = "";
 }
 
       el.ptitle.textContent = "Tile " + tile;
