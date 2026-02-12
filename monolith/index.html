@@ -564,9 +564,14 @@ zoom: 0.65,
   return x || y;
     }
 
-    function tileIdFromCoords(gx, gy){
-      return coordLabelFromG(gx, gy);
-    }
+    function coordLabelFromG(gx, gy){
+  gx = Number(gx)||0; gy = Number(gy)||0;
+  const ax = Math.abs(gx);
+  const ay = Math.abs(gy);
+  const sx = gx < 0 ? "W" : "E";
+  const sy = gy <= 0 ? "N" : "S";
+  return sx + ax + "-" + sy + ay;
+}
 
     function parseQueryToCoords(str){
       let raw = String(str || "").trim().toUpperCase().replace(/[–—−]/g, "-");
