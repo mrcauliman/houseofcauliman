@@ -345,6 +345,22 @@
   -webkit-overflow-scrolling: touch;
 }
 
+/* VALUE wrap, no spill */
+.v{
+  min-width:0;
+  white-space:normal;
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+#vLinkWrap a,
+#vWalletWrap,
+#vHandleWrap{
+  display:block;
+  white-space:normal;
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+
 /* NOTE wrap, no spill */
 #vNote{
   display:block;
