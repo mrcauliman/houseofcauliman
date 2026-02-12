@@ -549,13 +549,28 @@ zoom: 0.65,
     }
 
     function tileIdFromCoords(gx, gy){
+      const ax = Math.abs(gx);
+      const ay = Math.abs(gy);
+      const sx = gx < 0 ? "W" : "E";
+      const sy = gy < 0 ? "S" : "N";
+      return sx + ax + "-" + sy + ay;
+    }
+
+function coordLabelFromG(gx, gy){
+  gx = Number(gx)||0;
+  gy = Number(gy)||0;
+  if(gx===0 && gy===0) return "ORIGIN";
+
   const ax = Math.abs(gx);
   const ay = Math.abs(gy);
-  const sx = gx < 0 ? "W" : "E";
-  const sy = gy < 0 ? "N" : "S";
-  const y  = (gy === 0 ? "N0" : (sy + ay));
-  return sx + ax + "-" + y;
+
+  const x = gx>0 ? `E-${ax}` : gx<0 ? `W-${ax}` : "";
+  const y = gy>0 ? `N-${ay}` : gy<0 ? `S-${ay}` : "N-0";
+
+  if(x && y) return `${y} / ${x}`;
+  return x || y;
 }
+
 
     function parseQueryToCoords(str){
       let raw = String(str || "").trim().toUpperCase().replace(/[–—−]/g, "-");
@@ -574,7 +589,7 @@ zoom: 0.65,
       if(m){
         const gx = parseInt(m[2], 10) * (m[1] === "W" ? -1 : 1);
         const gyN = parseInt(m[4], 10);
-        const gy = (m[3] === "N" ? -gyN : gyN);
+        const gy = (m[3] === "N" ? gyN : -gyN);
         if(Number.isFinite(gx) && Number.isFinite(gy)){
           return { gx, gy, tile: tileIdFromCoords(gx, gy), raw };
         }
@@ -584,7 +599,7 @@ zoom: 0.65,
       if(m){
         const gx = parseInt(m[2], 10) * (m[1] === "W" ? -1 : 1);
         const gyN = parseInt(m[4], 10);
-        const gy = (m[3] === "N" ? -gyN : gyN);
+        const gy = (m[3] === "N" ? gyN : -gyN);
         if(Number.isFinite(gx) && Number.isFinite(gy)){
           return { gx, gy, tile: tileIdFromCoords(gx, gy), raw };
         }
@@ -954,7 +969,7 @@ const isCreator  = hasCreator && (
       const taken = state.taken.has(tile);
 
       cell.style.left = (gx * STEP) + "px";
-      cell.style.top  = (gy * STEP) + "px";
+      cell.style.top  = ((-gy) * STEP) + "px";
 
       cell.setAttribute("data-gx", String(gx));
       cell.setAttribute("data-gy", String(gy));
@@ -1124,7 +1139,7 @@ function updateWorldTransform(){
           const wx = state.camX + (sx - vp.clientWidth * 0.5) / Math.max(0.2, state.zoom);
           const wy = state.camY + (sy - vp.clientHeight * 0.5) / Math.max(0.2, state.zoom);
           const gx = Math.round(wx / STEP);
-          const gy = Math.round(wy / STEP);
+          const gy = -Math.round(wy / STEP);
           const tile = tileIdFromCoords(gx, gy);
           openPanel(tile, gx, gy);
         }
