@@ -1640,7 +1640,7 @@ el.close.addEventListener("click", function(e){
 
     if(el.btnCenter){
       el.btnCenter.addEventListener("click", () => {
-        startNearSeed();
+        centerOn(0, 0);
         toastShow("centered", "good");
       }, { passive:true });
     }
@@ -1654,7 +1654,7 @@ el.close.addEventListener("click", function(e){
       state.lastKey = "";
     });
 
-    loadFeed().then(() => startNearSeed());
+    loadFeed().then(() => { centerOn(0, 0); });
     setInterval(loadFeed, 15000);
   })();
   </script>
