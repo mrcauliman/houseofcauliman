@@ -10,21 +10,21 @@
     "link": "https://houseofcauliman.com/monolith/"
   },
   {
-    "tile": "N-1 / W-1",
-    "gx": -1,
-    "gy": 1,
+    "tile": "N-2",
+    "gx": 0,
+    "gy": 2,
     "tag": "MRCAULIMAN",
     "wallet": "rfgFM8z2abu2uahXFaRre8aWw9PEv48QbS",
     "img": "/monolith/assets/mrcauliman_logo.webp",
     "handle": "@mrcauliman",
     "ts": "2/10/2026",
     "link": "https://houseofcauliman.com/",
-    "note": "Founder of House of Cauliman. I build culture on the XRPL, then I bolt it to the chain so it can’t be erased. This wall is proof. This mark is permanent."
+    "note": "Founder of House of Cauliman. I build culture on the XRPL, then I bolt it to the chain so it can\u2019t be erased. This wall is proof. This mark is permanent."
   },
   {
-    "tile": "W-1",
-    "gx": -1,
-    "gy": 0,
+    "tile": "N-1",
+    "gx": 0,
+    "gy": 1,
     "tag": "AUGUR",
     "link": "https://houseofcauliman.com/augur.html",
     "img": "/monolith/assets/augur_logo.webp",
@@ -32,9 +32,9 @@
     "note": "AUGUR is a read-only Chain Oracle. It reads public wallets and turns them into plain-English statements. No wallet connection, no keys, no custody. It reads everywhere and writes nowhere."
   },
   {
-    "tile": "N-1",
-    "gx": 0,
-    "gy": 1,
+    "tile": "W-1",
+    "gx": -1,
+    "gy": 0,
     "tag": "CONTINENTAL WICK",
     "wallet": "rpFVEydkZrUjf4tcbLeDeVqXm5zYQGtXWm",
     "link": "https://www.continentalwick.com/",
@@ -52,13 +52,13 @@
     "link": "https://radgarlington.io/",
     "img": "/monolith/assets/rad_logo.webp",
     "handle": "@radgarlington",
-    "note": "RAD is the enforcement layer. The RAD Ledger is a public record of what’s real, what’s verified, and what’s suspect across XRPL tokens and drops. Certification, receipts, and accountability, no excuses.",
+    "note": "RAD is the enforcement layer. The RAD Ledger is a public record of what\u2019s real, what\u2019s verified, and what\u2019s suspect across XRPL tokens and drops. Certification, receipts, and accountability, no excuses.",
     "ts": "2/10/2026"
   },
   {
-    "tile": "S-1 / W-1",
-    "gx": -1,
-    "gy": -1,
+    "tile": "E-1",
+    "gx": 1,
+    "gy": 0,
     "tag": "GET THE $BAG",
     "wallet": "rNeYbfb9EDV8c7mNfUuooEEYYzMcEuDFbr",
     "link": "https://getthebag.io/",
