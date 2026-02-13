@@ -1,3 +1,4 @@
+// sw-bust 2026-02-13T08:52:46Z
 const CACHE_NAME="monolith-cache-999999";
 const CACHE="monolith-v3-1770611514";
 const ASSETS = [
