@@ -1504,7 +1504,11 @@ function onWheel(e){
         if(Array.isArray(data)){
           for(const it of data){
             if(!it) continue;
-            const tile = String(it.tile || "").trim().toUpperCase();
+            const gx = (it.gx!=null) ? parseInt(it.gx,10) : null;
+            const gy = (it.gy!=null) ? parseInt(it.gy,10) : null;
+            const tile = (Number.isFinite(gx) && Number.isFinite(gy))
+              ? tileIdFromCoords(gx, gy)
+              : String(it.tile || "").trim().toUpperCase();
             if(!tile) continue;
             taken.add(tile);
             marks.set(tile, {
