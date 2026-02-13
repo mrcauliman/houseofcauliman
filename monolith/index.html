@@ -1,45 +1,103 @@
-READY. Paste HTML now. When finished press Ctrl+D
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0b0f14" />
+  <title>MONOLITH</title>
+  <style>
+    html,body{height:100%;margin:0;background:#0b0f14;color:#e9eef6;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif}
+    a{color:inherit}
+    .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:22px}
+    .card{width:min(980px,100%);border:1px solid rgba(255,255,255,.10);border-radius:18px;background:rgba(255,255,255,.03);box-shadow:0 12px 50px rgba(0,0,0,.55)}
+    .pad{padding:22px}
+    .top{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+    .brand{display:flex;align-items:center;gap:10px}
+    .brand img{width:40px;height:40px;object-fit:contain;display:block}
+    h1{margin:0;font-size:28px;letter-spacing:.2px}
+    .sub{opacity:.86;line-height:1.55;margin-top:8px;max-width:70ch}
+    .btnRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.14);text-decoration:none;font-weight:900;letter-spacing:.2px}
+    .btn.primary{background:#ffffff;color:#0b0f14;border-color:#ffffff}
+    .btn.ghost{background:rgba(255,255,255,.06)}
+    .rule{height:1px;background:rgba(255,255,255,.10);margin:16px 0}
+    .muted{opacity:.82}
+    b{font-weight:950}
+    ul{margin:0;padding-left:18px}
+    li{margin:6px 0}
+    code{background:rgba(255,255,255,.06);padding:2px 6px;border-radius:8px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="pad">
+        <div class="top">
+          <div class="brand">
+            <img src="/monolith/assets/monolith_logo.webp" alt="MONOLITH" />
+          </div>
+          <div>
+            <h1>MONOLITH</h1>
+            <div class="muted">Permanent XRPL wall of coordinates</div>
+          </div>
+        </div>
 
-<!doctype html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>MONOLITH</title><style>
-body{margin:0;font-family:system-ui;background:#0b0f16;color:#e9eef8}
-.wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:22px}
-.card{max-width:880px;width:100%;background:#0f1624;border:1px solid #1e2a3a;border-radius:16px;padding:18px}
-h1{margin:0 0 10px;font-size:32px;letter-spacing:.4px}
-p{margin:0 0 10px;color:#9aa4b2;line-height:1.45}
-.k{color:#9aa4b2;font-weight:800;font-size:12px;letter-spacing:.2px}
-.m{font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:900}
-.row{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:12px;padding:12px 14px;font-weight:900;text-decoration:none}
-.primary{background:#e9eef8;color:#0b0f16}
-.ghost{border:1px solid #1e2a3a;color:#e9eef8}
-small{color:#9aa4b2}
-.brand{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-.brand img{width:42px;height:42px;object-fit:contain}
-</style></head><body><div class="wrap"><div class="card">
-<div class="brand"><img src="/monolith/assets/monolith_logo.webp" alt="MONOLITH"/><b>MONOLITH</b></div>
-<h1>Claim your coordinate on the XRPL</h1>
-<p>Each tile is an address on a grid, like a plot of land on a map. Your wallet is the owner. Your mark is your logo, image, and note.</p>
-<p class="k">Center</p><p class="m">ORIGIN</p>
-<p class="k">Examples</p><p class="m">N-11 / E-23   N-11/E-23   23,-11   E23-N11</p>
-<div class="row">
-<a class="btn primary" href="/monolith/wall.html">Enter the Wall</a>
-<a class="btn ghost" href="/monolith/#how">How it works</a>
-</div>
-<small>Companies can buy multiple tiles to build billboard blocks. Premium lanes and special numbers can be reserved.</small>
-</div>
+        <div class="sub">
+          MONOLITH is a permanent wall of tiles on the XRPL. Each tile is a coordinate, like a plot of land on a map.
+          Claim later links a wallet, a logo or image, and a note. Forever.
+        </div>
 
-<div id="how" style="margin-top:18px;max-width:900px">
-  <h2 style="margin:0 0 10px 0">How it works</h2>
-  <div style="opacity:.92;line-height:1.55">
-    <p style="margin:0 0 10px 0">MONOLITH is a forever wall on the XRPL. Each tile is a coordinate, like a plot on a map.</p>
-    <p style="margin:0 0 10px 0">Coordinates use ORIGIN at 0,0. North is N-1, N-2. South is S-1, S-2. East is E-1, E-2. West is W-1, W-2.</p>
-    <p style="margin:0 0 10px 0">Owning a tile ties it to your wallet. Your logo, image, and note become your permanent mark.</p>
-    <p style="margin:0">Companies can buy multiple tiles to build billboard blocks. Premium lanes and special numbers can be reserved.</p>
+        <div class="btnRow" style="margin-top:16px">
+          <a class="btn primary" href="/monolith/wall.html">Enter the Wall</a>
+          <a class="btn ghost" href="/monolith/#how">How it works</a>
+        </div>
+
+        <div class="rule"></div>
+
+        <div id="how" style="margin-top:18px;max-width:900px">
+          <h2 style="margin:0 0 10px 0">How it works</h2>
+          <p style="margin:0 0 10px 0;line-height:1.55">
+            MONOLITH is a permanent wall of tiles on the XRPL. Each tile is a coordinate, like a plot of land on a map.
+            Claim later links a wallet, a logo or image, and a note. Forever.
+          </p>
+
+          <div style="margin:12px 0;padding:12px 14px;border:1px solid rgba(255,255,255,.12);border-radius:12px">
+            <div style="font-weight:950;margin-bottom:6px">Coordinate model</div>
+            <ul style="margin:0;padding-left:18px;line-height:1.55">
+              <li><b>ORIGIN</b> is dead center at <b>0,0</b></li>
+              <li><b>N-1</b> north, <b>S-1</b> south</li>
+              <li><b>E-1</b> east, <b>W-1</b> west</li>
+              <li>Diagonal shows both, like <b>N-3 / E-7</b></li>
+            </ul>
+          </div>
+
+          <div style="margin:12px 0">
+            <div style="font-weight:950;margin-bottom:6px">Search formats</div>
+            <ul style="margin:0;padding-left:18px;line-height:1.55">
+              <li><b>N-11 / E-23</b> or <b>N-11/E-23</b></li>
+              <li><b>23,-11</b></li>
+              <li>Legacy input works, like <b>E23-N11</b></li>
+            </ul>
+          </div>
+
+          <div style="margin:12px 0">
+            <div style="font-weight:950;margin-bottom:6px">Why it matters</div>
+            <ul style="margin:0;padding-left:18px;line-height:1.55">
+              <li>Tiles connect to wallets. Your plot of land on the XRPL</li>
+              <li>Companies can buy blocks to make billboards</li>
+              <li>Premium lanes and special numbers can be reserved</li>
+              <li>Pricing is in <b>$XRP</b>. USD cost moves with $XRP</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="rule"></div>
+
+        <div class="muted" style="line-height:1.55">
+          Next: reserve premium lanes, reserve special numbers, then ship claim flow.
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-
-</div>
-
-
-
-</div></div></body></html>
+</body>
+</html>
