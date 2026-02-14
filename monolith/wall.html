@@ -502,6 +502,8 @@ let CREATOR_LOGO = "";
     const STEP = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--step").trim(), 10) || 128;
     const TILE = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--tile").trim(), 10) || 118;
 
+    const CAM_LIMIT = STEP * 60000;
+
     const state = {
       camX: 0, camY: 0,
       vx: 0, vy: 0,
@@ -546,6 +548,11 @@ zoom: 0.35,
     };
 
     function clamp(v, a, b){ return Math.max(a, Math.min(b, v)); }
+
+    function clampCam(){
+      state.camX = clamp(state.camX, -CAM_LIMIT, CAM_LIMIT);
+      state.camY = clamp(state.camY, -CAM_LIMIT, CAM_LIMIT);
+    }
 
     function toastShow(msg, kind){
       toast.className = "toast " + (kind || "");
@@ -1073,6 +1080,7 @@ const isCreator  = hasCreator && (
     }
 
 function updateWorldTransform(){
+  clampCam();
   const w = vp.clientWidth;
   const h = vp.clientHeight;
 
@@ -1190,6 +1198,7 @@ function updateWorldTransform(){
 
       state.camX = wx - (screenX - w*0.5) / state.zoom;
       state.camY = wy - (screenY - h*0.5) / state.zoom;
+  clampCam();
 
       state.lastKey = "";
       renderPool();
