@@ -502,7 +502,7 @@ let CREATOR_LOGO = "";
     const STEP = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--step").trim(), 10) || 128;
     const TILE = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--tile").trim(), 10) || 118;
 
-    const CAM_LIMIT = STEP * 60000;
+    const CAM_LIMIT = STEP * 8000;
 
     const state = {
       camX: 0, camY: 0,
