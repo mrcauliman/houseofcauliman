@@ -366,12 +366,16 @@
 body.debug #dbg{display:block;}
 
 #vBody{display:none;}
+
+/* TOP BAR TAP SHIELD */
+#topbar{pointer-events:none;}
+#topbar a,#topbar button,#topbar input,#topbar .btn,#topbar .search{pointer-events:auto;}
 </style>
   <script src="/monolith/coords.js"></script>
 </head>
 
 <body>
-  <header class="top">
+  <header class="top" id="topbar">
     <div class="brand">
       <img src="/monolith/assets/monolith_logo.webp" alt="MONOLITH" />
       <div>
@@ -391,6 +395,8 @@ body.debug #dbg{display:block;}
       <div class="pill"><span class="dot"></span><span id="kTaken">0</span> taken</div>
       <a class="btn primary" href="/monolith/claim/" aria-label="claim a tile"><span>Claim a Tile</span></a>
       <button class="btn" id="btnCenter" type="button" aria-label="return to center"><span>Return to Center</span></button>
+      <button class="btn" id="btnBrand" type="button" aria-label="toggle brand view"><span>Brand View</span></button>
+      <button class="btn" id="btnSatellite" type="button" aria-label="toggle satellite view"><span>Satellite</span></button>
     </div>
   </header>
 
@@ -496,7 +502,9 @@ let CREATOR_LOGO = "";
       vNote: document.getElementById("vNote"),
       vBody: document.getElementById("vBody"),
 
-      btnCenter: document.getElementById("btnCenter")
+      btnCenter: document.getElementById("btnCenter"),
+      btnBrand: document.getElementById("btnBrand"),
+      btnSatellite: document.getElementById("btnSatellite")
     };
 
     const STEP = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--step").trim(), 10) || 128;
@@ -1095,7 +1103,7 @@ function updateWorldTransform(){
         state.camY -= state.vy;
       }
 
-      updateWorldTransform();
+    updateWorldTransform();
       renderPool();
 
       state.raf = requestAnimationFrame(tick);
@@ -1649,6 +1657,31 @@ el.close.addEventListener("click", function(e){
       }, { passive:true });
     }
 
+    
+
+    let BRAND_VIEW = false;
+    let SATELLITE_VIEW = false;
+
+    function applyViewToggles(){
+      document.body.classList.toggle("brandview", !!BRAND_VIEW);
+      document.body.classList.toggle("satellite", !!SATELLITE_VIEW);
+    }
+
+    if(el.btnBrand){
+      el.btnBrand.addEventListener("click", () => {
+        BRAND_VIEW = !BRAND_VIEW;
+        applyViewToggles();
+        toastShow(BRAND_VIEW ? "brand view on" : "brand view off", "good");
+      }, { passive:true });
+    }
+
+    if(el.btnSatellite){
+      el.btnSatellite.addEventListener("click", () => {
+        SATELLITE_VIEW = !SATELLITE_VIEW;
+        applyViewToggles();
+        toastShow(SATELLITE_VIEW ? "satellite on" : "satellite off", "good");
+      }, { passive:true });
+    }
     updateWorldTransform();
     renderPool();
     requestAnimationFrame(tick);
