@@ -504,8 +504,7 @@ let CREATOR_LOGO = "";
 
     const state = {
       camX: 0, camY: 0,
-      originX: 0, originY: 0,
-      vx: 0, vy: 0,
+      originX: 0, originY: 0, baseX: 0, baseY: 0,       vx: 0, vy: 0,
 
       down: false,
       pid: null,
@@ -1001,8 +1000,8 @@ const isCreator  = hasCreator && (
       const mark = state.marksByTile.get(tile) || null;
       const taken = state.taken.has(tile);
 
-      cell.style.left = ((gx * STEP) - state.originX) + "px";
-      cell.style.top = (((-gy) * STEP) - state.originY) + "px";
+      cell.style.left = ((gx * STEP) - state.baseX) + "px";
+      cell.style.top = (((-gy) * STEP) - state.baseY) + "px";
 
       cell.setAttribute("data-gx", String(gx));
       cell.setAttribute("data-gy", String(gy));
@@ -1059,6 +1058,9 @@ const isCreator  = hasCreator && (
       const startGX = Math.floor(((state.originX + state.camX) - halfW) / STEP) - pad;
       const startGY = Math.floor(((state.originY + state.camY) - halfH) / STEP) - pad;
 
+      state.baseX = startGX * STEP;
+      state.baseY = (-startGY) * STEP;
+
       const key = `${startGX},${startGY},${state.cols},${state.rows},${state.taken.size},${state.marksByTile.size},${state.zoom.toFixed(3)}`;
       if(key === state.lastKey) return;
       state.lastKey = key;
@@ -1087,8 +1089,11 @@ function updateWorldTransform(){
   }
 
   // No rounding. Rounding causes jitter on high-res trackpads
-  const tx = (w * 0.5) - (state.camX * state.zoom);
-  const ty = (h * 0.5) - (state.camY * state.zoom);
+  const wcx = (state.originX||0) + state.camX;
+  const wcy = (state.originY||0) + state.camY;
+
+  const tx = (w * 0.5) - ((wcx - state.baseX) * state.zoom);
+  const ty = (h * 0.5) - ((wcy - state.baseY) * state.zoom);
 
   world.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(${state.zoom})`;
 }
@@ -1105,8 +1110,8 @@ function updateWorldTransform(){
         state.camY -= state.vy;
       }
 
-      updateWorldTransform();
       renderPool();
+      updateWorldTransform();
 
       state.raf = requestAnimationFrame(tick);
     }
@@ -1658,9 +1663,8 @@ el.close.addEventListener("click", function(e){
         toastShow("centered", "good");
       }, { passive:true });
     }
-
-    updateWorldTransform();
     renderPool();
+    updateWorldTransform();
     requestAnimationFrame(tick);
 
     resolveFirstWorking(CREATOR_LOGO_CANDIDATES).then((u) => {
