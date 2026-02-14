@@ -504,6 +504,7 @@ let CREATOR_LOGO = "";
 
     const state = {
       camX: 0, camY: 0,
+      originX: 0, originY: 0,
       vx: 0, vy: 0,
 
       down: false,
@@ -1000,8 +1001,8 @@ const isCreator  = hasCreator && (
       const mark = state.marksByTile.get(tile) || null;
       const taken = state.taken.has(tile);
 
-      cell.style.left = (gx * STEP) + "px";
-      cell.style.top  = ((-gy) * STEP) + "px";
+      cell.style.left = ((gx * STEP) - state.originX) + "px";
+      cell.style.top = (((-gy) * STEP) - state.originY) + "px";
 
       cell.setAttribute("data-gx", String(gx));
       cell.setAttribute("data-gy", String(gy));
@@ -1055,8 +1056,8 @@ const isCreator  = hasCreator && (
       const halfH = (h * 0.5) / state.zoom;
 
       const pad = (state.zoom < 0.25) ? 10 : state.POOL_PAD;
-      const startGX = Math.floor((state.camX - halfW) / STEP) - pad;
-      const startGY = Math.floor((state.camY - halfH) / STEP) - pad;
+      const startGX = Math.floor(((state.originX + state.camX) - halfW) / STEP) - pad;
+      const startGY = Math.floor(((state.originY + state.camY) - halfH) / STEP) - pad;
 
       const key = `${startGX},${startGY},${state.cols},${state.rows},${state.taken.size},${state.marksByTile.size},${state.zoom.toFixed(3)}`;
       if(key === state.lastKey) return;
@@ -1075,6 +1076,15 @@ const isCreator  = hasCreator && (
 function updateWorldTransform(){
   const w = vp.clientWidth;
   const h = vp.clientHeight;
+
+  const REBASE_LIM = 40000;
+  if(Math.abs(state.camX) > REBASE_LIM || Math.abs(state.camY) > REBASE_LIM){
+    state.originX += state.camX;
+    state.originY += state.camY;
+    state.camX = 0;
+    state.camY = 0;
+    state.lastKey = "";
+  }
 
   // No rounding. Rounding causes jitter on high-res trackpads
   const tx = (w * 0.5) - (state.camX * state.zoom);
@@ -1465,8 +1475,8 @@ function onWheel(e){
 }
 
     function centerOn(gx, gy){
-      state.camX = gx * STEP + STEP * 0.5;
-      state.camY = ((-gy) * STEP) + STEP * 0.5;
+      state.camX = (gx * STEP + STEP * 0.5) - state.originX;
+      state.camY = (((-gy) * STEP) + STEP * 0.5) - state.originY;
 
       state.vx = 0;
       state.vy = 0;
