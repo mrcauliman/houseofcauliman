@@ -520,6 +520,8 @@ let CREATOR_LOGO = "";
       cols: 0, rows: 0,
       pool: [],
       POOL_PAD: 3,
+      baseGX: 0,
+      baseGY: 0,
 
       taken: new Set(),
       marksByTile: new Map(),
@@ -533,7 +535,7 @@ let CREATOR_LOGO = "";
       walletRevealed: false,
 
 zoom: 0.65,
-      ZMIN: 0.55,
+      ZMIN: 0.18,
       ZMAX: 2.75,
 
       ptrs: new Map(),
@@ -1052,8 +1054,9 @@ const isCreator  = hasCreator && (
       const halfW = (w * 0.5) / state.zoom;
       const halfH = (h * 0.5) / state.zoom;
 
-      const startGX = Math.floor((state.camX - halfW) / STEP) - state.POOL_PAD;
-      const startGY = Math.floor((state.camY - halfH) / STEP) - state.POOL_PAD;
+      const pad = (state.zoom < 0.25) ? 10 : state.POOL_PAD;
+      const startGX = Math.floor((state.camX - halfW) / STEP) - pad;
+      const startGY = Math.floor((state.camY - halfH) / STEP) - pad;
 
       const key = `${startGX},${startGY},${state.cols},${state.rows},${state.taken.size},${state.marksByTile.size},${state.zoom.toFixed(3)}`;
       if(key === state.lastKey) return;
