@@ -1077,7 +1077,7 @@ function updateWorldTransform(){
   const w = vp.clientWidth;
   const h = vp.clientHeight;
 
-  const REBASE_LIM = 40000;
+  const REBASE_LIM = 8000;
   if(Math.abs(state.camX) > REBASE_LIM || Math.abs(state.camY) > REBASE_LIM){
     state.originX += state.camX;
     state.originY += state.camY;
