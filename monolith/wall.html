@@ -503,6 +503,7 @@ let CREATOR_LOGO = "";
     const TILE = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--tile").trim(), 10) || 118;
 
     const CAM_LIMIT = STEP * 60000;
+    const MAX_TRANSLATE_PX = 1800000;
 
     const state = {
       camX: 0, camY: 0,
@@ -1088,7 +1089,25 @@ function updateWorldTransform(){
   const tx = (w * 0.5) - (state.camX * state.zoom);
   const ty = (h * 0.5) - (state.camY * state.zoom);
 
-  world.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(${state.zoom})`;
+  let ntx = tx;
+  let nty = ty;
+
+  if(!Number.isFinite(ntx) || !Number.isFinite(nty) || !Number.isFinite(state.zoom) || state.zoom <= 0){
+    centerOn(0, 0);
+    return;
+  }
+
+  if(Math.abs(ntx) > MAX_TRANSLATE_PX){
+    ntx = clamp(ntx, -MAX_TRANSLATE_PX, MAX_TRANSLATE_PX);
+    state.camX = ((w * 0.5) - ntx) / state.zoom;
+  }
+
+  if(Math.abs(nty) > MAX_TRANSLATE_PX){
+    nty = clamp(nty, -MAX_TRANSLATE_PX, MAX_TRANSLATE_PX);
+    state.camY = ((h * 0.5) - nty) / state.zoom;
+  }
+
+  world.style.transform = `translate3d(px, px, 0) scale()`;
 }
 
     function tick(){
