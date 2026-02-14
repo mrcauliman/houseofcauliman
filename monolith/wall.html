@@ -999,7 +999,7 @@ const isCreator  = hasCreator && (
       const taken = state.taken.has(tile);
 
       cell.style.left = (gx * STEP) + "px";
-      cell.style.top  = ((-gy) * STEP) + "px";
+      cell.style.top  = (gy * STEP) + "px";
 
       cell.setAttribute("data-gx", String(gx));
       cell.setAttribute("data-gy", String(gy));
