@@ -508,6 +508,7 @@ let CREATOR_LOGO = "";
     const state = {
       camX: 0, camY: 0,
       baseX: 0, baseY: 0,
+      baseX: 0, baseY: 0,
       vx: 0, vy: 0,
 
       down: false,
@@ -1649,8 +1650,8 @@ el.close.addEventListener("click", function(e){
       }, { passive:true });
     }
 
-    updateWorldTransform();
     renderPool();
+      updateWorldTransform();
     requestAnimationFrame(tick);
 
     resolveFirstWorking(CREATOR_LOGO_CANDIDATES).then((u) => {
