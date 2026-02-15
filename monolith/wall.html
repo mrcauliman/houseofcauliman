@@ -48,7 +48,7 @@
       border-radius:18px;
       background:rgba(7,9,11,.62);
       box-shadow: none;
-backdrop-filter: blur(10px);
+backdrop-filter: none;
       z-index:20;
     }
     .brand{display:flex;align-items:center;gap:10px}
@@ -125,7 +125,7 @@ backdrop-filter: blur(10px);
     #world{
       position:absolute;left:0;top:0;
       width:1px;height:1px;
-      transform:translate3d(0,0,0);transform-origin: 0 0;
+      transform:translate(0,0,0);transform-origin: 0 0;
     }
 
     .cell{
@@ -168,7 +168,7 @@ overflow:hidden;
       height:88%;
       object-fit:contain;
       opacity:.95;
-      filter: drop-shadow(0 8px 18px rgba(0,0,0,.35));
+      filter: none;
     }
 
     .cell .id{
@@ -206,13 +206,13 @@ overflow:hidden;
       border:1px solid rgba(23,53,36,.95);
       background:linear-gradient(180deg, rgba(13,34,23,.86), rgba(11,27,19,.92));
       box-shadow: none;
-backdrop-filter: blur(10px);
+backdrop-filter: none;
       z-index:30;
-      transform:translate3d(110%,0,0);
+      transform:translate(110%,0,0);
       transition:transform .18s ease;
       display:flex;flex-direction:column;
     }
-    .panel.open{transform:translate3d(0,0,0)}
+    .panel.open{transform:translate(0,0,0)}
     .ph{
       display:flex;align-items:center;gap:10px;
       padding:12px;
@@ -291,7 +291,7 @@ backdrop-filter: blur(10px);
       position:fixed;
       left:50%;
       bottom:14px;
-      transform:translate3d(-50%, 90px, 0);
+      transform:translate(-50%, 90px, 0);
       opacity:0;
       transition:transform .18s ease, opacity .18s ease;
       z-index:40;
@@ -299,7 +299,7 @@ backdrop-filter: blur(10px);
       border-radius:14px;
       border:1px solid rgba(23,53,36,.95);
       background:rgba(7,9,11,.72);
-      backdrop-filter: blur(10px);
+      backdrop-filter: none;
       font-weight:1000;
       letter-spacing:.2px;
       font-size:12px;
@@ -308,7 +308,7 @@ backdrop-filter: blur(10px);
       overflow:hidden;
       text-overflow:ellipsis;
     }
-    .toast.show{transform:translate3d(-50%, 0, 0);opacity:1}
+    .toast.show{transform:translate(-50%, 0, 0);opacity:1}
     .toast.good{border-color:rgba(47,191,107,.75)}
     .toast.warn{border-color:rgba(255,225,117,.75)}
     .toast.bad{border-color:rgba(255,91,91,.75)}
@@ -1122,7 +1122,7 @@ function updateWorldTransform(){
   const tx = (w * 0.5) - (ndx * state.zoom);
   const ty = (h * 0.5) - (ndy * state.zoom);
 
-  world.style.transform = "translate3d(" + tx + "px, " + ty + "px, 0) scale(" + state.zoom + ")";
+  world.style.transform = "translate(" + tx + "px, " + ty + "px, 0) scale(" + state.zoom + ")";
 }
 
     function tick(){
