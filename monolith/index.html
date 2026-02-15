@@ -1105,11 +1105,6 @@ function updateWorldTransform(){
   const rx = state.baseX - (baseGX * STEP);
   const ry = state.baseY - (baseGY * STEP);
 
-  const baseGX = Math.round(state.baseX / STEP);
-  const baseGY = Math.round(state.baseY / STEP);
-  const rx = state.baseX - (baseGX * STEP);
-  const ry = state.baseY - (baseGY * STEP);
-
   const tx = (w * 0.5) - (ndx * state.zoom) + (rx * state.zoom);
   const ty = (h * 0.5) - (ndy * state.zoom) + (ry * state.zoom);
 
