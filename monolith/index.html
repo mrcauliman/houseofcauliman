@@ -966,8 +966,8 @@ const isCreator  = hasCreator && (
       const visW = w / state.zoom;
       const visH = h / state.zoom;
 
-      const cols = Math.ceil(visW / STEP) + state.POOL_PAD * 2 + 2;
-      const rows = Math.ceil(visH / STEP) + state.POOL_PAD * 2 + 2;
+      const cols = Math.ceil(visW / STEP) + state.POOL_PAD * 2 + 4;
+      const rows = Math.ceil(visH / STEP) + state.POOL_PAD * 2 + 12;
 
       if(cols === state.cols && rows === state.rows && state.pool.length){
         return;
