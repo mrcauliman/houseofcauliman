@@ -508,7 +508,6 @@ let CREATOR_LOGO = "";
     const state = {
       camX: 0, camY: 0,
       baseX: 0, baseY: 0,
-      baseX: 0, baseY: 0,
       vx: 0, vy: 0,
 
       down: false,
@@ -968,8 +967,13 @@ const isCreator  = hasCreator && (
       const visW = w / state.zoom;
       const visH = h / state.zoom;
 
-      const cols = Math.ceil(visW / STEP) + state.POOL_PAD * 2 + 8;
-      const rows = Math.ceil(visH / STEP) + state.POOL_PAD * 2 + 20;
+      const cols0 = Math.ceil(visW / STEP) + state.POOL_PAD * 2 + 8;
+      const rows0 = Math.ceil(visH / STEP) + state.POOL_PAD * 2 + 20;
+
+      const MAX_TILES = 4200;
+      const maxSide = Math.max(12, Math.floor(Math.sqrt(MAX_TILES)));
+      const cols = Math.min(cols0, maxSide);
+      const rows = Math.min(rows0, maxSide);
 
       if(cols === state.cols && rows === state.rows && state.pool.length){
         return;
@@ -1058,7 +1062,10 @@ const isCreator  = hasCreator && (
       const halfH = (h * 0.5) / state.zoom;
 
       const startGX = Math.floor((state.camX - halfW) / STEP) - state.POOL_PAD;
-      const startGY = Math.floor((state.camY + halfH) / STEP) - state.POOL_PAD;
+      const startGY = Math.floor((state.camY - halfH) / STEP) - state.POOL_PAD;
+
+      state.baseX = startGX * STEP;
+      state.baseY = startGY * STEP;
 
       const key = `${startGX},${startGY},${state.cols},${state.rows},${state.taken.size},${state.marksByTile.size},${state.zoom.toFixed(3)}`;
       if(key === state.lastKey) return;
