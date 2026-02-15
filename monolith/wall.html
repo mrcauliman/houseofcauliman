@@ -507,6 +507,7 @@ let CREATOR_LOGO = "";
 
     const state = {
       camX: 0, camY: 0,
+      baseX: 0, baseY: 0,
       vx: 0, vy: 0,
 
       down: false,
@@ -1001,7 +1002,7 @@ const isCreator  = hasCreator && (
       const mark = state.marksByTile.get(tile) || null;
       const taken = state.taken.has(tile);
 
-      cell.style.left = (gx * STEP) + "px";
+      cell.style.left = ((gx * STEP) - state.baseX) + "px";
       cell.style.top  = ((-gy) * STEP) + "px";
 
       cell.setAttribute("data-gx", String(gx));
@@ -1076,11 +1077,10 @@ function updateWorldTransform(){
   const w = vp.clientWidth;
   const h = vp.clientHeight;
 
-  // No rounding. Rounding causes jitter on high-res trackpads
-  const tx = (w * 0.5) - (state.camX * state.zoom);
-  const ty = (h * 0.5) - (state.camY * state.zoom);
+  const tx = (w * 0.5) - ((state.camX - state.baseX) * state.zoom);
+  const ty = (h * 0.5) - ((state.camY - state.baseY) * state.zoom);
 
-  world.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(${state.zoom})`;
+  world.style.transform = "translate3d(" + tx + "px, " + ty + "px, 0) scale(" + state.zoom + ")";
 }
 
     function tick(){
@@ -1095,8 +1095,8 @@ function updateWorldTransform(){
         state.camY -= state.vy;
       }
 
-      updateWorldTransform();
       renderPool();
+      updateWorldTransform();
 
       state.raf = requestAnimationFrame(tick);
     }
