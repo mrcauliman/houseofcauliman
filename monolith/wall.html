@@ -1157,8 +1157,8 @@ function updateWorldTransform(){
       const w = vp.clientWidth;
       const h = vp.clientHeight;
 
-      const anchorWX = state.camX + (midX - w*0.5) / state.zoom;
-      const anchorWY = state.camY + (midY - h*0.5) / state.zoom;
+      const anchorWX = (state.camX - state.baseX) + (midX - w*0.5) / state.zoom;
+      const anchorWY = (state.camY - state.baseY) + (midY - h*0.5) / state.zoom;
 
       state.vx = 0;
       state.vy = 0;
@@ -1200,13 +1200,19 @@ function updateWorldTransform(){
       const w = vp.clientWidth;
       const h = vp.clientHeight;
 
-      const wx = state.camX + (screenX - w*0.5) / state.zoom;
-      const wy = state.camY + (screenY - h*0.5) / state.zoom;
+      const lcX = state.camX - state.baseX;
+      const lcY = state.camY - state.baseY;
+
+      const wx = lcX + (screenX - w*0.5) / state.zoom;
+      const wy = lcY + (screenY - h*0.5) / state.zoom;
 
       state.zoom = clamp(newZoom, state.ZMIN, state.ZMAX);
 
-      state.camX = wx - (screenX - w*0.5) / state.zoom;
-      state.camY = wy - (screenY - h*0.5) / state.zoom;
+      const nlcX = wx - (screenX - w*0.5) / state.zoom;
+      const nlcY = wy - (screenY - h*0.5) / state.zoom;
+
+      state.camX = nlcX + state.baseX;
+      state.camY = nlcY + state.baseY;
 
       state.lastKey = "";
       renderPool();
@@ -1273,8 +1279,8 @@ function onMove(e){
           const h = vp.clientHeight;
 
           state.zoom = targetZoom;
-          state.camX = state.pinch.anchorWX - (midX - w*0.5) / state.zoom;
-          state.camY = state.pinch.anchorWY - (midY - h*0.5) / state.zoom;
+          state.camX = (state.pinch.anchorWX - (midX - w*0.5) / state.zoom) + state.baseX;
+          state.camY = (state.pinch.anchorWY - (midY - h*0.5) / state.zoom) + state.baseY;
 
           state.vx = 0;
           state.vy = 0;
