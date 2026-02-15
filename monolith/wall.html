@@ -1147,7 +1147,11 @@ function updateWorldTransform(){
             " | tx " + tx.toFixed(0) + " ty " + ty.toFixed(0) +
             "\ncell0 px " + l0.toFixed(0) + "," + t0.toFixed(0) +
             " | grid " + state.cols + "x" + state.rows +
-            " | pool " + (state.pool?state.pool.length:0);
+            " | pool " + (state.pool?state.pool.length:0) +
+            "\nstart " + startGX + "," + startGY +
+            " | baseG " + baseGX + "," + baseGY +
+            " | r " + rx.toFixed(0) + "," + ry.toFixed(0) +
+            (err ? "\nERR " + err : "");
         }
       }catch(_){ }
       if(!state.down && !state.pinch){
@@ -1721,6 +1725,10 @@ el.close.addEventListener("click", function(e){
     }
     renderPool();
     updateWorldTransform();
+    window.__monolithLastErr = "";
+    window.addEventListener("error", (e) => { try{ window.__monolithLastErr = String(e.message || e.error || e); }catch(_){} }, true);
+    window.addEventListener("unhandledrejection", (e) => { try{ window.__monolithLastErr = String(e.reason || e); }catch(_){} }, true);
+
     requestAnimationFrame(tick);
 
     resolveFirstWorking(CREATOR_LOGO_CANDIDATES).then((u) => {
