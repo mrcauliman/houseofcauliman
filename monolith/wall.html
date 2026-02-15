@@ -522,7 +522,7 @@ let CREATOR_LOGO = "";
 
       cols: 0, rows: 0,
       pool: [],
-      POOL_PAD: 8,
+      POOL_PAD: 12,
 
       taken: new Set(),
       marksByTile: new Map(),
@@ -966,8 +966,8 @@ const isCreator  = hasCreator && (
       const visW = w / state.zoom;
       const visH = h / state.zoom;
 
-      const cols = Math.ceil(visW / STEP) + state.POOL_PAD * 2 + 1;
-      const rows = Math.ceil(visH / STEP) + state.POOL_PAD * 2 + 1;
+      const cols = Math.ceil(visW / STEP) + state.POOL_PAD * 2 + 2;
+      const rows = Math.ceil(visH / STEP) + state.POOL_PAD * 2 + 2;
 
       if(cols === state.cols && rows === state.rows && state.pool.length){
         return;
