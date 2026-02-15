@@ -970,10 +970,19 @@ const isCreator  = hasCreator && (
       let rows = Math.ceil(visH / STEP) + padNow * 2;
 
       const MAX_POOL = 2200;
+      const side = Math.floor(Math.sqrt(MAX_POOL));
       if((cols * rows) > MAX_POOL){
-        const side = Math.floor(Math.sqrt(MAX_POOL));
-        cols = side;
-        rows = side;
+        const pad2 = padNow * 2;
+        const minCols = Math.max(6, side - pad2);
+        const minRows = Math.max(6, side - pad2);
+        const needZoomX = w / (STEP * minCols);
+        const needZoomY = h / (STEP * minRows);
+        const bumped = Math.max(state.zoom, needZoomX, needZoomY);
+        state.zoom = clamp(bumped, state.ZMIN, state.ZMAX);
+        const visW2 = w / state.zoom;
+        const visH2 = h / state.zoom;
+        cols = Math.ceil(visW2 / STEP) + padNow * 2;
+        rows = Math.ceil(visH2 / STEP) + padNow * 2;
       }
 
 
