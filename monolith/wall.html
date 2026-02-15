@@ -991,7 +991,7 @@ const isCreator  = hasCreator && (
           const gx = parseInt(d.getAttribute("data-gx") || "0", 10);
           const gy = parseInt(d.getAttribute("data-gy") || "0", 10);
           const tile = d.getAttribute("data-tile") || tileIdFromCoords(gx, gy);
-          openPanel(tile, gxW, gyW);
+          openPanel(tile, gx, gy);
         }, { passive:true });
       }
     }
@@ -1063,7 +1063,7 @@ const isCreator  = hasCreator && (
       const halfH = (h * 0.5) / state.zoom;
 
       const startGX = Math.floor(((state.camX - state.baseX) - halfW) / STEP) - state.POOL_PAD;
-      const startGY = Math.floor(((state.camY - state.baseY) + halfH) / STEP) - state.POOL_PAD;
+      const startGY = Math.floor(((state.camY - state.baseY) - halfH) / STEP) - state.POOL_PAD;
 
       const key = `${startGX},${startGY},${state.cols},${state.rows},${state.taken.size},${state.marksByTile.size},${state.zoom.toFixed(3)}`;
       if(key === state.lastKey) return;
@@ -1203,7 +1203,7 @@ function updateWorldTransform(){
       const ry = state.baseY - (baseGY * STEP);
 
       const tile = tileIdFromCoords(gxW, gyW);
-          openPanel(tile, gxW, gyW);
+          openPanel(tile, gx, gy);
         }
 
     }
@@ -1404,7 +1404,7 @@ function onMove(e){
 
         const tile = cell.getAttribute("data-tile") || cell.getAttribute("data-id") || cell.id || tileIdFromCoords(gx, gy);
 
-        openPanel(tile, gxW, gyW);
+        openPanel(tile, gx, gy);
 
         return true;
 
