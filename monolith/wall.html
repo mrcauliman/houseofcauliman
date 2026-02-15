@@ -996,15 +996,22 @@ const isCreator  = hasCreator && (
     }
 
     function setCell(cell, gx, gy){
-      const tile = tileIdFromCoords(gx, gy);
+      const baseGX = Math.round(state.baseX / STEP);
+      const baseGY = Math.round(state.baseY / STEP);
+      const gxW = gx + baseGX;
+      const gyW = gy + baseGY;
+      const tile = tileIdFromCoords(gxW, gyW);
       const mark = state.marksByTile.get(tile) || null;
       const taken = state.taken.has(tile);
 
-      cell.style.left = ((gx * STEP) - state.baseX) + "px";
-      cell.style.top = (((-gy) * STEP) - state.baseY) + "px";
+            const rx = state.baseX - (baseGX * STEP);
+      const ry = state.baseY - (baseGY * STEP);
 
-      cell.setAttribute("data-gx", String(gx));
-      cell.setAttribute("data-gy", String(gy));
+      cell.style.left = ((gx * STEP) - rx) + "px";
+            cell.style.top  = (((-gy) * STEP) - ry) + "px";
+
+      cell.setAttribute("data-gx", String(gxW));
+      cell.setAttribute("data-gy", String(gyW));
       cell.setAttribute("data-tile", tile);
 
       cell.className = "cell" + (taken ? " taken" : "");
