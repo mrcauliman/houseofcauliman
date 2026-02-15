@@ -965,8 +965,17 @@ const isCreator  = hasCreator && (
       const visW = w / state.zoom;
       const visH = h / state.zoom;
 
-      const cols = Math.ceil(visW / STEP) + state.POOL_PAD * 2;
-      const rows = Math.ceil(visH / STEP) + state.POOL_PAD * 2;
+      const padNow = (state.zoom < 0.25) ? 3 : state.POOL_PAD;
+      const cols = Math.ceil(visW / STEP) + padNow * 2;
+            const rows = Math.ceil(visH / STEP) + padNow * 2;
+
+      const MAX_POOL = 2200;
+      if((cols * rows) > MAX_POOL){
+        const side = Math.floor(Math.sqrt(MAX_POOL));
+        state.cols = side;
+        state.rows = side;
+      }
+
 
       if(cols === state.cols && rows === state.rows && state.pool.length){
         return;
@@ -1061,7 +1070,7 @@ const isCreator  = hasCreator && (
       const halfW = (w * 0.5) / state.zoom;
       const halfH = (h * 0.5) / state.zoom;
 
-      const pad = (state.zoom < 0.25) ? 10 : state.POOL_PAD;
+      const pad = (state.zoom < 0.25) ? 3 : state.POOL_PAD;
       const startGX = Math.floor(((state.camX - state.baseX) - halfW) / STEP) - pad;
       const startGY = Math.floor(((state.camY - state.baseY) - halfH) / STEP) - pad;
 
