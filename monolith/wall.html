@@ -966,14 +966,14 @@ const isCreator  = hasCreator && (
       const visH = h / state.zoom;
 
       const padNow = (state.zoom < 0.25) ? 3 : state.POOL_PAD;
-      const cols = Math.ceil(visW / STEP) + padNow * 2;
-            const rows = Math.ceil(visH / STEP) + padNow * 2;
+      let cols = Math.ceil(visW / STEP) + padNow * 2;
+      let rows = Math.ceil(visH / STEP) + padNow * 2;
 
       const MAX_POOL = 2200;
       if((cols * rows) > MAX_POOL){
         const side = Math.floor(Math.sqrt(MAX_POOL));
-        state.cols = side;
-        state.rows = side;
+        cols = side;
+        rows = side;
       }
 
 
