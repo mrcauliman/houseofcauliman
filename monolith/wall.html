@@ -1077,27 +1077,28 @@ function updateWorldTransform(){
   const w = vp.clientWidth;
   const h = vp.clientHeight;
 
-  // No rounding. Rounding causes jitter on high-res trackpads
-  const wcx = state.camX;
-  const wcy = state.camY;
+  // local coords inside the rebased space
+  const dx = state.camX - state.baseX;
+  const dy = state.camY - state.baseY;
 
-  let tx = (w * 0.5) - ((wcx - state.baseX) * state.zoom);
-  let ty = (h * 0.5) - ((wcy - state.baseY) * state.zoom);
-
-  const REBASE_TXTY = 8000;
-  if(Math.abs(tx) > REBASE_TXTY || Math.abs(ty) > REBASE_TXTY){
-    const sx = -tx / state.zoom;
-    const sy = -ty / state.zoom;
-    state.baseX += sx;
-    state.baseY += sy;
+  const REBASE_PX = 8000;
+  if(Math.abs(dx * state.zoom) > REBASE_PX || Math.abs(dy * state.zoom) > REBASE_PX){
+    // fold local motion into base, reset local to 0
+    state.baseX += dx;
+    state.baseY += dy;
+    state.camX = state.baseX;
+    state.camY = state.baseY;
     state.lastKey = "";
     try{ renderPool(); }catch(_){ }
-    tx = (w * 0.5) - ((wcx - state.baseX) * state.zoom);
-    ty = (h * 0.5) - ((wcy - state.baseY) * state.zoom);
   }
 
+  const ndx = state.camX - state.baseX;
+  const ndy = state.camY - state.baseY;
 
-  world.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(${state.zoom})`;
+  const tx = (w * 0.5) - (ndx * state.zoom);
+  const ty = (h * 0.5) - (ndy * state.zoom);
+
+  world.style.transform = "translate3d(" + tx + "px, " + ty + "px, 0) scale(" + state.zoom + ")";
 }
 
     function tick(){
@@ -1200,8 +1201,7 @@ function updateWorldTransform(){
       const w = vp.clientWidth;
       const h = vp.clientHeight;
 
-      const lcX = state.camX - state.baseX;
-      const lcY = state.camY - state.baseY;
+      const lcX = state.camX;      const lcY = state.camY - state.baseY;
 
       const wx = lcX + (screenX - w*0.5) / state.zoom;
       const wy = lcY + (screenY - h*0.5) / state.zoom;
@@ -1211,8 +1211,7 @@ function updateWorldTransform(){
       const nlcX = wx - (screenX - w*0.5) / state.zoom;
       const nlcY = wy - (screenY - h*0.5) / state.zoom;
 
-      state.camX = nlcX + state.baseX;
-      state.camY = nlcY + state.baseY;
+      state.camX = nlcX;      state.camY = nlcY + state.baseY;
 
       state.lastKey = "";
       renderPool();
