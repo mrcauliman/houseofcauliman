@@ -1055,11 +1055,9 @@ const isCreator  = hasCreator && (
       const halfH = (h * 0.5) / state.zoom;
 
       const pad = (state.zoom < 0.25) ? 10 : state.POOL_PAD;
-      const startGX = Math.floor(((state.camX) - halfW) / STEP) - pad;
-      const startGY = Math.floor(((state.camY) - halfH) / STEP) - pad;
+      const startGX = Math.floor(((state.camX - state.baseX) - halfW) / STEP) - pad;
+      const startGY = Math.floor(((state.camY - state.baseY) - halfH) / STEP) - pad;
 
-      state.baseX = startGX * STEP;
-      state.baseY = (-startGY) * STEP;
 
       const key = `${startGX},${startGY},${state.cols},${state.rows},${state.taken.size},${state.marksByTile.size},${state.zoom.toFixed(3)}`;
       if(key === state.lastKey) return;
@@ -1079,21 +1077,25 @@ function updateWorldTransform(){
   const w = vp.clientWidth;
   const h = vp.clientHeight;
 
-  const REBASE_LIM = 5000;
-  if(Math.abs(state.camX) > REBASE_LIM || Math.abs(state.camY) > REBASE_LIM){
-    state.originX += state.camX;
-    state.originY += state.camY;
-    state.camX = 0;
-    state.camY = 0;
-    state.lastKey = "";
-  }
-
   // No rounding. Rounding causes jitter on high-res trackpads
   const wcx = state.camX;
   const wcy = state.camY;
 
-  const tx = (w * 0.5) - ((wcx - state.baseX) * state.zoom);
-  const ty = (h * 0.5) - ((wcy - state.baseY) * state.zoom);
+  let tx = (w * 0.5) - ((wcx - state.baseX) * state.zoom);
+  let ty = (h * 0.5) - ((wcy - state.baseY) * state.zoom);
+
+  const REBASE_TXTY = 8000;
+  if(Math.abs(tx) > REBASE_TXTY || Math.abs(ty) > REBASE_TXTY){
+    const sx = -tx / state.zoom;
+    const sy = -ty / state.zoom;
+    state.baseX += sx;
+    state.baseY += sy;
+    state.lastKey = "";
+    try{ renderPool(); }catch(_){ }
+    tx = (w * 0.5) - ((wcx - state.baseX) * state.zoom);
+    ty = (h * 0.5) - ((wcy - state.baseY) * state.zoom);
+  }
+
 
   world.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(${state.zoom})`;
 }
@@ -1480,8 +1482,8 @@ function onWheel(e){
 }
 
     function centerOn(gx, gy){
-      state.camX = (gx * STEP + STEP * 0.5);
-      state.camY = (((-gy) * STEP) + STEP * 0.5);
+      state.camX = (gx * STEP + STEP * 0.5) + state.baseX;
+      state.camY = (((-gy) * STEP) + STEP * 0.5) + state.baseY;
 
       state.vx = 0;
       state.vy = 0;
