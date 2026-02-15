@@ -1138,9 +1138,8 @@ function updateWorldTransform(){
         state.camX -= state.vx;
         state.camY -= state.vy;
       }
-
-      renderPool();
       updateWorldTransform();
+      renderPool();
 
       state.raf = requestAnimationFrame(tick);
     }
@@ -1696,8 +1695,8 @@ el.close.addEventListener("click", function(e){
         toastShow("centered", "good");
       }, { passive:true });
     }
-    renderPool();
     updateWorldTransform();
+    renderPool();
     requestAnimationFrame(tick);
 
     resolveFirstWorking(CREATOR_LOGO_CANDIDATES).then((u) => {
