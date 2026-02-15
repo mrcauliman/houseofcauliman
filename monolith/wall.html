@@ -1126,6 +1126,30 @@ function updateWorldTransform(){
 }
 
     function tick(){
+      try{
+        const hud = document.getElementById("hud");
+        if(hud){
+          const w = vp.clientWidth, h = vp.clientHeight;
+          const dx = state.camX - state.baseX;
+          const dy = state.camY - state.baseY;
+          const tx = (w*0.5) - (dx * state.zoom);
+          const ty = (h*0.5) - (dy * state.zoom);
+          let l0=0,t0=0;
+          if(state.pool && state.pool.length){
+            const c = state.pool[0];
+            if(c){ l0 = Math.abs(parseFloat(c.style.left||"0")); t0 = Math.abs(parseFloat(c.style.top||"0")); }
+          }
+          hud.textContent =
+            "zoom " + state.zoom.toFixed(3) +
+            " | cam " + state.camX.toFixed(0) + "," + state.camY.toFixed(0) +
+            " | base " + state.baseX.toFixed(0) + "," + state.baseY.toFixed(0) +
+            " | dx " + dx.toFixed(0) + " dy " + dy.toFixed(0) +
+            " | tx " + tx.toFixed(0) + " ty " + ty.toFixed(0) +
+            "\ncell0 px " + l0.toFixed(0) + "," + t0.toFixed(0) +
+            " | grid " + state.cols + "x" + state.rows +
+            " | pool " + (state.pool?state.pool.length:0);
+        }
+      }catch(_){ }
       if(!state.down && !state.pinch){
         state.vx *= 0.85;
         state.vy *= 0.85;
