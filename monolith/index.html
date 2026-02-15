@@ -506,7 +506,7 @@ let CREATOR_LOGO = "";
     const TILE = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--tile").trim(), 10) || 118;
 
     const state = {
-      camX: 0, camY: 0, baseX: 0, baseY: 0,
+      camX: 0, camY: 0,
       vx: 0, vy: 0,
 
       down: false,
@@ -567,7 +567,7 @@ zoom: 0.65,
 function coordLabelFromG(gx, gy){
   gx = Number(gx)||0;
   gy = Number(gy)||0;
-  if(gxW===0 && gyW===0) return "ORIGIN";
+  if(gx===0 && gy===0) return "ORIGIN";
 
   const ax = Math.abs(gx);
   const ay = Math.abs(gy);
@@ -997,22 +997,15 @@ const isCreator  = hasCreator && (
     }
 
     function setCell(cell, gx, gy){
-      const baseGX = Math.floor(state.baseX / STEP);
-      const baseGY = Math.floor(state.baseY / STEP);
-      const gxW = gx + baseGX;
-      const gyW = gy + baseGY;
-      const rx = state.baseX - (baseGX * STEP);
-      const ry = state.baseY - (baseGY * STEP);
-
-      const tile = tileIdFromCoords(gxW, gyW);
+      const tile = tileIdFromCoords(gx, gy);
       const mark = state.marksByTile.get(tile) || null;
       const taken = state.taken.has(tile);
 
       cell.style.left = (gx * STEP) + "px";
       cell.style.top  = ((-gy) * STEP) + "px";
 
-      cell.setAttribute("data-gx", String(gxW));
-      cell.setAttribute("data-gy", String(gyW));
+      cell.setAttribute("data-gx", String(gx));
+      cell.setAttribute("data-gy", String(gy));
       cell.setAttribute("data-tile", tile);
 
       cell.className = "cell" + (taken ? " taken" : "");
@@ -1022,7 +1015,7 @@ const isCreator  = hasCreator && (
       const tag = cell.querySelector(".tag");
       const id = cell.querySelector(".id");
 
-      if(id){ id.textContent = (gxW===0 && gyW===0) ? "ORIGIN" : tile; }
+      if(id){ id.textContent = (gx===0 && gy===0) ? "ORIGIN" : tile; }
 
       if(tag){
         if(mark && mark.tag) tag.textContent = mark.tag;
@@ -1062,8 +1055,8 @@ const isCreator  = hasCreator && (
       const halfW = (w * 0.5) / state.zoom;
       const halfH = (h * 0.5) / state.zoom;
 
-      const startGX = Math.floor(((state.camX - state.baseX) - halfW) / STEP) - state.POOL_PAD;
-      const startGY = Math.floor(((state.camY - state.baseY) - halfH) / STEP) - state.POOL_PAD;
+      const startGX = Math.floor((state.camX - halfW) / STEP) - state.POOL_PAD;
+      const startGY = Math.floor((state.camY - halfH) / STEP) - state.POOL_PAD;
 
       const key = `${startGX},${startGY},${state.cols},${state.rows},${state.taken.size},${state.marksByTile.size},${state.zoom.toFixed(3)}`;
       if(key === state.lastKey) return;
@@ -1083,25 +1076,11 @@ function updateWorldTransform(){
   const w = vp.clientWidth;
   const h = vp.clientHeight;
 
-  // local coords inside floating-origin space
-  const dx = state.camX - state.baseX;
-  const dy = state.camY - state.baseY;
+  // No rounding. Rounding causes jitter on high-res trackpads
+  const tx = (w * 0.5) - (state.camX * state.zoom);
+  const ty = (h * 0.5) - (state.camY * state.zoom);
 
-  const REBASE_PX = 8000;
-  if(Math.abs(dx * state.zoom) > REBASE_PX || Math.abs(dy * state.zoom) > REBASE_PX){
-    // fold local motion into base, keep world position identical
-    state.baseX += dx;
-    state.baseY += dy;
-    state.camX = state.baseX;
-    state.camY = state.baseY;
-    state.lastKey = "";
-  }
-
-  const ndx = state.camX - state.baseX;
-  const ndy = state.camY - state.baseY;
-  const tx = (w * 0.5) - (ndx * state.zoom) + (rx * state.zoom);
-  const ty = (h * 0.5) - (ndy * state.zoom) + (ry * state.zoom);
-  world.style.transform = "translate3d(" + tx + "px, " + ty + "px, 0) scale(" + state.zoom + ")";
+  world.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(${state.zoom})`;
 }
 
     function tick(){
@@ -1116,8 +1095,8 @@ function updateWorldTransform(){
         state.camY -= state.vy;
       }
 
-      renderPool();
       updateWorldTransform();
+      renderPool();
 
       state.raf = requestAnimationFrame(tick);
     }
@@ -1161,8 +1140,8 @@ function updateWorldTransform(){
       const w = vp.clientWidth;
       const h = vp.clientHeight;
 
-      const anchorWX = (state.camX - state.baseX) + (midX - w*0.5) / state.zoom;
-      const anchorWY = (state.camY - state.baseY) + (midY - h*0.5) / state.zoom;
+      const anchorWX = state.camX + (midX - w*0.5) / state.zoom;
+      const anchorWY = state.camY + (midY - h*0.5) / state.zoom;
 
       state.vx = 0;
       state.vy = 0;
@@ -1190,18 +1169,11 @@ function updateWorldTransform(){
           const rect = vp.getBoundingClientRect();
           const sx = e.clientX - rect.left;
           const sy = e.clientY - rect.top;
-          const wx = (state.camX - state.baseX) + (sx - vp.clientWidth * 0.5) / Math.max(0.2, state.zoom);
-          const wy = (state.camY - state.baseY) + (sy - vp.clientHeight * 0.5) / Math.max(0.2, state.zoom);
+          const wx = state.camX + (sx - vp.clientWidth * 0.5) / Math.max(0.2, state.zoom);
+          const wy = state.camY + (sy - vp.clientHeight * 0.5) / Math.max(0.2, state.zoom);
           const gx = Math.round(wx / STEP);
           const gy = -Math.round(wy / STEP);
-          const baseGX = Math.floor(state.baseX / STEP);
-      const baseGY = Math.floor(state.baseY / STEP);
-      const gxW = gx + baseGX;
-      const gyW = gy + baseGY;
-      const rx = state.baseX - (baseGX * STEP);
-      const ry = state.baseY - (baseGY * STEP);
-
-      const tile = tileIdFromCoords(gxW, gyW);
+          const tile = tileIdFromCoords(gx, gy);
           openPanel(tile, gx, gy);
         }
 
@@ -1211,13 +1183,13 @@ function updateWorldTransform(){
       const w = vp.clientWidth;
       const h = vp.clientHeight;
 
-      const wx = (state.camX - state.baseX) + (screenX - w*0.5) / state.zoom;
-      const wy = (state.camY - state.baseY) + (screenY - h*0.5) / state.zoom;
+      const wx = state.camX + (screenX - w*0.5) / state.zoom;
+      const wy = state.camY + (screenY - h*0.5) / state.zoom;
 
       state.zoom = clamp(newZoom, state.ZMIN, state.ZMAX);
 
-      state.camX = (wx - (screenX - w*0.5) / state.zoom) + state.baseX;
-      state.camY = (wy - (screenY - h*0.5) / state.zoom) + state.baseY;
+      state.camX = wx - (screenX - w*0.5) / state.zoom;
+      state.camY = wy - (screenY - h*0.5) / state.zoom;
 
       state.lastKey = "";
       renderPool();
@@ -1677,8 +1649,8 @@ el.close.addEventListener("click", function(e){
       }, { passive:true });
     }
 
-    renderPool();
     updateWorldTransform();
+    renderPool();
     requestAnimationFrame(tick);
 
     resolveFirstWorking(CREATOR_LOGO_CANDIDATES).then((u) => {
