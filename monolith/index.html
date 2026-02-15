@@ -1099,9 +1099,7 @@ function updateWorldTransform(){
 
   const ndx = state.camX - state.baseX;
   const ndy = state.camY - state.baseY;
-  const tx = (w * 0.5) - (ndx * state.zoom);
-  const ty = (h * 0.5) - (ndy * state.zoom);
-
+  const tx = (w * 0.5) - (ndx * state.zoom) + (rx * state.zoom);  const ty = (h * 0.5) - (ndy * state.zoom) + (ry * state.zoom);
   world.style.transform = "translate3d(" + tx + "px, " + ty + "px, 0) scale(" + state.zoom + ")";
 }
 
