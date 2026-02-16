@@ -1079,8 +1079,21 @@ function updateWorldTransform(){
   const h = vp.clientHeight;
 
   // No rounding. Rounding causes jitter on high-res trackpads
-  const tx = (w * 0.5) - (state.camX * state.zoom);
-  const ty = (h * 0.5) - (state.camY * state.zoom);
+  let tx = (w * 0.5) - (state.camX * state.zoom);
+    let ty = (h * 0.5) - (state.camY * state.zoom);
+
+    const RECENTER_THRESH = 12000;
+    const RECENTER_ZMAX = 0.40;
+    if(!state.down && !state.pinch && state.zoom <= RECENTER_ZMAX && (Math.abs(tx) > RECENTER_THRESH || Math.abs(ty) > RECENTER_THRESH)){
+      const invZ = 1 / Math.max(0.2, state.zoom);
+      const shiftX = -tx * invZ;
+      const shiftY = -ty * invZ;
+      state.camX += shiftX;
+      state.camY += shiftY;
+      state.lastKey = "";
+      tx = (w * 0.5) - (state.camX * state.zoom);
+      ty = (h * 0.5) - (state.camY * state.zoom);
+    }
 
   world.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(${state.zoom})`;
 }
@@ -1096,9 +1109,8 @@ function updateWorldTransform(){
         state.camX -= state.vx;
         state.camY -= state.vy;
       }
-
-      updateWorldTransform();
       renderPool();
+      updateWorldTransform();
 
       state.raf = requestAnimationFrame(tick);
     }
