@@ -1114,7 +1114,6 @@ updateDbg("HUD LIVE");
       }
       renderPool();
       updateWorldTransform();
-      if(location.search.indexOf("debug=1")!==-1){ var el=document.getElementById("dbg"); if(el){ el.style.display="block"; var w=document.getElementById("world"); el.textContent="world "+(w&&w.children?w.children.length:0)+" z "+state.zoom.toFixed(3)+" cam "+state.camX.toFixed(1)+","+state.camY.toFixed(1); } }
   try {
     var z=state.zoom||1;
     var step=(typeof STEP!=="undefined")?STEP:NaN;
