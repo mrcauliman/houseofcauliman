@@ -374,11 +374,6 @@ body.debug #dbg{display:block;}
 </head>
 
 <body>
-
-<div style="position:fixed;left:12px;top:12px;z-index:9999;">
-  <a href="/monolith/wall.html" style="display:inline-block;padding:10px 14px;border-radius:10px;background:#111;color:#fff;font:600 13px/1.2 system-ui,Segoe UI,Arial;text-decoration:none;border:1px solid rgba(255,255,255,.18);">ENTER WALL</a>
-</div>
-
   <header class="top">
     <div class="brand">
       <img src="/monolith/assets/monolith_logo.webp" alt="MONOLITH" />
@@ -1670,13 +1665,6 @@ el.close.addEventListener("click", function(e){
 <!-- monolith-build: wheel-zoom-v2 2026-02-07 -->
 <!-- monolith-lock: TRUE -->
 <!-- monolith-lock-ts: 2026-02-07T00:00:00Z -->
-<script>
-(function(){
-  try {
-    if (location.hash === "#wall") location.replace("/monolith/wall.html");
-  } catch(e) {}
-})();
-</script>
 </body>
 </html>
 
