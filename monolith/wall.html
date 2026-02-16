@@ -1059,6 +1059,7 @@ const isCreator  = hasCreator && (
 
       const startGX = Math.floor((state.camX - halfW) / STEP) - state.POOL_PAD;
       const startGY = Math.floor((state.camY - halfH) / STEP) - state.POOL_PAD;
+      state.dbg = { startGX:startGX, startGY:startGY, cols:state.cols, rows:state.rows, halfW:halfW, halfH:halfH, camX:state.camX, camY:state.camY, zoom:state.zoom };
 
       const key = `${startGX},${startGY},${state.cols},${state.rows},${state.taken.size},${state.marksByTile.size},${state.zoom.toFixed(3)}`;
       if(key === state.lastKey) return;
@@ -1121,8 +1122,7 @@ updateDbg("HUD LIVE");
     var w=innerWidth;
     var h=innerHeight;
     var tx=(w*0.5)-(state.camX*z);
-    var ty=(h*0.5)-(state.camY*z);
-    var poolEl=document.getElementById("pool"); var pc=(poolEl&&poolEl.children)?poolEl.children.length:-1; updateDbg("z "+z.toFixed(4)+"\ncam "+state.camX.toFixed(1)+","+state.camY.toFixed(1)+"\nt "+tx.toFixed(0)+","+ty.toFixed(0)+"\nstep "+step+" pad "+pad+"\npool "+pc);
+    var worldEl=document.getElementById("world"); var wc=(worldEl&&worldEl.children)?worldEl.children.length:-1; var d=state.dbg||{}; updateDbg("z "+z.toFixed(4)+"\ncam "+state.camX.toFixed(1)+","+state.camY.toFixed(1)+"\nt "+tx.toFixed(0)+","+ty.toFixed(0)+"\nstep "+step+" pad "+pad+"\nworld "+wc+"\nstart "+(d.startGX??"") + "," + (d.startGY??"") + "  grid " + (d.cols??"") + "x" + (d.rows??""));
   } catch(e) { updateDbg("HUD ERR"); }
 
       state.raf = requestAnimationFrame(tick);
