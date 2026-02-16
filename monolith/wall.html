@@ -374,7 +374,7 @@ body.debug #dbg{display:block;}
 </head>
 
 <body>
-<div id="dbg" style="position:fixed;left:10px;bottom:10px;z-index:99999;font:12px/1.35 monospace;background:rgba(0,0,0,.55);padding:8px 10px;border:1px solid rgba(255,255,255,.15);border-radius:10px;color:#fff;pointer-events:none"></div>
+<div id="dbg" style="position:fixed;left:10px;top:10px;z-index:99999;font:12px/1.35 monospace;background:rgba(0,0,0,.90);padding:8px 10px;border:1px solid rgba(255,255,255,.15);border-radius:10px;color:#0f0;pointer-events:none"></div>
   <header class="top">
     <div class="brand">
       <img src="/monolith/assets/monolith_logo.webp" alt="MONOLITH" />
@@ -1099,6 +1099,7 @@ function updateWorldTransform(){
 }
 
 function updateDbg(s){ var el=document.getElementById("dbg"); if(!el) return; el.textContent=s; }
+updateDbg("HUD LIVE");
 
     function tick(){
       if(!state.down && !state.pinch){
