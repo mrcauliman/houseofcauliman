@@ -400,7 +400,6 @@ body.debug #dbg{display:block;}
 
   <div id="vp" aria-label="wall viewport">
     <div id="world" aria-label="wall world"></div>
-    <div id="dbg"></div>
   </div>
 
   <aside class="panel" id="panel" aria-label="tile detail panel">
@@ -1099,6 +1098,8 @@ function updateWorldTransform(){
   world.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(${state.zoom})`;
 }
 
+function updateDbg(s){ var el=document.getElementById("dbg"); if(!el) return; el.textContent=s; }
+
     function tick(){
       if(!state.down && !state.pinch){
         state.vx *= 0.85;
@@ -1112,6 +1113,16 @@ function updateWorldTransform(){
       }
       renderPool();
       updateWorldTransform();
+  try {
+    var z=state.zoom||1;
+    var step=(typeof STEP!=="undefined")?STEP:NaN;
+    var pad=(state&&typeof state.POOL_PAD!=="undefined")?state.POOL_PAD:NaN;
+    var w=(viewport&&viewport.clientWidth)?viewport.clientWidth:innerWidth;
+    var h=(viewport&&viewport.clientHeight)?viewport.clientHeight:innerHeight;
+    var tx=(w*0.5)-(state.camX*z);
+    var ty=(h*0.5)-(state.camY*z);
+    updateDbg("z "+z.toFixed(4)+"\ncam "+state.camX.toFixed(1)+","+state.camY.toFixed(1)+"\nt "+tx.toFixed(0)+","+ty.toFixed(0)+"\nstep "+step+" pad "+pad);
+  } catch(e) { updateDbg("HUD ERR"); }
 
       state.raf = requestAnimationFrame(tick);
     }
@@ -1663,9 +1674,8 @@ el.close.addEventListener("click", function(e){
         toastShow("centered", "good");
       }, { passive:true });
     }
-
-    updateWorldTransform();
     renderPool();
+    updateWorldTransform();
     requestAnimationFrame(tick);
 
     resolveFirstWorking(CREATOR_LOGO_CANDIDATES).then((u) => {
