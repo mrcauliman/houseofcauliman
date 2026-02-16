@@ -374,7 +374,7 @@ body.debug #dbg{display:block;}
 </head>
 
 <body>
-<div id="dbg" style="position:fixed;left:10px;top:10px;z-index:99999;font:12px/1.35 monospace;background:rgba(0,0,0,.90);padding:8px 10px;border:1px solid rgba(255,255,255,.15);border-radius:10px;color:#0f0;pointer-events:none">HUD STATIC</div>
+<div id="dbg" style="position:fixed;left:10px;top:10px;z-index:2147483647;font:12px/1.35 monospace;background:rgba(0,0,0,.90);padding:8px 10px;border:1px solid rgba(255,255,255,.15);border-radius:10px;color:#0f0;pointer-events:none;display:block!important;visibility:visible!important;opacity:1!important">HUD STATIC</div>
   <header class="top">
     <div class="brand">
       <img src="/monolith/assets/monolith_logo.webp" alt="MONOLITH" />
@@ -1118,8 +1118,8 @@ updateDbg("HUD LIVE");
     var z=state.zoom||1;
     var step=(typeof STEP!=="undefined")?STEP:NaN;
     var pad=(state&&typeof state.POOL_PAD!=="undefined")?state.POOL_PAD:NaN;
-    var w=(viewport&&viewport.clientWidth)?viewport.clientWidth:innerWidth;
-    var h=(viewport&&viewport.clientHeight)?viewport.clientHeight:innerHeight;
+    var w=innerWidth;
+    var h=innerHeight;
     var tx=(w*0.5)-(state.camX*z);
     var ty=(h*0.5)-(state.camY*z);
     updateDbg("z "+z.toFixed(4)+"\ncam "+state.camX.toFixed(1)+","+state.camY.toFixed(1)+"\nt "+tx.toFixed(0)+","+ty.toFixed(0)+"\nstep "+step+" pad "+pad);
