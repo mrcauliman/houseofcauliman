@@ -962,11 +962,11 @@ const isCreator  = hasCreator && (
     }
 
     function ensurePool(){
-      const w = vp.clientWidth;
-      const h = vp.clientHeight;
+      const w = (window.visualViewport ? visualViewport.width : innerWidth);
+      const h = (window.visualViewport ? visualViewport.height : innerHeight);
 
-      const visW = w / state.zoom;
-      const visH = h / state.zoom;
+      const visW = w / Math.max(state.zoom, 0.40);
+      const visH = h / Math.max(state.zoom, 0.40);
 
       const cols = Math.ceil(visW / STEP) + state.POOL_PAD * 2;
       const rows = Math.ceil(visH / STEP) + state.POOL_PAD * 2;
@@ -1051,8 +1051,8 @@ const isCreator  = hasCreator && (
     function renderPool(){
       ensurePool();
 
-      const w = vp.clientWidth;
-      const h = vp.clientHeight;
+      const w = (window.visualViewport ? visualViewport.width : innerWidth);
+      const h = (window.visualViewport ? visualViewport.height : innerHeight);
 
       const halfW = (w * 0.5) / state.zoom;
       const halfH = (h * 0.5) / state.zoom;
@@ -1075,8 +1075,8 @@ const isCreator  = hasCreator && (
     }
 
 function updateWorldTransform(){
-  const w = vp.clientWidth;
-  const h = vp.clientHeight;
+  const w = (window.visualViewport ? visualViewport.width : innerWidth);
+  const h = (window.visualViewport ? visualViewport.height : innerHeight);
 
   // No rounding. Rounding causes jitter on high-res trackpads
   let tx = (w * 0.5) - (state.camX * state.zoom);
@@ -1164,8 +1164,8 @@ updateDbg("HUD LIVE");
       const midX = (a.x + b.x) * 0.5;
       const midY = (a.y + b.y) * 0.5;
 
-      const w = vp.clientWidth;
-      const h = vp.clientHeight;
+      const w = (window.visualViewport ? visualViewport.width : innerWidth);
+      const h = (window.visualViewport ? visualViewport.height : innerHeight);
 
       const anchorWX = state.camX + (midX - w*0.5) / state.zoom;
       const anchorWY = state.camY + (midY - h*0.5) / state.zoom;
@@ -1207,8 +1207,8 @@ updateDbg("HUD LIVE");
     }
 
     function applyZoomAtScreen(newZoom, screenX, screenY){
-      const w = vp.clientWidth;
-      const h = vp.clientHeight;
+      const w = (window.visualViewport ? visualViewport.width : innerWidth);
+      const h = (window.visualViewport ? visualViewport.height : innerHeight);
 
       const wx = state.camX + (screenX - w*0.5) / state.zoom;
       const wy = state.camY + (screenY - h*0.5) / state.zoom;
@@ -1279,8 +1279,8 @@ function onMove(e){
 
           const targetZoom = clamp(state.pinch.startZoom * (dist / Math.max(20, state.pinch.startDist)), state.ZMIN, state.ZMAX);
 
-          const w = vp.clientWidth;
-          const h = vp.clientHeight;
+          const w = (window.visualViewport ? visualViewport.width : innerWidth);
+          const h = (window.visualViewport ? visualViewport.height : innerHeight);
 
           state.zoom = targetZoom;
           state.camX = state.pinch.anchorWX - (midX - w*0.5) / state.zoom;
@@ -1463,8 +1463,8 @@ function onWheel(e){
   state.dragging = false;
   vp.classList.remove("dragging");
 
-  const w = vp.clientWidth;
-  const h = vp.clientHeight;
+  const w = (window.visualViewport ? visualViewport.width : innerWidth);
+  const h = (window.visualViewport ? visualViewport.height : innerHeight);
 
   const rect = vp.getBoundingClientRect();
   const sx = clamp(e.clientX - rect.left, 0, w);
