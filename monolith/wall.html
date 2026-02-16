@@ -374,7 +374,7 @@ body.debug #dbg{display:block;}
 </head>
 
 <body>
-<div id="dbg" style="position:fixed;left:10px;top:10px;z-index:2147483647;font:12px/1.35 monospace;background:rgba(0,0,0,.90);padding:8px 10px;border:1px solid rgba(255,255,255,.15);border-radius:10px;color:#0f0;pointer-events:none;display:block!important;visibility:visible!important;opacity:1!important">HUD STATIC</div>
+<div id="dbg" style="display:none;position:fixed;left:10px;top:10px;z-index:2147483647;font:12px/1.35 monospace;background:rgba(0,0,0,.70);padding:8px 10px;border:1px solid rgba(255,255,255,.15);border-radius:10px;color:#0f0;pointer-events:none"></div>
   <header class="top">
     <div class="brand">
       <img src="/monolith/assets/monolith_logo.webp" alt="MONOLITH" />
@@ -1084,8 +1084,8 @@ function updateWorldTransform(){
 
     const RECENTER_THRESH = 12000;
     const RECENTER_ZMAX = 0.40;
-    if(!state.down && !state.pinch && state.zoom <= RECENTER_ZMAX && (Math.abs(tx) > RECENTER_THRESH || Math.abs(ty) > RECENTER_THRESH)){
-      const invZ = 1 / Math.max(0.2, state.zoom);
+    if(!state.down && !state.pinch && (Math.abs(tx) > RECENTER_THRESH || Math.abs(ty) > RECENTER_THRESH)){
+      const invZ = 1 / Math.max(0.40, state.zoom);
       const shiftX = -tx * invZ;
       const shiftY = -ty * invZ;
       state.camX += shiftX;
@@ -1099,7 +1099,7 @@ function updateWorldTransform(){
 }
 
 function updateDbg(s){ var el=document.getElementById("dbg"); if(!el) return; el.textContent=s; }
-updateDbg("HUD LIVE");
+if (location.search.indexOf("debug=1") !== -1) { var el=document.getElementById("dbg"); if(el) el.style.display="block"; }
 
     function tick(){
       if(!state.down && !state.pinch){
