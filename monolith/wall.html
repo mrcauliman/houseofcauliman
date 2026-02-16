@@ -506,6 +506,8 @@ let CREATOR_LOGO = "";
     const TILE = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--tile").trim(), 10) || 118;
 
     const state = {
+      originX: 0,
+      originY: 0,
       camX: 0, camY: 0,
       vx: 0, vy: 0,
 
