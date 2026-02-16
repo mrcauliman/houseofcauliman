@@ -1122,7 +1122,7 @@ updateDbg("HUD LIVE");
     var h=innerHeight;
     var tx=(w*0.5)-(state.camX*z);
     var ty=(h*0.5)-(state.camY*z);
-    updateDbg("z "+z.toFixed(4)+"\ncam "+state.camX.toFixed(1)+","+state.camY.toFixed(1)+"\nt "+tx.toFixed(0)+","+ty.toFixed(0)+"\nstep "+step+" pad "+pad);
+    var poolEl=document.getElementById("pool"); var pc=(poolEl&&poolEl.children)?poolEl.children.length:-1; updateDbg("z "+z.toFixed(4)+"\ncam "+state.camX.toFixed(1)+","+state.camY.toFixed(1)+"\nt "+tx.toFixed(0)+","+ty.toFixed(0)+"\nstep "+step+" pad "+pad+"\npool "+pc);
   } catch(e) { updateDbg("HUD ERR"); }
 
       state.raf = requestAnimationFrame(tick);
