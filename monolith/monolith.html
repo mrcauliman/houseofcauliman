@@ -1125,7 +1125,6 @@ function updateWorldTransform(){
       updateWorldTransform();
   try {
     var z=state.zoom||1;
-    var worldEl=document.getElementById("world"); var wc=(worldEl&&worldEl.children)?worldEl.children.length:-1; var d=state.dbg||{}; var sg=(d.startGX!==undefined)?d.startGX:""; var sy=(d.startGY!==undefined)?d.startGY:""; var cc=(d.cols!==undefined)?d.cols:""; var rr=(d.rows!==undefined)?d.rows:""; updateDbg("z "+z.toFixed(4)+"\ncam "+state.camX.toFixed(1)+","+state.camY.toFixed(1)+"\nt "+tx.toFixed(0)+","+ty.toFixed(0)+"\nstep "+step+" pad "+pad+"\nworld "+wc+"\nstart "+sg+","+sy+"  grid "+cc+"x"+rr);
 
       state.raf = requestAnimationFrame(tick);
     }
