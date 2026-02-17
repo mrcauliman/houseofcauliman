@@ -364,8 +364,17 @@
 .panel img{display:block;max-width:100%;height:auto;object-fit:contain;}
 
 
+/* DEBUG HUD */
+#dbg{display:none;position:fixed;left:10px;bottom:10px;z-index:99999;background:rgba(0,0,0,.75);color:#fff;font:12px/1.3 ui-monospace,Menlo,Consolas,monospace;padding:8px 10px;border-radius:10px;max-width:min(92vw,560px);white-space:pre-wrap;}
+body.debug #dbg{display:block;}
+
+#vBody{display:none;}
+</style>
+  <script src="/monolith/coords.js"></script>
+</head>
 
 <body>
+<div id="dbg" style="display:none;position:fixed;left:10px;top:10px;z-index:2147483647;font:12px/1.35 monospace;background:rgba(0,0,0,.70);padding:8px 10px;border:1px solid rgba(255,255,255,.15);border-radius:10px;color:#0f0;pointer-events:none"></div>
   <header class="top">
     <div class="brand">
       <img src="/monolith/assets/monolith_logo.webp" alt="MONOLITH" />
@@ -953,11 +962,11 @@ const isCreator  = hasCreator && (
     }
 
     function ensurePool(){
-      const w = vp.clientWidth;
-      const h = vp.clientHeight;
+      const w = (window.visualViewport ? visualViewport.width : innerWidth);
+      const h = (window.visualViewport ? visualViewport.height : innerHeight);
 
-      const visW = w / state.zoom;
-      const visH = h / state.zoom;
+      const visW = w / Math.max(state.zoom, 0.40);
+      const visH = h / Math.max(state.zoom, 0.40);
 
       const cols = Math.ceil(visW / STEP) + state.POOL_PAD * 2;
       const rows = Math.ceil(visH / STEP) + state.POOL_PAD * 2;
@@ -1042,15 +1051,14 @@ const isCreator  = hasCreator && (
     function renderPool(){
       ensurePool();
 
-      const w = vp.clientWidth;
-      const h = vp.clientHeight;
+      const w = (window.visualViewport ? visualViewport.width : innerWidth);
+      const h = (window.visualViewport ? visualViewport.height : innerHeight);
 
       const halfW = (w * 0.5) / state.zoom;
       const halfH = (h * 0.5) / state.zoom;
 
       const startGX = Math.floor((state.camX - halfW) / STEP) - state.POOL_PAD;
-      const startGY = Math.floor((-state.camY + halfH) / STEP) - state.POOL_PAD;
-      state.dbg = { startGX:startGX, startGY:startGY, cols:state.cols, rows:state.rows, halfW:halfW, halfH:halfH, camX:state.camX, camY:state.camY, zoom:state.zoom };
+            const startGY = Math.floor((-state.camY - halfH) / STEP) - state.POOL_PAD;
 
       const key = `${startGX},${startGY},${state.cols},${state.rows},${state.taken.size},${state.marksByTile.size},${state.zoom.toFixed(3)}`;
       if(key === state.lastKey) return;
@@ -1060,15 +1068,15 @@ const isCreator  = hasCreator && (
       for(let ry=0; ry<state.rows; ry++){
         for(let rx=0; rx<state.cols; rx++){
           const gx = startGX + rx;
-          const gy = startGY - ry;
+                    const gy = startGY + ry;
           setCell(state.pool[i++], gx, gy);
         }
       }
     }
 
 function updateWorldTransform(){
-  const w = vp.clientWidth;
-  const h = vp.clientHeight;
+  const w = (window.visualViewport ? visualViewport.width : innerWidth);
+  const h = (window.visualViewport ? visualViewport.height : innerHeight);
 
   // No rounding. Rounding causes jitter on high-res trackpads
   let tx = (w * 0.5) - (state.camX * state.zoom);
@@ -1076,8 +1084,8 @@ function updateWorldTransform(){
 
     const RECENTER_THRESH = 12000;
     const RECENTER_ZMAX = 0.40;
-    if(!state.down && !state.pinch && state.zoom <= RECENTER_ZMAX && (Math.abs(tx) > RECENTER_THRESH || Math.abs(ty) > RECENTER_THRESH)){
-      const invZ = 1 / Math.max(0.2, state.zoom);
+    if(!state.down && !state.pinch && (Math.abs(tx) > RECENTER_THRESH || Math.abs(ty) > RECENTER_THRESH)){
+      const invZ = 1 / Math.max(0.40, state.zoom);
       const shiftX = -tx * invZ;
       const shiftY = -ty * invZ;
       state.camX += shiftX;
@@ -1087,20 +1095,11 @@ function updateWorldTransform(){
       ty = (h * 0.5) - (state.camY * state.zoom);
     }
 
-  // GPU GUARD: prevent mobile precision black sea
-  const THRESH = 12000;
-  if(!state.down && !state.pinch && (Math.abs(tx) > THRESH || Math.abs(ty) > THRESH)){
-    const invZ = 1 / Math.max(0.40, state.zoom);
-    state.camX += (-tx) * invZ;
-    state.camY += (-ty) * invZ;
-    state.lastKey = "";
-    tx = (w * 0.5) - (state.camX * state.zoom);
-    ty = (h * 0.5) - (state.camY * state.zoom);
-  }
-
   world.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(${state.zoom})`;
 }
 
+function updateDbg(s){ var el=document.getElementById("dbg"); if(!el) return; el.textContent=s; }
+if (location.search.indexOf("debug=1") !== -1) { var el=document.getElementById("dbg"); if(el) el.style.display="block"; }
 
     function tick(){
       if(!state.down && !state.pinch){
@@ -1117,6 +1116,14 @@ function updateWorldTransform(){
       updateWorldTransform();
   try {
     var z=state.zoom||1;
+    var step=(typeof STEP!=="undefined")?STEP:NaN;
+    var pad=(state&&typeof state.POOL_PAD!=="undefined")?state.POOL_PAD:NaN;
+    var w=innerWidth;
+    var h=innerHeight;
+    var tx=(w*0.5)-(state.camX*z);
+    var ty=(h*0.5)-(state.camY*z);
+    var worldEl=document.getElementById("world"); var wc=(worldEl&&worldEl.children)?worldEl.children.length:-1; var d=state.dbg||{}; var sg=(d.startGX!==undefined)?d.startGX:""; var sy=(d.startGY!==undefined)?d.startGY:""; var cc=(d.cols!==undefined)?d.cols:""; var rr=(d.rows!==undefined)?d.rows:""; updateDbg("z "+z.toFixed(4)+"\ncam "+state.camX.toFixed(1)+","+state.camY.toFixed(1)+"\nt "+tx.toFixed(0)+","+ty.toFixed(0)+"\nstep "+step+" pad "+pad+"\nworld "+wc+"\nstart "+sg+","+sy+"  grid "+cc+"x"+rr);
+  } catch(e) { updateDbg("HUD ERR"); }
 
       state.raf = requestAnimationFrame(tick);
     }
@@ -1157,8 +1164,8 @@ function updateWorldTransform(){
       const midX = (a.x + b.x) * 0.5;
       const midY = (a.y + b.y) * 0.5;
 
-      const w = vp.clientWidth;
-      const h = vp.clientHeight;
+      const w = (window.visualViewport ? visualViewport.width : innerWidth);
+      const h = (window.visualViewport ? visualViewport.height : innerHeight);
 
       const anchorWX = state.camX + (midX - w*0.5) / state.zoom;
       const anchorWY = state.camY + (midY - h*0.5) / state.zoom;
@@ -1189,8 +1196,8 @@ function updateWorldTransform(){
           const rect = vp.getBoundingClientRect();
           const sx = e.clientX - rect.left;
           const sy = e.clientY - rect.top;
-          const wx = state.camX + (sx - vp.clientWidth * 0.5) / Math.max(0.2, state.zoom);
-          const wy = state.camY + (sy - vp.clientHeight * 0.5) / Math.max(0.2, state.zoom);
+          const wx = state.camX + (sx - (window.visualViewport ? visualViewport.width : innerWidth) * 0.5) / Math.max(0.2, state.zoom);
+          const wy = state.camY + (sy - (window.visualViewport ? visualViewport.height : innerHeight) * 0.5) / Math.max(0.2, state.zoom);
           const gx = Math.round(wx / STEP);
           const gy = -Math.round(wy / STEP);
           const tile = tileIdFromCoords(gx, gy);
@@ -1200,8 +1207,8 @@ function updateWorldTransform(){
     }
 
     function applyZoomAtScreen(newZoom, screenX, screenY){
-      const w = vp.clientWidth;
-      const h = vp.clientHeight;
+      const w = (window.visualViewport ? visualViewport.width : innerWidth);
+      const h = (window.visualViewport ? visualViewport.height : innerHeight);
 
       const wx = state.camX + (screenX - w*0.5) / state.zoom;
       const wy = state.camY + (screenY - h*0.5) / state.zoom;
@@ -1272,8 +1279,8 @@ function onMove(e){
 
           const targetZoom = clamp(state.pinch.startZoom * (dist / Math.max(20, state.pinch.startDist)), state.ZMIN, state.ZMAX);
 
-          const w = vp.clientWidth;
-          const h = vp.clientHeight;
+          const w = (window.visualViewport ? visualViewport.width : innerWidth);
+          const h = (window.visualViewport ? visualViewport.height : innerHeight);
 
           state.zoom = targetZoom;
           state.camX = state.pinch.anchorWX - (midX - w*0.5) / state.zoom;
@@ -1456,8 +1463,8 @@ function onWheel(e){
   state.dragging = false;
   vp.classList.remove("dragging");
 
-  const w = vp.clientWidth;
-  const h = vp.clientHeight;
+  const w = (window.visualViewport ? visualViewport.width : innerWidth);
+  const h = (window.visualViewport ? visualViewport.height : innerHeight);
 
   const rect = vp.getBoundingClientRect();
   const sx = clamp(e.clientX - rect.left, 0, w);
