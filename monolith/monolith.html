@@ -1058,7 +1058,7 @@ const isCreator  = hasCreator && (
       const halfH = (h * 0.5) / state.zoom;
 
       const startGX = Math.floor((state.camX - halfW) / STEP) - state.POOL_PAD;
-      const startGY = Math.floor((-state.camY + halfH) / STEP) - state.POOL_PAD;
+            const startGY = Math.floor((-state.camY - halfH) / STEP) - state.POOL_PAD;
 
       const key = `${startGX},${startGY},${state.cols},${state.rows},${state.taken.size},${state.marksByTile.size},${state.zoom.toFixed(3)}`;
       if(key === state.lastKey) return;
@@ -1068,7 +1068,7 @@ const isCreator  = hasCreator && (
       for(let ry=0; ry<state.rows; ry++){
         for(let rx=0; rx<state.cols; rx++){
           const gx = startGX + rx;
-          const gy = startGY - ry;
+                    const gy = startGY + ry;
           setCell(state.pool[i++], gx, gy);
         }
       }
