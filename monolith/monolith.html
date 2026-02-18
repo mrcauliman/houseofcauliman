@@ -364,18 +364,17 @@
 .panel img{display:block;max-width:100%;height:auto;object-fit:contain;}
 
 
+/* DEBUG HUD */
+#dbg{display:none;position:fixed;left:10px;bottom:10px;z-index:99999;background:rgba(0,0,0,.75);color:#fff;font:12px/1.3 ui-monospace,Menlo,Consolas,monospace;padding:8px 10px;border-radius:10px;max-width:min(92vw,560px);white-space:pre-wrap;}
+body.debug #dbg{display:block;}
+
 #vBody{display:none;}
-
-
-/* BLACK SEA GUARD v2: prevent void without killing body gradient */
-#vp{background:var(--bg);}
-#world{background:var(--bg);}
-
 </style>
   <script src="/monolith/coords.js"></script>
 </head>
 
 <body>
+<div id="dbg" style="display:none;position:fixed;left:10px;top:10px;z-index:2147483647;font:12px/1.35 monospace;background:rgba(0,0,0,.70);padding:8px 10px;border:1px solid rgba(255,255,255,.15);border-radius:10px;color:#0f0;pointer-events:none"></div>
   <header class="top">
     <div class="brand">
       <img src="/monolith/assets/monolith_logo.webp" alt="MONOLITH" />
@@ -448,10 +447,6 @@
   <div class="toast" id="toast" aria-label="toast"></div>
 
   <script>
-// CRASH BANNER v1
-window.addEventListener("error",function(e){try{var d=document.createElement("div");d.style.cssText="position:fixed;left:10px;right:10px;top:10px;z-index:2147483647;background:rgba(0,0,0,.85);color:#ff5b5b;border:1px solid rgba(255,91,91,.5);padding:10px 12px;border-radius:12px;font:12px/1.35 ui-monospace,Menlo,Consolas,monospace;white-space:pre-wrap;";d.textContent="MONOLITH ERROR\n"+(e.message||"") +"\n"+(e.filename||"") +":"+ (e.lineno||"") +":"+ (e.colno||"");document.body.appendChild(d);}catch(_){}});
-window.addEventListener("unhandledrejection",function(e){try{var d=document.createElement("div");d.style.cssText="position:fixed;left:10px;right:10px;top:10px;z-index:2147483647;background:rgba(0,0,0,.85);color:#ff5b5b;border:1px solid rgba(255,91,91,.5);padding:10px 12px;border-radius:12px;font:12px/1.35 ui-monospace,Menlo,Consolas,monospace;white-space:pre-wrap;";d.textContent="MONOLITH REJECTION\n"+String(e.reason||"");document.body.appendChild(d);}catch(_){}});
-
   (() => {
 const FEED_URL = "/assets/monolith/feed.json?cb=" + Date.now();
 
