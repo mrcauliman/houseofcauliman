@@ -553,16 +553,9 @@ zoom: 0.65,
       justPinchedUntil: 0
     };
 
+  window.MONOLITH_STATE = state;
+
     function clamp(v, a, b){ return Math.max(a, Math.min(b, v)); }
-
-    function clampCamY(){
-      const poolH = state.rows * STEP; /* world units */
-      const halfVisH = (vp.clientHeight * 0.5) / state.zoom;
-      const minY = -halfVisH + (STEP * 0.5); /* keep at least 1/2 tile */
-      const maxY = poolH - halfVisH - (STEP * 0.5);
-      state.camY = clamp(state.camY, minY, maxY);
-    }
-
 
     function toastShow(msg, kind){
       toast.className = "toast " + (kind || "");
@@ -1074,7 +1067,7 @@ const isCreator  = hasCreator && (
       const halfH = (h * 0.5) / state.zoom;
 
       const startGX = Math.floor((state.camX - halfW) / STEP) - state.POOL_PAD;
-      const startGY = Math.floor((state.camY - halfH) / STEP) - state.POOL_PAD;
+      const startGY = Math.floor((-state.camY - halfH) / STEP) - state.POOL_PAD;
 
       const key = `${startGX},${startGY},${state.cols},${state.rows},${state.taken.size},${state.marksByTile.size},${state.zoom.toFixed(3)}`;
       if(key === state.lastKey) return;
@@ -1102,7 +1095,6 @@ function updateWorldTransform(){
 }
 
     function tick(){
-        clampCamY();
       if(!state.down && !state.pinch){
         state.vx *= 0.85;
         state.vy *= 0.85;
