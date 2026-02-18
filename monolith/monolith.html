@@ -528,6 +528,8 @@ let CREATOR_LOGO = "";
       cols: 0, rows: 0,
       pool: [],
       POOL_PAD: 6,
+      lastVW: 0,
+      lastVH: 0,
 
       taken: new Set(),
       marksByTile: new Map(),
@@ -965,18 +967,20 @@ const isCreator  = hasCreator && (
     }
 
     function ensurePool(){
-      const w = vp.clientWidth;
-      const h = vp.clientHeight;
+      const vv = window.visualViewport; const w = vv ? vv.width : vp.clientWidth;
+      const vv2 = window.visualViewport; const h = vv2 ? vv2.height : vp.clientHeight;
 
       const visW = w / state.zoom;
       const visH = h / state.zoom;
 
-      const cols = Math.ceil(visW / STEP) + state.POOL_PAD * 2 + 10;
-      const rows = Math.ceil(visH / STEP) + state.POOL_PAD * 2 + 22;
+        const cols = Math.ceil(visW / STEP) + state.POOL_PAD * 2 + 10;
+        const rows = Math.ceil(visH / STEP) + state.POOL_PAD * 2 + 22;
 
-      if(cols === state.cols && rows === state.rows && state.pool.length){
-        return;
-      }
+        if(cols === state.cols && rows === state.rows && state.pool.length && state.lastVW === w && state.lastVH === h){
+          return;
+        }
+
+        state.lastVW = w; state.lastVH = h;
 
       state.cols = cols;
       state.rows = rows;
