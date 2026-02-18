@@ -1,355 +1,178 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Ledger Drop XRPL — 589 Gallery</title>
-  <link rel="canonical" href="https://houseofcauliman.com/ledgerdrop_xrpl/">
-  <meta name="description" content="589 XRPL Wallpapers 📱🖥️ Cinematic Visual Drops 🎨 $XRP Culture ⚡">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ledger Drop XRPL — 589 Gallery</title>
+<link rel="canonical" href="https://houseofcauliman.com/ledgerdrop_xrpl/">
+<meta name="description" content="589 XRPL Wallpapers. Cinematic Visual Drops. $XRP Culture.">
 
-  <style>
-    :root{
-      --bg:#050509;
-      --panel:#0b0e18;
-      --muted:#a9b2c2;
-      --r:18px;
-      --max:1200px;
-    }
-    *{box-sizing:border-box}
-    html,body{
-      margin:0;
-      background:var(--bg);
-      color:#f5f7ff;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-    }
-    a{color:inherit}
-    code{color:#d6ddff}
+<style>
+:root{
+  --bg:#050509;
+  --panel:#0b0e18;
+  --border:rgba(77,163,255,.35);
+  --muted:#9aa3b2;
+  --max:1400px;
+}
 
-    .wrap{max-width:var(--max);margin:0 auto;padding:26px 16px 70px}
-    .top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
-    .back{
-      display:inline-flex;gap:10px;align-items:center;
-      text-decoration:none;border:1px solid rgba(255,255,255,.12);
-      padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.03)
-    }
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;
-      text-decoration:none;font-weight:800;
-      padding:10px 14px;border-radius:14px;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.04)
-    }
+*{box-sizing:border-box}
 
-    h1{margin:14px 0 0;font-size:34px;letter-spacing:.2px}
-    .bio{margin:10px 0 0;color:var(--muted);line-height:1.55}
+html,body{
+  margin:0;
+  background:var(--bg);
+  color:#f5f7ff;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif
+}
 
-    .panel{
-      margin-top:18px;
-      background:var(--panel);
-      border:1px solid rgba(255,255,255,.10);
-      border-radius:var(--r);
-      padding:14px;
-    }
-    .panel-title{font-weight:900}
-    .links{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.wrap{
+  max-width:var(--max);
+  margin:0 auto;
+  padding:40px 20px 80px
+}
 
-    .grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:14px}
-    .tile{
-      background:rgba(255,255,255,.03);
-      border:1px solid rgba(255,255,255,.10);
-      border-radius:16px;
-      overflow:hidden;
-    }
-    .tile img{
-      display:block;
-      width:100%;
-      height:auto;
-      max-height:720px;
-      object-fit:contain;
-      background:#07070a;
-    }
-    .cap{
-      padding:10px 12px;
-      color:var(--muted);
-      font-size:13px;
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-    }
-    .cap span{
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
+.back{
+  display:inline-block;
+  text-decoration:none;
+  border:1px solid rgba(255,255,255,.15);
+  padding:10px 16px;
+  border-radius:14px;
+  color:#fff;
+  margin-bottom:30px
+}
 
-    @media (min-width:860px){
-      .grid{grid-template-columns:1fr 1fr}
-    }
-  </style>
-</head>
+h1{
+  margin:0 0 8px;
+  font-size:40px;
+  letter-spacing:.5px
+}
 
-<body>
-  <div class="wrap">
-    <div class="top">
-      <a class="back" href="/">← Back to House</a>
-      <a class="btn" href="https://x.com/LedgerDropXRPL" target="_blank" rel="noopener">𝕏</a>
-    </div>
+.sub{
+  color:var(--muted);
+  margin-bottom:40px;
+  font-size:15px
+}
 
-    <h1>Ledger Drop XRPL</h1>
-    <div class="bio">589 XRPL Wallpapers 📱🖥️ Cinematic Visual Drops 🎨 $XRP Culture ⚡</div>
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(420px,1fr));
+  gap:30px
+}
 
-    <div class="panel">
-      <div class="panel-title">589 Wallpaper Gallery</div>
-      <div class="bio" style="margin-top:6px">
-        Drop files into <code>collections/ledgerdropxrpl/assets/589/</code> then add tiles below.
-      </div>
-      <div class="links">
-        <a class="btn" href="#gallery">Jump to Gallery</a>
-      </div>
-    </div>
+.tile{
+  border:1px solid var(--border);
+  border-radius:18px;
+  overflow:hidden;
+  background:var(--panel);
+  transition:.2s ease;
+}
 
-    <div id="gallery" class="grid">
+.tile:hover{
+  transform:translateY(-4px);
+  border-color:#4da3ff;
+}
 
-      <div class="tile">
-        <picture>
-          <source srcset="/ledgerdrop_xrpl/assets/589/drop_001_mobile.webp" type="image/webp">
-          <img src="/ledgerdrop_xrpl/assets/589/drop_001_mobile.png" alt="Drop 001 Mobile">
-        </picture>
-        <div class="cap"><span>Drop 001</span><span>Mobile</span></div>
-      </div>
+.tile img{
+  width:100%;
+  height:auto;
+  display:block
+}
 
-      <div class="tile">
-        <picture>
-          <source srcset="/ledgerdrop_xrpl/assets/589/drop_001_pc.webp" type="image/webp">
-          <img src="/ledgerdrop_xrpl/assets/589/drop_001_pc.png" alt="Drop 001 PC">
-        </picture>
-        <div class="cap"><span>Drop 001</span><span>PC</span></div>
-      </div>
+.cap{
+  padding:16px 20px;
+  display:flex;
+  justify-content:space-between;
+  font-size:14px;
+  color:var(--muted);
+  border-top:1px solid rgba(255,255,255,.08)
+}
 
-      <div class="tile">
-        <picture>
-          <source srcset="/ledgerdrop_xrpl/assets/589/drop_002_mobile.webp" type="image/webp">
-          <img src="/ledgerdrop_xrpl/assets/589/drop_002_mobile.png" alt="Drop 002 Mobile">
-        </picture>
-        <div class="cap"><span>Drop 002</span><span>Mobile</span></div>
-      </div>
-
-      <div class="tile">
-        <picture>
-          <source srcset="/ledgerdrop_xrpl/assets/589/drop_002_pc.webp" type="image/webp">
-          <img src="/ledgerdrop_xrpl/assets/589/drop_002_pc.png" alt="Drop 002 PC">
-        </picture>
-        <div class="cap"><span>Drop 002</span><span>PC</span></div>
-      </div>
-
-      <div class="tile">
-        <picture>
-          <source srcset="/ledgerdrop_xrpl/assets/589/drop_003_mobile.webp" type="image/webp">
-          <img src="/ledgerdrop_xrpl/assets/589/drop_003_mobile.png" alt="Drop 003 Mobile">
-        </picture>
-        <div class="cap"><span>Drop 003</span><span>Mobile</span></div>
-      </div>
-
-      <div class="tile">
-        <picture>
-          <source srcset="/ledgerdrop_xrpl/assets/589/drop_003_pc.webp" type="image/webp">
-          <img src="/ledgerdrop_xrpl/assets/589/drop_003_pc.png" alt="Drop 003 PC">
-        </picture>
-        <div class="cap"><span>Drop 003</span><span>PC</span></div>
-      </div>
-
-      <div class="tile">
-        <picture>
-          <source srcset="/ledgerdrop_xrpl/assets/589/drop_004_mobile.webp" type="image/webp">
-          <img src="/ledgerdrop_xrpl/assets/589/drop_004_mobile.png" alt="Drop 004 Mobile">
-        </picture>
-        <div class="cap"><span>Drop 004</span><span>Mobile</span></div>
-      </div>
-
-      <div class="tile">
-        <picture>
-          <source srcset="/ledgerdrop_xrpl/assets/589/drop_004_pc.webp" type="image/webp">
-          <img src="/ledgerdrop_xrpl/assets/589/drop_004_pc.png" alt="Drop 004 PC">
-        </picture>
-        <div class="cap"><span>Drop 004</span><span>PC</span></div>
-      </div>
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Ledger Drop XRPL — 589 Gallery</title>
-  <link rel="canonical" href="https://houseofcauliman.com/ledgerdrop_xrpl/">
-  <meta name="description" content="Ledger Drop XRPL — 589 Wallpaper Gallery. XRPL Wallpapers. Cinematic Visual Drops. $XRP Culture.">
-  <style>
-    :root{
-      --bg:#050509;
-      --panel:#0b0e18;
-      --border:rgba(77,163,255,.45);
-      --muted:#a9b2c2;
-      --r:18px;
-      --max:1200px;
-    }
-    *{box-sizing:border-box}
-    html,body{
-      margin:0;
-      background:var(--bg);
-      color:#f5f7ff;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif
-    }
-    .wrap{max-width:var(--max);margin:0 auto;padding:28px 16px 70px}
-    .back{
-      display:inline-flex;
-      gap:10px;
-      align-items:center;
-      text-decoration:none;
-      border:1px solid rgba(255,255,255,.12);
-      padding:10px 14px;
-      border-radius:14px;
-      background:rgba(255,255,255,.03);
-      color:#fff
-    }
-    h1{margin:20px 0 6px;font-size:34px}
-    .sub{color:var(--muted);margin-bottom:30px}
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
-      gap:22px
-    }
-    .tile{
-      background:var(--panel);
-      border:1px solid var(--border);
-      border-radius:var(--r);
-      overflow:hidden
-    }
-    .tile picture,
-    .tile img{
-      display:block;
-      width:100%;
-      height:auto
-    }
-    .cap{
-      padding:14px;
-      display:flex;
-      justify-content:space-between;
-      font-size:14px;
-      color:var(--muted)
-    }
-  </style>
+@media(max-width:900px){
+  .grid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
 </head>
 <body>
-  <div class="wrap">
 
-    <a class="back" href="/">← Back to House</a>
+<div class="wrap">
 
-    <h1>Ledger Drop XRPL</h1>
-    <div class="sub">589 XRPL Wallpapers 📱🖥️ Cinematic Visual Drops 🎨 $XRP Culture ⚡</div>
+<a class="back" href="/">← Back to House</a>
 
-    <div class="grid">
+<h1>Ledger Drop XRPL</h1>
+<div class="sub">589 XRPL Wallpapers 📱🖥️ Cinematic Visual Drops 🎨 $XRP Culture ⚡</div>
 
-      <!-- DROP 001 -->
-      <div class="tile">
-        <picture>
-          <source srcset="/ledgerdrop_xrpl/assets/589/drop_001_mobile.webp" type="image/webp">
-          <img src="/ledgerdrop_xrpl/assets/589/drop_001_mobile.png" alt="Drop 001 Mobile">
-        </picture>
-        <div class="cap"><span>Drop 001</span><span>Mobile</span></div>
-      </div>
+<div class="grid">
 
-      <div class="tile">
-        <picture>
-          <source srcset="/ledgerdrop_xrpl/assets/589/drop_001_pc.webp" type="image/webp">
-          <img src="/ledgerdrop_xrpl/assets/589/drop_001_pc.png" alt="Drop 001 PC">
-        </picture>
-        <div class="cap"><span>Drop 001</span><span>PC</span></div>
-      </div>
+<!-- DROP 001 -->
+<div class="tile">
+<img src="/ledgerdrop_xrpl/assets/drop_001_mobile.png" alt="Drop 001 Mobile">
+<div class="cap"><span>Drop 001</span><span>Mobile</span></div>
+</div>
 
-      <!-- DROP 002 -->
-      <div class="tile">
-        <picture>
-          <source srcset="/ledgerdrop_xrpl/assets/589/drop_002_mobile.webp" type="image/webp">
-          <img src="/ledgerdrop_xrpl/assets/589/drop_002_mobile.png" alt="Drop 002 Mobile">
-        </picture>
-        <div class="cap"><span>Drop 002</span><span>Mobile</span></div>
-      </div>
+<div class="tile">
+<img src="/ledgerdrop_xrpl/assets/drop_001_pc.png" alt="Drop 001 PC">
+<div class="cap"><span>Drop 001</span><span>Desktop</span></div>
+</div>
 
-      <div class="tile">
-        <picture>
-          <source srcset="/ledgerdrop_xrpl/assets/589/drop_002_pc.webp" type="image/webp">
-          <img src="/ledgerdrop_xrpl/assets/589/drop_002_pc.png" alt="Drop 002 PC">
-        </picture>
-        <div class="cap"><span>Drop 002</span><span>PC</span></div>
-      </div>
+<!-- DROP 002 -->
+<div class="tile">
+<img src="/ledgerdrop_xrpl/assets/drop_002_mobile.png" alt="Drop 002 Mobile">
+<div class="cap"><span>Drop 002</span><span>Mobile</span></div>
+</div>
 
-      <!-- DROP 003 -->
-      <div class="tile">
-        <picture>
-          <source srcset="/ledgerdrop_xrpl/assets/589/drop_003_mobile.webp" type="image/webp">
-          <img src="/ledgerdrop_xrpl/assets/589/drop_003_mobile.png" alt="Drop 003 Mobile">
-        </picture>
-        <div class="cap"><span>Drop 003</span><span>Mobile</span></div>
-      </div>
+<div class="tile">
+<img src="/ledgerdrop_xrpl/assets/drop_002_pc.png" alt="Drop 002 PC">
+<div class="cap"><span>Drop 002</span><span>Desktop</span></div>
+</div>
 
-      <div class="tile">
-        <picture>
-          <source srcset="/ledgerdrop_xrpl/assets/589/drop_003_pc.webp" type="image/webp">
-          <img src="/ledgerdrop_xrpl/assets/589/drop_003_pc.png" alt="Drop 003 PC">
-        </picture>
-        <div class="cap"><span>Drop 003</span><span>PC</span></div>
-      </div>
+<!-- DROP 003 -->
+<div class="tile">
+<img src="/ledgerdrop_xrpl/assets/drop_003_mobile.png" alt="Drop 003 Mobile">
+<div class="cap"><span>Drop 003</span><span>Mobile</span></div>
+</div>
 
-      <!-- DROP 004 -->
-      <div class="tile">
-        <picture>
-          <source srcset="/ledgerdrop_xrpl/assets/589/drop_004_mobile.webp" type="image/webp">
-          <img src="/ledgerdrop_xrpl/assets/589/drop_004_mobile.png" alt="Drop 004 Mobile">
-        </picture>
-        <div class="cap"><span>Drop 004</span><span>Mobile</span></div>
-      </div>
+<div class="tile">
+<img src="/ledgerdrop_xrpl/assets/drop_003_pc.png" alt="Drop 003 PC">
+<div class="cap"><span>Drop 003</span><span>Desktop</span></div>
+</div>
 
-      <div class="tile">
-        <picture>
-          <source srcset="/ledgerdrop_xrpl/assets/589/drop_004_pc.webp" type="image/webp">
-          <img src="/ledgerdrop_xrpl/assets/589/drop_004_pc.png" alt="Drop 004 PC">
-        </picture>
-        <div class="cap"><span>Drop 004</span><span>PC</span></div>
-      </div>
+<!-- DROP 004 -->
+<div class="tile">
+<img src="/ledgerdrop_xrpl/assets/drop_004_mobile.png" alt="Drop 004 Mobile">
+<div class="cap"><span>Drop 004</span><span>Mobile</span></div>
+</div>
 
-      <!-- DROP 005 -->
-      <div class="tile">
-        <picture>
-          <source srcset="/ledgerdrop_xrpl/assets/589/drop_005_mobile.webp" type="image/webp">
-          <img src="/ledgerdrop_xrpl/assets/589/drop_005_mobile.png" alt="Drop 005 Mobile">
-        </picture>
-        <div class="cap"><span>Drop 005</span><span>Mobile</span></div>
-      </div>
+<div class="tile">
+<img src="/ledgerdrop_xrpl/assets/drop_004_pc.png" alt="Drop 004 PC">
+<div class="cap"><span>Drop 004</span><span>Desktop</span></div>
+</div>
 
-      <div class="tile">
-        <picture>
-          <source srcset="/ledgerdrop_xrpl/assets/589/drop_005_pc.webp" type="image/webp">
-          <img src="/ledgerdrop_xrpl/assets/589/drop_005_pc.png" alt="Drop 005 PC">
-        </picture>
-        <div class="cap"><span>Drop 005</span><span>PC</span></div>
-      </div>
+<!-- DROP 005 -->
+<div class="tile">
+<img src="/ledgerdrop_xrpl/assets/drop_005_mobile.png" alt="Drop 005 Mobile">
+<div class="cap"><span>Drop 005</span><span>Mobile</span></div>
+</div>
 
-      <!-- DROP 006 -->
-      <div class="tile">
-        <picture>
-          <source srcset="/ledgerdrop_xrpl/assets/589/drop_006_mobile.webp" type="image/webp">
-          <img src="/ledgerdrop_xrpl/assets/589/drop_006_mobile.png" alt="Drop 006 Mobile">
-        </picture>
-        <div class="cap"><span>Drop 006</span><span>Mobile</span></div>
-      </div>
+<div class="tile">
+<img src="/ledgerdrop_xrpl/assets/drop_005_pc.png" alt="Drop 005 PC">
+<div class="cap"><span>Drop 005</span><span>Desktop</span></div>
+</div>
 
-      <div class="tile">
-        <picture>
-          <source srcset="/ledgerdrop_xrpl/assets/589/drop_006_pc.webp" type="image/webp">
-          <img src="/ledgerdrop_xrpl/assets/589/drop_006_pc.png" alt="Drop 006 PC">
-        </picture>
-        <div class="cap"><span>Drop 006</span><span>PC</span></div>
-      </div>
+<!-- DROP 006 -->
+<div class="tile">
+<img src="/ledgerdrop_xrpl/assets/drop_006_mobile.png" alt="Drop 006 Mobile">
+<div class="cap"><span>Drop 006</span><span>Mobile</span></div>
+</div>
 
-    </div>
-  </div>
+<div class="tile">
+<img src="/ledgerdrop_xrpl/assets/drop_006_pc.png" alt="Drop 006 PC">
+<div class="cap"><span>Drop 006</span><span>Desktop</span></div>
+</div>
+
+</div>
+</div>
+
 </body>
 </html>
