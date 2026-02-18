@@ -369,6 +369,11 @@
 body.debug #dbg{display:block;}
 
 #vBody{display:none;}
+
+/* BLACK SEA FIX v1 */
+#vp{background:var(--bg);}
+#world{background:var(--bg);}
+
 </style>
   <script src="/monolith/coords.js"></script>
 </head>
@@ -966,8 +971,8 @@ const isCreator  = hasCreator && (
       const visW = w / state.zoom;
       const visH = h / state.zoom;
 
-      const cols = Math.ceil(visW / STEP) + state.POOL_PAD * 2;
-      const rows = Math.ceil(visH / STEP) + state.POOL_PAD * 2;
+      const cols = Math.ceil(visW / STEP) + state.POOL_PAD * 2 + 6;
+      const rows = Math.ceil(visH / STEP) + state.POOL_PAD * 2 + 14;
 
       if(cols === state.cols && rows === state.rows && state.pool.length){
         return;
