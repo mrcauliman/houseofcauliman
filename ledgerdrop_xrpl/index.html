@@ -11,9 +11,10 @@
 :root{
   --bg:#050509;
   --panel:#0b0e18;
-  --border:rgba(77,163,255,.35);
+  --border:rgba(77,163,255,.28);
+  --hover:#4da3ff;
   --muted:#9aa3b2;
-  --max:1400px;
+  --max:1500px;
 }
 
 *{box-sizing:border-box}
@@ -28,7 +29,7 @@ html,body{
 .wrap{
   max-width:var(--max);
   margin:0 auto;
-  padding:40px 20px 80px
+  padding:40px 24px 100px
 }
 
 .back{
@@ -49,47 +50,55 @@ h1{
 
 .sub{
   color:var(--muted);
-  margin-bottom:40px;
+  margin-bottom:50px;
   font-size:15px
 }
 
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(420px,1fr));
-  gap:30px
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:24px
 }
 
 .tile{
-  border:1px solid var(--border);
-  border-radius:18px;
-  overflow:hidden;
   background:var(--panel);
-  transition:.2s ease;
+  border:1px solid var(--border);
+  border-radius:16px;
+  overflow:hidden;
+  transition:.18s ease;
 }
 
 .tile:hover{
-  transform:translateY(-4px);
-  border-color:#4da3ff;
+  transform:translateY(-3px);
+  border-color:var(--hover);
 }
 
-.tile img{
+.thumb{
   width:100%;
-  height:auto;
-  display:block
+  aspect-ratio:16/9;
+  overflow:hidden;
+  background:#000;
+}
+
+.thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
 }
 
 .cap{
-  padding:16px 20px;
+  padding:12px 16px;
+  font-size:13px;
+  color:var(--muted);
   display:flex;
   justify-content:space-between;
-  font-size:14px;
-  color:var(--muted);
-  border-top:1px solid rgba(255,255,255,.08)
+  border-top:1px solid rgba(255,255,255,.06)
 }
 
-@media(max-width:900px){
+@media(max-width:600px){
   .grid{
-    grid-template-columns:1fr;
+    grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
   }
 }
 </style>
@@ -107,68 +116,92 @@ h1{
 
 <!-- DROP 001 -->
 <div class="tile">
-<img src="/ledgerdrop_xrpl/assets/drop_001_mobile.png" alt="Drop 001 Mobile">
-<div class="cap"><span>Drop 001</span><span>Mobile</span></div>
+  <div class="thumb">
+    <img src="/ledgerdrop_xrpl/assets/drop_001_mobile.png" alt="Drop 001 Mobile">
+  </div>
+  <div class="cap"><span>Drop 001</span><span>Mobile</span></div>
 </div>
 
 <div class="tile">
-<img src="/ledgerdrop_xrpl/assets/drop_001_pc.png" alt="Drop 001 PC">
-<div class="cap"><span>Drop 001</span><span>Desktop</span></div>
+  <div class="thumb">
+    <img src="/ledgerdrop_xrpl/assets/drop_001_pc.png" alt="Drop 001 Desktop">
+  </div>
+  <div class="cap"><span>Drop 001</span><span>Desktop</span></div>
 </div>
 
 <!-- DROP 002 -->
 <div class="tile">
-<img src="/ledgerdrop_xrpl/assets/drop_002_mobile.png" alt="Drop 002 Mobile">
-<div class="cap"><span>Drop 002</span><span>Mobile</span></div>
+  <div class="thumb">
+    <img src="/ledgerdrop_xrpl/assets/drop_002_mobile.png" alt="Drop 002 Mobile">
+  </div>
+  <div class="cap"><span>Drop 002</span><span>Mobile</span></div>
 </div>
 
 <div class="tile">
-<img src="/ledgerdrop_xrpl/assets/drop_002_pc.png" alt="Drop 002 PC">
-<div class="cap"><span>Drop 002</span><span>Desktop</span></div>
+  <div class="thumb">
+    <img src="/ledgerdrop_xrpl/assets/drop_002_pc.png" alt="Drop 002 Desktop">
+  </div>
+  <div class="cap"><span>Drop 002</span><span>Desktop</span></div>
 </div>
 
 <!-- DROP 003 -->
 <div class="tile">
-<img src="/ledgerdrop_xrpl/assets/drop_003_mobile.png" alt="Drop 003 Mobile">
-<div class="cap"><span>Drop 003</span><span>Mobile</span></div>
+  <div class="thumb">
+    <img src="/ledgerdrop_xrpl/assets/drop_003_mobile.png" alt="Drop 003 Mobile">
+  </div>
+  <div class="cap"><span>Drop 003</span><span>Mobile</span></div>
 </div>
 
 <div class="tile">
-<img src="/ledgerdrop_xrpl/assets/drop_003_pc.png" alt="Drop 003 PC">
-<div class="cap"><span>Drop 003</span><span>Desktop</span></div>
+  <div class="thumb">
+    <img src="/ledgerdrop_xrpl/assets/drop_003_pc.png" alt="Drop 003 Desktop">
+  </div>
+  <div class="cap"><span>Drop 003</span><span>Desktop</span></div>
 </div>
 
 <!-- DROP 004 -->
 <div class="tile">
-<img src="/ledgerdrop_xrpl/assets/drop_004_mobile.png" alt="Drop 004 Mobile">
-<div class="cap"><span>Drop 004</span><span>Mobile</span></div>
+  <div class="thumb">
+    <img src="/ledgerdrop_xrpl/assets/drop_004_mobile.png" alt="Drop 004 Mobile">
+  </div>
+  <div class="cap"><span>Drop 004</span><span>Mobile</span></div>
 </div>
 
 <div class="tile">
-<img src="/ledgerdrop_xrpl/assets/drop_004_pc.png" alt="Drop 004 PC">
-<div class="cap"><span>Drop 004</span><span>Desktop</span></div>
+  <div class="thumb">
+    <img src="/ledgerdrop_xrpl/assets/drop_004_pc.png" alt="Drop 004 Desktop">
+  </div>
+  <div class="cap"><span>Drop 004</span><span>Desktop</span></div>
 </div>
 
 <!-- DROP 005 -->
 <div class="tile">
-<img src="/ledgerdrop_xrpl/assets/drop_005_mobile.png" alt="Drop 005 Mobile">
-<div class="cap"><span>Drop 005</span><span>Mobile</span></div>
+  <div class="thumb">
+    <img src="/ledgerdrop_xrpl/assets/drop_005_mobile.png" alt="Drop 005 Mobile">
+  </div>
+  <div class="cap"><span>Drop 005</span><span>Mobile</span></div>
 </div>
 
 <div class="tile">
-<img src="/ledgerdrop_xrpl/assets/drop_005_pc.png" alt="Drop 005 PC">
-<div class="cap"><span>Drop 005</span><span>Desktop</span></div>
+  <div class="thumb">
+    <img src="/ledgerdrop_xrpl/assets/drop_005_pc.png" alt="Drop 005 Desktop">
+  </div>
+  <div class="cap"><span>Drop 005</span><span>Desktop</span></div>
 </div>
 
 <!-- DROP 006 -->
 <div class="tile">
-<img src="/ledgerdrop_xrpl/assets/drop_006_mobile.png" alt="Drop 006 Mobile">
-<div class="cap"><span>Drop 006</span><span>Mobile</span></div>
+  <div class="thumb">
+    <img src="/ledgerdrop_xrpl/assets/drop_006_mobile.png" alt="Drop 006 Mobile">
+  </div>
+  <div class="cap"><span>Drop 006</span><span>Mobile</span></div>
 </div>
 
 <div class="tile">
-<img src="/ledgerdrop_xrpl/assets/drop_006_pc.png" alt="Drop 006 PC">
-<div class="cap"><span>Drop 006</span><span>Desktop</span></div>
+  <div class="thumb">
+    <img src="/ledgerdrop_xrpl/assets/drop_006_pc.png" alt="Drop 006 Desktop">
+  </div>
+  <div class="cap"><span>Drop 006</span><span>Desktop</span></div>
 </div>
 
 </div>
