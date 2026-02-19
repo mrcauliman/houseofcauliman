@@ -15,3 +15,9 @@ index.html.bak.*
 *RUNBOOK*
 *runbook*
 private_ops/
+
+# PRIVATE RUNBOOKS
+hoc_runbook.html
+hoc_runbook_PRIVATE.html
+*.runbook.html
+*.runbook.md
