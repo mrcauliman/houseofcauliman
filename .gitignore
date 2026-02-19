@@ -21,3 +21,6 @@ hoc_runbook.html
 hoc_runbook_PRIVATE.html
 *.runbook.html
 *.runbook.md
+
+# PRIVATE RUNBOOKS
+snapshots/private/
