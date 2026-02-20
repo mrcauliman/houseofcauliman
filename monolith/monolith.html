@@ -374,12 +374,25 @@ body.debug #dbg{display:block;}
 #vp{background:var(--bg);}
 #world{background:var(--bg);}
 
+
+
+/* TOP TAP SHIELD v1: stop wall taps under header */
+.topShield{
+  position:fixed;left:0;right:0;top:0;
+  height:140px;
+  z-index:19;
+  background:rgba(7,9,11,.35);
+  backdrop-filter: blur(6px);
+}
+.top{z-index:20;}
+
 </style>
   <script src="/monolith/coords.js"></script>
 </head>
 
 <body>
-  <header class="top">
+  <div class="topShield" aria-hidden="true"></div>
+<header class="top">
     <div class="brand">
       <img src="/monolith/assets/monolith_logo.webp" alt="MONOLITH" />
       <div>
