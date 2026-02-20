@@ -1113,6 +1113,7 @@ function updateWorldTransform(){
     }
 
     function onDown(e){
+        if(e.target && e.target.closest && e.target.closest(".top, .panel")) return;
       state.ptrs.set(e.pointerId, { x:e.clientX, y:e.clientY });
 
       if(state.pid === null){
@@ -1441,6 +1442,7 @@ function onMove(e){
     }
 
 function onWheel(e){
+  if(e.target && e.target.closest && e.target.closest(".top, .panel")) return;
   e.preventDefault();
   state.vx = 0;
   state.vy = 0;
