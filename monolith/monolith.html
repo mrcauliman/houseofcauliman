@@ -483,6 +483,20 @@ let CREATOR_LOGO = "";
 
     const vp    = document.getElementById("vp");
     const world = document.getElementById("world");
+
+    const topEl = document.querySelector(".top");
+    const panelEl = document.getElementById("panel");
+    function blockWallEvents(el){
+      if(!el) return;
+      const types = ["pointerdown","pointermove","pointerup","mousedown","mousemove","mouseup","touchstart","touchmove","touchend","click","wheel"];
+      for(const t of types){
+        el.addEventListener(t, (e)=>{
+          e.stopPropagation();
+        }, {capture:true, passive:false});
+      }
+    }
+    blockWallEvents(topEl);
+    blockWallEvents(panelEl);
     const panel = document.getElementById("panel");
     const toast = document.getElementById("toast");
 
