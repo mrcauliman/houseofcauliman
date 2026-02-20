@@ -374,6 +374,19 @@ body.debug #dbg{display:block;}
 #vp{background:var(--bg);}
 #world{background:var(--bg);}
 
+
+
+/* TOP HIT SURFACE v1: stop tap-through into wall */
+.top{z-index:9999;position:fixed;}
+.top::before{
+  content:"";
+  position:absolute;
+  inset:-8px;
+  pointer-events:auto;
+  background:transparent;
+}
+.top > *{position:relative;z-index:1;}
+
 </style>
   <script src="/monolith/coords.js"></script>
 </head>
