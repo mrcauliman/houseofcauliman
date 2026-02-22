@@ -1113,6 +1113,12 @@ function updateWorldTransform(){
     }
 
     function onDown(e){
+  const cx = (typeof e.clientX==="number" && e.clientX) ? e.clientX : (e.touches&&e.touches[0]?e.touches[0].clientX:(e.changedTouches&&e.changedTouches[0]?e.changedTouches[0].clientX:0));
+  const cy = (typeof e.clientY==="number" && e.clientY) ? e.clientY : (e.touches&&e.touches[0]?e.touches[0].clientY:(e.changedTouches&&e.changedTouches[0]?e.changedTouches[0].clientY:0));
+  const topEl = document.querySelector(".top");
+  if(topEl){ const r = topEl.getBoundingClientRect(); if(cy && cy >= r.top && cy <= r.bottom) return; }
+  const hit = (cx && cy) ? document.elementFromPoint(cx, cy) : null;
+  if(hit && hit.closest && hit.closest(".top, .panel")) return;
       state.ptrs.set(e.pointerId, { x:e.clientX, y:e.clientY });
 
       if(state.pid === null){
