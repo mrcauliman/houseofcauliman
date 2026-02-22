@@ -1113,6 +1113,8 @@ function updateWorldTransform(){
     }
 
     function onDown(e){
+  const t = e.target;
+  if(!(t === vp || t === world || (t && t.closest && t.closest("#world")))) return;
       state.ptrs.set(e.pointerId, { x:e.clientX, y:e.clientY });
 
       if(state.pid === null){
