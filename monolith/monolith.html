@@ -1113,6 +1113,10 @@ function updateWorldTransform(){
     }
 
     function onDown(e){
+        try{
+          const t = e && e.target;
+          state.downFromWall = !!(t === vp || t === world || (t && t.closest && t.closest("#world")));
+        }catch(_){ state.downFromWall = false; }
       state.ptrs.set(e.pointerId, { x:e.clientX, y:e.clientY });
 
       if(state.pid === null){
@@ -1329,16 +1333,22 @@ function onMove(e){
                 if((state.movedDist||0) >= 8) drag = true;
               }
             }catch(_){ }
-          if(!drag && e && e.clientX != null && e.clientY != null){
-            var cell = pickCellFromPoint(e.clientX, e.clientY);
-            var tile = tileFromCell(cell);
-            if(tile){
-              try{ openPanel(tile, 0, 0); }catch(_){ }
+          if(!drag && state && state.downFromWall && e && e.clientX != null && e.clientY != null){
+              var _hit = document.elementFromPoint(e.clientX, e.clientY);
+              if(_hit && _hit.closest && _hit.closest(".top, .panel")){ /* UI tap */ }
+              else{
+                var cell = pickCellFromPoint(e.clientX, e.clientY);
+                var tile = tileFromCell(cell);
+                if(tile){
+                  try{ openPanel(tile, 0, 0); }catch(_){ }
+                }
+              }
             }
-          }
         }catch(_){ }
 
-    // DESKTOP OPEN FIX: click is unreliable after pointer capture. Open tile on mouse pointerup when not dragging
+          try{ if(state) state.downFromWall = false; }catch(_){ }
+
+      // DESKTOP OPEN FIX: click is unreliable after pointer capture. Open tile on mouse pointerup when not dragging
 
     const _upIsMouse = !!(e && e.pointerType === "mouse");
 
