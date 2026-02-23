@@ -482,6 +482,62 @@
       .augur-mark{width:100px;height:100px;border-radius:18px}
       .augur-logo{width:92px;height:92px}
     }
+
+/* HOC HUD */
+.hud{
+  display:inline-flex;
+  align-items:center;
+  gap:.5rem;
+  padding:.35rem .6rem;
+  border-radius:999px;
+  font:700 12px/1 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.06);
+  color:#eaf0f7;
+  white-space:nowrap;
+}
+.hud .dot{
+  width:8px;height:8px;border-radius:999px;
+  background:#a9b3bf;
+  box-shadow:0 0 0 3px rgba(169,179,191,.18);
+}
+.hud.active .dot{ background:#2fbf6b; box-shadow:0 0 0 3px rgba(47,191,107,.20); }
+.hud.live .dot{ background:#ffd166; box-shadow:0 0 0 3px rgba(255,209,102,.20); }
+.hud.private .dot{ background:#66b3ff; box-shadow:0 0 0 3px rgba(102,179,255,.20); }
+.hud.paused .dot{ background:#ff5b5b; box-shadow:0 0 0 3px rgba(255,91,91,.20); }
+.hud.archived .dot{ background:#7d8792; box-shadow:0 0 0 3px rgba(125,135,146,.20); }
+
+@media (prefers-reduced-motion: no-preference){
+  .hud.pulse{ animation:hudpulse 1.8s ease-in-out infinite; }
+  @keyframes hudpulse{ 0%,100%{opacity:1} 50%{opacity:.62} }
+}
+
+/* Legend */
+.hud-legend{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.5rem;
+  margin:.8rem 0 1rem;
+  padding:.75rem;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.04);
+}
+.hud-legend .item{
+  display:flex;
+  align-items:center;
+  gap:.45rem;
+  font:600 12px/1.2 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+  color:#cfd6de;
+}
+.hud-legend .key{ width:10px;height:10px;border-radius:999px; }
+.hud-legend .k-active{ background:#2fbf6b; }
+.hud-legend .k-live{ background:#ffd166; }
+.hud-legend .k-private{ background:#66b3ff; }
+.hud-legend .k-paused{ background:#ff5b5b; }
+.hud-legend .k-archived{ background:#7d8792; }
   </style>
 </head>
 
@@ -505,6 +561,14 @@
         Protocols, culture, and collectibles engineered under one roof.
       </p>
     </section>
+
+<div class="hud-legend" aria-label="Project status legend">
+  <div class="item"><span class="key k-active"></span><span>Active Build</span></div>
+  <div class="item"><span class="key k-live"></span><span>Live</span></div>
+  <div class="item"><span class="key k-private"></span><span>Private Build</span></div>
+  <div class="item"><span class="key k-paused"></span><span>Paused</span></div>
+  <div class="item"><span class="key k-archived"></span><span>Archived</span></div>
+</div>
 
     <!-- MONOLITH + AUGUR split -->
     <section class="feature-split">
@@ -596,6 +660,7 @@ MONOLITH is an XRPL-native graffiti wall written permanently to the XRP Ledger.
         </div>
         <div class="project-body">
           <h2 class="project-title">CONTINENTAL WICK</h2>
+          <div class="hud active pulse"><span class="dot"></span><span>Active Build</span></div>
           <p class="project-sub">$WCK • COLLECTIBLE UNIVERSE</p>
           <p class="project-copy">
             A cinematic XRPL protocol where order meets consequence.
@@ -622,6 +687,7 @@ MONOLITH is an XRPL-native graffiti wall written permanently to the XRP Ledger.
         </div>
         <div class="project-body">
           <h2 class="project-title">GET THE $BAG</h2>
+          <div class="hud live"><span class="dot"></span><span>Token Live</span></div>
           <p class="project-sub">$BAG • XRPL’S HEAVIEST MEME</p>
           <p class="project-copy">
             $BAG runs the casino and arcade.
@@ -647,6 +713,7 @@ MONOLITH is an XRPL-native graffiti wall written permanently to the XRP Ledger.
         </div>
         <div class="project-body">
           <h2 class="project-title">RAD GARLINGTON</h2>
+          <div class="hud live"><span class="dot"></span><span>Live</span></div>
           <p class="project-sub">$RAD • LEDGER FIRST</p>
           <p class="project-copy">
             $RAD powers verification across the XRPL.
@@ -688,6 +755,7 @@ MONOLITH is an XRPL-native graffiti wall written permanently to the XRP Ledger.
         </div>
         <div class="project-body">
           <h2 class="project-title" style="color:#d4a44a;">NFTITANS</h2>
+          <div class="hud private pulse"><span class="dot"></span><span>Private Build</span></div>
           <p class="project-sub">XRPL • COLLECTIBLE SERIES</p>
           <p class="project-copy">
             32 Roman Titans.
@@ -725,6 +793,7 @@ MONOLITH is an XRPL-native graffiti wall written permanently to the XRP Ledger.
         </div>
         <div class="project-body">
           <h2 class="project-title" style="color:#f8fafc;">THE DON</h2>
+          <div class="hud active pulse"><span class="dot"></span><span>Active Build</span></div>
           <p class="project-sub">XRPL • ICON SERIES</p>
           <p class="project-copy">
             Icon moments. Pixar-style collectibles.
@@ -756,6 +825,7 @@ MONOLITH is an XRPL-native graffiti wall written permanently to the XRP Ledger.
         </div>
         <div class="project-body">
           <h2 class="project-title" style="color:#e7d7b1;">SEVEN SEALS XRPL</h2>
+          <div class="hud private pulse"><span class="dot"></span><span>Private Build</span></div>
           <p class="project-sub" style="text-transform:none; letter-spacing:0;">Seven Seals ✟ Prophetic NFTs on XRPL ✦ Free ✦ Eternal • On-chain 🕊️ Each seal marks a moment of prophecy, faith, and truth.</p>
           <p class="project-copy">
             Pixar-style cinematic realism.
@@ -860,6 +930,7 @@ XRPL public-ledger indexing • Account history parsing • Trustlines & ripplin
   </div>
   <div class="project-body" style="text-align:center;">
     <h2 class="project-title">Ledger Drop XRPL</h2>
+    <div class="hud live pulse"><span class="dot"></span><span>Utility Live</span></div>
     <p class="project-sub">PROJECT SPOTLIGHT</p>
     <p class="project-copy" style="max-width:900px; margin:8px auto 0;">
       589 XRPL Wallpapers 📱🖥️ Cinematic Visual Drops 🎨 $XRP Culture ⚡
