@@ -374,11 +374,28 @@ body.debug #dbg{display:block;}
 #vp{background:var(--bg);}
 #world{background:var(--bg);}
 
+
+
+/* UI HEADER BAR v1: solid hit area behind header, blocks wall taps */
+.uiHeaderBar{
+  position:fixed;
+  left:0; right:0; top:0;
+  height:92px;
+  background:rgba(7,9,11,.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index:19;
+}
+ (max-width:720px){
+  .uiHeaderBar{height:120px;}
+}
+
 </style>
   <script src="/monolith/coords.js"></script>
 </head>
 
 <body>
+  <div class="uiHeaderBar" aria-hidden="true"></div>
   <header class="top">
     <div class="brand">
       <img src="/monolith/assets/monolith_logo.webp" alt="MONOLITH" />
