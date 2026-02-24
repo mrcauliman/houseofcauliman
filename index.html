@@ -518,26 +518,44 @@
 .hud-legend{
   display:flex;
   flex-wrap:wrap;
-  gap:.5rem;
+  gap:.7rem .9rem;
   margin:.8rem 0 1rem;
-  padding:.75rem;
+  padding:.85rem .9rem;
   border-radius:16px;
   border:1px solid rgba(255,255,255,.10);
   background:rgba(255,255,255,.04);
 }
+
 .hud-legend .item{
   display:flex;
-  align-items:center;
-  gap:.45rem;
-  font:600 12px/1.2 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+  align-items:flex-start;
+  gap:.5rem;
+  font:700 12px/1.15 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
   color:#cfd6de;
+  max-width:260px;
 }
-.hud-legend .key{ width:10px;height:10px;border-radius:999px; }
-.hud-legend .k-active{ background:#2fbf6b; }
-.hud-legend .k-live{ background:#ffd166; }
-.hud-legend .k-private{ background:#66b3ff; }
-.hud-legend .k-paused{ background:#ff5b5b; }
-.hud-legend .k-archived{ background:#7d8792; }
+
+.hud-legend .key{
+  width:10px;
+  height:10px;
+  border-radius:999px;
+  margin-top:2px;
+  flex:0 0 auto;
+}
+
+.hud-legend .item small{
+  display:block;
+  font:500 11px/1.25 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+  color:var(--text-soft);
+  margin-top:2px;
+}
+
+/* New status keys */
+.hud-legend .k-live{ background:#2fbf6b; }
+.hud-legend .k-token-live{ background:#4bd08a; }
+.hud-legend .k-utility-live{ background:#4fb7ff; }
+.hud-legend .k-active-build{ background:#ffe175; }
+.hud-legend .k-private-build{ background:#aeb7af; }
   
 /* TRIPLE FEATURE ROW: MONOLITH + AUGUR + LEDGER DROP */
 .feature-split.triple{
@@ -576,11 +594,11 @@
     </section>
 
 <div class="hud-legend" aria-label="Project status legend">
-  <div class="item"><span class="key k-active"></span><span>Active Build</span></div>
-  <div class="item"><span class="key k-live"></span><span>Live</span></div>
-  <div class="item"><span class="key k-private"></span><span>Private Build</span></div>
-  <div class="item"><span class="key k-paused"></span><span>Paused</span></div>
-  <div class="item"><span class="key k-archived"></span><span>Archived</span></div>
+  <div class="item"><span class="key k-live"></span><span>LIVE</span><small>Token and utility fully operational.</small></div>
+  <div class="item"><span class="key k-token-live"></span><span>TOKEN LIVE</span><small>Token tradable. Utility expanding or in staged rollout.</small></div>
+  <div class="item"><span class="key k-utility-live"></span><span>UTILITY LIVE</span><small>Product operational. Token secondary, optional, or pending.</small></div>
+  <div class="item"><span class="key k-active-build"></span><span>ACTIVE BUILD</span><small>Core framework in active development. Public-facing progress visible.</small></div>
+  <div class="item"><span class="key k-private-build"></span><span>PRIVATE BUILD</span><small>Infrastructure phase. Not public-facing.</small></div>
 </div>
 
 <!-- MONOLITH + AUGUR + LEDGER DROP XRPL split -->
