@@ -503,11 +503,11 @@
   background:#a9b3bf;
   box-shadow:0 0 0 3px rgba(169,179,191,.18);
 }
-.hud.active .dot{ background:#2fbf6b; box-shadow:0 0 0 3px rgba(47,191,107,.20); }
-.hud.live .dot{ background:#ffd166; box-shadow:0 0 0 3px rgba(255,209,102,.20); }
-.hud.private .dot{ background:#66b3ff; box-shadow:0 0 0 3px rgba(102,179,255,.20); }
-.hud.paused .dot{ background:#ff5b5b; box-shadow:0 0 0 3px rgba(255,91,91,.20); }
-.hud.archived .dot{ background:#7d8792; box-shadow:0 0 0 3px rgba(125,135,146,.20); }
+.hud.live .dot{ background:#2fbf6b; box-shadow:0 0 0 3px rgba(47,191,107,.20); }
+.hud.token-live .dot{ background:#4bd08a; box-shadow:0 0 0 3px rgba(75,208,138,.20); }
+.hud.utility-live .dot{ background:#4fb7ff; box-shadow:0 0 0 3px rgba(79,183,255,.20); }
+.hud.active-build .dot{ background:#ffe175; box-shadow:0 0 0 3px rgba(255,225,117,.22); }
+.hud.private-build .dot{ background:#aeb7af; box-shadow:0 0 0 3px rgba(169,179,191,.18); }
 
 @media (prefers-reduced-motion: no-preference){
   .hud.pulse{ animation:hudpulse 1.8s ease-in-out infinite; }
@@ -612,7 +612,7 @@
       <div>
         <p class="dl-kicker">Coming Soon</p>
         <h2 class="dl-title" style="margin:0;">MONOLITH</h2>
-        <div class="hud active pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
+        <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
         <p class="augur-sub">The Wall of Record</p>
       </div>
       </div>
@@ -650,7 +650,7 @@
         <div>
           <p class="dl-kicker">Coming Soon</p>
           <h2 class="dl-title" style="margin:0;">AUGUR</h2>
-          <div class="hud active pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
+          <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
           <p class="augur-sub">Chain Oracle</p>
         </div>
       </div>
@@ -685,7 +685,7 @@
           <div class="dl-badge">
             <p class="dl-kicker">Live</p>
             <h2 class="dl-title" style="margin:0;">LEDGER DROP XRPL</h2>
-            <div class="hud live pulse"><span class="dot"></span><span>UTILITY LIVE</span></div>
+            <div class="hud utility-live pulse"><span class="dot"></span><span>UTILITY LIVE</span></div>
             <p class="augur-sub">Daily Wallpapers</p>
           </div>
         </div>
@@ -719,7 +719,7 @@
         </div>
         <div class="project-body">
           <h2 class="project-title">CONTINENTAL WICK</h2>
-          <div class="hud active pulse"><span class="dot"></span><span>Active Build</span></div>
+          <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
           <p class="project-sub">$WCK • COLLECTIBLE UNIVERSE</p>
           <p class="project-copy">
             A cinematic XRPL protocol where order meets consequence.
@@ -746,7 +746,7 @@
         </div>
         <div class="project-body">
           <h2 class="project-title">GET THE $BAG</h2>
-          <div class="hud live"><span class="dot"></span><span>Token Live</span></div>
+          <div class="hud token-live"><span class="dot"></span><span>TOKEN LIVE</span></div>
           <p class="project-sub">$BAG • XRPL’S HEAVIEST MEME</p>
           <p class="project-copy">
             $BAG runs the casino and arcade.
@@ -772,7 +772,7 @@
         </div>
         <div class="project-body">
           <h2 class="project-title">RAD GARLINGTON</h2>
-          <div class="hud live"><span class="dot"></span><span>Live</span></div>
+          <div class="LIVE"><span class="dot"></span><span>LIVE</span></div>
           <p class="project-sub">$RAD • LEDGER FIRST</p>
           <p class="project-copy">
             $RAD powers verification across the XRPL.
@@ -814,7 +814,7 @@
         </div>
         <div class="project-body">
           <h2 class="project-title" style="color:#d4a44a;">NFTITANS</h2>
-          <div class="hud private pulse"><span class="dot"></span><span>Private Build</span></div>
+          <div class="hud private-build pulse"><span class="dot"></span><span>PRIVATE BUILD</span></div>
           <p class="project-sub">XRPL • COLLECTIBLE SERIES</p>
           <p class="project-copy">
             32 Roman Titans.
@@ -852,7 +852,7 @@
         </div>
         <div class="project-body">
           <h2 class="project-title" style="color:#f8fafc;">THE DON</h2>
-          <div class="hud active pulse"><span class="dot"></span><span>Active Build</span></div>
+          <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
           <p class="project-sub">XRPL • ICON SERIES</p>
           <p class="project-copy">
             Icon moments. Pixar-style collectibles.
@@ -884,7 +884,7 @@
         </div>
         <div class="project-body">
           <h2 class="project-title" style="color:#e7d7b1;">SEVEN SEALS XRPL</h2>
-          <div class="hud private pulse"><span class="dot"></span><span>Private Build</span></div>
+          <div class="hud private-build pulse"><span class="dot"></span><span>PRIVATE BUILD</span></div>
           <p class="project-sub" style="text-transform:none; letter-spacing:0;">Seven Seals ✟ Prophetic NFTs on XRPL ✦ Free ✦ Eternal • On-chain 🕊️ Each seal marks a moment of prophecy, faith, and truth.</p>
           <p class="project-copy">
             Pixar-style cinematic realism.
@@ -989,7 +989,7 @@ XRPL public-ledger indexing • Account history parsing • Trustlines & ripplin
   </div>
   <div class="project-body" style="text-align:center;">
     <h2 class="project-title">Ledger Drop XRPL</h2>
-    <div class="hud live pulse"><span class="dot"></span><span>Utility Live</span></div>
+    <div class="hud utility-live pulse"><span class="dot"></span><span>UTILITY LIVE</span></div>
     <p class="project-sub">PROJECT SPOTLIGHT</p>
     <p class="project-copy" style="max-width:900px; margin:8px auto 0;">
       589 XRPL Wallpapers 📱🖥️ Cinematic Visual Drops 🎨 $XRP Culture ⚡
