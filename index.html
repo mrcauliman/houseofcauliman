@@ -132,7 +132,8 @@
       margin:0;line-height:1.5
     }
 
-    .hoc-grid{display:grid;grid-template-columns:1fr;gap:18px}
+    .hoc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch}
+ (max-width:980px){.hoc-grid{grid-template-columns:1fr}}
     @media(min-width:768px){.hoc-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 
     .project-card{
@@ -569,6 +570,9 @@
 @media (max-width: 980px){
   .feature-split.triple{grid-template-columns:1fr;}
 }
+
+
+.hoc-intro,.hoc-grid,.feature-split{grid-column:1 / -1}
 
 </style>
 </head>
