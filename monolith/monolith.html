@@ -1103,7 +1103,7 @@ function centerOriginOnce(){
   state.camX = (STEP * 0.5);
   state.camY = (STEP * 0.5);
 
-  state.zoom = clamp(0.28, state.ZMIN, state.ZMAX);
+  state.zoom = clamp(0.55, state.ZMIN, state.ZMAX);
   updateWorldTransform();
   if(typeof schedulePoolUpdate === "function") schedulePoolUpdate();
 }
@@ -1117,8 +1117,8 @@ function applyView(mode){
 
   // Presets, tune here only
   const PRESET = {
-    brand: { zoom: 0.28, camX: (STEP * 0.5), camY: (STEP * 0.5) },
-    sat:   { zoom: 0.0933333333, camX: (STEP * 0.5), camY: (STEP * 0.5) }
+    brand: { zoom: 0.55, camX: (STEP * 0.5), camY: (STEP * 0.5) },
+    sat:   { zoom: 0.275, camX: (STEP * 0.5), camY: (STEP * 0.5) }
   };
 
   const key = (mode === "sat") ? "sat" : "brand";
@@ -1154,7 +1154,7 @@ function centerOriginNow(){
   if(state.down || state.pinch || state.dragging) return;
   state._viewMode = "free";
   try{ document.body.classList.remove("view-brand"); }catch(_){}
-  state.zoom = clamp(0.28, state.ZMIN, state.ZMAX);
+  state.zoom = clamp(0.55, state.ZMIN, state.ZMAX);
   state.camX = (STEP * 0.5);
   state.camY = (STEP * 0.5);
   updateWorldTransform();
