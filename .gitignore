@@ -24,3 +24,7 @@ hoc_runbook_PRIVATE.html
 
 # PRIVATE RUNBOOKS
 snapshots/private/
+
+# MONOLITH local backups
+monolith/monolith.html.bak_*
+monolith/*.bak_*
