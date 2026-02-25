@@ -376,10 +376,13 @@ body.debug #dbg{display:block;}
 
 
 
-/* Brand View: images only */
+/* Brand View and Satellite View: images only */
 body.view-brand .cell .id,
-body.view-brand .cell .tag{ display:none !important; }
-body.view-brand .cell .spray{ filter:none; }
+body.view-brand .cell .tag,
+body.view-imageonly .cell .id,
+body.view-imageonly .cell .tag{ display:none !important; }
+body.view-brand .cell .spray,
+body.view-imageonly .cell .spray{ filter:none; }
 
 </style>
   <script src="/monolith/coords.js"></script>
@@ -406,6 +409,7 @@ body.view-brand .cell .spray{ filter:none; }
       <div class="pill"><span class="dot"></span><span id="kTaken">0</span> taken</div>
       <a class="btn primary" href="/monolith/claim/" aria-label="claim a tile"><span>Claim a Tile</span></a>
       <button class="btn" id="btnCenter" type="button" aria-label="return to center"><span>Return to Center</span></button>
+      <button class="btn" id="btnNav" type="button" aria-label="navigation view"><span>Navigation View</span></button>
       <button class="btn" id="btnBrand" type="button" aria-label="brand view"><span>Brand View</span></button>
       <button class="btn" id="btnSat" type="button" aria-label="satellite view"><span>Satellite View</span></button>
     </div>
@@ -514,6 +518,7 @@ let CREATOR_LOGO = "";
       vBody: document.getElementById("vBody"),
 
       btnCenter: document.getElementById("btnCenter"),
+      btnNav: document.getElementById("btnNav"),
       btnBrand: document.getElementById("btnBrand"),
       btnSat: document.getElementById("btnSat")
     };
@@ -1130,6 +1135,7 @@ function applyView(mode){
 
   state._viewMode = key;
   try{ document.body.classList.toggle("view-brand", key === "brand"); }catch(_){}
+  try{ document.body.classList.toggle("view-imageonly", key === "brand" || key === "sat"); }catch(_){}
 
   state.zoom = clamp(PRESET[key].zoom, state.ZMIN, state.ZMAX);
   state.camX = PRESET[key].camX;
@@ -1146,6 +1152,7 @@ function restoreView(){
   state.camY = state._viewLast.camY;
   state.zoom = clamp(state._viewLast.zoom, state.ZMIN, state.ZMAX);
   state._viewMode = "free";
+  try{ document.body.classList.remove("view-brand"); document.body.classList.remove("view-imageonly"); }catch(_){ }
   updateWorldTransform();
   renderPool();
 }
@@ -1153,7 +1160,7 @@ function restoreView(){
 function centerOriginNow(){
   if(state.down || state.pinch || state.dragging) return;
   state._viewMode = "free";
-  try{ document.body.classList.remove("view-brand"); }catch(_){}
+  try{ document.body.classList.remove("view-brand"); document.body.classList.remove("view-imageonly"); }catch(_){}
   state.zoom = clamp(0.55, state.ZMIN, state.ZMAX);
   state.camX = (STEP * 0.5);
   state.camY = (STEP * 0.5);
@@ -1750,6 +1757,13 @@ el.close.addEventListener("click", function(e){
         }
         centerOriginNow();
         toastShow("centered", "good");
+      }, { passive:true });
+    }
+
+    if(el.btnNav){
+      el.btnNav.addEventListener("click", () => {
+        centerOriginNow();
+        toastShow("navigation", "good");
       }, { passive:true });
     }
 
