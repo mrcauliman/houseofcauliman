@@ -1083,6 +1083,19 @@ const isCreator  = hasCreator && (
       }
     }
 
+function centerOriginOnce(){
+  if(state._originCentered) return;
+  state._originCentered = true;
+
+  // camX/camY are WORLD pixel coords that land at screen center.
+  // Center ORIGIN tile at grid 0,0 by targeting tile center.
+  state.camX = (STEP * 0.5);
+  state.camY = (STEP * 0.5);
+
+  updateWorldTransform();
+  if(typeof schedulePoolUpdate === "function") schedulePoolUpdate();
+}
+
 function updateWorldTransform(){
   const w = vp.clientWidth;
   const h = vp.clientHeight;
@@ -1669,8 +1682,7 @@ el.close.addEventListener("click", function(e){
         toastShow("centered", "good");
       }, { passive:true });
     }
-
-    updateWorldTransform();
+    centerOriginOnce();
     renderPool();
     requestAnimationFrame(tick);
 
@@ -1679,7 +1691,7 @@ el.close.addEventListener("click", function(e){
       state.lastKey = "";
     });
 
-    loadFeed().then(() => { centerOn(0, 0); });
+    loadFeed().then(() => { centerOriginOnce(); });
     setInterval(loadFeed, 15000);
   })();
   </script>
