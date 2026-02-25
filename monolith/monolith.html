@@ -1103,19 +1103,40 @@ function centerOriginOnce(){
 function applyView(mode){
   // Camera presets only. No new coordinate system.
   // camX/camY are world pixel coords that land at screen center.
-  const zBrand = 1.0;
-  const zSat = 0.35;
 
-  if(mode === "sat"){
-    state.zoom = clamp(zSat, state.ZMIN, state.ZMAX);
-  }else{
-    state.zoom = clamp(zBrand, state.ZMIN, state.ZMAX);
+  // Do not switch views mid-gesture
+  if(state.down || state.pinch || state.dragging) return;
+
+  // Presets, tune here only
+  const PRESET = {
+    brand: { zoom: 1.05, camX: (STEP * 0.5), camY: (STEP * 0.5) },
+    sat:   { zoom: 0.28, camX: (STEP * 0.5), camY: (STEP * 0.5) }
+  };
+
+  const key = (mode === "sat") ? "sat" : "brand";
+
+  // Save last user view once per entry into a preset mode
+  if(!state._viewMode || state._viewMode === "free"){
+    state._viewLast = { camX: state.camX, camY: state.camY, zoom: state.zoom };
   }
 
-  // Anchor on ORIGIN tile center (grid 0,0).
-  state.camX = (STEP * 0.5);
-  state.camY = (STEP * 0.5);
+  state._viewMode = key;
 
+  state.zoom = clamp(PRESET[key].zoom, state.ZMIN, state.ZMAX);
+  state.camX = PRESET[key].camX;
+  state.camY = PRESET[key].camY;
+
+  updateWorldTransform();
+  renderPool();
+}
+
+function restoreView(){
+  if(!state._viewLast) return;
+  if(state.down || state.pinch || state.dragging) return;
+  state.camX = state._viewLast.camX;
+  state.camY = state._viewLast.camY;
+  state.zoom = clamp(state._viewLast.zoom, state.ZMIN, state.ZMAX);
+  state._viewMode = "free";
   updateWorldTransform();
   renderPool();
 }
@@ -1702,6 +1723,11 @@ el.close.addEventListener("click", function(e){
 
     if(el.btnCenter){
       el.btnCenter.addEventListener("click", () => {
+        if(state._viewMode && state._viewMode !== "free"){
+          restoreView();
+          toastShow("restored", "good");
+          return;
+        }
         centerOn(0, 0);
         toastShow("centered", "good");
       }, { passive:true });
