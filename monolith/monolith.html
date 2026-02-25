@@ -399,6 +399,8 @@ body.debug #dbg{display:block;}
       <div class="pill"><span class="dot"></span><span id="kTaken">0</span> taken</div>
       <a class="btn primary" href="/monolith/claim/" aria-label="claim a tile"><span>Claim a Tile</span></a>
       <button class="btn" id="btnCenter" type="button" aria-label="return to center"><span>Return to Center</span></button>
+      <button class="btn" id="btnBrand" type="button" aria-label="brand view"><span>Brand View</span></button>
+      <button class="btn" id="btnSat" type="button" aria-label="satellite view"><span>Satellite View</span></button>
     </div>
   </header>
 
@@ -504,7 +506,9 @@ let CREATOR_LOGO = "";
       vNote: document.getElementById("vNote"),
       vBody: document.getElementById("vBody"),
 
-      btnCenter: document.getElementById("btnCenter")
+      btnCenter: document.getElementById("btnCenter"),
+      btnBrand: document.getElementById("btnBrand"),
+      btnSat: document.getElementById("btnSat")
     };
 
     const STEP = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--step").trim(), 10) || 128;
@@ -1096,6 +1100,26 @@ function centerOriginOnce(){
   if(typeof schedulePoolUpdate === "function") schedulePoolUpdate();
 }
 
+function applyView(mode){
+  // Camera presets only. No new coordinate system.
+  // camX/camY are world pixel coords that land at screen center.
+  const zBrand = 1.0;
+  const zSat = 0.35;
+
+  if(mode === "sat"){
+    state.zoom = clamp(zSat, state.ZMIN, state.ZMAX);
+  }else{
+    state.zoom = clamp(zBrand, state.ZMIN, state.ZMAX);
+  }
+
+  // Anchor on ORIGIN tile center (grid 0,0).
+  state.camX = (STEP * 0.5);
+  state.camY = (STEP * 0.5);
+
+  updateWorldTransform();
+  renderPool();
+}
+
 function updateWorldTransform(){
   const w = vp.clientWidth;
   const h = vp.clientHeight;
@@ -1680,6 +1704,20 @@ el.close.addEventListener("click", function(e){
       el.btnCenter.addEventListener("click", () => {
         centerOn(0, 0);
         toastShow("centered", "good");
+      }, { passive:true });
+    }
+
+    if(el.btnBrand){
+      el.btnBrand.addEventListener("click", () => {
+        applyView("brand");
+        toastShow("brand view", "good");
+      }, { passive:true });
+    }
+
+    if(el.btnSat){
+      el.btnSat.addEventListener("click", () => {
+        applyView("sat");
+        toastShow("satellite view", "good");
       }, { passive:true });
     }
     centerOriginOnce();
