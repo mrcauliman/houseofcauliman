@@ -374,6 +374,13 @@ body.debug #dbg{display:block;}
 #vp{background:var(--bg);}
 #world{background:var(--bg);}
 
+
+
+/* Brand View: images only */
+body.view-brand .cell .id,
+body.view-brand .cell .tag{ display:none !important; }
+body.view-brand .cell .spray{ filter:none; }
+
 </style>
   <script src="/monolith/coords.js"></script>
 </head>
@@ -1096,6 +1103,7 @@ function centerOriginOnce(){
   state.camX = (STEP * 0.5);
   state.camY = (STEP * 0.5);
 
+  state.zoom = clamp(0.28, state.ZMIN, state.ZMAX);
   updateWorldTransform();
   if(typeof schedulePoolUpdate === "function") schedulePoolUpdate();
 }
@@ -1109,8 +1117,8 @@ function applyView(mode){
 
   // Presets, tune here only
   const PRESET = {
-    brand: { zoom: 1.05, camX: (STEP * 0.5), camY: (STEP * 0.5) },
-    sat:   { zoom: 0.28, camX: (STEP * 0.5), camY: (STEP * 0.5) }
+    brand: { zoom: 0.28, camX: (STEP * 0.5), camY: (STEP * 0.5) },
+    sat:   { zoom: 0.0933333333, camX: (STEP * 0.5), camY: (STEP * 0.5) }
   };
 
   const key = (mode === "sat") ? "sat" : "brand";
@@ -1121,6 +1129,7 @@ function applyView(mode){
   }
 
   state._viewMode = key;
+  try{ document.body.classList.toggle("view-brand", key === "brand"); }catch(_){}
 
   state.zoom = clamp(PRESET[key].zoom, state.ZMIN, state.ZMAX);
   state.camX = PRESET[key].camX;
@@ -1137,6 +1146,17 @@ function restoreView(){
   state.camY = state._viewLast.camY;
   state.zoom = clamp(state._viewLast.zoom, state.ZMIN, state.ZMAX);
   state._viewMode = "free";
+  updateWorldTransform();
+  renderPool();
+}
+
+function centerOriginNow(){
+  if(state.down || state.pinch || state.dragging) return;
+  state._viewMode = "free";
+  try{ document.body.classList.remove("view-brand"); }catch(_){}
+  state.zoom = clamp(0.28, state.ZMIN, state.ZMAX);
+  state.camX = (STEP * 0.5);
+  state.camY = (STEP * 0.5);
   updateWorldTransform();
   renderPool();
 }
@@ -1728,7 +1748,7 @@ el.close.addEventListener("click", function(e){
           toastShow("restored", "good");
           return;
         }
-        centerOn(0, 0);
+        centerOriginNow();
         toastShow("centered", "good");
       }, { passive:true });
     }
