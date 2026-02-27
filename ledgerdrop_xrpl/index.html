@@ -1,463 +1,757 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ledger Drop XRPL — 589 Gallery</title>
-<link rel="canonical" href="https://houseofcauliman.com/ledgerdrop_xrpl/">
-<meta name="description" content="589 XRPL Wallpapers. Cinematic Visual Drops. $XRP Culture.">
-
-<style>
-:root{
-  --bg:#050509;
-  --panel:#0b0e18;
-  --border:rgba(77,163,255,.22);
-  --hover:#4da3ff;
-  --muted:#9aa3b2;
-  --max:1500px;
-  --r:16px;
-}
-
-*{box-sizing:border-box}
-
-html,body{
-  margin:0;
-  background:var(--bg);
-  color:#f5f7ff;
-  font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif
-}
-
-.wrap{
-  max-width:var(--max);
-  margin:0 auto;
-  padding:40px 24px 100px
-}
-
-.back{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  text-decoration:none;
-  color:#f5f7ff;
-  border:1px solid rgba(255,255,255,.12);
-  background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-  padding:12px 16px;
-  border-radius:16px;
-  box-shadow:0 10px 30px rgba(0,0,0,.35);
-  transition:transform .15s ease, border-color .15s ease, box-shadow .15s ease;
-}
-
-h1{
-  margin:0 0 8px;
-  font-size:40px;
-  letter-spacing:.4px
-}
-
-.sub{
-  color:var(--muted);
-  margin-bottom:36px;
-  font-size:15px
-}
-
-.grid{
-  display:grid;
-  gap:18px;
-  grid-template-columns:repeat(6, minmax(0, 1fr));
-}
-
-@media (max-width:1400px){
-  .grid{grid-template-columns:repeat(5, minmax(0, 1fr));}
-}
-@media (max-width:1120px){
-  .grid{grid-template-columns:repeat(4, minmax(0, 1fr));}
-}
-@media (max-width:860px){
-  .grid{grid-template-columns:repeat(3, minmax(0, 1fr));}
-}
-@media (max-width:620px){
-  .grid{grid-template-columns:repeat(2, minmax(0, 1fr));}
-}
-
-.drop{
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:var(--r);
-  overflow:hidden;
-  transition:.18s ease;
-}
-
-.drop:hover{
-  transform:translateY(-2px);
-  border-color:var(--hover);
-}
-
-.stack{
-  display:grid;
-  grid-template-rows:1fr 1fr;
-}
-
-.frame{
-  position:relative;
-  width:100%;
-  aspect-ratio:16/9;
-  overflow:hidden;
-  background:#000;
-}
-
-.frame img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-
-.tag{
-  position:absolute;
-  left:10px;
-  top:10px;
-  font-size:12px;
-  padding:6px 9px;
-  border-radius:999px;
-  background:rgba(0,0,0,.55);
-  border:1px solid rgba(255,255,255,.18);
-  color:#fff;
-  backdrop-filter:blur(6px);
-}
-
-.meta{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  padding:12px 14px;
-  font-size:13px;
-  color:var(--muted);
-  border-top:1px solid rgba(255,255,255,.06);
-}
-
-.meta strong{
-  color:#fff;
-  font-weight:650;
-}
-
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ledger Drop XRPL Gallery</title>
+  <style>
+    :root{
+      --bg:#0b0d10;
+      --panel:#11161d;
+      --text:#eaf0f7;
+      --muted:#a9b3bf;
+      --line:rgba(255,255,255,.10);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .wrap{
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 22px 14px 34px;
+    }
+    h1{
+      margin:0 0 6px;
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing:.3px;
+      text-align:center;
+    }
+    .sub{
+      margin:0 0 18px;
+      text-align:center;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .card{
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+    }
+    .top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom: 10px;
+    }
+    .pill{
+      display:inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      font-size: 12px;
+      white-space: nowrap;
+      flex: 0 0 auto;
+    }
+    .name{
+      font-weight: 900;
+      letter-spacing: .2px;
+      line-height: 1.2;
+      text-align:right;
+      flex: 1 1 auto;
+    }
+    .links{
+      display:flex;
+      gap:8px;
+    }
+    .a{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width: 86px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      color: var(--muted);
+      font-size: 12px;
+      text-decoration:none;
+      user-select:none;
+    }
+    .a.off{
+      opacity: .55;
+      pointer-events: none;
+    }
+    .footer{
+      margin-top: 14px;
+      text-align:center;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    @media (max-width: 980px){
+      .grid{ grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 620px){
+      .grid{ grid-template-columns: 1fr; }
+      .name{ text-align:left; }
+      .top{ align-items:center; }
+    }
+  </style>
 </head>
 <body>
+  <div class="wrap">
+    <h1>Ledger Drop XRPL Gallery</h1>
+    <p class="sub">589 drops. Names locked. Links stay disabled until files exist.</p>
 
-<div class="wrap">
+    <div id="grid" class="grid"></div>
 
-<a class="back" href="/">← Back to House</a>
-
-<h1>Ledger Drop XRPL</h1>
-<div class="sub">589 XRPL Wallpapers 📱🖥️ Cinematic Visual Drops 🎨 $XRP Culture ⚡</div>
-
-<div class="grid">
-
-<!-- DROP 001 -->
-<article class="drop">
-  <div class="stack">
-    <a class="frame" href="/ledgerdrop_xrpl/assets/drop_001_mobile.png" target="_blank" rel="noopener">
-      <span class="tag">MOBILE</span>
-      <img src="/ledgerdrop_xrpl/assets/drop_001_mobile.png" alt="Drop 001 Mobile" loading="lazy" decoding="async">
-    </a>
-    <a class="frame" href="/ledgerdrop_xrpl/assets/drop_001_pc.png" target="_blank" rel="noopener">
-      <span class="tag">PC</span>
-      <img src="/ledgerdrop_xrpl/assets/drop_001_pc.png" alt="Drop 001 PC" loading="lazy" decoding="async">
-    </a>
-  </div>
-  <div class="meta"><strong>Drop 001</strong><span>Mobile + PC</span></div>
-</article>
-
-<!-- DROP 002 -->
-<article class="drop">
-  <div class="stack">
-    <a class="frame" href="/ledgerdrop_xrpl/assets/drop_002_mobile.png" target="_blank" rel="noopener">
-      <span class="tag">MOBILE</span>
-      <img src="/ledgerdrop_xrpl/assets/drop_002_mobile.png" alt="Drop 002 Mobile" loading="lazy" decoding="async">
-    </a>
-    <a class="frame" href="/ledgerdrop_xrpl/assets/drop_002_pc.png" target="_blank" rel="noopener">
-      <span class="tag">PC</span>
-      <img src="/ledgerdrop_xrpl/assets/drop_002_pc.png" alt="Drop 002 PC" loading="lazy" decoding="async">
-    </a>
-  </div>
-  <div class="meta"><strong>Drop 002</strong><span>Mobile + PC</span></div>
-</article>
-
-<!-- DROP 003 -->
-<article class="drop">
-  <div class="stack">
-    <a class="frame" href="/ledgerdrop_xrpl/assets/drop_003_mobile.png" target="_blank" rel="noopener">
-      <span class="tag">MOBILE</span>
-      <img src="/ledgerdrop_xrpl/assets/drop_003_mobile.png" alt="Drop 003 Mobile" loading="lazy" decoding="async">
-    </a>
-    <a class="frame" href="/ledgerdrop_xrpl/assets/drop_003_pc.png" target="_blank" rel="noopener">
-      <span class="tag">PC</span>
-      <img src="/ledgerdrop_xrpl/assets/drop_003_pc.png" alt="Drop 003 PC" loading="lazy" decoding="async">
-    </a>
-  </div>
-  <div class="meta"><strong>Drop 003</strong><span>Mobile + PC</span></div>
-</article>
-
-<!-- DROP 004 -->
-<article class="drop">
-  <div class="stack">
-    <a class="frame" href="/ledgerdrop_xrpl/assets/drop_004_mobile.png" target="_blank" rel="noopener">
-      <span class="tag">MOBILE</span>
-      <img src="/ledgerdrop_xrpl/assets/drop_004_mobile.png" alt="Drop 004 Mobile" loading="lazy" decoding="async">
-    </a>
-    <a class="frame" href="/ledgerdrop_xrpl/assets/drop_004_pc.png" target="_blank" rel="noopener">
-      <span class="tag">PC</span>
-      <img src="/ledgerdrop_xrpl/assets/drop_004_pc.png" alt="Drop 004 PC" loading="lazy" decoding="async">
-    </a>
-  </div>
-  <div class="meta"><strong>Drop 004</strong><span>Mobile + PC</span></div>
-</article>
-
-<!-- DROP 005 -->
-<article class="drop">
-  <div class="stack">
-    <a class="frame" href="/ledgerdrop_xrpl/assets/drop_005_mobile.png" target="_blank" rel="noopener">
-      <span class="tag">MOBILE</span>
-      <img src="/ledgerdrop_xrpl/assets/drop_005_mobile.png" alt="Drop 005 Mobile" loading="lazy" decoding="async">
-    </a>
-    <a class="frame" href="/ledgerdrop_xrpl/assets/drop_005_pc.png" target="_blank" rel="noopener">
-      <span class="tag">PC</span>
-      <img src="/ledgerdrop_xrpl/assets/drop_005_pc.png" alt="Drop 005 PC" loading="lazy" decoding="async">
-    </a>
-  </div>
-  <div class="meta"><strong>Drop 005</strong><span>Mobile + PC</span></div>
-</article>
-
-<!-- DROP 006 -->
-<article class="drop">
-  <div class="stack">
-    <a class="frame" href="/ledgerdrop_xrpl/assets/drop_006_mobile.png" target="_blank" rel="noopener">
-      <span class="tag">MOBILE</span>
-      <img src="/ledgerdrop_xrpl/assets/drop_006_mobile.png" alt="Drop 006 Mobile" loading="lazy" decoding="async">
-    </a>
-    <a class="frame" href="/ledgerdrop_xrpl/assets/drop_006_pc.png" target="_blank" rel="noopener">
-      <span class="tag">PC</span>
-      <img src="/ledgerdrop_xrpl/assets/drop_006_pc.png" alt="Drop 006 PC" loading="lazy" decoding="async">
-    </a>
-  </div>
-  <div class="meta"><strong>Drop 006</strong><span>Mobile + PC</span></div>
-</article>
-
-<!-- DROP 007 -->
-<article class="drop">
-  <div class="stack">
-    <a class="frame" href="/ledgerdrop_xrpl/assets/drop_007_mobile.png" target="_blank" rel="noopener">
-      <span class="tag">MOBILE</span>
-      <img src="/ledgerdrop_xrpl/assets/drop_007_mobile.png" alt="Drop 007 Mobile" loading="lazy" decoding="async">
-    </a>
-    <a class="frame" href="/ledgerdrop_xrpl/assets/drop_007_pc.png" target="_blank" rel="noopener">
-      <span class="tag">PC</span>
-      <img src="/ledgerdrop_xrpl/assets/drop_007_pc.png" alt="Drop 007 PC" loading="lazy" decoding="async">
-    </a>
-  </div>
-  <div class="meta"><strong>Drop 007</strong><span>Mobile + PC</span></div>
-</article>
-
-<!-- DROP 008 -->
-<article class="drop">
-  <div class="stack">
-    <a class="frame" href="/ledgerdrop_xrpl/assets/drop_008_mobile.png" target="_blank" rel="noopener">
-      <span class="tag">MOBILE</span>
-      <img src="/ledgerdrop_xrpl/assets/drop_008_mobile.png" alt="Drop 008 Mobile" loading="lazy" decoding="async">
-    </a>
-    <a class="frame" href="/ledgerdrop_xrpl/assets/drop_008_pc.png" target="_blank" rel="noopener">
-      <span class="tag">PC</span>
-      <img src="/ledgerdrop_xrpl/assets/drop_008_pc.png" alt="Drop 008 PC" loading="lazy" decoding="async">
-    </a>
-  </div>
-  <div class="meta"><strong>Drop 008</strong><span>Mobile + PC</span></div>
-</article>
-
-<!-- DROP 009 -->
-<article class="drop">
-  <div class="stack">
-    <a class="frame" href="/ledgerdrop_xrpl/assets/drop_009_mobile.png" target="_blank" rel="noopener">
-      <span class="tag">MOBILE</span>
-      <img src="/ledgerdrop_xrpl/assets/drop_009_mobile.png" alt="Drop 009 Mobile" loading="lazy" decoding="async">
-    </a>
-    <a class="frame" href="/ledgerdrop_xrpl/assets/drop_009_pc.png" target="_blank" rel="noopener">
-      <span class="tag">PC</span>
-      <img src="/ledgerdrop_xrpl/assets/drop_009_pc.png" alt="Drop 009 PC" loading="lazy" decoding="async">
-    </a>
-  </div>
-  <div class="meta"><strong>Drop 009</strong><span>Mobile + PC</span></div>
-</article>
-
-<!-- DROP 010 -->
-<article class="drop">
-  <div class="stack">
-    <a class="frame" href="/ledgerdrop_xrpl/assets/drop_010_mobile.png" target="_blank" rel="noopener">
-      <span class="tag">MOBILE</span>
-      <img src="/ledgerdrop_xrpl/assets/drop_010_mobile.png" alt="Drop 010 Mobile" loading="lazy" decoding="async">
-    </a>
-    <a class="frame" href="/ledgerdrop_xrpl/assets/drop_010_pc.png" target="_blank" rel="noopener">
-      <span class="tag">PC</span>
-      <img src="/ledgerdrop_xrpl/assets/drop_010_pc.png" alt="Drop 010 PC" loading="lazy" decoding="async">
-    </a>
-  </div>
-  <div class="meta"><strong>Drop 010</strong><span>Mobile + PC</span></div>
-</article>
-
-<!-- DROP 011 -->
-<article class="drop">
-  <div class="stack">
-    <a class="frame" href="/ledgerdrop_xrpl/assets/drop_011_mobile.png" target="_blank" rel="noopener">
-      <span class="tag">MOBILE</span>
-      <img src="/ledgerdrop_xrpl/assets/drop_011_mobile.png" alt="Drop 011 Mobile" loading="lazy" decoding="async">
-    </a>
-    <a class="frame" href="/ledgerdrop_xrpl/assets/drop_011_pc.png" target="_blank" rel="noopener">
-      <span class="tag">PC</span>
-      <img src="/ledgerdrop_xrpl/assets/drop_011_pc.png" alt="Drop 011 PC" loading="lazy" decoding="async">
-    </a>
-  </div>
-  <div class="meta"><strong>Drop 011</strong><span>Mobile + PC</span></div>
-</article>
-
-<!-- DROP 012 -->
-<article class="drop">
-  <div class="stack">
-    <a class="frame" href="/ledgerdrop_xrpl/assets/drop_012_mobile.png" target="_blank" rel="noopener">
-      <span class="tag">MOBILE</span>
-      <img src="/ledgerdrop_xrpl/assets/drop_012_mobile.png" alt="Drop 012 Mobile" loading="lazy" decoding="async">
-    </a>
-    <a class="frame" href="/ledgerdrop_xrpl/assets/drop_012_pc.png" target="_blank" rel="noopener">
-      <span class="tag">PC</span>
-      <img src="/ledgerdrop_xrpl/assets/drop_012_pc.png" alt="Drop 012 PC" loading="lazy" decoding="async">
-    </a>
-  </div>
-  <div class="meta"><strong>Drop 012</strong><span>Mobile + PC</span></div>
-</article>
-
-<!-- DROP 013 -->
-<article class="drop">
-  <div class="stack">
-    <a class="frame" href="/ledgerdrop_xrpl/assets/drop_013_mobile.png" target="_blank" rel="noopener">
-      <span class="tag">MOBILE</span>
-      <img src="/ledgerdrop_xrpl/assets/drop_013_mobile.png" alt="Drop 013 Mobile" loading="lazy" decoding="async">
-    </a>
-    <a class="frame" href="/ledgerdrop_xrpl/assets/drop_013_pc.png" target="_blank" rel="noopener">
-      <span class="tag">PC</span>
-      <img src="/ledgerdrop_xrpl/assets/drop_013_pc.png" alt="Drop 013 PC" loading="lazy" decoding="async">
-    </a>
-  </div>
-  <div class="meta"><strong>Drop 013</strong><span>Mobile + PC</span></div>
-</article>
-
-  <!-- DROP 014 -->
-  <article class="drop">
-    <div class="stack">
-      <a class="frame" href="/ledgerdrop_xrpl/assets/drop_014_mobile.png" target="_blank" rel="noopener">
-        <span class="tag">MOBILE</span>
-        <picture>
-          <source srcset="/ledgerdrop_xrpl/assets/drop_014_mobile.webp" type="image/webp">
-          <img src="/ledgerdrop_xrpl/assets/drop_014_mobile.png" alt="Drop 014 Mobile" loading="lazy" decoding="async">
-        </picture>
-      </a>
-      <a class="frame" href="/ledgerdrop_xrpl/assets/drop_014_pc.png" target="_blank" rel="noopener">
-        <span class="tag">PC</span>
-        <picture>
-          <source srcset="/ledgerdrop_xrpl/assets/drop_014_pc.webp" type="image/webp">
-          <img src="/ledgerdrop_xrpl/assets/drop_014_pc.png" alt="Drop 014 PC" loading="lazy" decoding="async">
-        </picture>
-      </a>
+    <div class="footer">
+      Paths expected: /ledgerdrop_xrpl/assets/drop_###_mobile.png and /ledgerdrop_xrpl/assets/drop_###_pc.png
     </div>
-    <div class="meta"><strong>Drop 014</strong><span>Mobile + PC</span></div>
-  </article>
-
-  <!-- DROP 015 -->
-  <article class="drop">
-    <div class="stack">
-      <a class="frame" href="/ledgerdrop_xrpl/assets/drop_015_mobile.png" target="_blank" rel="noopener">
-        <span class="tag">MOBILE</span>
-        <picture>
-          <source srcset="/ledgerdrop_xrpl/assets/drop_015_mobile.webp" type="image/webp">
-          <img src="/ledgerdrop_xrpl/assets/drop_015_mobile.png" alt="Drop 015 Mobile" loading="lazy" decoding="async">
-        </picture>
-      </a>
-      <a class="frame" href="/ledgerdrop_xrpl/assets/drop_015_pc.png" target="_blank" rel="noopener">
-        <span class="tag">PC</span>
-        <picture>
-          <source srcset="/ledgerdrop_xrpl/assets/drop_015_pc.webp" type="image/webp">
-          <img src="/ledgerdrop_xrpl/assets/drop_015_pc.png" alt="Drop 015 PC" loading="lazy" decoding="async">
-        </picture>
-      </a>
-    </div>
-    <div class="meta"><strong>Drop 015</strong><span>Mobile + PC</span></div>
-  </article>
-
-  <!-- DROP 016 -->
-  <article class="drop">
-    <div class="stack">
-      <a class="frame" href="/ledgerdrop_xrpl/assets/drop_016_mobile.png" target="_blank" rel="noopener">
-        <span class="tag">MOBILE</span>
-        <picture>
-          <source srcset="/ledgerdrop_xrpl/assets/drop_016_mobile.webp" type="image/webp">
-          <img src="/ledgerdrop_xrpl/assets/drop_016_mobile.png" alt="Drop 016 Mobile" loading="lazy" decoding="async">
-        </picture>
-      </a>
-      <a class="frame" href="/ledgerdrop_xrpl/assets/drop_016_pc.png" target="_blank" rel="noopener">
-        <span class="tag">PC</span>
-        <picture>
-          <source srcset="/ledgerdrop_xrpl/assets/drop_016_pc.webp" type="image/webp">
-          <img src="/ledgerdrop_xrpl/assets/drop_016_pc.png" alt="Drop 016 PC" loading="lazy" decoding="async">
-        </picture>
-      </a>
-    </div>
-    <div class="meta"><strong>Drop 016</strong><span>Mobile + PC</span></div>
-  </article>
-
-<!-- DROP 017 -->
-<article class="drop">
-  <div class="stack">
-    <a class="frame" href="/ledgerdrop_xrpl/assets/drop_017_mobile.png" target="_blank" rel="noopener">
-      <span class="tag">MOBILE</span>
-      <img src="/ledgerdrop_xrpl/assets/drop_017_mobile.png" alt="Drop 017 Mobile" loading="lazy" decoding="async">
-    </a>
-    <a class="frame" href="/ledgerdrop_xrpl/assets/drop_017_pc.png" target="_blank" rel="noopener">
-      <span class="tag">PC</span>
-      <img src="/ledgerdrop_xrpl/assets/drop_017_pc.png" alt="Drop 017 PC" loading="lazy" decoding="async">
-    </a>
   </div>
-  <div class="meta"><strong>Drop 017</strong><span>Mobile + PC</span></div>
-</article>
 
-<!-- DROP 018 -->
-<article class="drop">
-  <div class="stack">
-    <a class="frame" href="/ledgerdrop_xrpl/assets/drop_018_mobile.png" target="_blank" rel="noopener">
-      <span class="tag">MOBILE</span>
-      <img src="/ledgerdrop_xrpl/assets/drop_018_mobile.png" alt="Drop 018 Mobile" loading="lazy" decoding="async">
-    </a>
-    <a class="frame" href="/ledgerdrop_xrpl/assets/drop_018_pc.png" target="_blank" rel="noopener">
-      <span class="tag">PC</span>
-      <img src="/ledgerdrop_xrpl/assets/drop_018_pc.png" alt="Drop 018 PC" loading="lazy" decoding="async">
-    </a>
-  </div>
-  <div class="meta"><strong>Drop 018</strong><span>Mobile + PC</span></div>
-</article>
+  <script>
+    const pad3 = (n) => String(n).padStart(3, "0");
 
-<!-- DROP 019 -->
-<article class="drop">
-  <div class="stack">
-    <a class="frame" href="/ledgerdrop_xrpl/assets/drop_019_mobile.png" target="_blank" rel="noopener">
-      <span class="tag">MOBILE</span>
-      <img src="/ledgerdrop_xrpl/assets/drop_019_mobile.png" alt="Drop 019 Mobile" loading="lazy" decoding="async">
-    </a>
-    <a class="frame" href="/ledgerdrop_xrpl/assets/drop_019_pc.png" target="_blank" rel="noopener">
-      <span class="tag">PC</span>
-      <img src="/ledgerdrop_xrpl/assets/drop_019_pc.png" alt="Drop 019 PC" loading="lazy" decoding="async">
-    </a>
-  </div>
-  <div class="meta"><strong>Drop 019</strong><span>Mobile + PC</span></div>
-</article>
+    const drops = [
+      {n:1,  name:"Brushed titanium XRP emblem"},
+      {n:2,  name:"Liquid mercury ripple form"},
+      {n:3,  name:"Polished chrome floating logo"},
+      {n:4,  name:"Damascus steel engraved XRP"},
+      {n:5,  name:"Black anodized aluminum plate"},
+      {n:6,  name:"Industrial riveted steel panel"},
+      {n:7,  name:"Frosted stainless slab"},
+      {n:8,  name:"Raw forged iron"},
+      {n:9,  name:"Gunmetal blueprint etch"},
+      {n:10, name:"Platinum mirror surface"},
+      {n:11, name:"Molten silver flow"},
+      {n:12, name:"Hammered copper texture"},
+      {n:13, name:"Oxidized bronze patina"},
+      {n:14, name:"Gold leaf macro surface"},
+      {n:15, name:"Satin nickel minimal slab"},
+      {n:16, name:"Steel beam cathedral structure"},
+      {n:17, name:"Brushed gold micrograin"},
+      {n:18, name:"Liquid metal splash freeze"},
+      {n:19, name:"Chrome infinity corridor"},
+      {n:20, name:"Precision CNC milled XRP"},
+      {n:21, name:"Titanium heat-blued finish"},
+      {n:22, name:"Aerospace alloy frame"},
+      {n:23, name:"Mirror black obsidian metal"},
+      {n:24, name:"Metallic liquid wave"},
+      {n:25, name:"Steel grid vault interior"},
+      {n:26, name:"Industrial crane macro scene"},
+      {n:27, name:"Chrome sphere cluster"},
+      {n:28, name:"Steel fracture crack pattern"},
+      {n:29, name:"Burnished brass architecture"},
+      {n:30, name:"Silver vapor surface"},
+      {n:31, name:"Alloy lattice macro"},
+      {n:32, name:"Liquid aluminum pool"},
+      {n:33, name:"Steel monolith rising"},
+      {n:34, name:"Gold coin macro realism"},
+      {n:35, name:"Platinum embossed surface"},
+      {n:36, name:"Iron cathedral arches"},
+      {n:37, name:"Black chrome reflection hall"},
+      {n:38, name:"Gold ripple under spotlight"},
+      {n:39, name:"Industrial fog metal chamber"},
+      {n:40, name:"Forged blade finish"},
+      {n:41, name:"Brushed graphite slab"},
+      {n:42, name:"Liquid chrome splash crown"},
+      {n:43, name:"Steel cube grid field"},
+      {n:44, name:"Polished gold vault door"},
+      {n:45, name:"Titanium ripple mesh"},
+      {n:46, name:"Gunmetal hex architecture"},
+      {n:47, name:"Metal particle burst"},
+      {n:48, name:"Micro-scratched steel macro"},
+      {n:49, name:"Liquid gold drip freeze"},
+      {n:50, name:"Steel corridor vanishing point"},
+      {n:51, name:"Chrome edge light silhouette"},
+      {n:52, name:"Industrial turbine chamber"},
+      {n:53, name:"Gold molten core"},
+      {n:54, name:"Platinum frost surface"},
+      {n:55, name:"Bronze cathedral vault"},
+      {n:56, name:"Mirror chrome symmetry chamber"},
+      {n:57, name:"Steel tension cables macro"},
+      {n:58, name:"Liquid silver sphere"},
+      {n:59, name:"Black metal X sculpture"},
+      {n:60, name:"Chrome vortex"},
+      {n:61, name:"Brushed alloy terrain"},
+      {n:62, name:"Precision machined coin macro"},
+      {n:63, name:"Molten metal fracture"},
+      {n:64, name:"Steel rain environment"},
+      {n:65, name:"Titanium structural ribs"},
+      {n:66, name:"Gold dust explosion"},
+      {n:67, name:"Liquid chrome ribbon"},
+      {n:68, name:"Industrial rail yard macro"},
+      {n:69, name:"Steel armor plating"},
+      {n:70, name:"Alloy honeycomb surface"},
+      {n:71, name:"Metallic lightning strike"},
+      {n:72, name:"Chrome reflection infinity"},
+      {n:73, name:"Polished bullion stack macro"},
+      {n:74, name:"Forged metallic wave"},
+      {n:75, name:"Dark metal minimal slab"},
 
-</div>
+      {n:76, name:"Basalt low-poly terrain"},
+      {n:77, name:"Marble black with gold vein"},
+      {n:78, name:"White Carrara marble macro"},
+      {n:79, name:"Granite monolith tower"},
+      {n:80, name:"Sandstone canyon XRP"},
+      {n:81, name:"Volcanic lava crust"},
+      {n:82, name:"Obsidian glass slab"},
+      {n:83, name:"Slate geometric plate"},
+      {n:84, name:"Desert dune ripple"},
+      {n:85, name:"Rocky cliff edge sunrise"},
+      {n:86, name:"Cracked earth macro"},
+      {n:87, name:"Stone temple interior"},
+      {n:88, name:"Limestone cathedral hall"},
+      {n:89, name:"Ice glacier embedded logo"},
+      {n:90, name:"Snow drift macro"},
+      {n:91, name:"Frozen lake reflection"},
+      {n:92, name:"Crystal cave interior"},
+      {n:93, name:"Amethyst geode chamber"},
+      {n:94, name:"Quartz macro structure"},
+      {n:95, name:"Salt flat mirror horizon"},
+      {n:96, name:"Cliffside storm scene"},
+      {n:97, name:"Canyon depth aerial"},
+      {n:98, name:"Polished stone sculpture"},
+      {n:99, name:"Moss-covered stone slab"},
+      {n:100,name:"Lava river night glow"},
+      {n:101,name:"Marble spiral staircase"},
+      {n:102,name:"Ice fractal pattern"},
+      {n:103,name:"Glacier cavern blue"},
+      {n:104,name:"Stone vault underground"},
+      {n:105,name:"Granite engraved insignia"},
+      {n:106,name:"Rocky island silhouette"},
+      {n:107,name:"Crystalline mountain peak"},
+      {n:108,name:"Dark cave spotlight"},
+      {n:109,name:"Fossilized stone imprint"},
+      {n:110,name:"Stone monolith desert"},
+      {n:111,name:"Marble ripple water reflection"},
+      {n:112,name:"Basalt hex columns"},
+      {n:113,name:"Volcanic smoke environment"},
+      {n:114,name:"Desert eclipse scene"},
+      {n:115,name:"Stone ring arena"},
+      {n:116,name:"Frost-covered rock macro"},
+      {n:117,name:"Crystal shard explosion"},
+      {n:118,name:"Onyx polished slab"},
+      {n:119,name:"Marble minimal luxury"},
+      {n:120,name:"Ice shard macro"},
+      {n:121,name:"Rockfall freeze frame"},
+      {n:122,name:"Stone archway horizon"},
+      {n:123,name:"Underground cavern glow"},
+      {n:124,name:"Crystal cathedral interior"},
+      {n:125,name:"Rock wall macro texture"},
+      {n:126,name:"Basalt canyon depth"},
+      {n:127,name:"Lava crack macro"},
+      {n:128,name:"Stone infinity corridor"},
+      {n:129,name:"Marble pillar symmetry"},
+      {n:130,name:"Quartz light refract"},
+      {n:131,name:"Ice tunnel glow"},
+      {n:132,name:"Desert wind streak"},
+      {n:133,name:"Rocky coastline storm"},
+      {n:134,name:"Cliff edge mist"},
+      {n:135,name:"Polished granite minimal"},
+      {n:136,name:"Crystal prism macro"},
+      {n:137,name:"Stone labyrinth overhead"},
+      {n:138,name:"Marble floor reflection"},
+      {n:139,name:"Dark obsidian mirror"},
+      {n:140,name:"Ice crown formation"},
 
-</div>
+      {n:141,name:"Transparent glass XRP suspended in void"},
+      {n:142,name:"Frosted glass slab with edge glow"},
+      {n:143,name:"Neon wireframe XRP in darkness"},
+      {n:144,name:"Cyberpunk alley reflection in glass"},
+      {n:145,name:"Holographic projection chamber"},
+      {n:146,name:"Glass cube grid horizon"},
+      {n:147,name:"Acrylic logo with volumetric light"},
+      {n:148,name:"Prism refracted XRP spectrum"},
+      {n:149,name:"Laser grid crossing emblem"},
+      {n:150,name:"Hologram above metal table"},
+      {n:151,name:"Neon tunnel vanishing point"},
+      {n:152,name:"Transparent coin macro refraction"},
+      {n:153,name:"Glass shatter freeze frame"},
+      {n:154,name:"LED strip rim-lit silhouette"},
+      {n:155,name:"Glass corridor mirror symmetry"},
+      {n:156,name:"Volumetric fog with neon beam"},
+      {n:157,name:"Circuit board under glass surface"},
+      {n:158,name:"Fiber optic thread macro"},
+      {n:159,name:"Data center aisle glow"},
+      {n:160,name:"Glass ripple water hybrid"},
+      {n:161,name:"Digital rain reflection on glass"},
+      {n:162,name:"Holographic blueprint rotation"},
+      {n:163,name:"Light cube matrix chamber"},
+      {n:164,name:"Transparent sphere distortion"},
+      {n:165,name:"Laser cut acrylic slab"},
+      {n:166,name:"Neon grid horizon sunset"},
+      {n:167,name:"Prism explosion burst"},
+      {n:168,name:"Microchip macro under lens"},
+      {n:169,name:"Transparent stacked layers"},
+      {n:170,name:"Glass cathedral of light"},
+      {n:171,name:"UV glow edges"},
+      {n:172,name:"Electric blue plasma arc"},
+      {n:173,name:"Neon pulse wave"},
+      {n:174,name:"Translucent liquid glass swirl"},
+      {n:175,name:"Mirror shard environment"},
+      {n:176,name:"LED infinity room"},
+      {n:177,name:"Quantum light strands"},
+      {n:178,name:"Volumetric beam pillar"},
+      {n:179,name:"Glass coin with depth lensing"},
+      {n:180,name:"Futuristic XRPL server rack"},
+      {n:181,name:"Neon X architecture structure"},
+      {n:182,name:"Transparent layered glyph"},
+      {n:183,name:"Cyber vault interior"},
+      {n:184,name:"Laser outline silhouette only"},
+      {n:185,name:"Aurora neon fog"},
+      {n:186,name:"Glass ripple distortion macro"},
+      {n:187,name:"Blue data streams vertical"},
+      {n:188,name:"Energy core chamber"},
+      {n:189,name:"Transparent monolith tower"},
+      {n:190,name:"Glitch prism fracture"},
+      {n:191,name:"Refraction through crystal sphere"},
+      {n:192,name:"Neon wave horizon"},
+      {n:193,name:"Edge-lit minimal glass plate"},
+      {n:194,name:"Transparent floating panels"},
+      {n:195,name:"Futuristic city reflection in glass"},
+      {n:196,name:"LED wall macro grid"},
+      {n:197,name:"Volumetric hologram spin"},
+      {n:198,name:"Liquid neon pool"},
+      {n:199,name:"Data node light cluster"},
+      {n:200,name:"Electric plasma burst"},
+      {n:201,name:"Cyber chamber with light rails"},
+      {n:202,name:"Fiber optic waterfall"},
+      {n:203,name:"Digital XRPL core vault"},
+      {n:204,name:"Transparent cube fractal"},
+      {n:205,name:"Neon halo formation"},
+      {n:206,name:"Laser circle symmetry chamber"},
+      {n:207,name:"Glass ripple concentric"},
+      {n:208,name:"Prism beam cathedral"},
+      {n:209,name:"Transparent wave sheet"},
+      {n:210,name:"Luminous blue corridor"},
+      {n:211,name:"Neon smoke swirl"},
+      {n:212,name:"Reflected hologram floor"},
+      {n:213,name:"Transparent ripple mesh"},
+      {n:214,name:"Digital lattice environment"},
+      {n:215,name:"High-tech cold lab chamber"},
 
+      {n:216,name:"XRP in deep space void"},
+      {n:217,name:"Planetary ring silhouette"},
+      {n:218,name:"Black hole light bend"},
+      {n:219,name:"Nebula cloud macro"},
+      {n:220,name:"Starfield minimal center"},
+      {n:221,name:"Lunar surface embed"},
+      {n:222,name:"Solar flare eruption"},
+      {n:223,name:"Cosmic dust explosion"},
+      {n:224,name:"Galactic spiral macro"},
+      {n:225,name:"Floating asteroid belt"},
+      {n:226,name:"Planet horizon sunrise"},
+      {n:227,name:"Dark matter swirl"},
+      {n:228,name:"Event horizon glow"},
+      {n:229,name:"Space station exterior"},
+      {n:230,name:"Cosmic corridor warp"},
+      {n:231,name:"Meteor streak freeze"},
+      {n:232,name:"Constellation line mapping"},
+      {n:233,name:"Milky Way arch"},
+      {n:234,name:"Moonlight surface shadow"},
+      {n:235,name:"Planetary eclipse silhouette"},
+      {n:236,name:"Space debris orbit"},
+      {n:237,name:"Deep star tunnel"},
+      {n:238,name:"Cosmic plasma arc"},
+      {n:239,name:"Orbiting satellite macro"},
+      {n:240,name:"Supernova burst"},
+      {n:241,name:"Interstellar cloud ribbon"},
+      {n:242,name:"Planet core cutaway glow"},
+      {n:243,name:"Ice planet terrain"},
+      {n:244,name:"Mars-like red dust field"},
+      {n:245,name:"Galactic vortex"},
+      {n:246,name:"Astronaut helmet reflection"},
+      {n:247,name:"Space capsule interior"},
+      {n:248,name:"Cosmic lightning storm"},
+      {n:249,name:"Star birth cloud"},
+      {n:250,name:"Infinite star grid"},
+      {n:251,name:"Distant galaxy cluster"},
+      {n:252,name:"Deep space minimal black"},
+      {n:253,name:"Asteroid impact freeze"},
+      {n:254,name:"Planetary ocean world"},
+      {n:255,name:"Ringed planet silhouette"},
+      {n:256,name:"Solar system alignment"},
+      {n:257,name:"Star collapse moment"},
+      {n:258,name:"Orbiting light trails"},
+      {n:259,name:"Dark cosmic abyss"},
+      {n:260,name:"Planetary night lights"},
+      {n:261,name:"Space-time fabric distortion"},
+      {n:262,name:"Cosmic energy beam"},
+      {n:263,name:"Aurora from orbit"},
+      {n:264,name:"Meteor shower cascade"},
+      {n:265,name:"Planetary canyon aerial"},
+      {n:266,name:"Interstellar gate portal"},
+      {n:267,name:"Space nebula cathedral"},
+      {n:268,name:"Cosmic prism reflection"},
+      {n:269,name:"Asteroid surface macro"},
+      {n:270,name:"Planetary lava crust"},
+      {n:271,name:"Moon crater macro"},
+      {n:272,name:"Gravity lens distortion"},
+      {n:273,name:"Deep void center glow"},
+      {n:274,name:"Star map minimal white"},
+      {n:275,name:"Dark orbit silhouette"},
+      {n:276,name:"Solar wind flare"},
+      {n:277,name:"Frozen comet surface"},
+      {n:278,name:"Galaxy horizon minimal"},
+      {n:279,name:"Planetary storm swirl"},
+      {n:280,name:"Cosmic ripple wave"},
+      {n:281,name:"Ring debris belt macro"},
+      {n:282,name:"Starlight beam shaft"},
+      {n:283,name:"Black void with single beam"},
+      {n:284,name:"Orbiting shard fragments"},
+      {n:285,name:"Planetary metallic city"},
+      {n:286,name:"Deep space monolith"},
+      {n:287,name:"Quantum star fracture"},
+      {n:288,name:"Nebula smoke macro"},
+      {n:289,name:"Planet core plasma"},
+      {n:290,name:"Infinite black with faint edge light"},
+
+      {n:291,name:"Deep ocean abyss"},
+      {n:292,name:"Surface ripple macro"},
+      {n:293,name:"Water droplet crown freeze"},
+      {n:294,name:"Underwater light rays"},
+      {n:295,name:"Ocean wave curl freeze"},
+      {n:296,name:"Rain streak glass reflection"},
+      {n:297,name:"Waterfall mist silhouette"},
+      {n:298,name:"Ice melt drip macro"},
+      {n:299,name:"Crystal clear lake mirror"},
+      {n:300,name:"Storm surge wave"},
+      {n:301,name:"Submerged coin macro"},
+      {n:302,name:"Air bubble macro"},
+      {n:303,name:"High-speed splash freeze"},
+      {n:304,name:"Ocean trench darkness"},
+      {n:305,name:"Blue liquid swirl vortex"},
+      {n:306,name:"Water ripple concentric"},
+      {n:307,name:"Ice crack freeze"},
+      {n:308,name:"Monsoon rain scene"},
+      {n:309,name:"Tidal surge macro"},
+      {n:310,name:"Ocean foam macro"},
+      {n:311,name:"Submerged rock cavern"},
+      {n:312,name:"Reflective wet asphalt night"},
+      {n:313,name:"Light refract underwater"},
+      {n:314,name:"Dripping chrome water hybrid"},
+      {n:315,name:"Clear water minimal black"},
+      {n:316,name:"Ice cube macro transparency"},
+      {n:317,name:"Glacier melt flow"},
+      {n:318,name:"Water spiral macro"},
+      {n:319,name:"Coastal cliff spray"},
+      {n:320,name:"Deep blue gradient minimal"},
+      {n:321,name:"Ice tunnel blue glow"},
+      {n:322,name:"Rain droplets macro lens"},
+      {n:323,name:"Water sheet surface"},
+      {n:324,name:"Ocean horizon sunset"},
+      {n:325,name:"Liquid glass hybrid"},
+      {n:326,name:"Storm cloud over sea"},
+      {n:327,name:"Droplet suspended in air"},
+      {n:328,name:"Underwater silhouette"},
+      {n:329,name:"Lake dawn reflection"},
+      {n:330,name:"Frozen waterfall macro"},
+      {n:331,name:"Ripple over black void"},
+      {n:332,name:"Submerged LED glow"},
+      {n:333,name:"Water vortex drain"},
+      {n:334,name:"Misty shoreline minimal"},
+      {n:335,name:"Ice crystal macro"},
+      {n:336,name:"Ocean bioluminescent glow"},
+      {n:337,name:"Deep sea particle light"},
+      {n:338,name:"Arctic ocean dusk"},
+      {n:339,name:"High-speed droplet impact"},
+      {n:340,name:"Water reflection architecture"},
+      {n:341,name:"Minimal blue depth gradient"},
+      {n:342,name:"Ice frost edge macro"},
+      {n:343,name:"Ocean turbulence freeze"},
+      {n:344,name:"Drip over metal surface"},
+      {n:345,name:"Rain with neon reflection"},
+      {n:346,name:"Black water mirror"},
+      {n:347,name:"Ocean surface night glow"},
+      {n:348,name:"Frozen ripple crown"},
+      {n:349,name:"Water bead on glass macro"},
+      {n:350,name:"Deep ocean silhouette beam"},
+
+      {n:351,name:"Brutalist concrete cathedral"},
+      {n:352,name:"Futuristic city skyline night"},
+      {n:353,name:"Glass skyscraper reflection canyon"},
+      {n:354,name:"Underground vault corridor"},
+      {n:355,name:"Minimal white museum hall"},
+      {n:356,name:"Grand marble banking hall"},
+      {n:357,name:"Industrial warehouse beams"},
+      {n:358,name:"Modern bridge suspension cables"},
+      {n:359,name:"Rooftop city edge sunset"},
+      {n:360,name:"Massive steel hangar interior"},
+      {n:361,name:"Dark tunnel vanishing point"},
+      {n:362,name:"Futuristic airport terminal"},
+      {n:363,name:"Luxury penthouse window skyline"},
+      {n:364,name:"Subterranean bunker chamber"},
+      {n:365,name:"Concrete monolith courtyard"},
+      {n:366,name:"Elevated highway interchange aerial"},
+      {n:367,name:"Underground subway tunnel"},
+      {n:368,name:"High-rise rooftop helipad"},
+      {n:369,name:"Modern cathedral glass dome"},
+      {n:370,name:"Massive stairwell symmetry"},
+      {n:371,name:"Financial district street canyon"},
+      {n:372,name:"Luxury marble lobby minimal"},
+      {n:373,name:"Industrial power plant interior"},
+      {n:374,name:"Futuristic transport hub"},
+      {n:375,name:"Dark alley wet reflection"},
+      {n:376,name:"Architectural blueprint overlay scene"},
+      {n:377,name:"Mega dam wall face"},
+      {n:378,name:"Suspension bridge fog"},
+      {n:379,name:"Concrete corridor brutal minimal"},
+      {n:380,name:"Museum spotlight exhibit chamber"},
+      {n:381,name:"High-rise elevator shaft vertical"},
+      {n:382,name:"Rooftop neon skyline night"},
+      {n:383,name:"Glass atrium symmetry"},
+      {n:384,name:"Vault door macro realism"},
+      {n:385,name:"Underground metro platform"},
+      {n:386,name:"Skyscraper top perspective down"},
+      {n:387,name:"Massive steel staircase"},
+      {n:388,name:"Futuristic parliament chamber"},
+      {n:389,name:"Corporate boardroom minimal"},
+      {n:390,name:"Stadium interior empty"},
+      {n:391,name:"Grand financial exchange hall"},
+      {n:392,name:"Luxury hotel atrium"},
+      {n:393,name:"Underground data vault chamber"},
+      {n:394,name:"City skyline sunrise minimal"},
+      {n:395,name:"Massive colonnade hall"},
+      {n:396,name:"Steel truss bridge underside"},
+      {n:397,name:"Urban rooftop rain"},
+      {n:398,name:"Architectural light shaft minimal"},
+      {n:399,name:"Futuristic civic plaza"},
+      {n:400,name:"Monolithic government building"},
+      {n:401,name:"Dark parking structure symmetry"},
+      {n:402,name:"Minimal architectural void"},
+      {n:403,name:"Modern observatory dome"},
+      {n:404,name:"Mega port container grid"},
+      {n:405,name:"Underground bunker corridor red light"},
+      {n:406,name:"Brutalist tower vertical"},
+      {n:407,name:"Grand archway hall"},
+      {n:408,name:"Steel framework under construction"},
+      {n:409,name:"Financial trading floor abstracted"},
+      {n:410,name:"Futuristic transit tunnel glow"},
+      {n:411,name:"Concrete amphitheater minimal"},
+      {n:412,name:"Massive marble staircase"},
+      {n:413,name:"Industrial refinery pipes"},
+      {n:414,name:"Skyline reflected in glass floor"},
+      {n:415,name:"Underground command center"},
+      {n:416,name:"Monument plaza symmetry"},
+      {n:417,name:"Massive city aerial night"},
+      {n:418,name:"Cathedral nave light beam"},
+      {n:419,name:"Futuristic courthouse interior"},
+      {n:420,name:"High-altitude skyscraper spire"},
+
+      {n:421,name:"Black leather embossed XRP"},
+      {n:422,name:"Carbon fiber weave macro"},
+      {n:423,name:"Silk fabric ripple macro"},
+      {n:424,name:"Velvet dark texture"},
+      {n:425,name:"Diamond encrusted logo macro"},
+      {n:426,name:"Satin gold plate minimal"},
+      {n:427,name:"Ultra-minimal matte black slab"},
+      {n:428,name:"White ceramic gloss surface"},
+      {n:429,name:"Crystal cut gemstone macro"},
+      {n:430,name:"Polished onyx luxury minimal"},
+      {n:431,name:"High-end watch face macro"},
+      {n:432,name:"Brushed champagne gold surface"},
+      {n:433,name:"Suede texture macro"},
+      {n:434,name:"Frosted matte titanium minimal"},
+      {n:435,name:"Luxury marble table macro"},
+      {n:436,name:"Macro jewelry reflection"},
+      {n:437,name:"Glossy piano black surface"},
+      {n:438,name:"High-polish obsidian minimal"},
+      {n:439,name:"Ultra-clean white void minimal"},
+      {n:440,name:"Micro-beveled metal edge macro"},
+      {n:441,name:"Precision engraved bullion macro"},
+      {n:442,name:"Glossy enamel surface"},
+      {n:443,name:"Luxury pen tip macro"},
+      {n:444,name:"Matte carbon slab"},
+      {n:445,name:"Fine grain leather macro"},
+      {n:446,name:"Glossy lacquered wood minimal"},
+      {n:447,name:"Crystal clear resin embed"},
+      {n:448,name:"Satin brushed aluminum macro"},
+      {n:449,name:"Luxury cufflink macro"},
+      {n:450,name:"Ultra-minimal dark gradient"},
+      {n:451,name:"High-gloss black infinity surface"},
+      {n:452,name:"Precision milled edge detail"},
+      {n:453,name:"Macro reflective gold grain"},
+      {n:454,name:"Sculpted platinum curve"},
+      {n:455,name:"Matte stone luxury minimal"},
+      {n:456,name:"Luxury minimal white marble void"},
+      {n:457,name:"Hyper-detailed coin edge macro"},
+      {n:458,name:"Fine fabric thread macro"},
+      {n:459,name:"Sculpted glass luxury minimal"},
+      {n:460,name:"Ultra-clean shadow study"},
+
+      {n:461,name:"Infinite cube grid"},
+      {n:462,name:"Fractal recursion tunnel"},
+      {n:463,name:"Geometric hex field"},
+      {n:464,name:"Triangular prism field"},
+      {n:465,name:"Sphere array symmetry"},
+      {n:466,name:"Infinite mirror corridor"},
+      {n:467,name:"Rotating cube matrix"},
+      {n:468,name:"Polygonal low-poly wave"},
+      {n:469,name:"Black void geometric frame"},
+      {n:470,name:"Radial symmetry mandala minimal"},
+      {n:471,name:"Concentric ring geometry"},
+      {n:472,name:"Lattice structure depth"},
+      {n:473,name:"Floating cube shards"},
+      {n:474,name:"Geometric ribbon twist"},
+      {n:475,name:"Spiral staircase abstraction"},
+      {n:476,name:"Wireframe depth field"},
+      {n:477,name:"Floating geometric islands"},
+      {n:478,name:"Hexagon tessellation macro"},
+      {n:479,name:"Circular depth layers"},
+      {n:480,name:"Grid distortion wave"},
+      {n:481,name:"Symmetrical X structure field"},
+      {n:482,name:"Geometric light bars"},
+      {n:483,name:"Abstract volumetric tunnel"},
+      {n:484,name:"Triangular void chamber"},
+      {n:485,name:"Perfect symmetry chamber"},
+      {n:486,name:"Rotational radial beams"},
+      {n:487,name:"Cubic depth canyon"},
+      {n:488,name:"Geometric plane slices"},
+      {n:489,name:"Fractal wave horizon"},
+      {n:490,name:"Diamond grid field"},
+      {n:491,name:"Infinite line depth"},
+      {n:492,name:"Layered square minimal"},
+      {n:493,name:"Polygon fracture field"},
+      {n:494,name:"Depth of field cube cluster"},
+      {n:495,name:"Mirror symmetry split"},
+      {n:496,name:"Geometric void portal"},
+      {n:497,name:"Radial ripple abstraction"},
+      {n:498,name:"Symmetric plane corridor"},
+      {n:499,name:"Abstract tension lines"},
+      {n:500,name:"Minimal geometric monolith"},
+
+      {n:501,name:"Single beam in darkness"},
+      {n:502,name:"Volumetric light cone"},
+      {n:503,name:"Electric lightning strike"},
+      {n:504,name:"Laser grid explosion"},
+      {n:505,name:"Plasma energy arc"},
+      {n:506,name:"Blue energy vortex"},
+      {n:507,name:"White glow minimal"},
+      {n:508,name:"Radiant flare silhouette"},
+      {n:509,name:"Light ray through fog"},
+      {n:510,name:"Energy pulse ripple"},
+      {n:511,name:"Neon halo burst"},
+      {n:512,name:"Electric current macro"},
+      {n:513,name:"Photon particle field"},
+      {n:514,name:"Radiating core burst"},
+      {n:515,name:"Beam through crack"},
+      {n:516,name:"High-energy particle storm"},
+      {n:517,name:"Electric X silhouette"},
+      {n:518,name:"Radiant white void"},
+      {n:519,name:"Laser slice minimal"},
+      {n:520,name:"Blue plasma chamber"},
+      {n:521,name:"Electric storm sky"},
+      {n:522,name:"Beam reflection symmetry"},
+      {n:523,name:"Energy sphere macro"},
+      {n:524,name:"Light refraction minimal"},
+      {n:525,name:"Radiating horizon beam"},
+      {n:526,name:"High-intensity glow edge"},
+      {n:527,name:"Arc flash explosion"},
+      {n:528,name:"Blue electric fog"},
+      {n:529,name:"Energy shockwave ring"},
+      {n:530,name:"Volumetric beam forest"},
+      {n:531,name:"Light streak long exposure"},
+      {n:532,name:"Radiant metallic edge"},
+      {n:533,name:"Electric grid pattern"},
+      {n:534,name:"Photon spray macro"},
+      {n:535,name:"Laser curtain field"},
+      {n:536,name:"Dark void with rim light"},
+      {n:537,name:"Pulse wave expansion"},
+      {n:538,name:"Electric ring fracture"},
+      {n:539,name:"Energy field distortion"},
+      {n:540,name:"Single glow horizon"},
+
+      {n:541,name:"Global payment rail map"},
+      {n:542,name:"Server rack corridor macro"},
+      {n:543,name:"Fiber optic backbone close-up"},
+      {n:544,name:"Data node world map minimal"},
+      {n:545,name:"Trading terminal depth blur"},
+      {n:546,name:"Bank vault macro"},
+      {n:547,name:"Financial district skyline dawn"},
+      {n:548,name:"Network cable macro"},
+      {n:549,name:"Data center cold aisle"},
+      {n:550,name:"Secure transaction visualization"},
+      {n:551,name:"World connection light trails"},
+      {n:552,name:"Payment channel abstraction"},
+      {n:553,name:"Ledger node cluster macro"},
+      {n:554,name:"Global exchange board abstract"},
+      {n:555,name:"Secure vault door minimal"},
+      {n:556,name:"Financial skyline reflection"},
+      {n:557,name:"Transaction pipeline abstraction"},
+      {n:558,name:"Blockchain cube abstraction"},
+      {n:559,name:"Interbank corridor visualization"},
+      {n:560,name:"Digital clearing house interior"},
+      {n:561,name:"Secure metallic safe macro"},
+      {n:562,name:"Global digital grid minimal"},
+      {n:563,name:"Node-to-node beam connections"},
+      {n:564,name:"Digital ledger architecture minimal"},
+      {n:565,name:"World rail overlay night map"},
+      {n:566,name:"Interconnected light web"},
+      {n:567,name:"Server fan macro"},
+      {n:568,name:"Financial core command center"},
+      {n:569,name:"Transaction beam through city"},
+      {n:570,name:"Institutional marble hall minimal"},
+
+      {n:571,name:"Desert monolith sunrise"},
+      {n:572,name:"Snow mountain summit"},
+      {n:573,name:"Storm over skyscraper"},
+      {n:574,name:"Night rooftop edge"},
+      {n:575,name:"Foggy forest minimal"},
+      {n:576,name:"Rain-soaked urban night"},
+      {n:577,name:"Cliff edge lightning strike"},
+      {n:578,name:"Ice cave blue glow"},
+      {n:579,name:"Volcano rim dusk"},
+      {n:580,name:"Ocean cliff horizon"},
+      {n:581,name:"Canyon sunrise beam"},
+      {n:582,name:"Dark forest spotlight"},
+      {n:583,name:"Foggy bridge minimal"},
+      {n:584,name:"Arctic tundra horizon"},
+      {n:585,name:"Storm clouds over city"},
+      {n:586,name:"Rooftop neon rain"},
+      {n:587,name:"Infinite desert dusk"},
+      {n:588,name:"High-altitude sunrise above clouds"},
+      {n:589,name:"Black void final minimal glow"}
+    ];
+
+    const grid = document.getElementById("grid");
+
+    const makeCard = (dropNum, name) => {
+      const d = pad3(dropNum);
+      const mobileHref = `/ledgerdrop_xrpl/assets/drop_${d}_mobile.png`;
+      const pcHref = `/ledgerdrop_xrpl/assets/drop_${d}_pc.png`;
+
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <div class="top">
+          <span class="pill">Drop ${d}</span>
+          <div class="name">${name}</div>
+        </div>
+        <div class="links">
+          <a class="a off" href="${mobileHref}" aria-disabled="true">Mobile</a>
+          <a class="a off" href="${pcHref}" aria-disabled="true">PC</a>
+        </div>
+      `;
+      return card;
+    };
+
+    for (const item of drops) {
+      grid.appendChild(makeCard(item.n, item.name));
+    }
+  </script>
 </body>
 </html>
