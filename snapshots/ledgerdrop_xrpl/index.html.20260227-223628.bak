@@ -143,7 +143,7 @@
     <h1>Ledger Drop XRPL Gallery</h1>
     <p class="sub">589 drops. Names locked. Links stay disabled until files exist.</p>
 
-    <div id="grid" class="grid"></div>
+    <div id="grid" class="grid"></div></div>
 
   <script>
     const pad3 = (n) => String(n).padStart(3, "0");
