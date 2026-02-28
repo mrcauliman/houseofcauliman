@@ -742,9 +742,23 @@
     }
     computeLiveCount();
 
+    
+    // Strip any accidental literal \n text nodes
+    for (const n of Array.from(document.body.childNodes)) {
+      if (n && n.nodeType === 3 && n.textContent && n.textContent.indexOf("\\n") !== -1) {
+        n.textContent = n.textContent.split("\\n").join("");
+      }
+    }
 
+document.addEventListener("DOMContentLoaded", () => {
+      for (const n of Array.from(document.body.childNodes)) {
+        if (n && n.nodeType === 3 && n.textContent && n.textContent.includes("\\n")) {
+          n.textContent = n.textContent.replaceAll("\\n", "");
+        }
+      }
+    });
 
-    const grid = document.getElementById("grid");
+const grid = document.getElementById("grid");
 
     const makeCard = (dropNum, name) => {
       const d = pad3(dropNum);
