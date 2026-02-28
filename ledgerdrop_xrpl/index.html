@@ -728,7 +728,25 @@
       {n:589,name:"Black void final minimal glow"}
     ];
 
-    const grid = document.getElementById("grid");
+    
+    async function computeLiveCount(){
+      let live = 0;
+      for (const d of drops){
+        const id = pad3(d.n);
+        const url = `/ledgerdrop_xrpl/assets/drop__mobile.png`;
+        try{
+          const r = await fetch(url, { method: "HEAD", cache: "no-store" });
+          if (r.ok) live++;
+          live++;
+        }catch(e){
+        }
+      }
+      const el = document.getElementById("ldLive");
+      if (el) el.textContent = String(live);
+    }
+    computeLiveCount();
+
+const grid = document.getElementById("grid");
 
     const makeCard = (dropNum, name) => {
       const d = pad3(dropNum);
@@ -737,6 +755,9 @@
 
       const card = document.createElement("div");
       card.className = "card";
+      const pillar = (dropNum===1||dropNum===10||dropNum===20||dropNum===50||dropNum===100) ? ("pillar-"+pad3(dropNum)) : "";
+      if (pillar) card.id = pillar;
+
       card.innerHTML = `
         <div class="top">
           <span class="pill">Drop ${d}</span>
