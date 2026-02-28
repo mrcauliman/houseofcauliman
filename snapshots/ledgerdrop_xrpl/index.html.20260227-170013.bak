@@ -108,11 +108,10 @@
       .name{ text-align:left; }
       .top{ align-items:center; }
     }
-  /* Ledger Drop header */.ld-head{max-width:1100px;margin:44px auto 26px;padding:0 16px;text-align:center}.ld-logo{width:min(760px,92vw);height:auto;display:block;margin:0 auto 16px}.ld-count{font-size:14px;opacity:.82;margin:0 0 16px}.ld-pillars{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}.ld-pillars a{font-size:13px;text-decoration:none;padding:8px 12px;border:1px solid rgba(0,0,0,.12);border-radius:10px}html{scroll-behavior:smooth}
-</style>
+  </style>
 </head>
 <body>
-  <header class="ld-head" role="banner"><img class="ld-logo" src="/assets/ledger_drop_xrpl.png" alt="Ledger Drop XRPL" loading="eager" decoding="async" /><div class="ld-sub"><div class="ld-count"><span id="ldLive">0</span> / 589 Live</div></div><nav class="ld-pillars" aria-label="Pillar jumps"><a href="#pillar-001">001 Institutional</a><a href="#pillar-010">010 Industrial</a><a href="#pillar-020">020 Authority</a><a href="#pillar-050">050 Silence</a><a href="#pillar-100">100 Deep Space</a></nav></header>\n<div class="wrap">
+  <div class="wrap">
     <h1>Ledger Drop XRPL Gallery</h1>
     <p class="sub">589 drops. Names locked. Links stay disabled until files exist.</p>
 
