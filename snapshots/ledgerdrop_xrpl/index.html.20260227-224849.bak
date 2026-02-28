@@ -778,7 +778,10 @@
     for (const item of drops) {
       grid.appendChild(makeCard(item.n, item.name));
     }
+  </script>
 
+</body>
+</html>
     const topBtn = document.getElementById("ldTop");
     if (topBtn) {
       topBtn.addEventListener("click", (e) => {
@@ -786,14 +789,7 @@
         window.scrollTo({ top: 0, behavior: "smooth" });
       });
     }
-  </script>
-
-
-
-
     <footer class="hoc-footer">
       <span>Built and backed by mrcauliman. No VC. No training wheels.</span>
       <span>Powered by $XRP • <a href="https://houseofcauliman.com">HouseOfCauliman.com</a></span>
     </footer>
-</body>
-</html>
