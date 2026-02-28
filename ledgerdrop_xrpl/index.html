@@ -116,7 +116,7 @@
 <body>
   <a id="top"></a>
   <a class="ld-back" href="/" aria-label="Back to House">Back to House</a>
-  <a class="ld-top" href="#top" aria-label="Back to Top">Top</a>
+  <a id="ldTop" class="ld-top" href="#top" aria-label="Back to Top">Top</a>
 
   <header class="ld-head" role="banner"><img class="ld-logo" src="/assets/ledger_drop_xrpl.png" alt="Ledger Drop XRPL" loading="eager" decoding="async" /><div class="ld-sub"><div class="ld-count"><span id="ldLive">0</span> / 589 Live</div></div><nav class="ld-pillars" aria-label="Pillar jumps"><a href="#pillar-001">001 Metals</a><a href="#pillar-076">076 Stone and Earth</a><a href="#pillar-141">141 Glass and Neon Tech</a><a href="#pillar-216">216 Space and Cosmic</a><a href="#pillar-291">291 Water and Fluid</a><a href="#pillar-351">351 Architecture</a><a href="#pillar-421">421 Luxury Macro</a><a href="#pillar-461">461 Abstract Geometry</a><a href="#pillar-501">501 Light and Energy</a><a href="#pillar-541">541 Financial Infra</a><a href="#pillar-571">571 Cinematic Envs</a><a href="#pillar-589">589 Final</a></nav></header>\n<div class="wrap">
     <h1>Ledger Drop XRPL Gallery</h1>
@@ -746,18 +746,27 @@
       if (el) el.textContent = String(live);
     }
     computeLiveCount();
-
-    
-    // Strip any accidental literal \n text nodes
+    // Remove stray whitespace-only text nodes
     for (const n of Array.from(document.body.childNodes)) {
-      if (n && n.nodeType === 3 && n.textContent && n.textContent.indexOf("") !== -1) {
-        n.textContent = n.textContent.split("").join("");
+      if (n && n.nodeType === 3 && n.textContent && n.textContent.trim() === "") {
+        n.remove();
       }
     }
 
+
+    
+    
+    const topBtn = document.getElementById("ldTop");
+    if (topBtn) {
+      topBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    }
+
+// Strip any accidental literal \n text nodes
 document.addEventListener("DOMContentLoaded", () => {
       for (const n of Array.from(document.body.childNodes)) {
-        if (n && n.nodeType === 3 && n.textContent && n.textContent.includes("")) {
           n.textContent = n.textContent.replaceAll("", "");
         }
       }
