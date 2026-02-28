@@ -28,3 +28,6 @@ snapshots/private/
 # MONOLITH local backups
 monolith/monolith.html.bak_*
 monolith/*.bak_*
+
+# Ledger Drop backups
+ledgerdrop_xrpl/index.html.bak_*
