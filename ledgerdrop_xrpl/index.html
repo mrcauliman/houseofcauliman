@@ -109,24 +109,41 @@
       .top{ align-items:center; }
     }
   /* Ledger Drop header */.ld-head{max-width:1100px;margin:44px auto 26px;padding:0 16px;text-align:center}.ld-logo{width:min(760px,92vw);height:auto;display:block;margin:0 auto 16px}.ld-count{font-size:14px;opacity:.82;margin:0 0 16px}.ld-pillars{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}.ld-pillars a{font-size:13px;text-decoration:none;padding:9px 14px;border:1px solid rgba(255,255,255,.16);border-radius:999px;color:rgba(255,255,255,.92);background:rgba(255,255,255,.04);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);box-shadow:0 10px 30px rgba(0,0,0,.22);transition:transform .12s ease,border-color .12s ease,background .12s ease,opacity .12s ease}.ld-pillars a:hover{transform:translateY(-1px);border-color:rgba(255,255,255,.30);background:rgba(255,255,255,.07)}.ld-pillars a:active{transform:translateY(0)}html{scroll-behavior:smooth}
-.hoc-footer{text-align:center}.hoc-footer span{display:block}
-.ld-back,.ld-top{position:fixed;z-index:50;right:16px;text-decoration:none;font-size:13px;padding:10px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(0,0,0,.35);color:rgba(255,255,255,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 10px 30px rgba(0,0,0,.22)}.ld-back{top:16px}.ld-top{bottom:16px}.ld-back:hover,.ld-top:hover{background:rgba(0,0,0,.50);border-color:rgba(255,255,255,.30)}
+
+/* Floating buttons */.ld-back,.ld-top{position:fixed;z-index:50;right:16px;text-decoration:none;font-size:13px;padding:10px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(0,0,0,.35);color:rgba(255,255,255,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 10px 30px rgba(0,0,0,.22)}.ld-back{top:16px}.ld-top{bottom:16px}.ld-back:hover,.ld-top:hover{background:rgba(0,0,0,.50);border-color:rgba(255,255,255,.30)}
+
+/* Footer */.hoc-footer{text-align:center}.hoc-footer span{display:block}
 </style>
 </head>
 <body>
   <a id="top"></a>
   <a class="ld-back" href="/" aria-label="Back to House">Back to House</a>
   <a id="ldTop" class="ld-top" href="#top" aria-label="Back to Top">Top</a>
-
-  <header class="ld-head" role="banner"><img class="ld-logo" src="/assets/ledger_drop_xrpl.png" alt="Ledger Drop XRPL" loading="eager" decoding="async" /><div class="ld-sub"><div class="ld-count"><span id="ldLive">0</span> / 589 Live</div></div><nav class="ld-pillars" aria-label="Pillar jumps"><a href="#pillar-001">001 Metals</a><a href="#pillar-076">076 Stone and Earth</a><a href="#pillar-141">141 Glass and Neon Tech</a><a href="#pillar-216">216 Space and Cosmic</a><a href="#pillar-291">291 Water and Fluid</a><a href="#pillar-351">351 Architecture</a><a href="#pillar-421">421 Luxury Macro</a><a href="#pillar-461">461 Abstract Geometry</a><a href="#pillar-501">501 Light and Energy</a><a href="#pillar-541">541 Financial Infra</a><a href="#pillar-571">571 Cinematic Envs</a><a href="#pillar-589">589 Final</a></nav></header>\n<div class="wrap">
+  <header class="ld-head" role="banner">
+    <img class="ld-logo" src="/assets/ledger_drop_xrpl.png" alt="Ledger Drop XRPL" loading="eager" decoding="async" />
+    <div class="ld-sub">
+      <div class="ld-count"><span id="ldLive">0</span> / 589 Live</div>
+    </div>
+    <nav class="ld-pillars" aria-label="Pillar jumps">
+      <a href="#pillar-001">001 Metals</a>
+      <a href="#pillar-076">076 Stone and Earth</a>
+      <a href="#pillar-141">141 Glass and Neon Tech</a>
+      <a href="#pillar-216">216 Space and Cosmic</a>
+      <a href="#pillar-291">291 Water and Fluid</a>
+      <a href="#pillar-351">351 Architecture</a>
+      <a href="#pillar-421">421 Luxury Macro</a>
+      <a href="#pillar-461">461 Abstract Geometry</a>
+      <a href="#pillar-501">501 Light and Energy</a>
+      <a href="#pillar-541">541 Financial Infra</a>
+      <a href="#pillar-571">571 Cinematic Envs</a>
+      <a href="#pillar-589">589 Final</a>
+    </nav>
+  </header>
+  <div class="wrap">
     <h1>Ledger Drop XRPL Gallery</h1>
     <p class="sub">589 drops. Names locked. Links stay disabled until files exist.</p>
 
-    <div id="grid" class="grid"></div>
-
-    <div class="footer">
-    </div>
-  </div>
+    <div id="grid" class="grid"></div></div>
 
   <script>
     const pad3 = (n) => String(n).padStart(3, "0");
@@ -732,47 +749,8 @@
       {n:588,name:"High-altitude sunrise above clouds"},
       {n:589,name:"Black void final minimal glow"}
     ];
-    async function computeLiveCount(){
-      let live = 0;
-      for (const d of drops){
-        const id = pad3(d.n);
-        const url = `/ledgerdrop_xrpl/assets/drop__mobile.png`;
-        try{
-          const r = await fetch(url, { method: "HEAD", cache: "no-store" });
-          if (r.ok) live++;
-        }catch(e){}
-      }
-      const el = document.getElementById("ldLive");
-      if (el) el.textContent = String(live);
-    }
-    computeLiveCount();
-    // Remove stray whitespace-only text nodes
-    for (const n of Array.from(document.body.childNodes)) {
-      if (n && n.nodeType === 3 && n.textContent && n.textContent.trim() === "") {
-        n.remove();
-      }
-    }
 
-
-    
-    
-    const topBtn = document.getElementById("ldTop");
-    if (topBtn) {
-      topBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      });
-    }
-
-// Strip any accidental literal \n text nodes
-document.addEventListener("DOMContentLoaded", () => {
-      for (const n of Array.from(document.body.childNodes)) {
-          n.textContent = n.textContent.replaceAll("", "");
-        }
-      }
-    });
-
-const grid = document.getElementById("grid");
+    const grid = document.getElementById("grid");
 
     const makeCard = (dropNum, name) => {
       const d = pad3(dropNum);
@@ -784,7 +762,6 @@ const grid = document.getElementById("grid");
       const PILLARS = new Set([1,76,141,216,291,351,421,461,501,541,571,589]);
       const pillar = PILLARS.has(dropNum) ? ("pillar-" + pad3(dropNum)) : "";
       if (pillar) card.id = pillar;
-
       card.innerHTML = `
         <div class="top">
           <span class="pill">Drop ${d}</span>
@@ -802,8 +779,16 @@ const grid = document.getElementById("grid");
       grid.appendChild(makeCard(item.n, item.name));
     }
   </script>
+
 </body>
 </html>
+    const topBtn = document.getElementById("ldTop");
+    if (topBtn) {
+      topBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    }
     <footer class="hoc-footer">
       <span>Built and backed by mrcauliman. No VC. No training wheels.</span>
       <span>Powered by $XRP • <a href="https://houseofcauliman.com">HouseOfCauliman.com</a></span>
