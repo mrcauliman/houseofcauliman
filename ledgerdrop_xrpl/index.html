@@ -113,9 +113,18 @@
 /* Floating buttons */.ld-back,.ld-top{position:fixed;z-index:50;right:16px;text-decoration:none;font-size:13px;padding:10px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(0,0,0,.35);color:rgba(255,255,255,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 10px 30px rgba(0,0,0,.22)}.ld-back{top:16px}.ld-top{bottom:16px}.ld-back:hover,.ld-top:hover{background:rgba(0,0,0,.50);border-color:rgba(255,255,255,.30)}
 
 /* Footer */.hoc-footer{text-align:center}.hoc-footer span{display:block}
+
+  .ld-status{position:fixed;left:14px;bottom:14px;z-index:50;display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.10);background:rgba(10,12,15,.72);color:#eaf0f7;font-size:12px;font-weight:800;letter-spacing:.2px;backdrop-filter:blur(8px);}
+  .ld-dot{width:8px;height:8px;border-radius:999px;background:#2bf3a2;box-shadow:0 0 14px rgba(43,243,162,.55);animation:ldPulse 1.2s ease-in-out infinite;}
+  @keyframes ldPulse{0%,100%{transform:scale(1);opacity:.75;}50%{transform:scale(1.35);opacity:1;}}
+
+
+  .ld-sub{margin:6px 0 14px;text-align:center;color:rgba(234,240,247,.72);font-size:12px;font-weight:800;letter-spacing:.2px;}
 </style>
 </head>
 <body>
+<div id="ldStatus" class="ld-status" role="status" aria-live="polite"><span class="ld-dot"></span><span id="ldStatusText">Loading wallpapers</span></div>
+
   <a id="top"></a>
   <a class="ld-back" href="/" aria-label="Back to House">Back to House</a>
   <a id="ldTop" class="ld-top" href="#top" aria-label="Back to Top">Top</a>
@@ -140,10 +149,9 @@
     </nav>
   </header>
   <div class="wrap">
-    <h1>Ledger Drop XRPL Gallery</h1>
-    <p class="sub">589 drops. Names locked. Links stay disabled until files exist.</p>
-
-    <div id="grid" class="grid"></div>
+        <h1>Ledger Drop XRPL Gallery</h1>
+    <div class="ld-sub">4K wallpapers • Mobile + PC</div>
+</div>
 
   <script>
     const pad3 = (n) => String(n).padStart(3, "0");
@@ -811,5 +819,13 @@
 })();
 
 </script>
+
+<script>
+(()=>{const set=t=>{const el=document.getElementById("ldStatusText");if(el) el.textContent=t;};
+set("Loading wallpapers");
+window.addEventListener("load",()=>set("New images land daily. Links unlock automatically"));
+})();
+</script>
+
 </body>
 </html>
