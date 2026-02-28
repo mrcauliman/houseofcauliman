@@ -108,7 +108,7 @@
       .name{ text-align:left; }
       .top{ align-items:center; }
     }
-  /* Ledger Drop header */.ld-head{max-width:1100px;margin:44px auto 26px;padding:0 16px;text-align:center}.ld-logo{width:min(760px,92vw);height:auto;display:block;margin:0 auto 16px}.ld-count{font-size:14px;opacity:.82;margin:0 0 16px}.ld-pillars{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}.ld-pillars a{font-size:13px;text-decoration:none;padding:8px 12px;border:1px solid rgba(0,0,0,.12);border-radius:10px}html{scroll-behavior:smooth}
+  /* Ledger Drop header */.ld-head{max-width:1100px;margin:44px auto 26px;padding:0 16px;text-align:center}.ld-logo{width:min(760px,92vw);height:auto;display:block;margin:0 auto 16px}.ld-count{font-size:14px;opacity:.82;margin:0 0 16px}.ld-pillars{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}.ld-pillars a{font-size:13px;text-decoration:none;padding:9px 14px;border:1px solid rgba(255,255,255,.16);border-radius:999px;color:rgba(255,255,255,.92);background:rgba(255,255,255,.04);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);box-shadow:0 10px 30px rgba(0,0,0,.22);transition:transform .12s ease,border-color .12s ease,background .12s ease,opacity .12s ease}.ld-pillars a:hover{transform:translateY(-1px);border-color:rgba(255,255,255,.30);background:rgba(255,255,255,.07)}.ld-pillars a:active{transform:translateY(0)}html{scroll-behavior:smooth}
 </style>
 </head>
 <body>
@@ -727,8 +727,6 @@
       {n:588,name:"High-altitude sunrise above clouds"},
       {n:589,name:"Black void final minimal glow"}
     ];
-
-    
     async function computeLiveCount(){
       let live = 0;
       for (const d of drops){
@@ -737,16 +735,16 @@
         try{
           const r = await fetch(url, { method: "HEAD", cache: "no-store" });
           if (r.ok) live++;
-          live++;
-        }catch(e){
-        }
+        }catch(e){}
       }
       const el = document.getElementById("ldLive");
       if (el) el.textContent = String(live);
     }
     computeLiveCount();
 
-const grid = document.getElementById("grid");
+
+
+    const grid = document.getElementById("grid");
 
     const makeCard = (dropNum, name) => {
       const d = pad3(dropNum);
@@ -777,3 +775,7 @@ const grid = document.getElementById("grid");
   </script>
 </body>
 </html>
+    <footer class="hoc-footer">
+      <span>Built and backed by mrcauliman. No VC. No training wheels.</span>
+      <span>Powered by $XRP • <a href="https://houseofcauliman.com">HouseOfCauliman.com</a></span>
+    </footer>
