@@ -120,6 +120,9 @@
 
 
   .ld-sub{margin:6px 0 14px;text-align:center;color:rgba(234,240,247,.72);font-size:12px;font-weight:800;letter-spacing:.2px;}
+
+  /* LD_TOP_Z_V1 */
+  .ld-top{z-index:9999;pointer-events:auto;}
 </style>
 </head>
 <body>
@@ -824,6 +827,24 @@
 (()=>{const set=t=>{const el=document.getElementById("ldStatusText");if(el) el.textContent=t;};
 set("Loading wallpapers");
 window.addEventListener("load",()=>set("New images land daily. Links unlock automatically"));
+})();
+</script>
+
+
+<script>
+/* LD_TOP_HARDBIND_V1 */
+(() => {
+  const bind = () => {
+    const btn = document.getElementById("ldTop");
+    if(!btn) return;
+    btn.style.pointerEvents = "auto";
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, { passive: false });
+  };
+  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", bind);
+  else bind();
 })();
 </script>
 
