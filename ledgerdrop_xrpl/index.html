@@ -767,6 +767,7 @@
       const d = pad3(dropNum);
       const mobileHref = `/ledgerdrop_xrpl/assets/drop_${d}_mobile.png`;
       const pcHref = `/ledgerdrop_xrpl/assets/drop_${d}_pc.png`;
+      const ogHref = `/ledgerdrop_xrpl/drop/${d}/`;
 
       const card = document.createElement("div");
       card.className = "card";
@@ -783,6 +784,11 @@
           <a class="a off" href="${pcHref}" aria-disabled="true">PC</a>
         </div>
       `;
+      card.addEventListener("click", (e) => {
+        const a = e.target && e.target.closest ? e.target.closest("a") : null;
+        if (a) return;
+        window.location.href = ogHref;
+      });
       return card;
     };
 
