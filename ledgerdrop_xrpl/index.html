@@ -72,7 +72,12 @@
       text-align:right;
       flex: 1 1 auto;
     }
-    .links{
+    
+  .thumbwrap{margin:10px 0 10px}
+  .thumb{width:100%;height:auto;display:none;border-radius:14px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.03)}
+  .thumbph{width:100%;padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.03);color:rgba(234,240,247,.72);font-weight:900;text-align:center}
+
+  .links{
       display:flex;
       gap:8px;
     }
@@ -784,6 +789,10 @@
           <span class="pill">Drop ${d}</span>
           <div class="name">${name}</div>
         </div>
+        <div class="thumbwrap">
+          <img class="thumb" data-dd="${d}" alt="Drop ${d} preview" loading="lazy" decoding="async">
+          <div class="thumbph" data-dd="${d}">Preview loading</div>
+        </div>
         <div class="links">
           <a class="a off" href="${mobileHref}" aria-disabled="true">Mobile</a>
           <a class="a off" href="${pcHref}" aria-disabled="true">PC</a>
@@ -828,6 +837,25 @@
     const map=new Map(); for(const d of (j.drops||[])){const k=String(d.n).padStart(3,"0"); map.set(k,{mobile:!!d.mobile?.exists, pc:!!d.pc?.exists});}
     const links=document.querySelectorAll('a[href*="drop_"][href$=".png"]');
     for(const a of links){const m=a.getAttribute("href").match(RX); if(!m) continue; const rec=map.get(m[1]); if(rec && rec[m[2]]) on(a); else off(a);}
+
+    const thumbs=document.querySelectorAll('.thumb[data-dd]');
+    for(const img of thumbs){
+      const dd=img.getAttribute('data-dd');
+      const rec=map.get(dd);
+      const ph=document.querySelector('.thumbph[data-dd="'+dd+'"]');
+      if(!rec) continue;
+      const pcOk=!!rec.pc, mOk=!!rec.mobile;
+      const src = pcOk ? (`/ledgerdrop_xrpl/assets/drop_${dd}_pc.png`) : (mOk ? (`/ledgerdrop_xrpl/assets/drop_${dd}_mobile.png`) : "");
+      if(src){
+        img.src = src;
+        img.style.display = "block";
+        if(ph) ph.style.display = "none";
+      } else {
+        img.style.display = "none";
+        if(ph) ph.style.display = "block";
+      }
+    }
+
   };
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",run); else run();
 })();
