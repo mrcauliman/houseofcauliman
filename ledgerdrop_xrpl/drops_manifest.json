@@ -5,11 +5,13 @@
       "n": 1,
       "mobile": {
         "path": "assets/drop_001_mobile.png",
-        "exists": false
+        "exists": true,
+        "sha256": "dd7b56e4557532bd616c00f5ba9decb61ec22b89628ab3f1c8add3785524f3dc"
       },
       "pc": {
         "path": "assets/drop_001_pc.png",
-        "exists": false
+        "exists": true,
+        "sha256": "9e7d1051abb2a458cb16f0a863d042ff07738432dd90ad1f503ecb2b57dd1e01"
       }
     },
     {
