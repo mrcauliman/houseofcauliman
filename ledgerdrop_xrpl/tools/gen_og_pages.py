@@ -46,6 +46,8 @@ body{{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Ari
 .grid{{display:grid;grid-template-columns:1fr;gap:12px;padding:12px;}}
 img{{width:100%;height:auto;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:#0b0d10;}}
 .off{{opacity:.55;pointer-events:none}}
+.coming{{padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.03);font-weight:900}}
+.coming .small{{{{display:block;margin-top:6px;color:var(--muted);font-size:12px;font-weight:800}}}}
 </style>
 </head>
 <body>
@@ -64,8 +66,9 @@ img{{width:100%;height:auto;border-radius:12px;border:1px solid rgba(255,255,255
       </div>
     </div>
     <div class="grid">
-      <img src="{pc}" alt="Drop {dd} PC wallpaper">
-      <img src="{mobile}" alt="Drop {dd} Mobile wallpaper">
+      {pc_block}
+      {mobile_block}
+      {coming_block}
     </div>
   </div>
 </div>
@@ -91,6 +94,12 @@ for d in drops:
   og_img_rel = pc_rel if pc_ok else (mobile_rel if m_ok else pc_rel)
   og_url = f"{SITE_ORIGIN}{BASE_PATH}/drop/{dd}/"
   og_image = f"{SITE_ORIGIN}{og_img_rel}"
+  pc_block = f'<img src="{pc_rel}" alt="Drop {dd} PC wallpaper">' if pc_ok else ""
+  mobile_block = f'<img src="{mobile_rel}" alt="Drop {dd} Mobile wallpaper">' if m_ok else ""
+  coming_block = ""
+  if (not pc_ok) and (not m_ok):
+    coming_block = '<div class="coming">Images loading<span class="small">This drop isn’t live yet. Links unlock automatically.</span></div>'
+
 
   html = tpl.format(
     dd=dd,
@@ -101,6 +110,9 @@ for d in drops:
     pc=pc_rel,
     moff=("off" if not m_ok else ""),
     poff=("off" if not pc_ok else ""),
+    pc_block=pc_block,
+    mobile_block=mobile_block,
+    coming_block=coming_block,
     BASE_PATH=BASE_PATH
   )
 
