@@ -848,16 +848,21 @@
   </div>
 </div>
 
-        <div class="links">
-          <a class="a off" href="${mobileHref}" aria-disabled="true">Mobile</a>
-          <a class="a off" href="${pcHref}" aria-disabled="true">PC</a>
-        </div>
-      `;
-      card.addEventListener("click", (e) => {
-        const a = e.target && e.target.closest ? e.target.closest("a") : null;
-        if (a) return;
-        window.location.href = ogHref;
-      });
+        `;
+        card.addEventListener("click", (e) => {
+          const t = e.target;
+          const isMobileThumb = t && t.closest ? t.closest(".thumb-m,.thumbph-m") : null;
+          const isPcThumb = t && t.closest ? t.closest(".thumb-pc,.thumbph-pc") : null;
+          if (isMobileThumb) {
+            window.open(mobileHref, "_blank", "noopener,noreferrer");
+            return;
+          }
+          if (isPcThumb) {
+            window.open(pcHref, "_blank", "noopener,noreferrer");
+            return;
+          }
+          window.location.href = ogHref;
+        });
       return card;
     };
 
@@ -890,8 +895,6 @@
   const run=async()=>{
     let j; try{const r=await fetch("./drops_manifest.json",{cache:"no-store"}); if(!r.ok) return; j=await r.json();}catch(_){return;}
     const map=new Map(); for(const d of (j.drops||[])){const k=String(d.n).padStart(3,"0"); map.set(k,{mobile:!!d.mobile?.exists, pc:!!d.pc?.exists});}
-    const links=document.querySelectorAll('a[href*="drop_"][href$=".png"]');
-    for(const a of links){const m=a.getAttribute("href").match(RX); if(!m) continue; const rec=map.get(m[1]); if(rec && rec[m[2]]) on(a); else off(a);}
 
       const mImgs=document.querySelectorAll('.thumb-m[data-dd]');
       for(const img of mImgs){
