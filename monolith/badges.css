@@ -1,0 +1,16 @@
+/* PRICING BADGES v2 */
+.cell{ position:relative; }
+.cell.badge-premium::after,
+.cell.badge-na::after{
+  position:absolute;
+  top:2px; left:2px;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.4px;
+  padding:2px 5px;
+  border-radius:4px;
+  z-index:5;
+  pointer-events:none;
+}
+.cell.badge-premium::after{ content:"PREMIUM"; background:rgba(255,215,0,.92); color:#111; }
+.cell.badge-na::after{ content:"NOT AVAILABLE"; background:rgba(220,20,60,.92); color:#fff; }
