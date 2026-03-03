@@ -73,9 +73,11 @@
       flex: 1 1 auto;
     }
     
-  .thumbwrap{margin:10px 0 10px}
-  .thumb{width:100%;height:auto;display:none;border-radius:14px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.03)}
-  .thumbph{width:100%;padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.03);color:rgba(234,240,247,.72);font-weight:900;text-align:center}
+.thumbstack{margin:10px 0 10px;display:flex;flex-direction:column;gap:10px}
+.thumbslot{position:relative}
+.tlabel{position:absolute;top:10px;left:10px;padding:6px 10px;border-radius:999px;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.12);font-size:11px;font-weight:900;letter-spacing:.2px}
+.thumb{width:100%;height:auto;display:none;border-radius:14px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.03)}
+.thumbph{width:100%;padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.03);color:rgba(234,240,247,.72);font-weight:900;text-align:center}
 
   .links{
       display:flex;
@@ -789,10 +791,20 @@
           <span class="pill">Drop ${d}</span>
           <div class="name">${name}</div>
         </div>
-        <div class="thumbwrap">
-          <img class="thumb" data-dd="${d}" alt="Drop ${d} preview" loading="lazy" decoding="async">
-          <div class="thumbph" data-dd="${d}">Preview loading</div>
-        </div>
+<div class="thumbstack">
+  <div class="thumbslot">
+    <div class="tlabel">Mobile</div>
+    <img class="thumb thumb-m" data-dd="${d}" alt="Drop ${d} Mobile preview" loading="lazy" decoding="async">
+    <div class="thumbph thumbph-m" data-dd="${d}">Mobile coming</div>
+  </div>
+
+  <div class="thumbslot">
+    <div class="tlabel">PC</div>
+    <img class="thumb thumb-pc" data-dd="${d}" alt="Drop ${d} PC preview" loading="lazy" decoding="async">
+    <div class="thumbph thumbph-pc" data-dd="${d}">PC coming</div>
+  </div>
+</div>
+
         <div class="links">
           <a class="a off" href="${mobileHref}" aria-disabled="true">Mobile</a>
           <a class="a off" href="${pcHref}" aria-disabled="true">PC</a>
@@ -838,23 +850,35 @@
     const links=document.querySelectorAll('a[href*="drop_"][href$=".png"]');
     for(const a of links){const m=a.getAttribute("href").match(RX); if(!m) continue; const rec=map.get(m[1]); if(rec && rec[m[2]]) on(a); else off(a);}
 
-    const thumbs=document.querySelectorAll('.thumb[data-dd]');
-    for(const img of thumbs){
-      const dd=img.getAttribute('data-dd');
-      const rec=map.get(dd);
-      const ph=document.querySelector('.thumbph[data-dd="'+dd+'"]');
-      if(!rec) continue;
-      const pcOk=!!rec.pc, mOk=!!rec.mobile;
-      const src = pcOk ? (`/ledgerdrop_xrpl/assets/drop_${dd}_pc.png`) : (mOk ? (`/ledgerdrop_xrpl/assets/drop_${dd}_mobile.png`) : "");
-      if(src){
-        img.src = src;
-        img.style.display = "block";
-        if(ph) ph.style.display = "none";
-      } else {
-        img.style.display = "none";
-        if(ph) ph.style.display = "block";
+      const mImgs=document.querySelectorAll('.thumb-m[data-dd]');
+      for(const img of mImgs){
+        const dd=img.getAttribute('data-dd');
+        const rec=map.get(dd);
+        const ph=document.querySelector('.thumbph-m[data-dd="'+dd+'"]');
+        if(rec && rec.mobile){
+          img.src = `/ledgerdrop_xrpl/assets/drop_${dd}_mobile.png`;
+          img.style.display = "block";
+          if(ph) ph.style.display = "none";
+        } else {
+          img.style.display = "none";
+          if(ph) ph.style.display = "block";
+        }
       }
-    }
+
+      const pcImgs=document.querySelectorAll('.thumb-pc[data-dd]');
+      for(const img of pcImgs){
+        const dd=img.getAttribute('data-dd');
+        const rec=map.get(dd);
+        const ph=document.querySelector('.thumbph-pc[data-dd="'+dd+'"]');
+        if(rec && rec.pc){
+          img.src = `/ledgerdrop_xrpl/assets/drop_${dd}_pc.png`;
+          img.style.display = "block";
+          if(ph) ph.style.display = "none";
+        } else {
+          img.style.display = "none";
+          if(ph) ph.style.display = "block";
+        }
+      }
 
   };
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",run); else run();
