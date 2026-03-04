@@ -43,6 +43,7 @@ function hook(){
   tile.addEventListener("input", function(){ render(tile.value); });
   tile.addEventListener("change", function(){ render(tile.value); });
   setTimeout(function(){ render(tile.value); }, 250);
+  var _n=el("priceNote"); if(_n) _n.textContent="Pricing preview loaded. Type a coordinate to see tier + price."; 
   var last = tile.value;
   setInterval(function(){
     if(tile.value !== last){ last = tile.value; render(tile.value); }
