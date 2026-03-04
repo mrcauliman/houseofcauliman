@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="/monolith/claim/pricing_preview.css?v=1">
+  <script defer src="/monolith/claim/pricing_preview.js?v=1"></script>
   <script defer src="/monolith/claim/pricing.js?v=1"></script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
@@ -254,6 +256,13 @@
             <div class="field">
               <label>Tile</label>
               <input id="tile" type="text" placeholder="E23-N11 or 23,-11" autocomplete="off" />
+              <div id="pricePreview">
+                <div class="row">
+                  <span id="priceBadge" class="badge"></span>
+                  <div id="priceValue"></div>
+                </div>
+                <div id="priceNote">Enter a coordinate to preview pricing.</div>
+              </div>
               <div class="hint">Accepted: E23-N11, E23N11, dash variants, and coords 23,-11. Input canonicalizes after action.</div>
             </div>
 
