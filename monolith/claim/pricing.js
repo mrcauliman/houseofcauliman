@@ -2,164 +2,211 @@
 (function () {
   "use strict";
 
-  var BASE_PRICE = 50;
+  var BASE_PRICE_XRP = 50;
 
-  function absInt(v){
-    var n = parseInt((v==null?"":String(v)).replace(/[^\d-]/g,""), 10);
-    if (isNaN(n)) n = 0;
-    return Math.abs(n);
+  // Only forever lock
+  function isNA(gx, gy) {
+    gx = Math.abs(parseInt(gx || "0", 10));
+    gy = Math.abs(parseInt(gy || "0", 10));
+    return gx === 666 || gy === 666;
   }
 
-  function parseTileInput(raw){
-    var s = (raw==null?"":String(raw)).trim().toUpperCase();
-    if (!s) return { gx: 0, gy: 0 };
+  // Premium tier numbers
+  function isPremium(gx, gy) {
+    gx = Math.abs(parseInt(gx || "0", 10));
+    gy = Math.abs(parseInt(gy || "0", 10));
 
-    // allow separators: space, slash, pipe
-    s = s.replace(/\s+/g, " ").replace(/[|]/g, "/");
+    // Special high-demand numbers are still PREMIUM, not "special"
+    var special = [589, 143, 69, 67, 420, 777, 888];
+    for (var i = 0; i < special.length; i++) {
+      if (gx === special[i] || gy === special[i]) return true;
+    }
 
-    // numeric "x,y"
+    // Repeats 11..99 on either axis
+    if (gx !== 0 && gx <= 99 && gx % 11 === 0) return true;
+    if (gy !== 0 && gy <= 99 && gy % 11 === 0) return true;
+
+    // Hundreds milestones
+    var hundreds = [100, 200, 300, 400, 500];
+    for (var j = 0; j < hundreds.length; j++) {
+      if (gx === hundreds[j] || gy === hundreds[j]) return true;
+    }
+
+    return false;
+  }
+
+  function tierFor(gx, gy) {
+    if (isNA(gx, gy)) return "na";
+    if (isPremium(gx, gy)) return "premium";
+    return "standard";
+  }
+
+  // Human input to gx/gy
+  function parseCoords(input) {
+    var s = String(input || "").trim().toUpperCase();
+    if (!s) return null;
+
+    if (s === "ORIGIN" || s === "0,0" || s === "0 0") return { gx: 0, gy: 0 };
+
+    // "x,y"
     var m = s.match(/^\s*(-?\d+)\s*,\s*(-?\d+)\s*$/);
-    if (m) return { gx: parseInt(m[1],10)||0, gy: parseInt(m[2],10)||0 };
+    if (m) return { gx: parseInt(m[1], 10), gy: parseInt(m[2], 10) };
 
-    // collect axis tokens anywhere, supports E23-N11, N-11/E-23, "W 5", etc
+    // Normalize separators
+    s = s.replace(/[\/|]+/g, " ").replace(/[\s]+/g, " ").trim();
+
+    // Tokenize N/S/E/W chunks like "N-11", "E23", "W 7"
     var gx = null, gy = null;
-    var re = /([NSEW])\s*[-:]?\s*(-?\d+)/g;
-    var hit;
-    while ((hit = re.exec(s)) !== null){
-      var dir = hit[1];
-      var num = parseInt(hit[2],10);
-      if (isNaN(num)) continue;
+
+    // Allow combos like "E23 N11", "W-1 S-2", "N11/E23", "W1-N1"
+    var tokens = s.split(" ");
+    for (var i = 0; i < tokens.length; i++) {
+      var t = tokens[i].trim();
+      if (!t) continue;
+
+      // Handle "W1-N1" with dash between axes
+      if (t.indexOf("-") > 0 && /[NSEW]/.test(t)) {
+        var parts = t.split("-");
+        if (parts.length === 2 && /^[NSEW]/.test(parts[0]) && /^[NSEW]/.test(parts[1])) {
+          tokens.push(parts[0]);
+          tokens.push(parts[1]);
+          continue;
+        }
+      }
+
+      var mm = t.match(/^([NSEW])\s*(-?\d+)$/);
+      if (!mm) continue;
+
+      var dir = mm[1];
+      var num = parseInt(mm[2], 10);
+
       if (dir === "E") gx = Math.abs(num);
       if (dir === "W") gx = -Math.abs(num);
       if (dir === "N") gy = Math.abs(num);
       if (dir === "S") gy = -Math.abs(num);
     }
 
-    // allow bare single axis like "W-1"
-    if (gx == null && gy == null){
-      var one = s.match(/^\s*([NSEW])\s*[-:]?\s*(-?\d+)\s*$/);
-      if (one){
-        var d = one[1], n = parseInt(one[2],10)||0;
-        if (d === "E") gx = Math.abs(n);
-        if (d === "W") gx = -Math.abs(n);
-        if (d === "N") gy = Math.abs(n);
-        if (d === "S") gy = -Math.abs(n);
-      }
+    // If user only gives one axis, default the other to 0
+    if (gx === null && gy === null) return null;
+    if (gx === null) gx = 0;
+    if (gy === null) gy = 0;
+
+    return { gx: gx, gy: gy };
+  }
+
+  function formatPreview(tier) {
+    if (tier === "na") return { badge: "NOT AVAILABLE", price: null, note: "This coordinate is locked." };
+    if (tier === "premium") return { badge: "PREMIUM", price: String(BASE_PRICE_XRP) + " XRP", note: "Premium tile. Launch price." };
+    return { badge: null, price: String(BASE_PRICE_XRP) + " XRP", note: "Standard tile. Fixed price." };
+  }
+
+  // UI wiring (safe, no hard dependency on your existing IDs)
+  function findTileInput() {
+    var selectors = [
+      "#tile",
+      "#coord",
+      "#coords",
+      "#coordinate",
+      "input[name='tile']",
+      "input[name='coord']",
+      "input[name='coords']",
+      "input[placeholder*='N-']",
+      "input[placeholder*='E-']"
+    ];
+    for (var i = 0; i < selectors.length; i++) {
+      var el = document.querySelector(selectors[i]);
+      if (el) return el;
     }
-
-    return { gx: gx==null?0:gx, gy: gy==null?0:gy };
+    return null;
   }
 
-  function isPremium(ax){
-    // premium numbers and sets
-    if (ax === 589 || ax === 143 || ax === 69 || ax === 67 || ax === 420 || ax === 777 || ax === 888) return true;
-    if (ax !== 0 && ax <= 99 && (ax % 11 === 0)) return true; // repeats 11..99
-    if (ax === 100 || ax === 200 || ax === 300 || ax === 400 || ax === 500) return true;
-    return false;
-  }
-
-  function tierFor(gx, gy){
-    var ax = absInt(gx);
-    var ay = absInt(gy);
-
-    // only forever lock
-    if (ax === 666 || ay === 666) return { tier: "na", text: "NOT AVAILABLE" };
-
-    var premium = isPremium(ax) || isPremium(ay);
-    if (premium) return { tier: "premium", text: "PREMIUM " + BASE_PRICE + " XRP" };
-
-    return { tier: "standard", text: "STANDARD " + BASE_PRICE + " XRP" };
-  }
-
-  function ensureBox(){
-    var box = document.getElementById("pricingPreview");
+  function ensureBox(afterEl) {
+    var box = document.getElementById("monolithPricePreview");
     if (box) return box;
 
     box = document.createElement("div");
-    box.id = "pricingPreview";
-    box.style.margin = "12px 0";
+    box.id = "monolithPricePreview";
+    box.style.marginTop = "10px";
     box.style.padding = "10px 12px";
-    box.style.borderRadius = "10px";
     box.style.border = "1px solid rgba(255,255,255,.12)";
+    box.style.borderRadius = "10px";
     box.style.background = "rgba(0,0,0,.25)";
     box.style.fontSize = "14px";
-    box.style.lineHeight = "1.25";
+    box.style.lineHeight = "1.35";
 
-    var title = document.createElement("div");
-    title.textContent = "Pricing Preview";
-    title.style.fontWeight = "800";
-    title.style.marginBottom = "6px";
+    var badge = document.createElement("div");
+    badge.id = "monolithPriceBadge";
+    badge.style.fontWeight = "800";
+    badge.style.letterSpacing = ".4px";
+    badge.style.marginBottom = "4px";
 
-    var body = document.createElement("div");
-    body.id = "pricingPreviewBody";
-    body.style.fontWeight = "700";
-    body.textContent = "STANDARD " + BASE_PRICE + " XRP";
+    var price = document.createElement("div");
+    price.id = "monolithPriceValue";
+    price.style.fontWeight = "700";
+    price.style.marginBottom = "4px";
 
-    box.appendChild(title);
-    box.appendChild(body);
+    var note = document.createElement("div");
+    note.id = "monolithPriceNote";
+    note.style.opacity = ".85";
 
-    // place near top of first form or main container
-    var host =
-      document.querySelector("form") ||
-      document.querySelector(".panel") ||
-      document.querySelector(".wrap") ||
-      document.body;
-    host.insertBefore(box, host.firstChild);
+    box.appendChild(badge);
+    box.appendChild(price);
+    box.appendChild(note);
+
+    if (afterEl && afterEl.parentNode) {
+      afterEl.parentNode.insertBefore(box, afterEl.nextSibling);
+    } else {
+      document.body.appendChild(box);
+    }
 
     return box;
   }
 
-  function findTileInput(){
-    // prefer common ids
-    return (
-      document.getElementById("tile") ||
-      document.getElementById("coord") ||
-      document.getElementById("coords") ||
-      document.querySelector("input[name='tile']") ||
-      document.querySelector("input[name='coords']") ||
-      document.querySelector("input[type='text']")
-    );
-  }
+  function renderForInputValue(v) {
+    var c = parseCoords(v);
+    var badgeEl = document.getElementById("monolithPriceBadge");
+    var priceEl = document.getElementById("monolithPriceValue");
+    var noteEl = document.getElementById("monolithPriceNote");
 
-  function paint(){
-    var box = ensureBox();
-    var body = document.getElementById("pricingPreviewBody");
-    if (!body) return;
+    if (!badgeEl || !priceEl || !noteEl) return;
 
-    var inp = findTileInput();
-    var gx = 0, gy = 0;
-    if (inp){
-      var p = parseTileInput(inp.value);
-      gx = p.gx; gy = p.gy;
+    if (!c) {
+      badgeEl.textContent = "";
+      priceEl.textContent = "";
+      noteEl.textContent = "";
+      return;
     }
 
-    var t = tierFor(gx, gy);
-    body.textContent = t.text;
+    var t = tierFor(c.gx, c.gy);
+    var p = formatPreview(t);
 
-    // subtle emphasis without touching global styles
-    if (t.tier === "premium"){
-      box.style.borderColor = "rgba(255,215,0,.45)";
-    } else if (t.tier === "na"){
-      box.style.borderColor = "rgba(220,20,60,.55)";
-    } else {
-      box.style.borderColor = "rgba(255,255,255,.12)";
-    }
+    badgeEl.textContent = p.badge ? p.badge : "";
+    priceEl.textContent = p.price ? ("Preview: " + p.price) : "Preview: NOT AVAILABLE";
+    noteEl.textContent = p.note || "";
   }
 
-  function boot(){
-    ensureBox();
-    paint();
+  function boot() {
+    var input = findTileInput();
+    if (!input) return;
 
-    var inp = findTileInput();
-    if (inp){
-      inp.addEventListener("input", function(){ paint(); });
-      inp.addEventListener("change", function(){ paint(); });
-      inp.addEventListener("blur", function(){ paint(); });
-    }
+    ensureBox(input);
+    renderForInputValue(input.value);
 
-    // keep it fresh if claim page scripts rewrite the input programmatically
-    setInterval(paint, 1200);
+    input.addEventListener("input", function () {
+      renderForInputValue(input.value);
+    });
+
+    input.addEventListener("change", function () {
+      renderForInputValue(input.value);
+    });
   }
+
+  window.MONOLITH_CLAIM_PRICING = {
+    parseCoords: parseCoords,
+    tierFor: tierFor,
+    formatPreview: formatPreview,
+    basePriceXrp: BASE_PRICE_XRP
+  };
 
   document.addEventListener("DOMContentLoaded", boot);
 })();
