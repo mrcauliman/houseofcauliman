@@ -43,6 +43,10 @@ function hook(){
   tile.addEventListener("input", function(){ render(tile.value); });
   tile.addEventListener("change", function(){ render(tile.value); });
   setTimeout(function(){ render(tile.value); }, 250);
+  var last = tile.value;
+  setInterval(function(){
+    if(tile.value !== last){ last = tile.value; render(tile.value); }
+  }, 300);
   var gen=el("gen");
   if(gen) gen.addEventListener("click", function(){ setTimeout(function(){ render(tile.value); }, 0); });
 }
