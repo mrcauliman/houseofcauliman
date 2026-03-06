@@ -3,6 +3,10 @@
   "use strict";
 
   var BASE_PRICE_XRP = 50;
+  var PRICE_STANDARD_XRP = 50;
+  var PRICE_PREMIUM_XRP = 150;
+  var PRICE_ELITE_XRP = 500;
+
 
   // Only forever lock
   function isNA(gx, gy) {
@@ -12,7 +16,7 @@
   }
 
   // Premium tier numbers
-  function isPremium(gx, gy) {
+  function isElite(gx, gy) {
     gx = Math.abs(parseInt(gx || "0", 10));
     gy = Math.abs(parseInt(gy || "0", 10));
 
@@ -35,8 +39,21 @@
     return false;
   }
 
+  function isPremium(gx, gy) {
+    gx = Math.abs(parseInt(gx || "0", 10));
+    gy = Math.abs(parseInt(gy || "0", 10));
+    if (gx !== 0 && gx <= 99 && gx % 11 === 0) return true;
+    if (gy !== 0 && gy <= 99 && gy % 11 === 0) return true;
+    var hundreds = [100, 200, 300, 400, 500];
+    for (var j = 0; j < hundreds.length; j++) {
+      if (gx === hundreds[j] || gy === hundreds[j]) return true;
+    }
+    return false;
+  }
+
   function tierFor(gx, gy) {
     if (isNA(gx, gy)) return "na";
+    if (isElite(gx, gy)) return "elite";
     if (isPremium(gx, gy)) return "premium";
     return "standard";
   }
@@ -96,8 +113,9 @@
 
   function formatPreview(tier) {
     if (tier === "na") return { badge: "NOT AVAILABLE", price: null, note: "This coordinate is locked." };
-    if (tier === "premium") return { badge: "PREMIUM", price: String(BASE_PRICE_XRP) + " XRP", note: "Premium tile. Launch price." };
-    return { badge: null, price: String(BASE_PRICE_XRP) + " XRP", note: "Standard tile. Fixed price." };
+    if (tier === "elite") return { badge: "PREMIUM", price: String(PRICE_ELITE_XRP) + " XRP", note: "Premium tile. Elite tier." };
+    if (tier === "premium") return { badge: "PREMIUM", price: String(PRICE_PREMIUM_XRP) + " XRP", note: "Premium tile. Launch price." };
+    return { badge: null, price: String(PRICE_STANDARD_XRP) + " XRP", note: "Standard tile. Fixed price." };
   }
 
   // UI wiring (safe, no hard dependency on your existing IDs)
