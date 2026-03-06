@@ -388,7 +388,7 @@
       const raw = normalizeDash(input);
       if(!raw) return null;
 
-      const coord = raw.match(/^(-?\d+),(-?\d+)$/);
+      const coord = raw.match(/^\s*(-?\d+)\s*,\s*(-?\d+)\s*$/);
       if(coord){
         const gx = parseInt(coord[1], 10);
         const gy = parseInt(coord[2], 10);
@@ -396,7 +396,7 @@
         return { gx, gy, tile: tileFromCoords(gx, gy) };
       }
 
-      const t1 = raw.match(/^([EW])(\d+)-([NS])(\d+)$/i);
+      const t1 = raw.match(/^([EW])(\d+)[\s-]+([NS])(\d+)$/i);
       if(t1){
         const gx = (t1[1].toUpperCase() === "E" ? 1 : -1) * parseInt(t1[2], 10);
         const gy = (t1[3].toUpperCase() === "N" ? 1 : -1) * parseInt(t1[4], 10);
