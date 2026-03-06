@@ -18,11 +18,13 @@
       "n": 2,
       "mobile": {
         "path": "assets/drop_002_mobile.png",
-        "exists": false
+        "exists": true,
+        "sha256": "ab3594b633a3cdf11b76e2fca73580ac5cc1b2657daee32be4f15181e0ba6fc5"
       },
       "pc": {
         "path": "assets/drop_002_pc.png",
-        "exists": false
+        "exists": true,
+        "sha256": "eeedf25730f1854a574ae64eaa9c5f3c0637db8e83638b1605d8635a000e9bed"
       }
     },
     {
