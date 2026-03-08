@@ -31,11 +31,13 @@
       "n": 3,
       "mobile": {
         "path": "assets/drop_003_mobile.png",
-        "exists": false
+        "exists": true,
+        "sha256": "6ad0f18a55fd3edfdbef7306bf83cf03cb34ac6b99d74f3115927a972e49b565"
       },
       "pc": {
         "path": "assets/drop_003_pc.png",
-        "exists": false
+        "exists": true,
+        "sha256": "8cb16f116f45157cbfe680e536b36877cdaf139ae4bbd90c7f804f298f4aaee8"
       }
     },
     {
