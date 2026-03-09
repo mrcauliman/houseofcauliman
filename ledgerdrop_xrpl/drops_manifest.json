@@ -45,23 +45,25 @@
       "mobile": {
         "path": "assets/drop_004_mobile.png",
         "exists": true,
-        "sha256": "277fda2bf09c3639a85829161f0ada8472a9eecf3212711db5c4e38baebcaace"
+        "sha256": "6e8569c7805ddef1fc7c3aad4c4d6ab59e76077cefde5d0758b746c0488071e3"
       },
       "pc": {
         "path": "assets/drop_004_pc.png",
         "exists": true,
-        "sha256": "e395aa663cd8a5fc410fbcbd9cc63941c5ccaa7412af5c6e1d2a9ac78037f5c4"
+        "sha256": "335792da80aa7f7428451f36ac5041b4c748e2936be8cabf0542c92638463c54"
       }
     },
     {
       "n": 5,
       "mobile": {
         "path": "assets/drop_005_mobile.png",
-        "exists": false
+        "exists": true,
+        "sha256": "b524b5212c472f046f0ad190a408957ab0b73f0502321c5bc6926962a83f550a"
       },
       "pc": {
         "path": "assets/drop_005_pc.png",
-        "exists": false
+        "exists": true,
+        "sha256": "8a945ebf06d887786371117d48ec6ecf41fe3c1a4fa02f5f4a192c2d5954fcb1"
       }
     },
     {
