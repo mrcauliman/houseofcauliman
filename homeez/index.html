@@ -20,24 +20,23 @@
 
   <style>
     :root{
-      --bg:#07090f;
-      --bg2:#0d1220;
-      --panel:#101725;
+      --bg:#080b12;
+      --bg2:#0d1320;
+      --text:#f5f7fb;
+      --muted:#a4b0c7;
       --line:rgba(255,255,255,.08);
-      --text:#f6f8fc;
-      --muted:#9eacc7;
-      --glass1:rgba(173,224,255,.18);
-      --glass2:rgba(255,255,255,.05);
-      --metal1:#dfe6ef;
-      --metal2:#a8b4c7;
-      --metal3:#66738b;
-      --red1:#ff4c59;
-      --red2:#c91929;
-      --red3:#7f0d19;
-      --gold1:#ffd66a;
-      --gold2:#f2ad1b;
-      --gold3:#996307;
-      --shadow:0 28px 80px rgba(0,0,0,.45);
+      --red1:#ef3f47;
+      --red2:#c51b24;
+      --red3:#7d0c15;
+      --chrome1:#f3f6fb;
+      --chrome2:#b6c0d1;
+      --chrome3:#6a7488;
+      --chrome4:#2c3444;
+      --glass1:rgba(190,227,255,.22);
+      --glass2:rgba(255,255,255,.07);
+      --gold1:#ffd86e;
+      --gold2:#d69210;
+      --shadow:0 28px 80px rgba(0,0,0,.48);
       --max:1220px;
     }
 
@@ -49,14 +48,12 @@
       font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
       color:var(--text);
       background:
-        radial-gradient(circle at top left, rgba(90,169,255,.14), transparent 32%),
-        radial-gradient(circle at top right, rgba(255,90,90,.10), transparent 28%),
-        radial-gradient(circle at bottom center, rgba(255,214,106,.08), transparent 30%),
+        radial-gradient(circle at top left, rgba(84,132,255,.10), transparent 32%),
+        radial-gradient(circle at top right, rgba(255,72,72,.08), transparent 26%),
         linear-gradient(180deg, var(--bg), var(--bg2));
     }
 
     a{text-decoration:none;color:inherit}
-    img{max-width:100%;display:block}
     .wrap{width:min(calc(100% - 28px), var(--max));margin:0 auto}
 
     .topbar{
@@ -64,7 +61,7 @@
       top:0;
       z-index:20;
       backdrop-filter:blur(14px);
-      background:rgba(7,9,15,.72);
+      background:rgba(8,11,18,.74);
       border-bottom:1px solid var(--line);
     }
     .topbar-inner{
@@ -89,7 +86,7 @@
       border-radius:12px;
       background:
         radial-gradient(circle at 30% 30%, rgba(255,255,255,.22), transparent 36%),
-        linear-gradient(135deg, rgba(255,76,89,.28), rgba(255,214,106,.18));
+        linear-gradient(135deg, rgba(239,63,71,.28), rgba(255,216,110,.18));
       border:1px solid rgba(255,255,255,.12);
       box-shadow:inset 0 1px 0 rgba(255,255,255,.14), 0 12px 32px rgba(0,0,0,.35);
     }
@@ -115,7 +112,7 @@
     }
     .hero-grid{
       display:grid;
-      grid-template-columns:minmax(320px,520px) 1fr;
+      grid-template-columns:minmax(320px,470px) 1fr;
       gap:34px;
       align-items:center;
     }
@@ -125,9 +122,9 @@
       gap:10px;
       padding:8px 12px;
       border-radius:999px;
-      border:1px solid rgba(255,214,106,.22);
-      color:#ffe9ac;
-      background:rgba(255,214,106,.08);
+      border:1px solid rgba(255,216,110,.22);
+      color:#ffe8a7;
+      background:rgba(255,216,110,.08);
       font-size:12px;
       font-weight:900;
       letter-spacing:.12em;
@@ -144,7 +141,7 @@
       font-size:18px;
       line-height:1.6;
       color:var(--muted);
-      max-width:540px;
+      max-width:520px;
     }
     .cta-row{
       display:flex;
@@ -168,8 +165,8 @@
       color:var(--text);
     }
     .btn-machine{
-      background:linear-gradient(180deg, rgba(255,214,106,.22), rgba(242,173,27,.10));
-      border:1px solid rgba(255,214,106,.24);
+      background:linear-gradient(180deg, rgba(255,216,110,.22), rgba(214,146,16,.10));
+      border:1px solid rgba(255,216,110,.24);
       color:#ffefbf;
       pointer-events:none;
       cursor:not-allowed;
@@ -181,289 +178,291 @@
       align-items:flex-end;
     }
     .machine{
-      width:min(100%, 620px);
+      width:min(100%, 540px);
       position:relative;
       filter:drop-shadow(0 34px 70px rgba(0,0,0,.42));
     }
 
-    .top-cap{
-      width:74%;
-      height:58px;
+    .lid{
+      width:58%;
+      height:42px;
       margin:0 auto -6px;
-      border-radius:26px 26px 14px 14px;
+      border-radius:18px 18px 10px 10px;
       background:
-        linear-gradient(180deg, #ff8d96 0%, var(--red1) 18%, var(--red2) 72%, var(--red3) 100%);
-      border:2px solid rgba(255,255,255,.18);
+        linear-gradient(180deg, #ff8187 0%, var(--red1) 16%, var(--red2) 68%, var(--red3) 100%);
+      border:2px solid rgba(255,255,255,.16);
       box-shadow:
-        inset 0 10px 14px rgba(255,255,255,.18),
-        inset 0 -12px 18px rgba(0,0,0,.22);
+        inset 0 6px 10px rgba(255,255,255,.16),
+        inset 0 -10px 16px rgba(0,0,0,.20);
       position:relative;
-      z-index:4;
-    }
-    .top-cap:before{
-      content:"";
-      position:absolute;
-      left:10%;
-      right:10%;
-      top:8px;
-      height:12px;
-      border-radius:999px;
-      background:rgba(255,255,255,.20);
-      filter:blur(.4px);
+      z-index:5;
     }
 
-    .globe-shell{
+    .globe{
       position:relative;
       width:100%;
       aspect-ratio:1 / 1;
       border-radius:50%;
-      background:
-        radial-gradient(circle at 28% 24%, rgba(255,255,255,.58) 0%, rgba(255,255,255,.22) 10%, rgba(255,255,255,.05) 22%, transparent 30%),
-        radial-gradient(circle at 50% 20%, rgba(255,255,255,.18), transparent 38%),
-        radial-gradient(circle at 50% 56%, rgba(173,224,255,.14), rgba(173,224,255,.05) 55%, rgba(255,255,255,.02) 75%, rgba(255,255,255,.01) 100%);
-      border:3px solid rgba(226,241,255,.30);
-      box-shadow:
-        inset 0 0 0 8px rgba(255,255,255,.03),
-        inset 0 -40px 80px rgba(0,0,0,.14),
-        0 18px 40px rgba(0,0,0,.20);
       overflow:hidden;
-      z-index:3;
-    }
-    .globe-shell:after{
-      content:"";
-      position:absolute;
-      inset:0;
-      border-radius:50%;
+      background:
+        radial-gradient(circle at 26% 20%, rgba(255,255,255,.62) 0%, rgba(255,255,255,.22) 8%, rgba(255,255,255,.06) 18%, transparent 26%),
+        radial-gradient(circle at 46% 14%, rgba(255,255,255,.18), transparent 36%),
+        radial-gradient(circle at 50% 58%, rgba(175,223,255,.16), rgba(175,223,255,.05) 56%, rgba(255,255,255,.02) 78%, rgba(255,255,255,.01) 100%);
+      border:3px solid rgba(235,245,255,.32);
       box-shadow:
-        inset -20px -36px 80px rgba(0,0,0,.18),
-        inset 18px 20px 50px rgba(255,255,255,.05);
-      pointer-events:none;
+        inset 0 0 0 8px rgba(255,255,255,.025),
+        inset -18px -30px 70px rgba(0,0,0,.14),
+        inset 18px 18px 46px rgba(255,255,255,.04),
+        0 18px 40px rgba(0,0,0,.18);
+      z-index:4;
     }
 
-    .globe-inner{
+    .gumballs{
       position:absolute;
-      inset:8% 8% 12% 8%;
+      inset:10% 9% 12% 9%;
       border-radius:50%;
     }
-
     .gumball{
       position:absolute;
-      width:70px;
-      height:70px;
+      width:64px;
+      height:64px;
       border-radius:50%;
       box-shadow:
-        inset 0 6px 12px rgba(255,255,255,.24),
-        inset 0 -10px 16px rgba(0,0,0,.18),
-        0 8px 14px rgba(0,0,0,.18);
+        inset 0 5px 10px rgba(255,255,255,.26),
+        inset 0 -9px 14px rgba(0,0,0,.18),
+        0 7px 14px rgba(0,0,0,.14);
     }
     .gumball:before{
       content:"";
       position:absolute;
-      width:24px;
-      height:14px;
-      left:12px;
-      top:12px;
+      width:20px;
+      height:12px;
+      left:11px;
+      top:11px;
       border-radius:50%;
       background:rgba(255,255,255,.30);
       transform:rotate(-18deg);
-      filter:blur(.4px);
     }
 
-    .g1{left:7%; top:20%; background:linear-gradient(180deg,#7ad5ff,#297dff)}
-    .g2{left:22%; top:12%; background:linear-gradient(180deg,#ff8eb8,#db285e)}
-    .g3{left:39%; top:18%; background:linear-gradient(180deg,#ffe47f,#f0a90a)}
-    .g4{left:56%; top:12%; background:linear-gradient(180deg,#94f6a8,#26b44e)}
-    .g5{left:70%; top:21%; background:linear-gradient(180deg,#d59bff,#7f43d7)}
-    .g6{left:15%; top:39%; background:linear-gradient(180deg,#ffba7a,#ef6f10)}
-    .g7{left:31%; top:34%; background:linear-gradient(180deg,#86f7f3,#00a9b0)}
-    .g8{left:49%; top:37%; background:linear-gradient(180deg,#ff8fe7,#ff4db2)}
-    .g9{left:66%; top:38%; background:linear-gradient(180deg,#dfff81,#93c91d)}
-    .g10{left:24%; top:56%; background:linear-gradient(180deg,#9ab8ff,#4050dd)}
-    .g11{left:43%; top:58%; background:linear-gradient(180deg,#ffd878,#dd8a00)}
-    .g12{left:60%; top:58%; background:linear-gradient(180deg,#ff9292,#d4293b)}
+    .g1{left:8%;top:18%;background:linear-gradient(180deg,#7ad5ff,#297dff)}
+    .g2{left:24%;top:11%;background:linear-gradient(180deg,#ff93bd,#db285e)}
+    .g3{left:41%;top:17%;background:linear-gradient(180deg,#ffe47f,#f0a90a)}
+    .g4{left:58%;top:12%;background:linear-gradient(180deg,#8ef3a4,#23b24a)}
+    .g5{left:73%;top:20%;background:linear-gradient(180deg,#d59bff,#7f43d7)}
+    .g6{left:16%;top:38%;background:linear-gradient(180deg,#ffba7a,#ef6f10)}
+    .g7{left:33%;top:33%;background:linear-gradient(180deg,#86f7f3,#00a9b0)}
+    .g8{left:50%;top:36%;background:linear-gradient(180deg,#ff8fe7,#ff4db2)}
+    .g9{left:67%;top:38%;background:linear-gradient(180deg,#dfff81,#93c91d)}
+    .g10{left:25%;top:55%;background:linear-gradient(180deg,#9ab8ff,#4050dd)}
+    .g11{left:44%;top:57%;background:linear-gradient(180deg,#ffd878,#dd8a00)}
+    .g12{left:61%;top:57%;background:linear-gradient(180deg,#ff9292,#d4293b)}
 
-    .neck{
-      width:170px;
-      height:56px;
-      margin:-18px auto 0;
-      border-radius:18px 18px 10px 10px;
+    .chrome-collar{
+      width:66%;
+      height:34px;
+      margin:-10px auto 0;
+      border-radius:999px;
       background:
-        linear-gradient(180deg, #ff7e87 0%, var(--red2) 55%, var(--red3) 100%);
-      border:2px solid rgba(255,255,255,.14);
+        linear-gradient(180deg, var(--chrome1) 0%, var(--chrome2) 22%, var(--chrome3) 55%, var(--chrome1) 76%, var(--chrome4) 100%);
+      border:2px solid rgba(255,255,255,.18);
       box-shadow:
-        inset 0 8px 12px rgba(255,255,255,.12),
-        inset 0 -12px 18px rgba(0,0,0,.22);
+        inset 0 3px 6px rgba(255,255,255,.30),
+        inset 0 -5px 8px rgba(0,0,0,.18);
       position:relative;
-      z-index:4;
+      z-index:5;
     }
 
     .body{
-      width:72%;
+      width:58%;
       margin:0 auto;
-      padding:24px 26px 28px;
-      border-radius:34px 34px 28px 28px;
+      padding:22px 18px 18px;
+      border-radius:24px 24px 20px 20px;
       background:
-        linear-gradient(180deg, #ff6f79 0%, var(--red1) 10%, var(--red2) 62%, var(--red3) 100%);
-      border:2px solid rgba(255,255,255,.14);
+        linear-gradient(180deg, #ff7c82 0%, var(--red1) 12%, var(--red2) 60%, var(--red3) 100%);
+      border:2px solid rgba(255,255,255,.15);
       box-shadow:
-        inset 0 14px 18px rgba(255,255,255,.14),
-        inset 0 -26px 36px rgba(0,0,0,.25);
+        inset 0 10px 14px rgba(255,255,255,.14),
+        inset 0 -20px 26px rgba(0,0,0,.22);
       position:relative;
-      z-index:2;
+      z-index:3;
     }
 
     .brand-plate{
-      width:86%;
-      margin:0 auto 22px;
-      padding:16px 18px;
-      border-radius:18px;
+      width:100%;
+      margin:0 auto 18px;
+      padding:14px 14px;
+      border-radius:16px;
       background:
-        linear-gradient(180deg, rgba(255,255,255,.94), rgba(218,226,236,.92));
-      color:#c91d2c;
-      border:2px solid rgba(255,255,255,.40);
+        linear-gradient(180deg, rgba(255,255,255,.95), rgba(222,229,238,.92));
+      color:#c41928;
+      border:2px solid rgba(255,255,255,.36);
       box-shadow:
         inset 0 2px 0 rgba(255,255,255,.8),
-        0 12px 24px rgba(0,0,0,.18);
+        0 10px 18px rgba(0,0,0,.16);
       text-align:center;
     }
     .brand-plate .mini{
       display:block;
-      font-size:11px;
+      font-size:10px;
       font-weight:900;
       letter-spacing:.18em;
-      color:#8e99ab;
+      color:#8b96a8;
       text-transform:uppercase;
       margin-bottom:4px;
     }
     .brand-plate .main{
       display:block;
-      font-size:34px;
+      font-size:28px;
       line-height:1;
       font-weight:1000;
       letter-spacing:-.05em;
     }
 
-    .controls{
+    .hardware{
       display:grid;
-      grid-template-columns:120px 1fr;
-      gap:22px;
-      align-items:center;
+      grid-template-columns:1fr;
+      gap:14px;
+      justify-items:center;
     }
 
-    .coin-panel{
-      width:120px;
-      height:120px;
-      border-radius:26px;
+    .coin-plate{
+      width:114px;
+      height:88px;
+      border-radius:18px;
       background:
-        linear-gradient(180deg, rgba(255,255,255,.22), rgba(255,255,255,.08)),
-        linear-gradient(180deg, #dbe3ee, #9ea9be);
-      border:2px solid rgba(255,255,255,.28);
+        linear-gradient(180deg, var(--chrome1) 0%, var(--chrome2) 18%, var(--chrome3) 52%, var(--chrome1) 76%, var(--chrome4) 100%);
+      border:2px solid rgba(255,255,255,.24);
       box-shadow:
-        inset 0 8px 14px rgba(255,255,255,.28),
-        inset 0 -10px 16px rgba(0,0,0,.18);
-      display:flex;
-      align-items:center;
-      justify-content:center;
+        inset 0 4px 8px rgba(255,255,255,.28),
+        inset 0 -6px 10px rgba(0,0,0,.18);
       position:relative;
     }
-    .coin-panel:before{
-      content:"";
+    .coin-slot{
       position:absolute;
-      width:44px;
-      height:10px;
-      top:20px;
+      top:14px;
       left:50%;
       transform:translateX(-50%);
+      width:46px;
+      height:8px;
       border-radius:999px;
-      background:linear-gradient(180deg,#5a6579,#2e3645);
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.10);
+      background:linear-gradient(180deg,#59657a,#212837);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
     }
-    .coin-knob{
-      width:62px;
-      height:62px;
-      border-radius:50%;
+    .turn-handle{
+      position:absolute;
+      left:50%;
+      top:52px;
+      transform:translateX(-50%);
+      width:68px;
+      height:18px;
+      border-radius:999px;
       background:
-        radial-gradient(circle at 35% 30%, rgba(255,255,255,.35), transparent 28%),
-        linear-gradient(180deg, #f2f5f9, #9ba7bb);
-      border:2px solid rgba(255,255,255,.36);
+        linear-gradient(180deg, var(--chrome1), var(--chrome2) 35%, var(--chrome4));
       box-shadow:
-        inset 0 6px 12px rgba(255,255,255,.30),
-        inset 0 -8px 10px rgba(0,0,0,.14);
-      position:relative;
+        inset 0 2px 4px rgba(255,255,255,.22),
+        0 4px 8px rgba(0,0,0,.16);
     }
-    .coin-knob:after{
+    .turn-handle:before{
       content:"";
       position:absolute;
       left:50%;
       top:50%;
-      width:8px;
-      height:30px;
       transform:translate(-50%,-50%);
+      width:14px;
+      height:40px;
       border-radius:999px;
-      background:linear-gradient(180deg,#59667b,#283040);
-    }
-
-    .dispense{
-      display:grid;
-      gap:16px;
-    }
-
-    .chute{
-      height:88px;
-      border-radius:22px;
       background:
-        linear-gradient(180deg, rgba(0,0,0,.34), rgba(255,255,255,.04)),
-        linear-gradient(180deg, #aab3c4, #636f84);
-      border:2px solid rgba(255,255,255,.20);
+        linear-gradient(180deg, var(--chrome1), var(--chrome2) 40%, var(--chrome4));
       box-shadow:
-        inset 0 10px 20px rgba(0,0,0,.22),
-        inset 0 2px 0 rgba(255,255,255,.16);
+        inset 0 2px 4px rgba(255,255,255,.22),
+        0 4px 8px rgba(0,0,0,.16);
+    }
+
+    .dispense-door{
+      width:140px;
+      height:76px;
+      border-radius:18px 18px 22px 22px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.20), rgba(255,255,255,.06)),
+        linear-gradient(180deg, #b7c0d0, #69758b);
+      border:2px solid rgba(255,255,255,.22);
+      box-shadow:
+        inset 0 8px 12px rgba(255,255,255,.18),
+        inset 0 -10px 16px rgba(0,0,0,.20);
       position:relative;
       overflow:hidden;
     }
-    .chute:before{
+    .dispense-door:before{
       content:"";
       position:absolute;
       left:12px;
       right:12px;
-      top:14px;
+      top:12px;
       bottom:14px;
-      border-radius:14px;
-      background:linear-gradient(180deg, #161d29, #090d14);
-      box-shadow:inset 0 4px 10px rgba(255,255,255,.05);
+      border-radius:12px 12px 14px 14px;
+      background:linear-gradient(180deg,#161d29,#090d14);
+      box-shadow:inset 0 3px 8px rgba(255,255,255,.05);
     }
-    .chute-ball{
+    .dispense-ball{
       position:absolute;
-      right:26px;
-      top:50%;
-      transform:translateY(-50%);
-      width:46px;
-      height:46px;
+      right:18px;
+      bottom:14px;
+      width:34px;
+      height:34px;
       border-radius:50%;
       background:linear-gradient(180deg,#7ad5ff,#297dff);
       box-shadow:
-        inset 0 4px 8px rgba(255,255,255,.25),
-        inset 0 -6px 8px rgba(0,0,0,.18),
-        0 6px 12px rgba(0,0,0,.16);
+        inset 0 4px 7px rgba(255,255,255,.24),
+        inset 0 -5px 7px rgba(0,0,0,.18),
+        0 4px 8px rgba(0,0,0,.16);
       z-index:2;
     }
-    .chute-ball:before{
-      content:"";
-      position:absolute;
-      width:14px;
-      height:8px;
-      left:8px;
-      top:8px;
-      border-radius:50%;
-      background:rgba(255,255,255,.28);
-      transform:rotate(-20deg);
+
+    .post{
+      width:18%;
+      height:110px;
+      margin:0 auto;
+      background:
+        linear-gradient(180deg, var(--chrome1) 0%, var(--chrome2) 18%, var(--chrome3) 52%, var(--chrome1) 76%, var(--chrome4) 100%);
+      border:2px solid rgba(255,255,255,.22);
+      border-top:none;
+      box-shadow:
+        inset 0 6px 10px rgba(255,255,255,.22),
+        inset 0 -10px 16px rgba(0,0,0,.16);
+      position:relative;
+      top:-2px;
+      z-index:2;
     }
 
-    .label-row{
+    .base{
+      width:54%;
+      height:34px;
+      margin:0 auto;
+      border-radius:999px;
+      background:
+        linear-gradient(180deg, var(--chrome1) 0%, var(--chrome2) 18%, var(--chrome3) 52%, var(--chrome1) 76%, var(--chrome4) 100%);
+      border:2px solid rgba(255,255,255,.22);
+      box-shadow:
+        inset 0 4px 8px rgba(255,255,255,.24),
+        inset 0 -8px 12px rgba(0,0,0,.18);
+      position:relative;
+      top:-4px;
+      z-index:1;
+    }
+
+    .base-shadow{
+      width:60%;
+      height:18px;
+      margin:10px auto 0;
+      border-radius:999px;
+      background:rgba(0,0,0,.32);
+      filter:blur(8px);
+    }
+
+    .status-row{
+      margin-top:16px;
       display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
+      gap:10px;
       flex-wrap:wrap;
     }
     .status{
@@ -482,60 +481,9 @@
       color:#eef5ff;
     }
     .status.gold{
-      background:rgba(255,214,106,.10);
-      border-color:rgba(255,214,106,.22);
+      background:rgba(255,216,110,.10);
+      border-color:rgba(255,216,110,.22);
       color:#ffeeb9;
-    }
-
-    .floor{
-      width:86%;
-      height:24px;
-      margin:0 auto;
-      border-radius:999px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.20), rgba(255,255,255,.08)),
-        linear-gradient(180deg, #444d62, #212736);
-      box-shadow:
-        inset 0 2px 4px rgba(255,255,255,.12),
-        0 12px 18px rgba(0,0,0,.20);
-      position:relative;
-      top:-4px;
-      z-index:1;
-    }
-    .stand{
-      width:54%;
-      height:94px;
-      margin:0 auto;
-      border-radius:0 0 28px 28px;
-      background:
-        linear-gradient(180deg, #d7dfeb, #99a6bb 45%, #626e83 100%);
-      border:2px solid rgba(255,255,255,.24);
-      box-shadow:
-        inset 0 10px 14px rgba(255,255,255,.24),
-        inset 0 -16px 24px rgba(0,0,0,.18);
-      position:relative;
-      z-index:0;
-    }
-    .stand:before{
-      content:"";
-      position:absolute;
-      left:50%;
-      top:18px;
-      transform:translateX(-50%);
-      width:68%;
-      height:18px;
-      border-radius:999px;
-      background:linear-gradient(180deg,#6b758a,#2b3342);
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.10);
-    }
-
-    .base-shadow{
-      width:64%;
-      height:18px;
-      margin:10px auto 0;
-      border-radius:999px;
-      background:rgba(0,0,0,.30);
-      filter:blur(8px);
     }
 
     .footer{
@@ -552,12 +500,8 @@
     }
 
     @media (max-width:980px){
-      .hero-grid{
-        grid-template-columns:1fr;
-      }
-      .machine{
-        max-width:560px;
-      }
+      .hero-grid{grid-template-columns:1fr}
+      .machine{max-width:500px}
     }
 
     @media (max-width:640px){
@@ -575,49 +519,13 @@
       .pill{white-space:nowrap}
       .hero{padding:30px 0 42px}
       .sub{font-size:16px}
-      .body{
-        width:84%;
-        padding:18px 18px 22px;
-      }
-      .brand-plate .main{
-        font-size:28px;
-      }
-      .controls{
-        grid-template-columns:92px 1fr;
-        gap:14px;
-      }
-      .coin-panel{
-        width:92px;
-        height:92px;
-        border-radius:20px;
-      }
-      .coin-panel:before{
-        width:34px;
-        top:14px;
-      }
-      .coin-knob{
-        width:48px;
-        height:48px;
-      }
-      .chute{
-        height:70px;
-      }
-      .chute-ball{
-        width:38px;
-        height:38px;
-      }
-      .gumball{
-        width:56px;
-        height:56px;
-      }
-      .neck{
-        width:132px;
-        height:42px;
-      }
-      .stand{
-        height:76px;
-        width:60%;
-      }
+      .machine{max-width:420px}
+      .gumball{width:50px;height:50px}
+      .coin-plate{width:100px;height:78px}
+      .turn-handle{top:46px}
+      .dispense-door{width:124px;height:68px}
+      .post{height:92px}
+      .body{width:64%}
     }
   </style>
 </head>
@@ -640,19 +548,23 @@
         <div>
           <div class="eyebrow">Active Build</div>
           <h1>HOMEEZ</h1>
-          <p class="sub">The digital gumball machine is being built now. Real machine look first. Spin logic next.</p>
+          <p class="sub">The machine is being rebuilt with a real gumball machine silhouette. Spin logic comes after the hardware looks right.</p>
           <div class="cta-row">
             <span class="btn btn-machine">Machine Not Live Yet</span>
             <a class="btn btn-secondary" href="https://houseofcauliman.com/">Back to House</a>
+          </div>
+          <div class="status-row">
+            <span class="status gold">Founding Machine</span>
+            <span class="status">Stand By</span>
           </div>
         </div>
 
         <div class="machine-stage">
           <div class="machine" aria-label="HOMEEZ digital gumball machine">
-            <div class="top-cap"></div>
+            <div class="lid"></div>
 
-            <div class="globe-shell">
-              <div class="globe-inner">
+            <div class="globe">
+              <div class="gumballs">
                 <div class="gumball g1"></div>
                 <div class="gumball g2"></div>
                 <div class="gumball g3"></div>
@@ -668,7 +580,7 @@
               </div>
             </div>
 
-            <div class="neck"></div>
+            <div class="chrome-collar"></div>
 
             <div class="body">
               <div class="brand-plate">
@@ -676,25 +588,20 @@
                 <span class="main">HOMEEZ</span>
               </div>
 
-              <div class="controls">
-                <div class="coin-panel">
-                  <div class="coin-knob"></div>
+              <div class="hardware">
+                <div class="coin-plate">
+                  <div class="coin-slot"></div>
+                  <div class="turn-handle"></div>
                 </div>
 
-                <div class="dispense">
-                  <div class="label-row">
-                    <span class="status gold">Founding Machine</span>
-                    <span class="status">Stand By</span>
-                  </div>
-                  <div class="chute">
-                    <div class="chute-ball"></div>
-                  </div>
+                <div class="dispense-door">
+                  <div class="dispense-ball"></div>
                 </div>
               </div>
             </div>
 
-            <div class="floor"></div>
-            <div class="stand"></div>
+            <div class="post"></div>
+            <div class="base"></div>
             <div class="base-shadow"></div>
           </div>
         </div>
