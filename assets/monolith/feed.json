@@ -35,7 +35,7 @@
     "gy": 1,
     "tag": "AUGUR",
     "link": "https://augurxrpl.com",
-    "img": "/monolith/assets/augur_logo.webp",
+    "img": "/monolith/assets/augur_xrpl_icon.webp",
     "handle": "@augurintel",
     "note": "AUGUR is a read-only Chain Oracle. It reads public wallets and turns them into plain-English statements. No wallet connection, no keys, no custody. It reads everywhere and writes nowhere.",
     "claimable": true,
