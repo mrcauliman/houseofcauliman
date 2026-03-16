@@ -1,22 +1,164 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>NEB — Network Edge Bot</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body{
+background:#050509;
+color:#f5f7ff;
+font-family:system-ui,-apple-system,Segoe UI,Roboto;
+margin:0;
+}
+
+.wrapper{
+max-width:900px;
+margin:auto;
+padding:40px 20px 80px;
+}
+
+.logo{
+max-width:420px;
+width:100%;
+display:block;
+margin-bottom:30px;
+}
+
+.kicker{
+font-size:.75rem;
+letter-spacing:.18em;
+text-transform:uppercase;
+color:#9aa2c3;
+font-weight:900;
+margin-bottom:8px;
+}
+
+h1{
+margin:0;
+font-size:2.6rem;
+letter-spacing:.06em;
+}
+
+.sub{
+margin-top:8px;
+color:#38ff9c;
+font-weight:700;
+letter-spacing:.08em;
+text-transform:uppercase;
+}
+
+p{
+line-height:1.75;
+color:#cfd6de;
+}
+
+.section{
+margin-top:40px;
+}
+
+ul{
+line-height:1.8;
+}
+
+.card{
+border:1px solid #1a1b24;
+border-radius:18px;
+padding:28px;
+background:linear-gradient(180deg,#11121a,#050509);
+margin-top:30px;
+}
+
+.button{
+display:inline-block;
+margin-top:24px;
+padding:12px 16px;
+border-radius:999px;
+border:1px solid #38ff9c66;
+background:#38ff9c11;
+color:#fff;
+text-decoration:none;
+font-weight:700;
+font-size:.8rem;
+letter-spacing:.08em;
+text-transform:uppercase;
+}
+</style>
 </head>
 
-<body style="background:#050509;color:#fff;font-family:system-ui;padding:40px">
+<body>
 
-<img src="/neb/assets/neb_logo.png" style="max-width:420px;width:100%;display:block;margin-bottom:20px">
+<div class="wrapper">
+
+<img src="/neb/assets/neb_logo.png" class="logo">
+
+<p class="kicker">Private Build</p>
 
 <h1>NEB</h1>
-<h3>Network Edge Bot</h3>
+<p class="sub">Network Edge Bot</p>
 
-<p>XRPL execution engine designed to detect and capture network edge.</p>
+<div class="card">
 
-<p>Scanner → paper trading → controlled execution.</p>
+<p>
+NEB is an automated trading bot being built for the XRP Ledger.
+</p>
 
-<a href="/">← Back to House</a>
+<p>
+Its purpose is simple: detect market inefficiencies and capture edge automatically.
+</p>
+
+<p>
+The bot scans XRPL order books, liquidity pools, and routing paths looking for spreads,
+mispriced liquidity, and execution opportunities.
+</p>
+
+</div>
+
+<div class="section">
+
+<h2>What NEB Does</h2>
+
+<ul>
+<li>Scans XRPL order books for spread opportunities</li>
+<li>Identifies liquidity inefficiencies across trading pairs</li>
+<li>Executes automated trades when profitable conditions appear</li>
+<li>Operates without custody of user funds</li>
+</ul>
+
+</div>
+
+<div class="section">
+
+<h2>Build Roadmap</h2>
+
+<ul>
+<li>Market scanning engine</li>
+<li>Paper trading environment</li>
+<li>Strategy testing and safety controls</li>
+<li>Controlled live trading deployment</li>
+</ul>
+
+</div>
+
+<div class="section">
+
+<h2>Why It Exists</h2>
+
+<p>
+Crypto markets constantly produce small inefficiencies.
+NEB is designed to detect those edges and capture them automatically.
+</p>
+
+<p>
+It is infrastructure — not a hype product.
+</p>
+
+</div>
+
+<a class="button" href="/">Back to House</a>
+
+</div>
 
 </body>
 </html>
