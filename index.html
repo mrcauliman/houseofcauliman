@@ -568,7 +568,9 @@
     @media (max-width:980px){.hoc-grid{grid-template-columns:1fr}}
 
     /* Collections grid: normalize card media sizing */
-    section.hoc-grid[style*="margin-top:18px"] .project-media{padding:6px 8px;}
+    section.hoc-grid[style*="margin-top:18px"]{grid-template-columns:repeat(2,minmax(0,1fr));}
+section.hoc-grid[style*="margin-top:18px"]{grid-template-columns:repeat(2,minmax(0,1fr));}
+section.hoc-grid[style*="margin-top:18px"] .project-media{padding:6px 8px;}
     section.hoc-grid[style*="margin-top:18px"] .project-wallpaper{height:300px !important;}
     /* Collections: HOMEEZ max size without changing box */
     section.hoc-grid[style*="margin-top:18px"] img.project-logo[alt="HOMEEZ"]{height:235px;max-height:none;width:100%;max-width:96%;object-fit:contain;}
