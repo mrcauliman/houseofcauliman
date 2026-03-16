@@ -568,6 +568,11 @@
   .feature-split.triple{grid-template-columns:1fr;}
 }
 
+@media (max-width: 980px){
+  .dl-soon > div[style*="grid-template-columns:minmax(0,1fr) auto"]{
+    grid-template-columns:1fr !important;
+  }
+}
 
 .hoc-intro,.hoc-grid,.feature-split{grid-column:1 / -1}
 
@@ -594,7 +599,7 @@
     <img src="/assets/hoc.png" alt="mrcauliman" class="hoc-brand-mark">
     <div class="hoc-header-text">
       <h1>🏛️ HOUSE OF CAULIMAN</h1>
-      <p>XRPL • Active Ecosystems: AUGUR • MONOLITH • $WCK • $RAD • $BAG • Collections</p>
+<p>XRPL • Active Ecosystems: AUGUR • MONOLITH • NEB • $WCK • $RAD • $BAG • Collections</p>
     </div>
   </div>
 </header>
@@ -612,48 +617,47 @@
   <div class="item"><span class="key k-private-build"></span><span>PRIVATE BUILD</span><small>Infrastructure phase. Not public-facing.</small></div>
 </div>
 
-<!-- MONOLITH + AUGUR + LEDGER DROP XRPL split -->
+<!-- AUGUR + MONOLITH + NEB + LEDGER DROP XRPL split -->
 <section class="feature-split triple">
-  <!-- AUGUR (left on desktop) -->
-    <section class="dl-soon">
-      <div class="augur-head">
-        <div class="augur-mark">
-          <img src="/assets/augur/augur_xrpl_icon.png" alt="AUGUR" class="augur-logo">
-        </div>
-        <div>
-          <p class="dl-kicker">Coming Soon</p>
-          <h2 class="dl-title" style="margin:0;">AUGUR</h2>
-          <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
-          <p class="augur-sub">Chain Oracle</p>
-        </div>
+  <!-- AUGUR -->
+  <section class="dl-soon">
+    <div class="augur-head">
+      <div class="augur-mark">
+        <img src="/assets/augur/augur_xrpl_icon.png" alt="AUGUR" class="augur-logo">
       </div>
-    
-      <p class="dl-copy" style="margin-top:12px;">
-        Paste a public wallet address and AUGUR reads the chain for you.
-        It forges clean statements in plain English so you see what changed, where it moved, and what it cost.
-        No wallet connection. No keys. No custody.
-        </p>
-
-      <ul class="dl-bullets">
-        <li>Add multiple wallets across chains under one account, clean and organized</li>
-        <li>See inflows, outflows, fees, and net change, explained like a real statement</li>
-        <li>Tokens and NFTs included, not just the main coin</li>
-        <li>Monthly snapshots plus exports so you can track progress over time</li>
-      </ul>
-
-      <p class="dl-copy" style="margin-top:6px; font-size:0.82rem; color:var(--text-soft);">
-        Non-custodial. Read-only. Public data only.
-      </p>
-
-      <div class="dl-cta">
-        <a class="dl-btn primary" href="https://augurxrpl.com/">View AUGUR</a>
-        <a class="dl-btn" href="https://augurxrpl.com/#faq">Join Waitlist</a>
-        <a class="dl-btn" href="https://x.com/augurintel" target="_blank" rel="noopener">𝕏 PROFILE</a>
+      <div>
+        <p class="dl-kicker">Coming Soon</p>
+        <h2 class="dl-title" style="margin:0;">AUGUR</h2>
+        <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
+        <p class="augur-sub">Chain Oracle</p>
       </div>
-      </section>
+    </div>
 
-      
-<!-- MONOLITH (center on desktop) -->
+    <p class="dl-copy" style="margin-top:12px;">
+      Paste a public wallet address and AUGUR reads the chain for you.
+      It forges clean statements in plain English so you see what changed, where it moved, and what it cost.
+      No wallet connection. No keys. No custody.
+    </p>
+
+    <ul class="dl-bullets">
+      <li>Add multiple wallets across chains under one account, clean and organized</li>
+      <li>See inflows, outflows, fees, and net change, explained like a real statement</li>
+      <li>Tokens and NFTs included, not just the main coin</li>
+      <li>Monthly snapshots plus exports so you can track progress over time</li>
+    </ul>
+
+    <p class="dl-copy" style="margin-top:6px; font-size:0.82rem; color:var(--text-soft);">
+      Non-custodial. Read-only. Public data only.
+    </p>
+
+    <div class="dl-cta">
+      <a class="dl-btn primary" href="https://augurxrpl.com/">View AUGUR</a>
+      <a class="dl-btn" href="https://augurxrpl.com/#faq">Join Waitlist</a>
+      <a class="dl-btn" href="https://x.com/augurintel" target="_blank" rel="noopener">𝕏 PROFILE</a>
+    </div>
+  </section>
+
+  <!-- MONOLITH -->
   <section class="dl-soon mono">
     <div class="augur-head">
       <div class="augur-mark">
@@ -665,70 +669,106 @@
         <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
         <p class="augur-sub">The Wall of Record</p>
       </div>
+    </div>
+
+    <p class="dl-copy" style="margin-top:12px;">
+      MONOLITH is an XRPL-native graffiti wall written permanently to the XRP Ledger.
+      You claim a tile, leave a mark, and the ledger keeps it forever.
+      Not a gallery. A credibility layer.
+    </p>
+
+    <ul class="dl-bullets">
+      <li>Each post is constrained to a tile so it stays clean and readable</li>
+      <li>Logos, tags, and artwork live inside the wall without wrecking it</li>
+      <li>Proof of presence is the product, the chain is the receipt</li>
+      <li>Years from now, people check MONOLITH to see who was real</li>
+    </ul>
+
+    <p class="dl-copy" style="margin-top:6px; font-size:0.82rem; color:var(--text-soft);">
+      The Wall of Record. An on-chain monument of proof and presence. Leave your mark. History keeps it.
+    </p>
+
+    <div class="dl-cta">
+      <a class="dl-btn primary" href="https://monolithxrpl.com/index.html" target="_blank" rel="noopener">Enter MONOLITH</a>
+      <a class="dl-btn" href="https://monolithxrpl.com/rules.html">Rules</a>
+      <a class="dl-btn" href="https://x.com/monolith_xrpl" target="_blank" rel="noopener">𝕏 PROFILE</a>
+    </div>
+  </section>
+
+  <!-- NEB -->
+  <section class="dl-soon">
+    <div class="augur-head">
+      <div class="augur-mark">
+        <img src="/neb/assets/neb_logo.png" alt="NEB" class="augur-logo">
       </div>
-
-      <p class="dl-copy" style="margin-top:12px;">
-        MONOLITH is an XRPL-native graffiti wall written permanently to the XRP Ledger.
-        You claim a tile, leave a mark, and the ledger keeps it forever.
-        Not a gallery. A credibility layer.
-      </p>
-
-      <ul class="dl-bullets">
-        <li>Each post is constrained to a tile so it stays clean and readable</li>
-        <li>Logos, tags, and artwork live inside the wall without wrecking it</li>
-        <li>Proof of presence is the product, the chain is the receipt</li>
-        <li>Years from now, people check MONOLITH to see who was real</li>
-      </ul>
-
-      <p class="dl-copy" style="margin-top:6px; font-size:0.82rem; color:var(--text-soft);">
-        The Wall of Record. An on-chain monument of proof and presence. Leave your mark. History keeps it.
-      </p>
-
-      <div class="dl-cta">
-        <a class="dl-btn primary" href="https://monolithxrpl.com/index.html" target="_blank" rel="noopener">Enter MONOLITH</a>
-        <a class="dl-btn" href="https://monolithxrpl.com/rules.html">Rules</a>
-        <a class="dl-btn" href="https://x.com/monolith_xrpl" target="_blank" rel="noopener">𝕏 PROFILE</a>
+      <div>
+        <p class="dl-kicker">Private Build</p>
+        <h2 class="dl-title" style="margin:0;">NEB</h2>
+        <div class="hud private-build pulse"><span class="dot"></span><span>PRIVATE BUILD</span></div>
+        <p class="augur-sub">Network Edge Bot</p>
       </div>
-    </section>
+    </div>
 
-    <!-- LEDGER DROP XRPL -->
-      <section class="dl-soon">
-        <div class="dl-head">
-          <div class="dl-badge">
-            <p class="dl-kicker">Live</p>
-            <h2 class="dl-title" style="margin:0;">LEDGER DROP XRPL</h2>
-            <div class="hud utility-live pulse"><span class="dot"></span><span>UTILITY LIVE</span></div>
-            <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
-            <p class="augur-sub">Daily Wallpapers</p>
-          </div>
-        </div>
+    <p class="dl-copy" style="margin-top:12px;">
+      NEB is a non-custodial XRPL execution engine built to detect and capture network edge.
+      It begins with opportunity scanning, paper trading, and controlled execution architecture.
+    </p>
 
-          <div class="dl-hero" style="margin-top:12px;">
-            <picture>
-              <source srcset="/assets/ledger_drop_xrpl.webp" type="image/webp">
-              <img src="/assets/ledger_drop_xrpl.png" alt="LEDGER DROP XRPL" style="width:100%; max-height:180px; object-fit:contain; padding:12px 16px;">
-            </picture>
-          </div>
+    <ul class="dl-bullets">
+      <li>Spread capture across XRPL books</li>
+      <li>AMM and route inefficiency detection</li>
+      <li>Paper trading before live capital deployment</li>
+      <li>Built to work alongside AUGUR intelligence later</li>
+    </ul>
 
-      
-      <p class="dl-copy" style="margin-top:12px;">
+    <p class="dl-copy" style="margin-top:6px; font-size:0.82rem; color:var(--text-soft);">
+      Standalone execution layer. Non-custodial. Risk-capped. Infrastructure first.
+    </p>
 
+    <div class="dl-cta">
+      <a class="dl-btn primary" href="/neb/">View NEB</a>
+      <a class="dl-btn" href="https://x.com/mrcauliman" target="_blank" rel="noopener">𝕏 PROFILE</a>
+    </div>
+  </section>
+</section>
 
+<section class="dl-soon" style="margin-top:18px;">
+  <div class="dl-head">
+    <div class="dl-badge">
+      <p class="dl-kicker">Live</p>
+      <h2 class="dl-title" style="margin:0;">LEDGER DROP XRPL</h2>
+      <div class="hud utility-live pulse"><span class="dot"></span><span>UTILITY LIVE</span></div>
+      <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
+      <p class="augur-sub">Daily Wallpapers</p>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:center;margin-top:12px;">
+    <div>
+      <p class="dl-copy" style="margin-top:0;">
         589 XRPL wallpapers. Daily drops. Built for culture and signal.
       </p>
-      
-      <ul class="dl-bullets">
 
+      <ul class="dl-bullets">
         <li>Mobile and desktop formats</li>
         <li>Download-ready assets</li>
         <li>Built around $XRP culture</li>
       </ul>
-      
+
       <div class="dl-cta">
         <a class="dl-btn primary" href="/ledgerdrop_xrpl/">Enter Ledger Drop</a>
-                <a class="dl-btn" href="https://x.com/LedgerDropXRPL" target="_blank" rel="noopener">𝕏 PROFILE</a>
+        <a class="dl-btn" href="https://x.com/LedgerDropXRPL" target="_blank" rel="noopener">𝕏 PROFILE</a>
       </div>
-      </section>
+    </div>
+
+    <div class="dl-hero" style="margin-top:0; min-width:280px;">
+      <picture>
+        <source srcset="/assets/ledger_drop_xrpl.webp" type="image/webp">
+        <img src="/assets/ledger_drop_xrpl.png" alt="LEDGER DROP XRPL" style="width:100%; max-height:120px; object-fit:contain; padding:6px 8px;">
+      </picture>
+    </div>
+  </div>
+</section>
 
   <section class="hoc-intro" style="margin-top:26px;">
     <p class="hoc-intro-title">TOKEN ECOSYSTEMS</p>
@@ -833,7 +873,7 @@
       <article class="project-card project-homeez">
           <div class="project-media">
             <div class="project-wallpaper">
-              <img src="/collections/homeez/assets/homeez_logo.webp" class="project-logo" alt="HOMEEZ">
+              <img src="/homeez/assets/homeez_logo.webp" class="project-logo" alt="HOMEEZ">
               <span class="project-tag">Capsule Toy Universe</span>
             </div>
           </div>
