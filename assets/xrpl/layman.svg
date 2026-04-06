@@ -1,0 +1,27 @@
+<svg width="1200" height="420" viewBox="0 0 1200 420" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="420" rx="24" fill="#0d1218"/>
+  <g opacity="0.16">
+    <circle cx="180" cy="60" r="180" fill="#58a6ff"/>
+    <circle cx="1030" cy="40" r="220" fill="#58a6ff"/>
+  </g>
+  <g stroke="#58a6ff" stroke-width="3" fill="none" opacity="0.9">
+    <path d="M140 300 L300 300 L300 250 L470 250 L470 195 L660 195 L660 135 L900 135" />
+  </g>
+  <g fill="#111823" stroke="#58a6ff" stroke-width="2">
+    <circle cx="140" cy="300" r="18"/>
+    <circle cx="300" cy="250" r="18"/>
+    <circle cx="470" cy="195" r="18"/>
+    <circle cx="660" cy="135" r="18"/>
+    <circle cx="900" cy="135" r="18"/>
+  </g>
+  <g fill="#eef3f8" font-family="system-ui, sans-serif" font-size="20">
+    <text x="110" y="340">Usage</text>
+    <text x="258" y="290">Demand</text>
+    <text x="430" y="235">Liquidity</text>
+    <text x="625" y="175">Adoption</text>
+    <text x="860" y="175">$XRP Rail</text>
+  </g>
+  <g fill="#d4a44a" font-family="system-ui, sans-serif" font-size="34" font-weight="700">
+    <text x="80" y="85">Usage builds in steps</text>
+  </g>
+</svg>

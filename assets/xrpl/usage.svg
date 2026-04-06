@@ -1,25 +1,30 @@
-<svg width="800" height="300" viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
-  <style>
-    .bg { fill: #0d1218; }
-    .line { stroke: #58a6ff; stroke-width: 2; opacity: 0.8; }
-    .node { fill: #111823; stroke: #58a6ff; stroke-width: 1.5; }
-    .text { fill: #eef3f8; font-size: 14px; font-family: system-ui; }
-  </style>
-
-  <rect class="bg" width="800" height="300" rx="20"/>
-
-  <!-- central rail -->
-  <line class="line" x1="200" y1="150" x2="600" y2="150"/>
-
-  <!-- nodes -->
-  <circle class="node" cx="200" cy="150" r="20"/>
-  <circle class="node" cx="350" cy="150" r="20"/>
-  <circle class="node" cx="500" cy="150" r="20"/>
-  <circle class="node" cx="600" cy="150" r="20"/>
-
-  <!-- labels -->
-  <text class="text" x="170" y="190">Apps</text>
-  <text class="text" x="320" y="190">Usage</text>
-  <text class="text" x="470" y="190">Liquidity</text>
-  <text class="text" x="580" y="190">$XRP</text>
+<svg width="1200" height="420" viewBox="0 0 1200 420" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="420" rx="24" fill="#0d1218"/>
+  <g opacity="0.16">
+    <circle cx="220" cy="40" r="180" fill="#58a6ff"/>
+    <circle cx="980" cy="70" r="210" fill="#58a6ff"/>
+  </g>
+  <g fill="#111823" stroke="#58a6ff" stroke-width="2">
+    <rect x="120" y="120" width="120" height="120" rx="18"/>
+    <rect x="280" y="120" width="120" height="120" rx="18"/>
+    <rect x="440" y="120" width="120" height="120" rx="18"/>
+    <circle cx="760" cy="180" r="42"/>
+    <circle cx="980" cy="180" r="42"/>
+  </g>
+  <g stroke="#58a6ff" stroke-width="3" fill="none">
+    <line x1="240" y1="180" x2="718" y2="180"/>
+    <line x1="400" y1="180" x2="718" y2="180"/>
+    <line x1="560" y1="180" x2="718" y2="180"/>
+    <line x1="802" y1="180" x2="938" y2="180"/>
+  </g>
+  <g fill="#eef3f8" font-family="system-ui, sans-serif" font-size="20" text-anchor="middle">
+    <text x="180" y="188">Apps</text>
+    <text x="340" y="188">Users</text>
+    <text x="500" y="188">Utility</text>
+    <text x="760" y="187">Usage</text>
+    <text x="980" y="187">$XRP</text>
+  </g>
+  <g fill="#d4a44a" font-family="system-ui, sans-serif" font-size="34" font-weight="700">
+    <text x="80" y="85">Apps and utilities feed the rail</text>
+  </g>
 </svg>

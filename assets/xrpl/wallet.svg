@@ -1,0 +1,25 @@
+<svg width="1200" height="420" viewBox="0 0 1200 420" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="420" rx="24" fill="#0d1218"/>
+  <g opacity="0.16">
+    <circle cx="220" cy="40" r="180" fill="#58a6ff"/>
+    <circle cx="990" cy="80" r="220" fill="#58a6ff"/>
+  </g>
+  <g fill="#111823" stroke="#58a6ff" stroke-width="2">
+    <rect x="430" y="110" width="340" height="200" rx="24"/>
+    <rect x="500" y="150" width="200" height="110" rx="18"/>
+    <circle cx="660" cy="205" r="12" fill="#58a6ff" stroke="none"/>
+  </g>
+  <g stroke="#58a6ff" stroke-width="3">
+    <line x1="240" y1="180" x2="430" y2="180"/>
+    <line x1="770" y1="180" x2="960" y2="180"/>
+  </g>
+  <g fill="#eef3f8" font-family="system-ui, sans-serif" font-size="22">
+    <text x="120" y="170">Public address</text>
+    <text x="120" y="205">Safe to share</text>
+    <text x="820" y="170">Private key</text>
+    <text x="820" y="205">Never share</text>
+  </g>
+  <g fill="#d4a44a" font-family="system-ui, sans-serif" font-size="34" font-weight="700">
+    <text x="80" y="85">Control the wallet. Protect the secrets.</text>
+  </g>
+</svg>
