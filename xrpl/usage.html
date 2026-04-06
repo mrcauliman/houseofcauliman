@@ -15,10 +15,50 @@ p,li{color:#aeb8c6;line-height:1.7}
 ul{margin-top:10px}
 .cta{display:inline-block;margin-top:14px;padding:10px 14px;border:1px solid rgba(255,255,255,.1);border-radius:10px;background:#111823;color:#eef3f8;text-decoration:none}
 .row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+  .topnav{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:0 0 18px;
+    padding:14px;
+    border:1px solid var(--line);
+    border-radius:16px;
+    background:rgba(255,255,255,.03);
+    box-shadow:var(--shadow);
+  }
+
+  .topnav a{
+    display:inline-block;
+    padding:10px 14px;
+    border-radius:10px;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.04);
+    color:var(--text);
+    font-size:14px;
+    font-weight:700;
+    text-decoration:none;
+  }
+
+  .topnav a:hover{
+    border-color:var(--blue);
+    box-shadow:0 0 0 1px rgba(88,166,255,.15), 0 0 24px rgba(88,166,255,.12);
+  }
+
 </style>
 </head>
 <body>
 <div class="wrap">
+<nav class="topnav">
+  <a href="/xrpl/">Layman</a>
+  <a href="/xrpl/definitions.html">Definitions</a>
+  <a href="/xrpl/usage.html">Usage & Adoption</a>
+  <a href="/xrpl/wallet-basics.html">Wallet Basics</a>
+  <a href="/xrpl/safety.html">Safety</a>
+  <a href="/xrpl/investing-reality.html">Investing Reality</a>
+  <a href="/">House</a>
+</nav>
+
+
 
 <h1>XRPL Usage & Adoption</h1>
 
