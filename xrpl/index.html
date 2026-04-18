@@ -1,299 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>XRPL Layman | House of Cauliman</title>
-<meta name="description" content="Free educational XRPL section. Simple explanations of XRP, XRPL usage, market reality, and core concepts without hype or fantasy numbers.">
-<meta property="og:title" content="XRPL Layman | House of Cauliman">
-<meta property="og:description" content="Free educational XRPL section. Simple explanations of XRP, XRPL usage, market reality, and core concepts without hype or fantasy numbers.">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="XRPL Layman | House of Cauliman">
-<meta name="twitter:description" content="Free educational XRPL section. Simple explanations of XRP, XRPL usage, market reality, and core concepts without hype or fantasy numbers.">
-<style>
-  :root{
-    --bg:#06080c;
-    --panel:#0d1218;
-    --panel2:#111823;
-    --line:rgba(255,255,255,.10);
-    --text:#eef3f8;
-    --muted:#aeb8c6;
-    --blue:#58a6ff;
-    --gold:#d4a44a;
-    --green:#42d392;
-    --radius:18px;
-    --shadow:0 16px 48px rgba(0,0,0,.35);
-    --sans:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-  }
-
-  *{box-sizing:border-box}
-  html,body{
-    margin:0;
-    padding:0;
-    background:
-      radial-gradient(circle at top, rgba(88,166,255,.10) 0%, rgba(0,0,0,0) 28%),
-      linear-gradient(180deg,#06080c 0%,#0b1018 100%);
-    color:var(--text);
-    font-family:var(--sans);
-  }
-
-  a{color:var(--blue);text-decoration:none}
-
-  .wrap{
-    max-width:1100px;
-    margin:0 auto;
-    padding:28px 18px 90px;
-  }
-
-  .hero{
-    background:
-      radial-gradient(circle at 10% 0, rgba(88,166,255,.12) 0, rgba(255,255,255,0) 55%),
-      linear-gradient(180deg,var(--panel),var(--panel2));
-    border:1px solid var(--line);
-    border-radius:24px;
-    padding:28px;
-    box-shadow:var(--shadow);
-  }
-
-  h1{
-    margin:0;
-    font-size:34px;
-    line-height:1.05;
-    letter-spacing:.2px;
-  }
-
-  .sub{
-    margin-top:10px;
-    color:var(--muted);
-    line-height:1.7;
-    max-width:820px;
-    font-size:15px;
-  }
-
-  .pillbar{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-top:18px;
-  }
-
-  .pill{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    padding:9px 12px;
-    border-radius:999px;
-    border:1px solid var(--line);
-    background:rgba(255,255,255,.04);
-    color:var(--muted);
-    font-size:12px;
-    font-weight:700;
-  }
-
-  .dot{
-    width:8px;
-    height:8px;
-    border-radius:999px;
-    background:var(--green);
-  }
-
-  .section{
-    margin-top:18px;
-    background:linear-gradient(180deg,var(--panel),var(--panel2));
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    padding:22px;
-    box-shadow:var(--shadow);
-  }
-
-  h2{
-    margin:0 0 12px;
-    font-size:18px;
-    color:var(--gold);
-    text-transform:uppercase;
-    letter-spacing:.4px;
-  }
-
-  h3{
-    margin:0 0 8px;
-    color:var(--text);
-    font-size:16px;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-  }
-
-  p{
-    margin:10px 0;
-    color:var(--muted);
-    line-height:1.75;
-    font-size:15px;
-  }
-
-  ul{
-    margin:10px 0 0 18px;
-    color:var(--muted);
-    line-height:1.75;
-    padding:0;
-  }
-
-  li{margin:6px 0}
-
-  .defs{
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:18px;
-    margin-top:18px;
-  }
-
-  .def-card{
-    background:rgba(255,255,255,.03);
-    border:1px solid var(--line);
-    border-radius:16px;
-    padding:18px;
-  }
-
-  .cta-row{
-    display:flex;
-    flex-wrap:wrap;
-    gap:12px;
-    margin-top:22px;
-  }
-
-  .cta{
-    display:inline-block;
-    padding:12px 16px;
-    border-radius:12px;
-    border:1px solid var(--line);
-    background:rgba(255,255,255,.04);
-    color:var(--text);
-    font-weight:800;
-    font-size:14px;
-  }
-
-  .cta:hover{
-    border-color:var(--blue);
-    box-shadow:0 0 0 1px rgba(88,166,255,.15), 0 0 24px rgba(88,166,255,.12);
-  }
-
-  .footer{
-    margin-top:18px;
-    color:var(--muted);
-    font-size:12px;
-    text-align:center;
-  }
-
-  @media (max-width: 820px){
-    .defs{grid-template-columns:1fr;}
-    h1{font-size:28px;}
-  }
-  .topnav{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin:0 0 18px;
-    padding:14px;
-    border:1px solid var(--line);
-    border-radius:16px;
-    background:rgba(255,255,255,.03);
-    box-shadow:var(--shadow);
-  }
-
-  .topnav a{
-    display:inline-block;
-    padding:10px 14px;
-    border-radius:10px;
-    border:1px solid var(--line);
-    background:rgba(255,255,255,.04);
-    color:var(--text);
-    font-size:14px;
-    font-weight:700;
-    text-decoration:none;
-  }
-
-  .topnav a:hover{
-    border-color:var(--blue);
-    box-shadow:0 0 0 1px rgba(88,166,255,.15), 0 0 24px rgba(88,166,255,.12);
-  }
-
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>XRPL Layman | House of Cauliman</title>
+  <meta name="description" content="Learn how to actually use the XRP Ledger. Wallets, buying tokens, NFTs, liquidity, and execution."/>
+  <style>
+    :root{
+      --bg:#05070b;
+      --panel:#0d1218;
+      --panel2:#111823;
+      --line:rgba(255,255,255,.10);
+      --text:#eef3f8;
+      --muted:#aeb8c6;
+      --blue:#58a6ff;
+      --gold:#d4a44a;
+      --green:#42d392;
+      --radius:18px;
+      --shadow:0 16px 48px rgba(0,0,0,.35);
+      --sans:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      --max:1180px;
+    }
+    *{box-sizing:border-box}
+    html,body{
+      margin:0;
+      padding:0;
+      background:linear-gradient(180deg,#05070b 0%,#0a1018 100%);
+      color:var(--text);
+      font-family:var(--sans);
+    }
+    a{color:var(--blue);text-decoration:none}
+    .wrap{max-width:var(--max);margin:0 auto;padding:28px 18px 90px}
+    .hero{
+      background:linear-gradient(180deg,rgba(88,166,255,.10),rgba(255,255,255,0) 70%), var(--panel);
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:26px;
+      box-shadow:var(--shadow);
+    }
+    h1{margin:0;font-size:36px;line-height:1.05;letter-spacing:.3px}
+    .sub{margin:12px 0 0;color:var(--muted);font-size:15px;line-height:1.65;max-width:920px}
+    .pillbar{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--muted);
+      font-size:12px;
+      font-weight:700;
+    }
+    .dot{width:8px;height:8px;border-radius:999px;background:var(--green)}
+    .intro{
+      margin-top:18px;
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px;
+      box-shadow:var(--shadow);
+    }
+    .intro p{margin:8px 0;color:var(--muted);line-height:1.65}
+    .grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:16px;
+      margin-top:18px;
+    }
+    @media(min-width:980px){
+      .grid{grid-template-columns:1fr 1fr}
+    }
+    .card{
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px;
+      box-shadow:var(--shadow);
+    }
+    .eyebrow{
+      display:inline-block;
+      color:var(--gold);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:8px;
+    }
+    .card h2{
+      margin:0 0 8px;
+      font-size:21px;
+      line-height:1.2;
+    }
+    .card p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.65;
+    }
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:42px;
+      padding:10px 14px;
+      border-radius:10px;
+      border:1px solid rgba(88,166,255,.28);
+      background:rgba(88,166,255,.12);
+      color:var(--text);
+      font-size:13px;
+      font-weight:800;
+      letter-spacing:.02em;
+      text-decoration:none;
+    }
+    .btn:hover{
+      background:rgba(88,166,255,.18);
+      border-color:rgba(88,166,255,.45);
+    }
+    .foot{
+      margin-top:18px;
+      color:var(--muted);
+      font-size:12px;
+      text-align:center;
+      opacity:.9;
+    }
+  </style>
 </head>
-<body id="top">
+<body>
   <div class="wrap">
-<nav class="topnav">
-  <a href="/xrpl/">Layman</a>
-  <a href="/xrpl/definitions.html">Definitions</a>
-  <a href="/xrpl/usage.html">Usage & Adoption</a>
-  <a href="/xrpl/wallet-basics.html">Wallet Basics</a>
-  <a href="/xrpl/safety.html">Safety</a>
-  <a href="/xrpl/investing-reality.html">Investing Reality</a>
-  <a href="/">House</a>
-</nav>
-
-
     <section class="hero">
-      <h1>XRPL Layman</h1>
-      <div class="sub">Free educational section for people who want to understand $XRP and the XRP Ledger in plain English. No hype. No fantasy numbers. No confusion.</div>
+      <h1>XRPL LAYMAN</h1>
+      <div class="sub">
+        Learn how to actually use the XRP Ledger. Wallets, buying tokens, NFTs, liquidity, and real execution.
+      </div>
       <div class="pillbar">
         <div class="pill"><span class="dot"></span>Free Education</div>
+        <div class="pill"><span class="dot"></span>Execution First</div>
+        <div class="pill"><span class="dot"></span>Reality First</div>
         <div class="pill"><span class="dot"></span>$XRP</div>
         <div class="pill"><span class="dot"></span>XRPL</div>
-        <div class="pill"><span class="dot"></span>Usage First</div>
-        <div class="pill"><span class="dot"></span>Reality Over Fantasy</div>
       </div>
     </section>
-<div class="section">
-  <img src="/assets/xrpl/layman.svg" alt="XRPL layman overview diagram" style="width:100%;border-radius:16px;border:1px solid var(--line);display:block;">
-</div>
 
-    <section class="section">
-      <h2>What is $XRP</h2>
-      <p>$XRP is a digital asset used to move value across the XRP Ledger.</p>
-      <p>It acts as a bridge asset between currencies, systems, and pools of liquidity, allowing value to move quickly and with low cost.</p>
-      <p>At its core, $XRP is a payment rail.</p>
+    <section class="intro">
+      <p>This is the House of Cauliman guide to actually using XRPL.</p>
+      <p>Start with wallets. Then learn how money gets on and off the ledger. Then learn how token buys, NFT buys, and different sale types actually work.</p>
+      <p>You are signing transactions on a public ledger. Every action is final.</p>
     </section>
 
-    <section class="section">
-      <h2>Usage Is Everything</h2>
-      <p>$XRP does not move on opinions, memes, or price fantasies. It moves on usage.</p>
-      <p>Usage means value actually moving across the ledger. Payments. Transfers. Liquidity. Settlement. Real transaction activity.</p>
-      <p>More usage creates more demand. Less usage reduces demand.</p>
-      <p>No usage means no sustained reason for long-term price strength.</p>
+    <section class="grid">
+      <article class="card">
+        <div class="eyebrow">Start Here</div>
+        <h2>Wallets</h2>
+        <p>Hot wallet, cold wallet, exchange custody, and why Xaman is the main wallet to know.</p>
+        <div class="actions">
+          <a class="btn" href="/xrpl/wallet-basics.html">Enter Wallets</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Move Money</div>
+        <h2>On-Ramps and Off-Ramps</h2>
+        <p>How money enters and exits the system. USD to $XRP. $XRP back to cash. Exchange versus wallet.</p>
+        <div class="actions">
+          <a class="btn" href="/xrpl/usage.html">Enter On-Ramps</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Use the Ledger</div>
+        <h2>Buy Tokens</h2>
+        <p>DEX, AMM, slippage, issuer checks, automatic trustline flow, and what actually happens when you buy.</p>
+        <div class="actions">
+          <a class="btn" href="/xrpl/usage.html">Enter Token Buying</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Collect</div>
+        <h2>Buy NFTs</h2>
+        <p>Marketplaces, direct listings, signing flow, and what to verify before you purchase.</p>
+        <div class="actions">
+          <a class="btn" href="/xrpl/usage.html">Enter NFT Buying</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Understand the Flow</div>
+        <h2>Sales Types</h2>
+        <p>AMM versus DEX versus OTC versus NFT marketplace versus direct site listing.</p>
+        <div class="actions">
+          <a class="btn" href="/xrpl/definitions.html">Enter Sales Types</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Protect Yourself</div>
+        <h2>Safety</h2>
+        <p>Fake issuers, blind signing, OTC risk, exchange risk, and basic wallet security that actually matters.</p>
+        <div class="actions">
+          <a class="btn" href="/xrpl/safety.html">Enter Safety</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Foundation</div>
+        <h2>XRPL Basics</h2>
+        <p>What XRPL is, what $XRP does, reserves, trustlines, settlement, and the parts people confuse.</p>
+        <div class="actions">
+          <a class="btn" href="/xrpl/definitions.html">Enter Basics</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="eyebrow">Go Deeper</div>
+        <h2>Advanced</h2>
+        <p>Liquidity, token structure, issuer behavior, AMM mechanics, and deeper XRPL execution concepts.</p>
+        <div class="actions">
+          <a class="btn" href="/xrpl/investing-reality.html">Enter Advanced</a>
+        </div>
+      </article>
     </section>
 
-    <section class="section">
-      <h2>How It Actually Moves</h2>
-      <p>$XRP does not move in one straight vertical line that stays there forever.</p>
-      <p>It tends to move in steps.</p>
-      <p>Usage expands. Price moves up. Sellers take profit. Price pulls back. More usage builds. The next step forms.</p>
-      <p>That cycle repeats.</p>
-    </section>
-
-    <section class="section">
-      <h2>Price Reality</h2>
-      <p>We are not here to give you fantasy numbers.</p>
-      <p>A $10,000 $XRP would imply a financial world operating at massive scale on the same rail, with deep liquidity, broad alignment, and continuous real usage across systems.</p>
-      <p>That is not an overnight move. That is not a six month event. That is a long-term infrastructure outcome, if it ever happens at all.</p>
-      <p>Thinking in instant moonshots teaches people the wrong lesson and makes them blind to what actually matters.</p>
-    </section>
-
-    <section class="section">
-      <h2>What Actually Matters</h2>
-      <p>Not hype. Not influencer predictions. Not fake certainty.</p>
-      <ul>
-        <li>Real transaction volume</li>
-        <li>Real usage</li>
-        <li>Liquidity depth</li>
-        <li>Adoption over time</li>
-        <li>Infrastructure growth</li>
-        <li>Actual settlement activity</li>
-      </ul>
-    </section>
-<div class="cta-row">
-      <a class="cta" href="#top">Return to Top</a>
+    <div class="foot">
+      House of Cauliman · XRPL Layman
     </div>
-
-    <div class="footer">House of Cauliman · XRPL Layman</div>
   </div>
 </body>
 </html>
