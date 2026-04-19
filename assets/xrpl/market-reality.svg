@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#0b1018"/>
+  <text x="120" y="110" fill="#eef3f8" font-family="Arial" font-size="52" font-weight="700">Market Reality</text>
+
+  <rect x="140" y="220" width="1320" height="520" rx="28" fill="#111823" stroke="#58a6ff"/>
+
+  <text x="220" y="320" fill="#d4a44a" font-family="Arial" font-size="34" font-weight="700">Entry is easy when the button is in front of you</text>
+  <text x="220" y="400" fill="#aeb8c6" font-family="Arial" font-size="30">Exit is where liquidity, size, and slippage expose reality</text>
+  <text x="220" y="490" fill="#aeb8c6" font-family="Arial" font-size="30">Price on screen is not the same as clean execution</text>
+  <text x="220" y="580" fill="#aeb8c6" font-family="Arial" font-size="30">Thin markets move fast on the way up and punish size on the way out</text>
+
+  <line x1="220" y1="650" x2="1380" y2="650" stroke="#ff6b6b" stroke-width="10"/>
+  <text x="220" y="705" fill="#ff6b6b" font-family="Arial" font-size="28" font-weight="700">Market cap is a headline. Liquidity decides what you can actually do.</text>
+</svg>
