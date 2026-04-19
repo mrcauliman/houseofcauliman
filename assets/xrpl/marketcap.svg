@@ -1,1 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400"><rect width="800" height="400" fill="#0b1018"/><text x="50" y="200" fill="#fff" font-size="30">Market Cap vs Liquidity</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#071018"/>
+  <text x="100" y="100" fill="#eef3f8" font-size="52" font-family="Arial" font-weight="700">Market Cap vs Liquidity</text>
+
+  <text x="140" y="190" fill="#d4a44a" font-size="28" font-family="Arial" font-weight="700">Headline size is not the same as real exit capacity.</text>
+
+  <rect x="180" y="280" width="1240" height="150" rx="18" fill="#3b2b0d" stroke="#d4a44a" stroke-width="4"/>
+  <rect x="180" y="520" width="420" height="150" rx="18" fill="#12304d" stroke="#58a6ff" stroke-width="4"/>
+
+  <text x="220" y="240" fill="#d4a44a" font-size="26" font-family="Arial" font-weight="700">Market Cap</text>
+  <text x="220" y="480" fill="#58a6ff" font-size="26" font-family="Arial" font-weight="700">Real Liquidity</text>
+
+  <text x="230" y="370" fill="#0b1018" font-size="36" font-family="Arial" font-weight="700">Big number people repeat online</text>
+  <text x="230" y="610" fill="#eef3f8" font-size="36" font-family="Arial" font-weight="700">Actual depth available for execution</text>
+
+  <line x1="760" y1="445" x2="760" y2="505" stroke="#ff6b6b" stroke-width="8"/>
+  <polygon points="760,530 735,490 785,490" fill="#ff6b6b"/>
+
+  <text x="820" y="515" fill="#ff6b6b" font-size="32" font-family="Arial" font-weight="700">You can't exit market cap</text>
+  <text x="820" y="565" fill="#aeb8c6" font-size="28" font-family="Arial">Liquidity decides what can actually clear</text>
+</svg>

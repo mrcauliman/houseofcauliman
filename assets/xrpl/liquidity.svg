@@ -1,1 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400"><rect width="800" height="400" fill="#0b1018"/><text x="50" y="200" fill="#fff" font-size="30">Liquidity Depth</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#071018"/>
+  <text x="100" y="100" fill="#eef3f8" font-size="52" font-family="Arial" font-weight="700">Liquidity Depth</text>
+
+  <text x="140" y="190" fill="#d4a44a" font-size="28" font-family="Arial" font-weight="700">Deeper liquidity absorbs size. Thin liquidity moves fast.</text>
+
+  <line x1="160" y1="700" x2="1440" y2="700" stroke="#38506a" stroke-width="4"/>
+  <line x1="160" y1="180" x2="160" y2="700" stroke="#38506a" stroke-width="4"/>
+
+  <rect x="260" y="300" width="180" height="400" rx="16" fill="#173a5e" stroke="#58a6ff" stroke-width="3"/>
+  <rect x="500" y="380" width="180" height="320" rx="16" fill="#173a5e" stroke="#58a6ff" stroke-width="3"/>
+  <rect x="740" y="460" width="180" height="240" rx="16" fill="#173a5e" stroke="#58a6ff" stroke-width="3"/>
+
+  <rect x="1020" y="560" width="120" height="140" rx="16" fill="#3a1f28" stroke="#ff6b6b" stroke-width="3"/>
+  <rect x="1190" y="600" width="120" height="100" rx="16" fill="#3a1f28" stroke="#ff6b6b" stroke-width="3"/>
+  <rect x="1360" y="635" width="60" height="65" rx="12" fill="#3a1f28" stroke="#ff6b6b" stroke-width="3"/>
+
+  <text x="235" y="760" fill="#aeb8c6" font-size="26" font-family="Arial">Deep book</text>
+  <text x="1010" y="760" fill="#aeb8c6" font-size="26" font-family="Arial">Thin book</text>
+
+  <text x="230" y="820" fill="#58a6ff" font-size="28" font-family="Arial" font-weight="700">More depth = less movement from size</text>
+  <text x="930" y="820" fill="#ff6b6b" font-size="28" font-family="Arial" font-weight="700">Less depth = price moves harder</text>
+</svg>
