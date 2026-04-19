@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>XRPL Safety | House of Cauliman</title>
-<meta name="description" content="XRPL safety. Avoid scams, phishing, fake tokens, bad actors, and common mistakes on the XRP Ledger.">
+<meta name="description" content="XRPL safety. Fake issuers, blind signing, OTC traps, exchange risk, and basic wallet protection that actually matters.">
 <meta property="og:title" content="XRPL Safety | House of Cauliman">
-<meta property="og:description" content="XRPL safety. Avoid scams, phishing, fake tokens, bad actors, and common mistakes on the XRP Ledger.">
+<meta property="og:description" content="XRPL safety. Fake issuers, blind signing, OTC traps, exchange risk, and basic wallet protection that actually matters.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="XRPL Safety | House of Cauliman">
-<meta name="twitter:description" content="XRPL safety. Avoid scams, phishing, fake tokens, bad actors, and common mistakes on the XRP Ledger.">
+<meta name="twitter:description" content="XRPL safety. Fake issuers, blind signing, OTC traps, exchange risk, and basic wallet protection that actually matters.">
 <style>
   :root{
     --bg:#06080c;
@@ -22,287 +22,142 @@
     --blue:#58a6ff;
     --gold:#d4a44a;
     --green:#42d392;
+    --red:#ff6b6b;
     --radius:18px;
     --shadow:0 16px 48px rgba(0,0,0,.35);
     --sans:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
   }
-
   *{box-sizing:border-box}
   html,body{
-    margin:0;
-    padding:0;
-    background:
-      radial-gradient(circle at top, rgba(88,166,255,.10) 0%, rgba(0,0,0,0) 28%),
-      linear-gradient(180deg,#06080c 0%,#0b1018 100%);
-    color:var(--text);
-    font-family:var(--sans);
+    margin:0;padding:0;
+    background:radial-gradient(circle at top, rgba(88,166,255,.10) 0%, rgba(0,0,0,0) 28%), linear-gradient(180deg,#06080c 0%,#0b1018 100%);
+    color:var(--text);font-family:var(--sans);
   }
-
   a{color:var(--blue);text-decoration:none}
-
-  .wrap{
-    max-width:1100px;
-    margin:0 auto;
-    padding:28px 18px 90px;
-  }
-
-  .hero{
-    background:
-      radial-gradient(circle at 10% 0, rgba(88,166,255,.12) 0, rgba(255,255,255,0) 55%),
-      linear-gradient(180deg,var(--panel),var(--panel2));
-    border:1px solid var(--line);
-    border-radius:24px;
-    padding:28px;
-    box-shadow:var(--shadow);
-  }
-
-  h1{
-    margin:0;
-    font-size:34px;
-    line-height:1.05;
-    letter-spacing:.2px;
-  }
-
-  .sub{
-    margin-top:10px;
-    color:var(--muted);
-    line-height:1.7;
-    max-width:820px;
-    font-size:15px;
-  }
-
-  .pillbar{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-top:18px;
-  }
-
-  .pill{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    padding:9px 12px;
-    border-radius:999px;
-    border:1px solid var(--line);
-    background:rgba(255,255,255,.04);
-    color:var(--muted);
-    font-size:12px;
-    font-weight:700;
-  }
-
-  .dot{
-    width:8px;
-    height:8px;
-    border-radius:999px;
-    background:var(--green);
-  }
-
-  .section{
-    margin-top:18px;
-    background:linear-gradient(180deg,var(--panel),var(--panel2));
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    padding:22px;
-    box-shadow:var(--shadow);
-  }
-
-  h2{
-    margin:0 0 12px;
-    font-size:18px;
-    color:var(--gold);
-    text-transform:uppercase;
-    letter-spacing:.4px;
-  }
-
-  h3{
-    margin:0 0 8px;
-    color:var(--text);
-    font-size:16px;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-  }
-
-  p{
-    margin:10px 0;
-    color:var(--muted);
-    line-height:1.75;
-    font-size:15px;
-  }
-
-  ul{
-    margin:10px 0 0 18px;
-    color:var(--muted);
-    line-height:1.75;
-    padding:0;
-  }
-
+  .wrap{max-width:1100px;margin:0 auto;padding:28px 18px 90px}
+  .topnav{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 18px;padding:14px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.03);box-shadow:var(--shadow)}
+  .topnav a{display:inline-block;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--text);font-size:14px;font-weight:700}
+  .hero{background:radial-gradient(circle at 10% 0, rgba(255,107,107,.08) 0, rgba(255,255,255,0) 55%), linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:24px;padding:28px;box-shadow:var(--shadow)}
+  h1{margin:0;font-size:34px;line-height:1.05;letter-spacing:.2px}
+  .sub{margin-top:10px;color:var(--muted);line-height:1.7;max-width:860px;font-size:15px}
+  .pillbar{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+  .pill{display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--muted);font-size:12px;font-weight:700}
+  .dot{width:8px;height:8px;border-radius:999px;background:var(--red)}
+  .section{margin-top:18px;background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+  h2{margin:0 0 12px;font-size:18px;color:var(--gold);text-transform:uppercase;letter-spacing:.4px}
+  p{margin:10px 0;color:var(--muted);line-height:1.75;font-size:15px}
+  ul{margin:10px 0 0 18px;color:var(--muted);line-height:1.75;padding:0}
   li{margin:6px 0}
-
-  .defs{
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:18px;
-    margin-top:18px;
-  }
-
-  .def-card{
-    background:rgba(255,255,255,.03);
-    border:1px solid var(--line);
-    border-radius:16px;
-    padding:18px;
-  }
-
-  .cta-row{
-    display:flex;
-    flex-wrap:wrap;
-    gap:12px;
-    margin-top:22px;
-  }
-
-  .cta{
-    display:inline-block;
-    padding:12px 16px;
-    border-radius:12px;
-    border:1px solid var(--line);
-    background:rgba(255,255,255,.04);
-    color:var(--text);
-    font-weight:800;
-    font-size:14px;
-  }
-
-  .cta:hover{
-    border-color:var(--blue);
-    box-shadow:0 0 0 1px rgba(88,166,255,.15), 0 0 24px rgba(88,166,255,.12);
-  }
-
-  .footer{
-    margin-top:18px;
-    color:var(--muted);
-    font-size:12px;
-    text-align:center;
-  }
-
-  @media (max-width: 820px){
-    .defs{grid-template-columns:1fr;}
-    h1{font-size:28px;}
-  }
-  .topnav{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin:0 0 18px;
-    padding:14px;
-    border:1px solid var(--line);
-    border-radius:16px;
-    background:rgba(255,255,255,.03);
-    box-shadow:var(--shadow);
-  }
-
-  .topnav a{
-    display:inline-block;
-    padding:10px 14px;
-    border-radius:10px;
-    border:1px solid var(--line);
-    background:rgba(255,255,255,.04);
-    color:var(--text);
-    font-size:14px;
-    font-weight:700;
-    text-decoration:none;
-  }
-
-  .topnav a:hover{
-    border-color:var(--blue);
-    box-shadow:0 0 0 1px rgba(88,166,255,.15), 0 0 24px rgba(88,166,255,.12);
-  }
-
+  .visual{margin-top:14px}
+  .visual img{width:100%;border-radius:16px;border:1px solid var(--line);display:block;background:#0a0f16}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+  .cta{display:inline-block;padding:12px 16px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--text);font-weight:800;font-size:14px}
+  .footer{margin-top:18px;color:var(--muted);font-size:12px;text-align:center}
+  @media (max-width: 820px){h1{font-size:28px}}
 </style>
 </head>
 <body id="top">
   <div class="wrap">
-<nav class="topnav">
-  <a href="/xrpl/">Layman</a>
-  <a href="/xrpl/definitions.html">Definitions</a>
-  <a href="/xrpl/usage.html">Usage & Adoption</a>
-  <a href="/xrpl/wallet-basics.html">Wallet Basics</a>
-  <a href="/xrpl/safety.html">Safety</a>
-  <a href="/xrpl/investing-reality.html">Investing Reality</a>
-  <a href="/">House</a>
-</nav>
-
+    <nav class="topnav">
+      <a href="/xrpl/">Layman</a>
+      <a href="/xrpl/definitions.html">Definitions</a>
+      <a href="/xrpl/usage.html">Usage & Adoption</a>
+      <a href="/xrpl/wallet-basics.html">Wallet Basics</a>
+      <a href="/xrpl/safety.html">Safety</a>
+      <a href="/xrpl/investing-reality.html">Investing Reality</a>
+      <a href="/">House</a>
+    </nav>
 
     <section class="hero">
       <h1>XRPL Safety</h1>
-      <div class="sub">This is the survival page. It covers scams, fake tokens, phishing, bad habits, and the people you should stop listening to.</div>
+      <div class="sub">This is the protection page. The scams, the traps, the lazy mistakes, and what actually keeps people from getting cooked.</div>
       <div class="pillbar">
         <div class="pill"><span class="dot"></span>Free Education</div>
         <div class="pill"><span class="dot"></span>Safety</div>
-        <div class="pill"><span class="dot"></span>Scam Defense</div>
-        <div class="pill"><span class="dot"></span>XRPL</div>
+        <div class="pill"><span class="dot"></span>Issuer Checks</div>
+        <div class="pill"><span class="dot"></span>Blind Signing</div>
+        <div class="pill"><span class="dot"></span>OTC Risk</div>
       </div>
     </section>
-<div class="section">
-  <img src="/assets/xrpl/safety.svg" alt="XRPL safety diagram" style="width:100%;border-radius:16px;border:1px solid var(--line);display:block;">
-</div>
 
     <section class="section">
-      <h2>First Rule</h2>
-      <p>If somebody wants your seed phrase, private key, or secret words, they are trying to take your wallet.</p>
-      <p>There is no valid exception to that.</p>
+      <div class="visual">
+        <img src="/assets/xrpl/safety.svg" alt="XRPL safety overview diagram">
+      </div>
     </section>
 
     <section class="section">
-      <h2>Common Scam Types</h2>
+      <h2>Fake Issuers</h2>
+      <p>Token name alone means nothing. Bad actors can use the same ticker and trick people who only look at symbol and logo.</p>
+      <div class="visual">
+        <img src="/assets/xrpl/fake-vs-real-issuer.svg" alt="Fake issuer versus real issuer comparison">
+      </div>
       <ul>
-        <li>Fake support accounts</li>
-        <li>Phishing websites</li>
-        <li>Fake airdrops</li>
-        <li>Fake token issuers</li>
-        <li>Impersonators in replies and DMs</li>
-        <li>Urgency-based pressure tactics</li>
+        <li>Always verify issuer</li>
+        <li>Do not trust ticker alone</li>
+        <li>Do not trust logo alone</li>
       </ul>
     </section>
 
     <section class="section">
-      <h2>Red Flags</h2>
+      <h2>Blind Signing</h2>
+      <p>If you do not understand what you are signing, do not sign it. This is basic survival.</p>
+      <div class="visual">
+        <img src="/assets/xrpl/blind-signing.svg" alt="Blind signing warning diagram">
+      </div>
       <ul>
-        <li>Guaranteed returns</li>
-        <li>Pressure to act fast</li>
-        <li>Requests for wallet secrets</li>
-        <li>Links sent through random DMs</li>
-        <li>Accounts pretending to be official support</li>
-        <li>Projects that cannot explain what they actually do</li>
+        <li>Read what the wallet is asking you to approve</li>
+        <li>Verify destination, issuer, and asset</li>
+        <li>Urgency is a red flag</li>
       </ul>
     </section>
 
     <section class="section">
-      <h2>People To Unfollow</h2>
-      <p>Bad information is a security risk too.</p>
+      <h2>OTC Risk</h2>
+      <p>Direct deals remove platform protection. That means the trust problem lands directly on you.</p>
+      <div class="visual">
+        <img src="/assets/xrpl/otc-risk.svg" alt="OTC risk diagram">
+      </div>
       <ul>
-        <li>Fantasy number accounts</li>
-        <li>Engagement farmers</li>
-        <li>People selling certainty instead of process</li>
-        <li>People who never explain risk</li>
-        <li>People who call everything a guaranteed winner</li>
+        <li>Higher counterparty risk</li>
+        <li>No marketplace buffer</li>
+        <li>Good for private deals only when both sides are real and verified</li>
       </ul>
     </section>
 
     <section class="section">
-      <h2>Practical Safety Moves</h2>
+      <h2>Exchange Risk</h2>
+      <p>Exchanges are useful. They are also company platforms. That means platform outages, account restrictions, and custody risk are real.</p>
+      <div class="visual">
+        <img src="/assets/xrpl/exchange-risk.svg" alt="Exchange risk diagram">
+      </div>
       <ul>
-        <li>Use a burner wallet for testing</li>
-        <li>Use cold storage for serious holdings</li>
-        <li>Double check URLs</li>
-        <li>Do not approve things you do not understand</li>
-        <li>Test small before moving big</li>
-        <li>Slow down when someone wants urgency</li>
+        <li>Good for on-ramp and off-ramp</li>
+        <li>Bad place to forget long-term self-custody</li>
+        <li>Not the same thing as wallet ownership</li>
       </ul>
     </section>
-<div class="cta-row">
-      <a class="cta" href="#top">Return to Top</a>
+
+    <section class="section">
+      <h2>Seed Protection</h2>
+      <p>Your seed, secret, recovery phrase, or private key never gets shared. Ever. Anyone asking for it is either ignorant or trying to take your assets.</p>
+    </section>
+
+    <section class="section">
+      <h2>Reality</h2>
+      <p>Most losses are not magic hacks. They are bad verification, bad trust, blind approval, weak custody habits, or people being lazy with details.</p>
+    </section>
+
+    <section class="section">
+      <div class="cta-row">
+        <a class="cta" href="/xrpl/definitions.html">Back: Definitions</a>
+        <a class="cta" href="/xrpl/investing-reality.html">Next: Investing Reality</a>
+      </div>
+    </section>
+
+    <div class="footer">
+      House of Cauliman · XRPL Safety
     </div>
-
-    <div class="footer">House of Cauliman · XRPL Safety</div>
   </div>
 </body>
 </html>
