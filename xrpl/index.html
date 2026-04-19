@@ -162,6 +162,11 @@
     .cta{display:inline-block;padding:12px 16px;border-radius:12px;border:1px solid rgba(43,51,69,.95);background:linear-gradient(135deg,rgba(15,23,42,.98),rgba(3,7,18,.98));color:var(--text);font-weight:800;font-size:14px;box-shadow:0 8px 20px rgba(0,0,0,.55);text-decoration:none}
     .footer{margin-top:18px;color:var(--muted);font-size:12px;text-align:center}
 </style>
+<style id="xrpl-layman-header-icon-style">
+.xrpl-layman-brand{display:inline-flex;align-items:center;gap:10px}
+.xrpl-layman-brand img{width:32px;height:32px;object-fit:contain;display:block;flex:0 0 auto}
+@media (max-width:640px){.xrpl-layman-brand img{width:28px;height:28px}}
+</style>
 </head>
 <body id="top">
   <div class="wrap">
@@ -181,7 +186,7 @@
     </div>
 
     <section class="hero">
-      <h1>XRPL LAYMAN</h1>
+      <h1><span class="xrpl-layman-brand"><img src="/assets/xrpl/xrpl_layman_icon.png" alt="XRPL LAYMAN icon"><span>XRPL LAYMAN</span></span></h1>
       <div class="sub">
         Learn how to actually use the XRP Ledger. Wallets, buying tokens, NFTs, liquidity, and real execution.
       </div>

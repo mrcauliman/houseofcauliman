@@ -120,6 +120,11 @@ html,body{
 /* XRPL HOUSE THEME OVERRIDE END */
 
 </style>
+<style id="xrpl-layman-header-icon-style">
+.xrpl-layman-brand{display:inline-flex;align-items:center;gap:10px}
+.xrpl-layman-brand img{width:32px;height:32px;object-fit:contain;display:block;flex:0 0 auto}
+@media (max-width:640px){.xrpl-layman-brand img{width:28px;height:28px}}
+</style>
 </head>
 <body id="top">
   <div class="wrap">
@@ -134,7 +139,7 @@ html,body{
 </nav>
 
     <section class="hero">
-      <h1>XRPL Definitions</h1>
+      <h1><span class="xrpl-layman-brand"><img src="/assets/xrpl/xrpl_layman_icon.png" alt="XRPL LAYMAN icon"><span>XRPL Definitions</span></span></h1>
       <div class="sub">This is the foundation page. The parts, the terms, and how the ledger actually fits together without the usual confusion.</div>
       <div class="pillbar">
         <div class="pill"><span class="dot"></span>Free Education</div>

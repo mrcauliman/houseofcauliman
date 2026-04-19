@@ -185,6 +185,11 @@ html,body{
 /* XRPL HOUSE THEME OVERRIDE END */
 
 </style>
+<style id="xrpl-layman-header-icon-style">
+.xrpl-layman-brand{display:inline-flex;align-items:center;gap:10px}
+.xrpl-layman-brand img{width:32px;height:32px;object-fit:contain;display:block;flex:0 0 auto}
+@media (max-width:640px){.xrpl-layman-brand img{width:28px;height:28px}}
+</style>
 </head>
 <body id="top">
   <div class="wrap">
@@ -199,7 +204,7 @@ html,body{
 </nav>
 
     <section class="hero">
-      <h1>XRPL Investing Reality</h1>
+      <h1><span class="xrpl-layman-brand"><img src="/assets/xrpl/xrpl_layman_icon.png" alt="XRPL LAYMAN icon"><span>XRPL Investing Reality</span></span></h1>
       <div class="sub">This is the truth filter. Liquidity, slippage, market cap confusion, and how price actually moves on XRPL.</div>
     </section>
 
