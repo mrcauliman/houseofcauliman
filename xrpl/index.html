@@ -131,10 +131,51 @@
       text-align:center;
       opacity:.9;
     }
-  </style>
+  
+  .topnav{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:0 0 18px;
+    padding:14px;
+    border:1px solid var(--line);
+    border-radius:16px;
+    background:rgba(255,255,255,.03);
+    box-shadow:var(--shadow);
+  }
+
+  .topnav a{
+    display:inline-block;
+    padding:10px 14px;
+    border-radius:10px;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.04);
+    color:var(--text);
+    font-size:14px;
+    font-weight:700;
+    text-decoration:none;
+  }
+
+  .topnav a:hover{
+    border-color:var(--blue);
+    box-shadow:0 0 0 1px rgba(88,166,255,.15), 0 0 24px rgba(88,166,255,.12);
+  }
+
+</style>
 </head>
 <body>
   <div class="wrap">
+    <nav class="topnav">
+      <a href="/xrpl/">Layman</a>
+      <a href="/xrpl/#basics-card">Basics</a>
+      <a href="/xrpl/wallet-basics.html">Wallets</a>
+      <a href="/xrpl/usage.html">Usage</a>
+      <a href="/xrpl/definitions.html">Definitions</a>
+      <a href="/xrpl/safety.html">Safety</a>
+      <a href="/xrpl/investing-reality.html">Investing Reality</a>
+      <a href="/">House</a>
+    </nav>
+
     <section class="hero">
       <h1>XRPL LAYMAN</h1>
       <div class="sub">
@@ -156,6 +197,15 @@
     </section>
 
     <section class="grid">
+
+      <article class="card" id="basics-card">
+        <div class="eyebrow">Foundation</div>
+        <h2>XRPL Basics</h2>
+        <p>What XRPL is, what $XRP does, reserves, trustlines, settlement, and the parts people confuse.</p>
+        <div class="actions">
+          <a class="btn" href="/xrpl/definitions.html">Enter Basics</a>
+        </div>
+      </article>
       <article class="card">
         <div class="eyebrow">Start Here</div>
         <h2>Wallets</h2>
@@ -207,15 +257,6 @@
         <p>Fake issuers, blind signing, OTC risk, exchange risk, and basic wallet security that actually matters.</p>
         <div class="actions">
           <a class="btn" href="/xrpl/safety.html">Enter Safety</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="eyebrow">Foundation</div>
-        <h2>XRPL Basics</h2>
-        <p>What XRPL is, what $XRP does, reserves, trustlines, settlement, and the parts people confuse.</p>
-        <div class="actions">
-          <a class="btn" href="/xrpl/definitions.html">Enter Basics</a>
         </div>
       </article>
 
