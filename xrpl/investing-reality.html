@@ -4,269 +4,87 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>XRPL Investing Reality | House of Cauliman</title>
-<meta name="description" content="XRPL investing reality. Usage, adoption, liquidity, price behavior, and unrealistic expectations explained clean.">
+<meta name="description" content="XRPL investing reality. Liquidity, slippage, market cap misconceptions, and how price actually moves.">
 <meta property="og:title" content="XRPL Investing Reality | House of Cauliman">
-<meta property="og:description" content="XRPL investing reality. Usage, adoption, liquidity, price behavior, and unrealistic expectations explained clean.">
+<meta property="og:description" content="XRPL investing reality. Liquidity, slippage, market cap misconceptions, and how price actually moves.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="XRPL Investing Reality | House of Cauliman">
-<meta name="twitter:description" content="XRPL investing reality. Usage, adoption, liquidity, price behavior, and unrealistic expectations explained clean.">
+<meta name="twitter:description" content="XRPL investing reality. Liquidity, slippage, market cap misconceptions, and how price actually moves.">
 <style>
-  :root{
-    --bg:#06080c;
-    --panel:#0d1218;
-    --panel2:#111823;
-    --line:rgba(255,255,255,.10);
-    --text:#eef3f8;
-    --muted:#aeb8c6;
-    --blue:#58a6ff;
-    --gold:#d4a44a;
-    --green:#42d392;
-    --radius:18px;
-    --shadow:0 16px 48px rgba(0,0,0,.35);
-    --sans:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-  }
-
-  *{box-sizing:border-box}
-  html,body{
-    margin:0;
-    padding:0;
-    background:
-      radial-gradient(circle at top, rgba(88,166,255,.10) 0%, rgba(0,0,0,0) 28%),
-      linear-gradient(180deg,#06080c 0%,#0b1018 100%);
-    color:var(--text);
-    font-family:var(--sans);
-  }
-
-  a{color:var(--blue);text-decoration:none}
-
-  .wrap{
-    max-width:1100px;
-    margin:0 auto;
-    padding:28px 18px 90px;
-  }
-
-  .topnav{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin:0 0 18px;
-    padding:14px;
-    border:1px solid var(--line);
-    border-radius:16px;
-    background:rgba(255,255,255,.03);
-    box-shadow:var(--shadow);
-  }
-
-  .topnav a{
-    display:inline-block;
-    padding:10px 14px;
-    border-radius:10px;
-    border:1px solid var(--line);
-    background:rgba(255,255,255,.04);
-    color:var(--text);
-    font-size:14px;
-    font-weight:700;
-    text-decoration:none;
-  }
-
-  .topnav a:hover{
-    border-color:var(--blue);
-    box-shadow:0 0 0 1px rgba(88,166,255,.15), 0 0 24px rgba(88,166,255,.12);
-  }
-
-  .hero{
-    background:
-      radial-gradient(circle at 10% 0, rgba(88,166,255,.12) 0, rgba(255,255,255,0) 55%),
-      linear-gradient(180deg,var(--panel),var(--panel2));
-    border:1px solid var(--line);
-    border-radius:24px;
-    padding:28px;
-    box-shadow:var(--shadow);
-  }
-
-  h1{
-    margin:0;
-    font-size:34px;
-    line-height:1.05;
-    letter-spacing:.2px;
-  }
-
-  .sub{
-    margin-top:10px;
-    color:var(--muted);
-    line-height:1.7;
-    max-width:820px;
-    font-size:15px;
-  }
-
-  .pillbar{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-top:18px;
-  }
-
-  .pill{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    padding:9px 12px;
-    border-radius:999px;
-    border:1px solid var(--line);
-    background:rgba(255,255,255,.04);
-    color:var(--muted);
-    font-size:12px;
-    font-weight:700;
-  }
-
-  .dot{
-    width:8px;
-    height:8px;
-    border-radius:999px;
-    background:var(--green);
-  }
-
-  .section{
-    margin-top:18px;
-    background:linear-gradient(180deg,var(--panel),var(--panel2));
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    padding:22px;
-    box-shadow:var(--shadow);
-  }
-
-  h2{
-    margin:0 0 12px;
-    font-size:18px;
-    color:var(--gold);
-    text-transform:uppercase;
-    letter-spacing:.4px;
-  }
-
-  p{
-    margin:10px 0;
-    color:var(--muted);
-    line-height:1.75;
-    font-size:15px;
-  }
-
-  ul{
-    margin:10px 0 0 18px;
-    color:var(--muted);
-    line-height:1.75;
-    padding:0;
-  }
-
-  li{margin:6px 0}
-
-  .cta-row{
-    display:flex;
-    flex-wrap:wrap;
-    gap:12px;
-    margin-top:22px;
-  }
-
-  .cta{
-    display:inline-block;
-    padding:12px 16px;
-    border-radius:12px;
-    border:1px solid var(--line);
-    background:rgba(255,255,255,.04);
-    color:var(--text);
-    font-weight:800;
-    font-size:14px;
-  }
-
-  .cta:hover{
-    border-color:var(--blue);
-    box-shadow:0 0 0 1px rgba(88,166,255,.15), 0 0 24px rgba(88,166,255,.12);
-  }
-
-  .footer{
-    margin-top:18px;
-    color:var(--muted);
-    font-size:12px;
-    text-align:center;
-  }
-
-  @media (max-width: 820px){
-    h1{font-size:28px;}
-  }
+:root{
+--bg:#06080c;
+--panel:#0d1218;
+--panel2:#111823;
+--line:rgba(255,255,255,.10);
+--text:#eef3f8;
+--muted:#aeb8c6;
+--blue:#58a6ff;
+--gold:#d4a44a;
+--red:#ff6b6b;
+--radius:18px;
+--shadow:0 16px 48px rgba(0,0,0,.35);
+--sans:system-ui,-apple-system,Segoe UI,Roboto;
+}
+*{box-sizing:border-box}
+body{
+margin:0;
+background:linear-gradient(180deg,#06080c,#0b1018);
+color:var(--text);
+font-family:var(--sans);
+}
+.wrap{max-width:1100px;margin:auto;padding:28px}
+.section{
+margin-top:18px;
+background:linear-gradient(180deg,var(--panel),var(--panel2));
+border:1px solid var(--line);
+border-radius:18px;
+padding:22px;
+}
+h1{margin:0;font-size:34px}
+h2{color:var(--gold)}
+p{color:var(--muted)}
+.visual img{width:100%;border-radius:14px;border:1px solid var(--line)}
 </style>
 </head>
-<body id="top">
-  <div class="wrap">
+<body>
+<div class="wrap">
 
-    <nav class="topnav">
-      <a href="/xrpl/">Layman</a>
-      <a href="/xrpl/definitions.html">Definitions</a>
-      <a href="/xrpl/usage.html">Usage & Adoption</a>
-      <a href="/xrpl/wallet-basics.html">Wallet Basics</a>
-      <a href="/xrpl/safety.html">Safety</a>
-      <a href="/xrpl/investing-reality.html">Investing Reality</a>
-      <a href="/">House</a>
-    </nav>
+<h1>XRPL Investing Reality</h1>
 
-    <section class="hero">
-      <h1>XRPL Investing Reality</h1>
-      <div class="sub">This page is about expectations. How price actually behaves, why usage matters, why fantasy numbers poison thinking, and what people need to understand before putting money to work.</div>
-      <div class="pillbar">
-        <div class="pill"><span class="dot"></span>Free Education</div>
-        <div class="pill"><span class="dot"></span>Usage First</div>
-        <div class="pill"><span class="dot"></span>Reality Over Fantasy</div>
-        <div class="pill"><span class="dot"></span>$XRP</div>
-      </div>
-    </section>
 <div class="section">
-  <img src="/assets/xrpl/reality.svg" alt="XRPL investing reality diagram" style="width:100%;border-radius:16px;border:1px solid var(--line);display:block;">
+<p>This is where people get it wrong. Price does not move based on belief. It moves based on liquidity and execution.</p>
 </div>
 
-    <section class="section">
-      <h2>First Principle</h2>
-      <p>$XRP does not become more valuable because people yell bigger numbers.</p>
-      <p>Usage is what matters. Real movement of value. Real settlement. Real adoption.</p>
-    </section>
+<div class="section">
+<h2>Liquidity</h2>
+<div class="visual">
+<img src="/assets/xrpl/liquidity.svg">
+</div>
+<p>Liquidity determines how easily price moves. Thin liquidity moves fast. Deep liquidity absorbs size.</p>
+</div>
 
-    <section class="section">
-      <h2>How Price Actually Moves</h2>
-      <p>Price does not move in a permanent vertical line.</p>
-      <p>Usage builds. Price steps up. Sellers take profit. Price pulls back. Usage builds again. The next step forms.</p>
-      <p>That is closer to reality than fantasy moonshot thinking.</p>
-    </section>
+<div class="section">
+<h2>Slippage</h2>
+<div class="visual">
+<img src="/assets/xrpl/slippage.svg">
+</div>
+<p>Large orders move price against you. That is slippage. Most new users underestimate this.</p>
+</div>
 
-    <section class="section">
-      <h2>What Fantasy Numbers Ignore</h2>
-      <p>Extreme price targets imply extreme system-wide alignment, liquidity, and usage. That is not a casual overnight event.</p>
-      <p>Big numbers require big rails. Big rails require real integration and time.</p>
-    </section>
+<div class="section">
+<h2>Market Cap Myth</h2>
+<div class="visual">
+<img src="/assets/xrpl/marketcap.svg">
+</div>
+<p>Market cap is not cash. It does not mean that amount can be withdrawn.</p>
+</div>
 
-    <section class="section">
-      <h2>What To Watch Instead</h2>
-      <ul>
-        <li>Usage growth</li>
-        <li>Liquidity depth</li>
-        <li>Transaction activity</li>
-        <li>Adoption by real systems</li>
-        <li>Whether the network is being used, not just discussed</li>
-      </ul>
-    </section>
+<div class="section">
+<h2>Reality</h2>
+<p>Price moves where liquidity allows it to move. Not where people want it to go.</p>
+</div>
 
-    <section class="section">
-      <h2>Bad Investor Habits</h2>
-      <ul>
-        <li>Buying narratives without understanding mechanics</li>
-        <li>Following fantasy accounts</li>
-        <li>Assuming every rally is permanent</li>
-        <li>Ignoring risk and liquidity</li>
-        <li>Thinking timeline and destination are the same thing</li>
-      </ul>
-    </section>
-<div class="cta-row">
-      <a class="cta" href="#top">Return to Top</a>
-    </div>
-
-    <div class="footer">House of Cauliman · XRPL Investing Reality</div>
-  </div>
+</div>
 </body>
 </html>
