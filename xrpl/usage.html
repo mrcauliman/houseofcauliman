@@ -303,94 +303,113 @@ html,body{
     </section>
 
     <section class="section">
-      <h2>What Usage Actually Means</h2>
-      <p>Usage is not people talking about a chain online. Usage is people signing transactions, buying assets, moving funds, listing products, and interacting with the ledger directly.</p>
-      <p>That means swaps, order books, NFT buys, direct settlements, and wallet-based execution.</p>
+      <h2>How People Actually Use XRPL</h2>
+      <p>People are not using XRPL in theory. They are signing transactions. Buying assets. Moving between pools. Taking positions and trying to exit them.</p>
+      <p>Every action comes down to one thing. A wallet signing something on the ledger.</p>
     </section>
 
     <section class="section">
-      <h2>DEX</h2>
-      <p>The XRPL DEX is the order book layer. Buyers and sellers place orders. The ledger matches them.</p>
+      <h2>DEX vs AMM</h2>
+      <p>There are two real execution layers. Order books and pools.</p>
+
       <div class="visual">
         <img src="/assets/xrpl/amm-vs-dex.svg" alt="AMM versus DEX comparison diagram">
       </div>
+
+      <p><strong>DEX:</strong> You place or hit orders. You get control. You need liquidity on the book.</p>
+      <p><strong>AMM:</strong> You swap into a pool. You get speed. You take slippage.</p>
+
       <ul>
-        <li>Order book based</li>
-        <li>Good for precise pricing</li>
-        <li>Requires active orders and real liquidity</li>
-        <li>Best when you want more control over the entry</li>
+        <li>DEX is precision</li>
+        <li>AMM is convenience</li>
+        <li>Thin liquidity punishes both</li>
       </ul>
     </section>
 
     <section class="section">
-      <h2>AMM</h2>
-      <p>The AMM is the pool layer. You are swapping against liquidity in a pool instead of matching directly with another order.</p>
-      <div class="visual">
-        <img src="/assets/xrpl/amm-vs-dex.svg" alt="AMM pool behavior compared to DEX">
-      </div>
-      <ul>
-        <li>Instant swap flow</li>
-        <li>Price moves with trade size</li>
-        <li>Slippage matters</li>
-        <li>Thin pools move harder and punish size faster</li>
-      </ul>
-    </section>
+      <h2>Token Flow</h2>
+      <p>This is what most people are actually doing.</p>
 
-    <section class="section">
-      <h2>Buying Tokens</h2>
-      <p>Most token buyers are doing one of two things. They are hitting the order book or swapping through an AMM. Xaman usually handles the signing flow directly.</p>
       <div class="visual">
         <img src="/assets/xrpl/token-buy-flow.svg" alt="XRPL token buying flow diagram">
       </div>
+
       <ul>
-        <li>Check the issuer</li>
-        <li>Check available liquidity</li>
-        <li>Understand whether you are using DEX or AMM</li>
-        <li>Sign only after you know what you are buying</li>
+        <li>Find token</li>
+        <li>Check issuer</li>
+        <li>Check liquidity</li>
+        <li>Choose DEX or AMM</li>
+        <li>Sign transaction in wallet</li>
       </ul>
+
+      <p>Most people skip step two and get burned.</p>
     </section>
 
     <section class="section">
-      <h2>Buying NFTs</h2>
-      <p>XRPL NFTs are usually bought through a marketplace or a direct project listing. Same ledger underneath. Different front door.</p>
+      <h2>NFT Flow</h2>
+
       <div class="visual">
         <img src="/assets/xrpl/nft-buy-flow.svg" alt="XRPL NFT buying flow diagram">
       </div>
+
       <ul>
-        <li>Marketplace listing gives cleaner discovery</li>
-        <li>Direct site listing gives the project more control</li>
-        <li>Xaman signs the final transaction either way</li>
-        <li>You still verify what collection and item you are buying</li>
+        <li>Marketplace or direct listing</li>
+        <li>Select item</li>
+        <li>Verify collection</li>
+        <li>Sign with wallet</li>
       </ul>
+
+      <p>Different front ends. Same ledger underneath.</p>
     </section>
 
     <section class="section">
-      <h2>OTC</h2>
-      <p>OTC means over the counter. Direct deal. Wallet to wallet. No marketplace protection. No pool logic. No order book in the middle.</p>
+      <h2>OTC Reality</h2>
+
       <div class="visual">
         <img src="/assets/xrpl/otc-risk.svg" alt="OTC risk diagram">
       </div>
+
+      <p>OTC is direct wallet to wallet.</p>
+
       <ul>
-        <li>Useful for private deals and bulk settlements</li>
-        <li>Trust risk is much higher</li>
-        <li>You are relying on the counterparty</li>
-        <li>Bad OTC habits get people burned fast</li>
+        <li>No protection</li>
+        <li>No pool</li>
+        <li>No order book</li>
+        <li>No recovery if it goes wrong</li>
       </ul>
+
+      <p>This is where people lose money fast.</p>
     </section>
 
     <section class="section">
-      <h2>Direct Site Listings</h2>
-      <p>Some projects sell directly through their own site. That can still route to the same ledger actions under the hood. The website is the interface. XRPL is still doing the settlement.</p>
+      <h2>Direct Site Execution</h2>
+      <p>Projects build their own front end. The transaction still hits XRPL the same way.</p>
+
       <ul>
-        <li>Project controls the buying flow</li>
-        <li>Can feel cleaner for users</li>
-        <li>Still needs wallet signing</li>
-        <li>Still needs issuer and asset verification</li>
+        <li>Cleaner experience</li>
+        <li>More control for the project</li>
+        <li>Still requires wallet signing</li>
       </ul>
+
+      <p>The site is just the interface. The ledger is still doing the work.</p>
     </section>
 
     <section class="section">
-      <h2>Reality</h2>
+      <h2>Where People Get Stuck</h2>
+
+      <ul>
+        <li>They don’t understand DEX vs AMM</li>
+        <li>They don’t check issuer</li>
+        <li>They ignore liquidity</li>
+        <li>They sign transactions blind</li>
+      </ul>
+
+      <p>That’s behavior. Not a platform problem.</p>
+    </section>
+
+
+    <section class="section">
+      <h2>Usage Reality</h2>
       <p>Every sale type has strengths and weaknesses. DEX gives precision. AMM gives convenience. OTC gives flexibility. Marketplaces give cleaner discovery. Direct sites give projects more control.</p>
       <p>None of that removes the need to verify what you are signing.</p>
     </section>
