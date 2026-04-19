@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#0b1018"/>
+  <text x="120" y="110" fill="#eef3f8" font-family="Arial" font-size="52" font-weight="700">Order Book vs Pool Impact</text>
+  <rect x="120" y="220" width="600" height="520" rx="28" fill="#111823" stroke="#58a6ff"/>
+  <rect x="880" y="220" width="600" height="520" rx="28" fill="#111823" stroke="#d4a44a"/>
+  <text x="300" y="300" fill="#58a6ff" font-family="Arial" font-size="42" font-weight="700">Order Book</text>
+  <text x="1080" y="300" fill="#d4a44a" font-family="Arial" font-size="42" font-weight="700">Pool</text>
+  <text x="180" y="390" fill="#aeb8c6" font-family="Arial" font-size="30">Depends on bids and asks</text>
+  <text x="180" y="460" fill="#aeb8c6" font-family="Arial" font-size="30">Execution depends on depth</text>
+  <text x="180" y="530" fill="#aeb8c6" font-family="Arial" font-size="30">Large size walks the book</text>
+  <text x="940" y="390" fill="#aeb8c6" font-family="Arial" font-size="30">Swap hits pool directly</text>
+  <text x="940" y="460" fill="#aeb8c6" font-family="Arial" font-size="30">Price moves along the curve</text>
+  <text x="940" y="530" fill="#aeb8c6" font-family="Arial" font-size="30">Large size increases slippage fast</text>
+</svg>

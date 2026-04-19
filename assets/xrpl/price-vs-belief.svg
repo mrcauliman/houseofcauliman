@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#0b1018"/>
+  <text x="120" y="110" fill="#eef3f8" font-family="Arial" font-size="52" font-weight="700">Belief vs Execution</text>
+  <rect x="140" y="220" width="1320" height="520" rx="28" fill="#111823" stroke="#58a6ff"/>
+  <text x="230" y="330" fill="#ff6b6b" font-family="Arial" font-size="38" font-weight="700">Belief does not move markets</text>
+  <text x="230" y="430" fill="#aeb8c6" font-family="Arial" font-size="30">Liquidity, size, and execution move markets</text>
+  <text x="230" y="520" fill="#aeb8c6" font-family="Arial" font-size="30">You can believe anything you want</text>
+  <text x="230" y="580" fill="#aeb8c6" font-family="Arial" font-size="30">The ledger only responds to real orders and available liquidity</text>
+  <line x1="230" y1="650" x2="1370" y2="650" stroke="#d4a44a" stroke-width="10"/>
+  <text x="230" y="715" fill="#d4a44a" font-family="Arial" font-size="28" font-weight="700">Execution decides reality</text>
+</svg>
