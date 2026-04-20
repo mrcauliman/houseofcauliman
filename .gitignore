@@ -31,3 +31,5 @@ monolith/*.bak_*
 
 # Ledger Drop backups
 ledgerdrop_xrpl/index.html.bak_*
+
+snapshots/
