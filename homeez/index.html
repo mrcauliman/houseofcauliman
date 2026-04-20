@@ -28,7 +28,6 @@
       --gold:#ffd86e;
       --gold2:#d69210;
       --panel:rgba(255,255,255,.04);
-      --panel-strong:rgba(255,255,255,.07);
       --shadow:0 28px 50px rgba(0,0,0,.38);
       --max:1320px;
     }
@@ -48,6 +47,7 @@
 
     a{text-decoration:none;color:inherit}
     img{max-width:100%;display:block}
+    button{appearance:none;border:0;cursor:pointer;font:inherit}
 
     .wrap{
       width:min(calc(100% - 28px), var(--max));
@@ -111,13 +111,13 @@
     }
 
     .hero{
-      padding:24px 0 42px;
+      padding:24px 0 40px;
     }
 
     .hero-grid{
       display:grid;
       grid-template-columns:minmax(320px,420px) 1fr;
-      gap:28px;
+      gap:26px;
       align-items:start;
     }
 
@@ -180,8 +180,106 @@
       color:#ffeeb9;
     }
 
-    .panel{
-      margin-top:22px;
+    .machine-side{
+      position:relative;
+    }
+
+    .machine-stage{
+      position:relative;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      min-height:760px;
+      padding:8px 0 0;
+    }
+
+    .machine-wrap{
+      position:relative;
+      width:min(100%, 820px);
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+    }
+
+    .machine-wrap.is-shaking .machine-render{
+      animation:machineShake .18s ease-in-out 1;
+    }
+
+    .machine-render{
+      width:min(100%, 820px);
+      height:auto;
+      display:block;
+      filter:drop-shadow(0 28px 50px rgba(0,0,0,.38));
+      user-select:none;
+      pointer-events:none;
+    }
+
+    .handle-wrap{
+      position:absolute;
+      right:19.2%;
+      top:42.8%;
+      width:14.5%;
+      aspect-ratio:1/1;
+      z-index:5;
+      pointer-events:none;
+    }
+
+    .handle-wrap.is-turning{
+      animation:handleTurn .28s ease-out 1;
+    }
+
+    .handle-hit{
+      position:absolute;
+      inset:-8%;
+      border-radius:50%;
+      background:transparent;
+      pointer-events:auto;
+      z-index:7;
+    }
+
+    .handle-hit:disabled{
+      cursor:not-allowed;
+    }
+
+    .handle-glow{
+      position:absolute;
+      inset:0;
+      border-radius:50%;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,.07), transparent 60%);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,.04),
+        inset 0 0 0 1px rgba(255,255,255,.03);
+      opacity:.18;
+    }
+
+    .handle-arm{
+      position:absolute;
+      left:50%;
+      top:14%;
+      width:12%;
+      height:40%;
+      transform:translateX(-50%);
+      border-radius:999px;
+      background:linear-gradient(180deg, rgba(255,255,255,.45), rgba(120,130,145,.24));
+      opacity:.20;
+      filter:blur(.2px);
+    }
+
+    .handle-knob{
+      position:absolute;
+      left:50%;
+      top:2%;
+      width:28%;
+      height:28%;
+      transform:translateX(-50%);
+      border-radius:50%;
+      background:radial-gradient(circle at 35% 35%, rgba(255,255,255,.4), rgba(140,150,165,.2));
+      opacity:.20;
+    }
+
+    .machine-panel{
+      margin-top:10px;
       padding:18px;
       border-radius:22px;
       background:var(--panel);
@@ -202,13 +300,6 @@
       display:flex;
       flex-wrap:wrap;
       gap:12px;
-    }
-
-    button{
-      appearance:none;
-      border:0;
-      cursor:pointer;
-      font:inherit;
     }
 
     .btn{
@@ -251,115 +342,47 @@
       min-height:22px;
     }
 
-    .machine-side{
-      position:relative;
-    }
-
-    .machine-stage{
-      position:relative;
+    .tap-meter{
+      margin-top:12px;
       display:flex;
-      justify-content:center;
+      gap:10px;
       align-items:center;
-      min-height:760px;
-      padding:10px 0 0;
+      flex-wrap:wrap;
     }
 
-    .machine-wrap{
-      position:relative;
-      width:min(100%, 820px);
+    .tap-dots{
       display:flex;
-      justify-content:center;
-      align-items:flex-start;
+      gap:8px;
     }
 
-    .machine-wrap.is-spinning .machine-render{
-      animation:machineShake .18s ease-in-out 5;
-    }
-
-    .machine-render{
-      width:min(100%, 820px);
-      height:auto;
-      display:block;
-      filter:drop-shadow(0 28px 50px rgba(0,0,0,.38));
-      user-select:none;
-      pointer-events:none;
-    }
-
-    .handle-hit{
-      position:absolute;
-      right:19.2%;
-      top:42.8%;
-      width:14.5%;
-      aspect-ratio:1/1;
+    .tap-dot{
+      width:12px;
+      height:12px;
       border-radius:50%;
-      background:transparent;
-      border:0;
-      cursor:pointer;
-      z-index:5;
+      background:rgba(255,255,255,.14);
+      border:1px solid rgba(255,255,255,.08);
+      transition:transform .15s ease, background .15s ease, box-shadow .15s ease;
     }
 
-    .handle-hit:disabled{
-      cursor:not-allowed;
+    .tap-dot.on{
+      background:linear-gradient(180deg, rgba(255,216,110,.95), rgba(214,146,16,.86));
+      box-shadow:0 0 16px rgba(255,216,110,.22);
+      transform:scale(1.08);
     }
 
-    .handle-rotator{
-      position:absolute;
-      right:19.2%;
-      top:42.8%;
-      width:14.5%;
-      aspect-ratio:1/1;
-      transform-origin:50% 50%;
-      pointer-events:none;
-      z-index:4;
-    }
-
-    .handle-wrap.is-turning .handle-rotator{
-      animation:handleTurn 1s cubic-bezier(.25,.8,.25,1) forwards;
-    }
-
-    .handle-ghost{
-      position:absolute;
-      inset:0;
-      border-radius:50%;
-      background:
-        radial-gradient(circle at 50% 50%, rgba(255,255,255,.06), transparent 55%);
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,.04),
-        inset 0 0 0 1px rgba(255,255,255,.03);
-      opacity:.22;
-    }
-
-    .handle-arm{
-      position:absolute;
-      left:50%;
-      top:14%;
-      width:12%;
-      height:40%;
-      transform:translateX(-50%);
-      border-radius:999px;
-      background:linear-gradient(180deg, rgba(255,255,255,.45), rgba(120,130,145,.24));
-      opacity:.20;
-      filter:blur(.2px);
-    }
-
-    .handle-knob{
-      position:absolute;
-      left:50%;
-      top:2%;
-      width:28%;
-      height:28%;
-      transform:translateX(-50%);
-      border-radius:50%;
-      background:radial-gradient(circle at 35% 35%, rgba(255,255,255,.4), rgba(140,150,165,.2));
-      opacity:.20;
+    .tap-text{
+      font-size:13px;
+      color:#d8e5ff;
+      font-weight:800;
+      letter-spacing:.02em;
     }
 
     .capsule-drop{
       position:absolute;
       left:50%;
       top:52%;
-      width:10.5%;
-      max-width:78px;
+      width:13.5%;
+      max-width:100px;
       aspect-ratio:1/1;
       transform:translate(-50%, -220px) scale(.82);
       opacity:0;
@@ -537,8 +560,7 @@
 
     @keyframes handleTurn{
       0%{ transform:rotate(0deg) }
-      68%{ transform:rotate(215deg) }
-      100%{ transform:rotate(180deg) }
+      100%{ transform:rotate(65deg) }
     }
 
     @keyframes capsuleDrop{
@@ -591,8 +613,12 @@
         grid-template-columns:1fr;
       }
 
+      .machine-side{
+        order:-1;
+      }
+
       .machine-stage{
-        min-height:660px;
+        min-height:640px;
       }
 
       .machine-wrap{
@@ -619,7 +645,11 @@
       }
 
       .hero{
-        padding:24px 0 34px;
+        padding:20px 0 32px;
+      }
+
+      h1{
+        font-size:clamp(36px, 10vw, 62px);
       }
 
       .sub{
@@ -627,16 +657,34 @@
       }
 
       .machine-stage{
-        min-height:500px;
+        min-height:470px;
       }
 
       .machine-wrap{
         width:min(100%, 460px);
       }
 
+      .machine-panel{
+        margin-top:8px;
+        padding:16px;
+      }
+
+      .controls{
+        gap:10px;
+      }
+
+      .btn{
+        min-height:46px;
+        padding:0 16px;
+      }
+
       .reveal-card{
         width:min(100%, 260px);
         top:78%;
+      }
+
+      .capsule-drop{
+        max-width:86px;
       }
     }
   </style>
@@ -660,22 +708,11 @@
         <div>
           <div class="eyebrow">Active Build</div>
           <h1>HOMEEZ Capsule Machine</h1>
-          <p class="sub">Turn the machine. Drop a capsule. Pop it open. The full XRPL pull system comes after the motion is locked.</p>
+          <p class="sub">Tap the real handle three times. Three taps. Three shakes. Then the capsule drops. Open it and reveal the result.</p>
 
           <div class="status-row">
             <span class="status gold">Founding Machine</span>
             <span class="status">Motion Demo Live</span>
-          </div>
-
-          <div class="panel">
-            <div class="panel-title">Machine Controls</div>
-            <div class="controls">
-              <button id="turnBtn" class="btn btn-primary" type="button">Turn Machine</button>
-              <button id="openBtn" class="btn" type="button" disabled>Open Capsule</button>
-              <button id="resetBtn" class="btn" type="button" disabled>Reset</button>
-              <a class="btn" href="https://houseofcauliman.com/">Back to House</a>
-            </div>
-            <div id="machineInfo" class="info">Machine ready.</div>
           </div>
         </div>
 
@@ -689,12 +726,10 @@
               >
 
               <div id="handleWrap" class="handle-wrap">
-                <div class="handle-rotator" aria-hidden="true">
-                  <div class="handle-ghost"></div>
-                  <div class="handle-arm"></div>
-                  <div class="handle-knob"></div>
-                </div>
-                <button id="handleHit" class="handle-hit" type="button" aria-label="Turn Machine"></button>
+                <div class="handle-glow" aria-hidden="true"></div>
+                <div class="handle-arm" aria-hidden="true"></div>
+                <div class="handle-knob" aria-hidden="true"></div>
+                <button id="handleHit" class="handle-hit" type="button" aria-label="Tap handle to turn machine"></button>
               </div>
 
               <div id="capsuleDrop" class="capsule-drop" aria-hidden="true">
@@ -714,6 +749,27 @@
                 <p id="revealCopy" class="reveal-copy">Blurred reveal placeholder. Character asset and rarity system come next.</p>
               </div>
             </div>
+          </div>
+
+          <div class="machine-panel">
+            <div class="panel-title">Machine Controls</div>
+
+            <div class="tap-meter">
+              <div id="tapDots" class="tap-dots">
+                <span class="tap-dot"></span>
+                <span class="tap-dot"></span>
+                <span class="tap-dot"></span>
+              </div>
+              <div id="tapText" class="tap-text">Tap the handle 3 times.</div>
+            </div>
+
+            <div class="controls" style="margin-top:14px;">
+              <button id="openBtn" class="btn btn-primary" type="button" disabled>Open Capsule</button>
+              <button id="resetBtn" class="btn" type="button" disabled>Reset</button>
+              <a class="btn" href="https://houseofcauliman.com/">Back to House</a>
+            </div>
+
+            <div id="machineInfo" class="info">Machine ready.</div>
           </div>
         </div>
       </div>
@@ -743,56 +799,97 @@
     const revealTitle = document.getElementById('revealTitle');
     const revealCopy = document.getElementById('revealCopy');
     const machineInfo = document.getElementById('machineInfo');
-
-    const turnBtn = document.getElementById('turnBtn');
+    const handleHit = document.getElementById('handleHit');
     const openBtn = document.getElementById('openBtn');
     const resetBtn = document.getElementById('resetBtn');
-    const handleHit = document.getElementById('handleHit');
+    const tapText = document.getElementById('tapText');
+    const tapDots = Array.from(document.querySelectorAll('.tap-dot'));
 
     let state = 'ready';
     let currentResult = null;
+    let tapCount = 0;
+    let tapBusy = false;
+
+    function vibrate(pattern) {
+      if (navigator.vibrate) {
+        navigator.vibrate(pattern);
+      }
+    }
 
     function pickResult() {
       return results[Math.floor(Math.random() * results.length)];
     }
 
-    function lockTurn(lock) {
-      turnBtn.disabled = lock;
-      handleHit.disabled = lock;
+    function updateTapMeter() {
+      tapDots.forEach((dot, i) => {
+        dot.classList.toggle('on', i < tapCount);
+      });
+
+      if (state === 'ready' || state === 'tapping') {
+        const left = Math.max(0, 3 - tapCount);
+        tapText.textContent = left === 0 ? 'Capsule dropping...' : `Tap the handle ${left} more ${left === 1 ? 'time' : 'times'}.`;
+      } else if (state === 'dropped') {
+        tapText.textContent = 'Capsule dropped. Open it.';
+      } else if (state === 'opened') {
+        tapText.textContent = 'Capsule opened.';
+      }
     }
 
-    function runTurn() {
-      if (state !== 'ready') return;
-
-      state = 'turning';
-      currentResult = pickResult();
-
-      machineInfo.textContent = 'Turning machine...';
-      lockTurn(true);
-      openBtn.disabled = true;
-      resetBtn.disabled = true;
-
-      revealCard.classList.remove('visible');
-      capsuleOpen.classList.remove('visible');
-      capsuleDrop.classList.remove('active');
-
-      void capsuleDrop.offsetWidth;
-
-      machineWrap.classList.add('is-spinning');
+    function flashShake() {
+      machineWrap.classList.remove('is-shaking');
+      handleWrap.classList.remove('is-turning');
+      void machineWrap.offsetWidth;
+      machineWrap.classList.add('is-shaking');
       handleWrap.classList.add('is-turning');
 
       setTimeout(() => {
-        capsuleDrop.classList.add('active');
-      }, 240);
+        machineWrap.classList.remove('is-shaking');
+        handleWrap.classList.remove('is-turning');
+      }, 220);
+    }
+
+    function resetVisuals() {
+      capsuleDrop.classList.remove('active');
+      capsuleOpen.classList.remove('visible');
+      revealCard.classList.remove('visible');
+    }
+
+    function runTap() {
+      if (state !== 'ready' && state !== 'tapping') return;
+      if (tapBusy) return;
+
+      tapBusy = true;
+      state = 'tapping';
+      tapCount += 1;
+
+      machineInfo.textContent = `Handle tap ${tapCount} of 3.`;
+      updateTapMeter();
+      flashShake();
+      vibrate(35);
 
       setTimeout(() => {
-        machineWrap.classList.remove('is-spinning');
-        handleWrap.classList.remove('is-turning');
-        state = 'dropped';
-        machineInfo.textContent = 'Capsule dropped. Open it.';
-        openBtn.disabled = false;
-        resetBtn.disabled = false;
-      }, 1180);
+        tapBusy = false;
+      }, 240);
+
+      if (tapCount >= 3) {
+        currentResult = pickResult();
+        state = 'dropping';
+        handleHit.disabled = true;
+        machineInfo.textContent = 'Capsule dropping...';
+        vibrate([50, 40, 70]);
+
+        setTimeout(() => {
+          capsuleDrop.classList.add('active');
+        }, 120);
+
+        setTimeout(() => {
+          state = 'dropped';
+          machineInfo.textContent = 'Capsule dropped. Open it.';
+          openBtn.disabled = false;
+          resetBtn.disabled = false;
+          updateTapMeter();
+        }, 1180);
+      }
     }
 
     function openCapsule() {
@@ -806,33 +903,35 @@
       revealCopy.textContent = currentResult.copy;
 
       capsuleOpen.classList.add('visible');
+      vibrate([60, 30, 60]);
 
       setTimeout(() => {
         revealCard.classList.add('visible');
         machineInfo.textContent = 'Capsule opened.';
+        updateTapMeter();
       }, 280);
     }
 
     function resetMachine() {
       state = 'ready';
       currentResult = null;
+      tapCount = 0;
+      tapBusy = false;
 
-      machineWrap.classList.remove('is-spinning');
-      handleWrap.classList.remove('is-turning');
-      capsuleDrop.classList.remove('active');
-      capsuleOpen.classList.remove('visible');
-      revealCard.classList.remove('visible');
-
-      lockTurn(false);
+      resetVisuals();
+      handleHit.disabled = false;
       openBtn.disabled = true;
       resetBtn.disabled = true;
       machineInfo.textContent = 'Machine ready.';
+      updateTapMeter();
+      vibrate(20);
     }
 
-    turnBtn.addEventListener('click', runTurn);
-    handleHit.addEventListener('click', runTurn);
+    handleHit.addEventListener('click', runTap);
     openBtn.addEventListener('click', openCapsule);
     resetBtn.addEventListener('click', resetMachine);
+
+    updateTapMeter();
   </script>
 </body>
 </html>
