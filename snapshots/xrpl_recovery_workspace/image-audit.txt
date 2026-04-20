@@ -1,0 +1,36 @@
+
+=== definitions.html ===
+OK  /assets/xrpl/definitions.svg
+MISSING  /assets/xrpl/issuer-token-wallet.svg
+MISSING  /assets/xrpl/trustline.svg
+MISSING  /assets/xrpl/reserve.svg
+
+=== index.html ===
+NO IMAGES FOUND
+
+=== investing-reality.html ===
+OK  /assets/xrpl/liquidity.svg
+OK  /assets/xrpl/slippage.svg
+OK  /assets/xrpl/marketcap.svg
+
+=== safety.html ===
+OK  /assets/xrpl/safety.svg
+MISSING  /assets/xrpl/fake-vs-real-issuer.svg
+MISSING  /assets/xrpl/blind-signing.svg
+OK  /assets/xrpl/otc-risk.svg
+MISSING  /assets/xrpl/exchange-risk.svg
+
+=== usage.html ===
+OK  /assets/xrpl/usage.svg
+OK  /assets/xrpl/amm-vs-dex.svg
+OK  /assets/xrpl/amm-vs-dex.svg
+OK  /assets/xrpl/token-buy-flow.svg
+OK  /assets/xrpl/nft-buy-flow.svg
+OK  /assets/xrpl/otc-risk.svg
+
+=== wallet-basics.html ===
+OK  /assets/xrpl/wallet.svg
+OK  /assets/xrpl/xaman-ui.svg
+OK  /assets/xrpl/hot-vs-cold.svg
+OK  /assets/xrpl/exchange-vs-wallet.svg
+OK  /assets/xrpl/onramp-flow.svg

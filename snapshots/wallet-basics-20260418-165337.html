@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XRPL Wallet Basics | House of Cauliman</title>
+<meta name="description" content="XRPL wallet basics. Hot wallets, cold wallets, exchanges, Xaman, on-ramps, off-ramps, custody, and how to operate safely on the XRP Ledger.">
+<meta property="og:title" content="XRPL Wallet Basics | House of Cauliman">
+<meta property="og:description" content="XRPL wallet basics. Hot wallets, cold wallets, exchanges, Xaman, on-ramps, off-ramps, custody, and how to operate safely on the XRP Ledger.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="XRPL Wallet Basics | House of Cauliman">
+<meta name="twitter:description" content="XRPL wallet basics. Hot wallets, cold wallets, exchanges, Xaman, on-ramps, off-ramps, custody, and how to operate safely on the XRP Ledger.">
+<style>
+  :root{
+    --bg:#06080c;
+    --panel:#0d1218;
+    --panel2:#111823;
+    --line:rgba(255,255,255,.10);
+    --text:#eef3f8;
+    --muted:#aeb8c6;
+    --blue:#58a6ff;
+    --gold:#d4a44a;
+    --green:#42d392;
+    --radius:18px;
+    --shadow:0 16px 48px rgba(0,0,0,.35);
+    --sans:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  }
+
+  *{box-sizing:border-box}
+  html,body{
+    margin:0;
+    padding:0;
+    background:
+      radial-gradient(circle at top, rgba(88,166,255,.10) 0%, rgba(0,0,0,0) 28%),
+      linear-gradient(180deg,#06080c 0%,#0b1018 100%);
+    color:var(--text);
+    font-family:var(--sans);
+  }
+
+  a{color:var(--blue);text-decoration:none}
+
+  .wrap{
+    max-width:1100px;
+    margin:0 auto;
+    padding:28px 18px 90px;
+  }
+
+  .topnav{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:0 0 18px;
+    padding:14px;
+    border:1px solid var(--line);
+    border-radius:16px;
+    background:rgba(255,255,255,.03);
+    box-shadow:var(--shadow);
+  }
+
+  .topnav a{
+    display:inline-block;
+    padding:10px 14px;
+    border-radius:10px;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.04);
+    color:var(--text);
+    font-size:14px;
+    font-weight:700;
+    text-decoration:none;
+  }
+
+  .topnav a:hover{
+    border-color:var(--blue);
+    box-shadow:0 0 0 1px rgba(88,166,255,.15), 0 0 24px rgba(88,166,255,.12);
+  }
+
+  .hero{
+    background:
+      radial-gradient(circle at 10% 0, rgba(88,166,255,.12) 0, rgba(255,255,255,0) 55%),
+      linear-gradient(180deg,var(--panel),var(--panel2));
+    border:1px solid var(--line);
+    border-radius:24px;
+    padding:28px;
+    box-shadow:var(--shadow);
+  }
+
+  h1{
+    margin:0;
+    font-size:34px;
+    line-height:1.05;
+    letter-spacing:.2px;
+  }
+
+  .sub{
+    margin-top:10px;
+    color:var(--muted);
+    line-height:1.7;
+    max-width:860px;
+    font-size:15px;
+  }
+
+  .pillbar{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:18px;
+  }
+
+  .pill{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:9px 12px;
+    border-radius:999px;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.04);
+    color:var(--muted);
+    font-size:12px;
+    font-weight:700;
+  }
+
+  .dot{
+    width:8px;
+    height:8px;
+    border-radius:999px;
+    background:var(--green);
+  }
+
+  .section{
+    margin-top:18px;
+    background:linear-gradient(180deg,var(--panel),var(--panel2));
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:22px;
+    box-shadow:var(--shadow);
+  }
+
+  .split{
+    display:grid;
+    grid-template-columns:1.15fr .85fr;
+    gap:18px;
+    align-items:start;
+  }
+
+  h2{
+    margin:0 0 12px;
+    font-size:18px;
+    color:var(--gold);
+    text-transform:uppercase;
+    letter-spacing:.4px;
+  }
+
+  h3{
+    margin:0 0 8px;
+    color:var(--text);
+    font-size:16px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+  }
+
+  p{
+    margin:10px 0;
+    color:var(--muted);
+    line-height:1.75;
+    font-size:15px;
+  }
+
+  ul{
+    margin:10px 0 0 18px;
+    color:var(--muted);
+    line-height:1.75;
+    padding:0;
+  }
+
+  li{margin:6px 0}
+
+  .visual{
+    background:rgba(255,255,255,.03);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:14px;
+  }
+
+  .visual img{
+    width:100%;
+    border-radius:12px;
+    display:block;
+    border:1px solid var(--line);
+    background:#0b1018;
+  }
+
+  .caption{
+    margin-top:10px;
+    font-size:13px;
+    color:var(--muted);
+    line-height:1.6;
+  }
+
+  .defs{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:18px;
+    margin-top:18px;
+  }
+
+  .def-card{
+    background:rgba(255,255,255,.03);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:18px;
+  }
+
+  .mini-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:14px;
+    margin-top:14px;
+  }
+
+  .mini{
+    background:rgba(255,255,255,.03);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:14px;
+  }
+
+  .cta-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:22px;
+  }
+
+  .cta{
+    display:inline-block;
+    padding:12px 16px;
+    border-radius:12px;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.04);
+    color:var(--text);
+    font-weight:800;
+    font-size:14px;
+  }
+
+  .cta:hover{
+    border-color:var(--blue);
+    box-shadow:0 0 0 1px rgba(88,166,255,.15), 0 0 24px rgba(88,166,255,.12);
+  }
+
+  .footer{
+    margin-top:18px;
+    color:var(--muted);
+    font-size:12px;
+    text-align:center;
+  }
+
+  @media (max-width: 900px){
+    .split{grid-template-columns:1fr}
+    .defs{grid-template-columns:1fr}
+    .mini-grid{grid-template-columns:1fr}
+    h1{font-size:28px}
+  }
+</style>
+</head>
+<body id="top">
+  <div class="wrap">
+    <nav class="topnav">
+      <a href="/xrpl/">Layman</a>
+      <a href="/xrpl/definitions.html">Definitions</a>
+      <a href="/xrpl/usage.html">Usage & Adoption</a>
+      <a href="/xrpl/wallet-basics.html">Wallet Basics</a>
+      <a href="/xrpl/safety.html">Safety</a>
+      <a href="/xrpl/investing-reality.html">Investing Reality</a>
+      <a href="/">House</a>
+    </nav>
+
+    <section class="hero">
+      <h1>XRPL Wallet Basics</h1>
+      <div class="sub">
+        This is the plain-English wallet page. What a wallet is, what it controls, what never gets shared, how money gets onto XRPL, and why Xaman is the first wallet most people should understand.
+      </div>
+      <div class="pillbar">
+        <div class="pill"><span class="dot"></span>Free Education</div>
+        <div class="pill"><span class="dot"></span>Wallets</div>
+        <div class="pill"><span class="dot"></span>Xaman</div>
+        <div class="pill"><span class="dot"></span>$XRP</div>
+        <div class="pill"><span class="dot"></span>XRPL</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="visual">
+        <img src="/assets/xrpl/wallet.svg" alt="XRPL wallet basics diagram">
+      </div>
+    </section>
+
+    <section class="section split">
+      <div>
+        <h2>What a Wallet Actually Is</h2>
+        <p>A wallet is your access point to the ledger. It does not magically store money inside an app like a game inventory. It controls access to the assets tied to your public address.</p>
+        <p>If you control the keys, you control the wallet.</p>
+        <p>If somebody else controls the keys, you are using their system.</p>
+      </div>
+      <div class="visual">
+        <img src="/assets/xrpl/wallet.svg" alt="Wallet and ledger relationship diagram">
+        <div class="caption">Wallet app on one side. Public address on the ledger. Keys are the control layer in the middle.</div>
+      </div>
+    </section>
+
+    <section class="section split">
+      <div>
+        <h2>Hot Wallet vs Cold Wallet</h2>
+        <p>A hot wallet is connected to the internet and used for daily activity. A cold wallet is kept offline and used for storage.</p>
+        <div class="mini-grid">
+          <div class="mini">
+            <h3>Hot Wallet</h3>
+            <p>Fast. Convenient. Used for signing, trading, minting, and interacting with apps.</p>
+            <ul>
+              <li>Best for active use</li>
+              <li>More exposed</li>
+              <li>Xaman fits here</li>
+            </ul>
+          </div>
+          <div class="mini">
+            <h3>Cold Wallet</h3>
+            <p>Slower. More secure. Built for storage and long-term protection.</p>
+            <ul>
+              <li>Best for larger holdings</li>
+              <li>Offline by design</li>
+              <li>Better for long-term storage</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="visual">
+        <img src="/assets/xrpl/hot-vs-cold.svg" alt="Hot wallet versus cold wallet comparison diagram">
+        <div class="caption">Hot wallets are for activity. Cold wallets are for storage. Use both correctly.</div>
+      </div>
+    </section>
+
+    <section class="section split">
+      <div>
+        <h2>Exchange vs Wallet</h2>
+        <p>An exchange gives you access through a company login. A wallet gives you direct control through your keys.</p>
+        <p>People confuse access with ownership all the time. They are not the same thing.</p>
+        <ul>
+          <li>Exchange holds the funds for you</li>
+          <li>Wallet puts you in control</li>
+          <li>If you do not control the keys, you do not control the funds</li>
+        </ul>
+      </div>
+      <div class="visual">
+        <img src="/assets/xrpl/exchange-vs-wallet.svg" alt="Exchange versus wallet comparison chart">
+        <div class="caption">Exchange equals custodial access. Wallet equals self-custody and direct ledger control.</div>
+      </div>
+    </section>
+
+    <section class="section split">
+      <div>
+        <h2>On-Ramp vs Off-Ramp</h2>
+        <p>An on-ramp converts dollars into crypto. An off-ramp converts crypto back into dollars.</p>
+        <p>Most people on-ramp through an exchange, move their $XRP into a wallet, then use XRPL from there.</p>
+        <ul>
+          <li>On-ramp: USD to $XRP</li>
+          <li>Off-ramp: $XRP to USD</li>
+          <li>Wallet is where you take control after purchase</li>
+        </ul>
+      </div>
+      <div class="visual">
+        <img src="/assets/xrpl/onramp-flow.svg" alt="On-ramp and off-ramp flow diagram">
+        <div class="caption">Bank to exchange to wallet to XRPL. Reverse the flow when exiting.</div>
+      </div>
+    </section>
+
+    <section class="section split">
+      <div>
+        <h2>Xaman</h2>
+        <p>Xaman is the main wallet most XRPL users should know first. It is the wallet that shows up constantly across real XRPL use.</p>
+        <p>It is built for signing transactions, managing assets, handling XRPL interactions, and staying in motion on the ledger.</p>
+        <ul>
+          <li>Strong XRPL-first user flow</li>
+          <li>Common wallet for token and NFT activity</li>
+          <li>Handles transaction signing cleanly</li>
+          <li>Fits daily XRPL use</li>
+        </ul>
+      </div>
+      <div class="visual">
+        <img src="/assets/xrpl/xaman-ui.svg" alt="Xaman wallet visual">
+        <div class="caption">Xaman is the execution wallet people need to understand first on XRPL.</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>What You Can Share</h2>
+      <p>Your public address is shareable. That is what people use to send assets to you.</p>
+      <p>Your secret, seed, recovery phrase, and signing control never get shared. Not with support. Not with a friend. Not with a website. Not with anybody.</p>
+    </section>
+
+    <section class="section">
+      <h2>What Never Gets Shared</h2>
+      <div class="defs">
+        <div class="def-card">
+          <h3>Secret / Seed</h3>
+          <p>This is the control layer. Whoever has it can control the wallet.</p>
+        </div>
+        <div class="def-card">
+          <h3>Recovery Phrase</h3>
+          <p>Same rule. This is not for screenshots, cloud notes, emails, or messages.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Custody in Plain English</h2>
+      <p>Custody means who actually controls the assets.</p>
+      <ul>
+        <li>Exchange custody means the company controls the funds</li>
+        <li>Self-custody means you control the wallet</li>
+        <li>Self-custody comes with responsibility. Lose the keys and that is on you</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Reality Check</h2>
+      <p>Convenience usually means more trust in somebody else. Security usually means more responsibility on your side.</p>
+      <p>Use the right tool for the right job. Hot wallet for activity. Cold wallet for storage. Exchange for entry and exit. Wallet for control.</p>
+    </section>
+
+    <section class="section">
+      <h2>Next Move</h2>
+      <p>Once the wallet part makes sense, the next step is understanding how people actually buy things on XRPL.</p>
+      <div class="cta-row">
+        <a class="cta" href="/xrpl/usage.html">Go to Usage &amp; Adoption</a>
+        <a class="cta" href="/xrpl/safety.html">Go to Safety</a>
+        <a class="cta" href="/xrpl/">Back to XRPL Layman</a>
+      </div>
+    </section>
+
+    <div class="footer">
+      House of Cauliman · XRPL Wallet Basics
+    </div>
+  </div>
+</body>
+</html>

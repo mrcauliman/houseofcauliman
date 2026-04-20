@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XRPL Usage & Adoption | House of Cauliman</title>
+<meta name="description" content="How XRPL is actually used. DEX, AMM, OTC, NFT marketplaces, direct site listings, and how buyers move through the ledger.">
+<meta property="og:title" content="XRPL Usage & Adoption | House of Cauliman">
+<meta property="og:description" content="How XRPL is actually used. DEX, AMM, OTC, NFT marketplaces, direct site listings, and how buyers move through the ledger.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="XRPL Usage & Adoption | House of Cauliman">
+<meta name="twitter:description" content="How XRPL is actually used. DEX, AMM, OTC, NFT marketplaces, direct site listings, and how buyers move through the ledger.">
+<style>
+  :root{
+    --bg:#06080c;
+    --panel:#0d1218;
+    --panel2:#111823;
+    --line:rgba(255,255,255,.10);
+    --text:#eef3f8;
+    --muted:#aeb8c6;
+    --blue:#58a6ff;
+    --gold:#d4a44a;
+    --green:#42d392;
+    --radius:18px;
+    --shadow:0 16px 48px rgba(0,0,0,.35);
+    --sans:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  }
+
+  *{box-sizing:border-box}
+  html,body{
+    margin:0;
+    padding:0;
+    background:
+      radial-gradient(circle at top, rgba(88,166,255,.10) 0%, rgba(0,0,0,0) 28%),
+      linear-gradient(180deg,#06080c 0%,#0b1018 100%);
+    color:var(--text);
+    font-family:var(--sans);
+  }
+
+  a{color:var(--blue);text-decoration:none}
+
+  .wrap{
+    max-width:1100px;
+    margin:0 auto;
+    padding:28px 18px 90px;
+  }
+
+  .topnav{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:0 0 18px;
+    padding:14px;
+    border:1px solid var(--line);
+    border-radius:16px;
+    background:rgba(255,255,255,.03);
+    box-shadow:var(--shadow);
+  }
+
+  .topnav a{
+    display:inline-block;
+    padding:10px 14px;
+    border-radius:10px;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.04);
+    color:var(--text);
+    font-size:14px;
+    font-weight:700;
+    text-decoration:none;
+  }
+
+  .topnav a:hover{
+    border-color:var(--blue);
+    box-shadow:0 0 0 1px rgba(88,166,255,.15), 0 0 24px rgba(88,166,255,.12);
+  }
+
+  .hero{
+    background:
+      radial-gradient(circle at 10% 0, rgba(88,166,255,.12) 0, rgba(255,255,255,0) 55%),
+      linear-gradient(180deg,var(--panel),var(--panel2));
+    border:1px solid var(--line);
+    border-radius:24px;
+    padding:28px;
+    box-shadow:var(--shadow);
+  }
+
+  h1{
+    margin:0;
+    font-size:34px;
+    line-height:1.05;
+    letter-spacing:.2px;
+  }
+
+  .sub{
+    margin-top:10px;
+    color:var(--muted);
+    line-height:1.7;
+    max-width:860px;
+    font-size:15px;
+  }
+
+  .pillbar{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:18px;
+  }
+
+  .pill{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:9px 12px;
+    border-radius:999px;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.04);
+    color:var(--muted);
+    font-size:12px;
+    font-weight:700;
+  }
+
+  .dot{
+    width:8px;
+    height:8px;
+    border-radius:999px;
+    background:var(--green);
+  }
+
+  .section{
+    margin-top:18px;
+    background:linear-gradient(180deg,var(--panel),var(--panel2));
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:22px;
+    box-shadow:var(--shadow);
+  }
+
+  h2{
+    margin:0 0 12px;
+    font-size:18px;
+    color:var(--gold);
+    text-transform:uppercase;
+    letter-spacing:.4px;
+  }
+
+  p{
+    margin:10px 0;
+    color:var(--muted);
+    line-height:1.75;
+    font-size:15px;
+  }
+
+  ul{
+    margin:10px 0 0 18px;
+    color:var(--muted);
+    line-height:1.75;
+    padding:0;
+  }
+
+  li{margin:6px 0}
+
+  .visual{
+    margin-top:14px;
+  }
+
+  .visual img{
+    width:100%;
+    border-radius:16px;
+    border:1px solid var(--line);
+    display:block;
+    background:#0a0f16;
+  }
+
+  .cta-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:22px;
+  }
+
+  .cta{
+    display:inline-block;
+    padding:12px 16px;
+    border-radius:12px;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.04);
+    color:var(--text);
+    font-weight:800;
+    font-size:14px;
+  }
+
+  .cta:hover{
+    border-color:var(--blue);
+    box-shadow:0 0 0 1px rgba(88,166,255,.15), 0 0 24px rgba(88,166,255,.12);
+  }
+
+  .footer{
+    margin-top:18px;
+    color:var(--muted);
+    font-size:12px;
+    text-align:center;
+  }
+
+  @media (max-width: 820px){
+    h1{font-size:28px;}
+  }
+
+/* XRPL HOUSE THEME OVERRIDE START */
+html,body{
+  background:radial-gradient(circle at top,#111827 0,#020308 55%,#000 100%) !important;
+}
+.topnav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:0 0 18px;
+  padding:14px;
+  border:1px solid rgba(43,51,69,.9) !important;
+  border-radius:16px;
+  background:linear-gradient(135deg,rgba(15,23,42,.92),rgba(5,6,12,.98)) !important;
+  box-shadow:0 18px 45px rgba(0,0,0,.75) !important;
+}
+.topnav a{
+  display:inline-block;
+  padding:10px 14px;
+  border-radius:10px;
+  border:1px solid rgba(43,51,69,.9) !important;
+  background:linear-gradient(135deg,rgba(15,23,42,.98),rgba(3,7,18,.98)) !important;
+  color:var(--text) !important;
+  font-size:14px;
+  font-weight:700;
+  text-decoration:none;
+  box-shadow:0 8px 20px rgba(0,0,0,.55) !important;
+}
+.hero{
+  background:radial-gradient(circle at top,#0a74d0 0,#0b1220 35%,#050509 100%) !important;
+  border:1px solid rgba(43,51,69,.95) !important;
+  border-radius:24px;
+  padding:28px;
+  box-shadow:0 18px 45px rgba(0,0,0,.75) !important;
+}
+.section{
+  margin-top:18px;
+  background:radial-gradient(circle at top,rgba(26,35,58,.85) 0,#050509 55%,#000 100%) !important;
+  border:1px solid rgba(26,27,36,.95) !important;
+  border-radius:18px;
+  padding:22px;
+  box-shadow:0 18px 45px rgba(0,0,0,.75) !important;
+}
+.visual img{
+  width:100%;
+  border-radius:16px;
+  border:1px solid rgba(43,51,69,.95) !important;
+  display:block;
+  background:#0a0f16;
+  box-shadow:0 12px 30px rgba(0,0,0,.65) !important;
+}
+.cta{
+  display:inline-block;
+  padding:12px 16px;
+  border-radius:12px;
+  border:1px solid rgba(43,51,69,.95) !important;
+  background:linear-gradient(135deg,rgba(15,23,42,.98),rgba(3,7,18,.98)) !important;
+  color:var(--text) !important;
+  font-weight:800;
+  font-size:14px;
+  box-shadow:0 8px 20px rgba(0,0,0,.55) !important;
+}
+/* XRPL HOUSE THEME OVERRIDE END */
+
+</style>
+</head>
+<body id="top">
+  <div class="wrap">
+    <nav class="topnav">
+  <a href="/xrpl/">Home</a>
+  <a href="/xrpl/definitions.html">Definitions</a>
+  <a href="/xrpl/wallet-basics.html">Wallets</a>
+  <a href="/xrpl/usage.html">Usage</a>
+  <a href="/xrpl/safety.html">Safety</a>
+  <a href="/xrpl/investing-reality.html">Investing Reality</a>
+  <a href="/">HOC</a>
+</nav>
+
+    <section class="hero">
+      <h1>XRPL Usage &amp; Adoption</h1>
+      <div class="sub">This is the execution page. How people actually use XRPL to buy tokens, move through pools, buy NFTs, handle direct deals, and interact with listings across the ecosystem.</div>
+      <div class="pillbar">
+        <div class="pill"><span class="dot"></span>Free Education</div>
+        <div class="pill"><span class="dot"></span>Execution</div>
+        <div class="pill"><span class="dot"></span>DEX</div>
+        <div class="pill"><span class="dot"></span>AMM</div>
+        <div class="pill"><span class="dot"></span>NFTs</div>
+        <div class="pill"><span class="dot"></span>XRPL</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="visual">
+        <img src="/assets/xrpl/usage.svg" alt="XRPL usage overview diagram">
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>How People Actually Use XRPL</h2>
+      <p>People are not using XRPL in theory. They are signing transactions. Buying assets. Moving between pools. Taking positions and trying to exit them.</p>
+      <p>Every action comes down to one thing. A wallet signing something on the ledger.</p>
+    </section>
+
+    <section class="section">
+      <h2>DEX vs AMM</h2>
+      <p>There are two real execution layers. Order books and pools.</p>
+
+      <div class="visual">
+        <img src="/assets/xrpl/amm-vs-dex.svg" alt="AMM versus DEX comparison diagram">
+      </div>
+
+      <p><strong>DEX:</strong> You place or hit orders. You get control. You need liquidity on the book.</p>
+      <p><strong>AMM:</strong> You swap into a pool. You get speed. You take slippage.</p>
+
+      <ul>
+        <li>DEX is precision</li>
+        <li>AMM is convenience</li>
+        <li>Thin liquidity punishes both</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Token Flow</h2>
+      <p>This is what most people are actually doing.</p>
+
+      <div class="visual">
+        <img src="/assets/xrpl/token-buy-flow.svg" alt="XRPL token buying flow diagram">
+      </div>
+
+      <ul>
+        <li>Find token</li>
+        <li>Check issuer</li>
+        <li>Check liquidity</li>
+        <li>Choose DEX or AMM</li>
+        <li>Sign transaction in wallet</li>
+      </ul>
+
+      <p>Most people skip step two and get burned.</p>
+    </section>
+
+    <section class="section">
+      <h2>NFT Flow</h2>
+
+      <div class="visual">
+        <img src="/assets/xrpl/nft-buy-flow.svg" alt="XRPL NFT buying flow diagram">
+      </div>
+
+      <ul>
+        <li>Marketplace or direct listing</li>
+        <li>Select item</li>
+        <li>Verify collection</li>
+        <li>Sign with wallet</li>
+      </ul>
+
+      <p>Different front ends. Same ledger underneath.</p>
+    </section>
+
+    <section class="section">
+      <h2>OTC Reality</h2>
+
+      <div class="visual">
+        <img src="/assets/xrpl/otc-risk.svg" alt="OTC risk diagram">
+      </div>
+
+      <p>OTC is direct wallet to wallet.</p>
+
+      <ul>
+        <li>No protection</li>
+        <li>No pool</li>
+        <li>No order book</li>
+        <li>No recovery if it goes wrong</li>
+      </ul>
+
+      <p>This is where people lose money fast.</p>
+    </section>
+
+    <section class="section">
+      <h2>Direct Site Execution</h2>
+      <p>Projects build their own front end. The transaction still hits XRPL the same way.</p>
+
+      <ul>
+        <li>Cleaner experience</li>
+        <li>More control for the project</li>
+        <li>Still requires wallet signing</li>
+      </ul>
+
+      <p>The site is just the interface. The ledger is still doing the work.</p>
+    </section>
+
+    <section class="section">
+      <h2>Where People Get Stuck</h2>
+
+      <ul>
+        <li>They don’t understand DEX vs AMM</li>
+        <li>They don’t check issuer</li>
+        <li>They ignore liquidity</li>
+        <li>They sign transactions blind</li>
+      </ul>
+
+      <p>That’s behavior. Not a platform problem.</p>
+    </section>
+
+
+    <section class="section">
+      <h2>Usage Reality</h2>
+      <p>Every sale type has strengths and weaknesses. DEX gives precision. AMM gives convenience. OTC gives flexibility. Marketplaces give cleaner discovery. Direct sites give projects more control.</p>
+      <p>None of that removes the need to verify what you are signing.</p>
+    </section>
+
+    <section class="section">
+      <div class="cta-row">
+        <a class="cta" href="#top">Back to Top</a>
+      </div>
+    </section>
+
+    <div class="footer">
+      House of Cauliman · XRPL Usage &amp; Adoption
+    </div>
+  </div>
+</body>
+</html>
