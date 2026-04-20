@@ -29,7 +29,6 @@
       --panel:rgba(255,255,255,.04);
       --max:1320px;
     }
-
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
@@ -42,25 +41,17 @@
         radial-gradient(circle at top right, rgba(255,72,72,.08), transparent 26%),
         linear-gradient(180deg, var(--bg), var(--bg2));
     }
-
     a{text-decoration:none;color:inherit}
     img{max-width:100%;display:block}
     button{appearance:none;border:0;cursor:pointer;font:inherit}
-
-    .wrap{
-      width:min(calc(100% - 28px), var(--max));
-      margin:0 auto;
-    }
+    .wrap{width:min(calc(100% - 28px), var(--max));margin:0 auto}
 
     .topbar{
-      position:sticky;
-      top:0;
-      z-index:20;
+      position:sticky; top:0; z-index:20;
       backdrop-filter:blur(14px);
       background:rgba(8,11,18,.74);
       border-bottom:1px solid var(--line);
     }
-
     .topbar-inner{
       width:min(calc(100% - 28px), var(--max));
       margin:0 auto;
@@ -70,182 +61,118 @@
       justify-content:space-between;
       gap:14px;
     }
-
     .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      font-weight:900;
-      letter-spacing:.08em;
+      display:flex; align-items:center; gap:12px;
+      font-weight:900; letter-spacing:.08em;
     }
-
     .brand-mark{
-      width:40px;
-      height:40px;
-      border-radius:12px;
+      width:40px; height:40px; border-radius:12px;
       background:
         radial-gradient(circle at 30% 30%, rgba(255,255,255,.22), transparent 36%),
         linear-gradient(135deg, rgba(239,63,71,.28), rgba(255,216,110,.18));
       border:1px solid rgba(255,255,255,.12);
       box-shadow:inset 0 1px 0 rgba(255,255,255,.14), 0 12px 32px rgba(0,0,0,.35);
     }
-
-    .top-links{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-
+    .top-links{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
     .pill{
-      padding:10px 14px;
-      border:1px solid var(--line);
-      border-radius:999px;
-      color:#d8e5ff;
-      background:rgba(255,255,255,.03);
-      font-weight:800;
-      font-size:14px;
+      padding:10px 14px; border:1px solid var(--line); border-radius:999px;
+      color:#d8e5ff; background:rgba(255,255,255,.03); font-weight:800; font-size:14px;
     }
 
-    .hero{
-      padding:24px 0 40px;
-    }
-
+    .hero{padding:24px 0 40px}
     .hero-grid{
       display:grid;
       grid-template-columns:minmax(320px,420px) 1fr;
       gap:26px;
       align-items:start;
     }
-
     .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:8px 12px;
-      border-radius:999px;
+      display:inline-flex; align-items:center; gap:10px;
+      padding:8px 12px; border-radius:999px;
       border:1px solid rgba(255,216,110,.22);
-      color:#ffe8a7;
-      background:rgba(255,216,110,.08);
-      font-size:12px;
-      font-weight:900;
-      letter-spacing:.12em;
-      text-transform:uppercase;
+      color:#ffe8a7; background:rgba(255,216,110,.08);
+      font-size:12px; font-weight:900; letter-spacing:.12em; text-transform:uppercase;
     }
-
     h1{
       margin:16px 0 10px;
       font-size:clamp(42px,6vw,82px);
-      line-height:.94;
-      letter-spacing:-.05em;
+      line-height:.94; letter-spacing:-.05em;
     }
-
     .sub{
-      margin:0;
-      font-size:18px;
-      line-height:1.6;
-      color:var(--muted);
-      max-width:460px;
+      margin:0; font-size:18px; line-height:1.6; color:var(--muted); max-width:460px;
     }
-
     .status-row{
-      margin-top:16px;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
+      margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;
     }
-
     .status{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:38px;
-      padding:0 14px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:900;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.12);
-      color:#eef5ff;
+      display:inline-flex; align-items:center; justify-content:center;
+      min-height:38px; padding:0 14px; border-radius:999px;
+      font-size:12px; font-weight:900; letter-spacing:.12em; text-transform:uppercase;
+      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); color:#eef5ff;
     }
-
     .status.gold{
-      background:rgba(255,216,110,.10);
-      border-color:rgba(255,216,110,.22);
-      color:#ffeeb9;
+      background:rgba(255,216,110,.10); border-color:rgba(255,216,110,.22); color:#ffeeb9;
     }
 
-    .machine-side{
-      position:relative;
-    }
-
+    .machine-side{position:relative}
     .machine-stage{
       position:relative;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      min-height:760px;
-      padding:8px 0 0;
+      display:flex; justify-content:center; align-items:center;
+      min-height:760px; padding:8px 0 0;
     }
-
     .machine-wrap{
       position:relative;
       width:min(100%, 820px);
-      display:flex;
-      justify-content:center;
-      align-items:flex-start;
+      display:flex; justify-content:center; align-items:flex-start;
     }
-
     .machine-wrap.is-shaking .machine-render{
       animation:machineShake .18s ease-in-out 1;
     }
-
     .machine-render{
       width:min(100%, 820px);
-      height:auto;
-      display:block;
+      height:auto; display:block;
       filter:drop-shadow(0 28px 50px rgba(0,0,0,.38));
-      user-select:none;
-      pointer-events:none;
+      user-select:none; pointer-events:none;
     }
 
-    .handle-wrap{
-      position:absolute;
-      right:16.8%;
-      top:40.8%;
-      width:19%;
-      aspect-ratio:1/1;
-      z-index:8;
-      pointer-events:none;
-    }
-
-    .handle-wrap.is-turning{
-      animation:handleTurn .28s ease-out 1;
-    }
-
+    /* Huge guaranteed tap area over the right-side crank/hardware zone */
     .handle-hit{
       position:absolute;
-      inset:0;
-      border-radius:50%;
+      right:8%;
+      top:33%;
+      width:33%;
+      height:28%;
       background:transparent;
-      pointer-events:auto;
-      z-index:10;
+      z-index:20;
       touch-action:manipulation;
     }
 
-    .handle-glow{
+    .tap-ring{
       position:absolute;
-      inset:6%;
+      right:13%;
+      top:39%;
+      width:21%;
+      aspect-ratio:1/1;
       border-radius:50%;
-      background:radial-gradient(circle at 50% 50%, rgba(255,255,255,.08), transparent 62%);
+      background:radial-gradient(circle at 50% 50%, rgba(255,255,255,.06), transparent 62%);
       box-shadow:0 0 0 1px rgba(255,255,255,.05);
-      opacity:.22;
+      opacity:.18;
       pointer-events:none;
+      z-index:8;
     }
 
+    .handle-visual{
+      position:absolute;
+      right:18.5%;
+      top:42.7%;
+      width:15%;
+      aspect-ratio:1/1;
+      z-index:9;
+      pointer-events:none;
+    }
+    .handle-visual.is-turning{
+      animation:handleTurn .28s ease-out 1;
+    }
     .handle-arm{
       position:absolute;
       left:50%;
@@ -257,9 +184,7 @@
       background:linear-gradient(180deg, rgba(255,255,255,.45), rgba(120,130,145,.24));
       opacity:.22;
       filter:blur(.2px);
-      pointer-events:none;
     }
-
     .handle-knob{
       position:absolute;
       left:50%;
@@ -270,424 +195,211 @@
       border-radius:50%;
       background:radial-gradient(circle at 35% 35%, rgba(255,255,255,.4), rgba(140,150,165,.2));
       opacity:.22;
-      pointer-events:none;
     }
 
     .machine-panel{
-      margin-top:10px;
-      padding:18px;
-      border-radius:22px;
-      background:var(--panel);
-      border:1px solid var(--line);
+      margin-top:10px; padding:18px; border-radius:22px;
+      background:var(--panel); border:1px solid var(--line);
       box-shadow:0 12px 26px rgba(0,0,0,.18);
     }
-
     .panel-title{
       margin:0 0 14px;
-      font-size:14px;
-      font-weight:900;
-      letter-spacing:.12em;
-      text-transform:uppercase;
+      font-size:14px; font-weight:900; letter-spacing:.12em; text-transform:uppercase;
       color:#d9e2f3;
     }
-
     .tap-meter{
-      margin-top:2px;
-      display:flex;
-      gap:10px;
-      align-items:center;
-      flex-wrap:wrap;
+      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
     }
-
-    .tap-dots{
-      display:flex;
-      gap:8px;
-    }
-
+    .tap-dots{display:flex; gap:8px}
     .tap-dot{
-      width:12px;
-      height:12px;
-      border-radius:50%;
+      width:12px; height:12px; border-radius:50%;
       background:rgba(255,255,255,.14);
       border:1px solid rgba(255,255,255,.08);
       transition:transform .15s ease, background .15s ease, box-shadow .15s ease;
     }
-
     .tap-dot.on{
       background:linear-gradient(180deg, rgba(255,216,110,.95), rgba(214,146,16,.86));
       box-shadow:0 0 16px rgba(255,216,110,.22);
       transform:scale(1.08);
     }
-
     .tap-text{
-      font-size:13px;
-      color:#d8e5ff;
-      font-weight:800;
-      letter-spacing:.02em;
+      font-size:13px; color:#d8e5ff; font-weight:800; letter-spacing:.02em;
     }
-
     .controls{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-top:14px;
+      display:flex; flex-wrap:wrap; gap:12px; margin-top:14px;
     }
-
     .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:48px;
-      padding:0 18px;
-      border-radius:14px;
-      font-weight:900;
-      letter-spacing:.02em;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.04);
-      color:var(--text);
+      display:inline-flex; align-items:center; justify-content:center;
+      min-height:48px; padding:0 18px; border-radius:14px;
+      font-weight:900; letter-spacing:.02em;
+      border:1px solid var(--line); background:rgba(255,255,255,.04); color:var(--text);
       transition:transform .15s ease, opacity .15s ease, background .15s ease;
     }
-
     .btn:hover:not(:disabled){
-      transform:translateY(-1px);
-      background:rgba(255,255,255,.07);
+      transform:translateY(-1px); background:rgba(255,255,255,.07);
     }
-
     .btn:disabled{
-      opacity:.45;
-      cursor:not-allowed;
-      transform:none;
+      opacity:.45; cursor:not-allowed; transform:none;
     }
-
     .btn-primary{
       background:linear-gradient(180deg, rgba(255,216,110,.22), rgba(214,146,16,.10));
-      border:1px solid rgba(255,216,110,.24);
-      color:#ffefbf;
+      border:1px solid rgba(255,216,110,.24); color:#ffefbf;
     }
-
     .info{
-      margin-top:14px;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.55;
-      min-height:22px;
+      margin-top:14px; color:var(--muted); font-size:14px; line-height:1.55; min-height:22px;
     }
 
     .capsule-drop{
       position:absolute;
-      left:50%;
-      top:52%;
-      width:14.5%;
-      max-width:108px;
-      aspect-ratio:1/1;
+      left:50%; top:52%;
+      width:14.5%; max-width:108px; aspect-ratio:1/1;
       transform:translate(-50%, -220px) scale(.82);
-      opacity:0;
-      z-index:6;
-      pointer-events:none;
+      opacity:0; z-index:6; pointer-events:none;
     }
-
-    .capsule-drop.active{
-      animation:capsuleDrop 1s cubic-bezier(.2,.8,.2,1) forwards;
-    }
-
+    .capsule-drop.active{animation:capsuleDrop 1s cubic-bezier(.2,.8,.2,1) forwards}
     .capsule-shell{
-      position:relative;
-      width:100%;
-      height:100%;
-      border-radius:50%;
+      position:relative; width:100%; height:100%; border-radius:50%;
       background:
         radial-gradient(circle at 30% 25%, rgba(255,255,255,.55), rgba(255,255,255,.18) 20%, rgba(255,255,255,.06) 38%, rgba(255,255,255,.02) 65%, rgba(255,255,255,.03) 100%);
       border:1px solid rgba(255,255,255,.22);
-      box-shadow:
-        inset 0 8px 10px rgba(255,255,255,.18),
-        inset 0 -10px 14px rgba(0,0,0,.12),
-        0 10px 18px rgba(0,0,0,.18);
-      backdrop-filter:blur(1px);
-      overflow:hidden;
+      box-shadow: inset 0 8px 10px rgba(255,255,255,.18), inset 0 -10px 14px rgba(0,0,0,.12), 0 10px 18px rgba(0,0,0,.18);
+      backdrop-filter:blur(1px); overflow:hidden;
     }
-
     .capsule-shell::before{
-      content:"";
-      position:absolute;
-      left:8%;
-      right:8%;
-      top:49%;
-      height:2px;
-      border-radius:999px;
-      background:rgba(255,255,255,.20);
-      box-shadow:0 0 0 1px rgba(0,0,0,.03);
+      content:""; position:absolute; left:8%; right:8%; top:49%; height:2px; border-radius:999px;
+      background:rgba(255,255,255,.20); box-shadow:0 0 0 1px rgba(0,0,0,.03);
     }
-
     .capsule-figure{
-      position:absolute;
-      left:50%;
-      top:52%;
-      width:46%;
-      height:56%;
+      position:absolute; left:50%; top:52%; width:46%; height:56%;
       transform:translate(-50%, -50%);
       border-radius:45% 45% 34% 34%;
       background:rgba(60,70,85,.33);
       filter:blur(7px);
     }
-
     .capsule-figure::before{
-      content:"";
-      position:absolute;
-      left:50%;
-      top:-18%;
-      width:48%;
-      height:34%;
-      transform:translateX(-50%);
-      border-radius:50%;
-      background:rgba(60,70,85,.33);
+      content:""; position:absolute; left:50%; top:-18%; width:48%; height:34%;
+      transform:translateX(-50%); border-radius:50%; background:rgba(60,70,85,.33);
     }
 
     .capsule-open{
-      position:absolute;
-      left:50%;
-      top:71%;
-      width:22%;
-      max-width:160px;
-      aspect-ratio:1/1;
+      position:absolute; left:50%; top:71%; width:22%; max-width:160px; aspect-ratio:1/1;
       transform:translate(-50%, -50%) scale(.2);
-      opacity:0;
-      pointer-events:none;
-      z-index:8;
+      opacity:0; pointer-events:none; z-index:8;
     }
-
-    .capsule-open.visible{
-      animation:capsuleReveal .55s ease-out forwards;
-    }
-
+    .capsule-open.visible{animation:capsuleReveal .55s ease-out forwards}
     .capsule-half{
-      position:absolute;
-      left:50%;
-      width:100%;
-      height:50%;
-      transform:translateX(-50%);
+      position:absolute; left:50%; width:100%; height:50%; transform:translateX(-50%);
       background:
         radial-gradient(circle at 30% 25%, rgba(255,255,255,.55), rgba(255,255,255,.16) 20%, rgba(255,255,255,.06) 48%, rgba(255,255,255,.02) 100%);
       border:1px solid rgba(255,255,255,.22);
       backdrop-filter:blur(1px);
-      box-shadow:
-        inset 0 6px 8px rgba(255,255,255,.18),
-        0 8px 14px rgba(0,0,0,.16);
+      box-shadow: inset 0 6px 8px rgba(255,255,255,.18), 0 8px 14px rgba(0,0,0,.16);
     }
-
     .capsule-half.top{
-      top:0;
-      border-radius:999px 999px 16px 16px;
-      transform-origin:50% 100%;
+      top:0; border-radius:999px 999px 16px 16px; transform-origin:50% 100%;
     }
-
     .capsule-open.visible .capsule-half.top{
       animation:openTop .45s ease-out forwards;
     }
-
     .capsule-half.bottom{
-      bottom:0;
-      border-radius:16px 16px 999px 999px;
+      bottom:0; border-radius:16px 16px 999px 999px;
     }
 
     .reveal-card{
-      position:absolute;
-      left:50%;
-      top:72%;
-      width:min(100%, 300px);
+      position:absolute; left:50%; top:72%; width:min(100%, 300px);
       transform:translate(-50%, 20px);
-      padding:18px 18px 16px;
-      border-radius:22px;
-      background:rgba(8,11,18,.88);
-      border:1px solid rgba(255,255,255,.12);
+      padding:18px 18px 16px; border-radius:22px;
+      background:rgba(8,11,18,.88); border:1px solid rgba(255,255,255,.12);
       box-shadow:0 18px 34px rgba(0,0,0,.26);
-      opacity:0;
-      pointer-events:none;
-      z-index:9;
-      text-align:center;
+      opacity:0; pointer-events:none; z-index:9; text-align:center;
     }
-
-    .reveal-card.visible{
-      animation:cardIn .45s ease-out forwards;
-    }
-
+    .reveal-card.visible{animation:cardIn .45s ease-out forwards}
     .reveal-kicker{
-      font-size:11px;
-      font-weight:900;
-      letter-spacing:.16em;
-      text-transform:uppercase;
-      color:#ffe7a1;
-      margin-bottom:8px;
+      font-size:11px; font-weight:900; letter-spacing:.16em; text-transform:uppercase;
+      color:#ffe7a1; margin-bottom:8px;
     }
-
     .reveal-title{
-      font-size:26px;
-      font-weight:1000;
-      letter-spacing:-.04em;
-      margin:0 0 8px;
+      font-size:26px; font-weight:1000; letter-spacing:-.04em; margin:0 0 8px;
     }
-
     .reveal-copy{
-      margin:0;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.5;
+      margin:0; color:var(--muted); font-size:14px; line-height:1.5;
     }
 
-    .footer{
-      padding:20px 0 46px;
-      color:var(--muted);
-    }
-
+    .footer{padding:20px 0 46px; color:var(--muted)}
     .footer-box{
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:space-between;
-      gap:14px;
-      padding-top:18px;
-      border-top:1px solid var(--line);
+      display:flex; flex-wrap:wrap; justify-content:space-between; gap:14px;
+      padding-top:18px; border-top:1px solid var(--line);
     }
 
     @keyframes machineShake{
-      0%,100%{ transform:translateX(0) }
-      25%{ transform:translateX(-2px) }
-      50%{ transform:translateX(2px) }
-      75%{ transform:translateX(-1px) }
+      0%,100%{transform:translateX(0)}
+      25%{transform:translateX(-2px)}
+      50%{transform:translateX(2px)}
+      75%{transform:translateX(-1px)}
     }
-
     @keyframes handleTurn{
-      0%{ transform:rotate(0deg) }
-      100%{ transform:rotate(65deg) }
+      0%{transform:rotate(0deg)}
+      100%{transform:rotate(65deg)}
     }
-
     @keyframes capsuleDrop{
-      0%{
-        transform:translate(-50%, -220px) scale(.82);
-        opacity:0;
-      }
-      12%{
-        opacity:1;
-      }
-      68%{
-        transform:translate(-50%, 62px) scale(1);
-        opacity:1;
-      }
-      100%{
-        transform:translate(-50%, 62px) scale(1);
-        opacity:1;
-      }
+      0%{transform:translate(-50%, -220px) scale(.82); opacity:0}
+      12%{opacity:1}
+      68%{transform:translate(-50%, 62px) scale(1); opacity:1}
+      100%{transform:translate(-50%, 62px) scale(1); opacity:1}
     }
-
     @keyframes capsuleReveal{
-      0%{
-        opacity:0;
-        transform:translate(-50%, -50%) scale(.2);
-      }
-      100%{
-        opacity:1;
-        transform:translate(-50%, -50%) scale(1);
-      }
+      0%{opacity:0; transform:translate(-50%, -50%) scale(.2)}
+      100%{opacity:1; transform:translate(-50%, -50%) scale(1)}
     }
-
     @keyframes openTop{
-      0%{ transform:translateX(-50%) rotate(0deg) }
-      100%{ transform:translateX(-50%) rotate(-42deg) translateY(-12px) }
+      0%{transform:translateX(-50%) rotate(0deg)}
+      100%{transform:translateX(-50%) rotate(-42deg) translateY(-12px)}
     }
-
     @keyframes cardIn{
-      0%{
-        opacity:0;
-        transform:translate(-50%, 20px);
-      }
-      100%{
-        opacity:1;
-        transform:translate(-50%, 0);
-      }
+      0%{opacity:0; transform:translate(-50%, 20px)}
+      100%{opacity:1; transform:translate(-50%, 0)}
     }
 
     @media (max-width:980px){
-      .hero-grid{
-        grid-template-columns:1fr;
-      }
-
-      .machine-side{
-        order:-1;
-      }
-
-      .machine-stage{
-        min-height:640px;
-      }
-
-      .machine-wrap{
-        width:min(100%, 620px);
-      }
+      .hero-grid{grid-template-columns:1fr}
+      .machine-side{order:-1}
+      .machine-stage{min-height:640px}
+      .machine-wrap{width:min(100%, 620px)}
     }
-
     @media (max-width:640px){
       .topbar-inner{
-        padding:8px 0;
-        align-items:flex-start;
-        flex-direction:column;
+        padding:8px 0; align-items:flex-start; flex-direction:column;
       }
-
       .top-links{
-        width:100%;
-        overflow:auto;
-        flex-wrap:nowrap;
-        padding-bottom:2px;
+        width:100%; overflow:auto; flex-wrap:nowrap; padding-bottom:2px;
       }
-
-      .pill{
-        white-space:nowrap;
+      .pill{white-space:nowrap}
+      .hero{padding:20px 0 32px}
+      h1{font-size:clamp(36px, 10vw, 62px)}
+      .sub{font-size:16px}
+      .machine-stage{min-height:470px}
+      .machine-wrap{width:min(100%, 460px)}
+      .handle-hit{
+        right:6%;
+        top:31%;
+        width:37%;
+        height:31%;
       }
-
-      .hero{
-        padding:20px 0 32px;
+      .tap-ring{
+        right:12%;
+        top:38.5%;
+        width:23%;
       }
-
-      h1{
-        font-size:clamp(36px, 10vw, 62px);
+      .handle-visual{
+        right:18%;
+        top:42.4%;
+        width:16%;
       }
-
-      .sub{
-        font-size:16px;
-      }
-
-      .machine-stage{
-        min-height:470px;
-      }
-
-      .machine-wrap{
-        width:min(100%, 460px);
-      }
-
-      .handle-wrap{
-        right:15.8%;
-        top:40.2%;
-        width:20%;
-      }
-
-      .machine-panel{
-        margin-top:8px;
-        padding:16px;
-      }
-
-      .controls{
-        gap:10px;
-      }
-
-      .btn{
-        min-height:46px;
-        padding:0 16px;
-      }
-
-      .reveal-card{
-        width:min(100%, 260px);
-        top:78%;
-      }
-
-      .capsule-drop{
-        max-width:92px;
-      }
+      .machine-panel{margin-top:8px; padding:16px}
+      .controls{gap:10px}
+      .btn{min-height:46px; padding:0 16px}
+      .reveal-card{width:min(100%, 260px); top:78%}
+      .capsule-drop{max-width:92px}
     }
   </style>
 </head>
@@ -710,7 +422,7 @@
         <div>
           <div class="eyebrow">Active Build</div>
           <h1>HOMEEZ Capsule Machine</h1>
-          <p class="sub">Tap the real handle three times. Three taps. Three shakes. Then the capsule drops. Open it and reveal the result.</p>
+          <p class="sub">Tap the real handle area three times. Three taps. Three shakes. Then the capsule drops. Open it and reveal the result.</p>
 
           <div class="status-row">
             <span class="status gold">Founding Machine</span>
@@ -727,11 +439,13 @@
                 class="machine-render"
               >
 
-              <div id="handleWrap" class="handle-wrap">
-                <div class="handle-glow" aria-hidden="true"></div>
-                <div class="handle-arm" aria-hidden="true"></div>
-                <div class="handle-knob" aria-hidden="true"></div>
-                <button id="handleHit" class="handle-hit" type="button" aria-label="Tap handle to turn machine"></button>
+              <button id="handleHit" class="handle-hit" type="button" aria-label="Tap handle area to turn machine"></button>
+
+              <div class="tap-ring" aria-hidden="true"></div>
+
+              <div id="handleVisual" class="handle-visual" aria-hidden="true">
+                <div class="handle-arm"></div>
+                <div class="handle-knob"></div>
               </div>
 
               <div id="capsuleDrop" class="capsule-drop" aria-hidden="true">
@@ -793,7 +507,7 @@
     ];
 
     const machineWrap = document.getElementById('machineWrap');
-    const handleWrap = document.getElementById('handleWrap');
+    const handleVisual = document.getElementById('handleVisual');
     const capsuleDrop = document.getElementById('capsuleDrop');
     const capsuleOpen = document.getElementById('capsuleOpen');
     const revealCard = document.getElementById('revealCard');
@@ -821,7 +535,6 @@
 
     function updateTapMeter() {
       tapDots.forEach((dot, i) => dot.classList.toggle('on', i < tapCount));
-
       if (state === 'ready' || state === 'tapping') {
         const left = Math.max(0, 3 - tapCount);
         tapText.textContent = left === 0 ? 'Capsule dropping...' : `Tap the handle ${left} more ${left === 1 ? 'time' : 'times'}.`;
@@ -834,14 +547,13 @@
 
     function flashShake() {
       machineWrap.classList.remove('is-shaking');
-      handleWrap.classList.remove('is-turning');
+      handleVisual.classList.remove('is-turning');
       void machineWrap.offsetWidth;
       machineWrap.classList.add('is-shaking');
-      handleWrap.classList.add('is-turning');
-
+      handleVisual.classList.add('is-turning');
       setTimeout(() => {
         machineWrap.classList.remove('is-shaking');
-        handleWrap.classList.remove('is-turning');
+        handleVisual.classList.remove('is-turning');
       }, 220);
     }
 
@@ -856,7 +568,6 @@
         event.preventDefault();
         event.stopPropagation();
       }
-
       if (state !== 'ready' && state !== 'tapping') return;
       if (tapBusy) return;
 
@@ -896,7 +607,6 @@
 
     function openCapsule() {
       if (state !== 'dropped') return;
-
       state = 'opened';
       machineInfo.textContent = 'Opening capsule...';
       openBtn.disabled = true;
@@ -929,8 +639,8 @@
       vibrate(20);
     }
 
-    handleHit.addEventListener('click', runTap);
-    handleHit.addEventListener('touchstart', runTap, { passive: false });
+    handleHit.addEventListener('pointerdown', runTap);
+    handleHit.addEventListener('click', function(e){ e.preventDefault(); });
     openBtn.addEventListener('click', openCapsule);
     resetBtn.addEventListener('click', resetMachine);
 
