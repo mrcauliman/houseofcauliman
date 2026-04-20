@@ -135,66 +135,63 @@
       user-select:none; pointer-events:none;
     }
 
-    /* Huge guaranteed tap area over the right-side crank/hardware zone */
+    /* Visible instruction and tap zone at capsule drop area */
+    .tap-callout{
+      position:absolute;
+      left:50%;
+      top:58.5%;
+      transform:translateX(-50%);
+      z-index:18;
+      pointer-events:none;
+      text-align:center;
+    }
+    .tap-callout-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:36px;
+      padding:0 14px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:#fff2bf;
+      background:rgba(255,216,110,.12);
+      border:1px solid rgba(255,216,110,.24);
+      box-shadow:0 8px 22px rgba(0,0,0,.22);
+      backdrop-filter:blur(10px);
+      white-space:nowrap;
+    }
+
     .handle-hit{
       position:absolute;
-      right:8%;
-      top:33%;
-      width:33%;
-      height:28%;
+      left:50%;
+      top:62%;
+      transform:translateX(-50%);
+      width:23%;
+      height:16%;
       background:transparent;
       z-index:20;
       touch-action:manipulation;
+      border-radius:18px;
     }
 
-    .tap-ring{
+    .tap-zone-ring{
       position:absolute;
-      right:13%;
-      top:39%;
-      width:21%;
-      aspect-ratio:1/1;
-      border-radius:50%;
-      background:radial-gradient(circle at 50% 50%, rgba(255,255,255,.06), transparent 62%);
-      box-shadow:0 0 0 1px rgba(255,255,255,.05);
-      opacity:.18;
+      left:50%;
+      top:63.5%;
+      transform:translateX(-50%);
+      width:18%;
+      height:10%;
+      border-radius:18px;
+      background:radial-gradient(circle at 50% 50%, rgba(255,255,255,.08), transparent 70%);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,.05),
+        inset 0 0 0 1px rgba(255,255,255,.04);
+      opacity:.20;
       pointer-events:none;
       z-index:8;
-    }
-
-    .handle-visual{
-      position:absolute;
-      right:18.5%;
-      top:42.7%;
-      width:15%;
-      aspect-ratio:1/1;
-      z-index:9;
-      pointer-events:none;
-    }
-    .handle-visual.is-turning{
-      animation:handleTurn .28s ease-out 1;
-    }
-    .handle-arm{
-      position:absolute;
-      left:50%;
-      top:16%;
-      width:12%;
-      height:38%;
-      transform:translateX(-50%);
-      border-radius:999px;
-      background:linear-gradient(180deg, rgba(255,255,255,.45), rgba(120,130,145,.24));
-      opacity:.22;
-      filter:blur(.2px);
-    }
-    .handle-knob{
-      position:absolute;
-      left:50%;
-      top:4%;
-      width:28%;
-      height:28%;
-      transform:translateX(-50%);
-      border-radius:50%;
-      background:radial-gradient(circle at 35% 35%, rgba(255,255,255,.4), rgba(140,150,165,.2));
-      opacity:.22;
     }
 
     .machine-panel{
@@ -337,10 +334,6 @@
       50%{transform:translateX(2px)}
       75%{transform:translateX(-1px)}
     }
-    @keyframes handleTurn{
-      0%{transform:rotate(0deg)}
-      100%{transform:rotate(65deg)}
-    }
     @keyframes capsuleDrop{
       0%{transform:translate(-50%, -220px) scale(.82); opacity:0}
       12%{opacity:1}
@@ -379,21 +372,23 @@
       .sub{font-size:16px}
       .machine-stage{min-height:470px}
       .machine-wrap{width:min(100%, 460px)}
+      .tap-callout{
+        top:58%;
+      }
+      .tap-callout-badge{
+        min-height:34px;
+        padding:0 12px;
+        font-size:11px;
+      }
       .handle-hit{
-        right:6%;
-        top:31%;
-        width:37%;
-        height:31%;
+        top:61%;
+        width:28%;
+        height:18%;
       }
-      .tap-ring{
-        right:12%;
-        top:38.5%;
-        width:23%;
-      }
-      .handle-visual{
-        right:18%;
-        top:42.4%;
-        width:16%;
+      .tap-zone-ring{
+        top:63%;
+        width:22%;
+        height:11%;
       }
       .machine-panel{margin-top:8px; padding:16px}
       .controls{gap:10px}
@@ -422,7 +417,7 @@
         <div>
           <div class="eyebrow">Active Build</div>
           <h1>HOMEEZ Capsule Machine</h1>
-          <p class="sub">Tap the real handle area three times. Three taps. Three shakes. Then the capsule drops. Open it and reveal the result.</p>
+          <p class="sub">Tap the capsule drop area three times. Three taps. Three shakes. Then the capsule drops. Open it and reveal the result.</p>
 
           <div class="status-row">
             <span class="status gold">Founding Machine</span>
@@ -439,14 +434,13 @@
                 class="machine-render"
               >
 
-              <button id="handleHit" class="handle-hit" type="button" aria-label="Tap handle area to turn machine"></button>
-
-              <div class="tap-ring" aria-hidden="true"></div>
-
-              <div id="handleVisual" class="handle-visual" aria-hidden="true">
-                <div class="handle-arm"></div>
-                <div class="handle-knob"></div>
+              <div class="tap-callout" aria-hidden="true">
+                <div class="tap-callout-badge">Tap Here 3 Times</div>
               </div>
+
+              <button id="handleHit" class="handle-hit" type="button" aria-label="Tap here three times to drop a capsule"></button>
+
+              <div class="tap-zone-ring" aria-hidden="true"></div>
 
               <div id="capsuleDrop" class="capsule-drop" aria-hidden="true">
                 <div class="capsule-shell">
@@ -507,7 +501,6 @@
     ];
 
     const machineWrap = document.getElementById('machineWrap');
-    const handleVisual = document.getElementById('handleVisual');
     const capsuleDrop = document.getElementById('capsuleDrop');
     const capsuleOpen = document.getElementById('capsuleOpen');
     const revealCard = document.getElementById('revealCard');
@@ -537,7 +530,7 @@
       tapDots.forEach((dot, i) => dot.classList.toggle('on', i < tapCount));
       if (state === 'ready' || state === 'tapping') {
         const left = Math.max(0, 3 - tapCount);
-        tapText.textContent = left === 0 ? 'Capsule dropping...' : `Tap the handle ${left} more ${left === 1 ? 'time' : 'times'}.`;
+        tapText.textContent = left === 0 ? 'Capsule dropping...' : `Tap 3 times. ${left} ${left === 1 ? 'tap' : 'taps'} left.`;
       } else if (state === 'dropped') {
         tapText.textContent = 'Capsule dropped. Open it.';
       } else if (state === 'opened') {
@@ -547,13 +540,10 @@
 
     function flashShake() {
       machineWrap.classList.remove('is-shaking');
-      handleVisual.classList.remove('is-turning');
       void machineWrap.offsetWidth;
       machineWrap.classList.add('is-shaking');
-      handleVisual.classList.add('is-turning');
       setTimeout(() => {
         machineWrap.classList.remove('is-shaking');
-        handleVisual.classList.remove('is-turning');
       }, 220);
     }
 
@@ -575,7 +565,7 @@
       state = 'tapping';
       tapCount += 1;
 
-      machineInfo.textContent = `Handle tap ${tapCount} of 3.`;
+      machineInfo.textContent = `Tap ${tapCount} of 3.`;
       updateTapMeter();
       flashShake();
       vibrate(35);
