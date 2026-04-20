@@ -601,3 +601,733 @@
       .hoc-brand-mark{width:72px;height:72px}
       .hoc-footer{flex-direction:column}
     }
+
+  .house-roller-wrap{
+    position:fixed;
+    right:-20px;
+    top:50%;
+    transform:translateY(-50%);
+    z-index:9999;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    user-select:none;
+    -webkit-user-select:none;
+    touch-action:none;
+  }
+  .house-roller-label{
+    opacity:0;
+    transform:translateX(10px);
+    transition:opacity .18s ease, transform .18s ease;
+    padding:12px 16px;
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,.28);
+    background:rgba(10,14,24,.94);
+    box-shadow:0 14px 30px rgba(0,0,0,.52), 0 0 0 1px rgba(88,166,255,.20);
+    color:#fff;
+    font-size:1rem;
+    font-weight:800;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    white-space:nowrap;
+    pointer-events:none;
+    text-shadow:0 0 14px rgba(255,255,255,.18);
+    backdrop-filter:blur(12px);
+  }
+  .house-roller-wrap.active .house-roller-label{
+    opacity:1;
+    transform:translateX(0);
+  }
+  .house-roller{
+    position:relative;
+    width:40px;
+    height:84px;
+    border-radius:18px 0 0 18px;
+    border:1px solid rgba(255,255,255,.12);
+    border-right:none;
+    background:linear-gradient(180deg,rgba(16,20,30,.98),rgba(8,10,16,.99));
+    box-shadow:
+      0 14px 30px rgba(0,0,0,.48),
+      inset 0 1px 0 rgba(255,255,255,.05),
+      inset 0 -1px 0 rgba(0,0,0,.30);
+    overflow:visible;
+  }
+  .house-roller::before{
+    content:"";
+    position:absolute;
+    inset:8px 0 8px 8px;
+    border-radius:14px 0 0 14px;
+    background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
+    pointer-events:none;
+  }
+  .house-roller-wheel{
+    position:absolute;
+    left:2px;
+    top:10px;
+    width:58px;
+    height:64px;
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,.22);
+    background:
+      radial-gradient(circle at 32% 22%, rgba(255,255,255,.34), rgba(255,255,255,0) 22%),
+      repeating-linear-gradient(
+        90deg,
+        rgba(255,255,255,.12) 0 3px,
+        rgba(255,255,255,.03) 3px 8px
+      ),
+      linear-gradient(180deg,#5a677e 0%, #2a3548 48%, #141b28 100%);
+    box-shadow:
+      0 10px 22px rgba(0,0,0,.42),
+      inset 0 2px 0 rgba(255,255,255,.20),
+      inset 0 -2px 0 rgba(0,0,0,.34),
+      inset 4px 0 10px rgba(255,255,255,.08),
+      inset -4px 0 10px rgba(0,0,0,.22);
+    cursor:grab;
+    touch-action:none;
+    transform:rotate(0deg);
+    will-change:transform, background-position;
+    background-position:center 0, center 0, center center;
+  }
+  .house-roller-wrap.active .house-roller-wheel{
+    cursor:grabbing;
+    box-shadow:
+      0 12px 24px rgba(0,0,0,.44),
+      inset 0 2px 0 rgba(255,255,255,.24),
+      inset 0 -2px 0 rgba(0,0,0,.38),
+      inset 4px 0 10px rgba(255,255,255,.10),
+      inset -4px 0 10px rgba(0,0,0,.24),
+      0 0 10px rgba(88,166,255,.12);
+  }
+  @media (max-width: 767px){
+    .house-roller-wrap{ right:-18px; gap:10px; }
+    .house-roller{ width:34px; height:76px; }
+    .house-roller-wheel{ left:1px; top:8px; width:52px; height:58px; }
+    .house-roller-label{
+      font-size:.84rem;
+      font-weight:800;
+      letter-spacing:.12em;
+      padding:10px 12px;
+      max-width:62vw;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+  }
+
+    .house-roller{ width:46px; height:116px; }
+    .house-roller-wheel{ left:6px; width:34px; height:48px; }
+    .house-roller-label{ font-size:.82rem; font-weight:800; letter-spacing:.12em; padding:10px 12px; max-width:62vw; overflow:hidden; text-overflow:ellipsis; }
+  }
+
+</style>
+</head>
+
+<body>
+<header class="hoc-header">
+  <div class="hoc-header-inner">
+    <img src="/assets/hoc.png" alt="mrcauliman" class="hoc-brand-mark">
+    <div class="hoc-header-text">
+      <h1>🏛️ HOUSE OF CAULIMAN</h1>
+      <p>XRPL • Active Ecosystems: MONOLITH • AUGUR • LAV • NEB • XRPL LAYMAN • Ledger Drop XRPL • $WCK • $RAD • $BAG • NFTITANS • HOMEEZ</p>
+    </div>
+  </div>
+</header>
+
+<main class="hoc-main">
+  <div class="hoc-shell">
+    <section class="hoc-intro">
+      <p class="hoc-intro-title">HOUSE STACK</p>
+      <p class="hoc-intro-main">One operator. Multiple XRPL ecosystems. Tokens, utilities, media, collectibles, and infrastructure built for real usage.</p>
+    </section>
+
+    <div class="hud-legend" aria-label="Project status legend">
+      <div class="item"><span class="key k-live"></span><span>LIVE</span><small>Token and utility fully operational.</small></div>
+      <div class="item"><span class="key k-token-live"></span><span>TOKEN LIVE</span><small>Token tradable. Utility expanding or in staged rollout.</small></div>
+      <div class="item"><span class="key k-utility-live"></span><span>UTILITY LIVE</span><small>Product operational. Token secondary, optional, or pending.</small></div>
+      <div class="item"><span class="key k-active-build"></span><span>ACTIVE BUILD</span><small>Core framework in active development. Public-facing progress visible.</small></div>
+      <div class="item"><span class="key k-private-build"></span><span>PRIVATE BUILD</span><small>Infrastructure phase. Not public-facing.</small></div>
+    </div>
+
+    <section class="stack-card blue">
+      <div class="stack-head">
+        <div class="stack-mark">
+          <img src="/assets/xrpl/xrpl_layman_logo.png" alt="XRPL Layman" class="stack-logo">
+        </div>
+        <div>
+          <h2 class="stack-title" data-roller-name="XRPL LAYMAN">XRPL LAYMAN</h2>
+          <div class="hud utility-live pulse"><span class="dot"></span><span>UTILITY LIVE</span></div>
+          <p class="stack-sub">Free Education • $XRP • XRPL</p>
+        </div>
+      </div>
+
+      <p class="stack-copy">
+        Simple explanations of $XRP and the XRP Ledger. Usage first. Reality first. Built for people who want clean answers without hype or fantasy numbers.
+      </p>
+
+      <ul class="stack-bullets">
+        <li>Wallet basics, safety, and ledger usage explained cleanly</li>
+        <li>No hype. No fake numbers. No fantasy framing</li>
+        <li>Built for users who want to understand how XRPL actually works</li>
+        <li>Direct, practical education from inside the ecosystem</li>
+      </ul>
+
+      <div class="stack-cta">
+        <a class="stack-btn primary" href="/xrpl/">Enter XRPL Layman</a>
+      </div>
+    </section>
+
+    <section class="stack-card mono">
+      <div class="stack-head">
+        <div class="stack-mark">
+          <img src="/assets/monolith/monolith_logo.webp" alt="MONOLITH" class="stack-logo">
+        </div>
+        <div>
+          <h2 class="stack-title" data-roller-name="MONOLITH">MONOLITH</h2>
+          <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
+          <p class="stack-sub">The Wall of Record</p>
+        </div>
+      </div>
+
+      <p class="stack-copy">
+        MONOLITH is an XRPL-native graffiti wall written permanently to the XRP Ledger. You claim a tile, leave a mark, and the ledger keeps it forever. Not a gallery. A credibility layer.
+      </p>
+
+      <ul class="stack-bullets">
+        <li>Each post is constrained to a tile so it stays clean and readable</li>
+        <li>Logos, tags, and artwork live inside the wall without wrecking it</li>
+        <li>Proof of presence is the product, the chain is the receipt</li>
+        <li>Years from now, people check MONOLITH to see who was real</li>
+      </ul>
+
+      <p class="stack-copy" style="margin-top:6px;font-size:0.82rem;color:var(--text-soft);">
+        The Wall of Record. An on-chain monument of proof and presence. Leave your mark. History keeps it.
+      </p>
+
+      <div class="stack-cta">
+        <a class="stack-btn primary" href="https://monolithxrpl.com/index.html" target="_blank" rel="noopener">Enter MONOLITH</a>
+        <a class="stack-btn" href="https://monolithxrpl.com/rules.html">Rules</a>
+        <a class="stack-btn" href="https://x.com/monolith_xrpl" target="_blank" rel="noopener">𝕏 Profile</a>
+      </div>
+    </section>
+
+    <section class="stack-card">
+      <div class="stack-head">
+        <div class="stack-mark">
+          <img src="/assets/augur/augur_logo.png" alt="AUGUR" class="stack-logo">
+        </div>
+        <div>
+          <h2 class="stack-title" data-roller-name="AUGUR">AUGUR</h2>
+          <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
+          <div class="hud utility-live pulse"><span class="dot"></span><span>UTILITY LIVE</span></div>
+          <p class="stack-sub">Chain Oracle</p>
+        </div>
+      </div>
+
+      <p class="stack-copy">
+        Paste a public wallet address and AUGUR reads the chain for you. It forges clean statements in plain English so you see what changed, where it moved, and what it cost. No wallet connection. No keys. No custody.
+      </p>
+
+      <ul class="stack-bullets">
+        <li>Track multiple XRPL wallets in one place, clean and organized</li>
+        <li>See inflows, outflows, fees, and net change, explained like a real statement</li>
+        <li>Tokens and NFTs included, not just the main coin</li>
+        <li>Monthly snapshots plus exports so you can track progress over time</li>
+      </ul>
+
+      <p class="stack-copy" style="margin-top:6px;font-size:0.82rem;color:var(--text-soft);">
+        Non-custodial. Read-only. Public data only.
+      </p>
+
+      <div class="stack-cta">
+        <a class="stack-btn primary" href="https://augurxrpl.com/" target="_blank" rel="noopener">View AUGUR</a>
+        <a class="stack-btn" href="https://augurxrpl.com/#faq">Join Waitlist</a>
+        <a class="stack-btn" href="https://x.com/augurintel" target="_blank" rel="noopener">𝕏 Profile</a>
+      </div>
+    </section>
+
+    <section class="stack-card">
+      <div class="stack-head">
+        <div class="stack-mark">
+          <img src="/assets/lav/lav_icon.png" alt="LAV" class="stack-logo">
+        </div>
+        <div>
+          <h2 class="stack-title" data-roller-name="LAV">LAV</h2>
+          <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
+          <p class="stack-sub">Legacy Access Vault</p>
+        </div>
+      </div>
+
+      <p class="stack-copy">
+        LAV is being built for family crypto continuity. It gives families a clear path for recovery planning, future handoff, and protected access across generations.
+      </p>
+
+      <ul class="stack-bullets">
+        <li>Spouse recovery planning for self-custodied crypto</li>
+        <li>Heir guidance with plain-English access structure</li>
+        <li>Future handoff planning for children and beneficiaries</li>
+        <li>Built first for real $XRP family continuity use</li>
+      </ul>
+
+      <p class="stack-copy" style="margin-top:6px;font-size:0.82rem;color:var(--text-soft);">
+        Structured access. No custody.
+      </p>
+
+      <div class="stack-cta">
+        <a class="stack-btn primary" href="/lav/">Enter LAV</a>
+      </div>
+    </section>
+
+    <section class="stack-card">
+      <div class="stack-head">
+        <div class="stack-mark">
+          <img src="/neb/assets/neb_icon.webp" alt="NEB" class="stack-logo">
+        </div>
+        <div>
+          <h2 class="stack-title" data-roller-name="NEB">NEB</h2>
+          <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
+          <p class="stack-sub">Network Exchange Bot</p>
+        </div>
+      </div>
+
+      <p class="stack-copy">
+        NEB is an XRPL trading bot designed to detect trading opportunities across the XRP Ledger. It scans order books, identifies inefficiencies, and executes trades automatically when opportunities appear.
+      </p>
+
+      <ul class="stack-bullets">
+        <li>Automated trading bot for XRPL markets</li>
+        <li>Spread and liquidity inefficiency detection</li>
+        <li>Paper trading before live capital deployment</li>
+        <li>Built to integrate with AUGUR intelligence later</li>
+      </ul>
+
+      <p class="stack-copy" style="margin-top:6px;font-size:0.82rem;color:var(--text-soft);">
+        Built as infrastructure first. Scanner, paper trading, then controlled live trading.
+      </p>
+
+      <div class="stack-cta">
+        <a class="stack-btn primary" href="/neb/">View NEB</a>
+        <a class="stack-btn" href="https://x.com/NEB_XRPL" target="_blank" rel="noopener">𝕏 Profile</a>
+      </div>
+    </section>
+
+    <section class="stack-card gold">
+      <div class="stack-head">
+        <div class="stack-mark">
+          <img src="/assets/wck_logo.webp" alt="WCK" class="stack-logo">
+        </div>
+        <div>
+          <h2 class="stack-title" data-roller-name="CONTINENTAL WICK">CONTINENTAL WICK</h2>
+          <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
+          <p class="stack-sub">$WCK • Collectible Universe</p>
+        </div>
+      </div>
+
+      <p class="stack-copy">
+        A cinematic XRPL protocol where order meets consequence. Enforcement agents. Narrative physics.
+      </p>
+
+      <ul class="stack-bullets">
+        <li>Protocol universe built around collectible infrastructure</li>
+        <li>Cinematic identity and narrative continuity</li>
+        <li>House-controlled worldbuilding on XRPL rails</li>
+        <li>Foundation for long-form ecosystem expansion</li>
+      </ul>
+
+      <div class="stack-cta">
+        <a class="stack-btn primary" href="https://continentalwick.com" target="_blank" rel="noopener">Website</a>
+        <a class="stack-btn" href="https://x.com/wcktoken" target="_blank" rel="noopener">𝕏 Profile</a>
+        <a class="stack-btn" href="https://x.com/i/communities/199081719163736323" target="_blank" rel="noopener">WCK Lobby 𝕏</a>
+        <a class="stack-btn" href="https://t.me/houseofcauliman" target="_blank" rel="noopener">Telegram Announcements</a>
+        <a class="stack-btn" href="https://t.me/hoc_hq" target="_blank" rel="noopener">Telegram Community</a>
+      </div>
+    </section>
+
+    <section class="stack-card green">
+      <div class="stack-head">
+        <div class="stack-mark">
+          <img src="/assets/bag/BAG_logo.png" alt="BAG" class="stack-logo">
+        </div>
+        <div>
+          <h2 class="stack-title" data-roller-name="GET THE $BAG">GET THE $BAG</h2>
+          <div class="hud token-live"><span class="dot"></span><span>TOKEN LIVE</span></div>
+          <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
+          <p class="stack-sub">$BAG • XRPL Gaming Infrastructure</p>
+        </div>
+      </div>
+
+      <p class="stack-copy">
+        Skill League PvP wagering, casino rails, and gaming infrastructure powered by $BAG on the XRPL.
+      </p>
+
+      <ul class="stack-bullets">
+        <li>PvP wagering and skill-league direction</li>
+        <li>Casino rails and infrastructure buildout</li>
+        <li>Token-backed gaming economy on XRPL</li>
+        <li>Designed for usage, liquidity, and platform growth</li>
+      </ul>
+
+      <div class="stack-cta">
+        <a class="stack-btn primary" href="https://getthebag.io" target="_blank" rel="noopener">Website</a>
+        <a class="stack-btn" href="https://xmagnetic.org/swap/BAG+rNeYbfb9EDV8c7mNfUuooEEYYzMcEuDFbr_XRP+XRP?network=mainnet" target="_blank" rel="noopener">BAG AMM</a>
+        <a class="stack-btn" href="https://x.com/getthebag_io" target="_blank" rel="noopener">𝕏 Profile</a>
+        <a class="stack-btn" href="https://t.me/houseofcauliman" target="_blank" rel="noopener">Telegram Announcements</a>
+        <a class="stack-btn" href="https://t.me/hoc_hq" target="_blank" rel="noopener">Telegram Community</a>
+      </div>
+    </section>
+
+    <section class="stack-card blue">
+      <div class="stack-head">
+        <div class="stack-mark">
+          <img src="/assets/rad_logo.webp" alt="RAD" class="stack-logo">
+        </div>
+        <div>
+          <h2 class="stack-title" data-roller-name="RAD GARLINGTON">RAD GARLINGTON</h2>
+          <div class="hud live"><span class="dot"></span><span>LIVE</span></div>
+          <p class="stack-sub">$RAD • The Meme Coin With a Ledger</p>
+        </div>
+      </div>
+
+      <p class="stack-copy">
+        It’s not Brad, it’s Rad. Powered by XRPL and built around the protocol’s most loyal believer.
+      </p>
+
+      <ul class="stack-bullets">
+        <li>Character-led meme coin built inside the House ecosystem</li>
+        <li>Community token with strong ledger identity</li>
+        <li>Designed for culture, humor, and holder participation</li>
+        <li>Connected to XRPL-native meme infrastructure</li>
+      </ul>
+
+      <div class="stack-cta">
+        <a class="stack-btn primary" href="https://radgarlington.io" target="_blank" rel="noopener">Website</a>
+        <a class="stack-btn" href="https://xmagnetic.org/swap/RAD+rKpaNoTRdXa48W7emkKgtCLz2MuhEroU7V_XRP+XRP?network=mainnet" target="_blank" rel="noopener">RAD AMM</a>
+        <a class="stack-btn" href="https://x.com/radgarlington" target="_blank" rel="noopener">𝕏 Profile</a>
+        <a class="stack-btn" href="https://x.com/i/communities/1994831536378843504" target="_blank" rel="noopener">XRP Meme Factory 𝕏</a>
+        <a class="stack-btn" href="https://t.me/houseofcauliman" target="_blank" rel="noopener">Telegram Announcements</a>
+        <a class="stack-btn" href="https://t.me/hoc_hq" target="_blank" rel="noopener">Telegram Community</a>
+      </div>
+    </section>
+
+    <section class="stack-card">
+      <div class="stack-head">
+        <div class="stack-mark">
+          <img src="/homeez/assets/homeez_logo.webp" alt="HOMEEZ" class="stack-logo">
+        </div>
+        <div>
+          <h2 class="stack-title" data-roller-name="HOMEEZ">HOMEEZ</h2>
+          <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
+          <p class="stack-sub">Collectibles • Archetypes • Drops</p>
+        </div>
+      </div>
+
+      <p class="stack-copy">
+        Neighborhood archetypes turned into capsule-toy collectibles. Series builds locked. Drop pipeline in motion.
+      </p>
+
+      <ul class="stack-bullets">
+        <li>Capsule toy universe direction</li>
+        <li>Character archetype pipeline</li>
+        <li>Drop-ready collectible system</li>
+        <li>House-controlled visual identity</li>
+      </ul>
+
+      <div class="stack-cta">
+        <a class="stack-btn primary" href="/homeez/">Enter HOMEEZ</a>
+      </div>
+    </section>
+
+    <section class="stack-card gold">
+      <div class="stack-head">
+        <div class="stack-mark">
+          <img src="/collections/nftitans/assets/NFTITANS_logo.webp" alt="NFTITANS" class="stack-logo">
+        </div>
+        <div>
+          <h2 class="stack-title" data-roller-name="NFTITANS">NFTITANS</h2>
+          <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
+          <p class="stack-sub">XRPL • Collectible Series</p>
+        </div>
+      </div>
+
+      <p class="stack-copy">
+        18 Roman Titans. Extreme muscle. Toy-accurate NFT collectibles. Built on XRPL. Forged for the House of Cauliman.
+      </p>
+
+      <ul class="stack-bullets">
+        <li>Series-locked collectible build</li>
+        <li>Roman Titan visual direction</li>
+        <li>XRPL-native collectible release path</li>
+        <li>House-controlled material and character continuity</li>
+      </ul>
+
+      <div class="stack-cta">
+        <a class="stack-btn primary" href="/collections/nftitans.html">View Collection</a>
+        <a class="stack-btn" href="https://x.com/NFTITANS_XRPL" target="_blank" rel="noopener">𝕏 Profile</a>
+      </div>
+    </section>
+
+    <section class="stack-card gold">
+      <div class="stack-head">
+        <div class="stack-mark">
+          <picture>
+            <source srcset="/assets/ledger_drop_xrpl.webp" type="image/webp">
+            <img src="/assets/ledger_drop_xrpl.png" alt="Ledger Drop XRPL" class="stack-logo">
+          </picture>
+        </div>
+        <div>
+          <h2 class="stack-title" data-roller-name="Ledger Drop XRPL">Ledger Drop XRPL</h2>
+          <div class="hud utility-live pulse"><span class="dot"></span><span>UTILITY LIVE</span></div>
+          <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
+          <p class="stack-sub">Daily Wallpapers</p>
+        </div>
+      </div>
+
+      <p class="stack-copy">
+        589 XRPL wallpapers. Daily drops. Built for culture and signal.
+      </p>
+
+      <ul class="stack-bullets">
+        <li>Mobile and desktop formats</li>
+        <li>Download-ready assets</li>
+        <li>Built around $XRP culture</li>
+        <li>Ongoing release pipeline across the full drop library</li>
+      </ul>
+
+      <div class="stack-cta">
+        <a class="stack-btn primary" href="/ledgerdrop_xrpl/">Enter Ledger Drop</a>
+        <a class="stack-btn" href="https://x.com/LedgerDropXRPL" target="_blank" rel="noopener">𝕏 Profile</a>
+      </div>
+    </section>
+
+    <section class="hoc-intro" style="margin-top:26px;">
+      <p class="hoc-intro-title">HOUSE OPERATOR</p>
+      <p class="hoc-intro-main">Architect and enforcement layer operating the stack.</p>
+    </section>
+
+    <section class="hoc-grid" style="margin-top:28px;">
+      <article class="project-card" style="grid-column:1 / -1;">
+        <div class="project-media">
+          <div class="project-wallpaper" style="background:radial-gradient(circle at top,#1e293b 0,#020308 70%); border-color:rgba(77,163,255,0.8);">
+            <img src="/assets/mrcauliman_logo.webp" class="project-logo" alt="mrcauliman">
+            <span class="project-tag">Operator</span>
+          </div>
+        </div>
+        <div class="project-body">
+          <h2 class="project-title" style="color:var(--accent);">MR CAULIMAN</h2>
+          <p class="project-sub">BUILDER • BJJ BLACK BELT • CTO</p>
+          <p class="project-copy">
+            Every system in this stack is architected and enforced under one operator.
+            Discipline. Pressure. Execution.
+          </p>
+
+          <p class="project-copy" style="margin-top:6px; font-size:0.78rem; color:var(--text-soft); line-height:1.55;">
+            <strong>Operator Stack:</strong><br>
+            Builder of MONOLITH. XRPL-native Wall of Record.
+            XRPL public-ledger indexing • Account history parsing • Trustlines & rippling analysis • AMM flows •
+            XLS-20 NFTs • Token + NFT inventory mapping • Statement forging • Net flow + fee breakdowns • Monthly snapshots • Export pipelines •
+            Non-custodial architecture • Zero-key design • Wallet architecture • Threat mapping • Verification flows •
+
+            <br><br>
+            <strong>AUGUR • Chain Oracle Build:</strong><br>
+            Multi-wallet account model • Labeling + grouping wallets under one identity •
+            Auto-detection of inflows/outflows/fees • Swap + AMM movement interpretation •
+            Token + NFT change tracking • Chain events translated into plain English •
+            Monthly statement snapshots • Statement-style exports •
+
+            <br><br>
+            <strong>Infrastructure:</strong><br>
+            Ubuntu server management • DigitalOcean • Nginx • reverse proxies • SSL/HTTPS • systemd services •
+            server hardening • multi-site architecture • uptime + log-driven debugging •
+
+            <br><br>
+            <strong>Creative Systems:</strong><br>
+            Cinematic realism • Pixar-style asset pipelines • 8-bit protocol visuals • character universe design •
+            multi-brand ecosystem architecture • metadata systems • collection bibles • production locking + version control
+          </p>
+
+          <div class="project-links">
+            <a class="project-link primary" href="https://x.com/NEB_XRPL" target="_blank" rel="noopener"><span>𝕏 Profile</span></a>
+            <a class="project-link" href="https://x.com/i/communities/1677882151931637760" target="_blank" rel="noopener"><span>🥋 Cauliflower Chronicles 𝕏</span></a>
+            <a class="project-link" href="https://x.com/i/communities/1993769453449040144" target="_blank" rel="noopener"><span>🏛️ House of Cauliman 𝕏</span></a>
+            <a class="project-link" href="https://t.me/houseofcauliman" target="_blank" rel="noopener"><span>📢 Telegram Announcements</span></a>
+            <a class="project-link" href="https://t.me/hoc_hq" target="_blank" rel="noopener"><span>💬 Telegram Community</span></a>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <article class="project-card" style="grid-column:1/-1; margin-top:40px;">
+      <div class="project-body">
+        <h2 class="project-title">Investment Thesis</h2>
+        <img src="/assets/hoc.png" alt="House of Cauliman Ecosystem Diagram" class="thesis-image">
+        <p class="project-copy" style="margin-top:16px;">
+          Most crypto projects fail because they are passive.<br>
+          Liquidity is seeded once. Supply is released without discipline.<br>
+          The market is expected to behave.
+        </p>
+        <p class="project-copy">
+          The House of Cauliman is actively managed.<br>
+          This ecosystem is designed for durability, not short-term attention cycles.<br>
+          If usage grows, the structure strengthens.
+        </p>
+        <div class="nav-link-card" style="margin-top:24px;">
+          <a href="/house.html">Full Investment Thesis →</a>
+        </div>
+      </div>
+    </article>
+
+    <footer class="hoc-footer">
+      <span>Built and backed by mrcauliman. No VC. No training wheels.</span>
+      <span>Powered by $XRP • <a href="https://houseofcauliman.com">HouseOfCauliman.com</a></span>
+    </footer>
+  </div>
+</main>
+
+<div class="house-roller-wrap" id="houseRollerWrap">
+  <div class="house-roller-label" id="houseRollerLabel">HOUSE</div>
+  <div class="house-roller" id="houseRoller" aria-label="House project roller" role="slider">
+    <div class="house-roller-wheel" id="houseRollerWheel"></div>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  const wrap = document.getElementById('houseRollerWrap');
+  const rail = document.getElementById('houseRoller');
+  const wheel = document.getElementById('houseRollerWheel');
+  const label = document.getElementById('houseRollerLabel');
+  if (!wrap || !rail || !wheel || !label) return;
+
+  const cards = [...document.querySelectorAll('.stack-card')].filter(el => el.querySelector('.stack-title'));
+  if (!cards.length) return;
+
+  const points = cards.map((el, i) => {
+    const title = el.querySelector('.stack-title');
+    return {
+      el,
+      name: (title?.getAttribute('data-roller-name') || title?.textContent || `Section ${i+1}`).trim()
+    };
+  });
+
+  let dragging = false;
+  let startY = 0;
+  let startScroll = 0;
+  let spin = 0;
+  let displaySpin = 0;
+  let raf = null;
+  let activeUntil = 0;
+
+  function clamp(n,a,b){ return Math.max(a, Math.min(b, n)); }
+
+  function maxScroll(){
+    return Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+  }
+
+  function activePoint(){
+    const mid = window.innerHeight * 0.42;
+    let best = points[0];
+    let bestDist = Infinity;
+    for (const p of points){
+      const r = p.el.getBoundingClientRect();
+      const center = r.top + r.height / 2;
+      const d = Math.abs(center - mid);
+      if (d < bestDist){
+        bestDist = d;
+        best = p;
+      }
+    }
+    return best;
+  }
+
+  function updateLabel(){
+    const p = activePoint();
+    if (p) label.textContent = p.name;
+  }
+
+  function showActive(ms=700){
+    activeUntil = performance.now() + ms;
+    wrap.classList.add('active');
+  }
+
+  function maybeHide(){
+    if (performance.now() > activeUntil && !dragging){
+      wrap.classList.remove('active');
+    }
+  }
+
+  function applyWheelVisual(){
+    displaySpin += (spin - displaySpin) * 0.12;
+    const textureY = -(displaySpin * 18);
+    wheel.style.transform = `rotate(${displaySpin * 7}deg)`;
+    wheel.style.backgroundPosition = `center 0, center ${textureY}px, center center`;
+  }
+
+  function animate(){
+    applyWheelVisual();
+    maybeHide();
+    raf = requestAnimationFrame(animate);
+  }
+
+  function snapToNearest(){
+    const p = activePoint();
+    if (!p) return;
+    p.el.scrollIntoView({ behavior:'smooth', block:'center' });
+    showActive(900);
+  }
+
+  wheel.addEventListener('pointerdown', e => {
+    dragging = true;
+    startY = e.clientY;
+    startScroll = window.scrollY;
+    wheel.setPointerCapture(e.pointerId);
+    showActive(1200);
+  });
+
+  window.addEventListener('pointermove', e => {
+    if (!dragging) return;
+    const dy = e.clientY - startY;
+    const slowed = dy * 18;
+    const target = clamp(startScroll + slowed, 0, maxScroll());
+    window.scrollTo({ top: target, behavior:'auto' });
+    spin = (target / Math.max(1, maxScroll())) * 22;
+    updateLabel();
+    showActive(1200);
+  });
+
+  window.addEventListener('pointerup', () => {
+    if (!dragging) return;
+    dragging = false;
+    snapToNearest();
+  });
+
+  rail.addEventListener('click', e => {
+    if (e.target === wheel) return;
+    const dir = e.clientY < rail.getBoundingClientRect().top + rail.offsetHeight / 2 ? -1 : 1;
+    const target = clamp(window.scrollY + dir * (window.innerHeight * 0.72), 0, maxScroll());
+    window.scrollTo({ top: target, behavior:'smooth' });
+    spin += dir * 1.6;
+    updateLabel();
+    showActive(900);
+    setTimeout(snapToNearest, 180);
+  });
+
+  window.addEventListener('scroll', () => {
+    if (!dragging){
+      spin = (window.scrollY / Math.max(1, maxScroll())) * 22;
+    }
+    updateLabel();
+  }, { passive:true });
+
+  window.addEventListener('resize', () => {
+    spin = (window.scrollY / Math.max(1, maxScroll())) * 22;
+    updateLabel();
+  });
+
+  spin = (window.scrollY / Math.max(1, maxScroll())) * 22;
+  displaySpin = spin;
+  updateLabel();
+  animate();
+})();
+</script>
+
+</body>
+</html>
