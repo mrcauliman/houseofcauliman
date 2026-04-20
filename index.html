@@ -614,8 +614,10 @@
     user-select:none;
     -webkit-user-select:none;
     touch-action:none;
+    pointer-events:none;
   }
   .hoc-wheel-label{
+    pointer-events:none;
     padding:10px 12px;
     border-radius:999px;
     border:1px solid rgba(255,255,255,.24);
@@ -632,6 +634,7 @@
   }
   .hoc-wheel-mount{
     position:relative;
+    pointer-events:none;
     width:16px;
     height:62px;
     border-radius:12px;
@@ -641,6 +644,7 @@
     overflow:visible;
   }
   .hoc-wheel{
+    pointer-events:auto;
     position:absolute;
     left:0px;
     top:5px;
@@ -1218,10 +1222,10 @@
   window.addEventListener('pointermove', e => {
     if (!dragging) return;
     const dy = e.clientY - startY;
-    const slowed = dy * 3.0;
+    const slowed = dy * 1.6;
     const target = clamp(startScroll + slowed, 0, maxScroll());
     window.scrollTo({ top: target, behavior: 'auto' });
-    spin = target * 2.0;
+    spin = target * 1.4;
     setLabel();
   });
 
@@ -1233,14 +1237,14 @@
   });
 
   window.addEventListener('scroll', () => {
-    if (!dragging) spin = window.scrollY * 2.0;
+    if (!dragging) spin = window.scrollY * 1.4;
     setLabel();
   }, { passive:true });
 
   window.addEventListener('resize', setLabel);
 
   setLabel();
-  spin = window.scrollY * 2.0;
+  spin = window.scrollY * 1.4;
   displaySpin = spin;
   animate();
 })();
