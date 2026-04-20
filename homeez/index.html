@@ -25,9 +25,12 @@
       --text:#f5f7fb;
       --muted:#a4b0c7;
       --line:rgba(255,255,255,.08);
-      --gold1:#ffd86e;
+      --gold:#ffd86e;
       --gold2:#d69210;
-      --max:1220px;
+      --panel:rgba(255,255,255,.04);
+      --panel-strong:rgba(255,255,255,.07);
+      --shadow:0 28px 50px rgba(0,0,0,.38);
+      --max:1320px;
     }
 
     *{box-sizing:border-box}
@@ -108,14 +111,14 @@
     }
 
     .hero{
-      padding:34px 0 54px;
+      padding:24px 0 42px;
     }
 
     .hero-grid{
       display:grid;
-      grid-template-columns:minmax(320px,470px) 1fr;
-      gap:34px;
-      align-items:center;
+      grid-template-columns:minmax(320px,420px) 1fr;
+      gap:28px;
+      align-items:start;
     }
 
     .eyebrow{
@@ -135,7 +138,7 @@
 
     h1{
       margin:16px 0 10px;
-      font-size:clamp(42px,6vw,84px);
+      font-size:clamp(42px,6vw,82px);
       line-height:.94;
       letter-spacing:-.05em;
     }
@@ -145,39 +148,7 @@
       font-size:18px;
       line-height:1.6;
       color:var(--muted);
-      max-width:520px;
-    }
-
-    .cta-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-top:24px;
-    }
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:48px;
-      padding:0 18px;
-      border-radius:14px;
-      font-weight:900;
-      letter-spacing:.02em;
-      border:1px solid var(--line);
-    }
-
-    .btn-secondary{
-      background:rgba(255,255,255,.04);
-      color:var(--text);
-    }
-
-    .btn-machine{
-      background:linear-gradient(180deg, rgba(255,216,110,.22), rgba(214,146,16,.10));
-      border:1px solid rgba(255,216,110,.24);
-      color:#ffefbf;
-      pointer-events:none;
-      cursor:not-allowed;
+      max-width:460px;
     }
 
     .status-row{
@@ -209,17 +180,338 @@
       color:#ffeeb9;
     }
 
+    .panel{
+      margin-top:22px;
+      padding:18px;
+      border-radius:22px;
+      background:var(--panel);
+      border:1px solid var(--line);
+      box-shadow:0 12px 26px rgba(0,0,0,.18);
+    }
+
+    .panel-title{
+      margin:0 0 14px;
+      font-size:14px;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:#d9e2f3;
+    }
+
+    .controls{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+
+    button{
+      appearance:none;
+      border:0;
+      cursor:pointer;
+      font:inherit;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:48px;
+      padding:0 18px;
+      border-radius:14px;
+      font-weight:900;
+      letter-spacing:.02em;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      transition:transform .15s ease, opacity .15s ease, background .15s ease;
+    }
+
+    .btn:hover:not(:disabled){
+      transform:translateY(-1px);
+      background:rgba(255,255,255,.07);
+    }
+
+    .btn:disabled{
+      opacity:.45;
+      cursor:not-allowed;
+      transform:none;
+    }
+
+    .btn-primary{
+      background:linear-gradient(180deg, rgba(255,216,110,.22), rgba(214,146,16,.10));
+      border:1px solid rgba(255,216,110,.24);
+      color:#ffefbf;
+    }
+
+    .info{
+      margin-top:14px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.55;
+      min-height:22px;
+    }
+
+    .machine-side{
+      position:relative;
+    }
+
     .machine-stage{
+      position:relative;
       display:flex;
       justify-content:center;
       align-items:center;
+      min-height:760px;
+      padding:10px 0 0;
+    }
+
+    .machine-wrap{
+      position:relative;
+      width:min(100%, 820px);
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+    }
+
+    .machine-wrap.is-spinning .machine-render{
+      animation:machineShake .18s ease-in-out 5;
     }
 
     .machine-render{
-      width:min(100%, 620px);
+      width:min(100%, 820px);
       height:auto;
       display:block;
       filter:drop-shadow(0 28px 50px rgba(0,0,0,.38));
+      user-select:none;
+      pointer-events:none;
+    }
+
+    .handle-hit{
+      position:absolute;
+      right:19.2%;
+      top:42.8%;
+      width:14.5%;
+      aspect-ratio:1/1;
+      border-radius:50%;
+      background:transparent;
+      border:0;
+      cursor:pointer;
+      z-index:5;
+    }
+
+    .handle-hit:disabled{
+      cursor:not-allowed;
+    }
+
+    .handle-rotator{
+      position:absolute;
+      right:19.2%;
+      top:42.8%;
+      width:14.5%;
+      aspect-ratio:1/1;
+      transform-origin:50% 50%;
+      pointer-events:none;
+      z-index:4;
+    }
+
+    .handle-wrap.is-turning .handle-rotator{
+      animation:handleTurn 1s cubic-bezier(.25,.8,.25,1) forwards;
+    }
+
+    .handle-ghost{
+      position:absolute;
+      inset:0;
+      border-radius:50%;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,.06), transparent 55%);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,.04),
+        inset 0 0 0 1px rgba(255,255,255,.03);
+      opacity:.22;
+    }
+
+    .handle-arm{
+      position:absolute;
+      left:50%;
+      top:14%;
+      width:12%;
+      height:40%;
+      transform:translateX(-50%);
+      border-radius:999px;
+      background:linear-gradient(180deg, rgba(255,255,255,.45), rgba(120,130,145,.24));
+      opacity:.20;
+      filter:blur(.2px);
+    }
+
+    .handle-knob{
+      position:absolute;
+      left:50%;
+      top:2%;
+      width:28%;
+      height:28%;
+      transform:translateX(-50%);
+      border-radius:50%;
+      background:radial-gradient(circle at 35% 35%, rgba(255,255,255,.4), rgba(140,150,165,.2));
+      opacity:.20;
+    }
+
+    .capsule-drop{
+      position:absolute;
+      left:50%;
+      top:52%;
+      width:10.5%;
+      max-width:78px;
+      aspect-ratio:1/1;
+      transform:translate(-50%, -220px) scale(.82);
+      opacity:0;
+      z-index:6;
+      pointer-events:none;
+    }
+
+    .capsule-drop.active{
+      animation:capsuleDrop 1s cubic-bezier(.2,.8,.2,1) forwards;
+    }
+
+    .capsule-shell{
+      position:relative;
+      width:100%;
+      height:100%;
+      border-radius:50%;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(255,255,255,.55), rgba(255,255,255,.18) 20%, rgba(255,255,255,.06) 38%, rgba(255,255,255,.02) 65%, rgba(255,255,255,.03) 100%);
+      border:1px solid rgba(255,255,255,.22);
+      box-shadow:
+        inset 0 8px 10px rgba(255,255,255,.18),
+        inset 0 -10px 14px rgba(0,0,0,.12),
+        0 10px 18px rgba(0,0,0,.18);
+      backdrop-filter:blur(1px);
+      overflow:hidden;
+    }
+
+    .capsule-shell::before{
+      content:"";
+      position:absolute;
+      left:8%;
+      right:8%;
+      top:49%;
+      height:2px;
+      border-radius:999px;
+      background:rgba(255,255,255,.20);
+      box-shadow:0 0 0 1px rgba(0,0,0,.03);
+    }
+
+    .capsule-figure{
+      position:absolute;
+      left:50%;
+      top:52%;
+      width:46%;
+      height:56%;
+      transform:translate(-50%, -50%);
+      border-radius:45% 45% 34% 34%;
+      background:rgba(60,70,85,.33);
+      filter:blur(7px);
+    }
+
+    .capsule-figure::before{
+      content:"";
+      position:absolute;
+      left:50%;
+      top:-18%;
+      width:48%;
+      height:34%;
+      transform:translateX(-50%);
+      border-radius:50%;
+      background:rgba(60,70,85,.33);
+    }
+
+    .capsule-open{
+      position:absolute;
+      left:50%;
+      top:71%;
+      width:22%;
+      max-width:160px;
+      aspect-ratio:1/1;
+      transform:translate(-50%, -50%) scale(.2);
+      opacity:0;
+      pointer-events:none;
+      z-index:8;
+    }
+
+    .capsule-open.visible{
+      animation:capsuleReveal .55s ease-out forwards;
+    }
+
+    .capsule-half{
+      position:absolute;
+      left:50%;
+      width:100%;
+      height:50%;
+      transform:translateX(-50%);
+      background:
+        radial-gradient(circle at 30% 25%, rgba(255,255,255,.55), rgba(255,255,255,.16) 20%, rgba(255,255,255,.06) 48%, rgba(255,255,255,.02) 100%);
+      border:1px solid rgba(255,255,255,.22);
+      backdrop-filter:blur(1px);
+      box-shadow:
+        inset 0 6px 8px rgba(255,255,255,.18),
+        0 8px 14px rgba(0,0,0,.16);
+    }
+
+    .capsule-half.top{
+      top:0;
+      border-radius:999px 999px 16px 16px;
+      transform-origin:50% 100%;
+    }
+
+    .capsule-open.visible .capsule-half.top{
+      animation:openTop .45s ease-out forwards;
+    }
+
+    .capsule-half.bottom{
+      bottom:0;
+      border-radius:16px 16px 999px 999px;
+    }
+
+    .reveal-card{
+      position:absolute;
+      left:50%;
+      top:72%;
+      width:min(100%, 300px);
+      transform:translate(-50%, 20px);
+      padding:18px 18px 16px;
+      border-radius:22px;
+      background:rgba(8,11,18,.88);
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:0 18px 34px rgba(0,0,0,.26);
+      opacity:0;
+      pointer-events:none;
+      z-index:9;
+      text-align:center;
+    }
+
+    .reveal-card.visible{
+      animation:cardIn .45s ease-out forwards;
+    }
+
+    .reveal-kicker{
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:#ffe7a1;
+      margin-bottom:8px;
+    }
+
+    .reveal-title{
+      font-size:26px;
+      font-weight:1000;
+      letter-spacing:-.04em;
+      margin:0 0 8px;
+    }
+
+    .reveal-copy{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.5;
     }
 
     .footer{
@@ -236,9 +528,75 @@
       border-top:1px solid var(--line);
     }
 
+    @keyframes machineShake{
+      0%,100%{ transform:translateX(0) }
+      25%{ transform:translateX(-2px) }
+      50%{ transform:translateX(2px) }
+      75%{ transform:translateX(-1px) }
+    }
+
+    @keyframes handleTurn{
+      0%{ transform:rotate(0deg) }
+      68%{ transform:rotate(215deg) }
+      100%{ transform:rotate(180deg) }
+    }
+
+    @keyframes capsuleDrop{
+      0%{
+        transform:translate(-50%, -220px) scale(.82);
+        opacity:0;
+      }
+      12%{
+        opacity:1;
+      }
+      68%{
+        transform:translate(-50%, 62px) scale(1);
+        opacity:1;
+      }
+      100%{
+        transform:translate(-50%, 62px) scale(1);
+        opacity:1;
+      }
+    }
+
+    @keyframes capsuleReveal{
+      0%{
+        opacity:0;
+        transform:translate(-50%, -50%) scale(.2);
+      }
+      100%{
+        opacity:1;
+        transform:translate(-50%, -50%) scale(1);
+      }
+    }
+
+    @keyframes openTop{
+      0%{ transform:translateX(-50%) rotate(0deg) }
+      100%{ transform:translateX(-50%) rotate(-42deg) translateY(-12px) }
+    }
+
+    @keyframes cardIn{
+      0%{
+        opacity:0;
+        transform:translate(-50%, 20px);
+      }
+      100%{
+        opacity:1;
+        transform:translate(-50%, 0);
+      }
+    }
+
     @media (max-width:980px){
       .hero-grid{
         grid-template-columns:1fr;
+      }
+
+      .machine-stage{
+        min-height:660px;
+      }
+
+      .machine-wrap{
+        width:min(100%, 620px);
       }
     }
 
@@ -261,15 +619,24 @@
       }
 
       .hero{
-        padding:30px 0 42px;
+        padding:24px 0 34px;
       }
 
       .sub{
         font-size:16px;
       }
 
-      .machine-render{
+      .machine-stage{
+        min-height:500px;
+      }
+
+      .machine-wrap{
         width:min(100%, 460px);
+      }
+
+      .reveal-card{
+        width:min(100%, 260px);
+        top:78%;
       }
     }
   </style>
@@ -293,23 +660,61 @@
         <div>
           <div class="eyebrow">Active Build</div>
           <h1>HOMEEZ Capsule Machine</h1>
-          <p class="sub">The HOMEEZ Capsule Machine is being built now. The machine is live on the page. Spin logic comes next.</p>
-          <div class="cta-row">
-            <span class="btn btn-machine">Machine Not Live Yet</span>
-            <a class="btn btn-secondary" href="https://houseofcauliman.com/">Back to House</a>
-          </div>
+          <p class="sub">Turn the machine. Drop a capsule. Pop it open. The full XRPL pull system comes after the motion is locked.</p>
+
           <div class="status-row">
             <span class="status gold">Founding Machine</span>
-            <span class="status">Stand By</span>
+            <span class="status">Motion Demo Live</span>
+          </div>
+
+          <div class="panel">
+            <div class="panel-title">Machine Controls</div>
+            <div class="controls">
+              <button id="turnBtn" class="btn btn-primary" type="button">Turn Machine</button>
+              <button id="openBtn" class="btn" type="button" disabled>Open Capsule</button>
+              <button id="resetBtn" class="btn" type="button" disabled>Reset</button>
+              <a class="btn" href="https://houseofcauliman.com/">Back to House</a>
+            </div>
+            <div id="machineInfo" class="info">Machine ready.</div>
           </div>
         </div>
 
-        <div class="machine-stage">
-          <img
-            src="/homeez/assets/homeez_capsule_machine.png"
-            alt="HOMEEZ Capsule Machine"
-            class="machine-render"
-          >
+        <div class="machine-side">
+          <div class="machine-stage">
+            <div id="machineWrap" class="machine-wrap">
+              <img
+                src="/homeez/assets/homeez_capsule_machine.png"
+                alt="HOMEEZ Capsule Machine"
+                class="machine-render"
+              >
+
+              <div id="handleWrap" class="handle-wrap">
+                <div class="handle-rotator" aria-hidden="true">
+                  <div class="handle-ghost"></div>
+                  <div class="handle-arm"></div>
+                  <div class="handle-knob"></div>
+                </div>
+                <button id="handleHit" class="handle-hit" type="button" aria-label="Turn Machine"></button>
+              </div>
+
+              <div id="capsuleDrop" class="capsule-drop" aria-hidden="true">
+                <div class="capsule-shell">
+                  <div class="capsule-figure"></div>
+                </div>
+              </div>
+
+              <div id="capsuleOpen" class="capsule-open" aria-hidden="true">
+                <div class="capsule-half top"></div>
+                <div class="capsule-half bottom"></div>
+              </div>
+
+              <div id="revealCard" class="reveal-card" aria-live="polite">
+                <div class="reveal-kicker">Capsule Opened</div>
+                <h2 id="revealTitle" class="reveal-title">HOMEEZ Pull</h2>
+                <p id="revealCopy" class="reveal-copy">Blurred reveal placeholder. Character asset and rarity system come next.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -321,5 +726,113 @@
       <div><a href="https://houseofcauliman.com/">houseofcauliman.com</a></div>
     </div>
   </footer>
+
+  <script>
+    const results = [
+      { title: 'Neighborhood Archetype', copy: 'Prototype capsule result. Full character art and weighted rarity come next.' },
+      { title: 'Street Figure Pull', copy: 'Blurred silhouette placeholder. Later this opens into a real HOMEEZ reveal.' },
+      { title: 'Capsule Pull Locked', copy: 'Machine motion is working. XRPL-connected pulls come after the frontend sequence.' },
+      { title: 'Founding Capsule', copy: 'First-phase interaction demo. Real collectible assignments come in the next build.' }
+    ];
+
+    const machineWrap = document.getElementById('machineWrap');
+    const handleWrap = document.getElementById('handleWrap');
+    const capsuleDrop = document.getElementById('capsuleDrop');
+    const capsuleOpen = document.getElementById('capsuleOpen');
+    const revealCard = document.getElementById('revealCard');
+    const revealTitle = document.getElementById('revealTitle');
+    const revealCopy = document.getElementById('revealCopy');
+    const machineInfo = document.getElementById('machineInfo');
+
+    const turnBtn = document.getElementById('turnBtn');
+    const openBtn = document.getElementById('openBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const handleHit = document.getElementById('handleHit');
+
+    let state = 'ready';
+    let currentResult = null;
+
+    function pickResult() {
+      return results[Math.floor(Math.random() * results.length)];
+    }
+
+    function lockTurn(lock) {
+      turnBtn.disabled = lock;
+      handleHit.disabled = lock;
+    }
+
+    function runTurn() {
+      if (state !== 'ready') return;
+
+      state = 'turning';
+      currentResult = pickResult();
+
+      machineInfo.textContent = 'Turning machine...';
+      lockTurn(true);
+      openBtn.disabled = true;
+      resetBtn.disabled = true;
+
+      revealCard.classList.remove('visible');
+      capsuleOpen.classList.remove('visible');
+      capsuleDrop.classList.remove('active');
+
+      void capsuleDrop.offsetWidth;
+
+      machineWrap.classList.add('is-spinning');
+      handleWrap.classList.add('is-turning');
+
+      setTimeout(() => {
+        capsuleDrop.classList.add('active');
+      }, 240);
+
+      setTimeout(() => {
+        machineWrap.classList.remove('is-spinning');
+        handleWrap.classList.remove('is-turning');
+        state = 'dropped';
+        machineInfo.textContent = 'Capsule dropped. Open it.';
+        openBtn.disabled = false;
+        resetBtn.disabled = false;
+      }, 1180);
+    }
+
+    function openCapsule() {
+      if (state !== 'dropped') return;
+
+      state = 'opened';
+      machineInfo.textContent = 'Opening capsule...';
+      openBtn.disabled = true;
+
+      revealTitle.textContent = currentResult.title;
+      revealCopy.textContent = currentResult.copy;
+
+      capsuleOpen.classList.add('visible');
+
+      setTimeout(() => {
+        revealCard.classList.add('visible');
+        machineInfo.textContent = 'Capsule opened.';
+      }, 280);
+    }
+
+    function resetMachine() {
+      state = 'ready';
+      currentResult = null;
+
+      machineWrap.classList.remove('is-spinning');
+      handleWrap.classList.remove('is-turning');
+      capsuleDrop.classList.remove('active');
+      capsuleOpen.classList.remove('visible');
+      revealCard.classList.remove('visible');
+
+      lockTurn(false);
+      openBtn.disabled = true;
+      resetBtn.disabled = true;
+      machineInfo.textContent = 'Machine ready.';
+    }
+
+    turnBtn.addEventListener('click', runTurn);
+    handleHit.addEventListener('click', runTurn);
+    openBtn.addEventListener('click', openCapsule);
+    resetBtn.addEventListener('click', resetMachine);
+  </script>
 </body>
 </html>
