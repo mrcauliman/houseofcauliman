@@ -26,9 +26,7 @@
       --muted:#a4b0c7;
       --line:rgba(255,255,255,.08);
       --gold:#ffd86e;
-      --gold2:#d69210;
       --panel:rgba(255,255,255,.04);
-      --shadow:0 28px 50px rgba(0,0,0,.38);
       --max:1320px;
     }
 
@@ -216,11 +214,11 @@
 
     .handle-wrap{
       position:absolute;
-      right:19.2%;
-      top:42.8%;
-      width:14.5%;
+      right:16.8%;
+      top:40.8%;
+      width:19%;
       aspect-ratio:1/1;
-      z-index:5;
+      z-index:8;
       pointer-events:none;
     }
 
@@ -230,52 +228,49 @@
 
     .handle-hit{
       position:absolute;
-      inset:-8%;
+      inset:0;
       border-radius:50%;
       background:transparent;
       pointer-events:auto;
-      z-index:7;
-    }
-
-    .handle-hit:disabled{
-      cursor:not-allowed;
+      z-index:10;
+      touch-action:manipulation;
     }
 
     .handle-glow{
       position:absolute;
-      inset:0;
+      inset:6%;
       border-radius:50%;
-      background:
-        radial-gradient(circle at 50% 50%, rgba(255,255,255,.07), transparent 60%);
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,.04),
-        inset 0 0 0 1px rgba(255,255,255,.03);
-      opacity:.18;
+      background:radial-gradient(circle at 50% 50%, rgba(255,255,255,.08), transparent 62%);
+      box-shadow:0 0 0 1px rgba(255,255,255,.05);
+      opacity:.22;
+      pointer-events:none;
     }
 
     .handle-arm{
       position:absolute;
       left:50%;
-      top:14%;
+      top:16%;
       width:12%;
-      height:40%;
+      height:38%;
       transform:translateX(-50%);
       border-radius:999px;
       background:linear-gradient(180deg, rgba(255,255,255,.45), rgba(120,130,145,.24));
-      opacity:.20;
+      opacity:.22;
       filter:blur(.2px);
+      pointer-events:none;
     }
 
     .handle-knob{
       position:absolute;
       left:50%;
-      top:2%;
+      top:4%;
       width:28%;
       height:28%;
       transform:translateX(-50%);
       border-radius:50%;
       background:radial-gradient(circle at 35% 35%, rgba(255,255,255,.4), rgba(140,150,165,.2));
-      opacity:.20;
+      opacity:.22;
+      pointer-events:none;
     }
 
     .machine-panel{
@@ -296,10 +291,46 @@
       color:#d9e2f3;
     }
 
+    .tap-meter{
+      margin-top:2px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .tap-dots{
+      display:flex;
+      gap:8px;
+    }
+
+    .tap-dot{
+      width:12px;
+      height:12px;
+      border-radius:50%;
+      background:rgba(255,255,255,.14);
+      border:1px solid rgba(255,255,255,.08);
+      transition:transform .15s ease, background .15s ease, box-shadow .15s ease;
+    }
+
+    .tap-dot.on{
+      background:linear-gradient(180deg, rgba(255,216,110,.95), rgba(214,146,16,.86));
+      box-shadow:0 0 16px rgba(255,216,110,.22);
+      transform:scale(1.08);
+    }
+
+    .tap-text{
+      font-size:13px;
+      color:#d8e5ff;
+      font-weight:800;
+      letter-spacing:.02em;
+    }
+
     .controls{
       display:flex;
       flex-wrap:wrap;
       gap:12px;
+      margin-top:14px;
     }
 
     .btn{
@@ -342,47 +373,12 @@
       min-height:22px;
     }
 
-    .tap-meter{
-      margin-top:12px;
-      display:flex;
-      gap:10px;
-      align-items:center;
-      flex-wrap:wrap;
-    }
-
-    .tap-dots{
-      display:flex;
-      gap:8px;
-    }
-
-    .tap-dot{
-      width:12px;
-      height:12px;
-      border-radius:50%;
-      background:rgba(255,255,255,.14);
-      border:1px solid rgba(255,255,255,.08);
-      transition:transform .15s ease, background .15s ease, box-shadow .15s ease;
-    }
-
-    .tap-dot.on{
-      background:linear-gradient(180deg, rgba(255,216,110,.95), rgba(214,146,16,.86));
-      box-shadow:0 0 16px rgba(255,216,110,.22);
-      transform:scale(1.08);
-    }
-
-    .tap-text{
-      font-size:13px;
-      color:#d8e5ff;
-      font-weight:800;
-      letter-spacing:.02em;
-    }
-
     .capsule-drop{
       position:absolute;
       left:50%;
       top:52%;
-      width:13.5%;
-      max-width:100px;
+      width:14.5%;
+      max-width:108px;
       aspect-ratio:1/1;
       transform:translate(-50%, -220px) scale(.82);
       opacity:0;
@@ -664,6 +660,12 @@
         width:min(100%, 460px);
       }
 
+      .handle-wrap{
+        right:15.8%;
+        top:40.2%;
+        width:20%;
+      }
+
       .machine-panel{
         margin-top:8px;
         padding:16px;
@@ -684,7 +686,7 @@
       }
 
       .capsule-drop{
-        max-width:86px;
+        max-width:92px;
       }
     }
   </style>
@@ -763,10 +765,9 @@
               <div id="tapText" class="tap-text">Tap the handle 3 times.</div>
             </div>
 
-            <div class="controls" style="margin-top:14px;">
+            <div class="controls">
               <button id="openBtn" class="btn btn-primary" type="button" disabled>Open Capsule</button>
               <button id="resetBtn" class="btn" type="button" disabled>Reset</button>
-              <a class="btn" href="https://houseofcauliman.com/">Back to House</a>
             </div>
 
             <div id="machineInfo" class="info">Machine ready.</div>
@@ -811,9 +812,7 @@
     let tapBusy = false;
 
     function vibrate(pattern) {
-      if (navigator.vibrate) {
-        navigator.vibrate(pattern);
-      }
+      if (navigator.vibrate) navigator.vibrate(pattern);
     }
 
     function pickResult() {
@@ -821,9 +820,7 @@
     }
 
     function updateTapMeter() {
-      tapDots.forEach((dot, i) => {
-        dot.classList.toggle('on', i < tapCount);
-      });
+      tapDots.forEach((dot, i) => dot.classList.toggle('on', i < tapCount));
 
       if (state === 'ready' || state === 'tapping') {
         const left = Math.max(0, 3 - tapCount);
@@ -854,7 +851,12 @@
       revealCard.classList.remove('visible');
     }
 
-    function runTap() {
+    function runTap(event) {
+      if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+
       if (state !== 'ready' && state !== 'tapping') return;
       if (tapBusy) return;
 
@@ -928,6 +930,7 @@
     }
 
     handleHit.addEventListener('click', runTap);
+    handleHit.addEventListener('touchstart', runTap, { passive: false });
     openBtn.addEventListener('click', openCapsule);
     resetBtn.addEventListener('click', resetMachine);
 
