@@ -604,7 +604,7 @@
 
   .house-roller-wrap{
     position:fixed;
-    right:-20px;
+    right:10px;
     top:50%;
     transform:translateY(-50%);
     z-index:9999;
@@ -640,48 +640,47 @@
   }
   .house-roller{
     position:relative;
-    width:40px;
-    height:84px;
-    border-radius:18px 0 0 18px;
-    border:1px solid rgba(255,255,255,.12);
-    border-right:none;
-    background:linear-gradient(180deg,rgba(16,20,30,.98),rgba(8,10,16,.99));
+    width:72px;
+    height:108px;
+    border-radius:28px;
+    border:1px solid rgba(255,255,255,.18);
+    background:linear-gradient(180deg,rgba(18,22,32,.98),rgba(8,10,16,.99));
     box-shadow:
-      0 14px 30px rgba(0,0,0,.48),
-      inset 0 1px 0 rgba(255,255,255,.05),
-      inset 0 -1px 0 rgba(0,0,0,.30);
-    overflow:visible;
+      0 18px 38px rgba(0,0,0,.52),
+      inset 0 1px 0 rgba(255,255,255,.08),
+      inset 0 -1px 0 rgba(0,0,0,.42);
+    overflow:hidden;
   }
   .house-roller::before{
     content:"";
     position:absolute;
-    inset:8px 0 8px 8px;
-    border-radius:14px 0 0 14px;
-    background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
+    inset:8px;
+    border-radius:22px;
+    background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));
     pointer-events:none;
   }
   .house-roller-wheel{
     position:absolute;
-    left:2px;
-    top:10px;
-    width:58px;
-    height:64px;
+    left:10px;
+    top:18px;
+    width:52px;
+    height:72px;
     border-radius:999px;
-    border:1px solid rgba(255,255,255,.22);
+    border:1px solid rgba(255,255,255,.20);
     background:
-      radial-gradient(circle at 32% 22%, rgba(255,255,255,.34), rgba(255,255,255,0) 22%),
+      radial-gradient(circle at 30% 24%, rgba(255,255,255,.26), rgba(255,255,255,0) 24%),
       repeating-linear-gradient(
-        90deg,
-        rgba(255,255,255,.12) 0 3px,
+        180deg,
+        rgba(255,255,255,.11) 0 3px,
         rgba(255,255,255,.03) 3px 8px
       ),
-      linear-gradient(180deg,#5a677e 0%, #2a3548 48%, #141b28 100%);
+      linear-gradient(180deg,#505d73 0%, #273247 48%, #141b28 100%);
     box-shadow:
-      0 10px 22px rgba(0,0,0,.42),
+      0 10px 22px rgba(0,0,0,.40),
       inset 0 2px 0 rgba(255,255,255,.20),
       inset 0 -2px 0 rgba(0,0,0,.34),
-      inset 4px 0 10px rgba(255,255,255,.08),
-      inset -4px 0 10px rgba(0,0,0,.22);
+      inset 3px 0 8px rgba(255,255,255,.08),
+      inset -3px 0 8px rgba(0,0,0,.22);
     cursor:grab;
     touch-action:none;
     transform:rotate(0deg);
@@ -694,14 +693,14 @@
       0 12px 24px rgba(0,0,0,.44),
       inset 0 2px 0 rgba(255,255,255,.24),
       inset 0 -2px 0 rgba(0,0,0,.38),
-      inset 4px 0 10px rgba(255,255,255,.10),
-      inset -4px 0 10px rgba(0,0,0,.24),
-      0 0 10px rgba(88,166,255,.12);
+      inset 3px 0 8px rgba(255,255,255,.10),
+      inset -3px 0 8px rgba(0,0,0,.24),
+      0 0 12px rgba(88,166,255,.14);
   }
   @media (max-width: 767px){
-    .house-roller-wrap{ right:-18px; gap:10px; }
-    .house-roller{ width:34px; height:76px; }
-    .house-roller-wheel{ left:1px; top:8px; width:52px; height:58px; }
+    .house-roller-wrap{ right:8px; gap:10px; }
+    .house-roller{ width:62px; height:96px; }
+    .house-roller-wheel{ left:9px; top:16px; width:44px; height:64px; }
     .house-roller-label{
       font-size:.84rem;
       font-weight:800;
