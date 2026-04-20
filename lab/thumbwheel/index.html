@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Thumbwheel Prototype</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <style>
+    :root{
+      --bg:#05070b;
+      --panel:#0d1218;
+      --text:#eef3f8;
+      --muted:#9fb0c7;
+      --line:rgba(255,255,255,.10);
+      --blue:rgba(88,166,255,.75);
+    }
+    *{box-sizing:border-box}
+    html,body{
+      margin:0;
+      padding:0;
+      background:radial-gradient(circle at top,#0d1522 0,#05070b 55%,#000 100%);
+      color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      min-height:100%;
+    }
+    body{overflow:hidden}
+    .stage{
+      position:relative;
+      width:100vw;
+      height:100vh;
+      overflow:hidden;
+    }
+    .track{
+      position:absolute;
+      inset:0;
+      overflow:hidden;
+    }
+    .reel{
+      position:absolute;
+      left:0;
+      top:0;
+      width:100%;
+      will-change:transform;
+    }
+    .section{
+      height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-bottom:1px solid rgba(255,255,255,.06);
+      position:relative;
+    }
+    .section::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,0));
+      pointer-events:none;
+    }
+    .section h2{
+      margin:0;
+      font-size:clamp(2rem,5vw,4rem);
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:#fff;
+      text-shadow:0 0 24px rgba(255,255,255,.10);
+    }
+
+    .wheel-wrap{
+      position:fixed;
+      right:-10px;
+      top:50%;
+      transform:translateY(-50%);
+      z-index:20;
+      display:flex;
+      align-items:center;
+      gap:14px;
+      user-select:none;
+      -webkit-user-select:none;
+      touch-action:none;
+    }
+
+    .wheel-label{
+      padding:12px 16px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.24);
+      background:rgba(8,12,20,.92);
+      box-shadow:0 14px 30px rgba(0,0,0,.45), 0 0 0 1px rgba(88,166,255,.14);
+      color:#fff;
+      font-size:1rem;
+      font-weight:800;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      white-space:nowrap;
+      text-shadow:0 0 14px rgba(255,255,255,.15);
+    }
+
+    .wheel-mount{
+      position:relative;
+      width:26px;
+      height:104px;
+      border-radius:16px 0 0 16px;
+      background:linear-gradient(180deg,#151b27,#090c12);
+      border:1px solid rgba(255,255,255,.10);
+      border-right:none;
+      box-shadow:0 14px 30px rgba(0,0,0,.46), inset 0 1px 0 rgba(255,255,255,.05);
+      overflow:visible;
+    }
+
+    .wheel{
+      position:absolute;
+      left:-2px;
+      top:14px;
+      width:56px;
+      height:76px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.20);
+      background:
+        radial-gradient(circle at 32% 22%, rgba(255,255,255,.34), rgba(255,255,255,0) 24%),
+        repeating-linear-gradient(
+          90deg,
+          rgba(255,255,255,.12) 0 3px,
+          rgba(255,255,255,.03) 3px 8px
+        ),
+        linear-gradient(180deg,#5a677e 0%, #2a3548 48%, #141b28 100%);
+      box-shadow:
+        0 10px 22px rgba(0,0,0,.42),
+        inset 0 2px 0 rgba(255,255,255,.20),
+        inset 0 -2px 0 rgba(0,0,0,.34),
+        inset 4px 0 10px rgba(255,255,255,.08),
+        inset -4px 0 10px rgba(0,0,0,.22);
+      cursor:grab;
+      touch-action:none;
+      will-change:transform, background-position;
+      background-position:center 0, center 0, center center;
+    }
+
+    .wheel:active{cursor:grabbing}
+
+    .hint{
+      position:fixed;
+      left:20px;
+      bottom:20px;
+      z-index:15;
+      padding:10px 12px;
+      border-radius:12px;
+      background:rgba(8,12,20,.78);
+      border:1px solid rgba(255,255,255,.10);
+      color:var(--muted);
+      font-size:.9rem;
+      letter-spacing:.04em;
+    }
+
+    @media (max-width: 767px){
+      .wheel-wrap{ right:-12px; gap:10px; }
+      .wheel-label{
+        font-size:.82rem;
+        max-width:58vw;
+        overflow:hidden;
+        text-overflow:ellipsis;
+      }
+      .wheel-mount{ width:22px; height:92px; }
+      .wheel{ width:50px; height:68px; top:12px; }
+      .hint{font-size:.82rem; left:12px; right:72px}
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="track">
+      <div class="reel" id="reel">
+        <section class="section" data-name="XRPL LAYMAN"><h2>XRPL LAYMAN</h2></section>
+        <section class="section" data-name="MONOLITH"><h2>MONOLITH</h2></section>
+        <section class="section" data-name="AUGUR"><h2>AUGUR</h2></section>
+        <section class="section" data-name="LAV"><h2>LAV</h2></section>
+        <section class="section" data-name="NEB"><h2>NEB</h2></section>
+        <section class="section" data-name="GET THE BAG"><h2>GET THE BAG</h2></section>
+        <section class="section" data-name="RAD GARLINGTON"><h2>RAD GARLINGTON</h2></section>
+      </div>
+    </div>
+
+    <div class="wheel-wrap">
+      <div class="wheel-label" id="wheelLabel">XRPL LAYMAN</div>
+      <div class="wheel-mount">
+        <div class="wheel" id="wheel"></div>
+      </div>
+    </div>
+
+    <div class="hint">Drag the wheel like a real thumb roller</div>
+  </div>
+
+  <script>
+    const wheel = document.getElementById('wheel');
+    const reel = document.getElementById('reel');
+    const label = document.getElementById('wheelLabel');
+    const sections = [...document.querySelectorAll('.section')];
+
+    let dragging = false;
+    let startY = 0;
+    let startOffset = 0;
+    let offset = 0;
+    let targetOffset = 0;
+    let spin = 0;
+    let displaySpin = 0;
+
+    function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
+    function maxOffset(){ return window.innerHeight * (sections.length - 1); }
+
+    function setActiveLabel(){
+      const index = Math.round(targetOffset / window.innerHeight);
+      const safe = clamp(index, 0, sections.length - 1);
+      label.textContent = sections[safe].dataset.name;
+    }
+
+    function animate(){
+      offset += (targetOffset - offset) * 0.08;
+      displaySpin += (spin - displaySpin) * 0.10;
+
+      reel.style.transform = `translateY(${-offset}px)`;
+      wheel.style.transform = `rotate(${displaySpin}deg)`;
+      wheel.style.backgroundPosition = `center 0, center ${-displaySpin * 1.2}px, center center`;
+
+      requestAnimationFrame(animate);
+    }
+
+    wheel.addEventListener('pointerdown', e => {
+      dragging = true;
+      startY = e.clientY;
+      startOffset = targetOffset;
+      wheel.setPointerCapture(e.pointerId);
+    });
+
+    window.addEventListener('pointermove', e => {
+      if (!dragging) return;
+      const dy = e.clientY - startY;
+      const slowed = dy * 7;
+      targetOffset = clamp(startOffset + slowed, 0, maxOffset());
+      spin = targetOffset * 1.2;
+      setActiveLabel();
+    });
+
+    window.addEventListener('pointerup', () => {
+      if (!dragging) return;
+      dragging = false;
+      targetOffset = Math.round(targetOffset / window.innerHeight) * window.innerHeight;
+      spin = targetOffset * 1.2;
+      setActiveLabel();
+    });
+
+    window.addEventListener('resize', () => {
+      targetOffset = Math.round(targetOffset / window.innerHeight) * window.innerHeight;
+      offset = targetOffset;
+      setActiveLabel();
+    });
+
+    setActiveLabel();
+    animate();
+  </script>
+</body>
+</html>
