@@ -67,7 +67,7 @@
 
     .wheel-wrap{
       position:fixed;
-      right:-10px;
+      right:-18px;
       top:50%;
       transform:translateY(-50%);
       z-index:20;
@@ -96,26 +96,26 @@
 
     .wheel-mount{
       position:relative;
-      width:26px;
-      height:104px;
-      border-radius:16px 0 0 16px;
-      background:linear-gradient(180deg,#151b27,#090c12);
-      border:1px solid rgba(255,255,255,.10);
+      width:16px;
+      height:110px;
+      border-radius:14px 0 0 14px;
+      background:linear-gradient(180deg,#141922,#090c12);
+      border:1px solid rgba(255,255,255,.08);
       border-right:none;
-      box-shadow:0 14px 30px rgba(0,0,0,.46), inset 0 1px 0 rgba(255,255,255,.05);
+      box-shadow:0 12px 28px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.04);
       overflow:visible;
     }
 
     .wheel{
       position:absolute;
-      left:-2px;
-      top:14px;
-      width:56px;
-      height:76px;
+      left:-18px;
+      top:11px;
+      width:62px;
+      height:88px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,.20);
+      border:1px solid rgba(255,255,255,.18);
       background:
-        radial-gradient(circle at 32% 22%, rgba(255,255,255,.34), rgba(255,255,255,0) 24%),
+        radial-gradient(circle at 32% 22%, rgba(255,255,255,.34), rgba(255,255,255,0) 22%),
         repeating-linear-gradient(
           90deg,
           rgba(255,255,255,.12) 0 3px,
@@ -132,6 +132,8 @@
       touch-action:none;
       will-change:transform, background-position;
       background-position:center 0, center 0, center center;
+      transform:perspective(300px) rotateY(-26deg) rotate(0deg);
+      transform-origin:center center;
     }
 
     .wheel:active{cursor:grabbing}
@@ -151,18 +153,18 @@
     }
 
     @media (max-width: 767px){
-      .wheel-wrap{ right:-12px; gap:10px; }
+      .wheel-wrap{ right:-20px; gap:10px; }
       .wheel-label{
         font-size:.82rem;
         max-width:58vw;
         overflow:hidden;
         text-overflow:ellipsis;
       }
-      .wheel-mount{ width:22px; height:92px; }
-      .wheel{ width:50px; height:68px; top:12px; }
+      .wheel-mount{ width:14px; height:96px; }
+      .wheel{ left:-16px; width:56px; height:78px; top:9px; }
       .hint{font-size:.82rem; left:12px; right:72px}
     }
-  </style>
+</style>
 </head>
 <body>
   <div class="stage">
@@ -212,12 +214,12 @@
     }
 
     function animate(){
-      offset += (targetOffset - offset) * 0.08;
+      offset += (targetOffset - offset) * 0.06;
       displaySpin += (spin - displaySpin) * 0.10;
 
       reel.style.transform = `translateY(${-offset}px)`;
-      wheel.style.transform = `rotate(${displaySpin}deg)`;
-      wheel.style.backgroundPosition = `center 0, center ${-displaySpin * 1.2}px, center center`;
+      wheel.style.transform = `perspective(300px) rotateY(-26deg) rotate(${displaySpin}deg)`;
+      wheel.style.backgroundPosition = `center 0, center ${-displaySpin * 1.4}px, center center`;
 
       requestAnimationFrame(animate);
     }
@@ -232,9 +234,9 @@
     window.addEventListener('pointermove', e => {
       if (!dragging) return;
       const dy = e.clientY - startY;
-      const slowed = dy * 7;
+      const slowed = dy * 4.5;
       targetOffset = clamp(startOffset + slowed, 0, maxOffset());
-      spin = targetOffset * 1.2;
+      spin = targetOffset * 1.35;
       setActiveLabel();
     });
 
@@ -242,7 +244,7 @@
       if (!dragging) return;
       dragging = false;
       targetOffset = Math.round(targetOffset / window.innerHeight) * window.innerHeight;
-      spin = targetOffset * 1.2;
+      spin = targetOffset * 1.35;
       setActiveLabel();
     });
 
@@ -254,6 +256,6 @@
 
     setActiveLabel();
     animate();
-  </script>
+</script>
 </body>
 </html>
