@@ -7,11 +7,8 @@
   <style>
     :root{
       --bg:#05070b;
-      --panel:#0d1218;
       --text:#eef3f8;
       --muted:#9fb0c7;
-      --line:rgba(255,255,255,.10);
-      --blue:rgba(88,166,255,.75);
     }
     *{box-sizing:border-box}
     html,body{
@@ -67,26 +64,26 @@
 
     .wheel-wrap{
       position:fixed;
-      right:10px;
+      right:18px;
       top:50%;
       transform:translateY(-50%);
       z-index:20;
       display:flex;
       align-items:center;
-      gap:14px;
+      gap:16px;
       user-select:none;
       -webkit-user-select:none;
       touch-action:none;
     }
 
     .wheel-label{
-      padding:12px 16px;
+      padding:14px 18px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,.24);
-      background:rgba(8,12,20,.92);
+      border:1px solid rgba(255,255,255,.28);
+      background:rgba(8,12,20,.94);
       box-shadow:0 14px 30px rgba(0,0,0,.45), 0 0 0 1px rgba(88,166,255,.14);
       color:#fff;
-      font-size:1rem;
+      font-size:1.05rem;
       font-weight:800;
       letter-spacing:.14em;
       text-transform:uppercase;
@@ -96,9 +93,9 @@
 
     .wheel-mount{
       position:relative;
-      width:16px;
-      height:110px;
-      border-radius:14px 0 0 14px;
+      width:8px;
+      height:150px;
+      border-radius:8px 0 0 8px;
       background:linear-gradient(180deg,#141922,#090c12);
       border:1px solid rgba(255,255,255,.08);
       border-right:none;
@@ -108,31 +105,32 @@
 
     .wheel{
       position:absolute;
-      left:-2px;
-      top:11px;
-      width:64px;
-      height:92px;
+      left:-34px;
+      top:6px;
+      width:96px;
+      height:136px;
       border-radius:999px;
       border:1px solid rgba(255,255,255,.18);
       background:
-        radial-gradient(circle at 32% 22%, rgba(255,255,255,.34), rgba(255,255,255,0) 22%),
+        radial-gradient(circle at 28% 20%, rgba(255,255,255,.38), rgba(255,255,255,0) 20%),
+        linear-gradient(90deg, rgba(255,255,255,.08), rgba(255,255,255,0) 18%, rgba(0,0,0,.12) 82%, rgba(0,0,0,.28)),
         repeating-linear-gradient(
-          90deg,
-          rgba(255,255,255,.12) 0 3px,
-          rgba(255,255,255,.03) 3px 8px
+          180deg,
+          rgba(255,255,255,.12) 0 5px,
+          rgba(255,255,255,.03) 5px 12px
         ),
-        linear-gradient(180deg,#5a677e 0%, #2a3548 48%, #141b28 100%);
+        linear-gradient(180deg,#5f6e86 0%, #2d3a51 45%, #141b28 100%);
       box-shadow:
-        0 10px 22px rgba(0,0,0,.42),
-        inset 0 2px 0 rgba(255,255,255,.20),
-        inset 0 -2px 0 rgba(0,0,0,.34),
-        inset 4px 0 10px rgba(255,255,255,.08),
-        inset -4px 0 10px rgba(0,0,0,.22);
+        0 14px 26px rgba(0,0,0,.44),
+        inset 0 2px 0 rgba(255,255,255,.18),
+        inset 0 -3px 0 rgba(0,0,0,.34),
+        inset 6px 0 14px rgba(255,255,255,.10),
+        inset -8px 0 16px rgba(0,0,0,.24);
       cursor:grab;
       touch-action:none;
       will-change:transform, background-position;
-      background-position:center 0, center 0, center center;
-      transform:perspective(420px) rotateY(-58deg) rotate(0deg);
+      background-position:center 0, center 0, center 0, center center;
+      transform:perspective(700px) rotateY(-72deg);
       transform-origin:center center;
     }
 
@@ -160,8 +158,8 @@
         overflow:hidden;
         text-overflow:ellipsis;
       }
-      .wheel-mount{ width:10px; height:100px; }
-      .wheel{ left:-2px; width:58px; height:82px; top:9px; }
+      .wheel-mount{ width:6px; height:126px; }
+      .wheel{ left:-28px; top:8px; width:82px; height:116px; }
       .hint{font-size:.82rem; left:12px; right:72px}
     }
 </style>
@@ -214,12 +212,12 @@
     }
 
     function animate(){
-      offset += (targetOffset - offset) * 0.06;
+      offset += (targetOffset - offset) * 0.055;
       displaySpin += (spin - displaySpin) * 0.10;
 
       reel.style.transform = `translateY(${-offset}px)`;
-      wheel.style.transform = `perspective(420px) rotateY(-58deg)`;
-      wheel.style.backgroundPosition = `center 0, center ${-displaySpin * 3.2}px, center center`;
+      wheel.style.transform = `perspective(700px) rotateY(-72deg)`;
+      wheel.style.backgroundPosition = `center 0, center 0, center ${-displaySpin * 4.4}px, center center`;
 
       requestAnimationFrame(animate);
     }
@@ -234,9 +232,9 @@
     window.addEventListener('pointermove', e => {
       if (!dragging) return;
       const dy = e.clientY - startY;
-      const slowed = dy * 3.6;
+      const slowed = dy * 3.2;
       targetOffset = clamp(startOffset + slowed, 0, maxOffset());
-      spin = targetOffset * 1.9;
+      spin = targetOffset * 2.2;
       setActiveLabel();
     });
 
@@ -244,7 +242,7 @@
       if (!dragging) return;
       dragging = false;
       targetOffset = Math.round(targetOffset / window.innerHeight) * window.innerHeight;
-      spin = targetOffset * 1.9;
+      spin = targetOffset * 2.2;
       setActiveLabel();
     });
 
