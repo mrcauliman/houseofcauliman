@@ -601,7 +601,98 @@
       .hoc-brand-mark{width:72px;height:72px}
       .hoc-footer{flex-direction:column}
     }
-  </style>
+  
+  .house-roller-wrap{
+    position:fixed;
+    right:14px;
+    top:50%;
+    transform:translateY(-50%);
+    z-index:9999;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    user-select:none;
+    -webkit-user-select:none;
+    touch-action:none;
+  }
+  .house-roller-label{
+    opacity:0;
+    transform:translateX(8px);
+    transition:opacity .18s ease, transform .18s ease;
+    padding:10px 12px;
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,.18);
+    background:rgba(7,10,18,.88);
+    box-shadow:0 10px 28px rgba(0,0,0,.45), 0 0 0 1px rgba(88,166,255,.14);
+    color:#eef3f8;
+    font-size:.78rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    white-space:nowrap;
+    pointer-events:none;
+    backdrop-filter:blur(10px);
+  }
+  .house-roller-wrap.active .house-roller-label{
+    opacity:1;
+    transform:translateX(0);
+  }
+  .house-roller{
+    position:relative;
+    width:28px;
+    height:220px;
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,.18);
+    background:linear-gradient(180deg,rgba(20,26,40,.95),rgba(8,10,18,.98));
+    box-shadow:0 14px 34px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.06), 0 0 18px rgba(88,166,255,.10);
+    overflow:hidden;
+  }
+  .house-roller::before{
+    content:"";
+    position:absolute;
+    inset:8px;
+    border-radius:999px;
+    background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.01));
+    pointer-events:none;
+  }
+  .house-roller-wheel{
+    position:absolute;
+    left:3px;
+    top:6px;
+    width:20px;
+    height:56px;
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,.18);
+    background:
+      repeating-linear-gradient(
+        180deg,
+        rgba(255,255,255,.18) 0 2px,
+        rgba(255,255,255,.06) 2px 6px
+      ),
+      linear-gradient(180deg,#293246,#121827);
+    box-shadow:
+      0 8px 18px rgba(0,0,0,.40),
+      inset 0 1px 0 rgba(255,255,255,.18),
+      inset 0 -1px 0 rgba(0,0,0,.45),
+      0 0 14px rgba(88,166,255,.18);
+    cursor:grab;
+    touch-action:none;
+  }
+  .house-roller-wrap.active .house-roller-wheel{
+    cursor:grabbing;
+    box-shadow:
+      0 10px 20px rgba(0,0,0,.44),
+      inset 0 1px 0 rgba(255,255,255,.22),
+      inset 0 -1px 0 rgba(0,0,0,.5),
+      0 0 22px rgba(88,166,255,.28);
+  }
+  @media (max-width: 767px){
+    .house-roller-wrap{ right:8px; }
+    .house-roller{ height:190px; width:24px; }
+    .house-roller-wheel{ left:2px; width:18px; height:50px; }
+    .house-roller-label{ font-size:.7rem; letter-spacing:.10em; padding:8px 10px; max-width:58vw; overflow:hidden; text-overflow:ellipsis; }
+  }
+
+</style>
 </head>
 
 <body>
@@ -636,7 +727,7 @@
           <img src="/assets/xrpl/xrpl_layman_logo.png" alt="XRPL Layman" class="stack-logo">
         </div>
         <div>
-          <h2 class="stack-title">XRPL LAYMAN</h2>
+          <h2 class="stack-title" data-roller-name="XRPL LAYMAN">XRPL LAYMAN</h2>
           <div class="hud utility-live pulse"><span class="dot"></span><span>UTILITY LIVE</span></div>
           <p class="stack-sub">Free Education • $XRP • XRPL</p>
         </div>
@@ -664,7 +755,7 @@
           <img src="/assets/monolith/monolith_logo.webp" alt="MONOLITH" class="stack-logo">
         </div>
         <div>
-          <h2 class="stack-title">MONOLITH</h2>
+          <h2 class="stack-title" data-roller-name="MONOLITH">MONOLITH</h2>
           <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
           <p class="stack-sub">The Wall of Record</p>
         </div>
@@ -698,7 +789,7 @@
           <img src="/assets/augur/augur_logo.png" alt="AUGUR" class="stack-logo">
         </div>
         <div>
-          <h2 class="stack-title">AUGUR</h2>
+          <h2 class="stack-title" data-roller-name="AUGUR">AUGUR</h2>
           <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
           <div class="hud utility-live pulse"><span class="dot"></span><span>UTILITY LIVE</span></div>
           <p class="stack-sub">Chain Oracle</p>
@@ -733,7 +824,7 @@
           <img src="/assets/lav/lav_icon.png" alt="LAV" class="stack-logo">
         </div>
         <div>
-          <h2 class="stack-title">LAV</h2>
+          <h2 class="stack-title" data-roller-name="LAV">LAV</h2>
           <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
           <p class="stack-sub">Legacy Access Vault</p>
         </div>
@@ -765,7 +856,7 @@
           <img src="/neb/assets/neb_icon.webp" alt="NEB" class="stack-logo">
         </div>
         <div>
-          <h2 class="stack-title">NEB</h2>
+          <h2 class="stack-title" data-roller-name="NEB">NEB</h2>
           <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
           <p class="stack-sub">Network Exchange Bot</p>
         </div>
@@ -798,7 +889,7 @@
           <img src="/assets/wck_logo.webp" alt="WCK" class="stack-logo">
         </div>
         <div>
-          <h2 class="stack-title">CONTINENTAL WICK</h2>
+          <h2 class="stack-title" data-roller-name="CONTINENTAL WICK">CONTINENTAL WICK</h2>
           <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
           <p class="stack-sub">$WCK • Collectible Universe</p>
         </div>
@@ -830,7 +921,7 @@
           <img src="/assets/bag/BAG_logo.png" alt="BAG" class="stack-logo">
         </div>
         <div>
-          <h2 class="stack-title">GET THE $BAG</h2>
+          <h2 class="stack-title" data-roller-name="GET THE $BAG">GET THE $BAG</h2>
           <div class="hud token-live"><span class="dot"></span><span>TOKEN LIVE</span></div>
           <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
           <p class="stack-sub">$BAG • XRPL Gaming Infrastructure</p>
@@ -863,7 +954,7 @@
           <img src="/assets/rad_logo.webp" alt="RAD" class="stack-logo">
         </div>
         <div>
-          <h2 class="stack-title">RAD GARLINGTON</h2>
+          <h2 class="stack-title" data-roller-name="RAD GARLINGTON">RAD GARLINGTON</h2>
           <div class="hud live"><span class="dot"></span><span>LIVE</span></div>
           <p class="stack-sub">$RAD • The Meme Coin With a Ledger</p>
         </div>
@@ -896,7 +987,7 @@
           <img src="/homeez/assets/homeez_logo.webp" alt="HOMEEZ" class="stack-logo">
         </div>
         <div>
-          <h2 class="stack-title">HOMEEZ</h2>
+          <h2 class="stack-title" data-roller-name="HOMEEZ">HOMEEZ</h2>
           <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
           <p class="stack-sub">Collectibles • Archetypes • Drops</p>
         </div>
@@ -924,7 +1015,7 @@
           <img src="/collections/nftitans/assets/NFTITANS_logo.webp" alt="NFTITANS" class="stack-logo">
         </div>
         <div>
-          <h2 class="stack-title">NFTITANS</h2>
+          <h2 class="stack-title" data-roller-name="NFTITANS">NFTITANS</h2>
           <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
           <p class="stack-sub">XRPL • Collectible Series</p>
         </div>
@@ -956,7 +1047,7 @@
           </picture>
         </div>
         <div>
-          <h2 class="stack-title">Ledger Drop XRPL</h2>
+          <h2 class="stack-title" data-roller-name="Ledger Drop XRPL">Ledger Drop XRPL</h2>
           <div class="hud utility-live pulse"><span class="dot"></span><span>UTILITY LIVE</span></div>
           <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
           <p class="stack-sub">Daily Wallpapers</p>
@@ -1063,5 +1154,135 @@
     </footer>
   </div>
 </main>
+
+<div class="house-roller-wrap" id="houseRollerWrap">
+  <div class="house-roller-label" id="houseRollerLabel">HOUSE</div>
+  <div class="house-roller" id="houseRoller" aria-label="House project roller" role="slider">
+    <div class="house-roller-wheel" id="houseRollerWheel"></div>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  const wrap = document.getElementById('houseRollerWrap');
+  const rail = document.getElementById('houseRoller');
+  const wheel = document.getElementById('houseRollerWheel');
+  const label = document.getElementById('houseRollerLabel');
+  if (!wrap || !rail || !wheel || !label) return;
+
+  const cards = [...document.querySelectorAll('.stack-card')].filter(el => el.querySelector('.stack-title'));
+  if (!cards.length) return;
+
+  const points = cards.map((el, i) => ({
+    el,
+    name: (el.querySelector('.stack-title')?.textContent || `Section ${i+1}`).trim()
+  }));
+
+  let dragging = false;
+  let railRect = null;
+  let minTop = 6;
+  let maxTop = 6;
+  let wheelH = 56;
+  let scrollMax = 1;
+
+  function measure(){
+    railRect = rail.getBoundingClientRect();
+    wheelH = wheel.offsetHeight;
+    minTop = 6;
+    maxTop = rail.clientHeight - wheelH - 6;
+    scrollMax = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+  }
+
+  function clamp(n,a,b){ return Math.max(a, Math.min(b, n)); }
+
+  function setWheelFromScroll(){
+    measure();
+    const ratio = window.scrollY / scrollMax;
+    const top = minTop + (maxTop - minTop) * ratio;
+    wheel.style.top = `${top}px`;
+  }
+
+  function activePoint(){
+    const mid = window.innerHeight * 0.42;
+    let best = points[0];
+    let bestDist = Infinity;
+    for (const p of points){
+      const r = p.el.getBoundingClientRect();
+      const center = r.top + r.height / 2;
+      const d = Math.abs(center - mid);
+      if (d < bestDist){
+        bestDist = d;
+        best = p;
+      }
+    }
+    return best;
+  }
+
+  function updateLabel(){
+    const p = activePoint();
+    if (p) label.textContent = p.name;
+  }
+
+  function scrollFromPointer(clientY){
+    measure();
+    const y = clamp(clientY - railRect.top - wheelH / 2, minTop, maxTop);
+    wheel.style.top = `${y}px`;
+    const ratio = (y - minTop) / Math.max(1, (maxTop - minTop));
+    window.scrollTo({ top: ratio * scrollMax, behavior: 'auto' });
+    updateLabel();
+  }
+
+  function snapToNearest(){
+    const p = activePoint();
+    if (!p) return;
+    p.el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  wheel.addEventListener('pointerdown', e => {
+    dragging = true;
+    wrap.classList.add('active');
+    wheel.setPointerCapture(e.pointerId);
+    scrollFromPointer(e.clientY);
+  });
+
+  window.addEventListener('pointermove', e => {
+    if (!dragging) return;
+    scrollFromPointer(e.clientY);
+  });
+
+  window.addEventListener('pointerup', () => {
+    if (!dragging) return;
+    dragging = false;
+    snapToNearest();
+    setTimeout(() => wrap.classList.remove('active'), 500);
+  });
+
+  window.addEventListener('scroll', () => {
+    if (dragging) return;
+    setWheelFromScroll();
+    updateLabel();
+  }, { passive:true });
+
+  window.addEventListener('resize', () => {
+    measure();
+    setWheelFromScroll();
+    updateLabel();
+  });
+
+  rail.addEventListener('click', e => {
+    if (e.target === wheel) return;
+    wrap.classList.add('active');
+    scrollFromPointer(e.clientY);
+    snapToNearest();
+    setTimeout(() => wrap.classList.remove('active'), 500);
+  });
+
+  measure();
+  setWheelFromScroll();
+  updateLabel();
+})();
+</script>
+
 </body>
 </html>
