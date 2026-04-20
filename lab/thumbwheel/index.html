@@ -64,7 +64,7 @@
 
     .wheel-wrap{
       position:fixed;
-      right:18px;
+      right:4px;
       top:50%;
       transform:translateY(-50%);
       z-index:20;
@@ -93,8 +93,8 @@
 
     .wheel-mount{
       position:relative;
-      width:8px;
-      height:150px;
+      width:6px;
+      height:118px;
       border-radius:8px 0 0 8px;
       background:linear-gradient(180deg,#141922,#090c12);
       border:1px solid rgba(255,255,255,.08);
@@ -105,10 +105,10 @@
 
     .wheel{
       position:absolute;
-      left:-34px;
+      left:-18px;
       top:6px;
-      width:96px;
-      height:136px;
+      width:78px;
+      height:96px;
       border-radius:999px;
       border:1px solid rgba(255,255,255,.18);
       background:
@@ -151,15 +151,15 @@
     }
 
     @media (max-width: 767px){
-      .wheel-wrap{ right:8px; gap:10px; }
+      .wheel-wrap{ right:2px; gap:10px; }
       .wheel-label{
         font-size:.82rem;
         max-width:58vw;
         overflow:hidden;
         text-overflow:ellipsis;
       }
-      .wheel-mount{ width:6px; height:126px; }
-      .wheel{ left:-28px; top:8px; width:82px; height:116px; }
+      .wheel-mount{ width:5px; height:98px; }
+      .wheel{ left:-14px; top:8px; width:68px; height:86px; }
       .hint{font-size:.82rem; left:12px; right:72px}
     }
 </style>
