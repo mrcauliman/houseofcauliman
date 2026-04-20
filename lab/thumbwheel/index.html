@@ -64,7 +64,7 @@
 
     .wheel-wrap{
       position:fixed;
-      right:28px;
+      right:96px;
       top:50%;
       transform:translateY(-50%);
       z-index:20;
@@ -77,13 +77,13 @@
     }
 
     .wheel-label{
-      padding:12px 16px;
+      padding:10px 12px;
       border-radius:999px;
       border:1px solid rgba(255,255,255,.24);
       background:rgba(8,12,20,.92);
       box-shadow:0 14px 30px rgba(0,0,0,.45), 0 0 0 1px rgba(88,166,255,.14);
       color:#fff;
-      font-size:.95rem;
+      font-size:.82rem;
       font-weight:800;
       letter-spacing:.14em;
       text-transform:uppercase;
@@ -93,8 +93,8 @@
 
     .wheel-mount{
       position:relative;
-      width:20px;
-      height:88px;
+      width:16px;
+      height:54px;
       border-radius:12px;
       background:linear-gradient(180deg,#141922,#090c12);
       border:1px solid rgba(255,255,255,.10);
@@ -104,9 +104,9 @@
 
     .wheel{
       position:absolute;
-      left:-6px;
+      left:0px;
       top:8px;
-      width:58px;
+      width:46px;
       height:72px;
       border-radius:999px;
       border:1px solid rgba(255,255,255,.18);
@@ -150,15 +150,15 @@
     }
 
     @media (max-width: 767px){
-      .wheel-wrap{ right:14px; gap:10px; }
+      .wheel-wrap{ right:56px; gap:10px; }
       .wheel-label{
         font-size:.78rem;
         max-width:54vw;
         overflow:hidden;
         text-overflow:ellipsis;
       }
-      .wheel-mount{ width:18px; height:78px; }
-      .wheel{ left:-4px; top:7px; width:52px; height:64px; }
+      .wheel-mount{ width:14px; height:62px; }
+      .wheel{ left:0px; top:6px; width:42px; height:50px; }
       .hint{font-size:.76rem; left:10px; right:10px}
     }
 </style>
