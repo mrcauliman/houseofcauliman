@@ -601,37 +601,37 @@
       .hoc-brand-mark{width:72px;height:72px}
       .hoc-footer{flex-direction:column}
     }
-  
+
   .house-roller-wrap{
     position:fixed;
-    right:12px;
+    right:10px;
     top:50%;
     transform:translateY(-50%);
     z-index:9999;
     display:flex;
     align-items:center;
-    gap:10px;
+    gap:12px;
     user-select:none;
     -webkit-user-select:none;
     touch-action:none;
   }
   .house-roller-label{
     opacity:0;
-    transform:translateX(8px);
+    transform:translateX(10px);
     transition:opacity .18s ease, transform .18s ease;
     padding:12px 16px;
     border-radius:999px;
-    border:1px solid rgba(255,255,255,.26);
-    background:rgba(9,13,22,.94);
-    box-shadow:0 12px 30px rgba(0,0,0,.50), 0 0 0 1px rgba(88,166,255,.20);
-    color:#ffffff;
-    font-size:.98rem;
+    border:1px solid rgba(255,255,255,.28);
+    background:rgba(10,14,24,.94);
+    box-shadow:0 14px 30px rgba(0,0,0,.52), 0 0 0 1px rgba(88,166,255,.20);
+    color:#fff;
+    font-size:1rem;
     font-weight:800;
     letter-spacing:.14em;
     text-transform:uppercase;
     white-space:nowrap;
     pointer-events:none;
-    text-shadow:0 0 12px rgba(255,255,255,.16);
+    text-shadow:0 0 14px rgba(255,255,255,.18);
     backdrop-filter:blur(12px);
   }
   .house-roller-wrap.active .house-roller-label{
@@ -640,62 +640,78 @@
   }
   .house-roller{
     position:relative;
-    width:52px;
-    height:128px;
-    border-radius:999px;
+    width:72px;
+    height:108px;
+    border-radius:28px;
     border:1px solid rgba(255,255,255,.18);
-    background:linear-gradient(180deg,rgba(20,24,34,.98),rgba(8,10,16,.99));
+    background:linear-gradient(180deg,rgba(18,22,32,.98),rgba(8,10,16,.99));
     box-shadow:
-      0 16px 36px rgba(0,0,0,.48),
+      0 18px 38px rgba(0,0,0,.52),
       inset 0 1px 0 rgba(255,255,255,.08),
-      inset 0 -1px 0 rgba(0,0,0,.40);
+      inset 0 -1px 0 rgba(0,0,0,.42);
     overflow:hidden;
   }
   .house-roller::before{
     content:"";
     position:absolute;
     inset:8px;
-    border-radius:999px;
-    background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.01));
+    border-radius:22px;
+    background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));
     pointer-events:none;
   }
   .house-roller-wheel{
     position:absolute;
-    left:7px;
-    top:10px;
-    width:38px;
-    height:54px;
+    left:10px;
+    top:18px;
+    width:52px;
+    height:72px;
     border-radius:999px;
     border:1px solid rgba(255,255,255,.20);
     background:
-      radial-gradient(circle at 32% 24%, rgba(255,255,255,.30), rgba(255,255,255,0) 24%),
+      radial-gradient(circle at 30% 24%, rgba(255,255,255,.26), rgba(255,255,255,0) 24%),
       repeating-linear-gradient(
-        90deg,
-        rgba(255,255,255,.11) 0 2px,
-        rgba(255,255,255,.03) 2px 6px
+        180deg,
+        rgba(255,255,255,.11) 0 3px,
+        rgba(255,255,255,.03) 3px 8px
       ),
-      linear-gradient(180deg,#4a566c 0%, #243044 48%, #141c2a 100%);
+      linear-gradient(180deg,#505d73 0%, #273247 48%, #141b28 100%);
     box-shadow:
-      0 10px 20px rgba(0,0,0,.38),
+      0 10px 22px rgba(0,0,0,.40),
       inset 0 2px 0 rgba(255,255,255,.20),
-      inset 0 -2px 0 rgba(0,0,0,.35),
+      inset 0 -2px 0 rgba(0,0,0,.34),
       inset 3px 0 8px rgba(255,255,255,.08),
       inset -3px 0 8px rgba(0,0,0,.22);
     cursor:grab;
     touch-action:none;
+    transform:rotate(0deg);
+    will-change:transform, background-position;
+    background-position:center 0, center 0, center center;
   }
   .house-roller-wrap.active .house-roller-wheel{
     cursor:grabbing;
     box-shadow:
-      0 12px 22px rgba(0,0,0,.42),
+      0 12px 24px rgba(0,0,0,.44),
       inset 0 2px 0 rgba(255,255,255,.24),
-      inset 0 -2px 0 rgba(0,0,0,.40),
+      inset 0 -2px 0 rgba(0,0,0,.38),
       inset 3px 0 8px rgba(255,255,255,.10),
       inset -3px 0 8px rgba(0,0,0,.24),
-      0 0 12px rgba(88,166,255,.12);
+      0 0 12px rgba(88,166,255,.14);
   }
   @media (max-width: 767px){
-    .house-roller-wrap{ right:8px; }
+    .house-roller-wrap{ right:8px; gap:10px; }
+    .house-roller{ width:62px; height:96px; }
+    .house-roller-wheel{ left:9px; top:16px; width:44px; height:64px; }
+    .house-roller-label{
+      font-size:.84rem;
+      font-weight:800;
+      letter-spacing:.12em;
+      padding:10px 12px;
+      max-width:62vw;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+  }
+
     .house-roller{ width:46px; height:116px; }
     .house-roller-wheel{ left:6px; width:34px; height:48px; }
     .house-roller-label{ font-size:.82rem; font-weight:800; letter-spacing:.12em; padding:10px 12px; max-width:62vw; overflow:hidden; text-overflow:ellipsis; }
@@ -1183,36 +1199,26 @@
   const cards = [...document.querySelectorAll('.stack-card')].filter(el => el.querySelector('.stack-title'));
   if (!cards.length) return;
 
-  const points = cards.map((el, i) => ({
-    el,
-    name: (el.querySelector('.stack-title')?.textContent || `Section ${i+1}`).trim()
-  }));
+  const points = cards.map((el, i) => {
+    const title = el.querySelector('.stack-title');
+    return {
+      el,
+      name: (title?.getAttribute('data-roller-name') || title?.textContent || `Section ${i+1}`).trim()
+    };
+  });
 
   let dragging = false;
-  let railRect = null;
-  let minTop = 10;
-  let maxTop = 10;
-  let wheelH = 54;
-  let scrollMax = 1;
-  let currentY = 10;
-  let targetY = 10;
+  let startY = 0;
+  let startScroll = 0;
+  let spin = 0;
+  let displaySpin = 0;
   let raf = null;
-  let suppressSnap = false;
-
-  function measure(){
-    railRect = rail.getBoundingClientRect();
-    wheelH = wheel.offsetHeight;
-    minTop = 10;
-    maxTop = rail.clientHeight - wheelH - 10;
-    scrollMax = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-  }
+  let activeUntil = 0;
 
   function clamp(n,a,b){ return Math.max(a, Math.min(b, n)); }
 
-  function setWheelFromScroll(){
-    measure();
-    const ratio = window.scrollY / scrollMax;
-    targetY = minTop + (maxTop - minTop) * ratio;
+  function maxScroll(){
+    return Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
   }
 
   function activePoint(){
@@ -1236,79 +1242,89 @@
     if (p) label.textContent = p.name;
   }
 
-  function animateWheel(){
-    currentY += (targetY - currentY) * 0.055;
-    if (Math.abs(targetY - currentY) < 0.1) currentY = targetY;
-    wheel.style.top = `${currentY}px`;
-    raf = requestAnimationFrame(animateWheel);
+  function showActive(ms=700){
+    activeUntil = performance.now() + ms;
+    wrap.classList.add('active');
   }
 
-  function scrollFromPointer(clientY){
-    measure();
-    const raw = clamp(clientY - railRect.top - wheelH / 2, minTop, maxTop);
-    const slowed = minTop + ((raw - minTop) * 0.28);
-    targetY = clamp(slowed, minTop, maxTop);
-    const ratio = (targetY - minTop) / Math.max(1, (maxTop - minTop));
-    const targetScroll = ratio * scrollMax;
-    window.scrollTo({ top: targetScroll, behavior: 'smooth' });
-    updateLabel();
+  function maybeHide(){
+    if (performance.now() > activeUntil && !dragging){
+      wrap.classList.remove('active');
+    }
+  }
+
+  function applyWheelVisual(){
+    displaySpin += (spin - displaySpin) * 0.12;
+    const textureY = -(displaySpin * 18);
+    wheel.style.transform = `rotate(${displaySpin * 7}deg)`;
+    wheel.style.backgroundPosition = `center 0, center ${textureY}px, center center`;
+  }
+
+  function animate(){
+    applyWheelVisual();
+    maybeHide();
+    raf = requestAnimationFrame(animate);
   }
 
   function snapToNearest(){
     const p = activePoint();
     if (!p) return;
-    suppressSnap = true;
-    p.el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    setTimeout(() => { suppressSnap = false; }, 450);
+    p.el.scrollIntoView({ behavior:'smooth', block:'center' });
+    showActive(900);
   }
 
   wheel.addEventListener('pointerdown', e => {
     dragging = true;
-    wrap.classList.add('active');
+    startY = e.clientY;
+    startScroll = window.scrollY;
     wheel.setPointerCapture(e.pointerId);
-    scrollFromPointer(e.clientY);
+    showActive(1200);
   });
 
   window.addEventListener('pointermove', e => {
     if (!dragging) return;
-    scrollFromPointer(e.clientY);
+    const dy = e.clientY - startY;
+    const slowed = dy * 18;
+    const target = clamp(startScroll + slowed, 0, maxScroll());
+    window.scrollTo({ top: target, behavior:'auto' });
+    spin = (target / Math.max(1, maxScroll())) * 22;
+    updateLabel();
+    showActive(1200);
   });
 
   window.addEventListener('pointerup', () => {
     if (!dragging) return;
     dragging = false;
-    if (!suppressSnap) snapToNearest();
-    setTimeout(() => wrap.classList.remove('active'), 650);
-  });
-
-  window.addEventListener('scroll', () => {
-    if (dragging) return;
-    setWheelFromScroll();
-    updateLabel();
-  }, { passive:true });
-
-  window.addEventListener('resize', () => {
-    measure();
-    setWheelFromScroll();
-    updateLabel();
+    snapToNearest();
   });
 
   rail.addEventListener('click', e => {
     if (e.target === wheel) return;
-    wrap.classList.add('active');
-    scrollFromPointer(e.clientY);
-    setTimeout(() => {
-      if (!suppressSnap) snapToNearest();
-      wrap.classList.remove('active');
-    }, 140);
+    const dir = e.clientY < rail.getBoundingClientRect().top + rail.offsetHeight / 2 ? -1 : 1;
+    const target = clamp(window.scrollY + dir * (window.innerHeight * 0.72), 0, maxScroll());
+    window.scrollTo({ top: target, behavior:'smooth' });
+    spin += dir * 1.6;
+    updateLabel();
+    showActive(900);
+    setTimeout(snapToNearest, 180);
   });
 
-  measure();
-  setWheelFromScroll();
+  window.addEventListener('scroll', () => {
+    if (!dragging){
+      spin = (window.scrollY / Math.max(1, maxScroll())) * 22;
+    }
+    updateLabel();
+  }, { passive:true });
+
+  window.addEventListener('resize', () => {
+    spin = (window.scrollY / Math.max(1, maxScroll())) * 22;
+    updateLabel();
+  });
+
+  spin = (window.scrollY / Math.max(1, maxScroll())) * 22;
+  displaySpin = spin;
   updateLabel();
-  currentY = targetY;
-  wheel.style.top = `${currentY}px`;
-  animateWheel();
+  animate();
 })();
 </script>
 
