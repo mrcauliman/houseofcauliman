@@ -601,7 +601,27 @@
       .hoc-brand-mark{width:72px;height:72px}
       .hoc-footer{flex-direction:column}
     }
-  </style>
+  
+  .stack-card{
+    transition:
+      transform .28s ease,
+      box-shadow .28s ease,
+      border-color .28s ease,
+      filter .28s ease;
+    transform:scale(1);
+    transform-origin:center center;
+  }
+  .stack-card.is-active{
+    transform:scale(1.018);
+    border-color:rgba(255,255,255,.46);
+    box-shadow:
+      0 18px 40px rgba(0,0,0,.46),
+      0 0 0 1px rgba(255,255,255,.10) inset,
+      0 0 18px rgba(88,166,255,.10);
+    filter:brightness(1.03);
+  }
+
+</style>
 </head>
 
 <body>
@@ -1063,5 +1083,37 @@
     </footer>
   </div>
 </main>
+
+<script>
+(function(){
+  const cards = [...document.querySelectorAll('.stack-card')];
+  if (!cards.length) return;
+
+  function setActiveCard(){
+    const mid = window.innerHeight * 0.46;
+    let best = null;
+    let bestDist = Infinity;
+
+    for (const card of cards){
+      const r = card.getBoundingClientRect();
+      const center = r.top + r.height / 2;
+      const dist = Math.abs(center - mid);
+      if (dist < bestDist){
+        bestDist = dist;
+        best = card;
+      }
+    }
+
+    for (const card of cards){
+      card.classList.toggle('is-active', card === best);
+    }
+  }
+
+  window.addEventListener('scroll', setActiveCard, { passive:true });
+  window.addEventListener('resize', setActiveCard);
+  setActiveCard();
+})();
+</script>
+
 </body>
 </html>
