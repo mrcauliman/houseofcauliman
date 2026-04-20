@@ -552,6 +552,9 @@
       transform:translateY(-1px);
     }
 
+    .hoc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch}
+    @media (max-width:980px){.hoc-grid{grid-template-columns:1fr}}
+
     .hoc-footer{
       max-width:960px;
       margin:10px auto 26px;
@@ -626,6 +629,34 @@
       <div class="item"><span class="key k-active-build"></span><span>ACTIVE BUILD</span><small>Core framework in active development. Public-facing progress visible.</small></div>
       <div class="item"><span class="key k-private-build"></span><span>PRIVATE BUILD</span><small>Infrastructure phase. Not public-facing.</small></div>
     </div>
+
+    <section class="stack-card blue">
+      <div class="stack-head">
+        <div class="stack-mark">
+          <img src="/assets/xrpl/xrpl_layman_logo.png" alt="XRPL Layman" class="stack-logo">
+        </div>
+        <div>
+          <h2 class="stack-title">XRPL LAYMAN</h2>
+          <div class="hud utility-live pulse"><span class="dot"></span><span>UTILITY LIVE</span></div>
+          <p class="stack-sub">Free Education • $XRP • XRPL</p>
+        </div>
+      </div>
+
+      <p class="stack-copy">
+        Simple explanations of $XRP and the XRP Ledger. Usage first. Reality first. Built for people who want clean answers without hype or fantasy numbers.
+      </p>
+
+      <ul class="stack-bullets">
+        <li>Wallet basics, safety, and ledger usage explained cleanly</li>
+        <li>No hype. No fake numbers. No fantasy framing</li>
+        <li>Built for users who want to understand how XRPL actually works</li>
+        <li>Direct, practical education from inside the ecosystem</li>
+      </ul>
+
+      <div class="stack-cta">
+        <a class="stack-btn primary" href="/xrpl/">Enter XRPL Layman</a>
+      </div>
+    </section>
 
     <section class="stack-card mono">
       <div class="stack-head">
@@ -761,67 +792,6 @@
       </div>
     </section>
 
-    <section class="stack-card blue">
-      <div class="stack-head">
-        <div class="stack-mark">
-          <img src="/assets/xrpl/xrpl_layman_logo.png" alt="XRPL Layman" class="stack-logo">
-        </div>
-        <div>
-          <h2 class="stack-title">XRPL LAYMAN</h2>
-          <div class="hud utility-live pulse"><span class="dot"></span><span>UTILITY LIVE</span></div>
-          <p class="stack-sub">Free Education • $XRP • XRPL</p>
-        </div>
-      </div>
-
-      <p class="stack-copy">
-        Simple explanations of $XRP and the XRP Ledger. Usage first. Reality first. Built for people who want clean answers without hype or fantasy numbers.
-      </p>
-
-      <ul class="stack-bullets">
-        <li>Wallet basics, safety, and ledger usage explained cleanly</li>
-        <li>No hype. No fake numbers. No fantasy framing</li>
-        <li>Built for users who want to understand how XRPL actually works</li>
-        <li>Direct, practical education from inside the ecosystem</li>
-      </ul>
-
-      <div class="stack-cta">
-        <a class="stack-btn primary" href="/xrpl/">Enter XRPL Layman</a>
-      </div>
-    </section>
-
-    <section class="stack-card gold">
-      <div class="stack-head">
-        <div class="stack-mark">
-          <picture>
-            <source srcset="/assets/ledger_drop_xrpl.webp" type="image/webp">
-            <img src="/assets/ledger_drop_xrpl.png" alt="Ledger Drop XRPL" class="stack-logo">
-          </picture>
-        </div>
-        <div>
-          <h2 class="stack-title">Ledger Drop XRPL</h2>
-          <div class="hud utility-live pulse"><span class="dot"></span><span>UTILITY LIVE</span></div>
-          <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
-          <p class="stack-sub">Daily Wallpapers</p>
-        </div>
-      </div>
-
-      <p class="stack-copy">
-        589 XRPL wallpapers. Daily drops. Built for culture and signal.
-      </p>
-
-      <ul class="stack-bullets">
-        <li>Mobile and desktop formats</li>
-        <li>Download-ready assets</li>
-        <li>Built around $XRP culture</li>
-        <li>Ongoing release pipeline across the full drop library</li>
-      </ul>
-
-      <div class="stack-cta">
-        <a class="stack-btn primary" href="/ledgerdrop_xrpl/">Enter Ledger Drop</a>
-        <a class="stack-btn" href="https://x.com/LedgerDropXRPL" target="_blank" rel="noopener">𝕏 Profile</a>
-      </div>
-    </section>
-
     <section class="stack-card gold">
       <div class="stack-head">
         <div class="stack-mark">
@@ -849,39 +819,6 @@
         <a class="stack-btn primary" href="https://continentalwick.com" target="_blank" rel="noopener">Website</a>
         <a class="stack-btn" href="https://x.com/wcktoken" target="_blank" rel="noopener">𝕏 Profile</a>
         <a class="stack-btn" href="https://x.com/i/communities/199081719163736323" target="_blank" rel="noopener">WCK Lobby 𝕏</a>
-        <a class="stack-btn" href="https://t.me/houseofcauliman" target="_blank" rel="noopener">Telegram Announcements</a>
-        <a class="stack-btn" href="https://t.me/hoc_hq" target="_blank" rel="noopener">Telegram Community</a>
-      </div>
-    </section>
-
-    <section class="stack-card blue">
-      <div class="stack-head">
-        <div class="stack-mark">
-          <img src="/assets/rad_logo.webp" alt="RAD" class="stack-logo">
-        </div>
-        <div>
-          <h2 class="stack-title">RAD GARLINGTON</h2>
-          <div class="hud live"><span class="dot"></span><span>LIVE</span></div>
-          <p class="stack-sub">$RAD • The Meme Coin With a Ledger</p>
-        </div>
-      </div>
-
-      <p class="stack-copy">
-        It’s not Brad, it’s Rad. Powered by XRPL and built around the protocol’s most loyal believer.
-      </p>
-
-      <ul class="stack-bullets">
-        <li>Character-led meme coin built inside the House ecosystem</li>
-        <li>Community token with strong ledger identity</li>
-        <li>Designed for culture, humor, and holder participation</li>
-        <li>Connected to XRPL-native meme infrastructure</li>
-      </ul>
-
-      <div class="stack-cta">
-        <a class="stack-btn primary" href="https://radgarlington.io" target="_blank" rel="noopener">Website</a>
-        <a class="stack-btn" href="https://xmagnetic.org/swap/RAD+rKpaNoTRdXa48W7emkKgtCLz2MuhEroU7V_XRP+XRP?network=mainnet" target="_blank" rel="noopener">RAD AMM</a>
-        <a class="stack-btn" href="https://x.com/radgarlington" target="_blank" rel="noopener">𝕏 Profile</a>
-        <a class="stack-btn" href="https://x.com/i/communities/1994831536378843504" target="_blank" rel="noopener">XRP Meme Factory 𝕏</a>
         <a class="stack-btn" href="https://t.me/houseofcauliman" target="_blank" rel="noopener">Telegram Announcements</a>
         <a class="stack-btn" href="https://t.me/hoc_hq" target="_blank" rel="noopener">Telegram Community</a>
       </div>
@@ -920,6 +857,67 @@
       </div>
     </section>
 
+    <section class="stack-card blue">
+      <div class="stack-head">
+        <div class="stack-mark">
+          <img src="/assets/rad_logo.webp" alt="RAD" class="stack-logo">
+        </div>
+        <div>
+          <h2 class="stack-title">RAD GARLINGTON</h2>
+          <div class="hud live"><span class="dot"></span><span>LIVE</span></div>
+          <p class="stack-sub">$RAD • The Meme Coin With a Ledger</p>
+        </div>
+      </div>
+
+      <p class="stack-copy">
+        It’s not Brad, it’s Rad. Powered by XRPL and built around the protocol’s most loyal believer.
+      </p>
+
+      <ul class="stack-bullets">
+        <li>Character-led meme coin built inside the House ecosystem</li>
+        <li>Community token with strong ledger identity</li>
+        <li>Designed for culture, humor, and holder participation</li>
+        <li>Connected to XRPL-native meme infrastructure</li>
+      </ul>
+
+      <div class="stack-cta">
+        <a class="stack-btn primary" href="https://radgarlington.io" target="_blank" rel="noopener">Website</a>
+        <a class="stack-btn" href="https://xmagnetic.org/swap/RAD+rKpaNoTRdXa48W7emkKgtCLz2MuhEroU7V_XRP+XRP?network=mainnet" target="_blank" rel="noopener">RAD AMM</a>
+        <a class="stack-btn" href="https://x.com/radgarlington" target="_blank" rel="noopener">𝕏 Profile</a>
+        <a class="stack-btn" href="https://x.com/i/communities/1994831536378843504" target="_blank" rel="noopener">XRP Meme Factory 𝕏</a>
+        <a class="stack-btn" href="https://t.me/houseofcauliman" target="_blank" rel="noopener">Telegram Announcements</a>
+        <a class="stack-btn" href="https://t.me/hoc_hq" target="_blank" rel="noopener">Telegram Community</a>
+      </div>
+    </section>
+
+    <section class="stack-card">
+      <div class="stack-head">
+        <div class="stack-mark">
+          <img src="/homeez/assets/homeez_logo.webp" alt="HOMEEZ" class="stack-logo">
+        </div>
+        <div>
+          <h2 class="stack-title">HOMEEZ</h2>
+          <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
+          <p class="stack-sub">Collectibles • Archetypes • Drops</p>
+        </div>
+      </div>
+
+      <p class="stack-copy">
+        Neighborhood archetypes turned into capsule-toy collectibles. Series builds locked. Drop pipeline in motion.
+      </p>
+
+      <ul class="stack-bullets">
+        <li>Capsule toy universe direction</li>
+        <li>Character archetype pipeline</li>
+        <li>Drop-ready collectible system</li>
+        <li>House-controlled visual identity</li>
+      </ul>
+
+      <div class="stack-cta">
+        <a class="stack-btn primary" href="/homeez/">Enter HOMEEZ</a>
+      </div>
+    </section>
+
     <section class="stack-card gold">
       <div class="stack-head">
         <div class="stack-mark">
@@ -949,31 +947,36 @@
       </div>
     </section>
 
-    <section class="stack-card">
+    <section class="stack-card gold">
       <div class="stack-head">
         <div class="stack-mark">
-          <img src="/homeez/assets/homeez_logo.webp" alt="HOMEEZ" class="stack-logo">
+          <picture>
+            <source srcset="/assets/ledger_drop_xrpl.webp" type="image/webp">
+            <img src="/assets/ledger_drop_xrpl.png" alt="Ledger Drop XRPL" class="stack-logo">
+          </picture>
         </div>
         <div>
-          <h2 class="stack-title">HOMEEZ</h2>
+          <h2 class="stack-title">Ledger Drop XRPL</h2>
+          <div class="hud utility-live pulse"><span class="dot"></span><span>UTILITY LIVE</span></div>
           <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
-          <p class="stack-sub">Collectibles • Archetypes • Drops</p>
+          <p class="stack-sub">Daily Wallpapers</p>
         </div>
       </div>
 
       <p class="stack-copy">
-        Neighborhood archetypes turned into capsule-toy collectibles. Series builds locked. Drop pipeline in motion.
+        589 XRPL wallpapers. Daily drops. Built for culture and signal.
       </p>
 
       <ul class="stack-bullets">
-        <li>Capsule toy universe direction</li>
-        <li>Character archetype pipeline</li>
-        <li>Drop-ready collectible system</li>
-        <li>House-controlled visual identity</li>
+        <li>Mobile and desktop formats</li>
+        <li>Download-ready assets</li>
+        <li>Built around $XRP culture</li>
+        <li>Ongoing release pipeline across the full drop library</li>
       </ul>
 
       <div class="stack-cta">
-        <a class="stack-btn primary" href="/homeez/">Enter HOMEEZ</a>
+        <a class="stack-btn primary" href="/ledgerdrop_xrpl/">Enter Ledger Drop</a>
+        <a class="stack-btn" href="https://x.com/LedgerDropXRPL" target="_blank" rel="noopener">𝕏 Profile</a>
       </div>
     </section>
 
