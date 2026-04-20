@@ -55,7 +55,7 @@
     }
     .section h2{
       margin:0;
-      font-size:clamp(1.35rem,3vw,2.5rem);
+      font-size:clamp(1.25rem,2.6vw,2.2rem);
       letter-spacing:.16em;
       text-transform:uppercase;
       color:#fff;
@@ -64,26 +64,26 @@
 
     .wheel-wrap{
       position:fixed;
-      right:36px;
+      right:28px;
       top:50%;
       transform:translateY(-50%);
       z-index:20;
       display:flex;
       align-items:center;
-      gap:16px;
+      gap:14px;
       user-select:none;
       -webkit-user-select:none;
       touch-action:none;
     }
 
     .wheel-label{
-      padding:14px 18px;
+      padding:12px 16px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,.28);
-      background:rgba(8,12,20,.94);
+      border:1px solid rgba(255,255,255,.24);
+      background:rgba(8,12,20,.92);
       box-shadow:0 14px 30px rgba(0,0,0,.45), 0 0 0 1px rgba(88,166,255,.14);
       color:#fff;
-      font-size:1.05rem;
+      font-size:.95rem;
       font-weight:800;
       letter-spacing:.14em;
       text-transform:uppercase;
@@ -93,12 +93,11 @@
 
     .wheel-mount{
       position:relative;
-      width:8px;
-      height:74px;
-      border-radius:8px 0 0 8px;
+      width:20px;
+      height:88px;
+      border-radius:12px;
       background:linear-gradient(180deg,#141922,#090c12);
-      border:1px solid rgba(255,255,255,.08);
-      border-right:none;
+      border:1px solid rgba(255,255,255,.10);
       box-shadow:0 12px 28px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.04);
       overflow:visible;
     }
@@ -106,9 +105,9 @@
     .wheel{
       position:absolute;
       left:-6px;
-      top:6px;
-      width:72px;
-      height:96px;
+      top:8px;
+      width:58px;
+      height:72px;
       border-radius:999px;
       border:1px solid rgba(255,255,255,.18);
       background:
@@ -116,8 +115,8 @@
         linear-gradient(90deg, rgba(255,255,255,.08), rgba(255,255,255,0) 18%, rgba(0,0,0,.12) 82%, rgba(0,0,0,.28)),
         repeating-linear-gradient(
           180deg,
-          rgba(255,255,255,.12) 0 5px,
-          rgba(255,255,255,.03) 5px 12px
+          rgba(255,255,255,.12) 0 4px,
+          rgba(255,255,255,.03) 4px 10px
         ),
         linear-gradient(180deg,#5f6e86 0%, #2d3a51 45%, #141b28 100%);
       box-shadow:
@@ -130,7 +129,7 @@
       touch-action:none;
       will-change:transform, background-position;
       background-position:center 0, center 0, center 0, center center;
-      transform:perspective(700px) rotateY(-38deg);
+      transform:perspective(700px) rotateY(-34deg);
       transform-origin:center center;
     }
 
@@ -138,29 +137,29 @@
 
     .hint{
       position:fixed;
-      left:20px;
-      bottom:20px;
+      left:16px;
+      bottom:16px;
       z-index:15;
       padding:10px 12px;
       border-radius:12px;
       background:rgba(8,12,20,.78);
       border:1px solid rgba(255,255,255,.10);
       color:var(--muted);
-      font-size:.9rem;
+      font-size:.82rem;
       letter-spacing:.04em;
     }
 
     @media (max-width: 767px){
-      .wheel-wrap{ right:18px; gap:10px; }
+      .wheel-wrap{ right:14px; gap:10px; }
       .wheel-label{
-        font-size:.82rem;
-        max-width:58vw;
+        font-size:.78rem;
+        max-width:54vw;
         overflow:hidden;
         text-overflow:ellipsis;
       }
-      .wheel-mount{ width:7px; height:84px; }
-      .wheel{ left:-4px; top:7px; width:62px; height:68px; }
-      .hint{font-size:.82rem; left:12px; right:72px}
+      .wheel-mount{ width:18px; height:78px; }
+      .wheel{ left:-4px; top:7px; width:52px; height:64px; }
+      .hint{font-size:.76rem; left:10px; right:10px}
     }
 </style>
 </head>
@@ -216,8 +215,8 @@
       displaySpin += (spin - displaySpin) * 0.10;
 
       reel.style.transform = `translateY(${-offset}px)`;
-      wheel.style.transform = `perspective(700px) rotateY(-38deg)`;
-      wheel.style.backgroundPosition = `center 0, center 0, center ${-displaySpin * 4.4}px, center center`;
+      wheel.style.transform = `perspective(700px) rotateY(-34deg)`;
+      wheel.style.backgroundPosition = `center 0, center 0, center ${-displaySpin * 4.0}px, center center`;
 
       requestAnimationFrame(animate);
     }
@@ -234,7 +233,7 @@
       const dy = e.clientY - startY;
       const slowed = dy * 3.0;
       targetOffset = clamp(startOffset + slowed, 0, maxOffset());
-      spin = targetOffset * 2.2;
+      spin = targetOffset * 2.0;
       setActiveLabel();
     });
 
@@ -242,7 +241,7 @@
       if (!dragging) return;
       dragging = false;
       targetOffset = Math.round(targetOffset / window.innerHeight) * window.innerHeight;
-      spin = targetOffset * 2.2;
+      spin = targetOffset * 2.0;
       setActiveLabel();
     });
 
