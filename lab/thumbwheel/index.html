@@ -67,7 +67,7 @@
 
     .wheel-wrap{
       position:fixed;
-      right:-18px;
+      right:-6px;
       top:50%;
       transform:translateY(-50%);
       z-index:20;
@@ -108,10 +108,10 @@
 
     .wheel{
       position:absolute;
-      left:-18px;
+      left:-8px;
       top:11px;
-      width:62px;
-      height:88px;
+      width:64px;
+      height:92px;
       border-radius:999px;
       border:1px solid rgba(255,255,255,.18);
       background:
@@ -132,7 +132,7 @@
       touch-action:none;
       will-change:transform, background-position;
       background-position:center 0, center 0, center center;
-      transform:perspective(300px) rotateY(-26deg) rotate(0deg);
+      transform:perspective(420px) rotateY(-58deg) rotate(0deg);
       transform-origin:center center;
     }
 
@@ -153,15 +153,15 @@
     }
 
     @media (max-width: 767px){
-      .wheel-wrap{ right:-20px; gap:10px; }
+      .wheel-wrap{ right:-8px; gap:10px; }
       .wheel-label{
         font-size:.82rem;
         max-width:58vw;
         overflow:hidden;
         text-overflow:ellipsis;
       }
-      .wheel-mount{ width:14px; height:96px; }
-      .wheel{ left:-16px; width:56px; height:78px; top:9px; }
+      .wheel-mount{ width:10px; height:100px; }
+      .wheel{ left:-8px; width:58px; height:82px; top:9px; }
       .hint{font-size:.82rem; left:12px; right:72px}
     }
 </style>
@@ -218,8 +218,8 @@
       displaySpin += (spin - displaySpin) * 0.10;
 
       reel.style.transform = `translateY(${-offset}px)`;
-      wheel.style.transform = `perspective(300px) rotateY(-26deg) rotate(${displaySpin}deg)`;
-      wheel.style.backgroundPosition = `center 0, center ${-displaySpin * 1.4}px, center center`;
+      wheel.style.transform = `perspective(420px) rotateY(-58deg)`;
+      wheel.style.backgroundPosition = `center 0, center ${-displaySpin * 3.2}px, center center`;
 
       requestAnimationFrame(animate);
     }
@@ -234,9 +234,9 @@
     window.addEventListener('pointermove', e => {
       if (!dragging) return;
       const dy = e.clientY - startY;
-      const slowed = dy * 4.5;
+      const slowed = dy * 3.6;
       targetOffset = clamp(startOffset + slowed, 0, maxOffset());
-      spin = targetOffset * 1.35;
+      spin = targetOffset * 1.9;
       setActiveLabel();
     });
 
@@ -244,7 +244,7 @@
       if (!dragging) return;
       dragging = false;
       targetOffset = Math.round(targetOffset / window.innerHeight) * window.innerHeight;
-      spin = targetOffset * 1.35;
+      spin = targetOffset * 1.9;
       setActiveLabel();
     });
 
