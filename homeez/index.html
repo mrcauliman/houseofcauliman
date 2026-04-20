@@ -44,6 +44,9 @@
     a{text-decoration:none;color:inherit}
     img{max-width:100%;display:block}
     button{appearance:none;border:0;cursor:pointer;font:inherit}
+    a, button, .handle-hit{
+      touch-action:manipulation;
+    }
     .wrap{width:min(calc(100% - 28px), var(--max));margin:0 auto}
 
     .topbar{
@@ -139,7 +142,7 @@
     .tap-callout{
       position:absolute;
       left:50%;
-      top:49.5%;
+      top:47.5%;
       transform:translateX(-50%);
       z-index:18;
       pointer-events:none;
@@ -167,7 +170,7 @@
     .handle-hit{
       position:absolute;
       left:50%;
-      top:52%;
+      top:50%;
       transform:translateX(-50%);
       width:23%;
       height:16%;
@@ -337,8 +340,8 @@
     @keyframes capsuleDrop{
       0%{transform:translate(-50%, -220px) scale(.82); opacity:0}
       12%{opacity:1}
-      68%{transform:translate(-50%, 62px) scale(1); opacity:1}
-      100%{transform:translate(-50%, 62px) scale(1); opacity:1}
+      68%{transform:translate(-50%, 82px) scale(1); opacity:1}
+      100%{transform:translate(-50%, 82px) scale(1); opacity:1}
     }
     @keyframes capsuleReveal{
       0%{opacity:0; transform:translate(-50%, -50%) scale(.2)}
@@ -373,7 +376,7 @@
       .machine-stage{min-height:470px}
       .machine-wrap{width:min(100%, 460px)}
       .tap-callout{
-        top:54%;
+        top:51.5%;
       }
       .tap-callout-badge{
         min-height:34px;
@@ -381,7 +384,7 @@
         font-size:11px;
       }
       .handle-hit{
-        top:56%;
+        top:53.5%;
         width:28%;
         height:18%;
       }
@@ -392,9 +395,16 @@
       }
       .machine-panel{margin-top:8px; padding:16px}
       .controls{gap:10px}
-      .btn{min-height:46px; padding:0 16px}
+      .btn{
+        min-height:46px;
+        padding:0 16px;
+        font-size:16px;
+      }
       .reveal-card{width:min(100%, 260px); top:78%}
-      .capsule-drop{max-width:92px}
+      .capsule-drop{
+        max-width:92px;
+        top:54%;
+      }
     }
   </style>
 </head>
