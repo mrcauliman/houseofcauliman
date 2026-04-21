@@ -142,13 +142,24 @@
       const estimateEl = document.getElementById('xrpEstimate');
       const rateEl = document.getElementById('xrpRate');
 
-      const usdPrice = window.LAV_CONFIG.pricing.accessUsd;
-      const xrpRateUsd = window.LAV_CONFIG.pricing.estimatedXrpRateUsd;
-      const estimatedXrp = window.LAV.estimateXrpFromUsd(usdPrice, xrpRateUsd);
+      function renderPricing(usdPrice, xrpRateUsd) {
+        const estimatedXrp = window.LAV.estimateXrpFromUsd(usdPrice, xrpRateUsd);
+        usdPriceEl.textContent = window.LAV.formatUsd(usdPrice);
+        estimateEl.textContent = window.LAV.formatXrp(estimatedXrp);
+        rateEl.textContent = `${window.LAV.formatUsd(xrpRateUsd)} per $XRP`;
+      }
 
-      usdPriceEl.textContent = window.LAV.formatUsd(usdPrice);
-      estimateEl.textContent = window.LAV.formatXrp(estimatedXrp);
-      rateEl.textContent = `${window.LAV.formatUsd(xrpRateUsd)} per $XRP`;
+      fetch('/lav/api/pricing/')
+        .then((res) => res.json())
+        .then((data) => {
+          if (!data || !data.ok) throw new Error('pricing unavailable');
+          renderPricing(data.usdPrice, data.estimatedXrpRateUsd);
+        })
+        .catch(() => {
+          const usdPrice = window.LAV_CONFIG.pricing.accessUsd;
+          const xrpRateUsd = window.LAV_CONFIG.pricing.estimatedXrpRateUsd;
+          renderPricing(usdPrice, xrpRateUsd);
+        });
     })();
   </script>
 </body>
