@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LAV Dashboard | Vault Overview</title>
+  <meta name="description" content="LAV dashboard showing vault health, readiness flags, quick actions, and family continuity status." />
+  <link rel="stylesheet" href="/lav/assets/lav.css" />
+</head>
+<body>
+  <div class="site-shell">
+    <div class="wrap">
+      <header class="topbar panel">
+        <div class="brand">
+          <img class="brand-icon" src="/lav/assets/lav_icon.png" alt="LAV icon" />
+          <div class="brand-copy">
+            <img src="/lav/assets/lav_logo.png" alt="Legacy Access Vault" />
+            <div class="brand-kicker">Legacy Access Vault</div>
+          </div>
+        </div>
+        <nav class="nav" aria-label="Primary">
+          <a href="/lav/">Home</a>
+          <a href="/lav/dashboard/" class="active">Dashboard</a>
+          <a href="/lav/wallets/">Wallets</a>
+          <a href="/lav/contacts/">Contacts</a>
+          <a href="/lav/packet/">Packet</a>
+          <a href="/lav/release/">Release</a>
+          <a href="/lav/heir/">Heir View</a>
+          <a href="/lav/audit/">Audit</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="page-hero panel">
+          <div>
+            <div class="eyebrow">Dashboard</div>
+            <h1>Vault overview</h1>
+            <p class="lead">This page tells the owner what is ready, what still needs attention, and what to do next. No clutter. Clear priorities.</p>
+          </div>
+          <div class="page-actions">
+            <a class="btn btn-primary" href="/lav/packet/">Generate packet</a>
+            <a class="btn btn-secondary" href="/lav/wallets/">Add wallet</a>
+          </div>
+        </section>
+
+        <section class="section panel">
+          <div class="eyebrow">Vault health</div>
+          <h2>Readiness at a glance</h2>
+          <div class="stats-grid" style="margin-top:20px;">
+            <div class="metric-card"><div class="metric-label">Packet status</div><div class="metric-value">Ready</div></div>
+            <div class="metric-card"><div class="metric-label">Wallet records</div><div class="metric-value">3</div></div>
+            <div class="metric-card"><div class="metric-label">Contacts assigned</div><div class="metric-value">3</div></div>
+            <div class="metric-card"><div class="metric-label">Release mode</div><div class="metric-value">Manual</div></div>
+          </div>
+        </section>
+
+        <section class="section panel">
+          <div class="eyebrow">Critical status</div>
+          <h2>What needs attention</h2>
+          <div class="grid grid-3" style="margin-top:20px;">
+            <article class="card"><div class="badge">Ready</div><h3 style="margin-top:14px;">Family packet is current</h3><p>The packet was generated recently and is ready to print or review.</p></article>
+            <article class="card"><div class="badge soft">Review needed</div><h3 style="margin-top:14px;">Cold wallet record needs review</h3><p>The hardware wallet backup guidance should be rechecked so the instructions stay current.</p></article>
+            <article class="card"><div class="badge">Locked</div><h3 style="margin-top:14px;">Release mode is manual</h3><p>Nothing auto-releases. The owner stays in control of what is shared and when.</p></article>
+          </div>
+        </section>
+
+        <section class="section panel">
+          <div class="eyebrow">Next actions</div>
+          <h2>Simple actions that move the vault forward</h2>
+          <div class="grid grid-2" style="margin-top:20px;">
+            <a class="card" href="/lav/wallets/"><h3>Add or review wallets</h3><p>Update wallet records, app requirements, and backup guidance.</p></a>
+            <a class="card" href="/lav/contacts/"><h3>Review trusted contacts</h3><p>Make sure the heir, executor, and helper roles are correct.</p></a>
+            <a class="card" href="/lav/packet/"><h3>Open packet preview</h3><p>See exactly what the family-facing packet will show.</p></a>
+            <a class="card" href="/lav/release/"><h3>Check release policy</h3><p>Confirm who can see what and how the plan is controlled.</p></a>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer panel">
+        <div class="footer-grid">
+          <div><div class="footer-title">Page role</div><p>This dashboard is the owner’s control surface for continuity readiness.</p></div>
+          <div><div class="footer-title">Primary actions</div><p>Generate packet. Add wallet. Review contacts. Check release policy.</p></div>
+          <div><div class="footer-title">Next page</div><p>Wallets is the next best build because it holds the core record system.</p></div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>

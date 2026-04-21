@@ -3,237 +3,115 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LAV | Legacy Access Vault</title>
-  <meta name="description" content="Legacy Access Vault. Secure access to your $XRP for the people who need it. No custody. No confusion." />
-  <style>
-    :root{
-      --bg:#05070b;
-      --panel:#0d1218;
-      --panel2:#111823;
-      --line:rgba(255,255,255,.10);
-      --text:#eef3f8;
-      --muted:#aeb8c6;
-      --blue:#58a6ff;
-      --gold:#d4a44a;
-      --green:#42d392;
-      --radius:18px;
-      --shadow:0 16px 48px rgba(0,0,0,.35);
-      --sans:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-      --max:1180px;
-    }
-
-    *{box-sizing:border-box}
-
-    html,body{
-      margin:0;
-      padding:0;
-      background:linear-gradient(180deg,#05070b 0%,#0a1018 100%);
-      color:var(--text);
-      font-family:var(--sans);
-    }
-
-    a{
-      color:var(--blue);
-      text-decoration:none;
-    }
-
-    .wrap{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:28px 18px 90px;
-    }
-
-    .hero{
-      background:linear-gradient(180deg,rgba(88,166,255,.10),rgba(255,255,255,0) 70%), var(--panel);
-      border:1px solid var(--line);
-      border-radius:24px;
-      padding:26px;
-      box-shadow:var(--shadow);
-    }
-
-    .logo{
-      width:100%;
-      max-width:620px;
-      display:block;
-      margin:0 0 18px;
-    }
-
-    h1{
-      margin:0;
-      font-size:40px;
-      line-height:1.05;
-      letter-spacing:.3px;
-    }
-
-    h2{
-      margin:0 0 10px;
-      font-size:18px;
-      letter-spacing:.4px;
-      color:var(--gold);
-      text-transform:uppercase;
-    }
-
-    p{
-      margin:8px 0;
-      color:var(--muted);
-      font-size:15px;
-      line-height:1.65;
-    }
-
-    strong{
-      color:var(--text);
-    }
-
-    .pillbar{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:16px;
-    }
-
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:9px 12px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.04);
-      color:var(--muted);
-      font-size:12px;
-      font-weight:700;
-    }
-
-    .dot{
-      width:8px;
-      height:8px;
-      border-radius:999px;
-      background:var(--green);
-    }
-
-    .section{
-      margin-top:18px;
-    }
-
-    .card{
-      background:linear-gradient(180deg,var(--panel),var(--panel2));
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      padding:18px;
-      box-shadow:var(--shadow);
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:16px;
-    }
-
-    @media(min-width:980px){
-      .grid.three{
-        grid-template-columns:1fr 1fr 1fr;
-      }
-    }
-
-    .cta-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-top:18px;
-    }
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:46px;
-      padding:0 18px;
-      border-radius:12px;
-      border:1px solid var(--line);
-      font-weight:800;
-      letter-spacing:.2px;
-    }
-
-    .btn-primary{
-      background:linear-gradient(180deg,#ffffff 0%,#dfe7f3 100%);
-      color:#0a1018;
-      border-color:transparent;
-    }
-
-    .btn-secondary{
-      background:rgba(255,255,255,.04);
-      color:var(--text);
-    }
-
-    .trust-line{
-      margin-top:14px;
-      font-size:13px;
-      color:var(--muted);
-    }
-
-    .footer{
-      margin-top:18px;
-      color:var(--muted);
-      font-size:12px;
-      text-align:center;
-      opacity:.9;
-    }
-  </style>
+  <title>Legacy Access Vault | Protect Access. Preserve Continuity.</title>
+  <meta name="description" content="Legacy Access Vault is an XRPL-first family continuity utility that helps trusted family members recover digital assets with clear guidance, packet exports, and no custody." />
+  <link rel="stylesheet" href="/lav/assets/lav.css" />
 </head>
 <body>
-  <div class="wrap">
-    <section class="hero">
-      <img class="logo" src="/assets/lav/lav_logo_full.png" alt="LAV - Legacy Access Vault" />
-      <h1>Legacy Access Vault</h1>
-      <p>Secure access to your $XRP for the people who need it.</p>
+  <div class="site-shell">
+    <div class="wrap">
+      <header class="topbar panel">
+        <div class="brand">
+          <img class="brand-icon" src="/lav/assets/lav_icon.png" alt="LAV icon" />
+          <div class="brand-copy">
+            <img src="/lav/assets/lav_logo.png" alt="Legacy Access Vault" />
+            <div class="brand-kicker">Legacy Access Vault</div>
+          </div>
+        </div>
+        <nav class="nav" aria-label="Primary">
+          <a href="/lav/" class="active">Home</a>
+          <a href="/lav/dashboard/">Dashboard</a>
+          <a href="/lav/wallets/">Wallets</a>
+          <a href="/lav/contacts/">Contacts</a>
+          <a href="/lav/packet/">Packet</a>
+          <a href="/lav/release/">Release</a>
+          <a href="/lav/heir/">Heir View</a>
+          <a href="/lav/audit/">Audit</a>
+        </nav>
+      </header>
 
-      <div class="pillbar">
-        <div class="pill"><span class="dot"></span>ACTIVE BUILD</div>
-        <div class="pill"><span class="dot"></span>XRPL FIRST</div>
-        <div class="pill"><span class="dot"></span>FAMILY CONTINUITY</div>
-        <div class="pill"><span class="dot"></span>PROTECTED ACCESS</div>
-      </div>
+      <main>
+        <section class="hero panel">
+          <div>
+            <div class="kicker">XRPL-first family continuity utility</div>
+            <h1>Protect access. Preserve continuity.</h1>
+            <p>
+              Legacy Access Vault helps trusted family members recover digital assets with clear instructions, structured records, and a clean emergency packet. No custody. No fake simplicity. Just a system your family can actually use.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="/lav/dashboard/">Set up my vault</a>
+              <a class="btn btn-secondary" href="#how-it-works">See how it works</a>
+            </div>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-card"><div class="stat-label">Wallet records</div><div class="stat-value">3</div></div>
+            <div class="stat-card"><div class="stat-label">Trusted contacts</div><div class="stat-value">3</div></div>
+            <div class="stat-card"><div class="stat-label">Packet status</div><div class="stat-value">Ready</div></div>
+            <div class="stat-card"><div class="stat-label">Release mode</div><div class="stat-value">Manual</div></div>
+          </div>
+        </section>
 
-      <div class="cta-row">
-        <a class="btn btn-primary" href="mailto:lavaccess@gmail.com">Get Early Access</a>
-        <a class="btn btn-secondary" href="https://x.com/lavxrpl" target="_blank" rel="noopener noreferrer">Follow @lavxrpl</a>
-      </div>
+        <section class="section panel" id="how-it-works">
+          <div class="eyebrow">How LAV works</div>
+          <h2>Built for normal people, not crypto experts</h2>
+          <p class="section-copy">
+            This product exists for the moment most crypto holders fail to plan for. If something happens to you, the right person should know what wallets exist, what app to use, where the backup guidance points, what to avoid, and how to move carefully.
+          </p>
+          <div class="grid grid-3" style="margin-top:20px;">
+            <article class="card"><h3>Wallet records</h3><p>Track each wallet, the app needed, where the backup guidance points, and why it matters.</p></article>
+            <article class="card"><h3>Trusted contacts</h3><p>Assign the heir, executor, attorney, or technical helper tied to the continuity plan.</p></article>
+            <article class="card"><h3>Emergency packet</h3><p>Generate a clean family-facing packet with warnings, next steps, and plain-English guidance.</p></article>
+          </div>
+        </section>
 
-      <p class="trust-line">XRPL-first. Built for real-world recovery.</p>
-    </section>
+        <section class="section panel">
+          <div class="eyebrow">Simple setup path</div>
+          <h2>What the owner actually does</h2>
+          <div class="steps">
+            <div class="step"><div class="step-number">1</div><div><strong>Add the first wallet</strong><span>Start with the wallet your family would need to find first.</span></div></div>
+            <div class="step"><div class="step-number">2</div><div><strong>Explain where the backup guidance points</strong><span>Use plain language your family can understand under pressure.</span></div></div>
+            <div class="step"><div class="step-number">3</div><div><strong>Write recovery instructions</strong><span>Tell them what app to open, what to verify, and what to do first.</span></div></div>
+            <div class="step"><div class="step-number">4</div><div><strong>Export the family packet</strong><span>Generate a clean packet they can follow without crypto experience.</span></div></div>
+          </div>
+        </section>
 
-    <section id="overview" class="section card">
-      <h2>What LAV Is</h2>
-      <p>If something happens to you, your family shouldn’t be guessing how to access your $XRP.</p>
-      <p>Most people save a seed phrase and think they’re covered. They’re not. The person left behind still needs to know what wallets exist, what app to use, where to begin, and how to move funds safely.</p>
-      <p>LAV turns crypto recovery into a clear, step-by-step process.</p>
-      <p><strong>No custody. No confusion.</strong></p>
-    </section>
+        <section class="section panel">
+          <div class="eyebrow">What the family sees</div>
+          <h2>The pressure screen has to stay clean</h2>
+          <p class="section-copy">
+            No expert dashboard noise. No jargon. No random admin clutter. The heir-facing flow has to tell them what to do first and what mistakes will cost them money.
+          </p>
+          <div class="grid grid-2" style="margin-top:20px; align-items:start;">
+            <div class="card">
+              <h3>Critical warnings</h3>
+              <ul class="list">
+                <li>Never trust online helpers.</li>
+                <li>Never type recovery secrets into random sites.</li>
+                <li>Never move the full balance first.</li>
+                <li>Always send a small test amount first.</li>
+              </ul>
+            </div>
+            <div class="packet-preview">
+              <div class="packet-kicker">Legacy Access Vault</div>
+              <h3>Emergency access packet</h3>
+              <div class="packet-grid">
+                <div class="packet-box"><strong>What this is</strong><p>This packet helps a trusted person understand what wallets exist, what app to use, and how to move carefully.</p></div>
+                <div class="packet-box"><strong>Do this first</strong><p>Read the warnings. Confirm the wallet. Use the listed app. Test with a small amount first.</p></div>
+                <div class="packet-box" style="grid-column: 1 / -1;"><strong>Wallet summary</strong><p>Primary $XRP Wallet. Cold Reserve Wallet. Family Backup Wallet.</p></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
 
-    <section class="section grid three">
-      <div class="card">
-        <h2>Spouse Recovery</h2>
-        <p>Clear guidance for the person who would need to act if you could not.</p>
-      </div>
-
-      <div class="card">
-        <h2>Heir Guidance</h2>
-        <p>Structured instructions that reduce confusion and stop avoidable mistakes.</p>
-      </div>
-
-      <div class="card">
-        <h2>Future Handoff</h2>
-        <p>Planned release paths for children and beneficiaries when the time is right.</p>
-      </div>
-    </section>
-
-    <section class="section card">
-      <h2>Status</h2>
-      <p>LAV is now part of the House as a core utility.</p>
-      <p>Build is active.</p>
-    </section>
-
-    <div class="footer">LAV · Legacy Access Vault · House of Cauliman</div>
+      <footer class="footer panel">
+        <div class="footer-grid">
+          <div><div class="footer-title">Product</div><p>XRPL-first family continuity utility. No custody. Plain-English recovery structure.</p></div>
+          <div><div class="footer-title">Build law</div><p>Keep it simple enough for someone who knows nothing about crypto.</p></div>
+          <div><div class="footer-title">Next pages</div><p>Dashboard. Wallets. Contacts. Packet. Release. Heir View. Audit.</p></div>
+        </div>
+      </footer>
+    </div>
   </div>
 </body>
 </html>
