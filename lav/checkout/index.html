@@ -167,48 +167,27 @@
         }
       }
 
-      async function loadCheckoutPricing() {
-        const fallbackUsd = window.LAV_CONFIG.pricing.accessUsd;
-        const fallbackRate = window.LAV_CONFIG.pricing.estimatedXrpRateUsd;
-
-        try {
-          const live = await window.LAV.fetchLiveXrpUsdQuote();
+      fetch('/lav/api/pricing/')
+        .then((res) => res.json())
+        .then((data) => {
+          if (!data || !data.ok) throw new Error('pricing unavailable');
           renderPricing(
-            fallbackUsd,
-            live.xrpRateUsd,
-            'live_quote',
-            `coingecko_simple_price @ ${live.updatedAt}`,
+            data.usdPrice,
+            data.estimatedXrpRateUsd,
+            data.mode,
+            data.source,
+            data.xamanReady
+          );
+        })
+        .catch(() => {
+          renderPricing(
+            window.LAV_CONFIG.pricing.accessUsd,
+            window.LAV_CONFIG.pricing.estimatedXrpRateUsd,
+            'config_fallback',
+            'lav_config_fallback',
             false
           );
-          return;
-        } catch (err) {}
-
-        try {
-          const pricingRes = await fetch('/lav/api/pricing/');
-          const pricingData = await pricingRes.json();
-
-          if (pricingData && pricingData.ok) {
-            renderPricing(
-              pricingData.usdPrice,
-              pricingData.estimatedXrpRateUsd,
-              pricingData.mode,
-              pricingData.source,
-              pricingData.xamanReady
-            );
-            return;
-          }
-        } catch (err) {}
-
-        renderPricing(
-          fallbackUsd,
-          fallbackRate,
-          'config_fallback',
-          'lav_config_fallback',
-          false
-        );
-      }
-
-      loadCheckoutPricing();
+        });
     })();
   </script>
 </body>
