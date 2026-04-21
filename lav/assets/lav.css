@@ -26,10 +26,12 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
 }
 
 body {
   margin: 0;
+  overflow-y: scroll;
   color: var(--text);
   font-family: Inter, Arial, Helvetica, sans-serif;
   background:
