@@ -6,6 +6,7 @@
   <title>LAV Checkout | Complete Access</title>
   <meta name="description" content="Complete Legacy Access Vault access. Price is shown in USD and settled in $XRP." />
   <link rel="stylesheet" href="/lav/assets/lav.css" />
+  <script src="/lav/assets/lav.js"></script>
 </head>
 <body>
   <div class="site-shell">
@@ -54,7 +55,7 @@
           <div class="grid grid-2" style="margin-top:20px;">
             <article class="card">
               <h3>Order summary</h3>
-              <p style="font-size:34px;font-weight:800;line-height:1.1;margin:10px 0 12px;">$149</p>
+              <p id="usdPrice" style="font-size:34px;font-weight:800;line-height:1.1;margin:10px 0 12px;">$149</p>
               <p>One-time LAV access</p>
 
               <div class="grid" style="gap:12px;margin-top:18px;">
@@ -137,15 +138,17 @@
 
   <script>
     (function () {
-      const USD_PRICE = 149;
-      const XRP_USD_RATE = 1.50;
+      const usdPriceEl = document.getElementById('usdPrice');
       const estimateEl = document.getElementById('xrpEstimate');
       const rateEl = document.getElementById('xrpRate');
 
-      const estimatedXrp = (USD_PRICE / XRP_USD_RATE).toFixed(2);
+      const usdPrice = window.LAV_CONFIG.pricing.accessUsd;
+      const xrpRateUsd = window.LAV_CONFIG.pricing.estimatedXrpRateUsd;
+      const estimatedXrp = window.LAV.estimateXrpFromUsd(usdPrice, xrpRateUsd);
 
-      estimateEl.textContent = `${estimatedXrp} $XRP`;
-      rateEl.textContent = `$${XRP_USD_RATE.toFixed(2)} per $XRP`;
+      usdPriceEl.textContent = window.LAV.formatUsd(usdPrice);
+      estimateEl.textContent = window.LAV.formatXrp(estimatedXrp);
+      rateEl.textContent = `${window.LAV.formatUsd(xrpRateUsd)} per $XRP`;
     })();
   </script>
 </body>
