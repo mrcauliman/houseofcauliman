@@ -49,7 +49,7 @@
           <div class="eyebrow">Order</div>
           <h2>LAV access checkout</h2>
           <p class="section-copy">
-            The USD price is fixed on site. The $XRP amount below is an estimate for the checkout experience until live pricing and Xaman request generation are wired in.
+            The USD price is fixed on site. The $XRP amount below is currently rendered from the pricing source available to Checkout.
           </p>
 
           <div class="grid grid-2" style="margin-top:20px;">
@@ -62,7 +62,9 @@
                 <div class="card">
                   <h3 style="margin-bottom:8px;">Estimated settlement</h3>
                   <p style="margin:0 0 10px;">Estimated <strong id="xrpEstimate">99.33 $XRP</strong></p>
-                  <p style="margin:0;color:var(--muted);">Using reference rate: <strong id="xrpRate">$1.50</strong> per $XRP</p>
+                  <p style="margin:0 0 8px;color:var(--muted);">Using reference rate: <strong id="xrpRate">$1.50</strong> per $XRP</p>
+                  <p style="margin:0 0 8px;color:var(--muted);">Pricing mode: <strong id="pricingMode">preview</strong></p>
+                  <p style="margin:0;color:var(--muted);">Source: <strong id="pricingSource">lav_preview_config</strong></p>
                 </div>
               </div>
 
@@ -76,7 +78,7 @@
               </ul>
 
               <div class="hero-actions" style="margin-top:18px;">
-                <a class="btn btn-primary" href="#payment-rail">Pay with Xaman soon</a>
+                <a class="btn btn-primary" id="xamanButton" href="#payment-rail">Xaman payment not wired yet</a>
                 <a class="btn btn-secondary" href="/lav/access/">Return to access</a>
               </div>
             </article>
@@ -95,11 +97,11 @@
               <div class="grid" style="gap:12px;margin-top:16px;">
                 <div class="card">
                   <h3 style="margin-bottom:8px;">Current state</h3>
-                  <p>This page now handles the pricing handoff and estimated conversion display.</p>
+                  <p id="currentStateText">This page now handles pricing handoff and estimated conversion display.</p>
                 </div>
                 <div class="card" id="payment-rail">
                   <h3 style="margin-bottom:8px;">Next wiring step</h3>
-                  <p>Xaman request generation and payment confirmation turn this from preview checkout into live unlock flow.</p>
+                  <p>A backend quote source and Xaman request creator turn this from preview checkout into live unlock flow.</p>
                 </div>
               </div>
             </article>
@@ -111,16 +113,16 @@
           <h2>Wire the payment rail</h2>
           <div class="grid grid-3" style="margin-top:20px;">
             <article class="card">
-              <h3>USD on page</h3>
-              <p>Keep the public price stable and readable.</p>
+              <h3>Live quote source</h3>
+              <p>Replace preview pricing with a real quote source and timestamped response.</p>
             </article>
             <article class="card">
-              <h3>Live $XRP conversion</h3>
-              <p>Calculate the settlement amount when checkout loads or refreshes.</p>
+              <h3>Xaman request</h3>
+              <p>Create a payment request only when the quote is ready and the amount is final.</p>
             </article>
             <article class="card">
-              <h3>Xaman unlock</h3>
-              <p>Use confirmed XRPL payment to unlock real utility access.</p>
+              <h3>Unlock state</h3>
+              <p>Use confirmed XRPL payment to unlock the real LAV utility flow.</p>
             </article>
           </div>
         </section>
@@ -141,25 +143,72 @@
       const usdPriceEl = document.getElementById('usdPrice');
       const estimateEl = document.getElementById('xrpEstimate');
       const rateEl = document.getElementById('xrpRate');
+      const pricingModeEl = document.getElementById('pricingMode');
+      const pricingSourceEl = document.getElementById('pricingSource');
+      const xamanButtonEl = document.getElementById('xamanButton');
+      const currentStateTextEl = document.getElementById('currentStateText');
 
-      function renderPricing(usdPrice, xrpRateUsd) {
+      function renderPricing(usdPrice, xrpRateUsd, mode, source, xamanReady) {
         const estimatedXrp = window.LAV.estimateXrpFromUsd(usdPrice, xrpRateUsd);
         usdPriceEl.textContent = window.LAV.formatUsd(usdPrice);
         estimateEl.textContent = window.LAV.formatXrp(estimatedXrp);
         rateEl.textContent = `${window.LAV.formatUsd(xrpRateUsd)} per $XRP`;
+        pricingModeEl.textContent = mode || 'preview';
+        pricingSourceEl.textContent = source || 'lav_config_fallback';
+
+        if (xamanReady) {
+          xamanButtonEl.textContent = 'Pay with Xaman';
+          xamanButtonEl.setAttribute('href', '#live-xaman-request');
+          currentStateTextEl.textContent = 'This page is ready to hand off into the live Xaman payment flow.';
+        } else {
+          xamanButtonEl.textContent = 'Xaman payment not wired yet';
+          xamanButtonEl.setAttribute('href', '#payment-rail');
+          currentStateTextEl.textContent = 'This page is using quote data and is waiting on Xaman request wiring.';
+        }
       }
 
-      fetch('/lav/api/pricing/')
-        .then((res) => res.json())
-        .then((data) => {
-          if (!data || !data.ok) throw new Error('pricing unavailable');
-          renderPricing(data.usdPrice, data.estimatedXrpRateUsd);
-        })
-        .catch(() => {
-          const usdPrice = window.LAV_CONFIG.pricing.accessUsd;
-          const xrpRateUsd = window.LAV_CONFIG.pricing.estimatedXrpRateUsd;
-          renderPricing(usdPrice, xrpRateUsd);
-        });
+      async function loadCheckoutPricing() {
+        const fallbackUsd = window.LAV_CONFIG.pricing.accessUsd;
+        const fallbackRate = window.LAV_CONFIG.pricing.estimatedXrpRateUsd;
+
+        try {
+          const live = await window.LAV.fetchLiveXrpUsdQuote();
+          renderPricing(
+            fallbackUsd,
+            live.xrpRateUsd,
+            'live_quote',
+            `coingecko_simple_price @ ${live.updatedAt}`,
+            false
+          );
+          return;
+        } catch (err) {}
+
+        try {
+          const pricingRes = await fetch('/lav/api/pricing/');
+          const pricingData = await pricingRes.json();
+
+          if (pricingData && pricingData.ok) {
+            renderPricing(
+              pricingData.usdPrice,
+              pricingData.estimatedXrpRateUsd,
+              pricingData.mode,
+              pricingData.source,
+              pricingData.xamanReady
+            );
+            return;
+          }
+        } catch (err) {}
+
+        renderPricing(
+          fallbackUsd,
+          fallbackRate,
+          'config_fallback',
+          'lav_config_fallback',
+          false
+        );
+      }
+
+      loadCheckoutPricing();
     })();
   </script>
 </body>
