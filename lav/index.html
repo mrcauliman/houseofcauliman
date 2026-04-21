@@ -4,22 +4,174 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LAV | Legacy Access Vault</title>
-  <meta name="description" content="Legacy Access Vault. Family crypto continuity for recovery planning, future handoff, and protected access across generations." />
+  <meta name="description" content="Legacy Access Vault. Secure access to your $XRP for the people who need it. No custody. No confusion." />
   <style>
-    :root{--bg:#05070b;--panel:#0d1218;--panel2:#111823;--line:rgba(255,255,255,.10);--text:#eef3f8;--muted:#aeb8c6;--blue:#58a6ff;--gold:#d4a44a;--green:#42d392;--radius:18px;--shadow:0 16px 48px rgba(0,0,0,.35);--sans:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;--max:1180px}
-    *{box-sizing:border-box} html,body{margin:0;padding:0;background:linear-gradient(180deg,#05070b 0%,#0a1018 100%);color:var(--text);font-family:var(--sans)}
-    a{color:var(--blue);text-decoration:none} .wrap{max-width:var(--max);margin:0 auto;padding:28px 18px 90px}
-    .hero{background:linear-gradient(180deg,rgba(88,166,255,.10),rgba(255,255,255,0) 70%), var(--panel);border:1px solid var(--line);border-radius:24px;padding:26px;box-shadow:var(--shadow)}
-    .logo{width:100%;max-width:620px;display:block;margin:0 0 18px}
-    h1{margin:0;font-size:40px;line-height:1.05;letter-spacing:.3px} h2{margin:0 0 10px;font-size:18px;letter-spacing:.4px;color:var(--gold);text-transform:uppercase}
-    p{margin:8px 0;color:var(--muted);font-size:15px;line-height:1.65} .pillbar{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
-    .pill{display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--muted);font-size:12px;font-weight:700}
-    .dot{width:8px;height:8px;border-radius:999px;background:var(--green)} .section{margin-top:18px}
-    .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
-    .grid{display:grid;grid-template-columns:1fr;gap:16px} @media(min-width:980px){.grid.three{grid-template-columns:1fr 1fr 1fr}}
-    .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px} .btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 18px;border-radius:12px;border:1px solid var(--line);font-weight:800;letter-spacing:.2px}
-    .btn-primary{background:linear-gradient(180deg,#ffffff 0%,#dfe7f3 100%);color:#0a1018;border-color:transparent} .btn-secondary{background:rgba(255,255,255,.04);color:var(--text)}
-    .footer{margin-top:18px;color:var(--muted);font-size:12px;text-align:center;opacity:.9}
+    :root{
+      --bg:#05070b;
+      --panel:#0d1218;
+      --panel2:#111823;
+      --line:rgba(255,255,255,.10);
+      --text:#eef3f8;
+      --muted:#aeb8c6;
+      --blue:#58a6ff;
+      --gold:#d4a44a;
+      --green:#42d392;
+      --radius:18px;
+      --shadow:0 16px 48px rgba(0,0,0,.35);
+      --sans:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      --max:1180px;
+    }
+
+    *{box-sizing:border-box}
+
+    html,body{
+      margin:0;
+      padding:0;
+      background:linear-gradient(180deg,#05070b 0%,#0a1018 100%);
+      color:var(--text);
+      font-family:var(--sans);
+    }
+
+    a{
+      color:var(--blue);
+      text-decoration:none;
+    }
+
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:28px 18px 90px;
+    }
+
+    .hero{
+      background:linear-gradient(180deg,rgba(88,166,255,.10),rgba(255,255,255,0) 70%), var(--panel);
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:26px;
+      box-shadow:var(--shadow);
+    }
+
+    .logo{
+      width:100%;
+      max-width:620px;
+      display:block;
+      margin:0 0 18px;
+    }
+
+    h1{
+      margin:0;
+      font-size:40px;
+      line-height:1.05;
+      letter-spacing:.3px;
+    }
+
+    h2{
+      margin:0 0 10px;
+      font-size:18px;
+      letter-spacing:.4px;
+      color:var(--gold);
+      text-transform:uppercase;
+    }
+
+    p{
+      margin:8px 0;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.65;
+    }
+
+    strong{
+      color:var(--text);
+    }
+
+    .pillbar{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:16px;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--muted);
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .dot{
+      width:8px;
+      height:8px;
+      border-radius:999px;
+      background:var(--green);
+    }
+
+    .section{
+      margin-top:18px;
+    }
+
+    .card{
+      background:linear-gradient(180deg,var(--panel),var(--panel2));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow:var(--shadow);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:16px;
+    }
+
+    @media(min-width:980px){
+      .grid.three{
+        grid-template-columns:1fr 1fr 1fr;
+      }
+    }
+
+    .cta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:46px;
+      padding:0 18px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+
+    .btn-primary{
+      background:linear-gradient(180deg,#ffffff 0%,#dfe7f3 100%);
+      color:#0a1018;
+      border-color:transparent;
+    }
+
+    .btn-secondary{
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+    }
+
+    .footer{
+      margin-top:18px;
+      color:var(--muted);
+      font-size:12px;
+      text-align:center;
+      opacity:.9;
+    }
   </style>
 </head>
 <body>
@@ -27,23 +179,27 @@
     <section class="hero">
       <img class="logo" src="/assets/lav/lav_logo_full.png" alt="LAV - Legacy Access Vault" />
       <h1>Legacy Access Vault</h1>
-      <p>Family crypto continuity for recovery planning, future handoff, and protected access across generations.</p>
+      <p>Secure access to your $XRP for the people who need it.</p>
+
       <div class="pillbar">
         <div class="pill"><span class="dot"></span>ACTIVE BUILD</div>
         <div class="pill"><span class="dot"></span>XRPL FIRST</div>
         <div class="pill"><span class="dot"></span>FAMILY CONTINUITY</div>
-        <div class="pill"><span class="dot"></span>FUTURE HANDOFF</div>
+        <div class="pill"><span class="dot"></span>PROTECTED ACCESS</div>
       </div>
+
       <div class="cta-row">
-        <a class="btn btn-primary" href="/">Back to House</a>
+        <a class="btn btn-primary" href="mailto:lavaccess@gmail.com">Get Early Access</a>
         <a class="btn btn-secondary" href="#overview">View Overview</a>
       </div>
     </section>
 
     <section id="overview" class="section card">
       <h2>What LAV Is</h2>
-      <p>Legacy Access Vault is being built for family recovery, future handoff, and protected crypto access across generations.</p>
-      <p>If something happened to you, your spouse should not be left guessing. If you want to hand an $XRP wallet to your kid at 18, that plan should already be structured, protected, and clear.</p>
+      <p>If something happens to you, your family shouldn’t be guessing how to access your $XRP.</p>
+      <p>Most people save a seed phrase and think they’re covered. They’re not. The person left behind still needs to know what wallets exist, what app to use, where to begin, and how to move funds safely.</p>
+      <p>LAV turns crypto recovery into a clear, step-by-step process.</p>
+      <p><strong>No custody. No confusion.</strong></p>
     </section>
 
     <section class="section grid three">
@@ -51,10 +207,12 @@
         <h2>Spouse Recovery</h2>
         <p>Clear guidance for the person who would need to act if you could not.</p>
       </div>
+
       <div class="card">
         <h2>Heir Guidance</h2>
         <p>Structured instructions that reduce confusion and stop avoidable mistakes.</p>
       </div>
+
       <div class="card">
         <h2>Future Handoff</h2>
         <p>Planned release paths for children and beneficiaries when the time is right.</p>
