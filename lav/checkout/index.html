@@ -35,7 +35,7 @@
             <div class="eyebrow">Checkout</div>
             <h1>Complete access</h1>
             <p class="lead">
-              Legacy Access Vault pricing is shown in USD and settled in $XRP. This page is the handoff point between site pricing and the live XRPL payment flow.
+              Legacy Access Vault pricing is shown in USD and settled in $XRP. This page is the handoff point between site pricing and the XRPL payment rail.
             </p>
           </div>
           <div class="page-actions">
@@ -48,7 +48,7 @@
           <div class="eyebrow">Order</div>
           <h2>LAV access checkout</h2>
           <p class="section-copy">
-            For now this is the structured checkout page. Next pass wires live $XRP conversion and Xaman request generation.
+            The USD price is fixed on site. The $XRP amount below is an estimate for the checkout experience until live pricing and Xaman request generation are wired in.
           </p>
 
           <div class="grid grid-2" style="margin-top:20px;">
@@ -56,7 +56,16 @@
               <h3>Order summary</h3>
               <p style="font-size:34px;font-weight:800;line-height:1.1;margin:10px 0 12px;">$149</p>
               <p>One-time LAV access</p>
-              <ul style="margin-top:14px;">
+
+              <div class="grid" style="gap:12px;margin-top:18px;">
+                <div class="card">
+                  <h3 style="margin-bottom:8px;">Estimated settlement</h3>
+                  <p style="margin:0 0 10px;">Estimated <strong id="xrpEstimate">99.33 $XRP</strong></p>
+                  <p style="margin:0;color:var(--muted);">Using reference rate: <strong id="xrpRate">$1.50</strong> per $XRP</p>
+                </div>
+              </div>
+
+              <ul style="margin-top:18px;">
                 <li>Wallet record management</li>
                 <li>Trusted role setup</li>
                 <li>Packet generation</li>
@@ -64,20 +73,33 @@
                 <li>Heir-view preparation</li>
                 <li>Audit structure</li>
               </ul>
+
+              <div class="hero-actions" style="margin-top:18px;">
+                <a class="btn btn-primary" href="#payment-rail">Pay with Xaman soon</a>
+                <a class="btn btn-secondary" href="/lav/access/">Return to access</a>
+              </div>
             </article>
 
             <article class="card">
               <h3>Payment flow</h3>
-              <p>The final checkout flow should do this:</p>
+              <p>The live checkout flow should do this:</p>
               <ul style="margin-top:14px;">
                 <li>Show fixed USD price</li>
                 <li>Calculate live $XRP amount</li>
-                <li>Launch Xaman payment request</li>
-                <li>Confirm payment</li>
+                <li>Create Xaman request</li>
+                <li>Confirm XRPL payment</li>
                 <li>Unlock utility access</li>
               </ul>
-              <div class="hero-actions" style="margin-top:18px;">
-                <a class="btn btn-primary" href="/lav/access/">Return to access</a>
+
+              <div class="grid" style="gap:12px;margin-top:16px;">
+                <div class="card">
+                  <h3 style="margin-bottom:8px;">Current state</h3>
+                  <p>This page now handles the pricing handoff and estimated conversion display.</p>
+                </div>
+                <div class="card" id="payment-rail">
+                  <h3 style="margin-bottom:8px;">Next wiring step</h3>
+                  <p>Xaman request generation and payment confirmation turn this from preview checkout into live unlock flow.</p>
+                </div>
               </div>
             </article>
           </div>
@@ -105,12 +127,26 @@
 
       <footer class="footer panel">
         <div class="footer-grid">
-          <div><div class="footer-title">Checkout role</div><p>This page will become the live conversion and payment handoff layer for LAV.</p></div>
+          <div><div class="footer-title">Checkout role</div><p>This page is the pricing, conversion, and payment handoff layer for LAV.</p></div>
           <div><div class="footer-title">Pricing model</div><p>USD displayed on site. $XRP used for settlement. Access unlocks after confirmation.</p></div>
           <div><div class="footer-title">Inside LAV</div><p>Access shows pricing. Checkout handles conversion and payment flow.</p></div>
         </div>
       </footer>
     </div>
   </div>
+
+  <script>
+    (function () {
+      const USD_PRICE = 149;
+      const XRP_USD_RATE = 1.50;
+      const estimateEl = document.getElementById('xrpEstimate');
+      const rateEl = document.getElementById('xrpRate');
+
+      const estimatedXrp = (USD_PRICE / XRP_USD_RATE).toFixed(2);
+
+      estimateEl.textContent = `${estimatedXrp} $XRP`;
+      rateEl.textContent = `$${XRP_USD_RATE.toFixed(2)} per $XRP`;
+    })();
+  </script>
 </body>
 </html>
