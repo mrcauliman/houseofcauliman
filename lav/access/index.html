@@ -50,7 +50,7 @@
           <div class="eyebrow">Access</div>
           <h2>LAV access</h2>
           <p class="section-copy">
-            The USD price is fixed on site. The $XRP amount below is a live estimate for visibility only. Public payments are still disabled while the product continues to build.
+            The USD price is fixed on site. The $XRP amount below is a live estimate for visibility only. Public payment activation is not available on this page.
           </p>
 
           <div class="grid grid-2" style="margin-top:20px;">
@@ -64,9 +64,9 @@
                   <h3 style="margin-bottom:8px;">Estimated settlement</h3>
                   <p style="margin:0 0 10px;">Estimated <strong id="xrpEstimate">99.33 $XRP</strong></p>
                   <p style="margin:0 0 8px;color:var(--muted);">Using reference rate: <strong id="xrpRate">$1.50</strong> per $XRP</p>
-                  <p style="margin:0 0 8px;color:var(--muted);">Pricing mode: <strong id="pricingMode">preview</strong></p>
-                  <p style="margin:0 0 8px;color:var(--muted);">Source: <strong id="pricingSource">lav_preview_config</strong></p>
-                  <p style="margin:0;color:var(--muted);">Status: <strong id="paymentsStatus">Payments not live yet</strong></p>
+                  <p style="margin:0 0 8px;color:var(--muted);">Pricing mode: <strong id="pricingMode">live estimate</strong></p>
+                  <p style="margin:0 0 8px;color:var(--muted);">Source: <strong id="pricingSource">public quote source</strong></p>
+                  <p style="margin:0;color:var(--muted);">Status: <strong id="paymentsStatus">Payment activation unavailable</strong></p>
                 </div>
               </div>
 
@@ -80,7 +80,7 @@
               </ul>
 
               <div class="hero-actions" style="margin-top:18px;">
-                <a class="btn btn-primary" id="xamanButton" href="#payment-rail">Payments not live yet</a>
+                <a class="btn btn-primary" id="xamanButton" href="#payment-rail">Payment activation unavailable</a>
                 <a class="btn btn-secondary" href="/lav/">Return to home</a>
               </div>
             </article>
@@ -101,11 +101,11 @@
               <div class="grid" style="gap:12px;margin-top:16px;">
                 <div class="card">
                   <h3 style="margin-bottom:8px;">Current state</h3>
-                  <p id="currentStateText">This page shows live pricing visibility while the payment rail stays disabled.</p>
+                  <p id="currentStateText">This page shows access pricing and a live display-only $XRP estimate.</p>
                 </div>
                 <div class="card" id="payment-rail">
                   <h3 style="margin-bottom:8px;">Next wiring step</h3>
-                  <p>The backend quote source and Xaman request creator are being built privately first. Public payment activation comes later.</p>
+                  <p>Payment activation is not available on this public page.</p>
                 </div>
               </div>
             </article>
@@ -114,19 +114,19 @@
 
         <section class="section panel">
           <div class="eyebrow">What comes next</div>
-          <h2>Continue the build</h2>
+          <h2>What this page covers</h2>
           <div class="grid grid-3" style="margin-top:20px;">
             <article class="card">
               <h3>Live quote visibility</h3>
-              <p>Show real $XRP estimate publicly so pricing stays understandable.</p>
+              <p>Shows a live $XRP estimate tied to the fixed USD access price.</p>
             </article>
             <article class="card">
-              <h3>Private rail build</h3>
-              <p>Keep payment request creation and activation private until launch is approved.</p>
+              <h3>Settlement estimate</h3>
+              <p>Keeps the settlement side separate from the public access page.</p>
             </article>
             <article class="card">
               <h3>Utility first</h3>
-              <p>Keep building the actual LAV product while public payments stay disabled.</p>
+              <p>Shows a live display-only estimate so pricing stays understandable before payment activation is opened.</p>
             </article>
           </div>
         </section>
@@ -158,12 +158,12 @@
         usdPriceEl.textContent = window.LAV.formatUsd(usdPrice);
         estimateEl.textContent = window.LAV.formatXrp(estimatedXrp);
         rateEl.textContent = `${window.LAV.formatUsd(xrpRateUsd)} per $XRP`;
-        pricingModeEl.textContent = mode || 'preview';
-        pricingSourceEl.textContent = source || 'lav_config_fallback';
-        xamanButtonEl.textContent = 'Payments not live yet';
+        pricingModeEl.textContent = mode || 'live estimate';
+        pricingSourceEl.textContent = source || 'public quote source';
+        xamanButtonEl.textContent = 'Payment activation unavailable';
         xamanButtonEl.setAttribute('href', '#payment-rail');
-        paymentsStatusEl.textContent = 'Payments not live yet';
-        currentStateTextEl.textContent = 'This page shows live pricing visibility while the payment rail stays disabled.';
+        paymentsStatusEl.textContent = 'Payment activation unavailable';
+        currentStateTextEl.textContent = 'This page shows access pricing and a live display-only $XRP estimate.';
       }
 
       async function fetchLiveXrpUsd() {
