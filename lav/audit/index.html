@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LAV Audit | Activity History</title>
-  <meta name="description" content="LAV activity history for visibility into updates, exports, and continuity reviews." />
+  <title>LAV Audit Trail | Legacy Access Vault</title>
+  <meta name="description" content="Legacy Access Vault audit structure showing how changes, checks, and important actions should be recorded and reviewed." />
   <link rel="stylesheet" href="/lav/assets/lav.css" />
 </head>
 <body>
@@ -33,53 +33,98 @@
       <main>
         <section class="page-hero panel">
           <div>
-            <div class="eyebrow">Audit</div>
-            <h1>Activity history</h1>
+            <div class="eyebrow">Audit Trail</div>
+            <h1>Know what changed and when</h1>
             <p class="lead">
-              Review important updates and continuity-related actions in one place so the plan stays visible over time.
+              LAV audit structure is built to create visibility around important updates, reviews, and actions so the system stays current and accountable over time.
             </p>
           </div>
           <div class="page-actions">
-            <a class="btn btn-secondary" href="/lav/dashboard/">Back to dashboard</a>
+            <a class="btn btn-primary" href="#audit-model">See the structure</a>
+            <a class="btn btn-secondary" href="/lav/heir/">View heir flow</a>
+          </div>
+        </section>
+
+        <section class="section panel" id="audit-model">
+          <div class="eyebrow">Audit Model</div>
+          <h2>What the audit layer is for</h2>
+          <p class="section-copy">
+            The audit layer keeps track of meaningful changes and review points. It is built to show whether records stayed current, whether packet logic was updated, and whether the system is being maintained with discipline.
+          </p>
+
+          <div class="grid grid-3" style="margin-top:20px;">
+            <article class="card">
+              <h3>Change visibility</h3>
+              <p>Shows when key records were updated, reviewed, or adjusted so there is no blind drift over time.</p>
+            </article>
+            <article class="card">
+              <h3>Review discipline</h3>
+              <p>Keeps attention on regular checks instead of assuming old information is still good enough.</p>
+            </article>
+            <article class="card">
+              <h3>Action accountability</h3>
+              <p>Creates a record of what changed, who changed it, and what part of the system was affected.</p>
+            </article>
           </div>
         </section>
 
         <section class="section panel">
-          <div class="eyebrow">Recorded activity</div>
-          <h2>Important actions</h2>
-          <div class="table-wrap" style="margin-top: 20px;">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Activity</th>
-                  <th>Summary</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td>Apr 20, 2026</td><td>Packet exported</td><td>Family-facing packet generated and marked current.</td></tr>
-                <tr><td>Apr 18, 2026</td><td>Wallet record updated</td><td>Cold reserve guidance revised and cleaned up.</td></tr>
-                <tr><td>Apr 16, 2026</td><td>Continuity review completed</td><td>Core vault areas reviewed for clarity and readiness.</td></tr>
-              </tbody>
-            </table>
+          <div class="eyebrow">Audit Example</div>
+          <h2>Example audit structure</h2>
+          <div class="grid grid-2" style="margin-top:20px;">
+            <article class="card">
+              <h3>Tracked events</h3>
+              <ul>
+                <li><strong>Event 1:</strong> Wallet record updated</li>
+                <li><strong>Event 2:</strong> Trusted role changed</li>
+                <li><strong>Event 3:</strong> Packet reviewed</li>
+                <li><strong>Event 4:</strong> Release logic adjusted</li>
+                <li><strong>Event 5:</strong> Heir flow reviewed</li>
+              </ul>
+            </article>
+
+            <article class="card">
+              <h3>Audit outcomes</h3>
+              <ul>
+                <li>Shows what is fresh and what is stale</li>
+                <li>Shows whether the system is being maintained</li>
+                <li>Shows whether critical updates were actually made</li>
+                <li>Creates a cleaner trail of responsibility</li>
+              </ul>
+            </article>
           </div>
         </section>
 
         <section class="section panel">
           <div class="eyebrow">Why it matters</div>
-          <h2>Visibility supports continuity</h2>
-          <div class="grid grid-3" style="margin-top: 20px;">
+          <h2>Why audit structure matters</h2>
+          <div class="grid grid-3" style="margin-top:20px;">
             <article class="card">
-              <h3>Export visibility</h3>
-              <p>See when family-facing packet material is generated so the timeline stays clear.</p>
+              <h3>No false confidence</h3>
+              <p>A continuity system can look complete while quietly becoming outdated. Audit visibility helps stop that.</p>
             </article>
             <article class="card">
-              <h3>Record updates</h3>
-              <p>Track when wallet guidance or continuity details are revised.</p>
+              <h3>No silent drift</h3>
+              <p>Important records should not age into irrelevance without anyone noticing.</p>
             </article>
             <article class="card">
-              <h3>Review history</h3>
-              <p>Keep continuity reviews visible so maintenance does not become guesswork.</p>
+              <h3>No unclear ownership</h3>
+              <p>Audit structure helps show whether the system is being maintained with real attention.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section panel">
+          <div class="eyebrow">Current State</div>
+          <h2>What this page represents right now</h2>
+          <div class="grid grid-2" style="margin-top:20px;">
+            <article class="card">
+              <h3>Live public direction</h3>
+              <p>This page now shows the real audit structure LAV is being built around.</p>
+            </article>
+            <article class="card">
+              <h3>Next product step</h3>
+              <p>The next build is turning audit structure into real owner-side review tracking and change visibility.</p>
             </article>
           </div>
         </section>
@@ -87,9 +132,9 @@
 
       <footer class="footer panel">
         <div class="footer-grid">
-          <div><div class="footer-title">Audit page role</div><p>This page keeps continuity work visible instead of assumed.</p></div>
-          <div><div class="footer-title">Approach</div><p>Organized, clear, and restrained. Built to keep important activity visible.</p></div>
-          <div><div class="footer-title">Inside LAV</div><p>Dashboard. Wallets. Contacts. Packet. Release. Heir View. Audit.</p></div>
+          <div><div class="footer-title">Audit purpose</div><p>The audit layer shows what changed, what was reviewed, and whether the system is staying current.</p></div>
+          <div><div class="footer-title">LAV direction</div><p>A strong continuity system needs review visibility, not just one-time setup.</p></div>
+          <div><div class="footer-title">Build status</div><p>The public structure is live. Real owner-side audit tracking comes next.</p></div>
         </div>
       </footer>
     </div>
