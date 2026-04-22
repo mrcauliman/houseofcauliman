@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LAV Access | Activate Legacy Access Vault</title>
-  <meta name="description" content="Activate Legacy Access Vault. Pricing is shown in USD and access is unlocked through payment in $XRP." />
+  <title>LAV Access | Legacy Access Vault</title>
+  <meta name="description" content="Legacy Access Vault access, pricing, and live display-only $XRP estimate." />
   <link rel="stylesheet" href="/lav/assets/lav.css" />
+  <script src="/lav/assets/lav.js"></script>
 </head>
 <body>
   <div class="site-shell">
@@ -33,53 +34,77 @@
         <section class="page-hero panel">
           <div>
             <div class="eyebrow">Access</div>
-            <h1>Activate Legacy Access Vault</h1>
+            <h1>Get access to LAV</h1>
             <p class="lead">
-              LAV keeps the public structure visible so people can understand the system first. Full access unlocks the live utility, record management, packet generation, release controls, and the working continuity flow.
+              Legacy Access Vault pricing is shown in USD and estimated in $XRP. This page handles public access visibility, pricing, and current payment status in one place.
             </p>
           </div>
           <div class="page-actions">
-            <a class="btn btn-primary" href="#plans">View access</a>
-            <a class="btn btn-secondary" href="/lav/dashboard/">Back to dashboard</a>
+            <a class="btn btn-primary" href="#access-box">Continue</a>
+            <a class="btn btn-secondary" href="/lav/">Back to home</a>
           </div>
         </section>
 
-        <section class="section panel" id="plans">
-          <div class="eyebrow">Pricing</div>
-          <h2>Simple access</h2>
+        <section class="section panel" id="access-box">
+          <div class="eyebrow">Access</div>
+          <h2>LAV access</h2>
           <p class="section-copy">
-            Pricing is shown in USD. Payment is made in $XRP. The live $XRP amount should be calculated at checkout when payment flow is wired in.
+            The USD price is fixed on site. The $XRP amount below is a live estimate for visibility only. Public payments are still disabled while the product continues to build.
           </p>
 
           <div class="grid grid-2" style="margin-top:20px;">
             <article class="card">
-              <h3>LAV Access</h3>
-              <p style="font-size:34px;font-weight:800;line-height:1.1;margin:10px 0 12px;">$149</p>
-              <p>One-time access to the LAV utility.</p>
-              <ul style="margin-top:14px;">
+              <h3>Access summary</h3>
+              <p id="usdPrice" style="font-size:34px;font-weight:800;line-height:1.1;margin:10px 0 12px;">$149</p>
+              <p>One-time LAV access</p>
+
+              <div class="grid" style="gap:12px;margin-top:18px;">
+                <div class="card">
+                  <h3 style="margin-bottom:8px;">Estimated settlement</h3>
+                  <p style="margin:0 0 10px;">Estimated <strong id="xrpEstimate">99.33 $XRP</strong></p>
+                  <p style="margin:0 0 8px;color:var(--muted);">Using reference rate: <strong id="xrpRate">$1.50</strong> per $XRP</p>
+                  <p style="margin:0 0 8px;color:var(--muted);">Pricing mode: <strong id="pricingMode">preview</strong></p>
+                  <p style="margin:0 0 8px;color:var(--muted);">Source: <strong id="pricingSource">lav_preview_config</strong></p>
+                  <p style="margin:0;color:var(--muted);">Status: <strong id="paymentsStatus">Payments not live yet</strong></p>
+                </div>
+              </div>
+
+              <ul style="margin-top:18px;">
                 <li>Wallet record management</li>
                 <li>Trusted role setup</li>
-                <li>Family packet generation</li>
-                <li>Release structure controls</li>
+                <li>Packet generation</li>
+                <li>Release controls</li>
                 <li>Heir-view preparation</li>
-                <li>Audit and continuity organization</li>
+                <li>Audit structure</li>
               </ul>
+
               <div class="hero-actions" style="margin-top:18px;">
-                <a class="btn btn-primary" href="/lav/checkout/">Continue to checkout</a>
+                <a class="btn btn-primary" id="xamanButton" href="#payment-rail">Payments not live yet</a>
+                <a class="btn btn-secondary" href="/lav/">Return to home</a>
               </div>
             </article>
 
             <article class="card">
-              <h3>What unlocks</h3>
-              <p>Public pages stay visible. Full access unlocks the actual working utility.</p>
+              <h3>What LAV gives you</h3>
+              <p>LAV is built to help the people you trust know what exists, where to begin, what matters, and what to avoid if they ever need to step in.</p>
+
+              <ul style="margin-top:14px;">
+                <li>Wallet records</li>
+                <li>Trusted roles</li>
+                <li>Family packet flow</li>
+                <li>Release structure</li>
+                <li>Heir guidance</li>
+                <li>Activity visibility</li>
+              </ul>
+
               <div class="grid" style="gap:12px;margin-top:16px;">
                 <div class="card">
-                  <h3 style="margin-bottom:8px;">Inside access</h3>
-                  <p>Real record creation, editing, saving, packet output, and controlled continuity setup.</p>
+                  <h3 style="margin-bottom:8px;">Current state</h3>
+                  <p id="currentStateText">This page shows live pricing visibility while the payment rail stays disabled.</p>
                 </div>
-                <div class="card">
-                  <h3 style="margin-bottom:8px;">Checkout model</h3>
-                  <p>Show price in USD. Settle in $XRP. Unlock utility access after confirmed payment.</p>
+                <div class="card" id="payment-rail">
+                  <h3 style="margin-bottom:8px;">Next wiring step</h3>
+                  <p>The backend quote source and Xaman request creator are being built privately first. Public payment activation comes later.</p>
                 </div>
               </div>
             </article>
@@ -87,20 +112,20 @@
         </section>
 
         <section class="section panel">
-          <div class="eyebrow">Launch path</div>
-          <h2>Clean rollout</h2>
+          <div class="eyebrow">What comes next</div>
+          <h2>Continue the build</h2>
           <div class="grid grid-3" style="margin-top:20px;">
             <article class="card">
-              <h3>See the structure</h3>
-              <p>Let people understand what LAV does before they ever hit pricing.</p>
+              <h3>Live quote visibility</h3>
+              <p>Show real $XRP estimate publicly so pricing stays understandable.</p>
             </article>
             <article class="card">
-              <h3>Hit access naturally</h3>
-              <p>Pricing appears when the user is ready to move from preview into the real utility.</p>
+              <h3>Private rail build</h3>
+              <p>Keep payment request creation and activation private until launch is approved.</p>
             </article>
             <article class="card">
-              <h3>Unlock with $XRP</h3>
-              <p>Keep checkout native to the XRPL direction and settle access through $XRP.</p>
+              <h3>Utility first</h3>
+              <p>Keep building the actual LAV product while public payments stay disabled.</p>
             </article>
           </div>
         </section>
@@ -108,12 +133,95 @@
 
       <footer class="footer panel">
         <div class="footer-grid">
-          <div><div class="footer-title">Access page role</div><p>This page handles activation, pricing, and utility unlock inside the LAV flow.</p></div>
-          <div><div class="footer-title">Pricing model</div><p>USD shown on site. $XRP paid at checkout. Full access unlocked after confirmation.</p></div>
-          <div><div class="footer-title">Inside LAV</div><p>Public structure first. Access and utility unlock deeper in the flow.</p></div>
+          <div><div class="footer-title">Access role</div><p>This page is the public access, pricing, and payment-status layer for LAV.</p></div>
+          <div><div class="footer-title">Pricing model</div><p>USD displayed on site. Live $XRP estimate shown publicly. Payments stay disabled until launch.</p></div>
+          <div><div class="footer-title">Inside LAV</div><p>Access now holds the public pricing surface in one place.</p></div>
         </div>
       </footer>
     </div>
   </div>
+
+  <script>
+    (function () {
+      const usdPriceEl = document.getElementById('usdPrice');
+      const estimateEl = document.getElementById('xrpEstimate');
+      const rateEl = document.getElementById('xrpRate');
+      const pricingModeEl = document.getElementById('pricingMode');
+      const pricingSourceEl = document.getElementById('pricingSource');
+      const xamanButtonEl = document.getElementById('xamanButton');
+      const currentStateTextEl = document.getElementById('currentStateText');
+      const paymentsStatusEl = document.getElementById('paymentsStatus');
+
+      function renderPricing(usdPrice, xrpRateUsd, mode, source) {
+        const estimatedXrp = window.LAV.estimateXrpFromUsd(usdPrice, xrpRateUsd);
+        usdPriceEl.textContent = window.LAV.formatUsd(usdPrice);
+        estimateEl.textContent = window.LAV.formatXrp(estimatedXrp);
+        rateEl.textContent = `${window.LAV.formatUsd(xrpRateUsd)} per $XRP`;
+        pricingModeEl.textContent = mode || 'preview';
+        pricingSourceEl.textContent = source || 'lav_config_fallback';
+        xamanButtonEl.textContent = 'Payments not live yet';
+        xamanButtonEl.setAttribute('href', '#payment-rail');
+        paymentsStatusEl.textContent = 'Payments not live yet';
+        currentStateTextEl.textContent = 'This page shows live pricing visibility while the payment rail stays disabled.';
+      }
+
+      async function fetchLiveXrpUsd() {
+        const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ripple&vs_currencies=usd', {
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (!res.ok) {
+          throw new Error(`live quote http ${res.status}`);
+        }
+
+        const data = await res.json();
+        const rate = Number(data?.ripple?.usd);
+
+        if (!Number.isFinite(rate) || rate <= 0) {
+          throw new Error('invalid live quote');
+        }
+
+        return rate;
+      }
+
+      async function loadAccessPricing() {
+        const fallbackUsd = window.LAV_CONFIG.pricing.accessUsd;
+        const fallbackRate = window.LAV_CONFIG.pricing.estimatedXrpRateUsd;
+
+        try {
+          const liveRate = await fetchLiveXrpUsd();
+          renderPricing(
+            fallbackUsd,
+            liveRate,
+            'live_display_only',
+            'coingecko_public_quote'
+          );
+          return;
+        } catch (_) {}
+
+        fetch('/lav/api/pricing/')
+          .then((res) => res.json())
+          .then((data) => {
+            if (!data || !data.ok) throw new Error('pricing unavailable');
+            renderPricing(
+              data.usdPrice,
+              data.estimatedXrpRateUsd,
+              data.mode,
+              data.source
+            );
+          })
+          .catch(() => {
+            renderPricing(
+              fallbackUsd,
+              fallbackRate,
+              'config_fallback',
+              'lav_config_fallback'
+            );
+          });
+      }
+
+      loadAccessPricing();
+    })();
+  </script>
 </body>
 </html>
