@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LAV Wallets | Wallet Records</title>
-  <meta name="description" content="LAV wallet records for apps, devices, and continuity guidance tied to each wallet." />
+  <title>LAV Wallet Records | Legacy Access Vault</title>
+  <meta name="description" content="Legacy Access Vault wallet records show how assets, access paths, and recovery context are organized for the people you trust." />
   <link rel="stylesheet" href="/lav/assets/lav.css" />
 </head>
 <body>
@@ -19,8 +19,9 @@
         </div>
         <nav class="nav" aria-label="Primary">
           <a href="/lav/">Home</a>
+          <a href="/lav/access/">Access</a>
           <a href="/lav/dashboard/">Dashboard</a>
-          <a href="/lav/wallets/" class="active">Wallets</a>
+          <a href="/lav/wallets/">Wallets</a>
           <a href="/lav/contacts/">Contacts</a>
           <a href="/lav/packet/">Packet</a>
           <a href="/lav/release/">Release</a>
@@ -32,56 +33,110 @@
       <main>
         <section class="page-hero panel">
           <div>
-            <div class="eyebrow">Wallets</div>
-            <h1>Wallet records</h1>
+            <div class="eyebrow">Wallet Records</div>
+            <h1>Make every wallet understandable</h1>
             <p class="lead">
-              Organize the wallets that matter, the apps or devices tied to them, and the guidance a trusted person would need to move through them carefully.
+              LAV wallet records are built to turn scattered wallet knowledge into a clear structure your family can actually follow.
             </p>
           </div>
           <div class="page-actions">
-            <a class="btn btn-primary" href="/lav/access/">Unlock full access</a>
-            <a class="btn btn-secondary" href="/lav/packet/">Open packet</a>
+            <a class="btn btn-primary" href="#wallet-record-model">See the structure</a>
+            <a class="btn btn-secondary" href="/lav/access/">View access</a>
           </div>
         </section>
 
-        <section class="section panel">
-          <div class="eyebrow">Tracked wallets</div>
-          <h2>Current records</h2>
-          <div class="table-wrap" style="margin-top:20px;">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Wallet</th>
-                  <th>App or device</th>
-                  <th>Status</th>
-                  <th>Guidance location</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td>Primary $XRP Wallet</td><td>Xaman</td><td><span class="badge">Ready</span></td><td>Home safe instructions recorded</td></tr>
-                <tr><td>Cold Reserve Wallet</td><td>Ledger device</td><td><span class="badge soft">Needs review</span></td><td>Safe deposit guidance recorded</td></tr>
-                <tr><td>Family Backup Wallet</td><td>Xaman</td><td><span class="badge">Ready</span></td><td>Paper backup location recorded</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
+        <section class="section panel" id="wallet-record-model">
+          <div class="eyebrow">Wallet Model</div>
+          <h2>What a wallet record covers</h2>
+          <p class="section-copy">
+            A real wallet record is more than an address. It gives the next person enough context to know what they are looking at, where it belongs, and how to avoid making a bad move.
+          </p>
 
-        <section class="section panel">
-          <div class="eyebrow">What every record should cover</div>
-          <h2>Clear enough for the family to follow</h2>
           <div class="grid grid-3" style="margin-top:20px;">
-            <article class="card"><h3>Simple name</h3><p>Use a label a family member can understand quickly.</p></article>
-            <article class="card"><h3>Access path</h3><p>List the app or device needed without assuming crypto knowledge.</p></article>
-            <article class="card"><h3>Guidance location</h3><p>Point to the recovery guidance in a controlled, organized way.</p></article>
+            <article class="card">
+              <h3>Asset identity</h3>
+              <p>Wallet label, network, asset type, public address, storage method, and why that wallet exists.</p>
+            </article>
+            <article class="card">
+              <h3>Access path</h3>
+              <p>What app or device is used, whether hardware is involved, whether a passphrase exists, and where the recovery path begins.</p>
+            </article>
+            <article class="card">
+              <h3>Recovery context</h3>
+              <p>Priority level, warnings, test-send discipline, and notes that help a trusted person move carefully instead of guessing.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section panel">
+          <div class="eyebrow">Record Example</div>
+          <h2>Example wallet record structure</h2>
+          <div class="grid grid-2" style="margin-top:20px;">
+            <article class="card">
+              <h3>Record snapshot</h3>
+              <ul>
+                <li><strong>Wallet label:</strong> Primary XRP Reserve</li>
+                <li><strong>Network:</strong> XRPL</li>
+                <li><strong>Asset focus:</strong> $XRP</li>
+                <li><strong>Storage type:</strong> Self-custody</li>
+                <li><strong>Public address:</strong> Stored as reference</li>
+                <li><strong>Priority:</strong> High</li>
+              </ul>
+            </article>
+
+            <article class="card">
+              <h3>Recovery notes</h3>
+              <ul>
+                <li>Explains what app is used</li>
+                <li>Explains whether a hardware device is involved</li>
+                <li>Explains where the backup path starts</li>
+                <li>Explains what not to do first</li>
+                <li>Explains how to verify safely before moving funds</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section panel">
+          <div class="eyebrow">Why it matters</div>
+          <h2>Why wallet records come first</h2>
+          <div class="grid grid-3" style="margin-top:20px;">
+            <article class="card">
+              <h3>No blind guessing</h3>
+              <p>The next person should not have to guess which wallet matters, what chain it uses, or where to begin.</p>
+            </article>
+            <article class="card">
+              <h3>No scattered memory</h3>
+              <p>LAV is built so critical information is structured instead of living in your head or in random notes.</p>
+            </article>
+            <article class="card">
+              <h3>No panic moves</h3>
+              <p>A wallet record gives enough context to slow people down, reduce mistakes, and avoid scam-driven decisions.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section panel">
+          <div class="eyebrow">Current State</div>
+          <h2>What this page represents right now</h2>
+          <div class="grid grid-2" style="margin-top:20px;">
+            <article class="card">
+              <h3>Live public direction</h3>
+              <p>This page now shows the real structure LAV is being built around, not filler copy.</p>
+            </article>
+            <article class="card">
+              <h3>Next product step</h3>
+              <p>The next build is turning wallet records from public structure into real owner-side inputs and stored records.</p>
+            </article>
           </div>
         </section>
       </main>
 
       <footer class="footer panel">
         <div class="footer-grid">
-          <div><div class="footer-title">Wallet page role</div><p>This page turns scattered wallet knowledge into organized records a trusted person can follow.</p></div>
-          <div><div class="footer-title">Approach</div><p>Simple, direct, and readable. Built to remove guesswork.</p></div>
-          <div><div class="footer-title">Inside LAV</div><p>Contacts ties people to the plan. Packet turns those records into family-facing guidance.</p></div>
+          <div><div class="footer-title">Wallet role</div><p>Wallet records are the base layer for understanding assets, access paths, and recovery order.</p></div>
+          <div><div class="footer-title">LAV direction</div><p>Each record is meant to reduce confusion, reduce risk, and help trusted people act carefully.</p></div>
+          <div><div class="footer-title">Build status</div><p>The public structure is live. Real owner-side wallet handling comes next.</p></div>
         </div>
       </footer>
     </div>
