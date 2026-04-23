@@ -1,163 +1,373 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>NEB — Network Exchange Bot</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<style>
-body{
-background:#050509;
-color:#f5f7ff;
-font-family:system-ui,-apple-system,Segoe UI,Roboto;
-margin:0;
-}
-
-.wrapper{
-max-width:900px;
-margin:auto;
-padding:40px 20px 80px;
-}
-
-.logo{
-max-width:420px;
-width:100%;
-display:block;
-margin-bottom:30px;
-}
-
-.kicker{
-font-size:.75rem;
-letter-spacing:.18em;
-text-transform:uppercase;
-color:#9aa2c3;
-font-weight:900;
-margin-bottom:8px;
-}
-
-h1{
-margin:0;
-font-size:2.6rem;
-letter-spacing:.06em;
-}
-
-.sub{
-margin-top:8px;
-color:#38ff9c;
-font-weight:700;
-letter-spacing:.08em;
-text-transform:uppercase;
-}
-
-p{
-line-height:1.75;
-color:#cfd6de;
-}
-
-.section{
-margin-top:40px;
-}
-
-ul{
-line-height:1.8;
-}
-
-.card{
-border:1px solid #1a1b24;
-border-radius:18px;
-padding:28px;
-background:linear-gradient(180deg,#11121a,#050509);
-margin-top:30px;
-}
-
-.button{
-display:inline-block;
-margin-top:24px;
-padding:12px 16px;
-border-radius:999px;
-border:1px solid #38ff9c66;
-background:#38ff9c11;
-color:#fff;
-text-decoration:none;
-font-weight:700;
-font-size:.8rem;
-letter-spacing:.08em;
-text-transform:uppercase;
-}
-</style>
+  <meta charset="UTF-8">
+  <title>NEB — Network Exchange Bot</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="NEB — Network Exchange Bot. A trading bot for the XRP Ledger that monitors wallets, liquidity, and market momentum across the network and turns ledger activity into trades.">
+  <link rel="canonical" href="https://houseofcauliman.com/neb/">
+  <meta property="og:title" content="NEB — Network Exchange Bot">
+  <meta property="og:description" content="A trading bot for the XRP Ledger. Monitoring wallets, liquidity, and market momentum across the network. Turning ledger activity into trades.">
+  <meta property="og:image" content="https://houseofcauliman.com/neb/assets/neb_logo.png">
+  <meta property="og:url" content="https://houseofcauliman.com/neb/">
+  <meta property="og:type" content="website">
+  <style>
+    :root{
+      --bg:#050509;
+      --panel:#11121a;
+      --panel2:#0c1017;
+      --line:#1b2230;
+      --text:#f5f7ff;
+      --muted:#9aa2c3;
+      --soft:#717895;
+      --green:#38ff9c;
+      --green2:#22d37c;
+      --gold:#ffe175;
+      --radius:22px;
+      --shadow:0 18px 50px rgba(0,0,0,.45);
+      --max:1120px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(56,255,156,.08), transparent 28%),
+        radial-gradient(circle at top right, rgba(255,225,117,.06), transparent 20%),
+        linear-gradient(180deg,#040507 0%, #050509 100%);
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max);margin:0 auto;padding:28px 16px 70px}
+    .hero,
+    .card{
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:linear-gradient(180deg, rgba(17,18,26,.96), rgba(5,5,9,.98));
+      box-shadow:var(--shadow);
+    }
+    .hero{
+      padding:28px;
+      overflow:hidden;
+      position:relative;
+    }
+    .hero:before{
+      content:"";
+      position:absolute;
+      inset:auto auto 0 0;
+      width:380px;
+      height:380px;
+      background:radial-gradient(circle, rgba(56,255,156,.12) 0%, rgba(0,0,0,0) 70%);
+      pointer-events:none;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:24px;
+      align-items:center;
+      position:relative;
+      z-index:1;
+    }
+    @media (max-width:900px){
+      .hero-grid{grid-template-columns:1fr}
+    }
+    .logo{
+      width:100%;
+      max-width:560px;
+      height:auto;
+      display:block;
+      object-fit:contain;
+    }
+    .hud{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      border:1px solid rgba(255,225,117,.22);
+      border-radius:999px;
+      padding:8px 12px;
+      background:rgba(255,225,117,.08);
+      font-size:.78rem;
+      letter-spacing:.08em;
+      font-weight:900;
+      text-transform:uppercase;
+      color:#fff4c2;
+      margin:0 0 14px;
+    }
+    .dot{
+      width:10px;
+      height:10px;
+      border-radius:999px;
+      background:var(--gold);
+      box-shadow:0 0 0 3px rgba(255,225,117,.18);
+    }
+    h1{
+      margin:0;
+      font-size:clamp(2.1rem,5vw,4rem);
+      line-height:1.02;
+      letter-spacing:.05em;
+      text-transform:uppercase;
+    }
+    .sub{
+      margin:10px 0 0;
+      color:var(--green);
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-size:.92rem;
+    }
+    .lead{
+      margin:18px 0 0;
+      color:#d3daea;
+      font-size:1.02rem;
+      line-height:1.8;
+      max-width:720px;
+    }
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:22px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:46px;
+      padding:0 16px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:var(--text);
+      font-weight:800;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      font-size:.78rem;
+    }
+    .btn.primary{
+      border-color:rgba(56,255,156,.28);
+      background:rgba(56,255,156,.10);
+      color:#eafff4;
+    }
+    .hero-side{
+      display:grid;
+      gap:12px;
+    }
+    .mini{
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:var(--panel2);
+      padding:16px;
+    }
+    .mini h3{
+      margin:0 0 8px;
+      font-size:.82rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--soft);
+    }
+    .mini p{
+      margin:0;
+      color:#d3daea;
+      line-height:1.7;
+      font-size:.95rem;
+    }
+    .section{
+      margin-top:18px;
+      display:grid;
+      gap:18px;
+    }
+    .card{padding:24px}
+    .card h2{
+      margin:0 0 12px;
+      font-size:1.35rem;
+      letter-spacing:.05em;
+      text-transform:uppercase;
+    }
+    .card p{
+      margin:0 0 12px;
+      color:#d3daea;
+      line-height:1.8;
+    }
+    .grid-3,
+    .grid-2{
+      display:grid;
+      gap:14px;
+    }
+    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    @media (max-width:900px){
+      .grid-3,.grid-2{grid-template-columns:1fr}
+    }
+    .info{
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:16px;
+      background:var(--panel2);
+    }
+    .info h3{
+      margin:0 0 8px;
+      font-size:.82rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--green);
+    }
+    .info p,.info ul{
+      margin:0;
+      color:#d3daea;
+      line-height:1.75;
+      font-size:.95rem;
+    }
+    .info ul{padding-left:18px}
+    .footer{
+      margin-top:18px;
+      text-align:center;
+      color:var(--soft);
+      font-size:.82rem;
+    }
+  </style>
 </head>
-
 <body>
+  <div class="wrap">
 
-<div class="wrapper">
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="hud"><span class="dot"></span><span>ACTIVE BUILD</span></div>
+          <h1>NEB</h1>
+          <p class="sub">Network Exchange Bot</p>
+          <p class="lead">
+            NEB is a trading bot for the XRP Ledger. It monitors wallets, liquidity, and market momentum across the network and turns ledger activity into trades.
+          </p>
+          <div class="hero-actions">
+            <a class="btn primary" href="https://x.com/NEB_XRPL" target="_blank" rel="noopener">Follow NEB on 𝕏</a>
+            <a class="btn" href="/">Back to House</a>
+          </div>
+        </div>
+        <div>
+          <img src="/neb/assets/neb_logo.webp" alt="NEB — Network Exchange Bot" class="logo">
+        </div>
+      </div>
+    </section>
 
-<img src="/neb/assets/neb_logo.webp" class="logo">
+    <section class="section">
+      <div class="grid-3">
+        <div class="mini">
+          <h3>What It Is</h3>
+          <p>Automated trading infrastructure for XRPL markets.</p>
+        </div>
+        <div class="mini">
+          <h3>What It Watches</h3>
+          <p>Wallets, liquidity, market momentum, order flow, and exchange conditions.</p>
+        </div>
+        <div class="mini">
+          <h3>What It Does</h3>
+          <p>Scans for trading opportunities and executes under strict rules and controls.</p>
+        </div>
+      </div>
 
+      <div class="card">
+        <h2>What NEB Is</h2>
+        <p>
+          NEB is designed to watch the network itself instead of waiting for charts to tell the story after the move already happened.
+        </p>
+        <p>
+          The job is simple: detect trading opportunities, validate the setup, and execute under rules.
+        </p>
+      </div>
 
-<h1>NEB</h1>
-<p class="sub">Network Exchange Bot</p>
+      <div class="grid-2">
+        <div class="card">
+          <h2>What NEB Watches</h2>
+          <div class="info">
+            <ul>
+              <li>Wallet activity</li>
+              <li>Liquidity movement</li>
+              <li>Order book behavior</li>
+              <li>Market momentum</li>
+              <li>Exchange conditions across XRPL markets</li>
+            </ul>
+          </div>
+        </div>
 
-<div class="card">
+        <div class="card">
+          <h2>What NEB Does</h2>
+          <div class="info">
+            <ul>
+              <li>Scans XRPL market activity</li>
+              <li>Surfaces tradeable conditions</li>
+              <li>Validates setups before action</li>
+              <li>Executes under controlled logic</li>
+              <li>Logs behavior for review and refinement</li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
-<p>
-NEB is an automated trading bot for the XRP Ledger.
-</p>
+      <div class="card">
+        <h2>Build Status</h2>
+        <div class="grid-3">
+          <div class="info">
+            <h3>Market Scanner</h3>
+            <p>Reads XRPL activity and identifies potential trading opportunities.</p>
+          </div>
+          <div class="info">
+            <h3>Strategy Engine</h3>
+            <p>Scores market conditions using liquidity, momentum, and execution quality.</p>
+          </div>
+          <div class="info">
+            <h3>Controlled Execution</h3>
+            <p>Applies strict rules before any live trading behavior is trusted.</p>
+          </div>
+        </div>
+      </div>
 
-<p>
-Its purpose is simple: detect market inefficiencies and capture edge automatically.
-</p>
+      <div class="grid-2">
+        <div class="card">
+          <h2>Product Rules</h2>
+          <div class="info">
+            <ul>
+              <li>Non-custodial by design</li>
+              <li>No profit promises</li>
+              <li>Infrastructure first</li>
+              <li>Risk controls before scale</li>
+              <li>Wallet remains identity</li>
+            </ul>
+          </div>
+        </div>
 
-<p>
-The bot scans XRPL order books, liquidity pools, and routing paths looking for spreads,
-mispriced liquidity, and execution opportunities.
-</p>
+        <div class="card">
+          <h2>Future Direction</h2>
+          <div class="info">
+            <ul>
+              <li>XRPL-first architecture</li>
+              <li>Strategy validation before scale</li>
+              <li>Controlled live execution after proof</li>
+              <li>AUGUR-informed trading later</li>
+              <li>XRPL retention system required for paid access</li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
-</div>
+      <div class="card">
+        <h2>Why It Matters</h2>
+        <p>
+          Most people react after the move. NEB is built to watch the network itself.
+        </p>
+        <p>
+          It exists to turn raw XRPL activity into actual trading behavior.
+        </p>
+        <p>
+          AUGUR reads the ledger. NEB trades the ledger.
+        </p>
+      </div>
+    </section>
 
-<div class="section">
+    <div class="footer">
+      NEB — Network Exchange Bot • House of Cauliman
+    </div>
 
-<h2>What NEB Does</h2>
-
-<ul>
-<li>Scans XRPL order books for spread opportunities</li>
-<li>Identifies liquidity inefficiencies across trading pairs</li>
-<li>Executes automated trades when profitable conditions appear</li>
-<li>Operates without custody of user funds</li>
-</ul>
-
-</div>
-
-<div class="section">
-
-<h2>Build Roadmap</h2>
-
-<ul>
-<li>Market scanning engine</li>
-<li>Paper trading environment</li>
-<li>Strategy testing and safety controls</li>
-<li>Controlled live trading deployment</li>
-</ul>
-
-</div>
-
-<div class="section">
-
-<h2>Why It Exists</h2>
-
-<p>
-Crypto markets constantly produce small inefficiencies.
-NEB is designed to detect those edges and capture them automatically.
-</p>
-
-<p>
-It is infrastructure — not a hype product.
-</p>
-
-</div>
-
-<a class="button" href="/">Back to House</a>
-
-</div>
-
+  </div>
 </body>
 </html>
