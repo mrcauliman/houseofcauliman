@@ -1,613 +1,615 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>NEB — Network Exchange Bot</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="NEB — Network Exchange Bot. A trading bot for the XRP Ledger that monitors wallets, liquidity, and market momentum across the network and turns ledger activity into trades.">
-  <link rel="canonical" href="https://houseofcauliman.com/neb/">
-  <meta property="og:title" content="NEB — Network Exchange Bot">
-  <meta property="og:description" content="A trading bot for the XRP Ledger. Monitoring wallets, liquidity, and market momentum across the network. Turning ledger activity into trades.">
-  <meta property="og:image" content="https://houseofcauliman.com/neb/assets/neb_logo.png">
-  <meta property="og:url" content="https://houseofcauliman.com/neb/">
-  <meta property="og:type" content="website">
-  <style>
-    :root{
-      --bg:#050509;
-      --panel:#11121a;
-      --panel2:#0c1017;
-      --line:#1b2230;
-      --text:#f5f7ff;
-      --muted:#9aa2c3;
-      --soft:#717895;
-      --green:#38ff9c;
-      --green2:#22d37c;
-      --gold:#ffe175;
-      --radius:22px;
-      --shadow:0 18px 50px rgba(0,0,0,.45);
-      --max:1120px;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      color:var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(56,255,156,.08), transparent 28%),
-        radial-gradient(circle at top right, rgba(255,225,117,.06), transparent 20%),
-        linear-gradient(180deg,#040507 0%, #050509 100%);
-    }
-    a{color:inherit;text-decoration:none}
-    .wrap{max-width:var(--max);margin:0 auto;padding:28px 16px 70px}
-    .hero,
-    .card{
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      background:linear-gradient(180deg, rgba(17,18,26,.96), rgba(5,5,9,.98));
-      box-shadow:var(--shadow);
-    }
-    .hero{
-      padding:28px;
-      overflow:hidden;
-      position:relative;
-    }
-    .hero:before{
-      content:"";
-      position:absolute;
-      inset:auto auto 0 0;
-      width:380px;
-      height:380px;
-      background:radial-gradient(circle, rgba(56,255,156,.12) 0%, rgba(0,0,0,0) 70%);
-      pointer-events:none;
-    }
-    .hero-grid{
-      display:grid;
-      grid-template-columns:1.2fr .8fr;
-      gap:24px;
-      align-items:center;
-      position:relative;
-      z-index:1;
-    }
-    @media (max-width:900px){
-      .hero-grid{grid-template-columns:1fr}
-    }
-    .logo{
-      width:100%;
-      max-width:560px;
-      height:auto;
-      display:block;
-      object-fit:contain;
-    }
-    .hud{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      border:1px solid rgba(255,225,117,.22);
-      border-radius:999px;
-      padding:8px 12px;
-      background:rgba(255,225,117,.08);
-      font-size:.78rem;
-      letter-spacing:.08em;
-      font-weight:900;
-      text-transform:uppercase;
-      color:#fff4c2;
-      margin:0 0 14px;
-    }
-    .dot{
-      width:10px;
-      height:10px;
-      border-radius:999px;
-      background:var(--gold);
-      box-shadow:0 0 0 3px rgba(255,225,117,.18);
-    }
-    h1{
-      margin:0;
-      font-size:clamp(2.1rem,5vw,4rem);
-      line-height:1.02;
-      letter-spacing:.05em;
-      text-transform:uppercase;
-    }
-    .sub{
-      margin:10px 0 0;
-      color:var(--green);
-      font-weight:800;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      font-size:.92rem;
-    }
-    .lead{
-      margin:18px 0 0;
-      color:#d3daea;
-      font-size:1.02rem;
-      line-height:1.8;
-      max-width:720px;
-    }
-    .hero-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-top:22px;
-    }
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:46px;
-      padding:0 16px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      color:var(--text);
-      font-weight:800;
-      letter-spacing:.06em;
-      text-transform:uppercase;
-      font-size:.78rem;
-    }
-    .btn.primary{
-      border-color:rgba(56,255,156,.28);
-      background:rgba(56,255,156,.10);
-      color:#eafff4;
-    }
-    .hero-side{
-      display:grid;
-      gap:12px;
-    }
-    .mini{
-      border:1px solid var(--line);
-      border-radius:18px;
-      background:var(--panel2);
-      padding:16px;
-    }
-    .mini h3{
-      margin:0 0 8px;
-      font-size:.82rem;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      color:var(--soft);
-    }
-    .mini p{
-      margin:0;
-      color:#d3daea;
-      line-height:1.7;
-      font-size:.95rem;
-    }
-    .section{
-      margin-top:18px;
-      display:grid;
-      gap:18px;
-    }
-    .card{padding:24px}
-    .card h2{
-      margin:0 0 12px;
-      font-size:1.35rem;
-      letter-spacing:.05em;
-      text-transform:uppercase;
-    }
-    .card p{
-      margin:0 0 12px;
-      color:#d3daea;
-      line-height:1.8;
-    }
-    .grid-3,
-    .grid-2{
-      display:grid;
-      gap:14px;
-    }
-    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
-    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
-    @media (max-width:900px){
-      .grid-3,.grid-2{grid-template-columns:1fr}
-    }
-    .info{
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:16px;
-      background:var(--panel2);
-    }
-    .info h3{
-      margin:0 0 8px;
-      font-size:.82rem;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      color:var(--green);
-    }
-    .info p,.info ul{
-      margin:0;
-      color:#d3daea;
-      line-height:1.75;
-      font-size:.95rem;
-    }
-    .info ul{padding-left:18px}
-    .footer{
-      margin-top:18px;
-      text-align:center;
-      color:var(--soft);
-      font-size:.82rem;
-    }
-    .control-preview{margin-top:28px;border:1px solid rgba(56,255,156,.24);border-radius:28px;padding:24px;background:linear-gradient(180deg,rgba(13,16,23,.98),rgba(5,7,11,.99));box-shadow:var(--shadow)}
-    .control-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:18px;margin-bottom:18px}
-    .control-title h2{margin:0;font-size:clamp(1.45rem,3vw,2.25rem);letter-spacing:.08em;text-transform:uppercase}
-    .control-title p{max-width:760px;margin:10px 0 0;color:#cfd7e8}
-    .control-badges{display:flex;flex-wrap:wrap;gap:10px}
-    .status-chip{border:1px solid var(--line);border-radius:999px;padding:8px 11px;background:rgba(255,255,255,.035);color:var(--muted);font-size:.74rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
-    .status-chip.green{border-color:rgba(56,255,156,.34);color:var(--green);background:rgba(56,255,156,.07)}
-    .status-chip.gold{border-color:rgba(255,225,117,.34);color:var(--gold);background:rgba(255,225,117,.07)}
-    .control-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-    @media(max-width:1100px){.control-grid{grid-template-columns:repeat(2,minmax(0,1fr)}}
-    @media(max-width:680px){.control-grid{grid-template-columns:1fr}}
-    .control-panel{border:1px solid var(--line);border-radius:20px;padding:16px;background:rgba(18,23,34,.72);min-height:210px}
-    .control-panel h3{margin:0 0 12px;color:var(--green);font-size:.86rem;letter-spacing:.16em;text-transform:uppercase}
-    .feed-row,.risk-row,.journal-row{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-top:1px solid rgba(255,255,255,.07);color:#d7deee;font-size:.92rem}
-    .feed-row:first-of-type,.risk-row:first-of-type,.journal-row:first-of-type{border-top:0}
-    .row-value{color:var(--soft);font-weight:800;font-size:.78rem;letter-spacing:.07em;text-transform:uppercase}
-    .scanner-table{width:100%;border-collapse:collapse;margin-top:6px;font-size:.86rem}
-    .scanner-table th,.scanner-table td{padding:10px 8px;border-top:1px solid rgba(255,255,255,.07);text-align:left;color:#d7deee}
-    .scanner-table th{color:var(--soft);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}
-    .preview-note{margin-top:16px;padding:14px 15px;border:1px solid rgba(255,225,117,.24);border-radius:16px;background:rgba(255,225,117,.06);color:#f4e8bd;font-size:.92rem}  
-
-    .control-preview .feed-row,
-    .control-preview .risk-row,
-    .control-preview .journal-row{
-      display:grid;
-      grid-template-columns:minmax(0,1fr) auto;
-      align-items:center;
-      gap:14px;
-      padding:10px 0;
-      border-top:1px solid rgba(255,255,255,.08);
-      color:#d7deee;
-      font-size:.92rem;
-    }
-    .control-preview .feed-row span:first-child,
-    .control-preview .risk-row span:first-child,
-    .control-preview .journal-row span:first-child{
-      min-width:0;
-      padding-right:8px;
-    }
-    .control-preview .row-value{
-      justify-self:end;
-      color:var(--soft);
-      font-weight:900;
-      font-size:.74rem;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      white-space:nowrap;
-    }
-    .control-preview .scanner-table th,
-    .control-preview .scanner-table td{
-      padding:10px 10px;
-      vertical-align:middle;
-    }
-    .control-preview .control-panel{
-      min-height:230px;
-    }
-
-  
-    /* NEB Control Room hard layout fix */
-    .control-preview{
-      max-width:100%;
-    }
-    .control-preview .control-grid{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:16px;
-    }
-    @media(max-width:760px){
-      .control-preview .control-grid{
-        grid-template-columns:1fr;
-      }
-    }
-    .control-preview .control-panel{
-      min-height:auto;
-    }
-    .control-preview .feed-row,
-    .control-preview .risk-row,
-    .control-preview .journal-row{
-      display:block;
-      padding:11px 0;
-      border-top:1px solid rgba(255,255,255,.08);
-      color:#d7deee;
-      font-size:.94rem;
-      line-height:1.35;
-    }
-    .control-preview .feed-row:first-of-type,
-    .control-preview .risk-row:first-of-type,
-    .control-preview .journal-row:first-of-type{
-      border-top:0;
-    }
-    .control-preview .row-value{
-      display:block;
-      margin-top:3px;
-      color:var(--soft);
-      font-weight:900;
-      font-size:.72rem;
-      letter-spacing:.09em;
-      text-transform:uppercase;
-      white-space:normal;
-    }
-    .control-preview .scanner-table{
-      width:100%;
-      table-layout:auto;
-      border-collapse:collapse;
-    }
-    .control-preview .scanner-table th,
-    .control-preview .scanner-table td{
-      padding:11px 12px;
-      border-top:1px solid rgba(255,255,255,.08);
-      text-align:left;
-      line-height:1.35;
-    }
-
-  
-    /* NEB Control Room mobile containment fix */
-    @media(max-width:760px){
-      #control-room-preview{
-        padding:18px !important;
-        margin-left:0 !important;
-        margin-right:0 !important;
-        overflow:hidden !important;
-      }
-      #control-room-preview div[style*="grid-template-columns:repeat(2"]{
-        grid-template-columns:1fr !important;
-      }
-      #control-room-preview h2{
-        font-size:1.55rem !important;
-        line-height:1.08 !important;
-        overflow-wrap:anywhere !important;
-      }
-      #control-room-preview table{
-        display:block !important;
-        width:100% !important;
-        overflow-x:auto !important;
-        -webkit-overflow-scrolling:touch !important;
-      }
-      #control-room-preview th,
-      #control-room-preview td{
-        white-space:nowrap !important;
-      }
-      #control-room-preview span{
-        max-width:100% !important;
-      }
-    }
-
-  
-    /* NEB Control Room true mobile fix */
-    @media(max-width:760px){
-      #control-room-preview{
-        padding:18px !important;
-        overflow:hidden !important;
-      }
-      #control-room-grid{
-        display:grid !important;
-        grid-template-columns:1fr !important;
-        gap:14px !important;
-      }
-      #control-room-preview h2{
-        font-size:1.9rem !important;
-        line-height:1.06 !important;
-        overflow-wrap:anywhere !important;
-      }
-      #control-room-preview table{
-        width:100% !important;
-        display:block !important;
-        overflow-x:auto !important;
-        -webkit-overflow-scrolling:touch !important;
-      }
-      #control-room-preview th,
-      #control-room-preview td{
-        white-space:nowrap !important;
-      }
-    }
-
-  </style>
-  <meta name="apple-mobile-web-app-title" content="NEB" />
-  <meta name="application-name" content="NEB" />
-  <!-- favicon: NEB -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NEB | Network Exchange Bot</title>
+  <meta name="description" content="NEB is a build-preview trading bot interface for the XRP Ledger. Scanner first. Paper trading before live execution. Risk controls before scale." />
+  <meta property="og:title" content="NEB | Network Exchange Bot" />
+  <meta property="og:description" content="A build-preview trading bot interface for the XRP Ledger. Scanner first. Execution off." />
+  <meta property="og:image" content="https://houseofcauliman.com/neb/assets/neb_logo.png" />
+  <meta property="og:url" content="https://houseofcauliman.com/neb/" />
+  <meta property="og:type" content="website" />
   <link rel="icon" href="/assets/favicons/neb/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/neb/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/neb/favicon-16x16.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/neb/apple-touch-icon.png" />
+
+  <style>
+    :root{
+      --bg:#05070b;
+      --panel:#0d121c;
+      --panel2:#111827;
+      --line:#1f2a3d;
+      --line2:rgba(56,255,156,.28);
+      --text:#f5f7ff;
+      --muted:#a7b0ca;
+      --soft:#737d9b;
+      --green:#38ff9c;
+      --gold:#ffe175;
+      --red:#ff6b6b;
+      --shadow:0 22px 70px rgba(0,0,0,.46);
+      --max:1120px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;max-width:100%;overflow-x:hidden}
+    body{
+      min-height:100vh;
+      background:
+        radial-gradient(circle at 18% 0%, rgba(56,255,156,.12), transparent 28%),
+        radial-gradient(circle at 90% 14%, rgba(88,166,255,.10), transparent 26%),
+        linear-gradient(180deg,#040609 0%, #05070b 100%);
+      color:var(--text);
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      line-height:1.55;
+    }
+
+    a{color:inherit;text-decoration:none}
+    .wrap{
+      width:min(var(--max), calc(100% - 32px));
+      margin:0 auto;
+      padding:18px 0 52px;
+    }
+
+    .shell{
+      display:grid;
+      gap:18px;
+    }
+
+    .hero,
+    .control,
+    .section-card,
+    .mini-card{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(17,24,39,.88), rgba(8,12,19,.96));
+      box-shadow:var(--shadow);
+    }
+
+    .hero{
+      border-radius:26px;
+      padding:24px;
+      overflow:hidden;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:22px;
+      align-items:center;
+    }
+
+    .hud{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border:1px solid rgba(255,225,117,.28);
+      background:rgba(255,225,117,.07);
+      color:var(--gold);
+      border-radius:999px;
+      padding:7px 10px;
+      font-size:.68rem;
+      font-weight:950;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+
+    .hud-dot{
+      width:8px;
+      height:8px;
+      border-radius:999px;
+      background:var(--gold);
+      box-shadow:0 0 0 4px rgba(255,225,117,.13);
+    }
+
+    h1{
+      margin:14px 0 0;
+      font-size:clamp(3rem,12vw,6.6rem);
+      line-height:.88;
+      letter-spacing:.045em;
+      text-transform:uppercase;
+    }
+
+    .sub{
+      margin:10px 0 0;
+      color:var(--green);
+      font-size:.82rem;
+      font-weight:950;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+    }
+
+    .lead{
+      max-width:780px;
+      margin:16px 0 0;
+      color:#d9deed;
+      font-size:1rem;
+    }
+
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:42px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:0 15px;
+      background:rgba(255,255,255,.04);
+      color:#f7f9ff;
+      font-size:.75rem;
+      font-weight:950;
+      letter-spacing:.09em;
+      text-transform:uppercase;
+    }
+
+    .btn.primary{
+      border-color:rgba(56,255,156,.4);
+      background:rgba(56,255,156,.09);
+      color:var(--green);
+    }
+
+    .logo-box{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      min-height:170px;
+    }
+
+    .logo{
+      width:min(260px, 76vw);
+      height:auto;
+      display:block;
+      filter:drop-shadow(0 18px 32px rgba(0,0,0,.45));
+    }
+
+    .status-strip{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:10px;
+    }
+
+    .status{
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:14px;
+      background:rgba(17,24,39,.72);
+    }
+
+    .label{
+      color:var(--soft);
+      font-size:.7rem;
+      font-weight:950;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+    }
+
+    .value{
+      margin-top:4px;
+      font-size:1.05rem;
+      font-weight:950;
+      color:#fff;
+    }
+
+    .value.green{color:var(--green)}
+    .value.gold{color:var(--gold)}
+    .value.red{color:var(--red)}
+
+    .control{
+      border-color:var(--line2);
+      border-radius:28px;
+      padding:22px;
+    }
+
+    .control-head{
+      display:grid;
+      gap:14px;
+      margin-bottom:20px;
+    }
+
+    .control h2{
+      margin:0;
+      font-size:clamp(1.75rem,8vw,3rem);
+      line-height:1.02;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .control-copy{
+      margin:0;
+      max-width:780px;
+      color:#d6dceb;
+      font-size:1rem;
+    }
+
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .chip{
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:8px 11px;
+      background:rgba(255,255,255,.04);
+      color:var(--muted);
+      font-size:.7rem;
+      font-weight:950;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      white-space:nowrap;
+    }
+
+    .chip.green{
+      border-color:rgba(56,255,156,.42);
+      color:var(--green);
+      background:rgba(56,255,156,.08);
+    }
+
+    .chip.gold{
+      border-color:rgba(255,225,117,.42);
+      color:var(--gold);
+      background:rgba(255,225,117,.08);
+    }
+
+    .chip.red{
+      border-color:rgba(255,107,107,.38);
+      color:var(--red);
+      background:rgba(255,107,107,.07);
+    }
+
+    .control-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:14px;
+    }
+
+    .panel{
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:17px;
+      background:rgba(17,24,39,.72);
+      min-width:0;
+    }
+
+    .panel h3{
+      margin:0 0 16px;
+      color:var(--green);
+      font-size:.82rem;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+    }
+
+    .rows{
+      display:grid;
+      gap:12px;
+    }
+
+    .row{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:3px;
+      min-width:0;
+    }
+
+    .row strong{
+      color:#fff;
+      font-size:1rem;
+      line-height:1.25;
+    }
+
+    .row span{
+      color:var(--soft);
+      font-size:.74rem;
+      font-weight:950;
+      letter-spacing:.11em;
+      text-transform:uppercase;
+    }
+
+    .opp-list{
+      display:grid;
+      gap:10px;
+    }
+
+    .opp{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:7px;
+      border-top:1px solid rgba(255,255,255,.07);
+      padding-top:10px;
+    }
+
+    .opp:first-child{
+      border-top:0;
+      padding-top:0;
+    }
+
+    .opp div{
+      min-width:0;
+    }
+
+    .opp small{
+      display:block;
+      color:var(--soft);
+      font-size:.68rem;
+      font-weight:950;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:2px;
+    }
+
+    .opp b{
+      display:block;
+      font-size:.95rem;
+      color:#fff;
+      overflow-wrap:anywhere;
+    }
+
+    .note{
+      margin-top:14px;
+      border:1px solid rgba(255,225,117,.28);
+      border-radius:16px;
+      padding:13px 14px;
+      background:rgba(255,225,117,.06);
+      color:#f4e8bd;
+      font-size:.92rem;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:14px;
+    }
+
+    .section-card{
+      border-radius:24px;
+      padding:22px;
+    }
+
+    .section-card h2{
+      margin:0 0 10px;
+      font-size:1.28rem;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+
+    .section-card p{
+      margin:0;
+      color:#d6dceb;
+    }
+
+    .mini-card{
+      border-radius:18px;
+      padding:17px;
+    }
+
+    .mini-card h3{
+      margin:0 0 8px;
+      color:var(--green);
+      font-size:.82rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+    }
+
+    .mini-card p{
+      margin:0;
+      color:#d6dceb;
+      font-size:.95rem;
+    }
+
+    ul{
+      margin:8px 0 0;
+      padding-left:18px;
+      color:#d6dceb;
+    }
+
+    li{margin:6px 0}
+
+    .footer{
+      color:var(--soft);
+      text-align:center;
+      font-size:.78rem;
+      margin-top:18px;
+    }
+
+    @media(min-width:720px){
+      .wrap{padding-top:24px}
+      .hero{padding:28px}
+      .hero-grid{
+        grid-template-columns:1.15fr .85fr;
+      }
+      .status-strip{
+        grid-template-columns:repeat(4,minmax(0,1fr));
+      }
+      .control{padding:28px}
+      .control-head{
+        grid-template-columns:1fr;
+      }
+      .control-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+      .grid.two{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+      .grid.three{
+        grid-template-columns:repeat(3,minmax(0,1fr));
+      }
+      .opp{
+        grid-template-columns:1fr 1fr 1fr;
+        gap:12px;
+      }
+    }
+
+    @media(max-width:390px){
+      .wrap{width:min(100% - 22px, var(--max))}
+      .hero,.control,.section-card{border-radius:20px;padding:18px}
+      .panel{padding:15px}
+      .chip{font-size:.64rem;padding:7px 9px}
+    }
+  </style>
 </head>
+
 <body>
   <div class="wrap">
+    <main class="shell">
 
-    <section class="hero">
-      <div class="hero-grid">
-        <div>
-          <div class="hud"><span class="dot"></span><span>ACTIVE BUILD</span></div>
-          <h1>NEB</h1>
-          <p class="sub">Network Exchange Bot</p>
-          <p class="lead">
-            NEB is a trading bot for the XRP Ledger. It monitors wallets, liquidity, and market momentum across the network and turns ledger activity into trades.
-          </p>
-          <div class="hero-actions">
-            <a class="btn primary" href="https://x.com/NEB_XRPL" target="_blank" rel="noopener">Follow NEB on 𝕏</a>
-            <a class="btn" href="/">Back to House</a>
+      <section class="hero">
+        <div class="hero-grid">
+          <div>
+            <div class="hud"><span class="hud-dot"></span><span>Build Preview</span></div>
+            <h1>NEB</h1>
+            <p class="sub">Network Exchange Bot</p>
+            <p class="lead">
+              NEB is a trading bot build for the XRP Ledger. The live page now shows the intended control-room direction without pretending execution is active.
+            </p>
+            <div class="actions">
+              <a class="btn primary" href="https://x.com/NEB_XRPL" target="_blank" rel="noopener">Follow NEB on 𝕏</a>
+              <a class="btn" href="/">Back to House</a>
+            </div>
+          </div>
+          <div class="logo-box">
+            <img src="/neb/assets/neb_logo.webp" alt="NEB Network Exchange Bot logo" class="logo" />
           </div>
         </div>
-        <div>
-          <img src="/neb/assets/neb_logo.webp" alt="NEB — Network Exchange Bot" class="logo">
-        </div>
-      </div>
-    </section>
+      </section>
 
+      <section class="status-strip" aria-label="NEB status">
+        <div class="status"><div class="label">Current State</div><div class="value gold">Mockup</div></div>
+        <div class="status"><div class="label">Mode</div><div class="value green">Scanner First</div></div>
+        <div class="status"><div class="label">Wallet Access</div><div class="value red">None</div></div>
+        <div class="status"><div class="label">Execution</div><div class="value red">Off</div></div>
+      </section>
 
-
-    <section class="control-preview" id="control-room-preview" style="margin-top:28px;border:1px solid rgba(56,255,156,.34);border-radius:28px;padding:26px;background:linear-gradient(180deg,rgba(13,16,23,.98),rgba(5,7,11,.99));box-shadow:var(--shadow);">
-      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:18px;margin-bottom:24px;">
-        <div style="max-width:780px;">
-          <h2 style="margin:0;font-size:clamp(1.65rem,3vw,2.55rem);line-height:1.05;letter-spacing:.08em;text-transform:uppercase;">NEB Control Room Preview</h2>
-          <p style="margin:12px 0 0;color:#cfd7e8;max-width:760px;">This interface is a visual build preview. Live execution is not active. NEB starts as a scanner, then moves into paper trading, manual confirmation, and controlled execution only after the system is proven.</p>
-        </div>
-        <div style="display:flex;flex-wrap:wrap;gap:10px;align-content:flex-start;">
-          <span style="border:1px solid rgba(56,255,156,.42);border-radius:999px;padding:8px 11px;background:rgba(56,255,156,.08);color:var(--green);font-size:.74rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;">ACTIVE BUILD</span>
-          <span style="border:1px solid rgba(255,225,117,.42);border-radius:999px;padding:8px 11px;background:rgba(255,225,117,.08);color:var(--gold);font-size:.74rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;">SCANNER ONLY</span>
-          <span style="border:1px solid var(--line);border-radius:999px;padding:8px 11px;background:rgba(255,255,255,.035);color:var(--muted);font-size:.74rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;">XRPL MOCK OFFLINE</span>
-          <span style="border:1px solid rgba(255,225,117,.42);border-radius:999px;padding:8px 11px;background:rgba(255,225,117,.08);color:var(--gold);font-size:.74rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;">KILL SWITCH ARMED</span>
-        </div>
-      </div>
-
-      <div id="control-room-grid" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;">
-        <div style="border:1px solid var(--line);border-radius:20px;padding:18px;background:rgba(18,23,34,.72);">
-          <h3 style="margin:0 0 14px;color:var(--green);font-size:.86rem;letter-spacing:.16em;text-transform:uppercase;">Market Feeds</h3>
-          <p><strong>Order Books</strong><br><span style="color:var(--soft);font-size:.76rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;">Preview</span></p>
-          <p><strong>AMM State</strong><br><span style="color:var(--soft);font-size:.76rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;">Preview</span></p>
-          <p><strong>Wallet Watch</strong><br><span style="color:var(--soft);font-size:.76rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;">Preview</span></p>
-          <p><strong>Ledger Close</strong><br><span style="color:var(--soft);font-size:.76rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;">Locked</span></p>
+      <section class="control" id="control-room-preview">
+        <div class="control-head">
+          <div>
+            <h2>Control Room Preview</h2>
+            <p class="control-copy">
+              Visual interface only. No wallet connection. No live feed. No order placement. NEB starts with scanner logic, then paper trading, then manual confirmation before any controlled execution.
+            </p>
+          </div>
+          <div class="chips">
+            <span class="chip gold">Interface Mockup</span>
+            <span class="chip green">Scanner First</span>
+            <span class="chip red">Execution Off</span>
+            <span class="chip gold">Kill Switch Required</span>
+          </div>
         </div>
 
-        <div style="border:1px solid var(--line);border-radius:20px;padding:18px;background:rgba(18,23,34,.72);">
-          <h3 style="margin:0 0 14px;color:var(--green);font-size:.86rem;letter-spacing:.16em;text-transform:uppercase;">Opportunity Scanner</h3>
-          <table style="width:100%;border-collapse:collapse;">
-            <thead><tr><th style="text-align:left;padding:8px;color:var(--soft);">Pair</th><th style="text-align:left;padding:8px;color:var(--soft);">Signal</th><th style="text-align:left;padding:8px;color:var(--soft);">Score</th></tr></thead>
-            <tbody>
-              <tr><td style="padding:8px;">XRP/USD</td><td style="padding:8px;">Spread</td><td style="padding:8px;">Mock</td></tr>
-              <tr><td style="padding:8px;">XRP/IOU</td><td style="padding:8px;">Liquidity</td><td style="padding:8px;">Mock</td></tr>
-              <tr><td style="padding:8px;">AMM Route</td><td style="padding:8px;">Dislocation</td><td style="padding:8px;">Mock</td></tr>
-            </tbody>
-          </table>
+        <div class="control-grid">
+          <article class="panel">
+            <h3>Market Feeds</h3>
+            <div class="rows">
+              <div class="row"><strong>Order Books</strong><span>Planned feed</span></div>
+              <div class="row"><strong>AMM State</strong><span>Planned feed</span></div>
+              <div class="row"><strong>Wallet Watch</strong><span>Planned feed</span></div>
+              <div class="row"><strong>Ledger Close</strong><span>Planned feed</span></div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <h3>Opportunity Scanner</h3>
+            <div class="opp-list">
+              <div class="opp">
+                <div><small>Pair</small><b>XRP/USD</b></div>
+                <div><small>Signal</small><b>Spread</b></div>
+                <div><small>Status</small><b>Mock</b></div>
+              </div>
+              <div class="opp">
+                <div><small>Pair</small><b>XRP/IOU</b></div>
+                <div><small>Signal</small><b>Liquidity</b></div>
+                <div><small>Status</small><b>Mock</b></div>
+              </div>
+              <div class="opp">
+                <div><small>Pair</small><b>AMM Route</b></div>
+                <div><small>Signal</small><b>Dislocation</b></div>
+                <div><small>Status</small><b>Mock</b></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <h3>Risk Rails</h3>
+            <div class="rows">
+              <div class="row"><strong>Slippage Guard</strong><span>Required before live</span></div>
+              <div class="row"><strong>Liquidity Floor</strong><span>Required before live</span></div>
+              <div class="row"><strong>Daily Stop</strong><span>Required before live</span></div>
+              <div class="row"><strong>Execution Lock</strong><span>On by default</span></div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <h3>Activity Journal</h3>
+            <div class="rows">
+              <div class="row"><strong>Observations</strong><span>Future log</span></div>
+              <div class="row"><strong>Rejections</strong><span>Future log</span></div>
+              <div class="row"><strong>Candidates</strong><span>Future log</span></div>
+              <div class="row"><strong>Paper Trades</strong><span>Locked until phase 2</span></div>
+            </div>
+          </article>
         </div>
 
-        <div style="border:1px solid var(--line);border-radius:20px;padding:18px;background:rgba(18,23,34,.72);">
-          <h3 style="margin:0 0 14px;color:var(--green);font-size:.86rem;letter-spacing:.16em;text-transform:uppercase;">Risk Rails</h3>
-          <p><strong>Slippage Guard</strong><br><span style="color:var(--soft);font-size:.76rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;">Armed</span></p>
-          <p><strong>Liquidity Floor</strong><br><span style="color:var(--soft);font-size:.76rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;">Armed</span></p>
-          <p><strong>Daily Stop</strong><br><span style="color:var(--soft);font-size:.76rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;">Armed</span></p>
-          <p><strong>Execution Lock</strong><br><span style="color:var(--soft);font-size:.76rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;">Disabled</span></p>
+        <div class="note">
+          Preview only. This page does not trade, connect to wallets, read live market feeds, or execute orders.
         </div>
+      </section>
 
-        <div style="border:1px solid var(--line);border-radius:20px;padding:18px;background:rgba(18,23,34,.72);">
-          <h3 style="margin:0 0 14px;color:var(--green);font-size:.86rem;letter-spacing:.16em;text-transform:uppercase;">Activity Journal</h3>
-          <p><strong>Observations</strong><br><span style="color:var(--soft);font-size:.76rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;">Pending</span></p>
-          <p><strong>Rejections</strong><br><span style="color:var(--soft);font-size:.76rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;">Pending</span></p>
-          <p><strong>Candidates</strong><br><span style="color:var(--soft);font-size:.76rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;">Pending</span></p>
-          <p><strong>Paper Trades</strong><br><span style="color:var(--soft);font-size:.76rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;">Locked</span></p>
-        </div>
-      </div>
-
-      <div style="margin-top:16px;padding:14px 15px;border:1px solid rgba(255,225,117,.24);border-radius:16px;background:rgba(255,225,117,.06);color:#f4e8bd;font-size:.92rem;">Preview only. This UI does not place trades, connect to wallets, or execute orders.</div>
-    </section>
-
-
-
-    <section class="section">
-      <div class="grid-3">
-        <div class="mini">
+      <section class="grid three">
+        <div class="mini-card">
           <h3>What It Is</h3>
-          <p>Automated trading infrastructure for XRPL markets.</p>
+          <p>Automated trading infrastructure concept for XRPL markets.</p>
         </div>
-        <div class="mini">
+        <div class="mini-card">
           <h3>What It Watches</h3>
-          <p>Wallets, liquidity, market momentum, order flow, and exchange conditions.</p>
+          <p>Wallets, liquidity, order books, AMMs, routes, and ledger movement.</p>
         </div>
-        <div class="mini">
+        <div class="mini-card">
           <h3>What It Does</h3>
-          <p>Scans for trading opportunities and executes under strict rules and controls.</p>
+          <p>Scans for tradeable conditions and logs what should be reviewed next.</p>
         </div>
-      </div>
+      </section>
 
-      <div class="card">
-        <h2>What NEB Is</h2>
-        <p>
-          NEB is designed to watch the network itself instead of waiting for charts to tell the story after the move already happened.
-        </p>
-        <p>
-          The job is simple: detect trading opportunities, validate the setup, and execute under rules.
-        </p>
-      </div>
-
-      <div class="grid-2">
-        <div class="card">
-          <h2>What NEB Watches</h2>
-          <div class="info">
-            <ul>
-              <li>Wallet activity</li>
-              <li>Liquidity movement</li>
-              <li>Order book behavior</li>
-              <li>Market momentum</li>
-              <li>Exchange conditions across XRPL markets</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2>What NEB Does</h2>
-          <div class="info">
-            <ul>
-              <li>Scans XRPL market activity</li>
-              <li>Surfaces tradeable conditions</li>
-              <li>Validates setups before action</li>
-              <li>Executes under controlled logic</li>
-              <li>Logs behavior for review and refinement</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <h2>Build Status</h2>
-        <div class="grid-3">
-          <div class="info">
-            <h3>Market Scanner</h3>
-            <p>Reads XRPL activity and identifies potential trading opportunities.</p>
-          </div>
-          <div class="info">
-            <h3>Strategy Engine</h3>
-            <p>Scores market conditions using liquidity, momentum, and execution quality.</p>
-          </div>
-          <div class="info">
-            <h3>Controlled Execution</h3>
-            <p>Applies strict rules before any live trading behavior is trusted.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="grid-2">
-        <div class="card">
+      <section class="grid two">
+        <article class="section-card">
           <h2>Product Rules</h2>
-          <div class="info">
-            <ul>
-              <li>Non-custodial by design</li>
-              <li>No profit promises</li>
-              <li>Infrastructure first</li>
-              <li>Risk controls before scale</li>
-              <li>Wallet remains identity</li>
-            </ul>
-          </div>
-        </div>
+          <ul>
+            <li>Non-custodial by design</li>
+            <li>No profit promises</li>
+            <li>Scanner before paper trading</li>
+            <li>Paper trading before live execution</li>
+            <li>Risk controls before scale</li>
+          </ul>
+        </article>
 
-        <div class="card">
-          <h2>Future Direction</h2>
-          <div class="info">
-            <ul>
-              <li>XRPL-first architecture</li>
-              <li>Strategy validation before scale</li>
-              <li>Controlled live execution after proof</li>
-              <li>AUGUR-informed trading later</li>
-              <li>XRPL retention system required for paid access</li>
-            </ul>
-          </div>
-        </div>
+        <article class="section-card">
+          <h2>Build Path</h2>
+          <ul>
+            <li>Phase 1: static interface and scanner shape</li>
+            <li>Phase 2: XRPL feed reader</li>
+            <li>Phase 3: opportunity journal</li>
+            <li>Phase 4: paper trading</li>
+            <li>Phase 5: controlled execution after proof</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="section-card">
+        <h2>System Narrative</h2>
+        <p>AUGUR reads the ledger. NEB trades the ledger later, only after scanner logic, paper trading, risk rails, and execution controls are proven.</p>
+      </section>
+
+      <div class="footer">
+        NEB | Network Exchange Bot | House of Cauliman
       </div>
 
-      <div class="card">
-        <h2>Why It Matters</h2>
-        <p>
-          Most people react after the move. NEB is built to watch the network itself.
-        </p>
-        <p>
-          It exists to turn raw XRPL activity into actual trading behavior.
-        </p>
-        <p>
-          AUGUR reads the ledger. NEB trades the ledger.
-        </p>
-      </div>
-    </section>
-
-    <div class="footer">
-      NEB — Network Exchange Bot • House of Cauliman
-    </div>
-
+    </main>
   </div>
 </body>
 </html>
