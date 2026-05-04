@@ -338,6 +338,38 @@
       line-height:1.35;
     }
 
+  
+    /* NEB Control Room mobile containment fix */
+    @media(max-width:760px){
+      #control-room-preview{
+        padding:18px !important;
+        margin-left:0 !important;
+        margin-right:0 !important;
+        overflow:hidden !important;
+      }
+      #control-room-preview div[style*="grid-template-columns:repeat(2"]{
+        grid-template-columns:1fr !important;
+      }
+      #control-room-preview h2{
+        font-size:1.55rem !important;
+        line-height:1.08 !important;
+        overflow-wrap:anywhere !important;
+      }
+      #control-room-preview table{
+        display:block !important;
+        width:100% !important;
+        overflow-x:auto !important;
+        -webkit-overflow-scrolling:touch !important;
+      }
+      #control-room-preview th,
+      #control-room-preview td{
+        white-space:nowrap !important;
+      }
+      #control-room-preview span{
+        max-width:100% !important;
+      }
+    }
+
   </style>
   <meta name="apple-mobile-web-app-title" content="NEB" />
   <meta name="application-name" content="NEB" />
