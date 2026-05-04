@@ -225,7 +225,27 @@
       color:var(--soft);
       font-size:.82rem;
     }
-  </style>
+    .control-preview{margin-top:28px;border:1px solid rgba(56,255,156,.24);border-radius:28px;padding:24px;background:linear-gradient(180deg,rgba(13,16,23,.98),rgba(5,7,11,.99));box-shadow:var(--shadow)}
+    .control-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:18px;margin-bottom:18px}
+    .control-title h2{margin:0;font-size:clamp(1.45rem,3vw,2.25rem);letter-spacing:.08em;text-transform:uppercase}
+    .control-title p{max-width:760px;margin:10px 0 0;color:#cfd7e8}
+    .control-badges{display:flex;flex-wrap:wrap;gap:10px}
+    .status-chip{border:1px solid var(--line);border-radius:999px;padding:8px 11px;background:rgba(255,255,255,.035);color:var(--muted);font-size:.74rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+    .status-chip.green{border-color:rgba(56,255,156,.34);color:var(--green);background:rgba(56,255,156,.07)}
+    .status-chip.gold{border-color:rgba(255,225,117,.34);color:var(--gold);background:rgba(255,225,117,.07)}
+    .control-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+    @media(max-width:1100px){.control-grid{grid-template-columns:repeat(2,minmax(0,1fr)}}
+    @media(max-width:680px){.control-grid{grid-template-columns:1fr}}
+    .control-panel{border:1px solid var(--line);border-radius:20px;padding:16px;background:rgba(18,23,34,.72);min-height:210px}
+    .control-panel h3{margin:0 0 12px;color:var(--green);font-size:.86rem;letter-spacing:.16em;text-transform:uppercase}
+    .feed-row,.risk-row,.journal-row{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-top:1px solid rgba(255,255,255,.07);color:#d7deee;font-size:.92rem}
+    .feed-row:first-of-type,.risk-row:first-of-type,.journal-row:first-of-type{border-top:0}
+    .row-value{color:var(--soft);font-weight:800;font-size:.78rem;letter-spacing:.07em;text-transform:uppercase}
+    .scanner-table{width:100%;border-collapse:collapse;margin-top:6px;font-size:.86rem}
+    .scanner-table th,.scanner-table td{padding:10px 8px;border-top:1px solid rgba(255,255,255,.07);text-align:left;color:#d7deee}
+    .scanner-table th{color:var(--soft);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}
+    .preview-note{margin-top:16px;padding:14px 15px;border:1px solid rgba(255,225,117,.24);border-radius:16px;background:rgba(255,225,117,.06);color:#f4e8bd;font-size:.92rem}  
+</style>
   <meta name="apple-mobile-web-app-title" content="NEB" />
   <meta name="application-name" content="NEB" />
   <!-- favicon: NEB -->
@@ -256,6 +276,63 @@
         </div>
       </div>
     </section>
+
+
+    <section class="control-preview" id="control-room-preview">
+      <div class="control-top">
+        <div class="control-title">
+          <h2>NEB Control Room Preview</h2>
+          <p>This interface is a visual build preview. Live execution is not active. NEB starts as a scanner, then moves into paper trading, manual confirmation, and controlled execution only after the system is proven.</p>
+        </div>
+        <div class="control-badges">
+          <span class="status-chip green">ACTIVE BUILD</span>
+          <span class="status-chip gold">SCANNER ONLY</span>
+          <span class="status-chip">XRPL MOCK OFFLINE</span>
+          <span class="status-chip gold">KILL SWITCH ARMED</span>
+        </div>
+      </div>
+
+      <div class="control-grid">
+        <div class="control-panel">
+          <h3>Market Feeds</h3>
+          <div class="feed-row"><span>Order Books</span><span class="row-value">Preview</span></div>
+          <div class="feed-row"><span>AMM State</span><span class="row-value">Preview</span></div>
+          <div class="feed-row"><span>Wallet Watch</span><span class="row-value">Preview</span></div>
+          <div class="feed-row"><span>Ledger Close</span><span class="row-value">Locked</span></div>
+        </div>
+
+        <div class="control-panel">
+          <h3>Opportunity Scanner</h3>
+          <table class="scanner-table">
+            <thead><tr><th>Pair</th><th>Signal</th><th>Score</th></tr></thead>
+            <tbody>
+              <tr><td>XRP/USD</td><td>Spread</td><td>Mock</td></tr>
+              <tr><td>XRP/IOU</td><td>Liquidity</td><td>Mock</td></tr>
+              <tr><td>AMM Route</td><td>Dislocation</td><td>Mock</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="control-panel">
+          <h3>Risk Rails</h3>
+          <div class="risk-row"><span>Slippage Guard</span><span class="row-value">Armed</span></div>
+          <div class="risk-row"><span>Liquidity Floor</span><span class="row-value">Armed</span></div>
+          <div class="risk-row"><span>Daily Stop</span><span class="row-value">Armed</span></div>
+          <div class="risk-row"><span>Execution Lock</span><span class="row-value">Disabled</span></div>
+        </div>
+
+        <div class="control-panel">
+          <h3>Activity Journal</h3>
+          <div class="journal-row"><span>Observations</span><span class="row-value">Pending</span></div>
+          <div class="journal-row"><span>Rejections</span><span class="row-value">Pending</span></div>
+          <div class="journal-row"><span>Candidates</span><span class="row-value">Pending</span></div>
+          <div class="journal-row"><span>Paper Trades</span><span class="row-value">Locked</span></div>
+        </div>
+      </div>
+
+      <div class="preview-note">Preview only. This UI does not place trades, connect to wallets, or execute orders.</div>
+    </section>
+
 
     <section class="section">
       <div class="grid-3">
