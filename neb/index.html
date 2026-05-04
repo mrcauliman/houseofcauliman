@@ -282,6 +282,62 @@
       min-height:230px;
     }
 
+  
+    /* NEB Control Room hard layout fix */
+    .control-preview{
+      max-width:100%;
+    }
+    .control-preview .control-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:16px;
+    }
+    @media(max-width:760px){
+      .control-preview .control-grid{
+        grid-template-columns:1fr;
+      }
+    }
+    .control-preview .control-panel{
+      min-height:auto;
+    }
+    .control-preview .feed-row,
+    .control-preview .risk-row,
+    .control-preview .journal-row{
+      display:block;
+      padding:11px 0;
+      border-top:1px solid rgba(255,255,255,.08);
+      color:#d7deee;
+      font-size:.94rem;
+      line-height:1.35;
+    }
+    .control-preview .feed-row:first-of-type,
+    .control-preview .risk-row:first-of-type,
+    .control-preview .journal-row:first-of-type{
+      border-top:0;
+    }
+    .control-preview .row-value{
+      display:block;
+      margin-top:3px;
+      color:var(--soft);
+      font-weight:900;
+      font-size:.72rem;
+      letter-spacing:.09em;
+      text-transform:uppercase;
+      white-space:normal;
+    }
+    .control-preview .scanner-table{
+      width:100%;
+      table-layout:auto;
+      border-collapse:collapse;
+    }
+    .control-preview .scanner-table th,
+    .control-preview .scanner-table td{
+      padding:11px 12px;
+      border-top:1px solid rgba(255,255,255,.08);
+      text-align:left;
+      line-height:1.35;
+    }
+
   </style>
   <meta name="apple-mobile-web-app-title" content="NEB" />
   <meta name="application-name" content="NEB" />
