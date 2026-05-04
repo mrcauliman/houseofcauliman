@@ -481,7 +481,7 @@
       </section>
 
       <section class="status-strip" aria-label="NEB status">
-        <div class="status"><div class="label">Current State</div><div class="value gold">Mockup</div></div>
+        <div class="status"><div class="label">Current State</div><div class="value gold">Preview</div></div>
         <div class="status"><div class="label">Mode</div><div class="value green">Scanner First</div></div>
         <div class="status"><div class="label">Wallet Access</div><div class="value red">None</div></div>
         <div class="status"><div class="label">Execution</div><div class="value red">Off</div></div>
@@ -492,11 +492,11 @@
           <div>
             <h2>Control Room Preview</h2>
             <p class="control-copy">
-              Visual interface only. No wallet connection. No live feed. No order placement. NEB starts with scanner logic, then paper trading, then manual confirmation before any controlled execution.
+              Visual interface only. No wallet connection. No live feed. No order placement. NEB is designed to trade only under user-controlled rules after scanner logic, paper trading, manual confirmation, and risk controls are proven.
             </p>
           </div>
           <div class="chips">
-            <span class="chip gold">Interface Mockup</span>
+            <span class="chip gold">Interface Preview</span>
             <span class="chip green">Scanner First</span>
             <span class="chip red">Execution Off</span>
             <span class="chip gold">Kill Switch Required</span>
@@ -520,17 +520,17 @@
               <div class="opp">
                 <div><small>Pair</small><b>XRP/USD</b></div>
                 <div><small>Signal</small><b>Spread</b></div>
-                <div><small>Status</small><b>Mock</b></div>
+                <div><small>Status</small><b>Preview</b></div>
               </div>
               <div class="opp">
                 <div><small>Pair</small><b>XRP/IOU</b></div>
                 <div><small>Signal</small><b>Liquidity</b></div>
-                <div><small>Status</small><b>Mock</b></div>
+                <div><small>Status</small><b>Preview</b></div>
               </div>
               <div class="opp">
                 <div><small>Pair</small><b>AMM Route</b></div>
                 <div><small>Signal</small><b>Dislocation</b></div>
-                <div><small>Status</small><b>Mock</b></div>
+                <div><small>Status</small><b>Preview</b></div>
               </div>
             </div>
           </article>
@@ -558,6 +558,74 @@
 
         <div class="note">
           Preview only. This page does not trade, connect to wallets, read live market feeds, or execute orders.
+        </div>
+      </section>
+
+      <section class="control" id="user-trading-console">
+        <div class="control-head">
+          <div>
+            <h2>User Trading Console</h2>
+            <p class="control-copy">
+              NEB is being designed so a user can define trading rules before any execution is allowed. The wallet remains user-controlled. Trade authority stays disabled until a future signing and approval flow exists.
+            </p>
+          </div>
+          <div class="chips">
+            <span class="chip red">Wallet Not Connected</span>
+            <span class="chip gold">Manual Approval Required</span>
+            <span class="chip red">Trade Authority Disabled</span>
+          </div>
+        </div>
+
+        <div class="control-grid">
+          <article class="panel">
+            <h3>User Rules</h3>
+            <div class="rows">
+              <div class="row"><strong>Max Trade Size</strong><span>Not set</span></div>
+              <div class="row"><strong>Allowed Pairs</strong><span>User-defined later</span></div>
+              <div class="row"><strong>Slippage Limit</strong><span>Required before live</span></div>
+              <div class="row"><strong>Daily Stop</strong><span>Required before live</span></div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <h3>Trade Candidate</h3>
+            <div class="opp-list">
+              <div class="opp">
+                <div><small>Pair</small><b>XRP/USD</b></div>
+                <div><small>Signal</small><b>Spread</b></div>
+                <div><small>Status</small><b>Review Only</b></div>
+              </div>
+              <div class="opp">
+                <div><small>Action</small><b>Wait</b></div>
+                <div><small>Approval</small><b>Required</b></div>
+                <div><small>Execution</small><b>Disabled</b></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <h3>Trade Authority</h3>
+            <div class="rows">
+              <div class="row"><strong>Wallet Signature</strong><span>Required later</span></div>
+              <div class="row"><strong>Mode Gate</strong><span>Scanner only</span></div>
+              <div class="row"><strong>Kill Switch</strong><span>Required</span></div>
+              <div class="row"><strong>Live Orders</strong><span>Disabled</span></div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <h3>Execution Path</h3>
+            <div class="rows">
+              <div class="row"><strong>1. Scanner</strong><span>Find candidate</span></div>
+              <div class="row"><strong>2. Paper Trade</strong><span>Test outcome</span></div>
+              <div class="row"><strong>3. User Approval</strong><span>Required before live</span></div>
+              <div class="row"><strong>4. Controlled Execution</strong><span>Future phase</span></div>
+            </div>
+          </article>
+        </div>
+
+        <div class="note">
+          NEB can become a user-directed trading console later. At this stage, every trade action remains disabled.
         </div>
       </section>
 
