@@ -370,6 +370,35 @@
       }
     }
 
+  
+    /* NEB Control Room true mobile fix */
+    @media(max-width:760px){
+      #control-room-preview{
+        padding:18px !important;
+        overflow:hidden !important;
+      }
+      #control-room-grid{
+        display:grid !important;
+        grid-template-columns:1fr !important;
+        gap:14px !important;
+      }
+      #control-room-preview h2{
+        font-size:1.9rem !important;
+        line-height:1.06 !important;
+        overflow-wrap:anywhere !important;
+      }
+      #control-room-preview table{
+        width:100% !important;
+        display:block !important;
+        overflow-x:auto !important;
+        -webkit-overflow-scrolling:touch !important;
+      }
+      #control-room-preview th,
+      #control-room-preview td{
+        white-space:nowrap !important;
+      }
+    }
+
   </style>
   <meta name="apple-mobile-web-app-title" content="NEB" />
   <meta name="application-name" content="NEB" />
@@ -418,7 +447,7 @@
         </div>
       </div>
 
-      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;">
+      <div id="control-room-grid" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;">
         <div style="border:1px solid var(--line);border-radius:20px;padding:18px;background:rgba(18,23,34,.72);">
           <h3 style="margin:0 0 14px;color:var(--green);font-size:.86rem;letter-spacing:.16em;text-transform:uppercase;">Market Feeds</h3>
           <p><strong>Order Books</strong><br><span style="color:var(--soft);font-size:.76rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;">Preview</span></p>
