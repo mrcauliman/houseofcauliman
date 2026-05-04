@@ -245,7 +245,44 @@
     .scanner-table th,.scanner-table td{padding:10px 8px;border-top:1px solid rgba(255,255,255,.07);text-align:left;color:#d7deee}
     .scanner-table th{color:var(--soft);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}
     .preview-note{margin-top:16px;padding:14px 15px;border:1px solid rgba(255,225,117,.24);border-radius:16px;background:rgba(255,225,117,.06);color:#f4e8bd;font-size:.92rem}  
-</style>
+
+    .control-preview .feed-row,
+    .control-preview .risk-row,
+    .control-preview .journal-row{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) auto;
+      align-items:center;
+      gap:14px;
+      padding:10px 0;
+      border-top:1px solid rgba(255,255,255,.08);
+      color:#d7deee;
+      font-size:.92rem;
+    }
+    .control-preview .feed-row span:first-child,
+    .control-preview .risk-row span:first-child,
+    .control-preview .journal-row span:first-child{
+      min-width:0;
+      padding-right:8px;
+    }
+    .control-preview .row-value{
+      justify-self:end;
+      color:var(--soft);
+      font-weight:900;
+      font-size:.74rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      white-space:nowrap;
+    }
+    .control-preview .scanner-table th,
+    .control-preview .scanner-table td{
+      padding:10px 10px;
+      vertical-align:middle;
+    }
+    .control-preview .control-panel{
+      min-height:230px;
+    }
+
+  </style>
   <meta name="apple-mobile-web-app-title" content="NEB" />
   <meta name="application-name" content="NEB" />
   <!-- favicon: NEB -->
