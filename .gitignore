@@ -33,3 +33,7 @@ monolith/*.bak_*
 ledgerdrop_xrpl/index.html.bak_*
 
 snapshots/
+
+# Dungeon House prototype source
+dungeon-house/node_modules/
+dungeon-house/dist/
