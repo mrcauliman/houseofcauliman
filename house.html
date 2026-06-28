@@ -1,323 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>HOUSE OF CAULIMAN — Investment Thesis</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <link rel="canonical" href="https://houseofcauliman.com/house/">
-
-  <meta name="description" content="House of Cauliman investment thesis. RAD, $BAG, $WCK, hand-crafted access collections, managed liquidity, reseeding mechanisms, and rising structural floors built on XRPL.">
-  <meta name="keywords" content="XRPL, XRP, House of Cauliman, WCK, RAD, BAG, XRPL NFTs, XRPL AMM">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>House of Cauliman | The House</title>
+  <link rel="canonical" href="https://houseofcauliman.com/house/" />
+  <meta name="description" content="House of Cauliman designs, builds, and operates XRPL-native products across infrastructure, education, brands, intellectual property, media, and interactive entertainment." />
   <style>
-    :root {
-      --bg:#050509;
-      --bg-soft:#090910;
-      --card:#11121a;
-      --border-subtle:#1a1b24;
-      --border-strong:#2b3345;
-      --accent:#0a74d0;
-      --accent-glow:rgba(10,116,208,0.65);
-      --text:#f5f7ff;
-      --text-muted:#9aa2c3;
-      --text-soft:#717895;
-      --wck-gold:#d4a44a;
-      --rad-blue:#3da0ff;
-      --bag-green:#4ade80;
-      --radius-lg:18px;
-      --radius-xl:22px;
-      --shadow-soft:0 18px 45px rgba(0,0,0,0.75);
-      --shadow-glow:0 0 32px rgba(10,116,208,0.7);
-    }
+    :root{--bg:#020308;--panel:#070b12;--card:#0d121c;--line:rgba(255,255,255,.1);--text:#f5f7ff;--muted:#a7b0c8;--soft:#717895;--blue:#3da0ff;--gold:#d4a44a;--green:#4ade80;--yellow:#facc15;--radius:22px;--shadow:0 18px 45px rgba(0,0,0,.72)}
     *{box-sizing:border-box}
-    html,body{
-      margin:0;padding:0;width:100%;overflow-x:hidden;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-      background:radial-gradient(circle at top,#111827 0,#020308 55%,#000 100%);
-      color:var(--text);
-    }
+    html,body{margin:0;padding:0;background:radial-gradient(circle at top,#111827 0,#05070d 48%,#000 100%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
     a{color:inherit;text-decoration:none}
-    .hoc-header{padding:24px 20px 10px;background:radial-gradient(circle at top,#0a74d0 0,#050509 55%,#000 100%);border-bottom:1px solid #151827;box-shadow:0 20px 40px rgba(0,0,0,0.75)}
-    .hoc-header-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;gap:18px}
-    .hoc-brand-mark{width:82px;height:82px;object-fit:contain;border-radius:20px;border:1px solid #1b3a62;box-shadow:0 0 28px var(--accent-glow);background:radial-gradient(circle at 30% 0,#1f2937 0,#020308 70%)}
-    .hoc-header-text h1{margin:0;font-size:1.5rem;letter-spacing:0.15em;text-transform:uppercase}
-    .hoc-header-text p{margin:5px 0 0;font-size:0.92rem;color:#9fb4e2}
-    .hoc-main{padding:22px 16px 40px}
-    .hoc-shell{max-width:960px;margin:0 auto}
-    .hoc-intro{margin-bottom:22px;padding:16px 18px 18px;border-radius:var(--radius-lg);border:1px solid rgba(26,31,55,0.9);background:linear-gradient(135deg,rgba(15,23,42,0.9),rgba(5,6,12,0.98));box-shadow:var(--shadow-soft)}
-    .hoc-intro-main{font-size:0.97rem;color:var(--text-muted);margin:0;line-height:1.55}
-    .hoc-grid{display:grid;grid-template-columns:1fr;gap:18px}
-    @media(min-width:768px){.hoc-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-    .project-card{border-radius:var(--radius-xl);border:1px solid var(--border-subtle);background:radial-gradient(circle at top,rgba(26,35,58,0.85) 0,#050509 55%,#000 100%);box-shadow:var(--shadow-soft);overflow:hidden;display:flex;flex-direction:column;min-height:220px}
-    .project-body{padding:16px;display:flex;flex-direction:column;gap:6px}
-    .project-title{margin:0;font-size:1rem;letter-spacing:.12em;text-transform:uppercase}
-    .project-sub{margin:0;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-soft)}
-    .project-copy{margin:6px 0;font-size:.86rem;line-height:1.5;color:var(--text-muted)}
-    .project-image{width:100%;height:auto;display:block;border-radius:14px;margin-top:12px;box-shadow:0 12px 30px rgba(0,0,0,0.8);}
-    .project-logo{display:block;width:100%;max-width:420px;height:auto;margin:0 auto 18px;object-fit:contain;}
-    .hoc-footer{max-width:960px;margin:26px auto 10px;padding-top:10px;border-top:1px solid #141728;display:flex;justify-content:space-between;gap:8px;font-size:.78rem;color:var(--text-soft)}
-    .nav-link-card{text-align:center;padding:20px;}
-    .nav-link-card a{color:var(--text);font-size:0.95rem;letter-spacing:.12em;text-transform:uppercase;padding:10px 20px;border:1px solid var(--border-subtle);border-radius:var(--radius-xl);transition:all .25s ease;display:inline-block;}
-    .nav-link-card a:hover{border-color:var(--accent);box-shadow:0 0 20px var(--accent-glow);}
+    .wrap{max-width:1120px;margin:0 auto;padding:26px 16px 56px}
+    .hero{min-height:72vh;display:grid;place-items:center;text-align:center;padding:58px 16px}
+    .hero-card,.panel,.card{border:1px solid var(--line);box-shadow:var(--shadow)}
+    .hero-card{width:100%;max-width:860px;border-radius:32px;background:linear-gradient(180deg,rgba(61,160,255,.12),rgba(7,11,18,.96));padding:34px 22px}
+    .logo{width:116px;height:116px;object-fit:contain;border-radius:26px;border:1px solid rgba(61,160,255,.35);box-shadow:0 0 34px rgba(61,160,255,.45);margin-bottom:20px;background:#05070d}
+    h1{margin:0;font-size:clamp(2.2rem,7vw,5.2rem);letter-spacing:.12em;text-transform:uppercase;line-height:.95}
+    .kicker{margin:16px auto 0;color:#b9c8f5;font-size:clamp(1rem,2.4vw,1.35rem);line-height:1.45;max-width:760px}
+    .mission,.lead{color:var(--muted);line-height:1.65}
+    .mission{margin:24px auto 0;font-size:1.08rem;max-width:760px}
+    .btnrow{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:26px}
+    .btn,.card a,.disabled{display:inline-flex;align-items:center;justify-content:center;padding:11px 14px;border-radius:999px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;font-size:.72rem}
+    .btn,.card a{border:1px solid rgba(61,160,255,.45);background:rgba(61,160,255,.1)}
+    .section{margin-top:22px}
+    h2{margin:0;font-size:1.35rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+    .lead{margin:8px 0 0;max-width:860px}
+    .panel{border-radius:var(--radius);background:linear-gradient(180deg,rgba(16,24,39,.9),rgba(5,7,13,.96));padding:20px}
+    .stack{display:grid;gap:12px;margin-top:14px}
+    .stack-row{border:1px solid var(--line);border-radius:18px;padding:14px;background:rgba(255,255,255,.035)}
+    .stack-label{display:block;color:var(--soft);font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:7px}
+    .stack-items{font-size:1rem;font-weight:850;letter-spacing:.06em;line-height:1.7}
+    .grid{display:grid;grid-template-columns:1fr;gap:14px}
+    @media(min-width:760px){.grid{grid-template-columns:repeat(3,1fr)}}
+    .card{border-radius:var(--radius);background:radial-gradient(circle at top,rgba(61,160,255,.10),rgba(13,18,28,.98) 58%,#05070d 100%);padding:18px;min-height:230px;display:flex;flex-direction:column;justify-content:space-between}
+    .topline{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+    .role{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--soft);font-weight:800}
+    .badge{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;border:1px solid var(--line);border-radius:999px;padding:6px 8px;color:var(--muted);white-space:nowrap}
+    .live{border-color:rgba(74,222,128,.35);color:#b8ffd0;background:rgba(74,222,128,.08)}
+    .build{border-color:rgba(250,204,21,.35);color:#fff2a8;background:rgba(250,204,21,.08)}
+    .card-logo{width:76px;height:76px;object-fit:contain;margin:0 0 14px;border-radius:16px}
+    .card h3{margin:0;font-size:1.05rem;letter-spacing:.12em;text-transform:uppercase}
+    .verb{margin:9px 0 0;font-size:1.5rem;font-weight:900}
+    .copy{margin:9px 0 16px;color:var(--muted);font-size:.9rem;line-height:1.55}
+    .disabled{width:max-content;border:1px solid var(--line);color:var(--soft);background:rgba(255,255,255,.03)}
+    .loop{display:grid;gap:10px;margin-top:14px}
+    @media(min-width:760px){.loop{grid-template-columns:repeat(6,1fr)}}
+    .loop div{border:1px solid var(--line);border-radius:16px;padding:14px;text-align:center;background:rgba(255,255,255,.035);font-weight:900;letter-spacing:.08em;text-transform:uppercase;font-size:.78rem;color:var(--muted)}
+    .footer{margin-top:28px;padding-top:18px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--soft);font-size:.78rem}
   </style>
-  <!-- favicon: HOUSE -->
   <link rel="icon" href="/assets/favicons/favicon.ico" sizes="any" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png" />
   <meta name="apple-mobile-web-app-title" content="HOC" />
   <meta name="application-name" content="HOC" />
 </head>
 <body>
+  <main>
+    <section class="hero">
+      <div class="hero-card">
+        <img src="/assets/houseofcauliman_logo.webp" alt="House of Cauliman" class="logo" />
+        <h1>House of Cauliman</h1>
+        <p class="kicker">Designing, building, and operating XRPL-native products that expand what people can do on the XRP Ledger.</p>
+        <p class="mission">One House. Multiple products. Shared direction. Platforms, education, brands, intellectual property, media, and interactive entertainment built to reinforce the ecosystem.</p>
+        <div class="btnrow"><a class="btn" href="#portfolio">Explore the House</a><a class="btn" href="/">Back to Main Site</a></div>
+      </div>
+    </section>
 
-<header class="hoc-header">
-  <div class="hoc-header-inner">
-    <img src="/assets/mrcauliman_logo.webp" class="hoc-brand-mark">
-    <div class="hoc-header-text">
-      <h1>🏛️ HOUSE OF CAULIMAN</h1>
-      <p>Investment Thesis</p>
+    <div class="wrap">
+      <section class="section panel">
+        <h2>The House Stack</h2>
+        <p class="lead">The old three-role model is gone. The House now operates as a connected XRPL product company.</p>
+        <div class="stack">
+          <div class="stack-row"><span class="stack-label">Platforms</span><div class="stack-items">MONOLITH • AUGUR • LAV • NEB</div></div>
+          <div class="stack-row"><span class="stack-label">Education</span><div class="stack-items">XRPL LAYMAN</div></div>
+          <div class="stack-row"><span class="stack-label">Brands</span><div class="stack-items">RAD • Continental Wick • Get the BAG</div></div>
+          <div class="stack-row"><span class="stack-label">Intellectual Property</span><div class="stack-items">HOMEEZ • NFTITANS • Dungeon House</div></div>
+          <div class="stack-row"><span class="stack-label">Media</span><div class="stack-items">Ledger Drop XRPL</div></div>
+        </div>
+      </section>
+
+      <section id="portfolio" class="section">
+        <h2>Product Portfolio</h2>
+        <p class="lead">Every House product gets equal weight. No favorites. No crooked visual hierarchy.</p>
+        <div class="grid">
+
+          <article class="card">
+            <div>
+              <div class="topline"><span class="role">Platform</span><span class="badge live">Live</span></div>
+              <img class="card-logo" src="/assets/monolith/monolith_logo.webp" alt="MONOLITH" />
+              <h3>MONOLITH</h3>
+              <div class="verb">Own</div>
+              <p class="copy">Digital ownership on XRPL. Claim permanent coordinates, build a public page, and buy or sell tiles through the Tile Market.</p>
+            </div>
+            <a href="https://monolithxrpl.com/">Explore</a>
+          </article>
+
+          <article class="card">
+            <div>
+              <div class="topline"><span class="role">Platform</span><span class="badge live">Live</span></div>
+              <img class="card-logo" src="/assets/augur/augur_logo.png" alt="AUGUR" />
+              <h3>AUGUR</h3>
+              <div class="verb">Understand</div>
+              <p class="copy">XRPL wallet intelligence, reports, risk analysis, and readable ledger interpretation.</p>
+            </div>
+            <a href="https://augurxrpl.com/">Explore</a>
+          </article>
+
+          <article class="card">
+            <div>
+              <div class="topline"><span class="role">Platform</span><span class="badge live">Live</span></div>
+              <img class="card-logo" src="/assets/lav/lav_icon.png" alt="LAV" />
+              <h3>LAV</h3>
+              <div class="verb">Protect</div>
+              <p class="copy">Digital continuity, vault planning, recovery paths, and legacy protection for crypto holders and families.</p>
+            </div>
+            <a href="https://lavxrpl.com/">Explore</a>
+          </article>
+
+          <article class="card">
+            <div>
+              <div class="topline"><span class="role">Platform</span><span class="badge build">Building</span></div>
+              <img class="card-logo" src="/neb/assets/neb_icon.webp" alt="NEB" />
+              <h3>NEB</h3>
+              <div class="verb">Execute</div>
+              <p class="copy">Execution infrastructure, automation, trading tools, and future XRPL market utilities.</p>
+            </div>
+            <span class="disabled">Coming Soon</span>
+          </article>
+
+          <article class="card">
+            <div>
+              <div class="topline"><span class="role">Education</span><span class="badge live">Live</span></div>
+              <img class="card-logo" src="/assets/xrpl/xrpl_layman_logo.png" alt="XRPL LAYMAN" />
+              <h3>XRPL LAYMAN</h3>
+              <div class="verb">Learn</div>
+              <p class="copy">Plain-English XRPL education for wallets, trustlines, DEX, AMM, safety, and real usage.</p>
+            </div>
+            <a href="/xrpl-layman/">Explore</a>
+          </article>
+
+          <article class="card">
+            <div>
+              <div class="topline"><span class="role">Brand</span><span class="badge live">Live</span></div>
+              <img class="card-logo" src="/assets/rad_logo.webp" alt="RAD" />
+              <h3>RAD</h3>
+              <div class="verb">Belong</div>
+              <p class="copy">Community, humor, XRP culture, and the House personality layer.</p>
+            </div>
+            <a href="https://radgarlington.io/">Explore</a>
+          </article>
+
+          <article class="card">
+            <div>
+              <div class="topline"><span class="role">Brand / IP</span><span class="badge live">Live</span></div>
+              <img class="card-logo" src="/assets/wck_logo.webp" alt="Continental Wick" />
+              <h3>Continental Wick</h3>
+              <div class="verb">Imagine</div>
+              <p class="copy">Original XRPL collectible universe with characters, story, digital ownership, and future expansion.</p>
+            </div>
+            <a href="https://continentalwick.com/">Explore</a>
+          </article>
+
+          <article class="card">
+            <div>
+              <div class="topline"><span class="role">Brand</span><span class="badge live">Live</span></div>
+              <img class="card-logo" src="/assets/bag/BAG_logo.png" alt="Get the BAG" />
+              <h3>Get the BAG</h3>
+              <div class="verb">Compete</div>
+              <p class="copy">Competitive gaming ecosystem with Skill League, arcade direction, and $BAG-powered rails.</p>
+            </div>
+            <a href="https://getthebag.io/">Explore</a>
+          </article>
+
+          <article class="card">
+            <div>
+              <div class="topline"><span class="role">IP</span><span class="badge build">Building</span></div>
+              <img class="card-logo" src="/homeez/assets/HOMEEZ_logo.webp" alt="HOMEEZ" />
+              <h3>HOMEEZ</h3>
+              <div class="verb">Collect</div>
+              <p class="copy">Stylized character collectibles built for XRPL ownership and future experiences.</p>
+            </div>
+            <span class="disabled">Coming Soon</span>
+          </article>
+
+          <article class="card">
+            <div>
+              <div class="topline"><span class="role">IP</span><span class="badge build">Building</span></div>
+              <img class="card-logo" src="/collections/nftitans/assets/NFTITANS_logo.webp" alt="NFTITANS" />
+              <h3>NFTITANS</h3>
+              <div class="verb">Preserve</div>
+              <p class="copy">Premium digital collectibles celebrating builders, creators, and XRP ecosystem culture.</p>
+            </div>
+            <span class="disabled">Coming Soon</span>
+          </article>
+
+          <article class="card">
+            <div>
+              <div class="topline"><span class="role">Media</span><span class="badge live">Live</span></div>
+              <img class="card-logo" src="/assets/ledger_drop_xrpl.png" alt="Ledger Drop XRPL" />
+              <h3>Ledger Drop XRPL</h3>
+              <div class="verb">Discover</div>
+              <p class="copy">Premium XRP and XRPL wallpaper archive built as a growing visual media line.</p>
+            </div>
+            <a href="/ledgerdrop_xrpl/">Explore</a>
+          </article>
+
+          <article class="card">
+            <div>
+              <div class="topline"><span class="role">Interactive Entertainment</span><span class="badge build">Building</span></div>
+              <img class="card-logo" src="/assets/dungeon-house/DUNGEON HOUSE ICON.webp" alt="Dungeon House" />
+              <h3>Dungeon House</h3>
+              <div class="verb">Play</div>
+              <p class="copy">Retro dungeon crawler under active development for the House ecosystem.</p>
+            </div>
+            <span class="disabled">Coming Soon</span>
+          </article>
+
+        </div>
+      </section>
+
+      <section class="section panel">
+        <h2>How Everything Connects</h2>
+        <p class="lead">Each product has one job. Together they create a stronger XRPL ecosystem.</p>
+        <div class="loop"><div>Learn</div><div>Own</div><div>Understand</div><div>Protect</div><div>Belong</div><div>Return</div></div>
+      </section>
+
+      <section class="section panel">
+        <h2>The House Standard</h2>
+        <p class="lead">Every House product must solve a real problem, stand on its own, strengthen another part of the ecosystem, respect ownership, and improve over time.</p>
+      </section>
+
+      <section class="section panel">
+        <h2>Why XRPL</h2>
+        <p class="lead">Fast settlement. Low fees. Native DEX. AMM. NFTs. Tokenization. Wallet identity. Proven infrastructure.</p>
+      </section>
+
+      <footer class="footer"><span>House of Cauliman</span><span>Build things worth keeping.</span></footer>
     </div>
-  </div>
-</header>
-
-<main class="hoc-main">
-  <div class="hoc-shell">
-
-    <section class="hoc-intro">
-      <p class="hoc-intro-main">
-        Most crypto projects fail because they are passive.<br>
-        Liquidity is seeded once. Supply is released without discipline.<br>
-        The market is expected to behave.
-      </p>
-    </section>
-
-    <section class="hoc-intro">
-      <p class="hoc-intro-main">
-        The House of Cauliman is actively managed.<br>
-        This ecosystem is designed for durability, not short-term attention cycles.<br>
-        If usage grows, the structure strengthens.
-      </p>
-    </section>
-
-    <section class="hoc-grid">
-
-      <article class="project-card" style="grid-column:1/-1">
-        <div class="project-body">
-          <h2 class="project-title">One Ecosystem. Three Roles</h2>
-          <img src="/assets/hoc.png" alt="House of Cauliman Ecosystem Diagram" class="project-image">
-        </div>
-      </article>
-
-
-
-      <article class="project-card" style="grid-column:1/-1">
-        <div class="project-body">
-          <h2 class="project-title">Core Utilities</h2>
-          <p class="project-copy">
-            AUGUR, MONOLITH, and NEB are the primary utility layer of the House.
-          </p>
-          <p class="project-copy">
-            AUGUR turns public wallet activity into readable intelligence.<br>
-            MONOLITH turns identity and participation into permanent placement.<br>
-            NEB is being positioned as an execution and network utility layer.
-          </p>
-          <p class="project-copy">
-            These are not passive pages.<br>
-            They are usage surfaces.<br>
-            The more they are used, the more activity feeds the ecosystem.
-          </p>
-        </div>
-      </article>
-
-      
-      <article class="project-card">
-        <div class="project-body">
-          <h2 class="project-title">CONTINENTAL WICK</h2>
-          <p class="project-sub">$WCK • COLLECTIBLE UNIVERSE</p>
-          <p class="project-copy">
-            A cinematic XRPL protocol where order meets consequence.
-            Enforcement agents. Narrative physics.
-          </p>
-        </div>
-      </article>
-
-      <article class="project-card">
-        <div class="project-body">
-          <img src="/assets/bag/BAG_logo.png" alt="Get The $BAG" class="project-logo">
-          <h2 class="project-title">GET THE $BAG</h2>
-          <p class="project-sub">$BAG • XRPL GAMING INFRASTRUCTURE</p>
-          <p class="project-copy">
-            Skill League PvP wagering, casino rails, and gaming infrastructure powered by $BAG on the XRPL.
-            PvP wagering. Liquidity engine. Casino rails.
-          </p>
-        </div>
-      </article>
-
-
-
-      <article class="project-card">
-        <div class="project-body">
-          <h2 class="project-title">RAD GARLINGTON</h2>
-          <p class="project-sub">$RAD • THE MEME COIN WITH A LEDGER</p>
-          <p class="project-copy">
-            It’s not Brad, it’s Rad. Powered by XRPL and built around the Protocol’s most loyal believer.
-          </p>
-        </div>
-      </article>
-
-      <article class="project-card" style="grid-column:1/-1">
-        <div class="project-body">
-          <h2 class="project-title">Hand-Crafted Access Collections</h2>
-          <p class="project-copy">
-            Sit above tokens. Individually illustrated access instruments and cultural assets.<br>
-            Finite • No inflation • Ownership-based access
-          </p>
-          <p class="project-copy">
-            Unlock early access, private channels, priority participation, future permissions.<br>
-            As the ecosystem grows, access becomes scarcer and more valuable.
-          </p>
-          <p class="project-copy">
-          </p>
-        </div>
-      </article>
-
-      <!-- NEW: Why XRPL -->
-      <article class="project-card" style="grid-column:1/-1">
-        <div class="project-body">
-          <h2 class="project-title">Why XRPL</h2>
-          <p class="project-copy">
-            The House is built on XRPL for one reason: structural efficiency.
-          </p>
-          <p class="project-copy">
-            Low fees enable high-frequency interaction.<br>
-            Fast finality allows real-time systems.<br>
-            Native DEX and AMM mechanics remove dependency on third parties.
-          </p>
-          <p class="project-copy">
-            This ecosystem does not survive despite the chain.<br>
-            It survives because of it.
-          </p>
-        </div>
-      </article>
-
-      <!-- NEW: Capital Flow Loop -->
-      <article class="project-card" style="grid-column:1/-1">
-        <div class="project-body">
-          <h2 class="project-title">Capital Flow Loop</h2>
-          <p class="project-copy">
-            Participation enters through utilities, culture, and access.<br>
-            Engagement routes through AUGUR, MONOLITH, NEB, games, verification, and IP.<br>
-            Value consolidates back into managed liquidity.
-          </p>
-          <p class="project-copy">
-            Tokens do not exist in isolation.<br>
-            They function as routing instruments inside a closed economic loop.
-          </p>
-          <p class="project-copy">
-            Usage feeds liquidity.<br>
-            Liquidity supports the floor.<br>
-            The floor enables long-term participation.
-          </p>
-        </div>
-      </article>
-
-      <!-- NEW: Active Stewardship -->
-      <article class="project-card" style="grid-column:1/-1">
-        <div class="project-body">
-          <h2 class="project-title">Active Stewardship</h2>
-          <p class="project-copy">
-            This ecosystem is not unmanaged.<br>
-            Decisions are intentional, not crowdsourced.
-          </p>
-          <p class="project-copy">
-            Supply pacing, liquidity actions, and expansion timing are handled by the House.<br>
-            The objective is stability first, growth second.
-          </p>
-          <p class="project-copy">
-            Chaos is not decentralization.<br>
-            Structure is.
-          </p>
-        </div>
-      </article>
-
-      <!-- NEW: Time Horizon -->
-      <article class="project-card" style="grid-column:1/-1">
-        <div class="project-body">
-          <h2 class="project-title">Time Horizon</h2>
-          <p class="project-copy">
-            This is not a launch-and-exit system.
-          </p>
-          <p class="project-copy">
-            Floors are built slowly.<br>
-            Access compounds over time.<br>
-            Early participation is rewarded through position, not promises.
-          </p>
-          <p class="project-copy">
-            If you need fast liquidity, this is not designed for you.
-          </p>
-        </div>
-      </article>
-
-      <article class="project-card" style="grid-column:1/-1">
-        <div class="project-body">
-          <h2 class="project-title">Floor Control & Structural Growth</h2>
-          <p class="project-copy">
-            Liquidity seeded, retained, and reinforced by the House.<br>
-            No external entity can remove the base.
-          </p>
-          <p class="project-copy">
-            Reseeding: As usage increases, liquidity reintroduced → floor steps upward.<br>
-            Timed releases: Supply aligned with real demand absorption.
-          </p>
-          <p class="project-copy">
-            Price may fluctuate. The base remains intact.
-          </p>
-        </div>
-      </article>
-
-      <article class="project-card" style="grid-column:1/-1">
-        <div class="project-body">
-          <h2 class="project-title">Long-Term Holder Alignment</h2>
-          <p class="project-copy">
-            Patience structurally favored.<br>
-            Participation aligns with growth.<br>
-            Time strengthens positioning.
-          </p>
-        </div>
-      </article>
-
-      <!-- UPDATED: Risk & Reality -->
-      <article class="project-card" style="grid-column:1/-1">
-        <div class="project-body">
-          <h2 class="project-title">Risk & Reality</h2>
-          <p class="project-copy">
-            Digital assets carry volatility, execution risk, and regulatory uncertainty.
-          </p>
-          <p class="project-copy">
-            Outcomes depend on continued development, adoption, and market conditions.<br>
-            No returns are promised. No timelines are guaranteed.
-          </p>
-          <p class="project-copy">
-            This thesis describes structure, not certainty.
-          </p>
-        </div>
-      </article>
-
-      <article class="project-card" style="grid-column:1/-1">
-        <div class="project-body nav-link-card">
-          <a href="/index.html">← Home</a>
-        </div>
-      </article>
-
-    </section>
-
-    <footer class="hoc-footer">
-      <span>Built and enforced by mrcauliman</span>
-      <span>Powered by $XRP • HouseOfCauliman.com</span>
-    </footer>
-
-  </div>
-</main>
-
+  </main>
 </body>
 </html>
