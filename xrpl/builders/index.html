@@ -32,9 +32,68 @@
   .home-button-text{display:none}
 }
 
+
+.dashboard-float{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  z-index:999;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  min-height:48px;
+  padding:12px 17px;
+  border:1px solid rgba(22,140,255,.52);
+  border-radius:14px;
+  background:rgba(4,12,24,.90);
+  color:#fff;
+  font-size:13px;
+  font-weight:850;
+  box-shadow:
+    0 18px 40px rgba(0,0,0,.42),
+    0 0 24px rgba(22,140,255,.12);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  transition:transform .16s ease,background .16s ease,border-color .16s ease;
+}
+.dashboard-float:hover{
+  transform:translateY(-3px);
+  background:rgba(22,140,255,.18);
+  border-color:rgba(22,140,255,.78);
+}
+.dashboard-float:active{
+  transform:scale(.95);
+}
+.dashboard-float:focus-visible{
+  outline:2px solid #fff;
+  outline-offset:4px;
+}
+.dashboard-float-arrow{
+  font-size:18px;
+  line-height:1;
+}
+@media(max-width:640px){
+  .dashboard-float{
+    right:14px;
+    bottom:14px;
+    min-height:46px;
+    padding:11px 14px;
+  }
+  .dashboard-float-text{
+    display:none;
+  }
+}
+
 </style></head><body><div class="wrap"><nav class="appbar"><a class="appbar-brand" href="/xrpl/"><img src="/assets/xrpl/xrpl_layman_icon.png" alt="XRPL LAYMAN"><span><span class="appbar-title">XRPL LAYMAN</span><span class="appbar-sub">Builders Hub Application</span></span></a>
 <a class="home-button" href="/xrpl/" aria-label="Back to XRPL LAYMAN">
   <span aria-hidden="true">←</span>
   <span class="home-button-text">Back to XRPL LAYMAN</span>
 </a>
-<div class="appbar-links"><a href="/xrpl/">Dashboard</a><a href="/xrpl/definitions.html">Definitions</a><a href="/xrpl/wallet-basics.html">Wallets</a><a href="/xrpl/usage.html">Usage</a><a href="/xrpl/safety.html">Safety</a><a href="/xrpl/investing-reality.html">Reality</a><a href="/xrpl/builders/">Builders</a></div></nav><header class="hero" style="--accent:#ff9d25"><div class="hero-logo"><img src="/assets/xrpl/xrpl_layman_icon.png" alt="XRPL LAYMAN"></div><div><div class="eyebrow">Builders Hub Application</div><h1>Builders Hub</h1><p>Create, control, and deploy XRPL systems without hiding authority, risks, or transaction flow.</p></div></header><section class="lesson" id="create" style="--accent:var(--gold)"><div class="lesson-head"><div class="lesson-number">01</div><div><h2>Create</h2><p class="lesson-lead">Learn the primitives before launching anything.</p></div></div><div class="concept-grid"><div class="concept"><h3>Issued Assets</h3><p>Currency code, issuer, supply, trustlines, and controls.</p></div><div class="concept"><h3>NFTs</h3><p>Flags, URI, taxon, offers, transfer fees, and lifecycle.</p></div><div class="concept"><h3>Account Design</h3><p>Separate issuer, operator, treasury, and public accounts.</p></div></div></section><section class="lesson" id="control" style="--accent:var(--cyan)"><div class="lesson-head"><div class="lesson-number">02</div><div><h2>Control</h2><p class="lesson-lead">Know what authority stays active after launch.</p></div></div><div class="concept-grid"><div class="concept"><h3>Freeze</h3><p>Whether balances can be frozen.</p></div><div class="concept"><h3>Authorization</h3><p>Whether holders need approval.</p></div><div class="concept"><h3>Regular Keys</h3><p>How signing authority rotates.</p></div><div class="concept"><h3>Multisigning</h3><p>How shared authority protects accounts.</p></div><div class="concept"><h3>Blackholing</h3><p>What permanent loss of control does and doesn’t prove.</p></div><div class="concept"><h3>Disclosure</h3><p>What users need to know.</p></div></div></section><section class="lesson" id="deploy" style="--accent:var(--blue)"><div class="lesson-head"><div class="lesson-number">03</div><div><h2>Deploy</h2><p class="lesson-lead">Connect ledger actions to an interface people can use.</p></div></div><div class="flow"><div class="flow-step">Build transaction</div><div class="flow-arrow">→</div><div class="flow-step">Show signing request</div><div class="flow-arrow">→</div><div class="flow-step">Submit</div><div class="flow-arrow">→</div><div class="flow-step">Confirm validation</div><div class="flow-arrow">→</div><div class="flow-step">Explain result</div></div></section><section class="lesson" id="standards" style="--accent:var(--green)"><div class="lesson-head"><div class="lesson-number">04</div><div><h2>Builder standard</h2><p class="lesson-lead">A serious XRPL product should be understandable before it asks for a signature.</p></div></div><ul><li>Show the exact asset identity.</li><li>Explain every permission and account setting.</li><li>Handle failed, queued, expired, and validated transactions correctly.</li><li>Never claim success before validation.</li><li>Give users transaction hashes and explorer paths.</li><li>Separate product revenue from XRPL network fees.</li></ul></section><section class="lesson" id="quiz" style="--accent:#ff9d25"><div class="lesson-head"><div class="lesson-number">✓</div><div><h2>Did it click?</h2><p class="lesson-lead">Answer these without guessing.</p></div></div><div class="quiz-question"><h3>Should a product claim success before validation?</h3><div class="quiz-options"><button data-correct="false">Yes</button><button data-correct="true">No</button></div></div><div class="quiz-question"><h3>Is blackholing proof a project is safe?</h3><div class="quiz-options"><button data-correct="false">Yes</button><button data-correct="true">No</button></div></div><div class="quiz-question"><h3>What should users see before signing?</h3><div class="quiz-options"><button data-correct="true">The exact transaction and asset identity</button><button data-correct="false">Only a marketing button</button></div></div></section><section class="lesson" id="next" style="--accent:#ff9d25"><div class="lesson-head"><div class="lesson-number">→</div><div><h2>Keep moving</h2><p class="lesson-lead">Open the next application and keep building the full picture.</p></div></div><div class="next-grid"><a class="next-card" href="/xrpl/definitions.html"><strong>Definitions</strong><span>Master the primitives.</span><b>Open Definitions →</b></a><a class="next-card" href="/xrpl/wallet-basics.html"><strong>Wallets</strong><span>Understand account authority.</span><b>Open Wallets →</b></a><a class="next-card" href="/xrpl/usage.html"><strong>Usage</strong><span>Understand transaction execution.</span><b>Open Usage →</b></a></div></section><footer class="footer"><div><a href="https://houseofcauliman.com">A House of Cauliman Project</a></div><div><a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a> · <a href="/disclaimer.html">Disclaimer</a> · <a href="https://houseofcauliman.com">houseofcauliman.com</a></div><div>© 2026 House of Cauliman. All rights reserved.</div></footer></div><script>document.querySelectorAll('.quiz-options button').forEach(button=>button.addEventListener('click',()=>{const group=button.closest('.quiz-options');group.querySelectorAll('button').forEach(item=>item.classList.remove('correct','wrong'));button.classList.add(button.dataset.correct==='true'?'correct':'wrong')}));</script></body></html>
+<div class="appbar-links"><a href="/xrpl/">Dashboard</a><a href="/xrpl/definitions.html">Definitions</a><a href="/xrpl/wallet-basics.html">Wallets</a><a href="/xrpl/usage.html">Usage</a><a href="/xrpl/safety.html">Safety</a><a href="/xrpl/investing-reality.html">Reality</a><a href="/xrpl/builders/">Builders</a></div></nav><header class="hero" style="--accent:#ff9d25"><div class="hero-logo"><img src="/assets/xrpl/xrpl_layman_icon.png" alt="XRPL LAYMAN"></div><div><div class="eyebrow">Builders Hub Application</div><h1>Builders Hub</h1><p>Create, control, and deploy XRPL systems without hiding authority, risks, or transaction flow.</p></div></header><section class="lesson" id="create" style="--accent:var(--gold)"><div class="lesson-head"><div class="lesson-number">01</div><div><h2>Create</h2><p class="lesson-lead">Learn the primitives before launching anything.</p></div></div><div class="concept-grid"><div class="concept"><h3>Issued Assets</h3><p>Currency code, issuer, supply, trustlines, and controls.</p></div><div class="concept"><h3>NFTs</h3><p>Flags, URI, taxon, offers, transfer fees, and lifecycle.</p></div><div class="concept"><h3>Account Design</h3><p>Separate issuer, operator, treasury, and public accounts.</p></div></div></section><section class="lesson" id="control" style="--accent:var(--cyan)"><div class="lesson-head"><div class="lesson-number">02</div><div><h2>Control</h2><p class="lesson-lead">Know what authority stays active after launch.</p></div></div><div class="concept-grid"><div class="concept"><h3>Freeze</h3><p>Whether balances can be frozen.</p></div><div class="concept"><h3>Authorization</h3><p>Whether holders need approval.</p></div><div class="concept"><h3>Regular Keys</h3><p>How signing authority rotates.</p></div><div class="concept"><h3>Multisigning</h3><p>How shared authority protects accounts.</p></div><div class="concept"><h3>Blackholing</h3><p>What permanent loss of control does and doesn’t prove.</p></div><div class="concept"><h3>Disclosure</h3><p>What users need to know.</p></div></div></section><section class="lesson" id="deploy" style="--accent:var(--blue)"><div class="lesson-head"><div class="lesson-number">03</div><div><h2>Deploy</h2><p class="lesson-lead">Connect ledger actions to an interface people can use.</p></div></div><div class="flow"><div class="flow-step">Build transaction</div><div class="flow-arrow">→</div><div class="flow-step">Show signing request</div><div class="flow-arrow">→</div><div class="flow-step">Submit</div><div class="flow-arrow">→</div><div class="flow-step">Confirm validation</div><div class="flow-arrow">→</div><div class="flow-step">Explain result</div></div></section><section class="lesson" id="standards" style="--accent:var(--green)"><div class="lesson-head"><div class="lesson-number">04</div><div><h2>Builder standard</h2><p class="lesson-lead">A serious XRPL product should be understandable before it asks for a signature.</p></div></div><ul><li>Show the exact asset identity.</li><li>Explain every permission and account setting.</li><li>Handle failed, queued, expired, and validated transactions correctly.</li><li>Never claim success before validation.</li><li>Give users transaction hashes and explorer paths.</li><li>Separate product revenue from XRPL network fees.</li></ul></section><section class="lesson" id="quiz" style="--accent:#ff9d25"><div class="lesson-head"><div class="lesson-number">✓</div><div><h2>Did it click?</h2><p class="lesson-lead">Answer these without guessing.</p></div></div><div class="quiz-question"><h3>Should a product claim success before validation?</h3><div class="quiz-options"><button data-correct="false">Yes</button><button data-correct="true">No</button></div></div><div class="quiz-question"><h3>Is blackholing proof a project is safe?</h3><div class="quiz-options"><button data-correct="false">Yes</button><button data-correct="true">No</button></div></div><div class="quiz-question"><h3>What should users see before signing?</h3><div class="quiz-options"><button data-correct="true">The exact transaction and asset identity</button><button data-correct="false">Only a marketing button</button></div></div></section><section class="lesson" id="next" style="--accent:#ff9d25"><div class="lesson-head"><div class="lesson-number">→</div><div><h2>Keep moving</h2><p class="lesson-lead">Open the next application and keep building the full picture.</p></div></div><div class="next-grid"><a class="next-card" href="/xrpl/definitions.html"><strong>Definitions</strong><span>Master the primitives.</span><b>Open Definitions →</b></a><a class="next-card" href="/xrpl/wallet-basics.html"><strong>Wallets</strong><span>Understand account authority.</span><b>Open Wallets →</b></a><a class="next-card" href="/xrpl/usage.html"><strong>Usage</strong><span>Understand transaction execution.</span><b>Open Usage →</b></a></div></section><footer class="footer"><div><a href="https://houseofcauliman.com">A House of Cauliman Project</a></div><div><a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a> · <a href="/disclaimer.html">Disclaimer</a> · <a href="https://houseofcauliman.com">houseofcauliman.com</a></div><div>© 2026 House of Cauliman. All rights reserved.</div></footer></div><script>document.querySelectorAll('.quiz-options button').forEach(button=>button.addEventListener('click',()=>{const group=button.closest('.quiz-options');group.querySelectorAll('button').forEach(item=>item.classList.remove('correct','wrong'));button.classList.add(button.dataset.correct==='true'?'correct':'wrong')}));</script>
+<a class="dashboard-float" href="/xrpl/" aria-label="Back to XRPL LAYMAN dashboard">
+  <span class="dashboard-float-arrow" aria-hidden="true">←</span>
+  <span class="dashboard-float-text">Back to Dashboard</span>
+</a>
+
+</body></html>
