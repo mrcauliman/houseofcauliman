@@ -188,18 +188,222 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/xrpl_layman/favicon-16x16.png?v=2" />
   <link rel="shortcut icon" href="/assets/favicons/xrpl_layman/favicon.ico?v=2" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/xrpl_layman/apple-touch-icon.png?v=2" />
+
+<style id="xrpl-ios-shell">
+.xrpl-ios-status{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  min-height:32px;
+  padding:0 8px 10px;
+  color:#fff;
+  font-size:13px;
+  font-weight:800;
+  text-shadow:0 2px 8px rgba(0,0,0,.65);
+}
+.xrpl-ios-signals{
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+.xrpl-ios-bars{
+  display:flex;
+  align-items:flex-end;
+  gap:2px;
+  height:12px;
+}
+.xrpl-ios-bars span{
+  width:3px;
+  border-radius:2px;
+  background:#fff;
+}
+.xrpl-ios-bars span:nth-child(1){height:4px}
+.xrpl-ios-bars span:nth-child(2){height:7px}
+.xrpl-ios-bars span:nth-child(3){height:9px}
+.xrpl-ios-bars span:nth-child(4){height:12px}
+.xrpl-ios-battery{
+  width:23px;
+  height:11px;
+  padding:1px;
+  border:1.5px solid #fff;
+  border-radius:3px;
+}
+.xrpl-ios-battery::after{
+  content:"";
+  display:block;
+  width:82%;
+  height:100%;
+  border-radius:1px;
+  background:#fff;
+}
+.xrpl-ios-launcher{
+  margin:0 0 22px;
+  padding:24px 18px 18px;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:28px;
+  background:
+    radial-gradient(circle at 15% 5%,rgba(38,133,255,.45),transparent 35%),
+    radial-gradient(circle at 85% 20%,rgba(132,73,255,.35),transparent 38%),
+    linear-gradient(145deg,rgba(8,20,39,.96),rgba(3,8,16,.98));
+  box-shadow:0 22px 60px rgba(0,0,0,.55);
+  overflow:hidden;
+}
+.xrpl-ios-brand{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  margin-bottom:22px;
+}
+.xrpl-ios-brand img{
+  width:54px;
+  height:54px;
+  object-fit:contain;
+  border-radius:14px;
+  padding:6px;
+  background:linear-gradient(145deg,#2788ff,#10223f);
+  border:1px solid rgba(255,255,255,.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.35),
+    0 12px 24px rgba(0,0,0,.38);
+}
+.xrpl-ios-brand strong{
+  display:block;
+  color:#fff;
+  font-size:22px;
+  letter-spacing:-.02em;
+}
+.xrpl-ios-brand small{
+  display:block;
+  margin-top:3px;
+  color:rgba(255,255,255,.68);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.12em;
+}
+.xrpl-ios-apps{
+  display:grid;
+  grid-template-columns:repeat(7,minmax(0,1fr));
+  gap:18px 10px;
+}
+.xrpl-ios-app{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:7px;
+  min-width:0;
+  color:#fff;
+  text-align:center;
+  -webkit-tap-highlight-color:transparent;
+}
+.xrpl-ios-icon{
+  width:66px;
+  height:66px;
+  display:grid;
+  place-items:center;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.28);
+  font-size:29px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.38),
+    inset 0 -1px 0 rgba(0,0,0,.20),
+    0 10px 22px rgba(0,0,0,.38);
+  transition:transform .15s ease,filter .15s ease;
+}
+.xrpl-ios-app:hover .xrpl-ios-icon{
+  transform:translateY(-3px);
+  filter:brightness(1.08);
+}
+.xrpl-ios-app:active .xrpl-ios-icon{
+  transform:scale(.90);
+}
+.xrpl-ios-label{
+  max-width:88px;
+  min-height:26px;
+  color:#fff;
+  font-size:10.5px;
+  line-height:1.2;
+  font-weight:700;
+  text-shadow:0 2px 6px rgba(0,0,0,.85);
+}
+.xrpl-ios-foundation{background:linear-gradient(145deg,#ffbd59,#d96e0c)}
+.xrpl-ios-definitions{background:linear-gradient(145deg,#63b9ff,#1768d7)}
+.xrpl-ios-wallets{background:linear-gradient(145deg,#4ce0c5,#087e8a)}
+.xrpl-ios-usage{background:linear-gradient(145deg,#68df82,#188b43)}
+.xrpl-ios-safety{background:linear-gradient(145deg,#ff7772,#c8273a)}
+.xrpl-ios-reality{background:linear-gradient(145deg,#b89aff,#6941cf)}
+.xrpl-ios-house{background:linear-gradient(145deg,#8595aa,#26364b)}
+@media(max-width:850px){
+  .xrpl-ios-apps{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+@media(max-width:480px){
+  .xrpl-ios-launcher{padding:20px 10px 16px}
+  .xrpl-ios-apps{gap:20px 4px}
+  .xrpl-ios-icon{width:60px;height:60px;border-radius:15px;font-size:27px}
+  .xrpl-ios-label{max-width:70px;font-size:10px}
+}
+</style>
+
 </head>
 <body id="top">
   <div class="wrap">
-    <nav class="topnav">
-  <a href="/xrpl/">Home</a>
-  <a href="/xrpl/definitions.html">Definitions</a>
-  <a href="/xrpl/wallet-basics.html">Wallets</a>
-  <a href="/xrpl/usage.html">Usage</a>
-  <a href="/xrpl/safety.html">Safety</a>
-  <a href="/xrpl/investing-reality.html">Investing Reality</a>
-  <a href="/">HOC</a>
-</nav>
+    
+<div class="xrpl-ios-status">
+  <span id="xrpl-ios-time">9:41</span>
+  <div class="xrpl-ios-signals" aria-hidden="true">
+    <div class="xrpl-ios-bars"><span></span><span></span><span></span><span></span></div>
+    <span>5G</span>
+    <div class="xrpl-ios-battery"></div>
+  </div>
+</div>
+
+<section class="xrpl-ios-launcher" aria-label="XRPL LAYMAN home screen">
+  <div class="xrpl-ios-brand">
+    <img src="/assets/xrpl/xrpl_layman_icon.png" alt="XRPL LAYMAN">
+    <div>
+      <strong>XRPL LAYMAN</strong>
+      <small>UNDERSTAND. USE. BUILD.</small>
+    </div>
+  </div>
+
+  <nav class="xrpl-ios-apps" aria-label="XRPL LAYMAN apps">
+    <a class="xrpl-ios-app" href="#basics-card">
+      <span class="xrpl-ios-icon xrpl-ios-foundation">🧬</span>
+      <span class="xrpl-ios-label">Foundation</span>
+    </a>
+
+    <a class="xrpl-ios-app" href="/xrpl/definitions.html">
+      <span class="xrpl-ios-icon xrpl-ios-definitions">📖</span>
+      <span class="xrpl-ios-label">Definitions</span>
+    </a>
+
+    <a class="xrpl-ios-app" href="/xrpl/wallet-basics.html">
+      <span class="xrpl-ios-icon xrpl-ios-wallets">💳</span>
+      <span class="xrpl-ios-label">Wallets</span>
+    </a>
+
+    <a class="xrpl-ios-app" href="/xrpl/usage.html">
+      <span class="xrpl-ios-icon xrpl-ios-usage">⚡</span>
+      <span class="xrpl-ios-label">Usage</span>
+    </a>
+
+    <a class="xrpl-ios-app" href="/xrpl/safety.html">
+      <span class="xrpl-ios-icon xrpl-ios-safety">🛡️</span>
+      <span class="xrpl-ios-label">Safety</span>
+    </a>
+
+    <a class="xrpl-ios-app" href="/xrpl/investing-reality.html">
+      <span class="xrpl-ios-icon xrpl-ios-reality">📊</span>
+      <span class="xrpl-ios-label">Investing Reality</span>
+    </a>
+
+    <a class="xrpl-ios-app" href="/">
+      <span class="xrpl-ios-icon xrpl-ios-house">🏛️</span>
+      <span class="xrpl-ios-label">The House</span>
+    </a>
+  </nav>
+</section>
+
 
     <div class="builder-banner">
       <strong>Builders Hub Coming Soon</strong>
@@ -305,5 +509,20 @@
   <div>© 2026 House of Cauliman. All rights reserved.</div>
 </footer>
   </div>
+
+<script>
+(() => {
+  const el = document.getElementById("xrpl-ios-time");
+  const update = () => {
+    el.textContent = new Date().toLocaleTimeString([], {
+      hour:"numeric",
+      minute:"2-digit"
+    });
+  };
+  update();
+  setInterval(update,30000);
+})();
+</script>
+
 </body>
 </html>
