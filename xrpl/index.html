@@ -190,52 +190,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/xrpl_layman/apple-touch-icon.png?v=2" />
 
 <style id="xrpl-ios-shell">
-.xrpl-ios-status{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  min-height:32px;
-  padding:0 8px 10px;
-  color:#fff;
-  font-size:13px;
-  font-weight:800;
-  text-shadow:0 2px 8px rgba(0,0,0,.65);
-}
-.xrpl-ios-signals{
-  display:flex;
-  align-items:center;
-  gap:7px;
-}
-.xrpl-ios-bars{
-  display:flex;
-  align-items:flex-end;
-  gap:2px;
-  height:12px;
-}
-.xrpl-ios-bars span{
-  width:3px;
-  border-radius:2px;
-  background:#fff;
-}
-.xrpl-ios-bars span:nth-child(1){height:4px}
-.xrpl-ios-bars span:nth-child(2){height:7px}
-.xrpl-ios-bars span:nth-child(3){height:9px}
-.xrpl-ios-bars span:nth-child(4){height:12px}
-.xrpl-ios-battery{
-  width:23px;
-  height:11px;
-  padding:1px;
-  border:1.5px solid #fff;
-  border-radius:3px;
-}
-.xrpl-ios-battery::after{
-  content:"";
-  display:block;
-  width:82%;
-  height:100%;
-  border-radius:1px;
-  background:#fff;
-}
+
 .xrpl-ios-launcher{
   margin:0 0 22px;
   padding:24px 18px 18px;
@@ -253,14 +208,14 @@
   align-items:center;
   justify-content:center;
   gap:12px;
-  margin-bottom:22px;
+  margin-bottom:34px;
 }
 .xrpl-ios-brand img{
-  width:54px;
-  height:54px;
+  width:96px;
+  height:96px;
   object-fit:contain;
-  border-radius:14px;
-  padding:6px;
+  border-radius:24px;
+  padding:10px;
   background:linear-gradient(145deg,#2788ff,#10223f);
   border:1px solid rgba(255,255,255,.28);
   box-shadow:
@@ -270,14 +225,14 @@
 .xrpl-ios-brand strong{
   display:block;
   color:#fff;
-  font-size:22px;
+  font-size:36px;
   letter-spacing:-.02em;
 }
 .xrpl-ios-brand small{
   display:block;
   margin-top:3px;
   color:rgba(255,255,255,.68);
-  font-size:11px;
+  font-size:13px;
   font-weight:800;
   letter-spacing:.12em;
 }
@@ -347,16 +302,6 @@
 </head>
 <body id="top">
   <div class="wrap">
-    
-<div class="xrpl-ios-status">
-  <span id="xrpl-ios-time">9:41</span>
-  <div class="xrpl-ios-signals" aria-hidden="true">
-    <div class="xrpl-ios-bars"><span></span><span></span><span></span><span></span></div>
-    <span>5G</span>
-    <div class="xrpl-ios-battery"></div>
-  </div>
-</div>
-
 <section class="xrpl-ios-launcher" aria-label="XRPL LAYMAN home screen">
   <div class="xrpl-ios-brand">
     <img src="/assets/xrpl/xrpl_layman_icon.png" alt="XRPL LAYMAN">
@@ -509,20 +454,5 @@
   <div>© 2026 House of Cauliman. All rights reserved.</div>
 </footer>
   </div>
-
-<script>
-(() => {
-  const el = document.getElementById("xrpl-ios-time");
-  const update = () => {
-    el.textContent = new Date().toLocaleTimeString([], {
-      hour:"numeric",
-      minute:"2-digit"
-    });
-  };
-  update();
-  setInterval(update,30000);
-})();
-</script>
-
 </body>
 </html>
