@@ -98,64 +98,9 @@
       text-align:center;
       opacity:.9;
     }
-  
-  .topnav{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin:0 0 18px;
-    padding:14px;
-    border:1px solid var(--line);
-    border-radius:16px;
-    background:rgba(255,255,255,.03);
-    box-shadow:var(--shadow);
-  }
-
-  .topnav a{
-    display:inline-block;
-    padding:10px 14px;
-    border-radius:10px;
-    border:1px solid var(--line);
-    background:rgba(255,255,255,.04);
-    color:var(--text);
-    font-size:14px;
-    font-weight:700;
-    text-decoration:none;
-  }
-
-  .topnav a:hover{
-    border-color:var(--blue);
-    box-shadow:0 0 0 1px rgba(88,166,255,.15), 0 0 24px rgba(88,166,255,.12);
-  }
 
     .card-media{margin:0 0 14px;border:1px solid rgba(43,51,69,.95);border-radius:14px;background:radial-gradient(circle at top,#111827 0,#020308 70%);padding:10px;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,.55)}
     .card-media img{width:100%;height:180px;object-fit:contain;border-radius:10px;border:1px solid rgba(43,51,69,.95);display:block;background:#0a0f16;padding:8px}
-    
-
-    .builder-banner{
-      margin:18px 0;
-      padding:12px 16px;
-      border:1px solid rgba(212,164,74,.55);
-      border-radius:14px;
-      background:
-        repeating-linear-gradient(
-          -45deg,
-          rgba(212,164,74,.16) 0px,
-          rgba(212,164,74,.16) 12px,
-          rgba(15,23,42,.96) 12px,
-          rgba(15,23,42,.96) 24px
-        );
-      box-shadow:0 12px 30px rgba(0,0,0,.45);
-    }
-    .builder-banner strong{
-      color:#f5f7ff;
-      letter-spacing:.04em;
-      text-transform:uppercase;
-    }
-    .builder-banner span{
-      color:var(--text);
-      opacity:.92;
-    }
     
     .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
     
@@ -189,259 +134,571 @@
   <link rel="shortcut icon" href="/assets/favicons/xrpl_layman/favicon.ico?v=2" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/xrpl_layman/apple-touch-icon.png?v=2" />
 
-<style id="xrpl-ios-shell">
-
-.xrpl-ios-launcher{
-  margin:0 0 22px;
-  padding:24px 18px 18px;
-  border:1px solid rgba(255,255,255,.16);
-  border-radius:28px;
+<style id="xrpl-dashboard-v2">
+body{
   background:
-    radial-gradient(circle at 15% 5%,rgba(38,133,255,.45),transparent 35%),
-    radial-gradient(circle at 85% 20%,rgba(132,73,255,.35),transparent 38%),
-    linear-gradient(145deg,rgba(8,20,39,.96),rgba(3,8,16,.98));
-  box-shadow:0 22px 60px rgba(0,0,0,.55);
-  overflow:hidden;
+    radial-gradient(circle at 8% 10%,rgba(0,93,255,.22),transparent 30%),
+    radial-gradient(circle at 92% 20%,rgba(99,38,210,.18),transparent 34%),
+    linear-gradient(145deg,#020711 0%,#02050c 48%,#000 100%);
 }
-.xrpl-ios-brand{
+
+.wrap{
+  max-width:1500px;
+  padding:38px 28px 80px;
+}
+
+.xrpl-dashboard{
+  position:relative;
+  overflow:hidden;
+  padding:28px 14px 10px;
+}
+
+.xrpl-dashboard::before{
+  content:"";
+  position:absolute;
+  width:1050px;
+  height:1050px;
+  top:-770px;
+  left:-320px;
+  border:2px solid rgba(28,100,255,.33);
+  border-radius:50%;
+  box-shadow:
+    0 0 0 22px rgba(14,77,219,.08),
+    0 0 0 46px rgba(14,77,219,.045);
+  pointer-events:none;
+}
+
+.xrpl-dashboard::after{
+  content:"";
+  position:absolute;
+  width:980px;
+  height:980px;
+  top:-690px;
+  right:-520px;
+  border:2px solid rgba(121,49,255,.30);
+  border-radius:50%;
+  box-shadow:
+    0 0 0 22px rgba(106,40,230,.07),
+    0 0 0 46px rgba(106,40,230,.035);
+  pointer-events:none;
+}
+
+.xrpl-dashboard-hero{
+  position:relative;
+  z-index:1;
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:12px;
-  margin-bottom:34px;
+  gap:42px;
+  max-width:1100px;
+  margin:0 auto;
+  padding:28px 20px 18px;
 }
-.xrpl-ios-brand img{
-  width:96px;
-  height:96px;
-  object-fit:contain;
-  border-radius:24px;
-  padding:10px;
-  background:linear-gradient(145deg,#2788ff,#10223f);
-  border:1px solid rgba(255,255,255,.28);
+
+.xrpl-dashboard-logo{
+  width:220px;
+  height:220px;
+  flex:0 0 auto;
+  display:grid;
+  place-items:center;
+  border-radius:48px;
+  background:
+    radial-gradient(circle at 50% 42%,rgba(27,120,255,.40),transparent 46%),
+    linear-gradient(145deg,#08235a,#020817 72%);
+  border:2px solid rgba(120,169,255,.58);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.35),
-    0 12px 24px rgba(0,0,0,.38);
+    inset 0 1px 0 rgba(255,255,255,.18),
+    inset 0 -18px 30px rgba(0,0,0,.35),
+    0 28px 70px rgba(0,0,0,.52),
+    0 0 50px rgba(20,104,255,.18);
 }
-.xrpl-ios-brand strong{
-  display:block;
-  color:#fff;
-  font-size:36px;
-  letter-spacing:-.02em;
+
+.xrpl-dashboard-logo img{
+  width:160px;
+  height:160px;
+  object-fit:contain;
+  filter:drop-shadow(0 0 18px rgba(75,173,255,.68));
 }
-.xrpl-ios-brand small{
-  display:block;
-  margin-top:3px;
-  color:rgba(255,255,255,.68);
-  font-size:13px;
-  font-weight:800;
-  letter-spacing:.12em;
+
+.xrpl-dashboard-title{
+  min-width:0;
 }
-.xrpl-ios-apps{
+
+.xrpl-dashboard-title h1{
+  margin:0;
+  font-size:clamp(48px,7vw,94px);
+  line-height:.95;
+  letter-spacing:-.055em;
+  font-weight:900;
+  color:#f8fbff;
+  white-space:nowrap;
+  text-shadow:0 8px 30px rgba(0,0,0,.55);
+}
+
+.xrpl-dashboard-title h1 span{
+  background:linear-gradient(90deg,#f9fbff 0%,#eef4ff 45%,#2f82ff 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.xrpl-dashboard-tagline{
+  margin:22px 0 0;
+  color:#aeb8ca;
+  font-size:clamp(16px,2vw,25px);
+  font-weight:750;
+  letter-spacing:.26em;
+  text-align:center;
+}
+
+.xrpl-dashboard-rule{
+  position:relative;
+  z-index:1;
+  width:min(760px,70%);
+  height:1px;
+  margin:18px auto 30px;
+  background:linear-gradient(90deg,transparent,#1f8cff 22%,#4da9ff 50%,#5742ec 78%,transparent);
+}
+
+.xrpl-dashboard-rule::after{
+  content:"";
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#fff;
+  transform:translate(-50%,-50%);
+  box-shadow:0 0 14px #1d8cff,0 0 28px #1d8cff;
+}
+
+.xrpl-dashboard-intro{
+  position:relative;
+  z-index:1;
+  margin:0 auto 42px;
+  color:#b8c3d2;
+  font-size:clamp(17px,2vw,23px);
+  text-align:center;
+}
+
+.xrpl-app-grid{
+  position:relative;
+  z-index:1;
   display:grid;
   grid-template-columns:repeat(7,minmax(0,1fr));
-  gap:18px 10px;
+  gap:16px;
+  max-width:1450px;
+  margin:0 auto;
 }
-.xrpl-ios-app{
+
+.xrpl-app-card{
+  position:relative;
+  min-height:375px;
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:7px;
-  min-width:0;
+  padding:30px 18px 22px;
+  border-radius:18px;
+  border:1px solid var(--card-line);
+  background:
+    radial-gradient(circle at 50% 22%,var(--card-glow),transparent 31%),
+    linear-gradient(180deg,rgba(7,16,29,.93),rgba(2,8,17,.97));
   color:#fff;
   text-align:center;
-  -webkit-tap-highlight-color:transparent;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.035),
+    0 20px 45px rgba(0,0,0,.32);
+  transition:
+    transform .18s ease,
+    border-color .18s ease,
+    box-shadow .18s ease;
 }
-.xrpl-ios-icon{
-  width:66px;
-  height:66px;
+
+.xrpl-app-card:hover{
+  transform:translateY(-7px);
+  border-color:var(--card-color);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.06),
+    0 28px 60px rgba(0,0,0,.45),
+    0 0 28px var(--card-glow);
+}
+
+.xrpl-app-card:focus-visible{
+  outline:2px solid #fff;
+  outline-offset:4px;
+}
+
+.xrpl-app-icon{
+  width:100px;
+  height:100px;
   display:grid;
   place-items:center;
-  border-radius:16px;
-  border:1px solid rgba(255,255,255,.28);
-  font-size:29px;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.38),
-    inset 0 -1px 0 rgba(0,0,0,.20),
-    0 10px 22px rgba(0,0,0,.38);
-  transition:transform .15s ease,filter .15s ease;
+  margin-bottom:22px;
+  border-radius:50%;
+  background:radial-gradient(circle,var(--card-glow),transparent 68%);
+  color:var(--card-color);
 }
-.xrpl-ios-app:hover .xrpl-ios-icon{
-  transform:translateY(-3px);
-  filter:brightness(1.08);
+
+.xrpl-app-icon svg{
+  width:68px;
+  height:68px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2.1;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  filter:drop-shadow(0 0 11px var(--card-color));
 }
-.xrpl-ios-app:active .xrpl-ios-icon{
-  transform:scale(.90);
+
+.xrpl-app-card h2{
+  margin:0 0 18px;
+  font-size:20px;
+  line-height:1.15;
 }
-.xrpl-ios-label{
-  max-width:88px;
-  min-height:26px;
-  color:#fff;
-  font-size:10.5px;
-  line-height:1.2;
-  font-weight:700;
-  text-shadow:0 2px 6px rgba(0,0,0,.85);
+
+.xrpl-app-card p{
+  margin:0;
+  color:#c4ccda;
+  font-size:14px;
+  line-height:1.65;
 }
-.xrpl-ios-foundation{background:linear-gradient(145deg,#ffbd59,#d96e0c)}
-.xrpl-ios-definitions{background:linear-gradient(145deg,#63b9ff,#1768d7)}
-.xrpl-ios-wallets{background:linear-gradient(145deg,#4ce0c5,#087e8a)}
-.xrpl-ios-usage{background:linear-gradient(145deg,#68df82,#188b43)}
-.xrpl-ios-safety{background:linear-gradient(145deg,#ff7772,#c8273a)}
-.xrpl-ios-reality{background:linear-gradient(145deg,#b89aff,#6941cf)}
-.xrpl-ios-house{background:linear-gradient(145deg,#8595aa,#26364b)}
-@media(max-width:850px){
-  .xrpl-ios-apps{grid-template-columns:repeat(4,minmax(0,1fr))}
+
+.xrpl-app-arrow{
+  margin-top:auto;
+  padding-top:24px;
+  color:var(--card-color);
+  font-size:33px;
+  line-height:1;
 }
-@media(max-width:480px){
-  .xrpl-ios-launcher{padding:20px 10px 16px}
-  .xrpl-ios-apps{gap:20px 4px}
-  .xrpl-ios-icon{width:60px;height:60px;border-radius:15px;font-size:27px}
-  .xrpl-ios-label{max-width:70px;font-size:10px}
+
+.xrpl-card-foundation{
+  --card-color:#ff941f;
+  --card-line:rgba(255,148,31,.32);
+  --card-glow:rgba(255,148,31,.13);
+}
+
+.xrpl-card-definitions{
+  --card-color:#168cff;
+  --card-line:rgba(22,140,255,.33);
+  --card-glow:rgba(22,140,255,.13);
+}
+
+.xrpl-card-wallets{
+  --card-color:#00d6d1;
+  --card-line:rgba(0,214,209,.33);
+  --card-glow:rgba(0,214,209,.13);
+}
+
+.xrpl-card-usage{
+  --card-color:#6ee82f;
+  --card-line:rgba(110,232,47,.28);
+  --card-glow:rgba(110,232,47,.11);
+}
+
+.xrpl-card-safety{
+  --card-color:#ff334f;
+  --card-line:rgba(255,51,79,.30);
+  --card-glow:rgba(255,51,79,.12);
+}
+
+.xrpl-card-reality{
+  --card-color:#984bff;
+  --card-line:rgba(152,75,255,.34);
+  --card-glow:rgba(152,75,255,.13);
+}
+
+.xrpl-card-house{
+  --card-color:#a9b3c6;
+  --card-line:rgba(169,179,198,.30);
+  --card-glow:rgba(169,179,198,.10);
+}
+
+.xrpl-builder-banner{
+  position:relative;
+  z-index:1;
+  display:flex;
+  align-items:center;
+  gap:24px;
+  max-width:1450px;
+  margin:42px auto 0;
+  padding:26px 34px;
+  border:1px solid rgba(119,61,255,.74);
+  border-left-color:rgba(255,145,22,.72);
+  border-radius:18px;
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      rgba(37,32,82,.22) 0,
+      rgba(37,32,82,.22) 14px,
+      rgba(3,10,23,.74) 14px,
+      rgba(3,10,23,.74) 28px
+    ),
+    linear-gradient(90deg,rgba(255,140,20,.05),rgba(93,43,225,.12));
+  box-shadow:0 22px 55px rgba(0,0,0,.36);
+}
+
+.xrpl-builder-icon{
+  width:78px;
+  height:78px;
+  flex:0 0 auto;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  color:#ff941f;
+  background:rgba(255,148,31,.07);
+  border:1px solid rgba(255,148,31,.34);
+  box-shadow:0 0 28px rgba(255,148,31,.12);
+}
+
+.xrpl-builder-icon svg{
+  width:45px;
+  height:45px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.xrpl-builder-copy{
+  flex:1;
+}
+
+.xrpl-builder-copy h2{
+  margin:0 0 6px;
+  font-size:30px;
+  letter-spacing:.035em;
+}
+
+.xrpl-builder-copy p{
+  margin:0;
+  color:#bdc7d6;
+  font-size:18px;
+}
+
+.xrpl-builder-status{
+  flex:0 0 auto;
+  padding:16px 24px;
+  border:1px solid rgba(53,115,255,.28);
+  border-radius:14px;
+  color:#278cff;
+  font-size:16px;
+  font-weight:800;
+  letter-spacing:.08em;
+}
+
+.xrpl-dashboard + .hoc-standard-footer{
+  margin-top:38px;
+}
+
+@media(max-width:1180px){
+  .xrpl-app-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+  }
+
+  .xrpl-app-card{
+    min-height:350px;
+  }
+}
+
+@media(max-width:760px){
+  .wrap{
+    padding:22px 14px 70px;
+  }
+
+  .xrpl-dashboard-hero{
+    flex-direction:column;
+    gap:22px;
+  }
+
+  .xrpl-dashboard-logo{
+    width:145px;
+    height:145px;
+    border-radius:34px;
+  }
+
+  .xrpl-dashboard-logo img{
+    width:105px;
+    height:105px;
+  }
+
+  .xrpl-dashboard-title h1{
+    white-space:normal;
+    text-align:center;
+  }
+
+  .xrpl-dashboard-tagline{
+    letter-spacing:.16em;
+  }
+
+  .xrpl-app-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .xrpl-app-card{
+    min-height:330px;
+  }
+
+  .xrpl-builder-banner{
+    align-items:flex-start;
+    flex-wrap:wrap;
+    padding:24px;
+  }
+
+  .xrpl-builder-copy{
+    min-width:calc(100% - 110px);
+  }
+
+  .xrpl-builder-status{
+    width:100%;
+    text-align:center;
+  }
+}
+
+@media(max-width:430px){
+  .xrpl-app-grid{
+    grid-template-columns:1fr;
+  }
+
+  .xrpl-app-card{
+    min-height:300px;
+  }
 }
 </style>
 
 </head>
 <body id="top">
   <div class="wrap">
-<section class="xrpl-ios-launcher" aria-label="XRPL LAYMAN home screen">
-  <div class="xrpl-ios-brand">
-    <img src="/assets/xrpl/xrpl_layman_icon.png" alt="XRPL LAYMAN">
-    <div>
-      <strong>XRPL LAYMAN</strong>
-      <small>UNDERSTAND. USE. BUILD.</small>
+<section class="xrpl-dashboard">
+
+  <header class="xrpl-dashboard-hero">
+    <div class="xrpl-dashboard-logo">
+      <img src="/assets/xrpl/xrpl_layman_icon.png" alt="XRPL LAYMAN">
     </div>
-  </div>
 
-  <nav class="xrpl-ios-apps" aria-label="XRPL LAYMAN apps">
-    <a class="xrpl-ios-app" href="#basics-card">
-      <span class="xrpl-ios-icon xrpl-ios-foundation">🧬</span>
-      <span class="xrpl-ios-label">Foundation</span>
+    <div class="xrpl-dashboard-title">
+      <h1>XRPL <span>LAYMAN</span></h1>
+      <div class="xrpl-dashboard-tagline">UNDERSTAND. USE. BUILD.</div>
+    </div>
+  </header>
+
+  <div class="xrpl-dashboard-rule"></div>
+
+  <p class="xrpl-dashboard-intro">
+    Understand the XRP Ledger. Use it with confidence. Build what’s next.
+  </p>
+
+  <nav class="xrpl-app-grid" aria-label="XRPL LAYMAN learning applications">
+
+    <a class="xrpl-app-card xrpl-card-foundation" href="/xrpl/definitions.html">
+      <div class="xrpl-app-icon">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M20 7c20 11 20 39 0 50"/>
+          <path d="M44 7c-20 11-20 39 0 50"/>
+          <path d="M22 15h20M18 25h28M18 39h28M22 49h20"/>
+        </svg>
+      </div>
+      <h2>Foundation</h2>
+      <p>Start here. Core concepts, the ledger, and how it all fits together.</p>
+      <span class="xrpl-app-arrow">→</span>
     </a>
 
-    <a class="xrpl-ios-app" href="/xrpl/definitions.html">
-      <span class="xrpl-ios-icon xrpl-ios-definitions">📖</span>
-      <span class="xrpl-ios-label">Definitions</span>
+    <a class="xrpl-app-card xrpl-card-definitions" href="/xrpl/definitions.html">
+      <div class="xrpl-app-icon">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M7 12c10-3 18-1 25 5v38c-7-6-15-8-25-5z"/>
+          <path d="M57 12c-10-3-18-1-25 5v38c7-6 15-8 25-5z"/>
+          <path d="M32 17v38"/>
+        </svg>
+      </div>
+      <h2>Definitions</h2>
+      <p>Plain-English definitions of key terms and XRPL concepts.</p>
+      <span class="xrpl-app-arrow">→</span>
     </a>
 
-    <a class="xrpl-ios-app" href="/xrpl/wallet-basics.html">
-      <span class="xrpl-ios-icon xrpl-ios-wallets">💳</span>
-      <span class="xrpl-ios-label">Wallets</span>
+    <a class="xrpl-app-card xrpl-card-wallets" href="/xrpl/wallet-basics.html">
+      <div class="xrpl-app-icon">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M9 16h40a7 7 0 0 1 7 7v28H15a7 7 0 0 1-7-7V17a8 8 0 0 1 8-8h31"/>
+          <path d="M42 29h14v14H42a7 7 0 0 1 0-14z"/>
+          <circle cx="45" cy="36" r="1.5"/>
+        </svg>
+      </div>
+      <h2>Wallets</h2>
+      <p>Wallet types, accounts, setup, funding, custody, and protection.</p>
+      <span class="xrpl-app-arrow">→</span>
     </a>
 
-    <a class="xrpl-ios-app" href="/xrpl/usage.html">
-      <span class="xrpl-ios-icon xrpl-ios-usage">⚡</span>
-      <span class="xrpl-ios-label">Usage</span>
+    <a class="xrpl-app-card xrpl-card-usage" href="/xrpl/usage.html">
+      <div class="xrpl-app-icon">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M36 5 16 36h16l-4 23 20-32H32z"/>
+        </svg>
+      </div>
+      <h2>Usage</h2>
+      <p>Payments, tokens, NFTs, liquidity, transactions, and real execution.</p>
+      <span class="xrpl-app-arrow">→</span>
     </a>
 
-    <a class="xrpl-ios-app" href="/xrpl/safety.html">
-      <span class="xrpl-ios-icon xrpl-ios-safety">🛡️</span>
-      <span class="xrpl-ios-label">Safety</span>
+    <a class="xrpl-app-card xrpl-card-safety" href="/xrpl/safety.html">
+      <div class="xrpl-app-icon">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M32 5 54 14v17c0 14-9 23-22 28C19 54 10 45 10 31V14z"/>
+          <path d="M32 19v18M32 45h.01"/>
+        </svg>
+      </div>
+      <h2>Safety</h2>
+      <p>Security essentials, scams to avoid, and protecting your assets.</p>
+      <span class="xrpl-app-arrow">→</span>
     </a>
 
-    <a class="xrpl-ios-app" href="/xrpl/investing-reality.html">
-      <span class="xrpl-ios-icon xrpl-ios-reality">📊</span>
-      <span class="xrpl-ios-label">Investing Reality</span>
+    <a class="xrpl-app-card xrpl-card-reality" href="/xrpl/investing-reality.html">
+      <div class="xrpl-app-icon">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M9 55V33h10v22M27 55V20h10v35M45 55V9h10v46"/>
+          <path d="M6 55h52"/>
+        </svg>
+      </div>
+      <h2>Investing Reality</h2>
+      <p>The truth about risk, liquidity, cycles, and long-term perspective.</p>
+      <span class="xrpl-app-arrow">→</span>
     </a>
 
-    <a class="xrpl-ios-app" href="/">
-      <span class="xrpl-ios-icon xrpl-ios-house">🏛️</span>
-      <span class="xrpl-ios-label">The House</span>
+    <a class="xrpl-app-card xrpl-card-house" href="/">
+      <div class="xrpl-app-icon">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M8 24 32 8l24 16"/>
+          <path d="M12 26h40M15 51h34M10 57h44"/>
+          <path d="M19 27v24M28 27v24M36 27v24M45 27v24"/>
+        </svg>
+      </div>
+      <h2>The House</h2>
+      <p>Return to the main hub and explore House of Cauliman projects.</p>
+      <span class="xrpl-app-arrow">→</span>
     </a>
+
   </nav>
-</section>
 
-
-    <div class="builder-banner">
-      <strong>Builders Hub Coming Soon</strong>
-      <span> Wallets. Tools. Docs. Rails. Builder paths on XRPL.</span>
+  <section class="xrpl-builder-banner">
+    <div class="xrpl-builder-icon">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M39 9c8 3 13 8 16 16L39 41l-16-2-2-16z"/>
+        <path d="m21 23-9 4 8 8M39 41l-4 9-8-8"/>
+        <circle cx="41" cy="23" r="4"/>
+        <path d="M18 45c-5 0-9 4-9 9 5 0 9-4 9-9z"/>
+      </svg>
     </div>
 
-    <section class="hero">
-      <h1><span class="xrpl-layman-brand"><img src="/assets/xrpl/xrpl_layman_icon.png" alt="XRPL LAYMAN icon"><span>XRPL LAYMAN</span></span></h1>
-      <div class="sub">
-        Learn how to actually use the XRP Ledger. Wallets, buying tokens, NFTs, liquidity, and real execution.
-      </div>
-      <div class="pillbar">
-        <div class="pill"><span class="dot"></span>Free Education</div>
-        <div class="pill"><span class="dot"></span>Execution First</div>
-        <div class="pill"><span class="dot"></span>Reality First</div>
-        <div class="pill"><span class="dot"></span>$XRP</div>
-        <div class="pill"><span class="dot"></span>XRPL</div>
-      </div>
-    </section>
+    <div class="xrpl-builder-copy">
+      <h2>BUILDERS HUB COMING SOON</h2>
+      <p>Wallets. Tools. Docs. Rails. Builder paths on XRPL.</p>
+    </div>
 
-    </section>
+    <div class="xrpl-builder-status">STAY TUNED →</div>
+  </section>
 
-    <section class="intro">
-      <p>This is the House of Cauliman guide to actually using XRPL.</p>
-      <p>Start with wallets. Then learn how money gets on and off the ledger. Then learn how token buys, NFT buys, and different sale types actually work.</p>
-      <p>You are signing transactions on a public ledger. Every action is final.</p>
-    </section>
-
-    <section class="intro">
-      <h2>Why This Matters</h2>
-      <p>Most people are sitting around watching a bag and waiting for price to save them. That is not how real value gets built.</p>
-      <p>The iPhone did not become what it became because people stared at the hardware. It became dominant because the network, the software, the apps, and the utility stack made it part of everyday life.</p>
-      <p>XRPL is the same kind of opportunity. $XRP is the rail. XRPL is the network. The value comes from people building on top of it, using it, and creating real tools that people actually touch.</p>
-      <p>This section exists to teach people how the ledger works, how to use it, how not to get burned, and why building apps and utilities on the rail is the real move.</p>
-      <p>That is the point. Not sitting still. Not cheering from the sidelines. Building, using, and making the network more valuable through real activity.</p>
-    </section>
-
-    <section class="grid">
-      <article class="card" id="basics-card">
-        <div class="eyebrow">Foundation</div>
-        <div class="card-media"><img src="/assets/xrpl/definitions.svg" alt="XRPL Basics diagram"></div>
-        <h2>XRPL Basics</h2>
-        <p>What XRPL is, what $XRP does, reserves, trustlines, settlement, and the parts people confuse.</p>
-        <div class="actions">
-          <a class="btn" href="/xrpl/definitions.html">Enter Definitions</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="eyebrow">Start Here</div>
-        <div class="card-media"><img src="/assets/xrpl/wallet.svg" alt="Wallets diagram"></div>
-        <h2>Wallets</h2>
-        <p>Hot wallet, cold wallet, exchange custody, and why Xaman is the main wallet to know.</p>
-        <div class="actions">
-          <a class="btn" href="/xrpl/wallet-basics.html">Enter Wallets</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="eyebrow">Use the Ledger</div>
-        <div class="card-media"><img src="/assets/xrpl/usage.svg" alt="Usage diagram"></div>
-        <h2>Usage</h2>
-        <p>DEX, AMM, token buying, NFT buying, OTC deals, and how execution actually works on XRPL.</p>
-        <div class="actions">
-          <a class="btn" href="/xrpl/usage.html">Enter Usage</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="eyebrow">Protect Yourself</div>
-        <div class="card-media"><img src="/assets/xrpl/safety.svg" alt="Safety diagram"></div>
-        <h2>Safety</h2>
-        <p>Fake issuers, blind signing, OTC risk, exchange risk, and wallet protection that actually matters.</p>
-        <div class="actions">
-          <a class="btn" href="/xrpl/safety.html">Enter Safety</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="eyebrow">Truth Filter</div>
-        <div class="card-media"><img src="/assets/xrpl/reality.svg" alt="Investing Reality diagram"></div>
-        <h2>Investing Reality</h2>
-        <p>Liquidity, slippage, market cap confusion, and how price actually moves in the real world.</p>
-        <div class="actions">
-          <a class="btn" href="/xrpl/investing-reality.html">Enter Reality</a>
-        </div>
-      </article>
-    </section>
-    <section class="section">
-      <div class="cta-row">
-        <a class="cta" href="#top">Back to Top</a>
-      </div>
-    </section>
+</section>
 
     <footer class="hoc-standard-footer">
   <div>A House of Cauliman Project</div>
