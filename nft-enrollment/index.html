@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+  <title>𝕏 Subscriber NFT Enrollment | House of Cauliman</title>
+
+  <link rel="canonical" href="https://houseofcauliman.com/nft-enrollment/" />
+
+  <meta
+    name="description"
+    content="Register your XRPL wallet for @mrcauliman 𝕏 subscriber NFT drops. Weekly original XRPL collectibles begin September 27."
+  />
+
+  <meta name="theme-color" content="#050509" />
+
+  <style>
+    :root{
+      --bg:#050509;
+      --panel:#0d0e13;
+      --panel2:#11131a;
+      --line:#292b34;
+      --gold:#d6a640;
+      --gold2:#f2cb68;
+      --text:#f6f7fb;
+      --muted:#a9adb8;
+      --soft:#727783;
+      --blue:#0a74d0;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html,
+    body{
+      margin:0;
+      padding:0;
+      min-height:100%;
+      background:
+        radial-gradient(circle at 50% 0,rgba(255,255,255,.08),transparent 20%),
+        radial-gradient(circle at 50% 18%,rgba(214,166,64,.12),transparent 30%),
+        linear-gradient(180deg,#0b0c10 0,#050509 55%,#000 100%);
+      color:var(--text);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    .wrap{
+      max-width:980px;
+      margin:0 auto;
+      padding:24px 16px 72px;
+    }
+
+    .top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:26px;
+    }
+
+    .house{
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color:#cbc5b7;
+    }
+
+    .home{
+      padding:9px 13px;
+      border-radius:999px;
+      border:1px solid #30323a;
+      background:#0b0c10;
+      color:#c9ccd4;
+      font-size:13px;
+    }
+
+    .hero{
+      text-align:center;
+      padding:26px 10px 34px;
+    }
+
+    .x-mark{
+      font-size:clamp(110px,24vw,210px);
+      line-height:.76;
+      font-weight:1000;
+      color:#fff;
+      letter-spacing:-.08em;
+      margin:10px auto 30px;
+      text-shadow:
+        0 0 24px rgba(255,255,255,.15),
+        0 0 70px rgba(255,255,255,.07);
+    }
+
+    .eyebrow{
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.24em;
+      text-transform:uppercase;
+      color:var(--gold2);
+      margin-bottom:12px;
+    }
+
+    h1{
+      margin:0;
+      font-size:clamp(34px,7vw,62px);
+      line-height:1;
+      letter-spacing:-.045em;
+    }
+
+    .hero-copy{
+      max-width:720px;
+      margin:18px auto 0;
+      color:#b8bbc4;
+      font-size:16px;
+      line-height:1.65;
+    }
+
+    .badges{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:8px;
+      margin-top:22px;
+    }
+
+    .badge{
+      padding:7px 11px;
+      border-radius:999px;
+      border:1px solid rgba(214,166,64,.28);
+      background:rgba(214,166,64,.07);
+      color:#dfca8c;
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.04em;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      margin-top:12px;
+    }
+
+    .card{
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:22px;
+      background:
+        linear-gradient(
+          180deg,
+          rgba(17,19,26,.98),
+          rgba(8,9,12,.99)
+        );
+      box-shadow:0 22px 55px rgba(0,0,0,.40);
+    }
+
+    .card h2{
+      margin:0 0 16px;
+      font-size:19px;
+    }
+
+    .card p,
+    .card li{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.6;
+    }
+
+    .steps{
+      list-style:none;
+      padding:0;
+      margin:0;
+      counter-reset:item;
+    }
+
+    .steps li{
+      counter-increment:item;
+      position:relative;
+      padding:0 0 18px 40px;
+    }
+
+    .steps li::before{
+      content:counter(item);
+      position:absolute;
+      left:0;
+      top:-2px;
+      width:27px;
+      height:27px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:#1d190f;
+      border:1px solid #59461f;
+      color:var(--gold2);
+      font-size:12px;
+      font-weight:1000;
+    }
+
+    .notice{
+      margin:17px 0;
+      padding:15px;
+      border-radius:15px;
+      border:1px solid rgba(214,166,64,.30);
+      background:rgba(214,166,64,.07);
+      color:#d8ca9f;
+      font-size:13px;
+      line-height:1.55;
+    }
+
+    .series{
+      margin-top:18px;
+      padding:18px;
+      border-radius:17px;
+      border:1px solid rgba(214,166,64,.34);
+      background:
+        linear-gradient(
+          135deg,
+          rgba(214,166,64,.10),
+          rgba(214,166,64,.025)
+        );
+    }
+
+    .series-title{
+      color:var(--gold2);
+      font-size:13px;
+      font-weight:1000;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      margin-bottom:7px;
+    }
+
+    .series h3{
+      margin:0 0 8px;
+      font-size:27px;
+    }
+
+    .series p{
+      margin-bottom:0;
+    }
+
+    label{
+      display:block;
+      margin:16px 0 7px;
+      color:#dddfe5;
+      font-size:13px;
+      font-weight:900;
+    }
+
+    input{
+      width:100%;
+      padding:15px 14px;
+      border:1px solid #363842;
+      border-radius:13px;
+      background:#08090c;
+      color:#fff;
+      font-size:16px;
+      outline:none;
+    }
+
+    input:focus{
+      border-color:rgba(214,166,64,.72);
+      box-shadow:0 0 0 3px rgba(214,166,64,.08);
+    }
+
+    .help{
+      margin-top:6px;
+      color:var(--soft);
+      font-size:12px;
+      line-height:1.45;
+    }
+
+    .check{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      margin:18px 0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.5;
+    }
+
+    .check input{
+      width:18px;
+      height:18px;
+      margin-top:1px;
+      flex:0 0 auto;
+    }
+
+    button{
+      width:100%;
+      border:0;
+      border-radius:13px;
+      padding:15px;
+      font-size:15px;
+      font-weight:1000;
+      background:
+        linear-gradient(
+          180deg,
+          #efc75f,
+          #ca9630
+        );
+      color:#171106;
+    }
+
+    button:disabled{
+      cursor:not-allowed;
+      opacity:.64;
+    }
+
+    .opening{
+      margin-top:10px;
+      text-align:center;
+      color:#777b85;
+      font-size:12px;
+      line-height:1.5;
+    }
+
+    .future{
+      margin-top:18px;
+      padding-top:18px;
+      border-top:1px solid #23252c;
+    }
+
+    footer{
+      text-align:center;
+      margin-top:36px;
+      color:#666a73;
+      font-size:12px;
+      line-height:1.7;
+    }
+
+    footer a{
+      color:#9b9eaa;
+    }
+
+    @media(max-width:760px){
+      .grid{
+        grid-template-columns:1fr;
+      }
+
+      .top{
+        align-items:flex-start;
+      }
+
+      .hero{
+        padding-top:10px;
+      }
+
+      .x-mark{
+        margin-top:0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+  <div class="top">
+    <div class="house">House of Cauliman</div>
+
+    <a class="home" href="/">
+      Back to House
+    </a>
+  </div>
+
+  <section class="hero">
+
+    <div class="x-mark">𝕏</div>
+
+    <div class="eyebrow">
+      @mrcauliman Subscriber Program
+    </div>
+
+    <h1>
+      Subscriber NFT Enrollment
+    </h1>
+
+    <p class="hero-copy">
+      Subscribe to @mrcauliman on 𝕏, register one XRPL wallet,
+      and use that wallet for our weekly subscriber NFT drops.
+      Register once and stay connected to current and future
+      House of Cauliman collectible series.
+    </p>
+
+    <div class="badges">
+      <span class="badge">$5 / MONTH</span>
+      <span class="badge">WEEKLY NFT DROPS</span>
+      <span class="badge">XRPL NATIVE</span>
+      <span class="badge">FIRST DROP SEPTEMBER 27</span>
+    </div>
+
+  </section>
+
+  <div class="grid">
+
+    <section class="card">
+
+      <h2>How it works</h2>
+
+      <ol class="steps">
+
+        <li>
+          Subscribe to <strong>@mrcauliman</strong> on 𝕏.
+        </li>
+
+        <li>
+          Register your 𝕏 handle and one public XRPL wallet address.
+        </li>
+
+        <li>
+          We verify subscriber eligibility before each weekly cutoff.
+        </li>
+
+        <li>
+          Eligible subscriber wallets receive that week's original XRPL NFT.
+        </li>
+
+        <li>
+          Your registered wallet stays on file for future House of Cauliman subscriber collections and drops.
+        </li>
+
+      </ol>
+
+      <div class="notice">
+        <strong>Public XRPL address only.</strong><br>
+        House of Cauliman will never ask for your seed phrase,
+        secret numbers, mnemonic, or private keys.
+      </div>
+
+      <p>
+        <strong>Weekly cutoff</strong><br>
+        Saturday at 11:59 PM Pacific.
+        New registrations and wallet changes after the cutoff
+        apply to the following week's NFT drop.
+      </p>
+
+      <p>
+        <strong>Closed editions stay closed</strong><br>
+        If you subscribe after a weekly edition closes,
+        you begin with the next available NFT.
+      </p>
+
+      <div class="series">
+
+        <div class="series-title">
+          First Subscriber Collection
+        </div>
+
+        <h3>THE 52</h3>
+
+        <p>
+          52 original crypto and internet archetypes.
+          52 different characters.
+          One new XRPL-native collectible every week.
+        </p>
+
+        <p>
+          THE 52 begins September 27.
+        </p>
+
+      </div>
+
+      <div class="future">
+
+        <p>
+          <strong>THE 52 is only the beginning.</strong><br>
+          Future subscriber collections, special drops,
+          contests, drawings, and holder opportunities
+          can use the same registered XRPL wallet.
+        </p>
+
+      </div>
+
+    </section>
+
+    <section class="card">
+
+      <h2>Register your XRPL wallet</h2>
+
+      <form>
+
+        <label>
+          𝕏 handle
+        </label>
+
+        <input
+          placeholder="@yourhandle"
+          disabled
+        >
+
+        <label>
+          XRPL wallet address
+        </label>
+
+        <input
+          placeholder="r..."
+          disabled
+        >
+
+        <div class="help">
+          Your public XRPL r-address only.
+          Xaman and compatible XRPL wallets are supported.
+        </div>
+
+        <label>
+          Email
+          <span style="color:#737782;font-weight:600">
+            optional
+          </span>
+        </label>
+
+        <input
+          type="email"
+          placeholder="For drop notices or account recovery"
+          disabled
+        >
+
+        <label class="check">
+
+          <input
+            type="checkbox"
+            disabled
+          >
+
+          <span>
+            I understand that my 𝕏 subscription must be active
+            and my XRPL wallet must be registered before the
+            weekly cutoff to qualify for that week's NFT.
+          </span>
+
+        </label>
+
+        <button
+          type="button"
+          disabled
+        >
+          REGISTRATION OPENING SOON
+        </button>
+
+        <div class="opening">
+          Secure wallet enrollment is being connected now.
+          No wallet information can be submitted until registration is live.
+        </div>
+
+      </form>
+
+    </section>
+
+  </div>
+
+  <footer>
+
+    House of Cauliman subscriber NFT program.<br>
+
+    <a href="/terms.html">
+      Terms
+    </a>
+
+    ·
+
+    <a href="/privacy.html">
+      Privacy
+    </a>
+
+    ·
+
+    <a href="/disclaimer.html">
+      Disclaimer
+    </a>
+
+  </footer>
+
+</div>
+
+</body>
+</html>
