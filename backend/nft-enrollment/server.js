@@ -1,12 +1,17 @@
 const express = require("express");
 const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
+const { createAdminRouter } = require("./admin");
 const { Pool } = require("pg");
 const { DateTime } = require("luxon");
 const { isValidClassicAddress } = require("ripple-address-codec");
 
 const app = express();
 
+app.set("trust proxy", 1);
+
 const PORT = process.env.PORT || 3000;
+const FIRST_DROP_DATE = "2026-09-27";
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY || "";
 const MAIL_FROM =
@@ -265,7 +270,8 @@ function getEligibleWeek() {
     .plus({ days: daysUntilSunday })
     .startOf("day");
 
-  return sunday.toISODate();
+  const date = sunday.toISODate();
+  return date < FIRST_DROP_DATE ? FIRST_DROP_DATE : date;
 }
 
 async function initializeDatabase() {
@@ -295,7 +301,9 @@ async function initializeDatabase() {
       confirmation_email_sent BOOLEAN NOT NULL DEFAULT FALSE,
       confirmation_email_sent_at TIMESTAMPTZ,
       confirmation_email_id TEXT,
-      confirmation_email_error TEXT
+      confirmation_email_error TEXT,
+      delivered BOOLEAN NOT NULL DEFAULT FALSE,
+      delivered_at TIMESTAMPTZ
     );
   `);
 
@@ -304,8 +312,17 @@ async function initializeDatabase() {
       ADD COLUMN IF NOT EXISTS confirmation_email_sent BOOLEAN NOT NULL DEFAULT FALSE,
       ADD COLUMN IF NOT EXISTS confirmation_email_sent_at TIMESTAMPTZ,
       ADD COLUMN IF NOT EXISTS confirmation_email_id TEXT,
-      ADD COLUMN IF NOT EXISTS confirmation_email_error TEXT;
+      ADD COLUMN IF NOT EXISTS confirmation_email_error TEXT,
+      ADD COLUMN IF NOT EXISTS delivered BOOLEAN NOT NULL DEFAULT FALSE,
+      ADD COLUMN IF NOT EXISTS delivered_at TIMESTAMPTZ;
   `);
+
+  await pool.query(
+    `UPDATE nft_subscriber_registrations
+     SET eligible_week = $1
+     WHERE eligible_week < $1`,
+    [FIRST_DROP_DATE]
+  );
 
   await pool.query(`
     CREATE INDEX IF NOT EXISTS
@@ -337,7 +354,14 @@ app.get("/health", async (req, res) => {
   }
 });
 
-app.post("/register", async (req, res) => {
+const registrationLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  limit: 20,
+  standardHeaders: true,
+  legacyHeaders: false
+});
+
+app.post("/register", registrationLimiter, async (req, res) => {
   try {
     const xHandle = normalizeHandle(req.body.x_handle);
     const xrplAddress =
@@ -498,6 +522,8 @@ app.post("/register", async (req, res) => {
     });
   }
 });
+
+app.use("/admin", createAdminRouter({ pool }));
 
 app.use((req, res) => {
   res.status(404).json({
