@@ -524,7 +524,17 @@ app.post("/register", registrationLimiter, async (req, res) => {
   }
 });
 
-app.use("/admin", createAdminRouter({ pool }));
+app.get("/admin/admin-client.js", (req, res) => {
+  res.type("application/javascript");
+  res.sendFile(
+    require("path").join(
+      __dirname,
+      "admin-client.js"
+    )
+  );
+});
+
+app.use("/admin", createAdminRouter({ pool, sendConfirmationEmail }));
 app.use("/admin/weekly", createWeeklyRouter({ pool }));
 
 app.use((req, res) => {

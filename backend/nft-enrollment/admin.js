@@ -1,22 +1,17 @@
 const express = require("express");
 const crypto = require("crypto");
 const rateLimit = require("express-rate-limit");
+const { shell, esc, fmtDate, badge } = require("./ui");
 
 function safe(a, b) {
   const x = Buffer.from(String(a));
   const y = Buffer.from(String(b));
-  return x.length === y.length && crypto.timingSafeEqual(x, y);
+
+  return x.length === y.length &&
+    crypto.timingSafeEqual(x, y);
 }
 
-function esc(v) {
-  return String(v ?? "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;");
-}
-
-function createAdminRouter({ pool }) {
+function createAdminRouter({ pool, sendConfirmationEmail }) {
   const router = express.Router();
 
   router.use(rateLimit({
@@ -26,25 +21,47 @@ function createAdminRouter({ pool }) {
     legacyHeaders: false
   }));
 
-  router.use(express.urlencoded({ extended: false }));
+  router.use(express.urlencoded({
+    extended: false,
+    limit: "100kb"
+  }));
 
   router.use((req, res, next) => {
+    res.setHeader("Cache-Control", "no-store");
+    res.setHeader("X-Robots-Tag", "noindex, nofollow");
+
     const auth = req.headers.authorization || "";
 
     if (!auth.startsWith("Basic ")) {
-      res.setHeader("WWW-Authenticate", 'Basic realm="House NFT Admin"');
+      res.setHeader(
+        "WWW-Authenticate",
+        'Basic realm="House NFT Admin"'
+      );
+
       return res.sendStatus(401);
     }
 
-    const [user, pass] = Buffer.from(auth.slice(6), "base64")
-      .toString()
-      .split(":");
+    const decoded = Buffer
+      .from(auth.slice(6), "base64")
+      .toString();
+
+    const split = decoded.indexOf(":");
+
+    const user =
+      split >= 0 ? decoded.slice(0, split) : decoded;
+
+    const pass =
+      split >= 0 ? decoded.slice(split + 1) : "";
 
     if (
       !safe(user, process.env.ADMIN_USER || "") ||
       !safe(pass, process.env.ADMIN_PASSWORD || "")
     ) {
-      res.setHeader("WWW-Authenticate", 'Basic realm="House NFT Admin"');
+      res.setHeader(
+        "WWW-Authenticate",
+        'Basic realm="House NFT Admin"'
+      );
+
       return res.sendStatus(401);
     }
 
@@ -52,10 +69,11 @@ function createAdminRouter({ pool }) {
   });
 
   router.get("/", async (req, res) => {
-    const q = String(req.query.q || "").trim().toLowerCase();
+    const q = String(req.query.q || "")
+      .trim()
+      .toLowerCase();
 
-    const result = await pool.query(
-      `
+    const result = await pool.query(`
       SELECT *
       FROM nft_subscriber_registrations
       WHERE
@@ -65,117 +83,502 @@ function createAdminRouter({ pool }) {
         OR LOWER(xrpl_address) LIKE $2
       ORDER BY registered_at DESC
       LIMIT 500
-      `,
-      [q, `%${q}%`]
+    `, [q, `%${q}%`]);
+
+    const total = result.rows.length;
+
+    const xVerified = result.rows.filter(
+      r => r.subscription_verified
+    ).length;
+
+    const walletVerified = result.rows.filter(
+      r => r.wallet_verified
+    ).length;
+
+    const active = result.rows.filter(
+      r => r.status === "active"
+    ).length;
+
+    const people = result.rows.map(r => {
+      const emailStatus = r.confirmation_email_sent
+        ? badge("Email sent", "good")
+        : badge("No email", "neutral");
+
+      const xStatus = r.subscription_verified
+        ? badge("𝕏 verified", "good")
+        : badge("𝕏 pending", "warn");
+
+      const walletStatus = r.wallet_verified
+        ? badge("Wallet verified", "good")
+        : badge("Wallet pending", "warn");
+
+
+      return `
+        <div class="person">
+
+          <div>
+            <input
+              class="check bulk-check"
+              type="checkbox"
+              name="ids"
+              value="${r.id}"
+              data-wallet="${esc(r.xrpl_address)}"
+              data-handle="${esc(r.x_handle)}"
+              form="bulkForm"
+            >
+          </div>
+
+          <div>
+            <div class="handle">
+              ${esc(r.x_handle)}
+            </div>
+
+            <div class="small">
+              ${esc(r.email || "No email provided")}
+            </div>
+
+            <div style="margin-top:9px;display:flex;gap:6px;flex-wrap:wrap">
+              ${emailStatus}
+              ${xStatus}
+              ${walletStatus}
+            </div>
+
+            <div class="small" style="margin-top:9px">
+              Eligible ${fmtDate(r.eligible_week)}
+            </div>
+          </div>
+
+          <div class="wallet-block">
+            <div class="small">XRPL WALLET</div>
+            <div class="wallet">
+              ${esc(r.xrpl_address)}
+            </div>
+          </div>
+
+          <div class="control-block">
+
+            <form method="post" action="/admin/${r.id}">
+
+              <div class="toggle-row">
+                <span>𝕏 verified</span>
+
+                <label class="switch">
+                  <input
+                    type="checkbox"
+                    name="subscription_verified"
+                    ${r.subscription_verified ? "checked" : ""}
+                  >
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="toggle-row">
+                <span>Wallet verified</span>
+
+                <label class="switch">
+                  <input
+                    type="checkbox"
+                    name="wallet_verified"
+                    ${r.wallet_verified ? "checked" : ""}
+                  >
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+
+              <div style="margin:10px 0">
+                <select name="status">
+                  ${[
+                    "pending",
+                    "active",
+                    "inactive",
+                    "excluded"
+                  ].map(s => `
+                    <option
+                      value="${s}"
+                      ${r.status === s ? "selected" : ""}
+                    >
+                      ${s}
+                    </option>
+                  `).join("")}
+                </select>
+              </div>
+
+              <button class="btn primary" type="submit">
+                SAVE
+              </button>
+
+            </form>
+
+          </div>
+
+        </div>
+      `;
+    }).join("");
+
+    const body = `
+
+      <div class="grid four">
+
+        <div class="stat">
+          <div class="num">${total}</div>
+          <div class="label">Registrations</div>
+        </div>
+
+        <div class="stat">
+          <div class="num">${xVerified}</div>
+          <div class="label">𝕏 Verified</div>
+        </div>
+
+        <div class="stat">
+          <div class="num">${walletVerified}</div>
+          <div class="label">Wallet Verified</div>
+        </div>
+
+        <div class="stat">
+          <div class="num">${active}</div>
+          <div class="label">Active</div>
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <form
+          method="get"
+          action="/admin/"
+          class="grid two"
+        >
+          <div>
+            <label>Search registrations</label>
+
+            <input
+              type="search"
+              name="q"
+              value="${esc(q)}"
+              placeholder="Handle, email or XRPL wallet"
+            >
+          </div>
+
+          <div
+            class="actions"
+            style="align-self:end"
+          >
+            <button class="btn primary">
+              SEARCH
+            </button>
+
+            <a
+              class="btn secondary"
+              href="/admin/export.csv"
+            >
+              EXPORT CSV
+            </a>
+
+            <a
+              class="btn secondary"
+              href="/admin/weekly/"
+            >
+              WEEKLY DROPS
+            </a>
+          </div>
+        </form>
+
+      </div>
+
+      <form
+        id="bulkForm"
+        method="post"
+        action="/admin/bulk"
+      ></form>
+
+      <form
+        id="missingEmailForm"
+        method="post"
+        action="/admin/resend-missing"
+      ></form>
+
+      <div class="card toolbar">
+
+        <div class="actions">
+
+          <button
+            type="button"
+            class="btn secondary"
+            data-action="select-all"
+          >
+            SELECT ALL
+          </button>
+
+          <button
+            type="button"
+            class="btn secondary"
+            data-action="clear-all"
+          >
+            CLEAR
+          </button>
+
+          <button
+            type="button"
+            class="btn secondary"
+            data-action="copy-bulk-handles"
+          >
+            COPY SELECTED HANDLES
+          </button>
+
+          <button
+            class="btn primary"
+            name="action"
+            value="verify_x"
+            form="bulkForm"
+          >
+            MARK 𝕏 VERIFIED
+          </button>
+
+          <button
+            class="btn primary"
+            name="action"
+            value="verify_wallet"
+            form="bulkForm"
+          >
+            MARK WALLET VERIFIED
+          </button>
+
+          <button
+            class="btn primary"
+            name="action"
+            value="activate"
+            form="bulkForm"
+          >
+            SET ACTIVE
+          </button>
+
+          <button
+            class="btn secondary"
+            type="submit"
+            form="missingEmailForm"
+          >
+            SEND MISSING CONFIRMATIONS
+          </button>
+
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        ${
+          people ||
+          `<div class="small">No registrations found.</div>`
+        }
+
+      </div>
+    `;
+
+    const script = `
+      function selectAll() {
+        document
+          .querySelectorAll(".bulk-check")
+          .forEach(el => el.checked = true);
+      }
+
+      function clearAll() {
+        document
+          .querySelectorAll(".bulk-check")
+          .forEach(el => el.checked = false);
+      }
+    `;
+
+    res.send(shell({
+      title: "Subscriber Administration",
+      subtitle:
+        "Manage registrations, verification and weekly NFT eligibility.",
+      body,
+      script
+    }));
+  });
+
+  router.post("/bulk", async (req, res) => {
+    let ids = req.body.ids || [];
+
+    if (!Array.isArray(ids)) {
+      ids = [ids];
+    }
+
+    ids = ids
+      .map(Number)
+      .filter(Number.isInteger);
+
+    if (!ids.length) {
+      return res.redirect("/admin/");
+    }
+
+    const action = String(req.body.action || "");
+
+    if (action === "verify_x") {
+      await pool.query(`
+        UPDATE nft_subscriber_registrations
+        SET
+          subscription_verified = TRUE,
+          updated_at = NOW()
+        WHERE id = ANY($1::bigint[])
+      `, [ids]);
+    }
+
+    if (action === "verify_wallet") {
+      await pool.query(`
+        UPDATE nft_subscriber_registrations
+        SET
+          wallet_verified = TRUE,
+          updated_at = NOW()
+        WHERE id = ANY($1::bigint[])
+      `, [ids]);
+    }
+
+    if (action === "activate") {
+      await pool.query(`
+        UPDATE nft_subscriber_registrations
+        SET
+          status = 'active',
+          updated_at = NOW()
+        WHERE id = ANY($1::bigint[])
+      `, [ids]);
+    }
+
+    res.redirect("/admin/");
+  });
+
+
+  async function sendRegistrationConfirmation(id) {
+    const result = await pool.query(`
+      SELECT *
+      FROM nft_subscriber_registrations
+      WHERE id = $1
+      LIMIT 1
+    `, [id]);
+
+    if (!result.rows.length) {
+      return {
+        sent: false,
+        error: "Registration not found"
+      };
+    }
+
+    const registration = result.rows[0];
+
+    if (!registration.email) {
+      return {
+        sent: false,
+        error: "No email address"
+      };
+    }
+
+    const delivery = await sendConfirmationEmail(
+      registration,
+      registration.email
     );
 
-    const rows = result.rows.map(r => `
-      <tr>
-        <td>${r.id}</td>
-        <td><b>${esc(r.x_handle)}</b><br>${esc(r.email || "")}</td>
-        <td style="word-break:break-all">${esc(r.xrpl_address)}</td>
-        <td>${esc(r.eligible_week)}</td>
-        <td>${r.confirmation_email_sent ? "✓" : "—"}</td>
-        <td>
-          <form method="post" action="/admin/${r.id}">
-            <label>
-              <input type="checkbox" name="subscription_verified"
-                ${r.subscription_verified ? "checked" : ""}>
-              𝕏 verified
-            </label><br>
+    await pool.query(`
+      UPDATE nft_subscriber_registrations
+      SET
+        confirmation_email_sent = $1,
 
-            <label>
-              <input type="checkbox" name="wallet_verified"
-                ${r.wallet_verified ? "checked" : ""}>
-              Wallet verified
-            </label><br>
+        confirmation_email_sent_at =
+          CASE
+            WHEN $1
+            THEN NOW()
+            ELSE confirmation_email_sent_at
+          END,
 
-            <label>
-              <input type="checkbox" name="delivered"
-                ${r.delivered ? "checked" : ""}>
-              Delivered
-            </label><br>
+        confirmation_email_id = $2,
+        confirmation_email_error = $3,
+        updated_at = NOW()
 
-            <select name="status">
-              ${["pending","active","inactive","excluded"]
-                .map(s => `<option ${r.status === s ? "selected" : ""}>${s}</option>`)
-                .join("")}
-            </select>
+      WHERE id = $4
+    `, [
+      Boolean(delivery.sent),
+      delivery.id || null,
+      delivery.error || null,
+      id
+    ]);
 
-            <button>SAVE</button>
-          </form>
-        </td>
-      </tr>
-    `).join("");
+    return delivery;
+  }
 
-    res.send(`
-<!doctype html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width">
-<title>House NFT Admin</title>
-<style>
-body{font-family:Arial;background:#111;color:#eee;margin:0;padding:24px}
-h1{margin-bottom:4px}
-form.search{margin:22px 0}
-input,select,button{padding:8px}
-button{background:#d6b34c;border:0;font-weight:bold}
-table{width:100%;border-collapse:collapse;background:#181818}
-th,td{padding:10px;border-bottom:1px solid #333;text-align:left;vertical-align:top}
-th{color:#aaa}
-a{color:#d6b34c}
-</style>
-</head>
-<body>
-
-<h1>HOUSE OF CAULIMAN</h1>
-<div>Subscriber NFT Administration</div>
-
-<form class="search">
-<input name="q" value="${esc(q)}" placeholder="Handle, email or wallet">
-<button>SEARCH</button>
-<a href="/admin/export.csv">EXPORT CSV</a>
-<a href="/admin/weekly/">WEEKLY DROPS</a>
-</form>
-
-<table>
-<tr>
-<th>ID</th>
-<th>Subscriber</th>
-<th>XRPL Wallet</th>
-<th>Eligible Week</th>
-<th>Email</th>
-<th>Controls</th>
-</tr>
-${rows}
-</table>
-
-</body>
-</html>
+  router.post("/resend-missing", async (req, res) => {
+    const result = await pool.query(`
+      SELECT id
+      FROM nft_subscriber_registrations
+      WHERE
+        email IS NOT NULL
+        AND confirmation_email_sent = FALSE
+      ORDER BY id
     `);
+
+    for (const row of result.rows) {
+      try {
+        await sendRegistrationConfirmation(row.id);
+      } catch (error) {
+        await pool.query(`
+          UPDATE nft_subscriber_registrations
+          SET
+            confirmation_email_error = $1,
+            updated_at = NOW()
+          WHERE id = $2
+        `, [
+          error.message || String(error),
+          row.id
+        ]);
+      }
+    }
+
+    res.redirect("/admin/");
+  });
+
+  router.post("/resend/:id", async (req, res) => {
+    const id = Number(req.params.id);
+
+    if (!Number.isInteger(id)) {
+      return res.sendStatus(400);
+    }
+
+    await sendRegistrationConfirmation(id);
+
+    res.redirect("/admin/");
   });
 
   router.post("/:id", async (req, res) => {
-    await pool.query(
-      `
+    const id = Number(req.params.id);
+
+    if (!Number.isInteger(id)) {
+      return res.sendStatus(400);
+    }
+
+    const allowedStatuses = new Set([
+      "pending",
+      "active",
+      "inactive",
+      "excluded"
+    ]);
+
+    const status = allowedStatuses.has(req.body.status)
+      ? req.body.status
+      : "pending";
+
+    await pool.query(`
       UPDATE nft_subscriber_registrations
       SET
-        subscription_verified=$1,
-        wallet_verified=$2,
-        delivered=$3,
-        delivered_at=CASE WHEN $3 THEN COALESCE(delivered_at,NOW()) ELSE NULL END,
-        status=$4,
-        updated_at=NOW()
-      WHERE id=$5
-      `,
-      [
-        req.body.subscription_verified === "on",
-        req.body.wallet_verified === "on",
-        req.body.delivered === "on",
-        req.body.status || "pending",
-        Number(req.params.id)
-      ]
-    );
+        subscription_verified = $1,
+        wallet_verified = $2,
+        status = $3,
+        updated_at = NOW()
+      WHERE id = $4
+    `, [
+      req.body.subscription_verified === "on",
+      req.body.wallet_verified === "on",
+      status,
+      id
+    ]);
 
     res.redirect("/admin/");
   });
@@ -195,18 +598,23 @@ ${rows}
       ORDER BY registered_at
     `);
 
-    const cols = Object.keys(result.rows[0] || {});
+    const cols = Object.keys(
+      result.rows[0] || {}
+    );
 
     const csv = [
       cols.join(","),
+
       ...result.rows.map(row =>
         cols.map(c =>
-          `"${String(row[c] ?? "").replaceAll('"','""')}"`
+          `"${String(row[c] ?? "")
+            .replaceAll('"', '""')}"`
         ).join(",")
       )
     ].join("\n");
 
     res.type("text/csv");
+
     res.setHeader(
       "Content-Disposition",
       'attachment; filename="house-nft-registrations.csv"'
@@ -218,4 +626,6 @@ ${rows}
   return router;
 }
 
-module.exports = { createAdminRouter };
+module.exports = {
+  createAdminRouter
+};
