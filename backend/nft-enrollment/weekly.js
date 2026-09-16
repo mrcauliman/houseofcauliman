@@ -14,6 +14,30 @@ function csvCell(v) {
   return `"${String(v ?? "").replaceAll('"', '""')}"`;
 }
 
+function dateOnly(value) {
+  if (!value) return "";
+
+  if (value instanceof Date) {
+    return value.toISOString().slice(0, 10);
+  }
+
+  const text = String(value);
+
+  const match = text.match(/\d{4}-\d{2}-\d{2}/);
+
+  if (match) {
+    return match[0];
+  }
+
+  const parsed = new Date(value);
+
+  if (!Number.isNaN(parsed.getTime())) {
+    return parsed.toISOString().slice(0, 10);
+  }
+
+  return text.slice(0, 10);
+}
+
 function createWeeklyRouter({ pool }) {
   const router = express.Router();
 
@@ -245,7 +269,7 @@ function createWeeklyRouter({ pool }) {
       }
 
       const eligible =
-        String(row.eligible_week).slice(0, 10);
+        dateOnly(row.eligible_week);
 
       if (eligible > dropDate) {
         nextWeek.push(row);
@@ -263,7 +287,7 @@ function createWeeklyRouter({ pool }) {
     const activeSet = new Set(handles);
 
     const notActive = registrations.rows.filter(r =>
-      String(r.eligible_week).slice(0, 10) <= dropDate &&
+      dateOnly(r.eligible_week) <= dropDate &&
       !activeSet.has(r.x_handle_normalized) &&
       r.status !== "excluded"
     );
@@ -727,7 +751,7 @@ DROP
 ${d.drop_name}
 
 DROP DATE
-${String(d.drop_date).slice(0, 10)}
+${dateOnly(d.drop_date)}
 
 CONFIRMED XRPL RECIPIENTS
 ${recipients.rows.length}
