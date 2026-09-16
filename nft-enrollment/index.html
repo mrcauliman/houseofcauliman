@@ -494,7 +494,7 @@
   <input
     id="x_handle"
     name="x_handle"
-    placeholder="@yourhandle"
+    value="@"
     autocomplete="off"
     required
   >
@@ -546,6 +546,7 @@
     id="form-message"
     class="opening"
     aria-live="polite"
+    style="display:none;margin-top:18px;padding:16px 18px;border:2px solid currentColor;border-radius:12px;font-size:17px;font-weight:800;line-height:1.45;"
   ></div>
 
 </form>
@@ -559,11 +560,20 @@
     event.preventDefault();
 
     message.textContent = "";
+    message.style.display = "none";
     button.disabled = true;
     button.textContent = "REGISTERING...";
 
+    const handleInput = document.getElementById("x_handle");
+
+    let xHandle = handleInput.value.trim();
+
+    if (!xHandle.startsWith("@")) {
+      xHandle = "@" + xHandle;
+    }
+
     const payload = {
-      x_handle: document.getElementById("x_handle").value,
+      x_handle: xHandle,
       xrpl_address: document.getElementById("xrpl_address").value,
       email: document.getElementById("email").value
     };
@@ -589,12 +599,15 @@
       }
 
       message.textContent =
-        data.message || "Your XRPL wallet has been registered.";
+        "✓ Your XRPL wallet has been registered successfully.";
+
+      message.style.display = "block";
 
       form.reset();
       button.textContent = "REGISTERED";
     } catch (error) {
       message.textContent = error.message;
+      message.style.display = "block";
       button.disabled = false;
       button.textContent = "REGISTER WALLET";
     }
