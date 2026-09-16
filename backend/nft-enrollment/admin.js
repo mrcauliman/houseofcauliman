@@ -1,5 +1,6 @@
 const express = require("express");
 const crypto = require("crypto");
+const rateLimit = require("express-rate-limit");
 
 function safe(a, b) {
   const x = Buffer.from(String(a));
@@ -17,6 +18,13 @@ function esc(v) {
 
 function createAdminRouter({ pool }) {
   const router = express.Router();
+
+  router.use(rateLimit({
+    windowMs: 15 * 60 * 1000,
+    limit: 120,
+    standardHeaders: true,
+    legacyHeaders: false
+  }));
 
   router.use(express.urlencoded({ extended: false }));
 
@@ -127,6 +135,7 @@ a{color:#d6b34c}
 <input name="q" value="${esc(q)}" placeholder="Handle, email or wallet">
 <button>SEARCH</button>
 <a href="/admin/export.csv">EXPORT CSV</a>
+<a href="/admin/weekly/">WEEKLY DROPS</a>
 </form>
 
 <table>

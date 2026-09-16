@@ -2,6 +2,7 @@ const express = require("express");
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 const { createAdminRouter } = require("./admin");
+const { createWeeklyRouter } = require("./weekly");
 const { Pool } = require("pg");
 const { DateTime } = require("luxon");
 const { isValidClassicAddress } = require("ripple-address-codec");
@@ -524,6 +525,7 @@ app.post("/register", registrationLimiter, async (req, res) => {
 });
 
 app.use("/admin", createAdminRouter({ pool }));
+app.use("/admin/weekly", createWeeklyRouter({ pool }));
 
 app.use((req, res) => {
   res.status(404).json({
