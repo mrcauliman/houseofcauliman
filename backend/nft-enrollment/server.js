@@ -1,5 +1,6 @@
 const express = require("express");
 const helmet = require("helmet");
+const nodemailer = require("nodemailer");
 const { Pool } = require("pg");
 const { DateTime } = require("luxon");
 const { isValidClassicAddress } = require("ripple-address-codec");
@@ -7,6 +8,27 @@ const { isValidClassicAddress } = require("ripple-address-codec");
 const app = express();
 
 const PORT = process.env.PORT || 3000;
+
+const SMTP_HOST = process.env.SMTP_HOST || "smtp.gmail.com";
+const SMTP_PORT = Number(process.env.SMTP_PORT || 465);
+const SMTP_USER = process.env.SMTP_USER || "";
+const SMTP_PASS = process.env.SMTP_PASS || "";
+const MAIL_FROM =
+  process.env.MAIL_FROM ||
+  "House of Cauliman <houseofcauliman@gmail.com>";
+
+const mailTransport =
+  SMTP_USER && SMTP_PASS
+    ? nodemailer.createTransport({
+        host: SMTP_HOST,
+        port: SMTP_PORT,
+        secure: SMTP_PORT === 465,
+        auth: {
+          user: SMTP_USER,
+          pass: SMTP_PASS
+        }
+      })
+    : null;
 
 const ALLOWED_ORIGINS = new Set([
   "https://houseofcauliman.com",
@@ -90,6 +112,142 @@ function validEmail(value) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+async function sendConfirmationEmail(registration, email) {
+  if (!email || !mailTransport) {
+    return {
+      sent: false,
+      id: null,
+      error: email ? "SMTP is not configured" : null
+    };
+  }
+
+  const xHandle = escapeHtml(registration.x_handle);
+  const xrplAddress = escapeHtml(registration.xrpl_address);
+
+  const html = `
+<!doctype html>
+<html>
+<body style="margin:0;padding:0;background:#f4f4f5;font-family:Arial,Helvetica,sans-serif;color:#111111;">
+
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f4f4f5;padding:32px 16px;">
+<tr>
+<td align="center">
+
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:600px;background:#ffffff;border:1px solid #dedede;border-radius:14px;overflow:hidden;">
+
+<tr>
+<td style="padding:28px 32px;text-align:center;border-bottom:1px solid #ececec;">
+<div style="font-size:22px;font-weight:800;letter-spacing:.04em;">
+HOUSE OF CAULIMAN
+</div>
+</td>
+</tr>
+
+<tr>
+<td style="padding:32px;">
+
+<div style="font-size:22px;font-weight:800;margin-bottom:18px;">
+NFT Registration Confirmed
+</div>
+
+<p style="font-size:16px;line-height:1.6;margin:0 0 26px;">
+Your XRPL wallet has been registered for House of Cauliman subscriber NFT drops.
+</p>
+
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;margin-bottom:28px;">
+
+<tr>
+<td style="padding:16px;border:1px solid #e5e5e5;">
+<div style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#666666;margin-bottom:7px;">
+𝕏 handle
+</div>
+<div style="font-size:16px;font-weight:700;">
+${xHandle}
+</div>
+</td>
+</tr>
+
+<tr>
+<td style="padding:16px;border:1px solid #e5e5e5;border-top:0;">
+<div style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#666666;margin-bottom:7px;">
+XRPL wallet
+</div>
+<div style="font-size:14px;font-weight:700;word-break:break-all;">
+${xrplAddress}
+</div>
+</td>
+</tr>
+
+</table>
+
+<p style="font-size:15px;line-height:1.6;margin:0;">
+Your 𝕏 subscription must remain active and your registration must be in before the weekly cutoff to qualify for that week's NFT.
+</p>
+
+</td>
+</tr>
+
+<tr>
+<td style="padding:20px 32px;text-align:center;background:#111111;color:#ffffff;font-size:13px;font-weight:700;">
+House of Cauliman
+</td>
+</tr>
+
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>`;
+
+  const text = `House of Cauliman NFT Registration Confirmed
+
+Your XRPL wallet has been registered for House of Cauliman subscriber NFT drops.
+
+𝕏 handle
+${registration.x_handle}
+
+XRPL wallet
+${registration.xrpl_address}
+
+Your 𝕏 subscription must remain active and your registration must be in before the weekly cutoff to qualify for that week's NFT.
+
+House of Cauliman`;
+
+  try {
+    const info = await mailTransport.sendMail({
+      from: MAIL_FROM,
+      to: email,
+      subject: "House of Cauliman NFT Registration Confirmed",
+      text,
+      html
+    });
+
+    return {
+      sent: true,
+      id: info.messageId || null,
+      error: null
+    };
+  } catch (error) {
+    return {
+      sent: false,
+      id: null,
+      error: String(error.message || error)
+    };
+  }
+}
+
 function getEligibleWeek() {
   const now = DateTime.now().setZone("America/Los_Angeles");
 
@@ -128,8 +286,21 @@ async function initializeDatabase() {
       subscription_verified BOOLEAN NOT NULL DEFAULT FALSE,
       wallet_verified BOOLEAN NOT NULL DEFAULT FALSE,
 
-      source TEXT NOT NULL DEFAULT 'house_web'
+      source TEXT NOT NULL DEFAULT 'house_web',
+
+      confirmation_email_sent BOOLEAN NOT NULL DEFAULT FALSE,
+      confirmation_email_sent_at TIMESTAMPTZ,
+      confirmation_email_id TEXT,
+      confirmation_email_error TEXT
     );
+  `);
+
+  await pool.query(`
+    ALTER TABLE nft_subscriber_registrations
+      ADD COLUMN IF NOT EXISTS confirmation_email_sent BOOLEAN NOT NULL DEFAULT FALSE,
+      ADD COLUMN IF NOT EXISTS confirmation_email_sent_at TIMESTAMPTZ,
+      ADD COLUMN IF NOT EXISTS confirmation_email_id TEXT,
+      ADD COLUMN IF NOT EXISTS confirmation_email_error TEXT;
   `);
 
   await pool.query(`
@@ -264,6 +435,38 @@ app.post("/register", async (req, res) => {
     );
 
     const registration = result.rows[0];
+
+    if (email) {
+      const emailResult =
+        await sendConfirmationEmail(registration, email);
+
+      await pool.query(
+        `
+          UPDATE nft_subscriber_registrations
+          SET
+            confirmation_email_sent = $1,
+            confirmation_email_sent_at =
+              CASE WHEN $1 THEN NOW() ELSE NULL END,
+            confirmation_email_id = $2,
+            confirmation_email_error = $3,
+            updated_at = NOW()
+          WHERE id = $4
+        `,
+        [
+          emailResult.sent,
+          emailResult.id,
+          emailResult.error,
+          registration.id
+        ]
+      );
+
+      if (!emailResult.sent) {
+        console.error(
+          "Confirmation email failed",
+          emailResult.error
+        );
+      }
+    }
 
     return res.status(201).json({
       ok: true,
