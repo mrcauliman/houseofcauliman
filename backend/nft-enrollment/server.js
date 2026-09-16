@@ -1,6 +1,5 @@
 const express = require("express");
 const helmet = require("helmet");
-const nodemailer = require("nodemailer");
 const { Pool } = require("pg");
 const { DateTime } = require("luxon");
 const { isValidClassicAddress } = require("ripple-address-codec");
@@ -9,26 +8,13 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-const SMTP_HOST = process.env.SMTP_HOST || "smtp.gmail.com";
-const SMTP_PORT = Number(process.env.SMTP_PORT || 465);
-const SMTP_USER = process.env.SMTP_USER || "";
-const SMTP_PASS = process.env.SMTP_PASS || "";
+const RESEND_API_KEY = process.env.RESEND_API_KEY || "";
 const MAIL_FROM =
   process.env.MAIL_FROM ||
-  "House of Cauliman <houseofcauliman@gmail.com>";
-
-const mailTransport =
-  SMTP_USER && SMTP_PASS
-    ? nodemailer.createTransport({
-        host: SMTP_HOST,
-        port: SMTP_PORT,
-        secure: SMTP_PORT === 465,
-        auth: {
-          user: SMTP_USER,
-          pass: SMTP_PASS
-        }
-      })
-    : null;
+  "House of Cauliman <registration@houseofcauliman.com>";
+const MAIL_REPLY_TO =
+  process.env.MAIL_REPLY_TO ||
+  "houseofcauliman@gmail.com";
 
 const ALLOWED_ORIGINS = new Set([
   "https://houseofcauliman.com",
@@ -122,11 +108,11 @@ function escapeHtml(value) {
 }
 
 async function sendConfirmationEmail(registration, email) {
-  if (!email || !mailTransport) {
+  if (!email || !RESEND_API_KEY) {
     return {
       sent: false,
       id: null,
-      error: email ? "SMTP is not configured" : null
+      error: email ? "RESEND_API_KEY is not configured" : null
     };
   }
 
@@ -226,17 +212,35 @@ Your 𝕏 subscription must remain active and your registration must be in befor
 House of Cauliman`;
 
   try {
-    const info = await mailTransport.sendMail({
-      from: MAIL_FROM,
-      to: email,
-      subject: "House of Cauliman NFT Registration Confirmed",
-      text,
-      html
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${RESEND_API_KEY}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        from: MAIL_FROM,
+        to: [email],
+        reply_to: MAIL_REPLY_TO,
+        subject: "House of Cauliman NFT Registration Confirmed",
+        text,
+        html
+      })
     });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return {
+        sent: false,
+        id: null,
+        error: data.message || "Resend rejected the email"
+      };
+    }
 
     return {
       sent: true,
-      id: info.messageId || null,
+      id: data.id || null,
       error: null
     };
   } catch (error) {
