@@ -162,7 +162,146 @@ async function copyScript() {
   alert("JARVIS drop script copied.");
 }
 
+let csrfTokenPromise = null;
+
+function getCsrfToken() {
+  if (!csrfTokenPromise) {
+    csrfTokenPromise =
+      fetch("/admin/csrf", {
+        credentials: "same-origin",
+        cache: "no-store"
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(
+              "Could not load CSRF token"
+            );
+          }
+
+          return response.json();
+        })
+        .then(data => {
+          const token =
+            String(
+              data.csrfToken || ""
+            );
+
+          if (!token) {
+            throw new Error(
+              "CSRF token missing"
+            );
+          }
+
+          return token;
+        })
+        .catch(error => {
+          csrfTokenPromise = null;
+          throw error;
+        });
+  }
+
+  return csrfTokenPromise;
+}
+
+function applyCsrf(form, token) {
+  let input =
+    form.querySelector(
+      'input[name="_csrf"]'
+    );
+
+  if (!input) {
+    input =
+      document.createElement("input");
+
+    input.type = "hidden";
+    input.name = "_csrf";
+
+    form.appendChild(input);
+  }
+
+  input.value = token;
+}
+
+async function installCsrf() {
+  try {
+    const token =
+      await getCsrfToken();
+
+    document
+      .querySelectorAll(
+        'form[method="post"]'
+      )
+      .forEach(form => {
+        applyCsrf(
+          form,
+          token
+        );
+      });
+  } catch (error) {
+    console.error(
+      "Admin CSRF initialization failed",
+      error
+    );
+  }
+}
+
+document.addEventListener(
+  "submit",
+  async event => {
+    const form = event.target;
+
+    if (
+      !(form instanceof HTMLFormElement) ||
+      String(form.method).toLowerCase() !== "post"
+    ) {
+      return;
+    }
+
+    const existing =
+      form.querySelector(
+        'input[name="_csrf"]'
+      );
+
+    if (
+      existing &&
+      existing.value
+    ) {
+      return;
+    }
+
+    event.preventDefault();
+
+    try {
+      const token =
+        await getCsrfToken();
+
+      applyCsrf(
+        form,
+        token
+      );
+
+      if (form.requestSubmit) {
+        form.requestSubmit(
+          event.submitter || undefined
+        );
+      } else {
+        HTMLFormElement
+          .prototype
+          .submit
+          .call(form);
+      }
+    } catch {
+      alert(
+        "Your admin session could not be verified. Reload and sign in again."
+      );
+    }
+  },
+  true
+);
+
 document.addEventListener("DOMContentLoaded", () => {
+
+  installCsrf();
 
   getChecks(".eligible-check")
     .forEach(el =>

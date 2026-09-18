@@ -74,7 +74,20 @@ body{
 }
 
 .header{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:18px;
   margin-bottom:24px;
+}
+
+.header-main{
+  min-width:0;
+}
+
+.logout-form{
+  margin:0;
+  flex:0 0 auto;
 }
 
 .brand{
@@ -356,6 +369,14 @@ a{
 @media(max-width:760px){
   .wrap{padding:18px 12px 44px}
   h1{font-size:28px}
+
+  .header{
+    display:block;
+  }
+
+  .logout-form{
+    margin-top:16px;
+  }
   .grid.two,.grid.four{grid-template-columns:1fr}
   .person{
     grid-template-columns:32px 1fr;
@@ -379,9 +400,26 @@ a{
 <div class="wrap">
 
   <div class="header">
-    <div class="brand">HOUSE OF CAULIMAN</div>
-    <h1>${esc(title)}</h1>
-    ${subtitle ? `<div class="subtitle">${esc(subtitle)}</div>` : ""}
+
+    <div class="header-main">
+      <div class="brand">HOUSE OF CAULIMAN</div>
+      <h1>${esc(title)}</h1>
+      ${subtitle ? `<div class="subtitle">${esc(subtitle)}</div>` : ""}
+    </div>
+
+    <form
+      class="logout-form"
+      method="post"
+      action="/admin/logout"
+    >
+      <button
+        class="btn secondary"
+        type="submit"
+      >
+        SIGN OUT
+      </button>
+    </form>
+
   </div>
 
   ${body}

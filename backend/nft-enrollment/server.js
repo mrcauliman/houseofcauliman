@@ -3,6 +3,7 @@ const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 const { createAdminRouter } = require("./admin");
 const { createWeeklyRouter } = require("./weekly");
+const { createAdminAuth } = require("./admin-auth");
 const { Pool } = require("pg");
 const { DateTime } = require("luxon");
 const { isValidClassicAddress } = require("ripple-address-codec");
@@ -524,6 +525,21 @@ app.post("/register", registrationLimiter, async (req, res) => {
   }
 });
 
+const adminAuth = createAdminAuth({ pool });
+
+app.use(
+  "/admin",
+  express.urlencoded({
+    extended: false,
+    limit: "100kb"
+  })
+);
+
+app.use("/admin", adminAuth.router);
+app.use("/admin", adminAuth.gate);
+
+app.use("/admin", createAdminRouter({ pool, sendConfirmationEmail }));
+
 app.get("/admin/admin-client.js", (req, res) => {
   res.type("application/javascript");
   res.sendFile(
@@ -534,7 +550,6 @@ app.get("/admin/admin-client.js", (req, res) => {
   );
 });
 
-app.use("/admin", createAdminRouter({ pool, sendConfirmationEmail }));
 app.use("/admin/weekly", createWeeklyRouter({ pool }));
 
 app.use((req, res) => {

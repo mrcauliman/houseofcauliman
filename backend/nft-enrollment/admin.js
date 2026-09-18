@@ -1,15 +1,6 @@
 const express = require("express");
-const crypto = require("crypto");
 const rateLimit = require("express-rate-limit");
 const { shell, esc, fmtDate, badge } = require("./ui");
-
-function safe(a, b) {
-  const x = Buffer.from(String(a));
-  const y = Buffer.from(String(b));
-
-  return x.length === y.length &&
-    crypto.timingSafeEqual(x, y);
-}
 
 function createAdminRouter({ pool, sendConfirmationEmail }) {
   const router = express.Router();
@@ -30,38 +21,7 @@ function createAdminRouter({ pool, sendConfirmationEmail }) {
     res.setHeader("Cache-Control", "no-store");
     res.setHeader("X-Robots-Tag", "noindex, nofollow");
 
-    const auth = req.headers.authorization || "";
-
-    if (!auth.startsWith("Basic ")) {
-      res.setHeader(
-        "WWW-Authenticate",
-        'Basic realm="House NFT Admin"'
-      );
-
-      return res.sendStatus(401);
-    }
-
-    const decoded = Buffer
-      .from(auth.slice(6), "base64")
-      .toString();
-
-    const split = decoded.indexOf(":");
-
-    const user =
-      split >= 0 ? decoded.slice(0, split) : decoded;
-
-    const pass =
-      split >= 0 ? decoded.slice(split + 1) : "";
-
-    if (
-      !safe(user, process.env.ADMIN_USER || "") ||
-      !safe(pass, process.env.ADMIN_PASSWORD || "")
-    ) {
-      res.setHeader(
-        "WWW-Authenticate",
-        'Basic realm="House NFT Admin"'
-      );
-
+    if (req.houseAdminWalletAuthenticated !== true) {
       return res.sendStatus(401);
     }
 
