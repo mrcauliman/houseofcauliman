@@ -1,18 +1,310 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=/nft-enrollment/">
-  <link rel="canonical" href="https://houseofcauliman.com/nft-enrollment/">
-  <title>Subscriber NFT Enrollment | House of Cauliman</title>
-  <script>
-    window.location.replace("/nft-enrollment/");
-  </script>
+<meta charset="UTF-8">
+<title>THE 52 — House of Cauliman</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="canonical" href="https://houseofcauliman.com/the52/">
+<style>
+:root{
+  --bg:#030914;
+  --border:#17385f;
+  --text:#f5f8ff;
+  --muted:#9fb2cb;
+  --accent:#d4a44a;
+  --blue:#57a9ff;
+  --radius:18px;
+}
+*{box-sizing:border-box}
+html,body{
+  margin:0;
+  background:
+    radial-gradient(circle at 20% 0,rgba(54,138,232,.28),transparent 34%),
+    radial-gradient(circle at 88% 18%,rgba(212,164,74,.10),transparent 28%),
+    linear-gradient(180deg,#07182c 0,#030914 52%,#010307 100%);
+  color:var(--text);
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1400px;margin:0 auto;padding:18px 16px 80px}
+.back-btn{
+  display:inline-block;
+  margin-bottom:14px;
+  font-size:.7rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid rgba(87,169,255,.45);
+  background:#07182c;
+}
+.hero img{
+  width:100%;
+  max-width:980px;
+  margin:0 auto 10px;
+  display:block;
+}
+.drop-banner{
+  margin:6px auto 22px;
+  max-width:620px;
+  padding:8px 16px;
+  border-radius:999px;
+  border:1px solid rgba(212,164,74,.6);
+  text-align:center;
+  font-size:.75rem;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+@media(min-width:700px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1000px){.grid{grid-template-columns:repeat(5,1fr)}}
+.card{
+  border:1px solid rgba(87,169,255,.30);
+  border-radius:var(--radius);
+  background:linear-gradient(135deg,rgba(10,42,78,.96),rgba(3,10,20,.99));
+  padding:10px;
+  cursor:pointer;
+  transition:transform .15s ease,border-color .15s ease;
+  position:relative;
+  overflow:hidden;
+}
+.card:hover{
+  transform:translateY(-2px);
+  border-color:var(--accent);
+}
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg, rgba(255,255,255,.03), transparent 60%);
+  pointer-events:none;
+}
+.meta{
+  margin-top:8px;
+  font-size:.75rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  text-align:center;
+}
+.price{
+  margin-top:4px;
+  font-size:.8rem;
+  color:#d4a44a;
+  text-align:center;
+}
+.edition{
+  font-size:.65rem;
+  color:var(--muted);
+  text-align:center;
+}
+/* Placeholder */
+.placeholder{
+  width:100%;
+  aspect-ratio:1/1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  background:
+    radial-gradient(circle at top, rgba(87,169,255,.20), rgba(0,0,0,0) 55%),
+    linear-gradient(135deg, rgba(9,36,67,.96), rgba(3,9,18,.99));
+  border:1px dashed rgba(87,169,255,.45);
+  text-align:center;
+  padding:16px;
+}
+.placeholder .tag{
+  font-size:.7rem;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:#e7d7b1;
+}
+.placeholder .sub{
+  margin-top:10px;
+  font-size:.65rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+/* MODAL */
+#modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:50;
+}
+#modal.open{display:flex}
+.modal-box{
+  max-width:520px;
+  width:90%;
+  background:#04101f;
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:18px;
+}
+.modal-media{
+  width:100%;
+  border-radius:14px;
+  overflow:hidden;
+}
+.modal-title{
+  margin:10px 0 6px;
+  font-size:.9rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  text-align:center;
+  font-weight:600;
+}
+.modal-actions{
+  margin-top:14px;
+  display:flex;
+  gap:10px;
+}
+.modal-btn{
+  flex:1;
+  padding:10px;
+  text-align:center;
+  border-radius:999px;
+  border:1px solid rgba(87,169,255,.50);
+  background:#07182c;
+  font-size:.7rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  cursor:pointer;
+}
+
+.hoc-standard-footer{
+  margin:28px auto 10px;
+  padding:18px 14px 28px;
+  border-top:1px solid rgba(255,255,255,.12);
+  color:rgba(230,238,247,.72);
+  font-size:12px;
+  text-align:center;
+  line-height:1.7;
+}
+.hoc-standard-footer a{color:inherit;text-decoration:none}
+.hoc-standard-footer a:hover{text-decoration:underline}
+.hoc-standard-footer-links{margin:4px 0}
+
+</style>
+  <meta name="apple-mobile-web-app-title" content="THE 52" />
+  <meta name="application-name" content="THE 52" />
 </head>
 <body>
-  <p>
-    Redirecting to
-    <a href="/nft-enrollment/">Subscriber NFT Enrollment</a>.
-  </p>
+<main class="wrap">
+<a href="https://houseofcauliman.com" class="back-btn">← House of Cauliman</a>
+<section class="hero">
+  <img src="/assets/the52/THE_52_logo.webp" alt="THE 52">
+</section>
+<div class="drop-banner"
+     style="border-color:rgba(212,164,74,.6);color:#e7d7b1;">
+  52 ARCHETYPES · 52 WEEKS · FIRST DROP SEPTEMBER 27
+</div>
+<div class="drop-banner" style="border-color:rgba(87,169,255,.45);color:#cfe7ff;">
+  𝕏 SUBSCRIBERS · REGISTER YOUR XAMAN WALLET BEFORE SATURDAY 11:59 PM PACIFIC
+</div>
+<section class="grid" id="grid"></section>
+</main>
+<div id="modal">
+  <div class="modal-box">
+    <div class="modal-media" id="modalMedia"></div>
+    <div class="modal-title" id="modalTitle"></div>
+    <div class="modal-actions">
+      <a class="modal-btn" href="/nft-enrollment/">Subscriber Enrollment</a>
+      <div class="modal-btn" onclick="closeModal()">Close</div>
+    </div>
+  </div>
+</div>
+<script>
+const characters = [
+  "The Builder","The Whale","The Degen","The Diamond Hand","The Paper Hand","The Maxi",
+  "The Lurker","The Influencer","The Bag Holder","The Early One","The Skeptic","The Founder",
+  "The Chad","The Rug Survivor","The Chart Addict","The Ledger Nerd","The Night Shift","The Operator",
+  "The Last Buyer","The Exit Liquidity","The Moon Boy","The Panic Seller","The Market Maker",
+  "The Liquidity Hunter","The Airdrop Farmer","The Meme Lord","The Thread Guy","The Reply Guy",
+  "The Spaces Host","The Screenshot Trader","The Wallet Watcher","The On-Chain Detective","The Bot",
+  "The Shill","The Contrarian","The Believer","The Doubter","The Silent Whale","The Accumulator",
+  "The Flipper","The Collector","The Mint Addict","The Floor Sweeper","The Bidding War","The HODLer",
+  "The Ghost Wallet","The Burned One","The Comeback","The Millionaire in Waiting","The Broke Genius",
+  "The One Who Sold Early","The Legend"
+];
+
+const grid = document.getElementById("grid");
+
+characters.forEach((name,index)=>{
+  const num = String(index + 1).padStart(2,"0");
+  const state = index === 0
+    ? "FIRST DROP · SEP 27"
+    : index === 1
+      ? "UPCOMING"
+      : "LOCKED";
+
+  grid.insertAdjacentHTML("beforeend",`
+    <div class="card" data-index="${index}">
+      ${placeholderHTML(num,name,state)}
+      <div class="meta">${num} — ${name}</div>
+      <div class="price">${state}</div>
+      <div class="edition">${index === 0 ? "Scheduled" : "Unreleased"}</div>
+    </div>
+  `);
+});
+
+grid.addEventListener("click", e=>{
+  const card = e.target.closest(".card");
+  if(!card) return;
+
+  const index = Number(card.dataset.index);
+  const name = characters[index];
+  const num = String(index + 1).padStart(2,"0");
+  const state = index === 0
+    ? "FIRST DROP · SEP 27"
+    : index === 1
+      ? "UPCOMING"
+      : "LOCKED";
+
+  openModal(num,name,state);
+});
+
+function placeholderHTML(num,name,state){
+  return `
+    <div class="placeholder">
+      <div>
+        <div class="tag">${state}</div>
+        <div class="sub">${num} — ${name}</div>
+      </div>
+    </div>
+  `;
+}
+
+function openModal(num,name,state){
+  document.getElementById("modalTitle").innerText = `${num} — ${name}`;
+  document.getElementById("modalMedia").innerHTML = placeholderHTML(num,name,state);
+  document.getElementById("modal").classList.add("open");
+}
+
+function closeModal(){
+  document.getElementById("modal").classList.remove("open");
+}
+
+document.getElementById("modal").onclick = e=>{
+  if(e.target.id==="modal") closeModal();
+};
+</script>
+<footer class="hoc-standard-footer">
+  <div>THE 52 · A House of Cauliman Project · XRPL Native</div>
+  <div class="hoc-standard-footer-links">
+    <a href="/terms.html">Terms</a> ·
+    <a href="/privacy.html">Privacy</a> ·
+    <a href="/disclaimer.html">Disclaimer</a> ·
+    <a href="https://houseofcauliman.com">houseofcauliman.com</a>
+  </div>
+  <div>© 2026 House of Cauliman. All rights reserved.</div>
+</footer>
 </body>
 </html>
