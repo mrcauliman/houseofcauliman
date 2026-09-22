@@ -329,6 +329,61 @@
       border-top:1px solid #23252c;
     }
 
+    .enrollment-intro{
+      margin:0 0 24px;
+      padding:16px 18px;
+      border:1px solid rgba(10,116,208,.42);
+      border-radius:16px;
+      background:rgba(10,116,208,.09);
+      color:#c9ddf5;
+      font-size:14px;
+      line-height:1.6;
+    }
+
+    .section-kicker{
+      margin-bottom:7px;
+      color:var(--gold2);
+      font-size:11px;
+      font-weight:1000;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+    }
+
+    .section-divider{
+      height:1px;
+      margin:30px 0;
+      background:linear-gradient(
+        90deg,
+        transparent,
+        #343640 12%,
+        #343640 88%,
+        transparent
+      );
+    }
+
+    .result-box{
+      display:none;
+      margin-top:18px;
+      padding:16px 18px;
+      border:2px solid currentColor;
+      border-radius:12px;
+      font-size:16px;
+      font-weight:800;
+      line-height:1.5;
+      word-break:break-word;
+      text-align:left;
+    }
+
+    .result-box.success{
+      color:#74e293;
+      background:rgba(48,209,88,.08);
+    }
+
+    .result-box.error{
+      color:#ff9b95;
+      background:rgba(255,69,58,.08);
+    }
+
     footer{
       text-align:center;
       margin-top:36px;
@@ -485,6 +540,12 @@
 
     <section class="card">
 
+      <div class="enrollment-intro">
+        Already subscribed? Use this page to check your registration,
+        register your Xaman wallet, or request a wallet change.
+      </div>
+
+      <div class="section-kicker">Step 1</div>
       <h2>Check My Registration</h2>
 
       <p>
@@ -512,15 +573,15 @@
 
         <div
           id="registration-check-message"
-          class="opening"
+          class="result-box"
           aria-live="polite"
-          style="display:none;margin-top:18px;padding:16px 18px;border:2px solid currentColor;border-radius:12px;font-size:17px;font-weight:800;line-height:1.45;word-break:break-word;"
         ></div>
 
       </form>
 
-      <div style="height:1px;background:#292b34;margin:28px 0"></div>
+      <div class="section-divider"></div>
 
+      <div class="section-kicker">Step 2</div>
       <h2>Register your Xaman wallet</h2>
 
 
@@ -600,15 +661,15 @@
 
   <div
     id="form-message"
-    class="opening"
+    class="result-box"
     aria-live="polite"
-    style="display:none;margin-top:18px;padding:16px 18px;border:2px solid currentColor;border-radius:12px;font-size:17px;font-weight:800;line-height:1.45;"
   ></div>
 
 </form>
 
-<div style="height:1px;background:#292b34;margin:28px 0"></div>
+<div class="section-divider"></div>
 
+<div class="section-kicker">Step 3</div>
 <h2>Update My Wallet</h2>
 
 <p>
@@ -661,9 +722,8 @@
 
   <div
     id="wallet-change-message"
-    class="opening"
+    class="result-box"
     aria-live="polite"
-    style="display:none;margin-top:18px;padding:16px 18px;border:2px solid currentColor;border-radius:12px;font-size:17px;font-weight:800;line-height:1.45;word-break:break-word;"
   ></div>
 
 </form>
@@ -712,11 +772,15 @@
       checkMessage.textContent = data.registered
         ? "REGISTERED — This wallet is registered to receive House of Cauliman NFT drops. Wallet on file: " +
           data.xrpl_address
-        : "NOT REGISTERED — This wallet is not currently on the enrollment list.";
+        : "NOT REGISTERED — This wallet is not currently registered for House of Cauliman NFT drops.";
+
+      checkMessage.className =
+        "result-box " + (data.registered ? "success" : "error");
 
       checkMessage.style.display = "block";
     } catch (error) {
       checkMessage.textContent = error.message;
+      checkMessage.className = "result-box error";
       checkMessage.style.display = "block";
     } finally {
       checkButton.disabled = false;
@@ -777,13 +841,15 @@
       }
 
       walletChangeMessage.textContent =
-        "Wallet change request submitted. Your current wallet remains on file until the new Xaman wallet is verified and approved.";
+        "Wallet change request submitted. Your current wallet remains on file until the new Xaman wallet is verified and approved. Changes submitted after the weekly cutoff apply to the following drop.";
 
+      walletChangeMessage.className = "result-box success";
       walletChangeMessage.style.display = "block";
       walletChangeForm.reset();
       document.getElementById("change_x_handle").value = "@";
     } catch (error) {
       walletChangeMessage.textContent = error.message;
+      walletChangeMessage.className = "result-box error";
       walletChangeMessage.style.display = "block";
     } finally {
       walletChangeButton.disabled = false;
@@ -840,14 +906,16 @@
       }
 
       message.textContent =
-        "✓ Your XRPL wallet has been registered successfully.";
+        "Registration confirmed. This Xaman wallet is enrolled for House of Cauliman NFT drops.";
 
+      message.className = "result-box success";
       message.style.display = "block";
 
       form.reset();
       button.textContent = "REGISTERED";
     } catch (error) {
       message.textContent = error.message;
+      message.className = "result-box error";
       message.style.display = "block";
       button.disabled = false;
       button.textContent = "REGISTER WALLET";
