@@ -1,1108 +1,1664 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>HOUSE OF CAULIMAN | XRPL Stack</title><link rel="manifest" href="/assets/favicons/site.webmanifest">
-  <meta name="theme-color" content="#0b0b0b">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-  <link rel="canonical" href="https://houseofcauliman.com/">
-
-  <meta name="description" content="House of Cauliman. XRPL ecosystems built by mrcauliman. MONOLITH, AUGUR, LAV, NEB, XRPL LAYMAN, Ledger Drop XRPL, Continental Wick, RAD, BAG, NFTITANS, and HOMEEZ. Powered by $XRP.">
-  <meta name="keywords" content="XRP, XRPL, XRP Ledger, MONOLITH, AUGUR, LAV, NEB, XRPL LAYMAN, Ledger Drop XRPL, Continental Wick, RAD, BAG, NFTITANS, HOMEEZ, XRPL ecosystem, XRP builder">
-
-  <meta property="og:title" content="House of Cauliman | XRPL Ecosystem">
-  <meta property="og:description" content="The operator hub for MONOLITH, AUGUR, LAV, NEB, XRPL LAYMAN, Ledger Drop XRPL, $WCK, $RAD, and $BAG on the XRPL.">
-  <meta property="og:image" content="https://houseofcauliman.com/assets/hoc.png?v=1">
-  <meta property="og:url" content="https://houseofcauliman.com/">
-  <meta property="og:type" content="website">
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "HOC",
-    "url": "https://houseofcauliman.com",
-    "logo": "https://houseofcauliman.com/assets/hoc.png",
-    "description": "House of Cauliman builds XRPL ecosystems including MONOLITH, AUGUR, LAV, NEB, XRPL LAYMAN, Ledger Drop XRPL, Continental Wick, RAD, BAG, NFTITANS, and HOMEEZ.",
-    "sameAs": [
-      "https://continentalwick.com",
-      "https://radxrp.com",
-      "https://bagxrp.com",
-      "https://x.com/NEB_XRPL",
-      "https://x.com/ContinentalWCK",
-      "https://x.com/radgarlington",
-      "https://x.com/BAG_XRPL",
-      "https://x.com/augurintel",
-      "https://x.com/monolith_xrpl"
-    ]
-  }
-  </script>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>House of Cauliman | The House</title>
+  <link rel="canonical" href="https://houseofcauliman.com/" />
+  <meta name="description" content="House of Cauliman designs, builds, and operates XRPL-native products across infrastructure, education, brands, intellectual property, media, and interactive entertainment." />
   <style>
-    :root{
-      --bg:#050509;
-      --bg-soft:#090910;
-      --card:#11121a;
-      --border-subtle:#1a1b24;
-      --border-strong:#2b3345;
-      --accent:#0a74d0;
-      --accent-glow:rgba(10,116,208,0.65);
-      --text:#f5f7ff;
-      --text-muted:#9aa2c3;
-      --text-soft:#717895;
-      --wck-gold:#d4a44a;
-      --rad-blue:#3da0ff;
-      --bag-green:#4ade80;
-      --augur-mint:#2bf3a2;
-      --augur-mint-glow:rgba(43,243,162,0.22);
-      --mono-ink:#f5f7ff;
-      --mono-glow:rgba(245,247,255,0.12);
-      --mono-border:rgba(245,247,255,0.18);
-      --radius-lg:18px;
-      --radius-xl:22px;
-      --shadow-soft:0 18px 45px rgba(0,0,0,0.75);
-      --shadow-glow:0 0 32px rgba(10,116,208,0.7);
-    }
-
+    :root{--bg:#020308;--panel:#070b12;--card:#0d121c;--line:rgba(255,255,255,.1);--text:#f5f7ff;--muted:#a7b0c8;--soft:#717895;--blue:#3da0ff;--gold:#d4a44a;--green:#4ade80;--yellow:#facc15;--radius:22px;--shadow:0 18px 45px rgba(0,0,0,.72)}
     *{box-sizing:border-box}
-    html,body{
-      margin:0;
-      padding:0;
-      width:100%;
-      overflow-x:hidden;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-      background:radial-gradient(circle at top,#111827 0,#020308 55%,#000 100%);
-      color:var(--text);
-    }
+    html,body{margin:0;padding:0;background:radial-gradient(circle at top,#111827 0,#05070d 48%,#000 100%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
     a{color:inherit;text-decoration:none}
+    .wrap{max-width:1120px;margin:0 auto;padding:26px 16px 56px}
+    .hero{min-height:72vh;display:grid;place-items:center;text-align:center;padding:58px 16px}
+    .hero-card,.panel,.card{border:1px solid var(--line);box-shadow:var(--shadow)}
+    .hero-card{width:100%;max-width:860px;border-radius:32px;background:linear-gradient(180deg,rgba(61,160,255,.12),rgba(7,11,18,.96));padding:34px 22px}
+    .logo{width:116px;height:116px;object-fit:contain;border-radius:26px;border:1px solid rgba(61,160,255,.35);box-shadow:0 0 34px rgba(61,160,255,.45);margin-bottom:20px;background:#05070d}
+    h1{margin:0;font-size:clamp(2.2rem,7vw,5.2rem);letter-spacing:.12em;text-transform:uppercase;line-height:.95}
+    .kicker{margin:16px auto 0;color:#b9c8f5;font-size:clamp(1rem,2.4vw,1.35rem);line-height:1.45;max-width:760px}
+    .mission,.lead{color:var(--muted);line-height:1.65}
+    .mission{margin:24px auto 0;font-size:1.08rem;max-width:760px}
+    .btnrow{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:26px}
+    .btn,.card a,.disabled{display:inline-flex;align-items:center;justify-content:center;padding:11px 14px;border-radius:999px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;font-size:.72rem}
+    .btn,.card a{border:1px solid rgba(61,160,255,.45);background:rgba(61,160,255,.1)}
+    .section{margin-top:22px}
+    h2{margin:0;font-size:1.35rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+    .lead{margin:8px 0 0;max-width:860px}
+    .panel{border-radius:var(--radius);background:linear-gradient(180deg,rgba(16,24,39,.9),rgba(5,7,13,.96));padding:20px}
+    .stack{display:grid;gap:12px;margin-top:14px}
+    .stack-row{border:1px solid var(--line);border-radius:18px;padding:14px;background:rgba(255,255,255,.035)}
+    .stack-label{display:block;color:var(--soft);font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:7px}
+    .stack-items{font-size:1rem;font-weight:850;letter-spacing:.06em;line-height:1.7}
+    .grid{display:grid;grid-template-columns:1fr;gap:14px}
+    @media(min-width:760px){.grid{grid-template-columns:repeat(3,1fr)}}
+    .card{border-radius:var(--radius);background:radial-gradient(circle at top,rgba(61,160,255,.10),rgba(13,18,28,.98) 58%,#05070d 100%);padding:18px;min-height:230px;display:flex;flex-direction:column;justify-content:space-between}
+    .topline{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+    .role{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--soft);font-weight:800}
+    .badge{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;border:1px solid var(--line);border-radius:999px;padding:6px 8px;color:var(--muted);white-space:nowrap}
+    .live{border-color:rgba(74,222,128,.35);color:#b8ffd0;background:rgba(74,222,128,.08)}
+    .build{border-color:rgba(250,204,21,.35);color:#fff2a8;background:rgba(250,204,21,.08)}
+    .card-logo{width:76px;height:76px;object-fit:contain;margin:0 0 14px;border-radius:16px}
+    .card h3{margin:0;font-size:1.05rem;letter-spacing:.12em;text-transform:uppercase}
+    .verb{margin:9px 0 0;font-size:1.5rem;font-weight:900}
+    .copy{margin:9px 0 16px;color:var(--muted);font-size:.9rem;line-height:1.55}
+    .disabled{width:max-content;border:1px solid var(--line);color:var(--soft);background:rgba(255,255,255,.03)}
+    .loop{display:grid;gap:10px;margin-top:14px}
+    @media(min-width:760px){.loop{grid-template-columns:repeat(6,1fr)}}
+    .loop div{border:1px solid var(--line);border-radius:16px;padding:14px;text-align:center;background:rgba(255,255,255,.035);font-weight:900;letter-spacing:.08em;text-transform:uppercase;font-size:.78rem;color:var(--muted)}
+    .footer{margin-top:28px;padding-top:18px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--soft);font-size:.78rem}
 
-    .hoc-header{
-      padding:24px 20px 10px;
-      background:radial-gradient(circle at top,#0a74d0 0,#050509 55%,#000 100%);
-      border-bottom:1px solid #151827;
-      box-shadow:0 20px 40px rgba(0,0,0,0.75);
-    }
-    .hoc-header-inner{
-      max-width:960px;
-      margin:0 auto;
+    .house-nav{
+      position:sticky;
+      top:0;
+      z-index:60;
       display:flex;
-      align-items:center;
-      gap:18px;
+      justify-content:center;
+      gap:8px;
+      padding:10px 14px;
+      border-bottom:1px solid rgba(61,160,255,.18);
+      background:rgba(2,3,8,.88);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
     }
-    .hoc-brand-mark{
-      width:82px;
-      height:82px;
-      object-fit:contain;
-      border-radius:20px;
-      border:1px solid #1b3a62;
-      box-shadow:0 0 28px var(--accent-glow);
-      background:radial-gradient(circle at 30% 0,#1f2937 0,#020308 70%);
-    }
-    .hoc-header-text h1{
-      margin:0;
-      font-size:1.5rem;
-      letter-spacing:0.15em;
+    .house-nav a{
+      padding:9px 12px;
+      border:1px solid transparent;
+      border-radius:999px;
+      color:#b8c4dc;
+      font-size:.72rem;
+      font-weight:850;
+      letter-spacing:.1em;
       text-transform:uppercase;
+      white-space:nowrap;
     }
-    .hoc-header-text p{
-      margin:5px 0 0;
-      font-size:0.92rem;
-      color:#9fb4e2;
-      line-height:1.45;
+    .house-nav a:hover,
+    .house-nav a:focus-visible{
+      color:#fff;
+      border-color:rgba(61,160,255,.38);
+      background:rgba(61,160,255,.10);
+      outline:none;
     }
-
-    .hoc-main{padding:22px 16px 40px}
-    .hoc-shell{max-width:960px;margin:0 auto}
-
-    .hoc-intro{
-      margin:48px 0 28px;
-      padding:28px 24px;
-      border-radius:var(--radius-lg);
-      border:1px solid rgba(88,166,255,.28);
-      background:linear-gradient(135deg,rgba(15,23,42,.96),rgba(5,6,12,.99));
-      box-shadow:
-        0 18px 40px rgba(0,0,0,.45),
-        0 0 0 1px rgba(255,255,255,.10) inset,
-        0 0 30px rgba(88,166,255,.18);
+    #house,
+    #projects,
+    #collectibles,
+    #members,
+    #about{
+      scroll-margin-top:78px;
     }
-    .hoc-intro-title{
-      font-size:1.35rem;
-      text-transform:uppercase;
-      letter-spacing:0.12em;
-      color:var(--text-soft);
-      margin:0 0 12px;
-    }
-    .hoc-intro-main{
-      font-size:1.05rem;
-      color:var(--text-muted);
-      margin:0;
-      line-height:1.5;
+    @media(max-width:640px){
+      .house-nav{
+        justify-content:flex-start;
+        overflow-x:auto;
+        scrollbar-width:none;
+      }
+      .house-nav::-webkit-scrollbar{display:none}
     }
 
 
-    .house-grid-3{
+    .house-modal[hidden]{display:none}
+    .house-modal{
+      position:fixed;
+      inset:0;
+      z-index:1000;
       display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:18px;
-      margin-bottom:28px;
+      place-items:center;
+      padding:18px;
+    }
+    .house-modal-backdrop{
+      position:absolute;
+      inset:0;
+      background:rgba(0,0,0,.78);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+    }
+    .house-modal-window{
+      position:relative;
+      z-index:1;
+      width:min(920px,100%);
+      max-height:88vh;
+      overflow:auto;
+      border:1px solid rgba(61,160,255,.28);
+      border-radius:28px;
+      background:
+        radial-gradient(circle at 15% 0,rgba(61,160,255,.16),transparent 35%),
+        linear-gradient(180deg,#0b1220 0,#05070d 100%);
+      box-shadow:0 30px 90px rgba(0,0,0,.8);
+    }
+    .house-modal-body{padding:34px}
+    .house-modal-close{
+      position:absolute;
+      top:14px;
+      right:16px;
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.35);
+      color:#fff;
+      font-size:1.7rem;
+      line-height:1;
+      cursor:pointer;
+    }
+    .house-modal-kicker{
+      color:var(--gold);
+      font-size:.72rem;
+      font-weight:900;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      margin-bottom:8px;
+    }
+    .house-modal-window h2{
+      margin:0;
+      color:#fff;
+      font-size:clamp(1.8rem,5vw,3.2rem);
+    }
+    .house-modal-status{
+      margin-top:10px;
+      color:#b9c8f5;
+      font-size:.76rem;
+      font-weight:850;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+    }
+    .house-modal-lead{
+      margin:18px 0 0;
+      color:var(--muted);
+      font-size:1.02rem;
+      line-height:1.7;
+    }
+    .house-modal-details{
+      margin-top:22px;
+      padding-top:20px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      line-height:1.7;
+    }
+    .house-modal-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:24px;
+    }
+    .house-modal-actions a{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:11px 14px;
+      border-radius:999px;
+      border:1px solid rgba(61,160,255,.45);
+      background:rgba(61,160,255,.1);
+      font-size:.72rem;
+      font-weight:900;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+    }
+    body.modal-open{overflow:hidden}
+    @media(max-width:640px){
+      .house-modal{padding:10px}
+      .house-modal-window{max-height:92vh;border-radius:22px}
+      .house-modal-body{padding:28px 20px 22px}
     }
 
-    .house-grid-2{
+
+    /* Premium project portals */
+    .grid{
+      grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+      gap:16px;
+    }
+    .card{
+      position:relative;
+      overflow:hidden;
+      min-height:190px;
+      padding:18px;
+      border-radius:24px;
+      border:1px solid rgba(61,160,255,.24);
+      background:
+        radial-gradient(circle at 18% 0,rgba(61,160,255,.22),transparent 42%),
+        linear-gradient(145deg,rgba(15,28,48,.96),rgba(6,9,16,.98) 62%,rgba(4,6,11,.99));
+      box-shadow:
+        0 18px 45px rgba(0,0,0,.46),
+        inset 0 1px 0 rgba(255,255,255,.04);
+      cursor:pointer;
+      transition:
+        transform .28s ease,
+        border-color .28s ease,
+        box-shadow .28s ease,
+        background .28s ease;
+      isolation:isolate;
+    }
+    .card::before{
+      content:"";
+      position:absolute;
+      width:180px;
+      height:180px;
+      top:-90px;
+      right:-70px;
+      border-radius:50%;
+      background:radial-gradient(circle,rgba(61,160,255,.24),transparent 68%);
+      opacity:.65;
+      transform:scale(.9);
+      transition:transform .35s ease,opacity .35s ease;
+      pointer-events:none;
+      z-index:-1;
+    }
+    .card::after{
+      content:"";
+      position:absolute;
+      inset:auto 16px 0;
+      height:1px;
+      background:linear-gradient(90deg,transparent,rgba(212,164,74,.65),rgba(61,160,255,.65),transparent);
+      opacity:.55;
+      pointer-events:none;
+    }
+    .card:hover,
+    .card:focus-within{
+      transform:translateY(-6px) scale(1.012);
+      border-color:rgba(61,160,255,.62);
+      box-shadow:
+        0 26px 65px rgba(0,0,0,.58),
+        0 0 34px rgba(61,160,255,.16),
+        inset 0 1px 0 rgba(255,255,255,.07);
+    }
+    .card:hover::before,
+    .card:focus-within::before{
+      opacity:1;
+      transform:scale(1.15);
+    }
+    .card-logo{
+      width:62px;
+      height:62px;
+      padding:5px;
+      border-radius:18px;
+      background:rgba(2,5,12,.52);
+      border:1px solid rgba(61,160,255,.18);
+      box-shadow:0 10px 28px rgba(0,0,0,.35);
+    }
+    .card h3{
+      font-size:1rem;
+      letter-spacing:.11em;
+    }
+    .verb{
+      margin-top:7px;
+      font-size:1.22rem;
+      color:#fff;
+    }
+    .copy{
+      margin:7px 0 14px;
+      font-size:.82rem;
+      line-height:1.48;
+    }
+    .topline{
+      margin-bottom:10px;
+    }
+    .card > a,
+    .card > div + a,
+    .card > div + div a{
+      position:relative;
+      z-index:2;
+    }
+    .card a{
+      padding:9px 12px;
+      border-radius:14px;
+      background:linear-gradient(135deg,rgba(61,160,255,.20),rgba(61,160,255,.08));
+      border-color:rgba(61,160,255,.38);
+    }
+    .card:nth-child(3n+2){
+      background:
+        radial-gradient(circle at 82% 0,rgba(212,164,74,.14),transparent 38%),
+        radial-gradient(circle at 10% 100%,rgba(61,160,255,.16),transparent 42%),
+        linear-gradient(145deg,rgba(14,23,39,.97),rgba(5,8,15,.99));
+    }
+    .card:nth-child(3n){
+      background:
+        radial-gradient(circle at 50% -10%,rgba(61,160,255,.19),transparent 44%),
+        linear-gradient(160deg,rgba(11,21,39,.97),rgba(4,6,12,.99));
+    }
+    @media(max-width:560px){
+      .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+      .card{min-height:170px;padding:14px;border-radius:20px}
+      .card-logo{width:52px;height:52px}
+      .copy{font-size:.76rem}
+    }
+
+
+    .battlefield-feature{
+      position:relative;
+      overflow:hidden;
+      isolation:isolate;
+      text-align:center;
+      border-color:rgba(87,169,255,.55);
+      background:
+        radial-gradient(circle at 18% 20%,rgba(50,120,255,.20),transparent 34%),
+        radial-gradient(circle at 82% 80%,rgba(255,55,55,.18),transparent 34%),
+        linear-gradient(135deg,#07111f 0,#090b10 52%,#160a0d 100%);
+    }
+    .battlefield-feature::before{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      z-index:-2;
+      background:
+        radial-gradient(circle at 30% 50%,rgba(61,160,255,.28),transparent 24%),
+        radial-gradient(circle at 70% 45%,rgba(255,55,55,.22),transparent 24%);
+      animation:battlefieldDrift 9s ease-in-out infinite alternate;
+    }
+    .battlefield-feature::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:-1;
+      background:
+        repeating-linear-gradient(
+          118deg,
+          transparent 0,
+          transparent 26px,
+          rgba(255,255,255,.018) 27px,
+          transparent 28px
+        );
+      opacity:.55;
+      animation:battlefieldScan 10s linear infinite;
+    }
+    .battlefield-feature h2{
+      text-shadow:
+        0 0 24px rgba(61,160,255,.28),
+        0 0 34px rgba(255,55,55,.12);
+    }
+    @keyframes battlefieldDrift{
+      0%{transform:translate3d(-4%,-2%,0) scale(1)}
+      100%{transform:translate3d(5%,3%,0) scale(1.12)}
+    }
+    @keyframes battlefieldScan{
+      from{transform:translateX(-3%)}
+      to{transform:translateX(3%)}
+    }
+    @media(prefers-reduced-motion:reduce){
+      .battlefield-feature::before,
+      .battlefield-feature::after{
+        animation:none;
+      }
+    }
+
+
+    .operator-section{
+      position:relative;
+      overflow:hidden;
+      border:1px solid rgba(61,160,255,.28);
+      border-radius:30px;
+      background:
+        radial-gradient(circle at 15% 0,rgba(61,160,255,.20),transparent 34%),
+        radial-gradient(circle at 90% 90%,rgba(212,164,74,.10),transparent 30%),
+        linear-gradient(145deg,#0b1423 0,#05080f 62%,#03050a 100%);
+      box-shadow:0 26px 70px rgba(0,0,0,.5);
+      padding:0;
+    }
+    .operator-section .project-card{
+      display:grid;
+      grid-template-columns:minmax(190px,280px) 1fr;
+      gap:28px;
+      padding:28px;
+    }
+    .operator-section .project-media{
+      min-height:100%;
+    }
+    .operator-section .project-wallpaper{
+      min-height:260px;
+      height:100%;
+      border:1px solid rgba(61,160,255,.30);
+      border-radius:24px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:16px;
+      padding:24px;
+      background:
+        radial-gradient(circle at top,rgba(61,160,255,.18),transparent 42%),
+        rgba(2,5,12,.7) !important;
+    }
+    .operator-section .project-logo{
+      width:min(160px,80%);
+      max-height:160px;
+      object-fit:contain;
+      filter:drop-shadow(0 12px 28px rgba(61,160,255,.22));
+    }
+    .operator-section .project-tag{
+      border:1px solid rgba(212,164,74,.38);
+      border-radius:999px;
+      padding:7px 12px;
+      color:#f0cf8a;
+      font-size:.68rem;
+      font-weight:900;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+      background:rgba(212,164,74,.08);
+    }
+    .operator-section .project-title{
+      margin:0;
+      font-size:clamp(1.8rem,4vw,3rem);
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#fff !important;
+    }
+    .operator-section .project-sub{
+      margin:7px 0 16px;
+      color:var(--gold);
+      font-size:.74rem;
+      font-weight:900;
+      letter-spacing:.14em;
+    }
+    .operator-section .project-copy{
+      color:var(--muted);
+      line-height:1.65;
+    }
+    .operator-section .project-links{
+      margin-top:22px;
+    }
+    .operator-section .project-link{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:11px 15px;
+      border:1px solid rgba(61,160,255,.42);
+      border-radius:14px;
+      background:rgba(61,160,255,.10);
+      font-size:.72rem;
+      font-weight:900;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+    }
+    @media(max-width:760px){
+      .operator-section .project-card{
+        grid-template-columns:1fr;
+        padding:18px;
+      }
+      .operator-section .project-wallpaper{
+        min-height:190px;
+      }
+    }
+
+
+    /* Full-screen project experience */
+    .house-modal{
+      padding:0;
+      align-items:stretch;
+    }
+    .house-modal-backdrop{
+      background:rgba(0,0,0,.88);
+    }
+    .house-modal-window{
+      width:100%;
+      max-width:none;
+      height:100vh;
+      max-height:none;
+      border:0;
+      border-radius:0;
+      background:
+        radial-gradient(circle at 12% 5%,rgba(61,160,255,.28),transparent 32%),
+        radial-gradient(circle at 88% 92%,rgba(212,164,74,.12),transparent 28%),
+        linear-gradient(145deg,#0b1729 0,#060a12 48%,#020308 100%);
+      box-shadow:none;
+    }
+    .house-modal-window::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:
+        linear-gradient(115deg,transparent 0 42%,rgba(61,160,255,.045) 50%,transparent 58%),
+        repeating-linear-gradient(
+          90deg,
+          transparent 0,
+          transparent 79px,
+          rgba(255,255,255,.018) 80px
+        );
+      background-size:220% 100%,auto;
+      animation:projectPageSweep 12s linear infinite;
+    }
+    .house-modal-body{
+      position:relative;
+      z-index:1;
+      width:min(1180px,calc(100% - 40px));
+      min-height:100%;
+      margin:0 auto;
+      padding:clamp(74px,10vh,110px) 0 64px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+    .house-modal-kicker{
+      font-size:.8rem;
+      margin-bottom:12px;
+    }
+    .house-modal-window h2{
+      max-width:900px;
+      font-size:clamp(3rem,9vw,7rem);
+      line-height:.92;
+      letter-spacing:.06em;
+      text-shadow:0 0 46px rgba(61,160,255,.18);
+    }
+    .house-modal-status{
+      width:max-content;
+      margin-top:18px;
+      padding:8px 12px;
+      border:1px solid rgba(61,160,255,.32);
+      border-radius:999px;
+      background:rgba(61,160,255,.08);
+    }
+    .house-modal-lead{
+      max-width:820px;
+      margin-top:28px;
+      font-size:clamp(1.15rem,2vw,1.5rem);
+      line-height:1.6;
+      color:#d7e2f4;
+    }
+    .house-modal-details{
+      max-width:920px;
+      margin-top:30px;
+      padding:24px 0 0;
+      font-size:1rem;
+      line-height:1.8;
+    }
+    .house-modal-actions{
+      margin-top:32px;
+    }
+    .house-modal-actions a{
+      padding:13px 18px;
+      border-radius:14px;
+      background:linear-gradient(135deg,rgba(61,160,255,.26),rgba(61,160,255,.08));
+    }
+    .house-modal-close{
+      position:fixed;
+      top:22px;
+      right:24px;
+      z-index:3;
+      width:50px;
+      height:50px;
+      border-color:rgba(255,255,255,.20);
+      background:rgba(2,5,12,.72);
+      backdrop-filter:blur(12px);
+    }
+    @keyframes projectPageSweep{
+      from{background-position:180% 0,0 0}
+      to{background-position:-80% 0,0 0}
+    }
+    @media(max-width:640px){
+      .house-modal-body{
+        width:calc(100% - 30px);
+        padding:82px 0 42px;
+        justify-content:flex-start;
+      }
+      .house-modal-window h2{
+        font-size:clamp(2.5rem,16vw,4.8rem);
+      }
+      .house-modal-close{
+        top:14px;
+        right:14px;
+      }
+    }
+
+
+    .house-modal-visual{
+      position:absolute;
+      top:50%;
+      right:0;
+      width:min(42%,460px);
+      height:min(62vh,560px);
+      transform:translateY(-50%);
+      display:grid;
+      place-items:center;
+      pointer-events:none;
+    }
+    .house-modal-logo-wrap{
+      position:relative;
+      z-index:2;
+      width:min(320px,82%);
+      aspect-ratio:1;
+      display:grid;
+      place-items:center;
+      border-radius:34px;
+      border:1px solid rgba(61,160,255,.20);
+      background:
+        radial-gradient(circle at center,rgba(61,160,255,.16),rgba(3,7,14,.36) 58%,transparent 72%);
+      box-shadow:
+        0 30px 80px rgba(0,0,0,.48),
+        inset 0 1px 0 rgba(255,255,255,.05);
+    }
+    .house-modal-logo{
+      width:78%;
+      height:78%;
+      object-fit:contain;
+      filter:
+        drop-shadow(0 20px 42px rgba(0,0,0,.6))
+        drop-shadow(0 0 30px rgba(61,160,255,.20));
+      animation:projectLogoFloat 5s ease-in-out infinite;
+    }
+    .house-modal-visual-glow{
+      position:absolute;
+      inset:10%;
+      border-radius:50%;
+      background:
+        radial-gradient(circle,rgba(61,160,255,.24),rgba(61,160,255,.06) 42%,transparent 72%);
+      filter:blur(18px);
+      animation:projectGlowPulse 4.5s ease-in-out infinite alternate;
+    }
+    .house-modal-kicker,
+    .house-modal-window h2,
+    .house-modal-status,
+    .house-modal-lead,
+    .house-modal-details,
+    .house-modal-actions{
+      max-width:56%;
+    }
+    @keyframes projectLogoFloat{
+      0%,100%{transform:translateY(0) scale(1)}
+      50%{transform:translateY(-10px) scale(1.025)}
+    }
+    @keyframes projectGlowPulse{
+      from{opacity:.55;transform:scale(.9)}
+      to{opacity:1;transform:scale(1.08)}
+    }
+    @media(max-width:800px){
+      .house-modal-body{
+        display:block;
+      }
+      .house-modal-visual{
+        position:relative;
+        top:auto;
+        right:auto;
+        width:100%;
+        height:250px;
+        transform:none;
+        margin-bottom:28px;
+      }
+      .house-modal-logo-wrap{
+        width:220px;
+      }
+      .house-modal-kicker,
+      .house-modal-window h2,
+      .house-modal-status,
+      .house-modal-lead,
+      .house-modal-details,
+      .house-modal-actions{
+        max-width:100%;
+      }
+    }
+    @media(prefers-reduced-motion:reduce){
+      .house-modal-logo,
+      .house-modal-visual-glow{
+        animation:none;
+      }
+    }
+
+
+    .house-modal-breakdown{
       display:grid;
       grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:18px;
-      margin-bottom:28px;
+      gap:12px;
+      max-width:56%;
+      margin-top:22px;
     }
-
-    @media(max-width:980px){
-      .house-grid-3,
-      .house-grid-2{
+    .house-modal-breakdown-item{
+      position:relative;
+      padding:15px 16px 15px 18px;
+      border:1px solid rgba(61,160,255,.20);
+      border-radius:16px;
+      background:
+        linear-gradient(145deg,rgba(61,160,255,.10),rgba(255,255,255,.025));
+      color:#d5dfef;
+      font-size:.88rem;
+      line-height:1.5;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.035);
+    }
+    .house-modal-breakdown-item::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:14px;
+      bottom:14px;
+      width:3px;
+      border-radius:999px;
+      background:linear-gradient(180deg,var(--blue),var(--gold));
+    }
+    @media(max-width:800px){
+      .house-modal-breakdown{
+        max-width:100%;
         grid-template-columns:1fr;
       }
     }
 
-    .hud{
-      display:inline-flex;
-      align-items:center;
-      gap:.5rem;
-      padding:.35rem .6rem;
-      border-radius:999px;
-      font:700 12px/1 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      border:1px solid rgba(255,255,255,.34);
-      background:rgba(255,255,255,.06);
-      color:#eaf0f7;
-      white-space:nowrap;
-      margin-right:8px;
-      margin-top:6px;
-    }
-    .hud .dot{
-      width:8px;
-      height:8px;
-      border-radius:999px;
-      background:#a9b3bf;
-      box-shadow:0 0 0 3px rgba(169,179,191,.18);
-    }
-    .hud.live .dot{ background:#2fbf6b; box-shadow:0 0 0 3px rgba(47,191,107,.20); }
-    .hud.token-live .dot{ background:#4bd08a; box-shadow:0 0 0 3px rgba(75,208,138,.20); }
-    .hud.utility-live .dot{ background:#4fb7ff; box-shadow:0 0 0 3px rgba(79,183,255,.20); }
-    .hud.active-build .dot{ background:#ffe175; box-shadow:0 0 0 3px rgba(255,225,117,.22); }
-    .hud.private-build .dot{ background:#aeb7af; box-shadow:0 0 0 3px rgba(169,179,191,.18); }
 
-    @media (prefers-reduced-motion:no-preference){
-      .hud.pulse{animation:hudpulse 1.8s ease-in-out infinite}
-      @keyframes hudpulse{0%,100%{opacity:1}50%{opacity:.62}}
+    /* Floating project window */
+    .house-modal{
+      padding:clamp(22px,5vh,52px) 18px;
+      align-items:start;
+      justify-items:center;
+      overflow-y:auto;
     }
-
-    .hud-legend{
-      display:flex;
-      flex-wrap:wrap;
-      gap:.7rem .9rem;
-      margin:.8rem 0 1rem;
-      padding:.85rem .9rem;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.04);
+    .house-modal-backdrop{
+      background:rgba(0,0,0,.76);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
     }
-    .hud-legend .item{
-      display:flex;
-      align-items:flex-start;
-      gap:.5rem;
-      font:700 12px/1.15 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-      color:#cfd6de;
-      max-width:260px;
-    }
-    .hud-legend .key{
-      width:10px;
-      height:10px;
-      border-radius:999px;
-      margin-top:2px;
-      flex:0 0 auto;
-    }
-    .hud-legend .item small{
-      display:block;
-      font:500 11px/1.25 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-      color:var(--text-soft);
-      margin-top:2px;
-    }
-    .hud-legend .k-live{ background:#2fbf6b; }
-    .hud-legend .k-token-live{ background:#4bd08a; }
-    .hud-legend .k-utility-live{ background:#4fb7ff; }
-    .hud-legend .k-active-build{ background:#ffe175; }
-    .hud-legend .k-private-build{ background:#aeb7af; }
-
-    .stack-card{
-      margin:0 0 18px;
-      padding:18px 18px 16px;
-      border-radius:var(--radius-xl);
-      border:1px solid rgba(43,243,162,0.18);
-      background:
-        radial-gradient(circle at 12% 0, rgba(43,243,162,0.16) 0, rgba(2,6,23,0) 55%),
-        radial-gradient(circle at 80% 10%, rgba(10,116,208,0.18) 0, rgba(0,0,0,0) 60%),
-        linear-gradient(135deg, rgba(15,23,42,0.92), rgba(0,0,0,0.98));
-      box-shadow:var(--shadow-soft);
+    .house-modal-window{
       position:relative;
-      overflow:hidden;
-    }
-    .stack-card.mono{
-      border-color:var(--mono-border);
-      background:
-        radial-gradient(circle at 16% 0, rgba(245,247,255,0.08) 0, rgba(2,6,23,0) 55%),
-        radial-gradient(circle at 82% 12%, rgba(10,116,208,0.12) 0, rgba(0,0,0,0) 60%),
-        linear-gradient(135deg, rgba(10,12,22,0.92), rgba(0,0,0,0.98));
-    }
-    .stack-card.gold{
-      border-color:rgba(212,164,74,0.28);
-      background:
-        radial-gradient(circle at 12% 0, rgba(212,164,74,0.18) 0, rgba(2,6,23,0) 55%),
-        radial-gradient(circle at 80% 10%, rgba(10,116,208,0.14) 0, rgba(0,0,0,0) 60%),
-        linear-gradient(135deg, rgba(20,14,8,0.96), rgba(0,0,0,0.98));
-    }
-    .stack-card.blue{
-      border-color:rgba(61,160,255,0.28);
-      background:
-        radial-gradient(circle at 12% 0, rgba(61,160,255,0.18) 0, rgba(2,6,23,0) 55%),
-        radial-gradient(circle at 80% 10%, rgba(10,116,208,0.16) 0, rgba(0,0,0,0) 60%),
-        linear-gradient(135deg, rgba(8,18,34,0.96), rgba(0,0,0,0.98));
-    }
-    .stack-card.green{
-      border-color:rgba(74,222,128,0.28);
-      background:
-        radial-gradient(circle at 12% 0, rgba(74,222,128,0.18) 0, rgba(2,6,23,0) 55%),
-        radial-gradient(circle at 80% 10%, rgba(10,116,208,0.14) 0, rgba(0,0,0,0) 60%),
-        linear-gradient(135deg, rgba(6,22,14,0.96), rgba(0,0,0,0.98));
-    }
-
-    .stack-head{
-      display:flex;
-      gap:16px;
-      align-items:center;
-      justify-content:flex-start;
-      padding:10px 10px 12px;
-      border-radius:18px;
-      border:1px solid rgba(43,243,162,0.12);
-      background:
-        radial-gradient(circle at 10% 10%, rgba(43,243,162,0.14) 0, rgba(0,0,0,0) 55%),
-        linear-gradient(135deg, rgba(15,23,42,0.55), rgba(0,0,0,0.55));
-      box-shadow:0 10px 26px rgba(0,0,0,0.55);
-    }
-    .stack-card.mono .stack-head{
-      border-color:rgba(245,247,255,0.12);
-      background:
-        radial-gradient(circle at 10% 10%, rgba(245,247,255,0.08) 0, rgba(0,0,0,0) 55%),
-        linear-gradient(135deg, rgba(15,23,42,0.55), rgba(0,0,0,0.55));
-    }
-    .stack-mark{
-      width:112px;
-      height:112px;
-      border-radius:20px;
-      border:1px solid rgba(191,255,227,0.18);
-      background:
-        radial-gradient(circle at 30% 0, rgba(43,243,162,0.12) 0, rgba(2,6,23,0.0) 60%),
-        radial-gradient(circle at 70% 70%, rgba(10,116,208,0.12) 0, rgba(0,0,0,0) 55%),
-        linear-gradient(135deg, rgba(15,23,42,0.9), rgba(0,0,0,0.95));
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      overflow:hidden;
-      box-shadow:0 0 26px rgba(43,243,162,0.12);
-      flex:0 0 auto;
-    }
-    .stack-card.mono .stack-mark{
-      border-color:rgba(245,247,255,0.18);
-      background:
-        radial-gradient(circle at 30% 0, rgba(245,247,255,0.10) 0, rgba(2,6,23,0.0) 60%),
-        radial-gradient(circle at 70% 70%, rgba(10,116,208,0.10) 0, rgba(0,0,0,0) 55%),
-        linear-gradient(135deg, rgba(15,23,42,0.9), rgba(0,0,0,0.95));
-      box-shadow:0 0 26px rgba(245,247,255,0.08);
-    }
-    .stack-logo{
-      width:102px;
-      height:102px;
-      object-fit:contain;
-      filter:drop-shadow(0 0 22px rgba(0,0,0,0.95)) drop-shadow(0 0 22px rgba(43,243,162,0.18));
-    }
-    .stack-card.mono .stack-logo{
-      filter:drop-shadow(0 0 22px rgba(0,0,0,0.95)) drop-shadow(0 0 18px rgba(245,247,255,0.12));
-    }
-    .stack-title{
-      margin:0;
-      font-size:1.08rem;
-      letter-spacing:0.04em;
-      text-transform:uppercase;
-      font-weight:700;
-      color:#bfffe3;
-    }
-    .stack-card.mono .stack-title{color:var(--mono-ink)}
-    .stack-card.gold .stack-title{color:var(--wck-gold)}
-    .stack-card.blue .stack-title{color:var(--rad-blue)}
-    .stack-card.green .stack-title{color:var(--bag-green)}
-    .stack-sub{
-      margin:6px 0 0;
-      font-size:0.74rem;
-      letter-spacing:0.04em;
-      text-transform:uppercase;
-      color:#d6ffe9;
-      font-weight:600;
-      opacity:0.78;
-    }
-    .stack-card.mono .stack-sub{color:#eef0ff}
-
-    .stack-copy{
-      margin:14px 0 12px;
-      font-size:0.92rem;
-      color:var(--text-muted);
-      line-height:1.55;
-    }
-    .stack-bullets{
-      list-style:none;
-      padding:0;
-      margin:10px 0 14px;
-      display:grid;
-      grid-template-columns:1fr;
-      gap:10px;
-    }
-    @media(min-width:860px){.stack-bullets{grid-template-columns:1fr 1fr}}
-    .stack-bullets li{
-      position:relative;
-      padding:10px 12px 10px 40px;
-      border-radius:16px;
-      border:1px solid rgba(43,243,162,0.14);
-      background:linear-gradient(135deg, rgba(15,23,42,0.98), rgba(3,7,18,0.98));
-      box-shadow:0 10px 26px rgba(0,0,0,0.75);
-      color:#dbe3ff;
-      font-weight:750;
-      font-size:0.84rem;
-      line-height:1.45;
-    }
-    .stack-card.mono .stack-bullets li{border-color:rgba(245,247,255,0.12)}
-    .stack-card.gold .stack-bullets li{border-color:rgba(212,164,74,0.16)}
-    .stack-card.blue .stack-bullets li{border-color:rgba(61,160,255,0.16)}
-    .stack-card.green .stack-bullets li{border-color:rgba(74,222,128,0.16)}
-    .stack-bullets li:before{
-      content:"✓";
-      position:absolute;
-      left:12px;
-      top:10px;
-      width:20px;
-      height:20px;
-      border-radius:8px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:#03140d;
-      background:radial-gradient(circle at 30% 0, rgba(191,255,227,1) 0, rgba(43,243,162,1) 55%, rgba(4,80,55,1) 100%);
-      box-shadow:0 0 18px var(--augur-mint-glow);
-      border:1px solid rgba(191,255,227,0.35);
-      font-weight:900;
-    }
-    .stack-card.mono .stack-bullets li:before{
-      content:"■";
-      color:#0a0b10;
-      background:radial-gradient(circle at 30% 0, rgba(245,247,255,1) 0, rgba(245,247,255,0.92) 55%, rgba(210,214,230,1) 100%);
-      box-shadow:0 0 18px var(--mono-glow);
-      border-color:rgba(245,247,255,0.28);
-    }
-    .stack-card.gold .stack-bullets li:before{
-      background:radial-gradient(circle at 30% 0, #f2d38f 0, #d4a44a 60%, #7b5a1f 100%);
-      color:#130d02;
-      border-color:rgba(242,211,143,0.35);
-      box-shadow:0 0 18px rgba(212,164,74,0.22);
-    }
-    .stack-card.blue .stack-bullets li:before{
-      background:radial-gradient(circle at 30% 0, #8ac8ff 0, #3da0ff 60%, #11497c 100%);
-      color:#04111d;
-      border-color:rgba(138,200,255,0.35);
-      box-shadow:0 0 18px rgba(61,160,255,0.22);
-    }
-    .stack-card.green .stack-bullets li:before{
-      background:radial-gradient(circle at 30% 0, #b8f7ca 0, #4ade80 60%, #166534 100%);
-      color:#03140d;
-      border-color:rgba(184,247,202,0.35);
-      box-shadow:0 0 18px rgba(74,222,128,0.22);
-    }
-
-    .stack-cta{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:6px;
-    }
-    .stack-btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:9px 12px;
-      border-radius:999px;
-      border:1px solid rgba(43,243,162,0.22);
-      background:linear-gradient(135deg, rgba(15,23,42,0.98), rgba(3,7,18,0.98));
-      box-shadow:0 8px 22px rgba(0,0,0,0.85);
-      text-transform:uppercase;
-      letter-spacing:0.16em;
-      font-size:0.76rem;
-      font-weight:700;
-      color:#dbe3ff;
-      transition:transform .15s ease,border-color .2s ease,box-shadow .2s ease;
-    }
-    .stack-btn:hover{
-      border-color:rgba(43,243,162,0.55);
-      box-shadow:0 0 26px rgba(43,243,162,0.18);
-      transform:translateY(-1px);
-    }
-    .stack-card.mono .stack-btn{border-color:rgba(245,247,255,0.18)}
-    .stack-card.mono .stack-btn:hover{
-      border-color:rgba(245,247,255,0.38);
-      box-shadow:0 0 26px rgba(245,247,255,0.10);
-    }
-    .stack-btn.primary{
-      background:radial-gradient(circle at 20% 0, rgba(191,255,227,1) 0, rgba(43,243,162,1) 55%, rgba(4,80,55,1) 100%);
-      border-color:rgba(191,255,227,0.35);
-      color:#03140d;
-      box-shadow:0 0 30px rgba(43,243,162,0.18);
-    }
-    .stack-card.mono .stack-btn.primary{
-      background:radial-gradient(circle at 20% 0, rgba(245,247,255,1) 0, rgba(245,247,255,0.90) 55%, rgba(210,214,230,1) 100%);
-      border-color:rgba(245,247,255,0.18);
-      color:#0a0b10;
-      box-shadow:0 0 28px rgba(245,247,255,0.12);
-    }
-    .stack-card.gold .stack-btn.primary{
-      background:radial-gradient(circle at 20% 0, #f2d38f 0, #d4a44a 60%, #7b5a1f 100%);
-      color:#130d02;
-      border-color:rgba(242,211,143,0.35);
-    }
-    .stack-card.blue .stack-btn.primary{
-      background:radial-gradient(circle at 20% 0, #8ac8ff 0, #3da0ff 60%, #11497c 100%);
-      color:#04111d;
-      border-color:rgba(138,200,255,0.35);
-    }
-    .stack-card.green .stack-btn.primary{
-      background:radial-gradient(circle at 20% 0, #b8f7ca 0, #4ade80 60%, #166534 100%);
-      color:#03140d;
-      border-color:rgba(184,247,202,0.35);
-    }
-
-    .project-card{
-      border-radius:var(--radius-xl);
-      border:1px solid rgba(255,255,255,.34);
-      background:radial-gradient(circle at top,rgba(26,35,58,0.85) 0,#050509 55%,#000 100%);
-      box-shadow:var(--shadow-soft);
-      overflow:hidden;
-      display:flex;
-      flex-direction:column;
-      min-height:300px;
-      position:relative;
-      isolation:isolate;
-    }
-    .project-card::before{
-      content:"";
-      position:absolute;
-      inset:-1px;
-      border-radius:inherit;
-      background:conic-gradient(from 210deg,rgba(10,116,208,0.4),transparent 18%,transparent 60%,rgba(10,116,208,0.35),rgba(212,164,74,0.3),transparent 88%,rgba(10,116,208,0.4));
-      opacity:0;
-      transition:opacity .3s ease;
-      z-index:-1;
-    }
-    .project-card:hover::before{opacity:.65}
-    .project-media{
-      position:relative;
-      padding:14px;
-      border-bottom:1px solid rgba(37,44,70,0.9);
-      background:radial-gradient(circle at top,#111827 0,#020308 70%);
-    }
-    .project-wallpaper{
-      height:120px;
-      border-radius:16px;
-      border:1px solid rgba(46,57,98,0.9);
-      background:radial-gradient(circle at top,rgba(15,23,42,0.95),#020308 65%);
-      box-shadow:0 16px 32px rgba(0,0,0,0.9);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      position:relative;
-      overflow:hidden;
-    }
-    .project-logo{
-      width:86px;
-      height:86px;
-      object-fit:contain;
-      filter:drop-shadow(0 0 24px rgba(0,0,0,0.95)) drop-shadow(0 0 24px rgba(10,116,208,0.65));
-    }
-    .project-tag{
-      position:absolute;
-      right:10px;
-      bottom:8px;
-      font-size:0.7rem;
-      letter-spacing:0.16em;
-      text-transform:uppercase;
-      padding:4px 8px;
-      border-radius:999px;
-      border:1px solid rgba(148,163,184,0.35);
-      background:rgba(15,23,42,0.92);
-      color:#cbd5f5;
-      backdrop-filter:blur(8px);
-    }
-    .project-body{padding:14px;display:flex;flex-direction:column;gap:6px}
-    .project-title{margin:0;font-size:1rem;letter-spacing:0.12em;text-transform:uppercase}
-    .project-sub{margin:0;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.18em;color:var(--text-soft)}
-    .project-copy{margin:6px 0 10px;font-size:0.86rem;line-height:1.5;color:var(--text-muted)}
-    .project-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
-    .project-link{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:6px;
-      font-size:0.78rem;
-      padding:7px 11px;
-      border-radius:999px;
-      border:1px solid var(--border-strong);
-      background:linear-gradient(135deg,rgba(15,23,42,0.98),rgba(3,7,18,0.98));
-      box-shadow:0 8px 20px rgba(0,0,0,0.9);
-      text-transform:uppercase;
-      letter-spacing:0.16em;
-      color:#dbe3ff;
-      transition:border-color .2s ease,box-shadow .2s ease,transform .15s ease;
-      cursor:pointer;
-    }
-    .project-link:hover{
-      border-color:var(--accent);
-      box-shadow:var(--shadow-glow);
-      transform:translateY(-1px);
-    }
-
-    .hoc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch}
-    @media (max-width:980px){.hoc-grid{grid-template-columns:1fr}}
-
-    .hoc-footer{
-      max-width:960px;
-      margin:10px auto 26px;
-      padding:10px 18px 0;
-      border-top:1px solid #141728;
-      color:var(--text-soft);
-      font-size:0.78rem;
-      display:flex;
-      justify-content:space-between;
-      gap:8px;
-    }
-
-    .thesis-image{
-      width:100%;
+      width:min(1120px,94vw);
       height:auto;
-      display:block;
-      border-radius:14px;
-      margin-top:12px;
-      box-shadow:0 12px 30px rgba(0,0,0,0.8);
+      min-height:min(680px,82vh);
+      max-height:88vh;
+      margin:0 auto;
+      border:1px solid rgba(61,160,255,.34);
+      border-radius:30px;
+      overflow:auto;
+      background:
+        radial-gradient(circle at 12% 5%,rgba(61,160,255,.26),transparent 32%),
+        radial-gradient(circle at 88% 92%,rgba(212,164,74,.12),transparent 28%),
+        linear-gradient(145deg,#0b1729 0,#060a12 48%,#020308 100%);
+      box-shadow:
+        0 36px 110px rgba(0,0,0,.82),
+        0 0 55px rgba(61,160,255,.10);
     }
-
-    .nav-link-card{text-align:center;padding:20px}
-    .nav-link-card a{
-      color:var(--text);
-      font-size:0.95rem;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      padding:10px 20px;
-      border:1px solid var(--border-subtle);
-      border-radius:var(--radius-xl);
-      transition:all .25s ease;
-      display:inline-block;
+    .house-modal-body{
+      width:100%;
+      min-height:0;
+      margin:0;
+      padding:78px 56px 54px;
     }
-    .nav-link-card a[href="/house.html"]{
-      border-color:var(--accent);
-      box-shadow:0 0 20px var(--accent-glow);
+    .house-modal-close{
+      position:absolute;
+      top:18px;
+      right:18px;
+      z-index:10;
+      width:48px;
+      height:48px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.22);
+      background:rgba(3,7,14,.82);
+      color:#fff;
+      font-size:1.65rem;
+      cursor:pointer;
+      box-shadow:0 10px 30px rgba(0,0,0,.4);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
     }
-    .nav-link-card a:hover{
-      border-color:var(--accent);
-      box-shadow:0 0 20px var(--accent-glow);
+    .house-modal-close:hover{
+      border-color:rgba(61,160,255,.65);
+      background:rgba(61,160,255,.16);
     }
-
-    @media (max-width:767px){
-      .nav-link-card a[href="/house.html"],
-      .nav-link-card a[href="/house.html"]:link,
-      .nav-link-card a[href="/house.html"]:visited{
-        border-color:var(--accent) !important;
-        box-shadow:0 0 20px var(--accent-glow) !important;
+    @media(max-width:800px){
+      .house-modal{
+        padding:12px;
+      }
+      .house-modal-window{
+        width:100%;
+        min-height:0;
+        max-height:94vh;
+        border-radius:24px;
+      }
+      .house-modal-body{
+        padding:70px 20px 32px;
+      }
+      .house-modal-close{
+        top:12px;
+        right:12px;
       }
     }
 
-    @media (max-width:520px){
-      .stack-head{gap:14px}
-      .stack-mark{width:100px;height:100px;border-radius:18px}
-      .stack-logo{width:92px;height:92px}
-      .hoc-header-inner{align-items:flex-start}
-      .hoc-brand-mark{width:72px;height:72px}
-      .hoc-footer{flex-direction:column}
+
+    /* Ledger Blue visual lift */
+    :root{
+      --blue:#57a9ff;
+      --ledger-blue:#2f8fff;
+      --ledger-bright:#79bdff;
+      --ledger-deep:#0b315f;
     }
-  
-  .stack-card{
-    transition:
-      transform .28s ease,
-      box-shadow .28s ease,
-      border-color .28s ease,
-      filter .28s ease;
-    transform:scale(1);
-    transform-origin:center center;
-  }
 
-/* XRPL Trader House card */
-.stack-card.bag-trader-card {
-  border-color: rgba(56, 209, 120, .42);
-}
+    html,body{
+      background:
+        radial-gradient(circle at 18% 0,rgba(47,143,255,.28),transparent 32%),
+        radial-gradient(circle at 82% 30%,rgba(87,169,255,.14),transparent 34%),
+        linear-gradient(180deg,#08182d 0,#040a14 48%,#010307 100%);
+    }
 
-.stack-card.bag-trader-card .stack-mark {
-  background: rgba(4, 9, 6, .82);
-  backdrop-filter: blur(8px);
-}
+    .house-nav{
+      border-bottom-color:rgba(87,169,255,.34);
+      background:rgba(5,20,39,.90);
+      box-shadow:0 8px 30px rgba(0,80,180,.14);
+    }
 
-</style>
-  <!-- favicon: HOUSE -->
+    .hero-card{
+      border-color:rgba(87,169,255,.42);
+      background:
+        radial-gradient(circle at 50% 0,rgba(87,169,255,.28),transparent 46%),
+        linear-gradient(180deg,rgba(15,57,105,.94),rgba(5,13,26,.98));
+      box-shadow:
+        0 28px 80px rgba(0,0,0,.56),
+        0 0 55px rgba(47,143,255,.12);
+    }
+
+    .panel:not(.battlefield-feature){
+      border-color:rgba(87,169,255,.28);
+      background:
+        radial-gradient(circle at 15% 0,rgba(87,169,255,.15),transparent 38%),
+        linear-gradient(160deg,rgba(12,44,82,.90),rgba(5,13,26,.97) 64%);
+      box-shadow:
+        0 18px 50px rgba(0,0,0,.44),
+        0 0 30px rgba(47,143,255,.06);
+    }
+
+    .card{
+      border-color:rgba(87,169,255,.36);
+      background:
+        radial-gradient(circle at 20% 0,rgba(87,169,255,.30),transparent 42%),
+        radial-gradient(circle at 100% 100%,rgba(47,143,255,.12),transparent 36%),
+        linear-gradient(145deg,#123b68 0,#0a2545 34%,#061425 72%,#030810 100%);
+      box-shadow:
+        0 18px 45px rgba(0,0,0,.42),
+        0 0 28px rgba(47,143,255,.08),
+        inset 0 1px 0 rgba(255,255,255,.06);
+    }
+
+    .card:nth-child(3n+2){
+      background:
+        radial-gradient(circle at 80% 0,rgba(121,189,255,.22),transparent 40%),
+        radial-gradient(circle at 0 100%,rgba(212,164,74,.08),transparent 34%),
+        linear-gradient(145deg,#10365f,#081e38 54%,#040d19);
+    }
+
+    .card:nth-child(3n){
+      background:
+        radial-gradient(circle at 50% -10%,rgba(87,169,255,.26),transparent 44%),
+        linear-gradient(160deg,#12375f,#071a31 58%,#030a14);
+    }
+
+    .card:hover,
+    .card:focus-within{
+      border-color:rgba(121,189,255,.78);
+      box-shadow:
+        0 28px 70px rgba(0,0,0,.54),
+        0 0 42px rgba(47,143,255,.20),
+        inset 0 1px 0 rgba(255,255,255,.09);
+    }
+
+    .house-modal-window{
+      border-color:rgba(121,189,255,.52);
+      background:
+        radial-gradient(circle at 12% 5%,rgba(121,189,255,.34),transparent 34%),
+        radial-gradient(circle at 90% 95%,rgba(47,143,255,.18),transparent 30%),
+        linear-gradient(145deg,#174d83 0,#0e3763 28%,#092646 58%,#05162a 82%,#020810 100%);
+      box-shadow:
+        0 36px 110px rgba(0,0,0,.72),
+        0 0 70px rgba(47,143,255,.20);
+    }
+
+    .house-modal-logo-wrap{
+      border-color:rgba(121,189,255,.42);
+      background:
+        radial-gradient(circle at center,rgba(121,189,255,.28),rgba(15,57,105,.48) 52%,rgba(4,17,33,.72) 76%);
+      box-shadow:
+        0 30px 80px rgba(0,0,0,.40),
+        0 0 55px rgba(47,143,255,.18),
+        inset 0 1px 0 rgba(255,255,255,.09);
+    }
+
+    .house-modal-breakdown-item{
+      border-color:rgba(121,189,255,.30);
+      background:
+        linear-gradient(145deg,rgba(87,169,255,.18),rgba(9,39,72,.50));
+      color:#e5f1ff;
+    }
+
+    .house-modal-status{
+      border-color:rgba(121,189,255,.46);
+      background:rgba(87,169,255,.16);
+      color:#dcebff;
+    }
+
+    .btn,
+    .card a,
+    .house-modal-actions a{
+      border-color:rgba(121,189,255,.52);
+      background:linear-gradient(135deg,rgba(87,169,255,.28),rgba(47,143,255,.12));
+    }
+
+
+    /* Invisible project-window scrolling */
+    .house-modal,
+    .house-modal-window{
+      scrollbar-width:none;
+      -ms-overflow-style:none;
+    }
+    .house-modal::-webkit-scrollbar,
+    .house-modal-window::-webkit-scrollbar{
+      width:0;
+      height:0;
+      display:none;
+    }
+
+
+    /* Fixed project-page canvas */
+    .house-modal{
+      overflow:hidden;
+      padding:clamp(18px,4vh,38px) 18px;
+    }
+
+    .house-modal-window{
+      width:min(1120px,94vw);
+      height:min(720px,88vh);
+      min-height:0;
+      max-height:none;
+      overflow:hidden;
+      flex-shrink:0;
+    }
+
+    .house-modal-body{
+      position:relative;
+      width:100%;
+      height:100%;
+      min-height:0;
+      overflow:hidden;
+      padding:66px 52px 38px;
+      justify-content:flex-start;
+    }
+
+    .house-modal-visual{
+      top:50%;
+      right:34px;
+      width:38%;
+      height:72%;
+    }
+
+    .house-modal-logo-wrap{
+      width:min(300px,82%);
+    }
+
+    .house-modal-window h2{
+      font-size:clamp(2.7rem,6vw,5.6rem);
+    }
+
+    .house-modal-lead{
+      margin-top:18px;
+      font-size:clamp(1rem,1.6vw,1.28rem);
+      line-height:1.5;
+    }
+
+    .house-modal-details{
+      margin-top:18px;
+      padding-top:16px;
+      font-size:.9rem;
+      line-height:1.55;
+    }
+
+    .house-modal-breakdown{
+      margin-top:16px;
+      gap:9px;
+    }
+
+    .house-modal-breakdown-item{
+      padding:11px 13px 11px 16px;
+      border-radius:13px;
+      font-size:.78rem;
+      line-height:1.35;
+    }
+
+    .house-modal-actions{
+      margin-top:18px;
+      gap:8px;
+    }
+
+    .house-modal-actions a{
+      padding:10px 14px;
+    }
+
+    @media(max-width:800px){
+      .house-modal{
+        padding:10px;
+      }
+
+      .house-modal-window{
+        width:100%;
+        height:92dvh;
+        min-height:0;
+        overflow:hidden;
+      }
+
+      .house-modal-body{
+        height:100%;
+        overflow:hidden;
+        padding:60px 18px 20px;
+      }
+
+      .house-modal-visual{
+        position:relative;
+        top:auto;
+        right:auto;
+        width:100%;
+        height:150px;
+        transform:none;
+        margin:0 0 14px;
+      }
+
+      .house-modal-logo-wrap{
+        width:145px;
+        border-radius:22px;
+      }
+
+      .house-modal-window h2{
+        font-size:clamp(2rem,11vw,3.5rem);
+      }
+
+      .house-modal-lead{
+        margin-top:12px;
+        font-size:.94rem;
+      }
+
+      .house-modal-details{
+        margin-top:12px;
+        padding-top:10px;
+        font-size:.78rem;
+        line-height:1.4;
+      }
+
+      .house-modal-breakdown{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:6px;
+        margin-top:10px;
+      }
+
+      .house-modal-breakdown-item{
+        padding:8px 9px 8px 12px;
+        font-size:.67rem;
+      }
+
+      .house-modal-actions{
+        margin-top:12px;
+      }
+    }
+
+
+    /* Compact House hero + gold contrast */
+    .hero{
+      min-height:auto;
+      padding:34px 16px 24px;
+    }
+
+    .hero-card{
+      position:relative;
+      max-width:980px;
+      padding:30px 34px;
+      display:grid;
+      grid-template-columns:190px minmax(0,1fr);
+      grid-template-rows:auto;
+      column-gap:34px;
+      align-items:center;
+      text-align:left;
+      border-color:rgba(212,164,74,.48);
+      background:
+        radial-gradient(circle at 12% 50%,rgba(212,164,74,.14),transparent 25%),
+        radial-gradient(circle at 78% 0,rgba(87,169,255,.26),transparent 42%),
+        linear-gradient(145deg,rgba(17,61,108,.96),rgba(6,19,37,.98));
+      box-shadow:
+        0 24px 70px rgba(0,0,0,.52),
+        0 0 42px rgba(47,143,255,.13),
+        inset 0 1px 0 rgba(255,255,255,.07);
+    }
+
+    .hero-card::after{
+      content:"";
+      position:absolute;
+      left:28px;
+      right:28px;
+      bottom:0;
+      height:2px;
+      background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(212,164,74,.85),
+        rgba(87,169,255,.72),
+        rgba(212,164,74,.85),
+        transparent
+      );
+    }
+
+    .hero-card .logo{
+      grid-column:1;
+      grid-row:1 / span 5;
+      width:190px;
+      height:190px;
+      margin:0;
+      border-radius:30px;
+      border:1px solid rgba(212,164,74,.52);
+      box-shadow:
+        0 18px 46px rgba(0,0,0,.46),
+        0 0 34px rgba(212,164,74,.13),
+        0 0 42px rgba(47,143,255,.18);
+    }
+
+    .hero-card h1,
+    .hero-card .kicker,
+    .hero-card .mission,
+    .hero-card .btnrow,
+    .hero-card .btnrow + p{
+      grid-column:2;
+    }
+
+    .hero-card h1{
+      font-size:clamp(2.25rem,4.6vw,4.15rem);
+      line-height:.96;
+      text-shadow:
+        0 0 28px rgba(87,169,255,.18),
+        0 0 20px rgba(212,164,74,.08);
+    }
+
+    .hero-card .kicker{
+      margin:12px 0 0;
+      max-width:720px;
+    }
+
+    .hero-card .mission{
+      margin:15px 0 0;
+      max-width:740px;
+      font-size:.96rem;
+      line-height:1.55;
+    }
+
+    .hero-card .btnrow{
+      justify-content:flex-start;
+      margin-top:18px;
+    }
+
+    .hero-card .btnrow + p{
+      margin:9px 0 0 !important;
+    }
+
+    .hero-card .btnrow .btn:nth-child(2){
+      border-color:rgba(212,164,74,.55);
+      color:#f5d894;
+      background:linear-gradient(
+        135deg,
+        rgba(212,164,74,.16),
+        rgba(212,164,74,.05)
+      );
+    }
+
+    .section > h2,
+    .panel > h2{
+      text-shadow:0 0 18px rgba(212,164,74,.14);
+    }
+
+    .panel:not(.battlefield-feature),
+    .operator-section{
+      box-shadow:
+        0 18px 50px rgba(0,0,0,.44),
+        0 0 30px rgba(47,143,255,.07),
+        inset 0 1px 0 rgba(212,164,74,.035);
+    }
+
+    @media(max-width:760px){
+      .hero{
+        padding:22px 12px 18px;
+      }
+
+      .hero-card{
+        display:block;
+        padding:24px 18px;
+        text-align:center;
+      }
+
+      .hero-card .logo{
+        width:150px;
+        height:150px;
+        margin:0 auto 18px;
+      }
+
+      .hero-card .btnrow{
+        justify-content:center;
+      }
+    }
+
+  </style>
   <link rel="icon" href="/assets/favicons/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png" />
+  <link rel="manifest" href="/assets/favicons/site.webmanifest" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png" />
   <meta name="apple-mobile-web-app-title" content="HOC" />
   <meta name="application-name" content="HOC" />
 </head>
-
 <body>
-<header class="hoc-header">
-  <div class="hoc-header-inner">
-    <img src="/assets/hoc.png" alt="mrcauliman" class="hoc-brand-mark">
-    <div class="hoc-header-text">
-      <h1>🏛️ HOUSE OF CAULIMAN</h1>
-      <p>XRPL • Active Ecosystems: MONOLITH • AUGUR • LAV • NEB • XRPL LAYMAN • Ledger Drop XRPL • $WCK • $RAD • $BAG • NFTITANS • HOMEEZ</p>
-    </div>
-  </div>
-</header>
-
-<main class="hoc-main">
-  <div class="hoc-shell">
-    <section class="hoc-intro">
-      <p class="hoc-intro-title">HOUSE STACK</p>
-      <p class="hoc-intro-main">One operator. Multiple XRPL ecosystems. Tokens, utilities, media, collectibles, and infrastructure built for real usage.</p>
-    </section>
-
-    <div class="stack-cta" style="margin:0 0 14px;display:flex;justify-content:center;align-items:center;width:100%;">
-      <div style="width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;">
-        <a class="stack-btn" href="https://x.com/i/chat/group_join/g2047849753178968188/l2OyD5KTmb" target="_blank" rel="noopener">Join The House</a>
-        <div style="margin-top:10px;color:var(--muted);font-size:13px;">Official House 𝕏Chat for announcements, updates, and occasional group calls.</div>
-      </div>
-    </div>
-
-    <div class="nav-link-card" style="margin-top:18px; margin-bottom:22px;">
-      <a href="/house.html">Enter The House →</a>
-    </div>
-    <div class="hud-legend" aria-label="Project status legend">
-      <div class="item"><span class="key k-live"></span><span>LIVE</span><small>Token and utility fully operational.</small></div>
-      <div class="item"><span class="key k-token-live"></span><span>TOKEN LIVE</span><small>Token tradable. Utility expanding or in staged rollout.</small></div>
-      <div class="item"><span class="key k-utility-live"></span><span>UTILITY LIVE</span><small>Product operational. Token secondary, optional, or pending.</small></div>
-      <div class="item"><span class="key k-active-build"></span><span>ACTIVE BUILD</span><small>Core framework in active development. Public-facing progress visible.</small></div>
-      <div class="item"><span class="key k-private-build"></span><span>PRIVATE BUILD</span><small>Infrastructure phase. Not public-facing.</small></div>
-    </div>
-
-    
-<section class="hoc-intro" style="margin-top:28px;">
-  <p class="hoc-intro-title">CORE UTILITIES</p>
-  <p class="hoc-intro-main">Infrastructure, ownership, intelligence, continuity, and execution tools built around XRPL.</p>
-</section>
-<section class="stack-card mono">
-      <div class="stack-head">
-        <div class="stack-mark">
-          <img src="/assets/monolith/monolith_logo.webp" alt="MONOLITH" class="stack-logo">
+  <nav class="house-nav" aria-label="House sections">
+    <a href="#house">House</a>
+    <a href="#projects">Projects</a>
+    <a href="#collectibles">Collectibles</a>
+    <a href="#members">Members</a>
+    <a href="#about">About</a>
+  </nav>
+  <main>
+    <section id="house" class="hero">
+      <div class="hero-card">
+        <img src="/assets/hoc.png" alt="House of Cauliman" class="logo" />
+        <h1>House of Cauliman</h1>
+        <p class="kicker">Designing, building, and operating XRPL-native products that expand what people can do on the XRP Ledger.</p>
+        <p class="mission">One House. Multiple products. Shared direction. Platforms, education, brands, intellectual property, media, and interactive entertainment built to reinforce the ecosystem.</p>
+        <div class="btnrow">
+          <a class="btn" href="#projects">Explore the House</a>
+          <a class="btn" href="https://x.com/i/chat/group_join/g2047849753178968188/l2OyD5KTmb" target="_blank" rel="noopener">Join The House</a>
         </div>
-        <div>
-          <h2 class="stack-title">MONOLITH</h2>
-          <div class="hud utility-live pulse"><span class="dot"></span><span>UTILITY LIVE</span></div>
-          <p class="stack-sub">The Wall of Record</p>
-        </div>
-      </div>
-
-      <p class="stack-copy">
-        MONOLITH is XRPL-native digital ownership built around coordinate identity, public profile space, and the Tile Market. Claim a coordinate, build your tile page, and buy or sell digital real estate across the MONOLITH grid.
-      </p>
-
-      <ul class="stack-bullets">
-        <li>Coordinate Deed NFTs tied to claimable tile positions</li>
-        <li>Tile profile pages with identity, links, media, music, and proof</li>
-        <li>Top 8, gallery, owner mode, and shareable tile URLs</li>
-        <li>Tile Market now live with future expansion into larger footprints, premium ownership features, and digital real estate.</li>
-      </ul>
-
-      <p class="stack-copy" style="margin-top:6px;font-size:0.82rem;color:var(--text-soft);">
-        Every tile is a place. Every coordinate can become a profile, brand page, project hub, or piece of digital real estate backed by a Coordinate Deed NFT.
-      </p>
-
-      <div class="stack-cta">
-        <a class="stack-btn primary" href="https://monolithxrpl.com/index.html" target="_blank" rel="noopener">Enter MONOLITH</a>
-        <a class="stack-btn" href="https://x.com/monolith_xrpl" target="_blank" rel="noopener">𝕏 Profile</a>
+        <p style="margin:12px auto 0;color:var(--muted);font-size:.8rem;">Official House 𝕏Chat for announcements, updates, and occasional group calls.</p>
       </div>
     </section>
 
-    <div class="house-grid-3"><section class="stack-card">
-      <div class="stack-head">
-        <div class="stack-mark">
-          <img src="/assets/augur/augur_logo.png" alt="AUGUR" class="stack-logo">
-        </div>
-        <div>
-          <h2 class="stack-title">AUGUR</h2>
-          <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
-          <div class="hud utility-live pulse"><span class="dot"></span><span>UTILITY LIVE</span></div>
-          <p class="stack-sub">XRPL Intelligence Platform</p>
-        </div>
-      </div>
+    <div class="wrap">
 
-      <p class="stack-copy">
-        AUGUR reads XRPL activity and turns public ledger movement into clean intelligence. Track wallets, interpret flows, review token and NFT movement, watch large holders through Whale Watch, and experience live $XRP market pressure through AUGUR BATTLEFIELD. No wallet connection. No keys. No custody.
-      </p>
 
-      <ul class="stack-bullets">
-        <li>Whale Watch tracks large XRPL wallets and major holder movement</li>
-        <li>Track multiple XRPL wallets in one place, clean and organized</li>
-        <li>See inflows, outflows, fees, tokens, NFTs, and net change</li>
-        <li>Monthly snapshots plus exports for long-term wallet intelligence</li>
-        <li>AUGUR BATTLEFIELD turns live $XRP market pressure into an interactive battlefield visualization</li>
-      </ul>
-
-      <p class="stack-copy" style="margin-top:6px;font-size:0.82rem;color:var(--text-soft);">
-        Non-custodial. Read-only. Public data only. Built for wallet intelligence, whale tracking, and XRPL signal.
-      </p>
-
-      <div class="stack-cta">
-        <a class="stack-btn primary" href="https://augurxrpl.com/" target="_blank" rel="noopener">View AUGUR</a>
-        <a class="stack-btn" href="https://augurxrpl.com/battlefield/" target="_blank" rel="noopener">Enter Battlefield</a>
-        <a class="stack-btn" href="https://x.com/augurintel" target="_blank" rel="noopener">𝕏 Profile</a>
-      </div>
-    </section>
-    <section class="stack-card" style="margin:26px 0;border-color:rgba(87,169,255,.55);background:radial-gradient(circle at 18% 20%,rgba(50,120,255,.14),transparent 34%),radial-gradient(circle at 82% 80%,rgba(255,55,55,.13),transparent 34%),linear-gradient(135deg,#070b13,#0b090d);text-align:center;">
-      <div style="max-width:850px;margin:0 auto;">
-        <p class="stack-sub" style="letter-spacing:.16em;color:#9dbfe8;">AUGUR BATTLEFIELD • LIVE $XRP MARKET VISUALIZATION</p>
-        <h2 class="stack-title" style="font-size:clamp(1.6rem,4vw,2.8rem);margin:8px 0 12px;">FORGET THE CHARTS. WATCH THE BATTLE.</h2>
-        <p class="stack-copy" style="max-width:760px;margin:0 auto 18px;">
-          AUGUR BATTLEFIELD transforms live global $XRP market pressure into a moving battlefield. Blue represents buy pressure. Red represents sell pressure. Troops, tanks, aircraft, explosions, sound, and the front line react as the market changes.
+      <section class="section panel battlefield-feature">
+        <p style="margin:0 0 6px;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:#9dbfe8;">AUGUR BATTLEFIELD • LIVE</p>
+        <h2 style="margin:0 0 12px;">Forget the charts. Watch the battle.</h2>
+        <p class="lead" style="max-width:800px;margin:0 auto 18px;">
+          AUGUR BATTLEFIELD turns live global $XRP market pressure into a moving battlefield. Blue represents buy pressure. Red represents sell pressure. Troops, tanks, aircraft, explosions, audio, and the front line respond as market pressure changes.
         </p>
-        <div class="stack-cta" style="justify-content:center;">
-          <a class="stack-btn primary" href="https://augurxrpl.com/battlefield/" target="_blank" rel="noopener">Enter AUGUR Battlefield</a>
+        <div class="btnrow" style="justify-content:center;">
+          <a class="btn" href="https://augurxrpl.com/battlefield/">Enter AUGUR Battlefield</a>
         </div>
-      </div>
-    </section>
+      </section>
 
-<section class="stack-card">
-  <div class="stack-head">
-    <div class="stack-mark">
-      <img src="/assets/lav/lav_icon.png" alt="LAV" class="stack-logo">
-    </div>
-    <div>
-      <h2 class="stack-title">LAV</h2>
-      <div class="hud utility-live pulse"><span class="dot"></span><span>UTILITY LIVE</span></div>
-      <p class="stack-sub">Legacy Access Vault</p>
-    </div>
-  </div>
+      <section id="projects" class="section">
+        <h2>Projects</h2>
+        <p class="lead">Explore the platforms, brands, tools, collections, and media built inside the House.</p>
+        <div class="grid">
 
-  <p class="stack-copy">
-    LAV is family crypto continuity infrastructure. It gives families a clear path for recovery planning, future handoff, and protected access across generations.
-  </p>
+          <article class="card">
+            <div>
+              <div class="topline"><span class="role">Platform</span><span class="badge utility-live">UTILITY LIVE</span></div>
+              <img class="card-logo" src="/assets/monolith/monolith_logo.webp" alt="MONOLITH" />
+              <h3>MONOLITH</h3>
+              <div class="verb">Own</div>
+              <p class="copy">Digital ownership on XRPL. Claim permanent coordinates, build a public page, and buy or sell tiles through the Tile Market.</p>
+            </div>
+            <a href="https://monolithxrpl.com/index.html"
+               data-house-modal
+               data-title="MONOLITH"
+               data-logo="/assets/monolith/monolith_logo.webp"
+               data-role="Platform"
+               data-status="UTILITY LIVE"
+               data-lead="Digital ownership and utility on XRPL."
+               data-details="MONOLITH combines permanent coordinate ownership, public tile identity, live marketplaces, seller tools, payments, storefronts, NFT discovery, and XRPL-native utility inside one connected ecosystem."
+               data-breakdown="Permanent coordinate ownership on XRPL|Public wallet-linked tile identity and profiles|Live Tile Market for coordinate deeds|Live NFT Marketplace for eligible XRPL NFTs|Merch storefronts and seller tools|P2P payment utilities|NFT Showcase and ownership display|Directory, discovery, and connected tile utilities"
+               data-href="https://monolithxrpl.com/index.html"
+               data-link-label="Enter MONOLITH"
+               data-external="true"
+               data-href2="https://x.com/monolith_xrpl"
+               data-link-label2="𝕏 Profile"
+               data-external2="true">Explore</a>
+          </article>
 
-  <ul class="stack-bullets">
-    <li>Digital inheritance planning</li>
-    <li>Family recovery workflows</li>
-    <li>Secure continuity guidance</li>
-    <li>XRPL-native legacy infrastructure</li>
-  </ul>
+          <article class="card">
+            <div>
+              <div class="topline"><span class="role">Platform</span><span class="badge utility-live">UTILITY LIVE</span></div>
+              <img class="card-logo" src="/assets/augur/augur_logo.png" alt="AUGUR" />
+              <h3>AUGUR</h3>
+              <div class="verb">Understand</div>
+              <p class="copy">XRPL wallet intelligence, reports, risk analysis, readable ledger interpretation, and AUGUR BATTLEFIELD, a live visualization of global $XRP market pressure.</p>
+            </div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <a href="https://augurxrpl.com/"
+               data-house-modal
+               data-title="AUGUR"
+               data-role="XRPL Intelligence"
+               data-status="UTILITY LIVE"
+               data-lead="XRPL intelligence built to make ledger activity understandable."
+               data-details="AUGUR turns raw XRPL activity into readable wallet intelligence, distribution analysis, risk context, and live market-pressure visualization."
+               data-breakdown="Wallet intelligence and readable XRPL reports|Whale distribution and wallet-rank systems|Ledger and transaction interpretation|Risk and concentration analysis|Live validated-ledger infrastructure|AUGUR BATTLEFIELD visualization"
+               data-logo="/assets/augur/augur_logo.png"
+               data-href="https://augurxrpl.com/"
+               data-link-label="View AUGUR"
+               data-external="true"
+               data-href2="https://augurxrpl.com/battlefield/"
+               data-link-label2="Enter Battlefield"
+               data-external2="true"
+               data-href3="https://x.com/augurintel"
+               data-link-label3="𝕏 Profile"
+               data-external3="true">Explore AUGUR</a>
 
-  <div class="stack-cta">
-    <a class="stack-btn primary" href="https://lavxrpl.com/" target="_blank" rel="noopener">Enter LAV</a>
-    <a class="stack-btn" href="https://x.com/lavxrpl" target="_blank" rel="noopener">𝕏 Profile</a>
-  </div>
-</section><section class="stack-card">
-      <div class="stack-head">
-        <div class="stack-mark">
-          <img src="/neb/assets/neb_icon.webp" alt="NEB" class="stack-logo">
+            </div>
+          </article>
+
+          <article class="card">
+            <div>
+              <div class="topline"><span class="role">Platform</span><span class="badge utility-live">UTILITY LIVE</span></div>
+              <img class="card-logo" src="/assets/lav/lav_icon.png" alt="LAV" />
+              <h3>LAV</h3>
+              <div class="verb">Protect</div>
+              <p class="copy">Digital continuity, vault planning, recovery paths, and legacy protection for crypto holders and families.</p>
+            </div>
+            <a href="https://lavxrpl.com/"
+               data-house-modal
+               data-title="LAV"
+               data-role="Legacy Infrastructure"
+               data-status="UTILITY LIVE"
+               data-lead="Digital continuity and legacy protection for crypto holders and families."
+               data-details="LAV provides continuity planning, protected recovery paths, family access, and future handoff without becoming a centralized seed database."
+               data-breakdown="Digital inheritance planning|Family recovery workflows|Guided legacy setup|Protected future handoff|XRPL-native continuity infrastructure|Security-first nontechnical UX"
+               data-logo="/assets/lav/lav_icon.png"
+               data-href="https://lavxrpl.com/"
+               data-link-label="Enter LAV"
+               data-external="true"
+               data-href2="https://x.com/lavxrpl"
+               data-link-label2="𝕏 Profile"
+               data-external2="true">Explore</a>
+          </article>
+
+          <article class="card">
+            <div>
+              <div class="topline"><span class="role">Platform</span><span class="badge active-build">ACTIVE BUILD</span></div>
+              <img class="card-logo" src="/neb/assets/neb_icon.webp" alt="NEB" />
+              <h3>NEB</h3>
+              <div class="verb">Execute</div>
+              <p class="copy">Execution infrastructure, automation, trading tools, and future XRPL market utilities.</p>
+            </div>
+            <a href="/neb/"
+               data-house-modal
+               data-title="NEB"
+               data-role="Execution Infrastructure"
+               data-status="ACTIVE BUILD"
+               data-lead="XRPL market scanning, automation, and controlled execution infrastructure."
+               data-details="NEB scans XRPL markets for spread and liquidity inefficiencies, supports paper trading, and is being built toward controlled live execution."
+               data-breakdown="Automated XRPL market scanning|Spread and liquidity detection|Paper trading|Controlled execution architecture|Order-book monitoring|Future AUGUR integration"
+               data-logo="/neb/assets/neb_icon.webp"
+               data-href="/neb/"
+               data-link-label="View NEB"
+               data-href2="https://x.com/NEB_XRPL"
+               data-link-label2="𝕏 Profile"
+               data-external2="true">Explore</a>
+          </article>
+
+          <article class="card">
+            <div>
+              <div class="topline"><span class="role">Safety Utility</span><span class="badge active-build">ACTIVE BUILD</span></div>
+              <h3>WARDEN</h3>
+              <div class="verb">Verify</div>
+              <p class="copy">XRPL safety utility built to help users understand signing requests before they approve them.</p>
+            </div>
+            <a href="#"
+               data-house-modal
+               data-title="WARDEN"
+               data-role="XRPL Safety"
+               data-status="ACTIVE BUILD"
+               data-lead="Understand an XRPL signing request before you approve it."
+               data-details="WARDEN decodes proposed XRPL actions into plain English, verifies observable ledger facts, and flags material risk without requesting private recovery material."
+               data-breakdown="Screenshot inspection|Signing-link and QR inspection|Transaction JSON inspection|Transaction-hash inspection|CLEAR • CAUTION • DANGER • UNKNOWN|Permission and authority-change detection|Ledger-fact verification|Never requests seeds or private keys">Open WARDEN</a>
+          </article>
+
+          <article class="card">
+            <div>
+              <div class="topline"><span class="role">House IP</span><span class="badge active-build">ACTIVE BUILD</span></div>
+              <img class="card-logo" src="/assets/wck_logo.webp" alt="Continental Wick" />
+              <h3>Continental Wick</h3>
+              <div class="verb">Expand</div>
+              <p class="copy">An original House universe spanning XRPL collectibles, characters, story, and future interactive game experiences.</p>
+            </div>
+            <a href="https://continentalwick.com"
+               data-house-modal
+               data-title="CONTINENTAL WICK"
+               data-role="House IP"
+               data-status="ACTIVE BUILD"
+               data-lead="An original House universe spanning collectibles, characters, story, and future game experiences."
+               data-details="Continental Wick is a House-created character universe built across XRPL collectibles and expanding interactive experiences, with future gameplay extending the IP beyond static collectibles."
+               data-breakdown="Original House character universe|XRPL collectible ownership|Pixel Protocol Genesis|18-character Genesis structure|Story and world expansion|Future Continental Wick game"
+               data-logo="/assets/wck_logo.webp"
+               data-href="https://continentalwick.com"
+               data-link-label="Website"
+               data-external="true"
+               data-href2="https://x.com/ContinentalWCK"
+               data-link-label2="𝕏 Profile"
+               data-external2="true">Explore</a>
+          </article>
+
+          <article class="card">
+            <div>
+              <div class="topline"><span class="role">Education</span><span class="badge utility-live">UTILITY LIVE</span></div>
+              <img class="card-logo" src="/assets/xrpl/xrpl_layman_logo.png" alt="XRPL LAYMAN" />
+              <h3>XRPL LAYMAN</h3>
+              <div class="verb">Learn</div>
+              <p class="copy">Plain-English XRPL education for wallets, trustlines, DEX, AMM, safety, and real usage.</p>
+            </div>
+            <a href="/xrpl/"
+               data-house-modal
+               data-title="XRPL LAYMAN"
+               data-role="Education"
+               data-status="UTILITY LIVE"
+               data-lead="Plain-English XRPL education built for real usage."
+               data-details="XRPL LAYMAN explains wallets, trustlines, DEX activity, AMMs, safety, transactions, and XRPL mechanics in language people can actually use."
+               data-breakdown="Wallet and account education|Trustlines and issued assets|XRPL DEX fundamentals|AMM explanations|Transaction and ledger basics|Safety and practical usage"
+               data-logo="/assets/xrpl/xrpl_layman_logo.png"
+               data-href="/xrpl/"
+               data-link-label="Enter XRPL Layman">Explore</a>
+          </article>
+
+          <article class="card">
+            <div>
+              <div class="topline"><span class="role">Platform</span><span class="badge active-build">ACTIVE BUILD</span></div>
+              <img class="card-logo" src="/assets/bag/BAG_logo.webp" alt="$BAG Capital" />
+              <h3>XRPL Trader</h3>
+              <div class="verb">Compete</div>
+              <p class="copy">Simulation-only XRPL trading competition with real market data, 30-day seasons, portfolio tracking, and global rankings.</p>
+            </div>
+            <a href="https://bagxrp.com"
+               data-house-modal
+               data-title="$BAG CAPITAL"
+               data-role="Token Ecosystem / Trading"
+               data-status="ACTIVE BUILD"
+               data-lead="A House token ecosystem with XRPL Trader competition and market utility."
+               data-details="$BAG Capital connects the BAG ecosystem with XRPL Trader, a simulation-only trading competition using real market data, portfolio tracking, timed seasons, and rankings."
+               data-breakdown="$BAG token ecosystem|XRPL Trader competition|Real market-data inputs|30-day seasons|Portfolio tracking|Global rankings"
+               data-logo="/assets/bag/BAG_logo.webp"
+               data-href="https://bagxrp.com"
+               data-link-label="Website"
+               data-external="true"
+               data-href2="https://xmagnetic.org/swap/BAG+rNeYbfb9EDV8c7mNfUuooEEYYzMcEuDFbr_XRP+XRP?network=mainnet"
+               data-link-label2="BAG AMM"
+               data-external2="true"
+               data-href3="https://x.com/BAG_XRPL"
+               data-link-label3="𝕏 Profile"
+               data-external3="true">Explore</a>
+          </article>
+
+
+
+          <article class="card">
+            <div>
+              <div class="topline"><span class="role">Brand</span><span class="badge live">LIVE</span></div>
+              <img class="card-logo" src="/assets/RAD_logo.webp" alt="RAD" />
+              <h3>RAD</h3>
+              <div class="verb">Belong</div>
+              <p class="copy">Community, humor, XRP culture, and the House personality layer.</p>
+            </div>
+            <a href="https://radxrp.com"
+               data-house-modal
+               data-title="RAD GARLINGTON"
+               data-role="Brand / Token"
+               data-status="LIVE"
+               data-lead="Community, humor, $XRP culture, and House personality."
+               data-details="RAD GARLINGTON is a House brand and token ecosystem built around community, personality, humor, and XRP culture."
+               data-breakdown="House community brand|$RAD token ecosystem|XRP culture and humor|Community identity|XRPL-native trading access|Connected House presence"
+               data-logo="/assets/RAD_logo.webp"
+               data-href="https://radxrp.com"
+               data-link-label="Website"
+               data-external="true"
+               data-href2="https://xmagnetic.org/swap/RAD+rKpaNoTRdXa48W7emkKgtCLz2MuhEroU7V_XRP+XRP?network=mainnet"
+               data-link-label2="RAD AMM"
+               data-external2="true"
+               data-href3="https://x.com/radgarlington"
+               data-link-label3="𝕏 Profile"
+               data-external3="true">Explore</a>
+          </article>
+
+
+
+
+
+          <article class="card">
+            <div>
+              <div class="topline"><span class="role">Media</span><span class="badge utility-live">UTILITY LIVE</span></div>
+              <img class="card-logo" src="/assets/ledger_drop_xrpl.png" alt="Ledger Drop XRPL" />
+              <h3>Ledger Drop XRPL</h3>
+              <div class="verb">Discover</div>
+              <p class="copy">Premium XRP and XRPL wallpaper archive built as a growing visual media line.</p>
+            </div>
+            <a href="/ledgerdrop_xrpl/"
+               data-house-modal
+               data-title="LEDGER DROP XRPL"
+               data-role="Media"
+               data-status="UTILITY LIVE"
+               data-lead="A permanent archive of cinematic $XRP and XRPL wallpapers."
+               data-details="Ledger Drop XRPL is the House visual-media line for cinematic XRP and XRPL wallpapers, with ongoing releases, mobile and desktop formats, and download-ready assets."
+               data-breakdown="Cinematic XRP and XRPL wallpapers|Mobile formats|Desktop formats|Download-ready releases|Growing permanent archive|Ongoing visual production"
+               data-logo="/assets/ledger_drop_xrpl.png"
+               data-href="/ledgerdrop_xrpl/"
+               data-link-label="Enter Ledger Drop"
+               data-href2="https://x.com/LedgerDrop_XRPL"
+               data-link-label2="𝕏 Profile"
+               data-external2="true">Explore</a>
+          </article>
+
+          <article class="card">
+            <div>
+              <div class="topline"><span class="role">Interactive Entertainment</span><span class="badge active-build">ACTIVE BUILD</span></div>
+              <img class="card-logo" src="/assets/dungeon-house/DUNGEON HOUSE ICON.webp" alt="Dungeon House" />
+              <h3>Dungeon House</h3>
+              <div class="verb">Play</div>
+              <p class="copy">Retro dungeon crawler under active development for the House ecosystem.</p>
+            </div>
+            <a href="/dungeon-house.html"
+               data-house-modal
+               data-title="DUNGEON HOUSE"
+               data-role="Interactive Entertainment"
+               data-status="ACTIVE BUILD"
+               data-lead="A retro dungeon crawler being built inside the House ecosystem."
+               data-details="Dungeon House brings interactive entertainment into the House through a retro-styled dungeon crawler with its own visual identity and expanding gameplay direction."
+               data-breakdown="Retro dungeon-crawler identity|House-built interactive entertainment|Original visual direction|Gameplay under active development|Expandable world and mechanics|Future ecosystem integration"
+               data-logo="/assets/dungeon-house/DUNGEON HOUSE ICON.webp"
+               data-href="/dungeon-house.html"
+               data-link-label="Enter Dungeon House">Explore</a>
+          </article>
+
         </div>
-        <div>
-          <h2 class="stack-title">NEB</h2>
-          <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
-          <p class="stack-sub">Network Exchange Bot</p>
+      </section>
+
+      <section id="collectibles" class="section">
+        <h2>Collectibles</h2>
+        <p class="lead">House-created XRPL collections, characters, and digital ownership experiences.</p>
+
+        <div class="grid">
+          <article class="card">
+            <div>
+              <div class="topline"><span class="role">Weekly Collection</span><span class="badge live">LIVE</span></div>
+              <h3>THE 52</h3>
+              <div class="verb">Collect</div>
+              <p class="copy">52 original archetype NFTs released across one year, with subscriber drops, public releases, ownership recognition, and holder utility.</p>
+            </div>
+            <a href="/nft-enrollment/"
+               data-house-modal
+               data-title="THE 52"
+               data-role="Weekly XRPL Collection"
+               data-status="LIVE"
+               data-lead="52 original archetype NFTs released across one year."
+               data-details="THE 52 is a weekly House collection built around 52 crypto and internet archetypes with subscriber drops, public releases, ownership recognition, and holder utility."
+               data-breakdown="52-card weekly collection|One archetype each week|Subscriber NFT drops|Public MONOLITH releases|XRPL ownership recognition|Holder-specific utility|Released and upcoming states|Connected House member layer"
+               data-href="/nft-enrollment/"
+               data-link-label="Subscriber Enrollment">Explore THE 52</a>
+          </article>
+
+
+
+          <article class="card">
+            <div>
+              <div class="topline"><span class="role">Collection</span><span class="badge active-build">ACTIVE BUILD</span></div>
+              <img class="card-logo" src="/homeez/assets/HOMEEZ_logo.webp" alt="HOMEEZ" />
+              <h3>HOMEEZ</h3>
+              <div class="verb">Collect</div>
+              <p class="copy">Stylized character collectibles built for XRPL ownership and future experiences.</p>
+            </div>
+            <a href="/homeez/"
+               data-house-modal
+               data-title="HOMEEZ"
+               data-role="XRPL Collection"
+               data-status="ACTIVE BUILD"
+               data-lead="Stylized character collectibles built for XRPL ownership and future experiences."
+               data-details="HOMEEZ is a House character collection designed around recognizable visual identity, XRPL ownership, and room for experiences beyond the initial collectible layer."
+               data-breakdown="Original stylized characters|XRPL collectible ownership|House-created IP|Expandable character universe|Future holder experiences|Dedicated collection identity"
+               data-logo="/homeez/assets/HOMEEZ_logo.webp"
+               data-href="/homeez/"
+               data-link-label="Enter HOMEEZ"
+               data-href2="https://x.com/HOMEEZ_XRPL"
+               data-link-label2="𝕏 Profile"
+               data-external2="true">Explore</a>
+          </article>
+
+          <article class="card">
+            <div>
+              <div class="topline"><span class="role">Collection</span><span class="badge active-build">ACTIVE BUILD</span></div>
+              <img class="card-logo" src="/collections/nftitans/assets/NFTITANS_logo.webp" alt="NFTITANS" />
+              <h3>NFTITANS</h3>
+              <div class="verb">Preserve</div>
+              <p class="copy">Premium digital collectibles celebrating builders, creators, and XRP ecosystem culture.</p>
+            </div>
+            <a href="/collections/nftitans.html"
+               data-house-modal
+               data-title="NFTITANS"
+               data-role="XRPL Collection"
+               data-status="ACTIVE BUILD"
+               data-lead="Premium digital collectibles celebrating builders, creators, and XRP ecosystem culture."
+               data-details="NFTITANS is a House collectible line centered on recognizable builders, creators, and figures across XRP ecosystem culture."
+               data-breakdown="Premium digital collectible format|Builders and creators|XRP ecosystem culture|XRPL ownership|House collection system|Expandable subject roster"
+               data-logo="/collections/nftitans/assets/NFTITANS_logo.webp"
+               data-href="/collections/nftitans.html"
+               data-link-label="View Collection"
+               data-href2="https://x.com/NFTITANS_XRPL"
+               data-link-label2="𝕏 Profile"
+               data-external2="true">Explore</a>
+          </article>
         </div>
-      </div>
+      </section>
 
-      <p class="stack-copy">
-        NEB is an XRPL trading bot designed to detect trading opportunities across the XRP Ledger. It scans order books, identifies inefficiencies, and executes trades automatically when opportunities appear.
-      </p>
+      <section id="members" class="section panel">
+        <h2>Members</h2>
+        <p class="lead">A wallet-linked House identity layer for ownership, participation, and future holder utility.</p>
 
-      <ul class="stack-bullets">
-        <li>Automated trading bot for XRPL markets</li>
-        <li>Spread and liquidity inefficiency detection</li>
-        <li>Paper trading before live capital deployment</li>
-        <li>Built to integrate with AUGUR intelligence later</li>
-      </ul>
-
-      <p class="stack-copy" style="margin-top:6px;font-size:0.82rem;color:var(--text-soft);">
-        Built as infrastructure first. Scanner, paper trading, then controlled live trading.
-      </p>
-
-      <div class="stack-cta">
-        <a class="stack-btn primary" href="/neb/">View NEB</a>
-        <a class="stack-btn" href="https://x.com/NEB_XRPL" target="_blank" rel="noopener">𝕏 Profile</a>
-      </div>
-    </section></div>
-<section class="hoc-intro" style="margin-top:28px;">
-  <p class="hoc-intro-title">EDUCATION</p>
-  <p class="hoc-intro-main">Plain-language XRPL education built to move users into real usage.</p>
-</section>
-<section class="stack-card blue">
-      <div class="stack-head">
-        <div class="stack-mark">
-          <img src="/assets/xrpl/xrpl_layman_logo.png" alt="XRPL Layman" class="stack-logo">
+        <div class="stack">
+          <div class="stack-row">
+            <span class="stack-label">XRPL Ownership</span>
+            <div class="stack-items">Public wallet verification for eligible House collectibles and member access.</div>
+          </div>
+          <div class="stack-row">
+            <span class="stack-label">Holder Utility</span>
+            <div class="stack-items">Collectible-specific access, ownership states, participation, and future House experiences.</div>
+          </div>
+          <div class="stack-row">
+            <span class="stack-label">Security</span>
+            <div class="stack-items">Public XRPL addresses only. Never seeds, private keys, or recovery phrases.</div>
+          </div>
         </div>
-        <div>
-          <h2 class="stack-title">XRPL LAYMAN</h2>
-          <div class="hud utility-live pulse"><span class="dot"></span><span>UTILITY LIVE</span></div>
-          <p class="stack-sub">XRPL Education Platform</p>
+
+        <div class="btnrow">
+          <a class="btn" href="/nft-enrollment/">Subscriber NFT Enrollment</a>
         </div>
-      </div>
+      </section>
 
-      <p class="stack-copy">
-        Simple explanations of $XRP and the XRP Ledger. Usage first. Reality first. Built for people who want clean answers without hype or fantasy numbers.
-      </p>
+      <section class="section panel">
+        <h2>How Everything Connects</h2>
+        <p class="lead">Each product has one job. Together they create a stronger XRPL ecosystem.</p>
+        <div class="loop"><div>Learn</div><div>Own</div><div>Understand</div><div>Protect</div><div>Belong</div><div>Return</div></div>
+      </section>
 
-      <ul class="stack-bullets">
-        <li>Wallet basics, safety, and ledger usage explained cleanly</li>
-        <li>No hype. No fake numbers. No fantasy framing</li>
-        <li>Built for users who want to understand how XRPL actually works</li>
-        <li>Direct, practical education from inside the ecosystem</li>
-      </ul>
+      <section id="about" class="section panel">
+        <h2>The House Standard</h2>
+        <p class="lead">Every House product must solve a real problem, stand on its own, strengthen another part of the ecosystem, respect ownership, and improve over time.</p>
+      </section>
 
-      <div class="stack-cta">
-        <a class="stack-btn primary" href="/xrpl/">Enter XRPL Layman</a>
-      </div>
-    </section>
-<section class="hoc-intro" style="margin-top:28px;">
-  <p class="hoc-intro-title">TOKEN ECOSYSTEMS</p>
-  <p class="hoc-intro-main">Community, culture, gaming, narrative, and utility ecosystems.</p>
-</section>
-<div class="house-grid-3"><section class="stack-card green bag-trader-card">
-      <div class="stack-head">
-        <div class="stack-mark">
-          <img src="/assets/bag/BAG_logo.webp" alt="$BAG Capital" class="stack-logo">
-        </div>
-        <div>
-          <h2 class="stack-title">$BAG CAPITAL</h2>
-          <div class="hud token-live"><span class="dot"></span><span>TOKEN LIVE</span></div>
-          <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
-          <p class="stack-sub">XRPL TRADER • SIMULATED MARKET COMPETITION</p>
-        </div>
-      </div>
-
-      <p class="stack-copy">
-        XRPL Trader is the next platform from $BAG Capital: a simulation-only trading competition powered by real XRPL market data.
-      </p>
-
-      <ul class="stack-bullets">
-        <li>Start each 30-day season with 10,000 simulated XRP</li>
-        <li>Trade approved XRPL assets using real XRPL AMM market data</li>
-        <li>Track portfolio performance, trade history, and global rankings</li>
-        <li>Compete to build the biggest bag without moving real funds</li>
-      </ul>
-
-      <div class="stack-cta">
-        <a class="stack-btn primary" href="https://bagxrp.com" target="_blank" rel="noopener">Website</a>
-        <a class="stack-btn" href="https://xmagnetic.org/swap/BAG+rNeYbfb9EDV8c7mNfUuooEEYYzMcEuDFbr_XRP+XRP?network=mainnet" target="_blank" rel="noopener">BAG AMM</a>
-        <a class="stack-btn" href="https://x.com/BAG_XRPL" target="_blank" rel="noopener">𝕏 Profile</a>
-      </div>
-    </section><section class="stack-card gold">
-      <div class="stack-head">
-        <div class="stack-mark">
-          <img src="/assets/wck_logo.webp" alt="WCK" class="stack-logo">
-        </div>
-        <div>
-          <h2 class="stack-title">CONTINENTAL WICK</h2>
-          <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
-          <p class="stack-sub">$WCK • Collectible Universe</p>
-        </div>
-      </div>
-
-      <p class="stack-copy">
-        Continental Wick is a collectible universe built on XRPL, combining character-driven storytelling, digital collectibles, and future gaming under one expanding world.
-      </p>
-
-      <ul class="stack-bullets">
-        <li>Protocol universe built around collectible infrastructure</li>
-        <li>Cinematic identity and narrative continuity</li>
-        <li>House-controlled worldbuilding on XRPL rails</li>
-        <li>Foundation for long-form ecosystem expansion</li>
-      </ul>
-
-      <div class="stack-cta">
-        <a class="stack-btn primary" href="https://continentalwick.com" target="_blank" rel="noopener">Website</a>
-        <a class="stack-btn" href="https://x.com/ContinentalWCK" target="_blank" rel="noopener">𝕏 Profile</a>
-      </div>
-    </section><section class="stack-card blue">
-      <div class="stack-head">
-        <div class="stack-mark">
-          <img src="/assets/RAD_logo.webp" alt="RAD" class="stack-logo">
-        </div>
-        <div>
-          <h2 class="stack-title">RAD GARLINGTON</h2>
-          <div class="hud live"><span class="dot"></span><span>LIVE</span></div>
-          <p class="stack-sub">$RAD • The Meme Coin With a Ledger</p>
-        </div>
-      </div>
-
-      <p class="stack-copy">
-        It’s not Brad, it’s Rad. Powered by XRPL and built around the protocol’s most loyal believer.
-      </p>
-
-      <ul class="stack-bullets">
-        <li>Character-led meme coin built inside the House ecosystem</li>
-        <li>Community token with strong ledger identity</li>
-        <li>Designed for culture, humor, and holder participation</li>
-        <li>Connected to XRPL-native meme infrastructure</li>
-      </ul>
-
-      <div class="stack-cta">
-        <a class="stack-btn primary" href="https://radxrp.com" target="_blank" rel="noopener">Website</a>
-        <a class="stack-btn" href="https://xmagnetic.org/swap/RAD+rKpaNoTRdXa48W7emkKgtCLz2MuhEroU7V_XRP+XRP?network=mainnet" target="_blank" rel="noopener">RAD AMM</a>
-        <a class="stack-btn" href="https://x.com/radgarlington" target="_blank" rel="noopener">𝕏 Profile</a>
-      </div>
-    </section></div>
-<section class="hoc-intro" style="margin-top:28px;">
-  <p class="hoc-intro-title">COLLECTIONS</p>
-  <p class="hoc-intro-main">Structured collectible systems with their own identity and expansion path.</p>
-</section>
-<div class="house-grid-2"><section class="stack-card">
-  <div class="stack-head">
-    <div class="stack-mark">
-      <img src="/homeez/assets/HOMEEZ_logo.webp" alt="HOMEEZ" class="stack-logo">
-    </div>
-    <div>
-      <h2 class="stack-title">HOMEEZ</h2>
-      <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
-      <p class="stack-sub">Collectibles • Archetypes • Drops</p>
-    </div>
-  </div>
-
-  <p class="stack-copy">
-    HOMEEZ is a stylized collectible character universe built for XRPL NFTs, distinct identities, and future digital ownership experiences.
-  </p>
-
-  <ul class="stack-bullets">
-    <li>XRPL NFT character universe</li>
-    <li>Distinct character identities and silhouettes</li>
-    <li>NFT-first collectible release path</li>
-    <li>House-controlled style and continuity</li>
-  </ul>
-
-  <div class="stack-cta">
-    <a class="stack-btn primary" href="/homeez/">Enter HOMEEZ</a>
-    <a class="stack-btn" href="https://x.com/HOMEEZ_XRPL" target="_blank" rel="noopener">𝕏 Profile</a>
-  </div>
-</section><section class="stack-card gold">
-      <div class="stack-head">
-        <div class="stack-mark">
-          <img src="/collections/nftitans/assets/NFTITANS_logo.webp" alt="NFTITANS" class="stack-logo">
-        </div>
-        <div>
-          <h2 class="stack-title">NFTITANS</h2>
-          <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
-          <p class="stack-sub">XRPL • Collectible Series</p>
-        </div>
-      </div>
-
-      <p class="stack-copy">
-        18 Roman Titans. Extreme muscle. Toy-accurate NFT collectibles. Built on XRPL. Forged for the House of Cauliman.
-      </p>
-
-      <ul class="stack-bullets">
-        <li>Series-locked collectible build</li>
-        <li>Roman Titan visual direction</li>
-        <li>XRPL-native collectible release path</li>
-        <li>House-controlled material and character continuity</li>
-      </ul>
-
-      <div class="stack-cta">
-        <a class="stack-btn primary" href="/collections/nftitans.html">View Collection</a>
-        <a class="stack-btn" href="https://x.com/NFTITANS_XRPL" target="_blank" rel="noopener">𝕏 Profile</a>
-      </div>
-    </section></div>
-
-<section class="hoc-intro" style="margin-top:28px;">
-  <p class="hoc-intro-title">GAMES</p>
-  <p class="hoc-intro-main">Original worlds built inside the House of Cauliman.</p>
-</section>
-
-<section class="stack-card">
-  <div class="stack-head">
-    <div class="stack-mark">
-      <img src="/assets/dungeon-house/DUNGEON HOUSE ICON.webp" alt="Dungeon House" class="stack-logo">
-    </div>
-    <div>
-      <h2 class="stack-title">DUNGEON HOUSE</h2>
-      <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
-      <p class="stack-sub">Enter. Explore. Conquer.</p>
-    </div>
-  </div>
-
-  <p class="stack-copy">
-    Dungeon House is an original arcade dungeon crawler being forged inside the House of Cauliman. Choose your hero, descend into dangerous floors, fight monsters, unlock doors, cast spells, collect equipment, and hunt for treasure.
-  </p>
-
-  <ul class="stack-bullets">
-    <li>Original fantasy arcade dungeon-crawler experience</li>
-    <li>Characters, weapons, armor, spells, keys, potions, and relics</li>
-    <li>Free Trial Dungeon planned before the full campaign unlock</li>
-    <li>Premium campaign planned through a one-time $XRP purchase</li>
-  </ul>
-
-  <div class="stack-cta">
-    <a class="stack-btn primary" href="/dungeon-house.html">Enter Dungeon House</a>
-  </div>
-</section>
-
-<section class="hoc-intro" style="margin-top:28px;">
-  <p class="hoc-intro-title">MEDIA</p>
-  <p class="hoc-intro-main">Visual releases and archive-grade XRPL media.</p>
-</section>
-<section class="stack-card gold">
-      <div class="stack-head">
-        <div class="stack-mark">
-          <picture>
-            <source srcset="/assets/ledger_drop_xrpl.webp" type="image/webp">
-            <img src="/assets/ledger_drop_xrpl.png" alt="Ledger Drop XRPL" class="stack-logo">
-          </picture>
-        </div>
-        <div>
-          <h2 class="stack-title">Ledger Drop XRPL</h2>
-          <div class="hud utility-live pulse"><span class="dot"></span><span>UTILITY LIVE</span></div>
-          <div class="hud active-build pulse"><span class="dot"></span><span>ACTIVE BUILD</span></div>
-          <p class="stack-sub">Daily Wallpapers</p>
-        </div>
-      </div>
-
-      <p class="stack-copy">
-        The permanent archive of cinematic XRPL wallpapers with daily releases built for the XRP community.
-      </p>
-
-      <ul class="stack-bullets">
-        <li>Mobile and desktop formats</li>
-        <li>Download-ready assets</li>
-        <li>Built around $XRP culture</li>
-        <li>Ongoing release pipeline across the full drop library</li>
-      </ul>
-
-      <div class="stack-cta">
-        <a class="stack-btn primary" href="/ledgerdrop_xrpl/">Enter Ledger Drop</a>
-        <a class="stack-btn" href="https://x.com/LedgerDrop_XRPL" target="_blank" rel="noopener">𝕏 Profile</a>
-      </div>
-    </section>
-
-    <section class="hoc-intro" style="margin-top:26px;">
-      <p class="hoc-intro-title">HOUSE OPERATOR</p>
-      <p class="hoc-intro-main">One operator. One standard. One ecosystem.</p>
-    </section>
-
-    <section class="hoc-grid" style="margin-top:28px;">
-      <article class="project-card" style="grid-column:1 / -1;">
+      <section class="section operator-section">
+<article class="project-card" style="grid-column:1 / -1;">
         <div class="project-media">
           <div class="project-wallpaper" style="background:radial-gradient(circle at top,#1e293b 0,#020308 70%); border-color:rgba(77,163,255,0.8);">
             <img src="/assets/mrcauliman_logo.webp" class="project-logo" alt="mrcauliman">
@@ -1150,34 +1706,133 @@
           </div>
         </div>
       </article>
-    </section>
+      </section>
 
-    <article class="project-card" style="grid-column:1/-1; margin-top:40px;">
-      <div class="project-body">
-        <h2 class="project-title">The House</h2>
-        <img src="/assets/hoc.png" alt="House of Cauliman Ecosystem Diagram" class="thesis-image">
-        <p class="project-copy" style="margin-top:16px;">
-          House of Cauliman designs, builds, and operates XRPL-native products across platforms, education, brands, intellectual property, media, and interactive entertainment.
-        </p>
-        <p class="project-copy">
-          Enter the House to see the full ecosystem, live status, product roles, and how each piece connects back to the XRP Ledger.
-        </p>
-        <div class="nav-link-card" style="margin-top:24px;">
-          <a href="/house.html">Enter The House →</a>
+      <section class="section panel">
+        <h2>Why XRPL</h2>
+        <p class="lead">Fast settlement. Low fees. Native DEX. AMM. NFTs. Tokenization. Wallet identity. Proven infrastructure.</p>
+      </section>
+
+      <footer class="footer">
+        <span>Built and backed by mrcauliman. No VC. No training wheels.</span>
+        <span>Build things worth keeping.</span>
+        <span>Powered by $XRP • <a href="https://houseofcauliman.com">HouseOfCauliman.com</a></span>
+      </footer>
+    </div>
+    <div class="house-modal" id="houseModal" hidden>
+    <div class="house-modal-backdrop" data-modal-close></div>
+    <section class="house-modal-window" role="dialog" aria-modal="true" aria-labelledby="houseModalTitle">
+      <button class="house-modal-close" type="button" data-modal-close aria-label="Close">×</button>
+      <div class="house-modal-body">
+        <div class="house-modal-visual">
+          <div class="house-modal-logo-wrap">
+            <img id="houseModalLogo" class="house-modal-logo" src="" alt="" hidden>
+          </div>
+          <div class="house-modal-visual-glow"></div>
         </div>
+        <div class="house-modal-kicker" id="houseModalRole"></div>
+        <h2 id="houseModalTitle"></h2>
+        <div class="house-modal-status" id="houseModalStatus"></div>
+        <p class="house-modal-lead" id="houseModalLead"></p>
+        <div class="house-modal-details" id="houseModalDetails"></div>
+        <div class="house-modal-breakdown" id="houseModalBreakdown"></div>
+        <div class="house-modal-actions" id="houseModalActions"></div>
       </div>
-    </article>
-
-    <footer class="hoc-footer">
-      <span>Built and backed by mrcauliman. No VC. No training wheels.</span>
-      <span>Powered by $XRP • <a href="https://houseofcauliman.com">HouseOfCauliman.com</a></span>
-    </footer>
+    </section>
   </div>
 </main>
 
 <script>
+(() => {
+  const modal = document.getElementById('houseModal');
+  const title = document.getElementById('houseModalTitle');
+  const role = document.getElementById('houseModalRole');
+  const status = document.getElementById('houseModalStatus');
+  const lead = document.getElementById('houseModalLead');
+  const details = document.getElementById('houseModalDetails');
+  const breakdown = document.getElementById('houseModalBreakdown');
+  const actions = document.getElementById('houseModalActions');
+  const logo = document.getElementById('houseModalLogo');
 
-(function(){
+  const closeModal = () => {
+    modal.hidden = true;
+    document.body.classList.remove('modal-open');
+  };
+
+  document.addEventListener('click', (event) => {
+    const trigger = event.target.closest('[data-house-modal]');
+
+    if (trigger) {
+      event.preventDefault();
+
+      title.textContent = trigger.dataset.title || '';
+      role.textContent = trigger.dataset.role || '';
+      status.textContent = trigger.dataset.status || '';
+      lead.textContent = trigger.dataset.lead || '';
+      details.textContent = trigger.dataset.details || '';
+
+      breakdown.innerHTML = '';
+      const breakdownItems = (trigger.dataset.breakdown || '')
+        .split('|')
+        .map(item => item.trim())
+        .filter(Boolean);
+
+      breakdownItems.forEach(item => {
+        const box = document.createElement('div');
+        box.className = 'house-modal-breakdown-item';
+        box.textContent = item;
+        breakdown.appendChild(box);
+      });
+
+      if (trigger.dataset.logo) {
+        logo.src = trigger.dataset.logo;
+        logo.alt = (trigger.dataset.title || 'Project') + ' logo';
+        logo.hidden = false;
+      } else {
+        logo.removeAttribute('src');
+        logo.alt = '';
+        logo.hidden = true;
+      }
+      actions.innerHTML = '';
+
+      const actionDefs = [
+        [trigger.dataset.href,  trigger.dataset.linkLabel || 'Explore', trigger.dataset.external],
+        [trigger.dataset.href2, trigger.dataset.linkLabel2 || 'More', trigger.dataset.external2],
+        [trigger.dataset.href3, trigger.dataset.linkLabel3 || 'More', trigger.dataset.external3],
+        [trigger.dataset.href4, trigger.dataset.linkLabel4 || 'More', trigger.dataset.external4]
+      ];
+
+      actionDefs.forEach(([href, label, isExternal]) => {
+        if (!href) return;
+
+        const link = document.createElement('a');
+        link.href = href;
+        link.textContent = label;
+
+        if (isExternal === 'true') {
+          link.target = '_blank';
+          link.rel = 'noopener';
+        }
+
+        actions.appendChild(link);
+      });
+
+      modal.hidden = false;
+      document.body.classList.add('modal-open');
+      document.querySelector('.house-modal-close').focus();
+      return;
+    }
+
+    if (event.target.closest('[data-modal-close]')) {
+      closeModal();
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && !modal.hidden) {
+      closeModal();
+    }
+  });
 })();
 </script>
 
