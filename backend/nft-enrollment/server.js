@@ -337,6 +337,29 @@ async function initializeDatabase() {
       idx_nft_subscriber_status
     ON nft_subscriber_registrations (status);
   `);
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS nft_wallet_change_requests (
+      id BIGSERIAL PRIMARY KEY,
+      registration_id BIGINT NOT NULL
+        REFERENCES nft_subscriber_registrations(id)
+        ON DELETE CASCADE,
+      x_handle TEXT NOT NULL,
+      old_xrpl_address TEXT NOT NULL,
+      new_xrpl_address TEXT NOT NULL,
+      status TEXT NOT NULL DEFAULT 'pending',
+      requested_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+      reviewed_at TIMESTAMPTZ
+    );
+
+    CREATE INDEX IF NOT EXISTS
+      idx_nft_wallet_change_status
+    ON nft_wallet_change_requests (status);
+
+    CREATE INDEX IF NOT EXISTS
+      idx_nft_wallet_change_registration
+    ON nft_wallet_change_requests (registration_id);
+  `);
 }
 
 app.get("/health", async (req, res) => {
@@ -363,6 +386,198 @@ const registrationLimiter = rateLimit({
   legacyHeaders: false
 });
 
+const registrationLookupLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  limit: 30,
+  standardHeaders: true,
+  legacyHeaders: false
+});
+
+const walletChangeLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  limit: 10,
+  standardHeaders: true,
+  legacyHeaders: false
+});
+
+app.post("/registration-status", registrationLookupLimiter, async (req, res) => {
+  try {
+    const xrplAddress =
+      typeof req.body.xrpl_address === "string"
+        ? req.body.xrpl_address.trim()
+        : "";
+
+    if (!isValidClassicAddress(xrplAddress)) {
+      return res.status(400).json({
+        ok: false,
+        error: "Enter a valid XRPL public wallet address."
+      });
+    }
+
+    const result = await pool.query(
+      `
+        SELECT xrpl_address
+        FROM nft_subscriber_registrations
+        WHERE xrpl_address = $1
+        LIMIT 1
+      `,
+      [xrplAddress]
+    );
+
+    if (!result.rows.length) {
+      return res.json({
+        ok: true,
+        registered: false,
+        status: "NOT REGISTERED"
+      });
+    }
+
+    return res.json({
+      ok: true,
+      registered: true,
+      status: "REGISTERED",
+      xrpl_address: result.rows[0].xrpl_address
+    });
+  } catch (error) {
+    console.error("Registration lookup failed", error);
+
+    return res.status(500).json({
+      ok: false,
+      error: "Registration status could not be checked."
+    });
+  }
+});
+
+app.post("/wallet-change-request", walletChangeLimiter, async (req, res) => {
+  try {
+    const xHandle = normalizeHandle(req.body.x_handle);
+
+    const currentAddress =
+      typeof req.body.current_xrpl_address === "string"
+        ? req.body.current_xrpl_address.trim()
+        : "";
+
+    const newAddress =
+      typeof req.body.new_xrpl_address === "string"
+        ? req.body.new_xrpl_address.trim()
+        : "";
+
+    if (!validHandle(xHandle)) {
+      return res.status(400).json({
+        ok: false,
+        error: "Enter a valid X handle."
+      });
+    }
+
+    if (
+      !isValidClassicAddress(currentAddress) ||
+      !isValidClassicAddress(newAddress)
+    ) {
+      return res.status(400).json({
+        ok: false,
+        error: "Enter valid XRPL public wallet addresses."
+      });
+    }
+
+    if (currentAddress === newAddress) {
+      return res.status(400).json({
+        ok: false,
+        error: "Your new wallet must be different from your current wallet."
+      });
+    }
+
+    if (req.body.xaman_confirmed !== true) {
+      return res.status(400).json({
+        ok: false,
+        error: "Confirm that the new address is your Xaman wallet."
+      });
+    }
+
+    const registration = await pool.query(
+      `
+        SELECT id, x_handle, xrpl_address
+        FROM nft_subscriber_registrations
+        WHERE
+          x_handle_normalized = $1
+          AND xrpl_address = $2
+        LIMIT 1
+      `,
+      [xHandle, currentAddress]
+    );
+
+    if (!registration.rows.length) {
+      return res.status(404).json({
+        ok: false,
+        error: "Current registration could not be verified."
+      });
+    }
+
+    const duplicate = await pool.query(
+      `
+        SELECT id
+        FROM nft_subscriber_registrations
+        WHERE xrpl_address = $1
+        LIMIT 1
+      `,
+      [newAddress]
+    );
+
+    if (duplicate.rows.length) {
+      return res.status(409).json({
+        ok: false,
+        error: "That XRPL wallet is already registered."
+      });
+    }
+
+    const row = registration.rows[0];
+
+    await pool.query(
+      `
+        UPDATE nft_wallet_change_requests
+        SET
+          status = 'superseded',
+          reviewed_at = NOW()
+        WHERE
+          registration_id = $1
+          AND status = 'pending'
+      `,
+      [row.id]
+    );
+
+    await pool.query(
+      `
+        INSERT INTO nft_wallet_change_requests (
+          registration_id,
+          x_handle,
+          old_xrpl_address,
+          new_xrpl_address
+        )
+        VALUES ($1, $2, $3, $4)
+      `,
+      [
+        row.id,
+        row.x_handle,
+        row.xrpl_address,
+        newAddress
+      ]
+    );
+
+    return res.status(201).json({
+      ok: true,
+      message:
+        "Wallet change request submitted for verification.",
+      new_xrpl_address: newAddress
+    });
+  } catch (error) {
+    console.error("Wallet change request failed", error);
+
+    return res.status(500).json({
+      ok: false,
+      error: "Wallet change request could not be submitted."
+    });
+  }
+});
+
 app.post("/register", registrationLimiter, async (req, res) => {
   try {
     const xHandle = normalizeHandle(req.body.x_handle);
@@ -384,6 +599,13 @@ app.post("/register", registrationLimiter, async (req, res) => {
       return res.status(400).json({
         ok: false,
         error: "Enter a valid XRPL public wallet address."
+      });
+    }
+
+    if (req.body.xaman_confirmed !== true) {
+      return res.status(400).json({
+        ok: false,
+        error: "Confirm that this is your Xaman wallet."
       });
     }
 

@@ -485,7 +485,43 @@
 
     <section class="card">
 
-      <h2>Register your XRPL wallet</h2>
+      <h2>Check My Registration</h2>
+
+      <p>
+        Enter your public XRPL wallet address to confirm whether
+        it is currently registered for House of Cauliman NFT drops.
+      </p>
+
+      <form id="registration-check-form">
+
+        <label>XRPL wallet address</label>
+        <input
+          id="check_xrpl_address"
+          placeholder="r..."
+          autocomplete="off"
+          required
+        >
+
+        <button
+          id="check-registration-button"
+          type="submit"
+          style="margin-top:16px"
+        >
+          CHECK MY REGISTRATION
+        </button>
+
+        <div
+          id="registration-check-message"
+          class="opening"
+          aria-live="polite"
+          style="display:none;margin-top:18px;padding:16px 18px;border:2px solid currentColor;border-radius:12px;font-size:17px;font-weight:800;line-height:1.45;word-break:break-word;"
+        ></div>
+
+      </form>
+
+      <div style="height:1px;background:#292b34;margin:28px 0"></div>
+
+      <h2>Register your Xaman wallet</h2>
 
 
 <form id="nft-enrollment-form">
@@ -508,9 +544,18 @@
     required
   >
 
+  <div class="notice">
+    <strong>Xaman Wallet Required for NFT Drops</strong><br>
+    Register a public XRPL address from Xaman to receive
+    House of Cauliman NFT drops. After delivery, you may
+    transfer your NFT to another compatible XRPL wallet
+    if you choose.
+  </div>
+
   <div class="help">
-    Your public XRPL r-address only.
-    Xaman and compatible XRPL wallets are supported.
+    Your public Xaman XRPL r-address only.
+    Never enter a seed phrase, secret, recovery words,
+    mnemonic, or private key.
   </div>
 
   <label>
@@ -527,13 +572,24 @@
 
   <label class="check">
     <input
+      id="xaman_confirmed"
+      type="checkbox"
+      required
+    >
+    <span>
+      I confirm this public XRPL address is from my Xaman wallet.
+    </span>
+  </label>
+
+  <label class="check">
+    <input
       id="consent"
       type="checkbox"
       required
     >
     <span>
       I understand that my 𝕏 subscription must be active
-      and my XRPL wallet must be registered before the
+      and my Xaman wallet must be registered before the
       weekly cutoff to qualify for that week's NFT.
     </span>
   </label>
@@ -551,7 +607,190 @@
 
 </form>
 
+<div style="height:1px;background:#292b34;margin:28px 0"></div>
+
+<h2>Update My Wallet</h2>
+
+<p>
+  Already registered but need to replace your delivery wallet?
+  Submit your current registration and your new Xaman wallet below.
+  Your existing wallet will remain active until the change is verified
+  and approved.
+</p>
+
+<form id="wallet-change-form">
+
+  <label>𝕏 handle</label>
+  <input
+    id="change_x_handle"
+    value="@"
+    autocomplete="off"
+    required
+  >
+
+  <label>Current registered XRPL wallet</label>
+  <input
+    id="current_xrpl_address"
+    placeholder="r..."
+    autocomplete="off"
+    required
+  >
+
+  <label>New Xaman XRPL wallet</label>
+  <input
+    id="new_xrpl_address"
+    placeholder="r..."
+    autocomplete="off"
+    required
+  >
+
+  <label class="check">
+    <input
+      id="change_xaman_confirmed"
+      type="checkbox"
+      required
+    >
+    <span>
+      I confirm the new public XRPL address is from my Xaman wallet.
+    </span>
+  </label>
+
+  <button id="wallet-change-button" type="submit">
+    REQUEST WALLET CHANGE
+  </button>
+
+  <div
+    id="wallet-change-message"
+    class="opening"
+    aria-live="polite"
+    style="display:none;margin-top:18px;padding:16px 18px;border:2px solid currentColor;border-radius:12px;font-size:17px;font-weight:800;line-height:1.45;word-break:break-word;"
+  ></div>
+
+</form>
+
 <script>
+  const checkForm =
+    document.getElementById("registration-check-form");
+  const checkButton =
+    document.getElementById("check-registration-button");
+  const checkMessage =
+    document.getElementById("registration-check-message");
+
+  checkForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    checkMessage.textContent = "";
+    checkMessage.style.display = "none";
+    checkButton.disabled = true;
+    checkButton.textContent = "CHECKING...";
+
+    const xrplAddress =
+      document.getElementById("check_xrpl_address").value.trim();
+
+    try {
+      const response = await fetch(
+        "https://api.houseofcauliman.com/registration-status",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            xrpl_address: xrplAddress
+          })
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.error || "Registration status could not be checked."
+        );
+      }
+
+      checkMessage.textContent = data.registered
+        ? "REGISTERED — This wallet is registered to receive House of Cauliman NFT drops. Wallet on file: " +
+          data.xrpl_address
+        : "NOT REGISTERED — This wallet is not currently on the enrollment list.";
+
+      checkMessage.style.display = "block";
+    } catch (error) {
+      checkMessage.textContent = error.message;
+      checkMessage.style.display = "block";
+    } finally {
+      checkButton.disabled = false;
+      checkButton.textContent = "CHECK MY REGISTRATION";
+    }
+  });
+
+  const walletChangeForm =
+    document.getElementById("wallet-change-form");
+  const walletChangeButton =
+    document.getElementById("wallet-change-button");
+  const walletChangeMessage =
+    document.getElementById("wallet-change-message");
+
+  walletChangeForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    walletChangeMessage.textContent = "";
+    walletChangeMessage.style.display = "none";
+    walletChangeButton.disabled = true;
+    walletChangeButton.textContent = "SUBMITTING...";
+
+    let xHandle =
+      document.getElementById("change_x_handle").value.trim();
+
+    if (!xHandle.startsWith("@")) {
+      xHandle = "@" + xHandle;
+    }
+
+    const payload = {
+      x_handle: xHandle,
+      current_xrpl_address:
+        document.getElementById("current_xrpl_address").value.trim(),
+      new_xrpl_address:
+        document.getElementById("new_xrpl_address").value.trim(),
+      xaman_confirmed:
+        document.getElementById("change_xaman_confirmed").checked
+    };
+
+    try {
+      const response = await fetch(
+        "https://api.houseofcauliman.com/wallet-change-request",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.error || "Wallet change request could not be submitted."
+        );
+      }
+
+      walletChangeMessage.textContent =
+        "Wallet change request submitted. Your current wallet remains on file until the new Xaman wallet is verified and approved.";
+
+      walletChangeMessage.style.display = "block";
+      walletChangeForm.reset();
+      document.getElementById("change_x_handle").value = "@";
+    } catch (error) {
+      walletChangeMessage.textContent = error.message;
+      walletChangeMessage.style.display = "block";
+    } finally {
+      walletChangeButton.disabled = false;
+      walletChangeButton.textContent = "REQUEST WALLET CHANGE";
+    }
+  });
+
   const form = document.getElementById("nft-enrollment-form");
   const button = document.getElementById("register-button");
   const message = document.getElementById("form-message");
@@ -575,7 +814,9 @@
     const payload = {
       x_handle: xHandle,
       xrpl_address: document.getElementById("xrpl_address").value,
-      email: document.getElementById("email").value
+      email: document.getElementById("email").value,
+      xaman_confirmed:
+        document.getElementById("xaman_confirmed").checked
     };
 
     try {

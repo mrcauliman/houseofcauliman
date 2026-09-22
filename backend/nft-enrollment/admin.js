@@ -45,6 +45,18 @@ function createAdminRouter({ pool, sendConfirmationEmail }) {
       LIMIT 500
     `, [q, `%${q}%`]);
 
+    const walletChanges = await pool.query(`
+      SELECT
+        id,
+        x_handle,
+        old_xrpl_address,
+        new_xrpl_address,
+        requested_at
+      FROM nft_wallet_change_requests
+      WHERE status = 'pending'
+      ORDER BY requested_at ASC
+    `);
+
     const total = result.rows.length;
 
     const xVerified = result.rows.filter(
@@ -176,7 +188,76 @@ function createAdminRouter({ pool, sendConfirmationEmail }) {
       `;
     }).join("");
 
+    const walletChangeRows = walletChanges.rows.map(r => `
+      <div class="person">
+
+        <div>
+          ${badge("PENDING", "warn")}
+        </div>
+
+        <div>
+          <div class="handle">
+            ${esc(r.x_handle)}
+          </div>
+
+          <div class="small">
+            Wallet change requested ${fmtDate(r.requested_at)}
+          </div>
+        </div>
+
+        <div class="wallet-block">
+          <div class="small">CURRENT WALLET</div>
+          <div class="wallet">
+            ${esc(r.old_xrpl_address)}
+          </div>
+
+          <div class="small" style="margin-top:10px">
+            NEW XAMAN WALLET
+          </div>
+          <div class="wallet">
+            ${esc(r.new_xrpl_address)}
+          </div>
+        </div>
+
+        <div class="control-block">
+          <form
+            method="post"
+            action="/admin/wallet-change/${r.id}/approve"
+            style="margin-bottom:8px"
+          >
+            <button class="btn primary" type="submit">
+              APPROVE
+            </button>
+          </form>
+
+          <form
+            method="post"
+            action="/admin/wallet-change/${r.id}/reject"
+          >
+            <button class="btn secondary" type="submit">
+              REJECT
+            </button>
+          </form>
+        </div>
+
+      </div>
+    `).join("");
+
     const body = `
+
+      ${
+        walletChanges.rows.length
+          ? `
+            <div class="card">
+              <div class="handle" style="margin-bottom:12px">
+                Pending Wallet Changes
+              </div>
+
+              ${walletChangeRows}
+            </div>
+          `
+          : ""
+      }
 
       <div class="grid four">
 
@@ -505,6 +586,125 @@ function createAdminRouter({ pool, sendConfirmationEmail }) {
     await sendRegistrationConfirmation(id);
 
     res.redirect("/admin/");
+  });
+
+  router.post("/wallet-change/:id/approve", async (req, res) => {
+    const requestId = Number(req.params.id);
+
+    if (!Number.isInteger(requestId)) {
+      return res.sendStatus(400);
+    }
+
+    const client = await pool.connect();
+
+    try {
+      await client.query("BEGIN");
+
+      const request = await client.query(`
+        SELECT *
+        FROM nft_wallet_change_requests
+        WHERE id = $1
+        FOR UPDATE
+      `, [requestId]);
+
+      if (!request.rows.length) {
+        await client.query("ROLLBACK");
+        return res.sendStatus(404);
+      }
+
+      const change = request.rows[0];
+
+      if (change.status !== "pending") {
+        await client.query("ROLLBACK");
+        return res.status(409).send(
+          "Wallet change request is no longer pending."
+        );
+      }
+
+      const registration = await client.query(`
+        SELECT id, xrpl_address
+        FROM nft_subscriber_registrations
+        WHERE id = $1
+        FOR UPDATE
+      `, [change.registration_id]);
+
+      if (
+        !registration.rows.length ||
+        registration.rows[0].xrpl_address !== change.old_xrpl_address
+      ) {
+        await client.query("ROLLBACK");
+        return res.status(409).send(
+          "Subscriber wallet changed after this request was submitted."
+        );
+      }
+
+      const duplicate = await client.query(`
+        SELECT id
+        FROM nft_subscriber_registrations
+        WHERE
+          xrpl_address = $1
+          AND id <> $2
+        LIMIT 1
+      `, [
+        change.new_xrpl_address,
+        change.registration_id
+      ]);
+
+      if (duplicate.rows.length) {
+        await client.query("ROLLBACK");
+        return res.status(409).send(
+          "New wallet is already assigned to another subscriber."
+        );
+      }
+
+      await client.query(`
+        UPDATE nft_subscriber_registrations
+        SET
+          xrpl_address = $1,
+          wallet_verified = FALSE,
+          updated_at = NOW()
+        WHERE id = $2
+      `, [
+        change.new_xrpl_address,
+        change.registration_id
+      ]);
+
+      await client.query(`
+        UPDATE nft_wallet_change_requests
+        SET
+          status = 'approved',
+          reviewed_at = NOW()
+        WHERE id = $1
+      `, [requestId]);
+
+      await client.query("COMMIT");
+      return res.redirect("/admin/");
+    } catch (error) {
+      await client.query("ROLLBACK");
+      throw error;
+    } finally {
+      client.release();
+    }
+  });
+
+  router.post("/wallet-change/:id/reject", async (req, res) => {
+    const requestId = Number(req.params.id);
+
+    if (!Number.isInteger(requestId)) {
+      return res.sendStatus(400);
+    }
+
+    await pool.query(`
+      UPDATE nft_wallet_change_requests
+      SET
+        status = 'rejected',
+        reviewed_at = NOW()
+      WHERE
+        id = $1
+        AND status = 'pending'
+    `, [requestId]);
+
+    return res.redirect("/admin/");
   });
 
   router.post("/:id", async (req, res) => {
