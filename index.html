@@ -1217,6 +1217,20 @@
       }
     }
 
+
+    /* Touch cards stay fixed */
+    @media (hover:none), (pointer:coarse){
+      .card:hover,
+      .card:focus-within{
+        transform:none;
+      }
+
+      .card:hover::before,
+      .card:focus-within::before{
+        transform:scale(.9);
+      }
+    }
+
   </style>
   <link rel="icon" href="/assets/favicons/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png" />
