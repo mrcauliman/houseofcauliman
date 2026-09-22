@@ -34,9 +34,10 @@
     .grid{display:grid;grid-template-columns:1fr;gap:14px}
     @media(min-width:760px){.grid{grid-template-columns:repeat(3,1fr)}}
     .card{border-radius:var(--radius);background:radial-gradient(circle at top,rgba(61,160,255,.10),rgba(13,18,28,.98) 58%,#05070d 100%);padding:18px;min-height:230px;display:flex;flex-direction:column;justify-content:space-between}
-    .topline{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
-    .role{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--soft);font-weight:800}
-    .badge{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;border:1px solid var(--line);border-radius:999px;padding:6px 8px;color:var(--muted);white-space:nowrap}
+    .topline{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+    .role{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--soft);font-weight:800;min-width:0}
+    .badge{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;border:1px solid var(--line);border-radius:999px;padding:6px 8px;color:var(--muted);white-space:normal;max-width:100%;text-align:center;line-height:1.2}
+    .token-hud{display:inline-flex;align-items:center;width:max-content;max-width:100%;margin:-2px 0 12px;padding:6px 9px;border:1px solid rgba(74,222,128,.38);border-radius:999px;background:rgba(74,222,128,.08);color:#b8ffd0;font-size:.64rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;line-height:1.2}
     .live{border-color:rgba(74,222,128,.35);color:#b8ffd0;background:rgba(74,222,128,.08)}
     .build{border-color:rgba(250,204,21,.35);color:#fff2a8;background:rgba(250,204,21,.08)}
     .card-logo{width:76px;height:76px;object-fit:contain;margin:0 0 14px;border-radius:16px}
@@ -1435,6 +1436,7 @@
           <article class="card">
             <div>
               <div class="topline"><span class="role">House IP</span><span class="badge active-build">ACTIVE BUILD</span></div>
+              <div class="token-hud">TOKEN LIVE · $WCK</div>
               <img class="card-logo" src="/assets/wck_logo.webp" alt="Continental Wick" />
               <h3>Continental Wick</h3>
               <div class="verb">Expand</div>
@@ -1444,10 +1446,10 @@
                data-house-modal
                data-title="CONTINENTAL WICK"
                data-role="House IP"
-               data-status="ACTIVE BUILD"
-               data-lead="An original House universe spanning collectibles, characters, story, and future game experiences."
-               data-details="Continental Wick is a House-created character universe built across XRPL collectibles and expanding interactive experiences, with future gameplay extending the IP beyond static collectibles."
-               data-breakdown="Original House character universe|XRPL collectible ownership|Pixel Protocol Genesis|18-character Genesis structure|Story and world expansion|Future Continental Wick game"
+               data-status="ACTIVE BUILD · $WCK TOKEN LIVE"
+               data-lead="An original House universe powered by a live XRPL token, collectibles, characters, story, and future game experiences."
+               data-details="Continental Wick is a House-created character universe with the live $WCK token on XRPL, Pixel Protocol Genesis collectibles, expanding story and future interactive experiences. $WCK is live, but no House-listed AMM is currently active."
+               data-breakdown="$WCK token live on XRPL|Original House character universe|XRPL collectible ownership|Pixel Protocol Genesis|18-character Genesis structure|Story and world expansion|Future Continental Wick game"
                data-logo="/assets/wck_logo.webp"
                data-href="https://continentalwick.com"
                data-link-label="Website"
@@ -1481,6 +1483,7 @@
           <article class="card">
             <div>
               <div class="topline"><span class="role">Platform</span><span class="badge active-build">ACTIVE BUILD</span></div>
+              <div class="token-hud">TOKEN LIVE · $BAG</div>
               <img class="card-logo" src="/assets/bag/BAG_logo.webp" alt="$BAG Capital" />
               <h3>XRPL Trader</h3>
               <div class="verb">Compete</div>
@@ -1490,16 +1493,16 @@
                data-house-modal
                data-title="$BAG CAPITAL"
                data-role="Token Ecosystem / Trading"
-               data-status="ACTIVE BUILD"
-               data-lead="A House token ecosystem with XRPL Trader competition and market utility."
-               data-details="$BAG Capital connects the BAG ecosystem with XRPL Trader, a simulation-only trading competition using real market data, portfolio tracking, timed seasons, and rankings."
-               data-breakdown="$BAG token ecosystem|XRPL Trader competition|Real market-data inputs|30-day seasons|Portfolio tracking|Global rankings"
+               data-status="ACTIVE BUILD · $BAG TOKEN LIVE"
+               data-lead="A live XRPL token ecosystem with XRPL Trader competition, market utility, and AMM access."
+               data-details="$BAG is a live XRPL token and the asset at the center of the BAG ecosystem. $BAG Capital connects that token ecosystem with XRPL Trader, a simulation-only trading competition using real market data, portfolio tracking, timed seasons, rankings, and direct AMM access."
+               data-breakdown="$BAG token live on XRPL|Live $BAG / $XRP AMM access|XRPL Trader competition|Real market-data inputs|30-day seasons|Portfolio tracking|Global rankings"
                data-logo="/assets/bag/BAG_logo.webp"
                data-href="https://bagxrp.com"
                data-link-label="Website"
                data-external="true"
                data-href2="https://xmagnetic.org/swap/BAG+rNeYbfb9EDV8c7mNfUuooEEYYzMcEuDFbr_XRP+XRP?network=mainnet"
-               data-link-label2="BAG AMM"
+               data-link-label2="$BAG AMM"
                data-external2="true"
                data-href3="https://x.com/BAG_XRPL"
                data-link-label3="𝕏 Profile"
@@ -1511,6 +1514,7 @@
           <article class="card">
             <div>
               <div class="topline"><span class="role">Brand</span><span class="badge live">LIVE</span></div>
+              <div class="token-hud">TOKEN LIVE · $RAD</div>
               <img class="card-logo" src="/assets/RAD_logo.webp" alt="RAD" />
               <h3>RAD</h3>
               <div class="verb">Belong</div>
@@ -1520,16 +1524,16 @@
                data-house-modal
                data-title="RAD GARLINGTON"
                data-role="Brand / Token"
-               data-status="LIVE"
-               data-lead="Community, humor, $XRP culture, and House personality."
-               data-details="RAD GARLINGTON is a House brand and token ecosystem built around community, personality, humor, and XRP culture."
-               data-breakdown="House community brand|$RAD token ecosystem|XRP culture and humor|Community identity|XRPL-native trading access|Connected House presence"
+               data-status="LIVE · $RAD TOKEN LIVE"
+               data-lead="A live XRPL token ecosystem built around community, humor, $XRP culture, and House personality."
+               data-details="$RAD is a live XRPL token at the center of the RAD GARLINGTON ecosystem. The House brand combines community, personality, humor, $XRP culture, and direct $RAD / $XRP AMM access."
+               data-breakdown="$RAD token live on XRPL|Live $RAD / $XRP AMM access|House community brand|$XRP culture and humor|Community identity|XRPL-native trading access|Connected House presence"
                data-logo="/assets/RAD_logo.webp"
                data-href="https://radxrp.com"
                data-link-label="Website"
                data-external="true"
                data-href2="https://xmagnetic.org/swap/RAD+rKpaNoTRdXa48W7emkKgtCLz2MuhEroU7V_XRP+XRP?network=mainnet"
-               data-link-label2="RAD AMM"
+               data-link-label2="$RAD AMM"
                data-external2="true"
                data-href3="https://x.com/radgarlington"
                data-link-label3="𝕏 Profile"
