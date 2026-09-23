@@ -61,8 +61,77 @@ function createWeeklyRouter({ pool }) {
         email TEXT,
         delivered BOOLEAN NOT NULL DEFAULT FALSE,
         delivery_tx_hash TEXT,
+        mint_status TEXT NOT NULL DEFAULT 'pending',
+        mint_tx_hash TEXT,
+        nftoken_id TEXT,
+        mint_attempts INTEGER NOT NULL DEFAULT 0,
+        mint_error TEXT,
+        minted_at TIMESTAMPTZ,
         UNIQUE(drop_id, registration_id)
       );
+
+      ALTER TABLE nft_weekly_recipients
+        ADD COLUMN IF NOT EXISTS
+          mint_status TEXT NOT NULL DEFAULT 'pending';
+
+      ALTER TABLE nft_weekly_recipients
+        ADD COLUMN IF NOT EXISTS
+          mint_tx_hash TEXT;
+
+      ALTER TABLE nft_weekly_recipients
+        ADD COLUMN IF NOT EXISTS
+          nftoken_id TEXT;
+
+      ALTER TABLE nft_weekly_recipients
+        ADD COLUMN IF NOT EXISTS
+          mint_attempts INTEGER NOT NULL DEFAULT 0;
+
+      ALTER TABLE nft_weekly_recipients
+        ADD COLUMN IF NOT EXISTS
+          mint_error TEXT;
+
+      ALTER TABLE nft_weekly_recipients
+        ADD COLUMN IF NOT EXISTS
+          minted_at TIMESTAMPTZ;
+
+      CREATE UNIQUE INDEX IF NOT EXISTS
+        nft_weekly_recipients_mint_tx_hash_uidx
+      ON nft_weekly_recipients (mint_tx_hash)
+      WHERE mint_tx_hash IS NOT NULL;
+
+      CREATE UNIQUE INDEX IF NOT EXISTS
+        nft_weekly_recipients_nftoken_id_uidx
+      ON nft_weekly_recipients (nftoken_id)
+      WHERE nftoken_id IS NOT NULL;
+
+      CREATE TABLE IF NOT EXISTS nft_weekly_public_copies (
+        id BIGSERIAL PRIMARY KEY,
+        drop_id BIGINT NOT NULL UNIQUE
+          REFERENCES nft_weekly_drops(id)
+          ON DELETE CASCADE,
+        destination TEXT NOT NULL DEFAULT 'monolith_public',
+        mint_status TEXT NOT NULL DEFAULT 'pending',
+        mint_tx_hash TEXT,
+        nftoken_id TEXT,
+        mint_attempts INTEGER NOT NULL DEFAULT 0,
+        mint_error TEXT,
+        minted_at TIMESTAMPTZ,
+        monolith_listing_id TEXT,
+        monolith_listing_status TEXT,
+        authorization_tx_hash TEXT,
+        offer_index TEXT,
+        listed_at TIMESTAMPTZ
+      );
+
+      CREATE UNIQUE INDEX IF NOT EXISTS
+        nft_weekly_public_copies_mint_tx_hash_uidx
+      ON nft_weekly_public_copies (mint_tx_hash)
+      WHERE mint_tx_hash IS NOT NULL;
+
+      CREATE UNIQUE INDEX IF NOT EXISTS
+        nft_weekly_public_copies_nftoken_id_uidx
+      ON nft_weekly_public_copies (nftoken_id)
+      WHERE nftoken_id IS NOT NULL;
     `);
   }
 
@@ -657,6 +726,46 @@ function createWeeklyRouter({ pool }) {
 
       const dropId = drop.rows[0].id;
 
+      const mintActivity = await client.query(`
+        SELECT EXISTS (
+          SELECT 1
+          FROM nft_weekly_recipients
+          WHERE
+            drop_id = $1
+            AND (
+              mint_attempts > 0
+              OR mint_tx_hash IS NOT NULL
+              OR nftoken_id IS NOT NULL
+              OR minted_at IS NOT NULL
+              OR mint_status <> 'pending'
+            )
+        )
+        OR EXISTS (
+          SELECT 1
+          FROM nft_weekly_public_copies
+          WHERE
+            drop_id = $1
+            AND (
+              mint_attempts > 0
+              OR mint_tx_hash IS NOT NULL
+              OR nftoken_id IS NOT NULL
+              OR minted_at IS NOT NULL
+              OR mint_status <> 'pending'
+            )
+        ) AS locked
+      `, [dropId]);
+
+      if (mintActivity.rows[0].locked) {
+        await client.query("ROLLBACK");
+
+        return res
+          .status(409)
+          .type("text/plain")
+          .send(
+            "This drop already has mint activity and cannot be re-frozen."
+          );
+      }
+
       await client.query(`
         DELETE FROM nft_weekly_recipients
         WHERE drop_id = $1
@@ -696,6 +805,15 @@ function createWeeklyRouter({ pool }) {
           row.email
         ]);
       }
+
+      await client.query(`
+        INSERT INTO nft_weekly_public_copies (
+          drop_id
+        )
+        VALUES ($1)
+        ON CONFLICT (drop_id)
+        DO NOTHING
+      `, [dropId]);
 
       await client.query("COMMIT");
 
