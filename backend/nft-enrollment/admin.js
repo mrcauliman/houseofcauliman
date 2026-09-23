@@ -189,7 +189,7 @@ function createAdminRouter({ pool, sendConfirmationEmail }) {
     }).join("");
 
     const walletChangeRows = walletChanges.rows.map(r => `
-      <div class="person">
+      <div class="person wallet-change-row">
 
         <div>
           ${badge("PENDING", "warn")}

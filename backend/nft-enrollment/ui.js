@@ -275,6 +275,25 @@ textarea:focus{
   border-top:0;
 }
 
+.wallet-change-row{
+  grid-template-columns:92px minmax(160px,.8fr) minmax(360px,2fr) 130px;
+  gap:20px;
+  align-items:start;
+}
+
+.wallet-change-row > div:first-child{
+  padding-top:2px;
+}
+
+.wallet-change-row .wallet-block{
+  min-width:0;
+}
+
+.wallet-change-row .control-block{
+  min-width:120px;
+}
+
+
 .handle{
   font-size:16px;
   font-weight:800;
@@ -384,6 +403,23 @@ a{
   .person .wallet-block,
   .person .control-block{
     grid-column:2;
+  }
+
+  .wallet-change-row{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+
+  .wallet-change-row > div,
+  .wallet-change-row .wallet-block,
+  .wallet-change-row .control-block{
+    grid-column:1;
+  }
+
+  .wallet-change-row .control-block{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
   }
   .btn{
     width:100%;
