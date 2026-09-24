@@ -67,6 +67,10 @@ function createWeeklyRouter({ pool }) {
         mint_attempts INTEGER NOT NULL DEFAULT 0,
         mint_error TEXT,
         minted_at TIMESTAMPTZ,
+        claim_offer_id TEXT,
+        claim_offer_status TEXT NOT NULL DEFAULT 'pending',
+        claim_created_at TIMESTAMPTZ,
+        claim_accepted_at TIMESTAMPTZ,
         UNIQUE(drop_id, registration_id)
       );
 
@@ -93,6 +97,19 @@ function createWeeklyRouter({ pool }) {
       ALTER TABLE nft_weekly_recipients
         ADD COLUMN IF NOT EXISTS
           minted_at TIMESTAMPTZ;
+
+      ALTER TABLE nft_weekly_recipients
+        ADD COLUMN IF NOT EXISTS claim_offer_id TEXT;
+
+      ALTER TABLE nft_weekly_recipients
+        ADD COLUMN IF NOT EXISTS
+          claim_offer_status TEXT NOT NULL DEFAULT 'pending';
+
+      ALTER TABLE nft_weekly_recipients
+        ADD COLUMN IF NOT EXISTS claim_created_at TIMESTAMPTZ;
+
+      ALTER TABLE nft_weekly_recipients
+        ADD COLUMN IF NOT EXISTS claim_accepted_at TIMESTAMPTZ;
 
       CREATE UNIQUE INDEX IF NOT EXISTS
         nft_weekly_recipients_mint_tx_hash_uidx
