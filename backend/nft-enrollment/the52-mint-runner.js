@@ -62,6 +62,39 @@ const pool = new Pool({
 
 
 
+
+async function dryRun(dropDate, metadataUri) {
+  const recipients = await pool.query(`
+    SELECT
+      id,
+      x_handle,
+      xrpl_address
+    FROM nft_subscriber_registrations
+    WHERE eligible_week <= $1
+      AND status <> 'excluded'
+    ORDER BY x_handle
+  `, [dropDate]);
+
+  console.log(`THE 52 DRY RUN`);
+  console.log(`Drop date: ${dropDate}`);
+  console.log(`Issuer: ${ISSUER}`);
+  console.log(`Taxon: ${TAXON}`);
+  console.log(`Flags: ${FLAGS}`);
+  console.log(`TransferFee: ${TRANSFER_FEE}`);
+  console.log(`Metadata: ${metadataUri}`);
+  console.log(`Subscribers: ${recipients.rowCount}`);
+  console.log(`Public copies: 1`);
+  console.log(`Expected total mints: ${recipients.rowCount + 1}`);
+
+  for (const r of recipients.rows) {
+    console.log(
+      `SUBSCRIBER ${r.id} ${r.x_handle} -> ${r.xrpl_address}`
+    );
+  }
+
+  console.log(`PUBLIC -> issuer retained for MONOLITH`);
+}
+
 async function preview(dropDate) {
   const recipients = await pool.query(`
     SELECT
@@ -142,7 +175,20 @@ async function status(dropId) {
   const command = process.argv[2];
   const dropId = Number(process.argv[3]);
 
-  if (command === "preview") {
+  if (command === "dry-run") {
+    const dropDate = process.argv[3];
+    const metadataUri = process.argv[4];
+
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(dropDate || "")) {
+      throw new Error("Invalid drop date");
+    }
+
+    if (!metadataUri || !metadataUri.startsWith("ipfs://")) {
+      throw new Error("Metadata URI must be ipfs://...");
+    }
+
+    await dryRun(dropDate, metadataUri);
+  } else if (command === "preview") {
     const dropDate = process.argv[3];
 
     if (!/^\d{4}-\d{2}-\d{2}$/.test(dropDate || "")) {
@@ -156,7 +202,7 @@ async function status(dropId) {
     await status(dropId);
   } else {
     console.log(
-      "Usage: node the52-mint-runner.js preview YYYY-MM-DD | status <drop_id>"
+      "Usage: node the52-mint-runner.js dry-run YYYY-MM-DD ipfs://CID | preview YYYY-MM-DD | status <drop_id>"
     );
     process.exit(1);
   }
