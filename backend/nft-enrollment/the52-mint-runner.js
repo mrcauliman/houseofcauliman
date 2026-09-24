@@ -61,6 +61,33 @@ const pool = new Pool({
 });
 
 
+
+async function preview(dropDate) {
+  const recipients = await pool.query(`
+    SELECT
+      id,
+      x_handle,
+      xrpl_address,
+      eligible_week,
+      status
+    FROM nft_subscriber_registrations
+    WHERE eligible_week <= $1
+      AND status <> 'excluded'
+    ORDER BY x_handle
+  `, [dropDate]);
+
+  console.log(`Preview date: ${dropDate}`);
+  console.log(`Eligible subscribers: ${recipients.rowCount}`);
+
+  for (const r of recipients.rows) {
+    console.log(
+      `${r.id} ${r.x_handle} ${r.xrpl_address}`
+    );
+  }
+
+  console.log(`Expected total mints: ${recipients.rowCount + 1}`);
+}
+
 async function status(dropId) {
   const drop = await pool.query(
     "SELECT * FROM nft_weekly_drops WHERE id=$1",
@@ -115,18 +142,26 @@ async function status(dropId) {
   const command = process.argv[2];
   const dropId = Number(process.argv[3]);
 
-  if (command !== "status" || !Number.isInteger(dropId)) {
+  if (command === "preview") {
+    const dropDate = process.argv[3];
+
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(dropDate || "")) {
+      throw new Error(
+        "Usage: node the52-mint-runner.js preview YYYY-MM-DD"
+      );
+    }
+
+    await preview(dropDate);
+  } else if (command === "status" && Number.isInteger(dropId)) {
+    await status(dropId);
+  } else {
     console.log(
-      "Usage: node the52-mint-runner.js status <drop_id>"
+      "Usage: node the52-mint-runner.js preview YYYY-MM-DD | status <drop_id>"
     );
     process.exit(1);
   }
 
-  try {
-    await status(dropId);
-  } finally {
-    await pool.end();
-  }
+  await pool.end();
 })().catch(error => {
   console.error("ERROR:", error.message);
   process.exit(1);
