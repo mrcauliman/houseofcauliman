@@ -521,6 +521,169 @@ async function mintNext(dropId) {
 
 
 
+
+
+async function mintAll(dropId) {
+  await getDrop(dropId);
+
+  let completed = 0;
+
+  while (true) {
+    const remainingRecipients = await pool.query(`
+      SELECT count(*)::int AS count
+      FROM nft_weekly_recipients
+      WHERE drop_id=$1
+        AND mint_status <> 'minted'
+    `, [dropId]);
+
+    const remainingPublic = await pool.query(`
+      SELECT count(*)::int AS count
+      FROM nft_weekly_public_copies
+      WHERE drop_id=$1
+        AND mint_status <> 'minted'
+    `, [dropId]);
+
+    const remaining =
+      remainingRecipients.rows[0].count +
+      remainingPublic.rows[0].count;
+
+    if (remaining === 0) {
+      console.log(`MINT ALL COMPLETE: ${completed} processed`);
+      return;
+    }
+
+    console.log(`MINT ALL: ${remaining} remaining`);
+    await mintNext(dropId);
+    completed++;
+  }
+}
+
+async function claimAll(dropId) {
+  await getDrop(dropId);
+
+  let completed = 0;
+
+  while (true) {
+    const remaining = await pool.query(`
+      SELECT count(*)::int AS count
+      FROM nft_weekly_recipients
+      WHERE drop_id=$1
+        AND mint_status='minted'
+        AND delivered=FALSE
+        AND xrpl_address <> $2
+        AND claim_offer_status <> 'open'
+        AND claim_offer_status <> 'accepted'
+    `, [dropId, ISSUER]);
+
+    if (remaining.rows[0].count === 0) {
+      console.log(`CLAIM ALL COMPLETE: ${completed} processed`);
+      return;
+    }
+
+    console.log(`CLAIM ALL: ${remaining.rows[0].count} remaining`);
+    await claimNext(dropId);
+    completed++;
+  }
+}
+
+async function accountOwnsNFToken(client, account, nftokenId) {
+  let marker = undefined;
+
+  do {
+    const request = {
+      command: "account_nfts",
+      account,
+      ledger_index: "validated",
+      limit: 400
+    };
+
+    if (marker) {
+      request.marker = marker;
+    }
+
+    const result = await client.request(request);
+
+    const found = (result.result.account_nfts || []).some(
+      nft => nft.NFTokenID === nftokenId
+    );
+
+    if (found) {
+      return true;
+    }
+
+    marker = result.result.marker;
+  } while (marker);
+
+  return false;
+}
+
+async function reconcileClaims(dropId) {
+  await getDrop(dropId);
+
+  const q = await pool.query(`
+    SELECT *
+    FROM nft_weekly_recipients
+    WHERE drop_id=$1
+      AND mint_status='minted'
+      AND delivered=FALSE
+      AND xrpl_address <> $2
+    ORDER BY id
+  `, [dropId, ISSUER]);
+
+  if (!q.rowCount) {
+    console.log("No subscriber deliveries need reconciliation");
+    return;
+  }
+
+  const client = new Client(XRPL_WS);
+  await client.connect();
+
+  let accepted = 0;
+  let pending = 0;
+
+  try {
+    for (const row of q.rows) {
+      if (!row.nftoken_id) {
+        console.log(`SKIP ${row.x_handle} missing NFTokenID`);
+        pending++;
+        continue;
+      }
+
+      const owns = await accountOwnsNFToken(
+        client,
+        row.xrpl_address,
+        row.nftoken_id
+      );
+
+      if (!owns) {
+        console.log(`PENDING ${row.x_handle}`);
+        pending++;
+        continue;
+      }
+
+      await pool.query(`
+        UPDATE nft_weekly_recipients
+        SET
+          delivered=TRUE,
+          claim_offer_status='accepted',
+          claim_accepted_at=COALESCE(claim_accepted_at, NOW()),
+          claim_error=NULL
+        WHERE id=$1
+      `, [row.id]);
+
+      console.log(`DELIVERED ${row.x_handle}`);
+      console.log(`NFT ${row.nftoken_id}`);
+      accepted++;
+    }
+  } finally {
+    await client.disconnect();
+  }
+
+  console.log(
+    `Reconciliation complete: accepted=${accepted} pending=${pending}`
+  );
+}
+
 async function dryRun(dropDate, metadataUri) {
   const recipients = await pool.query(`
     SELECT
@@ -595,7 +758,13 @@ async function status(dropId) {
       x_handle,
       xrpl_address,
       mint_status,
+      mint_tx_hash,
+      mint_error,
+      nftoken_id,
       claim_offer_status,
+      claim_offer_id,
+      claim_offer_tx_hash,
+      claim_error,
       delivered
     FROM nft_weekly_recipients
     WHERE drop_id=$1
@@ -608,25 +777,66 @@ async function status(dropId) {
     WHERE drop_id=$1
   `, [dropId]);
 
-  console.log(
-    `${drop.rows[0].drop_name} | ${drop.rows[0].drop_date}`
-  );
+  const rows = recipients.rows;
 
-  console.log(`Subscribers: ${recipients.rowCount}`);
+  const minted = rows.filter(r => r.mint_status === "minted").length;
+  const mintPending = rows.length - minted;
+  const delivered = rows.filter(r => r.delivered).length;
+  const openClaims = rows.filter(r => r.claim_offer_status === "open").length;
+  const acceptedClaims = rows.filter(r => r.claim_offer_status === "accepted").length;
+  const claimSubmitting = rows.filter(r => r.claim_offer_status === "submitting").length;
+  const mintErrors = rows.filter(r => r.mint_error).length;
+  const claimErrors = rows.filter(r => r.claim_error).length;
 
-  for (const r of recipients.rows) {
-    console.log(
-      `${r.id} ${r.x_handle} ${r.mint_status} ${r.claim_offer_status} delivered=${r.delivered}`
-    );
+  console.log("THE 52 DROP STATUS");
+  console.log(`${drop.rows[0].drop_name} | ${drop.rows[0].drop_date}`);
+  console.log(`Drop ID: ${dropId}`);
+  console.log(`Metadata: ${drop.rows[0].metadata_uri || "UNBOUND"}`);
+  console.log("");
+
+  console.log(`Subscribers: ${rows.length}`);
+  console.log(`Minted: ${minted}`);
+  console.log(`Mint pending: ${mintPending}`);
+  console.log(`Delivered: ${delivered}`);
+  console.log(`Open claims: ${openClaims}`);
+  console.log(`Accepted claims: ${acceptedClaims}`);
+  console.log(`Claim submitting: ${claimSubmitting}`);
+  console.log(`Mint errors: ${mintErrors}`);
+  console.log(`Claim errors: ${claimErrors}`);
+
+  if (publicCopy.rowCount) {
+    const pub = publicCopy.rows[0];
+    console.log("");
+    console.log("PUBLIC MONOLITH COPY");
+    console.log(`Mint status: ${pub.mint_status}`);
+    console.log(`NFTokenID: ${pub.nftoken_id || "pending"}`);
+    console.log(`Mint tx: ${pub.mint_tx_hash || "pending"}`);
+    console.log(`Listing status: ${pub.monolith_listing_status || "pending"}`);
+    console.log(`Listing ID: ${pub.monolith_listing_id || "pending"}`);
+  } else {
+    console.log("");
+    console.log("PUBLIC MONOLITH COPY: missing");
   }
 
-  console.log(
-    `Public copy: ${
-      publicCopy.rowCount
-        ? publicCopy.rows[0].mint_status
-        : "missing"
-    }`
+  const problemRows = rows.filter(
+    r =>
+      r.mint_error ||
+      r.claim_error ||
+      r.mint_status === "submitting" ||
+      r.claim_offer_status === "submitting"
   );
+
+  if (problemRows.length) {
+    console.log("");
+    console.log("ATTENTION");
+    for (const r of problemRows) {
+      console.log(
+        `${r.id} ${r.x_handle} mint=${r.mint_status} claim=${r.claim_offer_status} delivered=${r.delivered}`
+      );
+      if (r.mint_error) console.log(`  mint_error: ${r.mint_error}`);
+      if (r.claim_error) console.log(`  claim_error: ${r.claim_error}`);
+    }
+  }
 }
 
 (async () => {
@@ -662,11 +872,27 @@ async function status(dropId) {
     await bindMetadata(dropId, process.argv[4]);
   } else if (command === "mint-next" && Number.isInteger(dropId)) {
     await mintNext(dropId);
+  } else if (command === "mint-all" && Number.isInteger(dropId)) {
+    if (process.argv[4] !== "CONFIRM_LIVE_MINT") {
+      throw new Error(
+        "mint-all requires CONFIRM_LIVE_MINT as the final argument"
+      );
+    }
+    await mintAll(dropId);
   } else if (command === "claim-next" && Number.isInteger(dropId)) {
     await claimNext(dropId);
+  } else if (command === "claim-all" && Number.isInteger(dropId)) {
+    if (process.argv[4] !== "CONFIRM_LIVE_CLAIMS") {
+      throw new Error(
+        "claim-all requires CONFIRM_LIVE_CLAIMS as the final argument"
+      );
+    }
+    await claimAll(dropId);
+  } else if (command === "reconcile-claims" && Number.isInteger(dropId)) {
+    await reconcileClaims(dropId);
   } else {
     console.log(
-      "Usage: node the52-mint-runner.js dry-run YYYY-MM-DD ipfs://CID | preview YYYY-MM-DD | status <drop_id>"
+      "Usage: node the52-mint-runner.js dry-run YYYY-MM-DD ipfs://CID | preview YYYY-MM-DD | status <drop_id> | bind-metadata <drop_id> ipfs://CID | mint-next <drop_id> | mint-all <drop_id> CONFIRM_LIVE_MINT | claim-next <drop_id> | claim-all <drop_id> CONFIRM_LIVE_CLAIMS | reconcile-claims <drop_id>"
     );
     process.exit(1);
   }
