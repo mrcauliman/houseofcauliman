@@ -50,6 +50,9 @@ function createWeeklyRouter({ pool }) {
         frozen_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       );
 
+      ALTER TABLE nft_weekly_drops
+        ADD COLUMN IF NOT EXISTS metadata_uri TEXT;
+
       CREATE TABLE IF NOT EXISTS nft_weekly_recipients (
         id BIGSERIAL PRIMARY KEY,
         drop_id BIGINT NOT NULL
@@ -68,7 +71,10 @@ function createWeeklyRouter({ pool }) {
         mint_error TEXT,
         minted_at TIMESTAMPTZ,
         claim_offer_id TEXT,
+        claim_offer_tx_hash TEXT,
         claim_offer_status TEXT NOT NULL DEFAULT 'pending',
+        claim_attempts INTEGER NOT NULL DEFAULT 0,
+        claim_error TEXT,
         claim_created_at TIMESTAMPTZ,
         claim_accepted_at TIMESTAMPTZ,
         UNIQUE(drop_id, registration_id)
@@ -100,6 +106,16 @@ function createWeeklyRouter({ pool }) {
 
       ALTER TABLE nft_weekly_recipients
         ADD COLUMN IF NOT EXISTS claim_offer_id TEXT;
+
+      ALTER TABLE nft_weekly_recipients
+        ADD COLUMN IF NOT EXISTS claim_offer_tx_hash TEXT;
+
+      ALTER TABLE nft_weekly_recipients
+        ADD COLUMN IF NOT EXISTS
+          claim_attempts INTEGER NOT NULL DEFAULT 0;
+
+      ALTER TABLE nft_weekly_recipients
+        ADD COLUMN IF NOT EXISTS claim_error TEXT;
 
       ALTER TABLE nft_weekly_recipients
         ADD COLUMN IF NOT EXISTS

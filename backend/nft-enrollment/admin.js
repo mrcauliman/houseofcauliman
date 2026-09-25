@@ -76,14 +76,14 @@ function createAdminRouter({ pool, sendConfirmationEmail }) {
         ? badge("Email sent", "good")
         : badge("No email", "neutral");
 
-      const xStatus = r.subscription_verified
-        ? badge("𝕏 verified", "good")
-        : badge("𝕏 pending", "warn");
-
-      const walletStatus = r.wallet_verified
-        ? badge("Wallet verified", "good")
-        : badge("Wallet pending", "warn");
-
+      const registrationStatus =
+        r.status === "active"
+          ? badge("Active", "good")
+          : r.status === "excluded"
+          ? badge("Excluded", "warn")
+          : r.status === "inactive"
+          ? badge("Inactive", "warn")
+          : badge("Pending", "neutral");
 
       return `
         <div class="person">
@@ -111,8 +111,7 @@ function createAdminRouter({ pool, sendConfirmationEmail }) {
 
             <div style="margin-top:9px;display:flex;gap:6px;flex-wrap:wrap">
               ${emailStatus}
-              ${xStatus}
-              ${walletStatus}
+              ${registrationStatus}
             </div>
 
             <div class="small" style="margin-top:9px">
@@ -128,60 +127,9 @@ function createAdminRouter({ pool, sendConfirmationEmail }) {
           </div>
 
           <div class="control-block">
-
-            <form method="post" action="/admin/${r.id}">
-
-              <div class="toggle-row">
-                <span>𝕏 verified</span>
-
-                <label class="switch">
-                  <input
-                    type="checkbox"
-                    name="subscription_verified"
-                    ${r.subscription_verified ? "checked" : ""}
-                  >
-                  <span class="slider"></span>
-                </label>
-              </div>
-
-              <div class="toggle-row">
-                <span>Wallet verified</span>
-
-                <label class="switch">
-                  <input
-                    type="checkbox"
-                    name="wallet_verified"
-                    ${r.wallet_verified ? "checked" : ""}
-                  >
-                  <span class="slider"></span>
-                </label>
-              </div>
-
-
-              <div style="margin:10px 0">
-                <select name="status">
-                  ${[
-                    "pending",
-                    "active",
-                    "inactive",
-                    "excluded"
-                  ].map(s => `
-                    <option
-                      value="${s}"
-                      ${r.status === s ? "selected" : ""}
-                    >
-                      ${s}
-                    </option>
-                  `).join("")}
-                </select>
-              </div>
-
-              <button class="btn primary" type="submit">
-                SAVE
-              </button>
-
-            </form>
-
+            <div class="small">
+              Managed through weekly subscriber reconciliation
+            </div>
           </div>
 
         </div>
