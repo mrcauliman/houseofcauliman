@@ -4,6 +4,7 @@ const rateLimit = require("express-rate-limit");
 const { createAdminRouter } = require("./admin");
 const { createWeeklyRouter } = require("./weekly");
 const { createAdminAuth } = require("./admin-auth");
+const { createHolderAuth } = require("./holder-auth");
 const { Pool } = require("pg");
 const { DateTime } = require("luxon");
 const { isValidClassicAddress } = require("ripple-address-codec");
@@ -54,12 +55,13 @@ app.use((req, res, next) => {
 
   if (origin && ALLOWED_ORIGINS.has(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
+    res.setHeader("Access-Control-Allow-Credentials", "true");
     res.setHeader("Vary", "Origin");
   }
 
   res.setHeader(
     "Access-Control-Allow-Headers",
-    "Content-Type"
+    "Content-Type, X-HOC-CSRF"
   );
 
   res.setHeader(
@@ -746,6 +748,10 @@ app.post("/register", registrationLimiter, async (req, res) => {
     });
   }
 });
+
+const holderAuth = createHolderAuth({ pool });
+
+app.use("/holder", holderAuth.router);
 
 const adminAuth = createAdminAuth({ pool });
 
