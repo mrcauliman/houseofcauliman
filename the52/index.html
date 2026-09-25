@@ -209,6 +209,18 @@ a{color:inherit;text-decoration:none}
 <div class="drop-banner" style="border-color:rgba(87,169,255,.45);color:#cfe7ff;">
   𝕏 SUBSCRIBERS · REGISTER YOUR XAMAN WALLET BEFORE SATURDAY 11:59 PM PACIFIC
 </div>
+<div id="walletBar" style="max-width:620px;margin:0 auto 22px;text-align:center;">
+  <a id="walletConnect"
+     class="back-btn"
+     href="https://api.houseofcauliman.com/holder/auth/start?return=/the52/">
+    Connect Xaman
+  </a>
+  <div id="walletStatus"
+       style="margin-top:8px;font-size:.72rem;color:var(--muted);">
+    Connect your XRPL wallet to verify THE 52 ownership.
+  </div>
+</div>
+
 <section class="grid" id="grid"></section>
 </main>
 <div id="modal">
@@ -235,7 +247,38 @@ const characters = [
   "The One Who Sold Early","The Legend"
 ];
 
+const API = "https://api.houseofcauliman.com";
 const grid = document.getElementById("grid");
+const walletConnect = document.getElementById("walletConnect");
+const walletStatus = document.getElementById("walletStatus");
+
+async function loadWalletState(){
+  try{
+    const response = await fetch(`${API}/holder/me`, {
+      credentials:"include"
+    });
+
+    if(!response.ok) return;
+
+    const data = await response.json();
+
+    if(data.signedIn){
+      const a = data.xrplAddress || "";
+      const short = a.length > 12
+        ? `${a.slice(0,6)}…${a.slice(-6)}`
+        : a;
+
+      walletConnect.textContent = "Wallet Connected";
+      walletConnect.removeAttribute("href");
+      walletConnect.style.cursor = "default";
+      walletStatus.textContent = `XRPL ${short}`;
+    }
+  }catch(error){
+    console.warn("Holder session unavailable");
+  }
+}
+
+loadWalletState();
 
 characters.forEach((name,index)=>{
   const num = String(index + 1).padStart(2,"0");
