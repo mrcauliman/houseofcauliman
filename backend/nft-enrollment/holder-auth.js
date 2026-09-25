@@ -109,6 +109,19 @@ function createHolderAuth({ pool }) {
           expires_at
         )
         WHERE revoked_at IS NULL;
+
+        CREATE TABLE IF NOT EXISTS the52_release_state (
+          card_number TEXT PRIMARY KEY,
+          released BOOLEAN NOT NULL DEFAULT FALSE,
+          released_at TIMESTAMPTZ
+        );
+
+        INSERT INTO the52_release_state (
+          card_number,
+          released
+        )
+        VALUES ('01', FALSE)
+        ON CONFLICT (card_number) DO NOTHING;
       `).catch(error => {
         initPromise = null;
         throw error;
@@ -630,6 +643,54 @@ function createHolderAuth({ pool }) {
           ok: false,
           error:
             "Holder authentication unavailable"
+        });
+      }
+    }
+  );
+
+  router.get(
+    "/the52/:card/release",
+    async (req, res) => {
+      try {
+        await ensureTables();
+
+        const cardNumber =
+          String(req.params.card || "")
+            .padStart(2, "0");
+
+        const card = THE52_CARDS[cardNumber];
+
+        if (!card) {
+          return res.status(404).json({
+            ok: false,
+            error: "THE 52 card is not available."
+          });
+        }
+
+        const result = await pool.query(`
+          SELECT released, released_at
+          FROM the52_release_state
+          WHERE card_number = $1
+          LIMIT 1
+        `, [cardNumber]);
+
+        const row = result.rows[0] || {};
+
+        res.setHeader("Cache-Control", "no-store");
+
+        return res.json({
+          ok: true,
+          card: cardNumber,
+          name: card.name,
+          released: row.released === true,
+          releasedAt: row.released_at || null
+        });
+      } catch (error) {
+        console.error("THE 52 release lookup failed", error);
+
+        return res.status(503).json({
+          ok: false,
+          error: "Release state unavailable"
         });
       }
     }
