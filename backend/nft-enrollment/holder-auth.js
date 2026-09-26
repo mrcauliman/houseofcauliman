@@ -320,9 +320,15 @@ function createHolderAuth({ pool }) {
 
         await ensureTables();
 
+        const requestedReturn =
+          String(req.query.return || "");
+
         const returnPath =
-          String(req.query.return || "") === "/the52/"
-            ? "/the52/"
+          [
+            "/the52/",
+            "/the52/builder/"
+          ].includes(requestedReturn)
+            ? requestedReturn
             : "/the52/";
 
         await pool.query(`
@@ -932,9 +938,65 @@ function createHolderAuth({ pool }) {
     }
   );
 
+  async function verifyBuilderOwner(account) {
+    await ensureTables();
+
+    const card = THE52_CARDS["01"];
+
+    const release = await pool.query(`
+      SELECT released
+      FROM the52_release_state
+      WHERE card_number = '01'
+      LIMIT 1
+    `);
+
+    if (release.rows[0]?.released !== true) {
+      return {
+        released: false,
+        owner: false,
+        mintedSupply: 0,
+        ownedTokenIds: []
+      };
+    }
+
+    const tokenIds = await getCardTokenIds(card);
+
+    const ownedTokenIds =
+      await accountOwnedTokenIds(
+        account,
+        tokenIds
+      );
+
+    return {
+      released: true,
+      owner: ownedTokenIds.length > 0,
+      mintedSupply: tokenIds.length,
+      ownedCount: ownedTokenIds.length,
+      ownedTokenIds
+    };
+  }
+
+  function verifyCsrf(req, session) {
+    if (!session?.csrfToken) {
+      return false;
+    }
+
+    const supplied =
+      String(
+        req.headers["x-hoc-csrf"] || ""
+      );
+
+    return safeEqual(
+      supplied,
+      session.csrfToken
+    );
+  }
+
   return {
     router,
-    getSession
+    getSession,
+    verifyBuilderOwner,
+    verifyCsrf
   };
 }
 
