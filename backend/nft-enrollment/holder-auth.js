@@ -24,6 +24,13 @@ const THE52_CARDS = {
   }
 };
 
+const THE52_PRIVATE_MEDIA = {
+  "01": "/opt/house-the52-private/01/THE52_01_The_Builder_MASTER.png"
+};
+
+const MONOLITH_MARKET_URL =
+  "https://monolithxrpl.com/nft-market/";
+
 function parseCookies(header) {
   const out = {};
 
@@ -678,12 +685,50 @@ function createHolderAuth({ pool }) {
 
         res.setHeader("Cache-Control", "no-store");
 
+        const released = row.released === true;
+
+        if (!released) {
+          return res.json({
+            ok: true,
+            card: cardNumber,
+            name: card.name,
+            released: false,
+            releasedAt: null
+          });
+        }
+
+        const tokenIds = await getCardTokenIds(card);
+
+        const listingResult = await pool.query(`
+          SELECT
+            p.monolith_listing_id,
+            p.monolith_listing_status
+          FROM nft_weekly_public_copies p
+          JOIN nft_weekly_drops d
+            ON d.id = p.drop_id
+          WHERE d.drop_date = $1
+          ORDER BY p.id DESC
+          LIMIT 1
+        `, [card.dropDate]);
+
+        const listing = listingResult.rows[0] || {};
+        const listingActive =
+          listing.monolith_listing_status === "active";
+
         return res.json({
           ok: true,
           card: cardNumber,
           name: card.name,
-          released: row.released === true,
-          releasedAt: row.released_at || null
+          released: true,
+          releasedAt: row.released_at || null,
+          mintedSupply: tokenIds.length,
+          imageUrl:
+            `${API_ORIGIN}/holder/the52/${cardNumber}/media`,
+          monolith: {
+            active: listingActive,
+            listingId: listing.monolith_listing_id || null,
+            url: listingActive ? MONOLITH_MARKET_URL : null
+          }
         });
       } catch (error) {
         console.error("THE 52 release lookup failed", error);
@@ -692,6 +737,48 @@ function createHolderAuth({ pool }) {
           ok: false,
           error: "Release state unavailable"
         });
+      }
+    }
+  );
+
+  router.get(
+    "/the52/:card/media",
+    async (req, res) => {
+      try {
+        await ensureTables();
+
+        const cardNumber =
+          String(req.params.card || "").padStart(2, "0");
+
+        const card = THE52_CARDS[cardNumber];
+        const mediaPath = THE52_PRIVATE_MEDIA[cardNumber];
+
+        if (!card || !mediaPath) {
+          return res.sendStatus(404);
+        }
+
+        const result = await pool.query(`
+          SELECT released
+          FROM the52_release_state
+          WHERE card_number = $1
+          LIMIT 1
+        `, [cardNumber]);
+
+        if (result.rows[0]?.released !== true) {
+          return res.sendStatus(404);
+        }
+
+        res.setHeader("Cache-Control", "public, max-age=3600");
+
+        return res.sendFile(mediaPath, error => {
+          if (error && !res.headersSent) {
+            console.error("THE 52 media send failed", error);
+            res.sendStatus(404);
+          }
+        });
+      } catch (error) {
+        console.error("THE 52 media lookup failed", error);
+        return res.sendStatus(503);
       }
     }
   );
@@ -728,6 +815,24 @@ function createHolderAuth({ pool }) {
             ok: false,
             error:
               "THE 52 card is not available."
+          });
+        }
+
+        const releaseResult = await pool.query(`
+          SELECT released
+          FROM the52_release_state
+          WHERE card_number = $1
+          LIMIT 1
+        `, [cardNumber]);
+
+        if (releaseResult.rows[0]?.released !== true) {
+          return res.json({
+            ok: true,
+            signedIn: true,
+            card: cardNumber,
+            name: card.name,
+            released: false,
+            owner: false
           });
         }
 
