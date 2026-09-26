@@ -190,6 +190,102 @@ a{color:inherit;text-decoration:none}
   font-size:.78rem;
   line-height:1.6;
 }
+
+.card-art{
+  width:100%;
+  display:block;
+  border-radius:12px;
+}
+
+.card.released{
+  border-color:rgba(212,164,74,.65);
+}
+
+.card.released .price{
+  color:#f0cc78;
+}
+
+.holder-panel{
+  margin-top:14px;
+  padding:14px;
+  border:1px solid rgba(87,169,255,.35);
+  border-radius:14px;
+  background:rgba(87,169,255,.06);
+}
+
+.holder-title{
+  font-size:.72rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:#cfe7ff;
+  font-weight:700;
+  text-align:center;
+}
+
+.holder-copy{
+  margin-top:8px;
+  color:var(--muted);
+  font-size:.78rem;
+  line-height:1.6;
+  text-align:center;
+}
+
+.holder-grid{
+  display:grid;
+  gap:8px;
+  margin-top:12px;
+}
+
+.holder-item{
+  padding:10px 12px;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:10px;
+  background:rgba(255,255,255,.03);
+}
+
+.holder-item strong{
+  display:block;
+  margin-bottom:3px;
+  color:var(--text);
+  font-size:.74rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.holder-item span{
+  color:var(--muted);
+  font-size:.72rem;
+  line-height:1.45;
+}
+
+.modal-stats{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+
+.stat-pill{
+  padding:6px 10px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:999px;
+  font-size:.66rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+.modal-btn.disabled{
+  opacity:.45;
+  pointer-events:none;
+}
+
+@media(max-width:560px){
+  .modal-actions{
+    flex-direction:column;
+  }
+}
 .modal-btn{
   flex:1;
   padding:10px;
@@ -253,7 +349,20 @@ a{color:inherit;text-decoration:none}
     <div class="modal-title" id="modalTitle"></div>
     <div id="modalRelease"></div>
     <div class="modal-actions">
-      <a class="modal-btn" href="/nft-enrollment/">Subscriber Enrollment</a>
+      <a class="modal-btn"
+         id="modalPrimary"
+         href="/nft-enrollment/">
+        Subscriber Enrollment
+      </a>
+
+      <a class="modal-btn disabled"
+         id="modalTrade"
+         href="#"
+         target="_blank"
+         rel="noopener">
+        Trade on MONOLITH
+      </a>
+
       <div class="modal-btn" onclick="closeModal()">Close</div>
     </div>
   </div>
@@ -273,6 +382,21 @@ const characters = [
 ];
 
 const API = "https://api.houseofcauliman.com";
+
+const collectionState = {
+  wallet: null,
+  builder: {
+    released: false,
+    releasedAt: null,
+    mintedSupply: 0,
+    imageUrl: null,
+    monolith: {
+      active: false,
+      url: null
+    }
+  }
+};
+
 const grid = document.getElementById("grid");
 const walletConnect = document.getElementById("walletConnect");
 const walletStatus = document.getElementById("walletStatus");
@@ -288,6 +412,8 @@ async function loadWalletState(){
     const data = await response.json();
 
     if(data.signedIn){
+      collectionState.wallet = data;
+
       const a = data.xrplAddress || "";
       const short = a.length > 12
         ? `${a.slice(0,6)}…${a.slice(-6)}`
@@ -303,8 +429,6 @@ async function loadWalletState(){
   }
 }
 
-loadWalletState();
-
 characters.forEach((name,index)=>{
   const num = String(index + 1).padStart(2,"0");
   const state = index === 0
@@ -314,7 +438,7 @@ characters.forEach((name,index)=>{
       : "LOCKED";
 
   grid.insertAdjacentHTML("beforeend",`
-    <div class="card" data-index="${index}">
+    <div class="card" data-index="${index}" id="card-${num}">
       ${placeholderHTML(num,name,state)}
       <div class="meta">${num} — ${name}</div>
       <div class="price">${state}</div>
@@ -322,6 +446,297 @@ characters.forEach((name,index)=>{
     </div>
   `);
 });
+
+async function loadBuilderRelease(){
+  try{
+    const response = await fetch(
+      `${API}/holder/the52/01/release`,
+      {
+        credentials:"include",
+        cache:"no-store"
+      }
+    );
+
+    if(!response.ok) return;
+
+    const data = await response.json();
+
+    collectionState.builder = {
+      released: data.released === true,
+      releasedAt: data.releasedAt || null,
+      mintedSupply: Number(data.mintedSupply || 0),
+      imageUrl: data.imageUrl || null,
+      monolith: data.monolith || {
+        active:false,
+        url:null
+      }
+    };
+
+    if(collectionState.builder.released){
+      renderReleasedBuilderCard();
+    }
+  }catch(error){
+    console.warn("Builder release state unavailable");
+  }
+}
+
+function renderReleasedBuilderCard(){
+  const card = document.getElementById("card-01");
+  if(!card) return;
+
+  const b = collectionState.builder;
+
+  card.classList.add("released");
+
+  const visual = card.querySelector(".placeholder");
+
+  if(visual && b.imageUrl){
+    visual.outerHTML =
+      `<img class="card-art"
+            src="${b.imageUrl}"
+            alt="01 THE BUILDER">`;
+  }
+
+  const price = card.querySelector(".price");
+  const edition = card.querySelector(".edition");
+
+  if(price){
+    price.textContent = "RELEASED";
+  }
+
+  if(edition){
+    edition.textContent =
+      b.mintedSupply > 0
+        ? `FINAL EDITION · ${b.mintedSupply} MINTED`
+        : "LIMITED WEEKLY EDITION";
+  }
+}
+
+async function loadBuilderOwnership(){
+  if(!collectionState.wallet){
+    return {
+      signedIn:false,
+      released:collectionState.builder.released,
+      owner:false
+    };
+  }
+
+  try{
+    const response = await fetch(
+      `${API}/holder/the52/01`,
+      {
+        credentials:"include",
+        cache:"no-store"
+      }
+    );
+
+    if(!response.ok){
+      return {
+        signedIn:false,
+        released:collectionState.builder.released,
+        owner:false
+      };
+    }
+
+    return await response.json();
+  }catch(error){
+    return {
+      signedIn:true,
+      released:collectionState.builder.released,
+      owner:false,
+      error:true
+    };
+  }
+}
+
+async function openBuilder(){
+  const b = collectionState.builder;
+
+  const media = document.getElementById("modalMedia");
+  const release = document.getElementById("modalRelease");
+  const primary = document.getElementById("modalPrimary");
+  const trade = document.getElementById("modalTrade");
+
+  document.getElementById("modalTitle").innerText =
+    "01 — The Builder";
+
+  trade.classList.add("disabled");
+  trade.href = "#";
+
+  if(!b.released){
+    media.innerHTML =
+      placeholderHTML(
+        "01",
+        "The Builder",
+        "FIRST DROP · SEP 27"
+      );
+
+    release.innerHTML = `
+      <div class="release-panel">
+        <div class="release-state">Not Yet Released</div>
+        <div class="release-copy">
+          01 THE BUILDER releases Sunday, September 27.
+          Holder verification and ownership utility activate after the drop.
+        </div>
+      </div>
+    `;
+
+    primary.textContent = "Subscriber Enrollment";
+    primary.href = "/nft-enrollment/";
+
+    document.getElementById("modal").classList.add("open");
+    return;
+  }
+
+  media.innerHTML = b.imageUrl
+    ? `<img class="card-art"
+             src="${b.imageUrl}"
+             alt="01 THE BUILDER">`
+    : placeholderHTML(
+        "01",
+        "The Builder",
+        "RELEASED"
+      );
+
+  release.innerHTML = `
+    <div class="release-panel">
+      <div class="release-state">Released</div>
+      <div class="release-copy">
+        The first card in THE 52.
+        A limited weekly XRPL collectible.
+      </div>
+      <div class="modal-stats">
+        <div class="stat-pill">
+          Card 01 of 52
+        </div>
+        <div class="stat-pill">
+          Final Supply ${b.mintedSupply}
+        </div>
+      </div>
+    </div>
+
+    <div class="holder-panel" id="builderHolder">
+      <div class="holder-title">
+        Checking Holder Access
+      </div>
+      <div class="holder-copy">
+        Verifying this wallet against current XRPL ownership.
+      </div>
+    </div>
+  `;
+
+  if(b.monolith?.active && b.monolith?.url){
+    trade.classList.remove("disabled");
+    trade.href = b.monolith.url;
+  }
+
+  primary.textContent =
+    collectionState.wallet
+      ? "Wallet Connected"
+      : "Connect Xaman";
+
+  primary.href =
+    collectionState.wallet
+      ? "#"
+      : `${API}/holder/auth/start?return=/the52/`;
+
+  document.getElementById("modal").classList.add("open");
+
+  const ownership = await loadBuilderOwnership();
+  renderBuilderHolderState(ownership);
+}
+
+function renderBuilderHolderState(data){
+  const panel =
+    document.getElementById("builderHolder");
+
+  if(!panel) return;
+
+  if(!collectionState.wallet || !data?.signedIn){
+    panel.innerHTML = `
+      <div class="holder-title">
+        Holder Access Locked
+      </div>
+      <div class="holder-copy">
+        Connect the XRPL wallet holding 01 THE BUILDER
+        to unlock the holder experience.
+      </div>
+    `;
+    return;
+  }
+
+  if(data.error){
+    panel.innerHTML = `
+      <div class="holder-title">
+        Verification Unavailable
+      </div>
+      <div class="holder-copy">
+        XRPL ownership could not be checked right now.
+        Try again shortly.
+      </div>
+    `;
+    return;
+  }
+
+  if(!data.owner){
+    panel.innerHTML = `
+      <div class="holder-title">
+        01 THE BUILDER Not Found
+      </div>
+      <div class="holder-copy">
+        This connected wallet does not currently hold
+        01 THE BUILDER.
+        Holder utility follows the NFT when ownership changes.
+      </div>
+    `;
+    return;
+  }
+
+  panel.innerHTML = `
+    <div class="holder-title">
+      Builder Holder Verified
+    </div>
+
+    <div class="holder-copy">
+      Current XRPL ownership confirmed.
+      This wallet has access to the 01 THE BUILDER holder area.
+    </div>
+
+    <div class="holder-grid">
+      <div class="holder-item">
+        <strong>Builder Drops</strong>
+        <span>
+          Holder-only Builder releases and claims appear here
+          when active.
+        </span>
+      </div>
+
+      <div class="holder-item">
+        <strong>Early Previews</strong>
+        <span>
+          Selected House build previews can be opened here
+          before public release.
+        </span>
+      </div>
+
+      <div class="holder-item">
+        <strong>Downloads</strong>
+        <span>
+          Builder-specific downloadable assets appear here
+          when released.
+        </span>
+      </div>
+
+      <div class="holder-item">
+        <strong>Ownership</strong>
+        <span>
+          Access follows current XRPL ownership of the NFT,
+          not the original recipient.
+        </span>
+      </div>
+    </div>
+  `;
+}
 
 grid.addEventListener("click", e=>{
   const card = e.target.closest(".card");
@@ -335,6 +750,11 @@ grid.addEventListener("click", e=>{
     : index === 1
       ? "UPCOMING"
       : "LOCKED";
+
+  if(num === "01"){
+    openBuilder();
+    return;
+  }
 
   openModal(num,name,state);
 });
@@ -358,18 +778,6 @@ function openModal(num,name,state){
   media.innerHTML = placeholderHTML(num,name,state);
   release.innerHTML = "";
 
-  if(num === "01"){
-    release.innerHTML = `
-      <div class="release-panel">
-        <div class="release-state">Not Yet Released</div>
-        <div class="release-copy">
-          01 THE BUILDER releases Sunday, September 27.
-          Holder verification and ownership utility activate after the drop.
-        </div>
-      </div>
-    `;
-  }
-
   document.getElementById("modal").classList.add("open");
 }
 
@@ -380,6 +788,15 @@ function closeModal(){
 document.getElementById("modal").onclick = e=>{
   if(e.target.id==="modal") closeModal();
 };
+
+async function boot(){
+  await Promise.all([
+    loadWalletState(),
+    loadBuilderRelease()
+  ]);
+}
+
+boot();
 </script>
 <footer class="hoc-standard-footer">
   <div>THE 52 · A House of Cauliman Project · XRPL Native</div>
