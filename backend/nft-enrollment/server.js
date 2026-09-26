@@ -5,7 +5,6 @@ const { createAdminRouter } = require("./admin");
 const { createWeeklyRouter } = require("./weekly");
 const { createAdminAuth } = require("./admin-auth");
 const { createHolderAuth } = require("./holder-auth");
-const { createBuilderAccess } = require("./builder-access");
 const { Pool } = require("pg");
 const { DateTime } = require("luxon");
 const { isValidClassicAddress } = require("ripple-address-codec");
@@ -752,20 +751,7 @@ app.post("/register", registrationLimiter, async (req, res) => {
 
 const holderAuth = createHolderAuth({ pool });
 
-const builderAccess = createBuilderAccess({
-  pool,
-  getSession: holderAuth.getSession,
-  verifyBuilderOwner:
-    holderAuth.verifyBuilderOwner,
-  verifyCsrf:
-    holderAuth.verifyCsrf
-});
-
 app.use("/holder", holderAuth.router);
-app.use(
-  "/holder/builder",
-  builderAccess.holderRouter
-);
 
 const adminAuth = createAdminAuth({ pool });
 
@@ -779,11 +765,6 @@ app.use(
 
 app.use("/admin", adminAuth.router);
 app.use("/admin", adminAuth.gate);
-
-app.use(
-  "/admin/builder",
-  builderAccess.adminRouter
-);
 
 app.use("/admin", createAdminRouter({ pool, sendConfirmationEmail }));
 
