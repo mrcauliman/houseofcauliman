@@ -523,6 +523,570 @@ async function mintNext(dropId) {
 
 
 
+
+const MONOLITH_NFT_MARKET_BASE = "https://monolithxrpl.com";
+
+async function monolithPost(path, body) {
+  const response = await fetch(
+    `${MONOLITH_NFT_MARKET_BASE}${path}`,
+    {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "accept": "application/json"
+      },
+      body: JSON.stringify(body)
+    }
+  );
+
+  let data = null;
+
+  try {
+    data = await response.json();
+  } catch (_) {
+    data = null;
+  }
+
+  if (!response.ok) {
+    const error = new Error(
+      `MONOLITH ${path} failed HTTP ${response.status}: ` +
+      `${data?.error || "unknown_error"}`
+    );
+
+    error.statusCode = response.status;
+    error.responseData = data;
+    throw error;
+  }
+
+  if (!data || data.ok !== true) {
+    throw new Error(
+      `MONOLITH ${path} returned invalid success response`
+    );
+  }
+
+  return data;
+}
+
+function decodeNftUri(uriHexValue) {
+  const value = String(uriHexValue || "").trim();
+
+  if (!value || !/^[0-9A-Fa-f]+$/.test(value) || value.length % 2 !== 0) {
+    return null;
+  }
+
+  try {
+    return Buffer.from(value, "hex").toString("utf8");
+  } catch (_) {
+    return null;
+  }
+}
+
+async function getOwnedNFToken(client, account, nftokenId) {
+  let marker = undefined;
+
+  do {
+    const request = {
+      command: "account_nfts",
+      account,
+      ledger_index: "validated",
+      limit: 400
+    };
+
+    if (marker) {
+      request.marker = marker;
+    }
+
+    const result = await client.request(request);
+
+    const found = (result.result.account_nfts || []).find(
+      nft => nft.NFTokenID === nftokenId
+    );
+
+    if (found) {
+      return found;
+    }
+
+    marker = result.result.marker;
+  } while (marker);
+
+  return null;
+}
+
+function printXamanApproval(label, payloadUuid, signUrl) {
+  console.log("");
+  console.log(label);
+  console.log(`Payload UUID: ${payloadUuid}`);
+
+  if (signUrl) {
+    console.log(`Xaman: ${signUrl}`);
+  }
+
+  console.log("");
+  console.log(
+    "Approve this exact request in Xaman, then rerun the same list-public command."
+  );
+}
+
+async function listPublic(dropId, usdInput) {
+  const drop = await getDrop(dropId);
+
+  const usdText = String(usdInput || "").trim();
+
+  if (!/^\d+(?:\.\d{1,2})?$/.test(usdText)) {
+    throw new Error(
+      "USD ask must be a positive dollar amount with at most 2 decimals"
+    );
+  }
+
+  const usdNumber = Number(usdText);
+  const askUsdCents = Math.round(usdNumber * 100);
+
+  if (
+    !Number.isFinite(usdNumber) ||
+    usdNumber <= 0 ||
+    !Number.isSafeInteger(askUsdCents) ||
+    askUsdCents <= 0
+  ) {
+    throw new Error("Invalid USD ask");
+  }
+
+  if (!drop.metadata_uri || !drop.metadata_uri.startsWith("ipfs://")) {
+    throw new Error("Drop metadata_uri is not bound");
+  }
+
+  const q = await pool.query(`
+    SELECT *
+    FROM nft_weekly_public_copies
+    WHERE drop_id=$1
+  `, [dropId]);
+
+  if (q.rowCount !== 1) {
+    throw new Error(
+      `Expected exactly one public-copy row for drop ${dropId}; found ${q.rowCount}`
+    );
+  }
+
+  let row = q.rows[0];
+
+  if (row.destination !== "monolith_public") {
+    throw new Error(
+      `Public copy destination is ${row.destination}; expected monolith_public`
+    );
+  }
+
+  if (row.mint_status !== "minted") {
+    throw new Error(
+      `Public copy is not minted; current mint_status=${row.mint_status}`
+    );
+  }
+
+  if (
+    !row.nftoken_id ||
+    !/^[0-9A-Fa-f]{64}$/.test(row.nftoken_id)
+  ) {
+    throw new Error("Public copy does not have a valid NFTokenID");
+  }
+
+  if (row.monolith_listing_status === "active") {
+    console.log("PUBLIC MONOLITH LISTING ALREADY ACTIVE");
+    console.log(`Drop ID: ${dropId}`);
+    console.log(`NFT: ${row.nftoken_id}`);
+    console.log(`Listing ID: ${row.monolith_listing_id || "unknown"}`);
+    console.log(`Status: ${row.monolith_listing_status}`);
+    console.log(`Offer index: ${row.offer_index || "unknown"}`);
+    console.log(`Authorization tx: ${row.authorization_tx_hash || "unknown"}`);
+    return;
+  }
+
+  const client = new Client(XRPL_WS);
+  await client.connect();
+
+  try {
+    const ownedNft = await getOwnedNFToken(
+      client,
+      ISSUER,
+      row.nftoken_id
+    );
+
+    if (!ownedNft) {
+      throw new Error(
+        `Locked seller ${ISSUER} does not own public NFT ${row.nftoken_id}`
+      );
+    }
+
+    const ledgerUri = decodeNftUri(ownedNft.URI);
+
+    if (!ledgerUri) {
+      throw new Error(
+        "Unable to decode public NFT on-ledger URI"
+      );
+    }
+
+    if (ledgerUri !== drop.metadata_uri) {
+      throw new Error(
+        `Public NFT metadata mismatch. Ledger=${ledgerUri} Drop=${drop.metadata_uri}`
+      );
+    }
+  } finally {
+    await client.disconnect();
+  }
+
+  /*
+   * STAGE 1
+   * No MONOLITH listing exists yet. Start or resume seller SignIn.
+   */
+  if (!row.monolith_listing_id) {
+    if (!row.monolith_auth_payload_uuid) {
+      let started;
+
+      try {
+        started = await monolithPost(
+          "/api/nft-market/list/start",
+          {
+            nftId: row.nftoken_id,
+            returnUrl: "https://monolithxrpl.com/nft-market/"
+          }
+        );
+      } catch (e) {
+        const existing = e.responseData?.activeListing;
+
+        if (
+          e.statusCode === 409 &&
+          e.responseData?.error === "nft_already_listed" &&
+          existing?.listingId
+        ) {
+          if (existing.nftId !== row.nftoken_id) {
+            throw new Error(
+              "Recovered MONOLITH listing NFTokenID mismatch"
+            );
+          }
+
+          if (existing.sellerWallet !== ISSUER) {
+            throw new Error(
+              "Recovered MONOLITH listing seller mismatch"
+            );
+          }
+
+          if (
+            existing.askUsdCents != null &&
+            existing.askUsdCents !== askUsdCents
+          ) {
+            throw new Error(
+              `Recovered MONOLITH USD ask mismatch: expected ${askUsdCents}, got ${existing.askUsdCents}`
+            );
+          }
+
+          const recoveredStatus =
+            existing.status || "pending_sell_offer";
+
+          if (recoveredStatus === "active") {
+            if (!existing.sellTxHash) {
+              throw new Error(
+                "Recovered active MONOLITH listing missing authorization transaction hash"
+              );
+            }
+
+            if (!existing.xrplOfferIndex) {
+              throw new Error(
+                "Recovered active MONOLITH listing missing XRPL offer index"
+              );
+            }
+
+            await pool.query(`
+              UPDATE nft_weekly_public_copies
+              SET
+                monolith_listing_id=$2,
+                monolith_listing_status='active',
+                authorization_tx_hash=$3,
+                offer_index=$4,
+                listed_at=COALESCE(listed_at, NOW())
+              WHERE id=$1
+            `, [
+              row.id,
+              existing.listingId,
+              existing.sellTxHash,
+              existing.xrplOfferIndex
+            ]);
+
+            console.log("");
+            console.log("RECOVERED ACTIVE PUBLIC MONOLITH LISTING");
+            console.log(`Drop ID: ${dropId}`);
+            console.log(`NFT: ${row.nftoken_id}`);
+            console.log(`Listing ID: ${existing.listingId}`);
+            console.log(`USD ask: $${(askUsdCents / 100).toFixed(2)}`);
+            console.log(`XRP ask: ${existing.askXrp || "not returned"}`);
+            console.log(`Offer index: ${existing.xrplOfferIndex}`);
+            console.log(`Authorization tx: ${existing.sellTxHash}`);
+            console.log("Status: active");
+            return;
+          }
+
+          await pool.query(`
+            UPDATE nft_weekly_public_copies
+            SET
+              monolith_listing_id=$2,
+              monolith_listing_status=$3
+            WHERE id=$1
+          `, [
+            row.id,
+            existing.listingId,
+            recoveredStatus
+          ]);
+
+          row = {
+            ...row,
+            monolith_listing_id: existing.listingId,
+            monolith_listing_status: recoveredStatus
+          };
+
+          console.log(
+            `Recovered existing MONOLITH listing ${existing.listingId}`
+          );
+        } else {
+          throw e;
+        }
+      }
+
+      if (started) {
+        const payloadUuid = started.auth?.payloadUuid;
+        const signUrl = started.auth?.signUrl || null;
+
+        if (!payloadUuid) {
+          throw new Error(
+            "MONOLITH list/start did not return auth payloadUuid"
+          );
+        }
+
+        await pool.query(`
+          UPDATE nft_weekly_public_copies
+          SET
+            monolith_listing_status='pending_seller_auth',
+            monolith_auth_payload_uuid=$2,
+            monolith_auth_sign_url=$3
+          WHERE id=$1
+        `, [row.id, payloadUuid, signUrl]);
+
+        printXamanApproval(
+          "XAMAN APPROVAL 1 OF 2: MONOLITH SELLER SIGN-IN",
+          payloadUuid,
+          signUrl
+        );
+
+        return;
+      }
+    }
+
+    if (!row.monolith_listing_id) {
+      console.log("Resuming existing MONOLITH seller SignIn");
+
+      if (row.monolith_auth_sign_url) {
+        console.log(`Xaman: ${row.monolith_auth_sign_url}`);
+      }
+
+      const verified = await monolithPost(
+        "/api/nft-market/list/verify",
+        {
+          nftId: row.nftoken_id,
+          payloadUuid: row.monolith_auth_payload_uuid,
+          askUsdCents
+        }
+      );
+
+      const listing = verified.listing;
+
+      if (!listing?.listingId) {
+        throw new Error(
+          "MONOLITH list/verify did not return listingId"
+        );
+      }
+
+      if (listing.nftId !== row.nftoken_id) {
+        throw new Error(
+          "MONOLITH returned listing for unexpected NFTokenID"
+        );
+      }
+
+      if (listing.sellerWallet !== ISSUER) {
+        throw new Error(
+          `MONOLITH seller mismatch: ${listing.sellerWallet}`
+        );
+      }
+
+      if (listing.askUsdCents !== askUsdCents) {
+        throw new Error(
+          `MONOLITH USD ask mismatch: expected ${askUsdCents}, got ${listing.askUsdCents}`
+        );
+      }
+
+      await pool.query(`
+        UPDATE nft_weekly_public_copies
+        SET
+          monolith_listing_id=$2,
+          monolith_listing_status=$3
+        WHERE id=$1
+      `, [
+        row.id,
+        listing.listingId,
+        listing.status || "pending_sell_offer"
+      ]);
+
+      row = {
+        ...row,
+        monolith_listing_id: listing.listingId,
+        monolith_listing_status:
+          listing.status || "pending_sell_offer"
+      };
+
+      console.log(
+        `MONOLITH seller verified. Listing ${listing.listingId} created.`
+      );
+    }
+  }
+
+  /*
+   * STAGE 2
+   * MONOLITH listing exists. Start or resume broker authorization.
+   */
+  if (
+    row.monolith_listing_status !== "active" &&
+    !row.monolith_sell_payload_uuid
+  ) {
+    const sellStarted = await monolithPost(
+      "/api/nft-market/sell-offer/start",
+      {
+        listingId: row.monolith_listing_id,
+        returnUrl: "https://monolithxrpl.com/nft-market/"
+      }
+    );
+
+    const payloadUuid = sellStarted.sellOffer?.payloadUuid;
+    const signUrl = sellStarted.sellOffer?.signUrl || null;
+
+    if (!payloadUuid) {
+      throw new Error(
+        "MONOLITH sell-offer/start did not return payloadUuid"
+      );
+    }
+
+    await pool.query(`
+      UPDATE nft_weekly_public_copies
+      SET
+        monolith_listing_status='pending_sell_offer',
+        monolith_sell_payload_uuid=$2,
+        monolith_sell_sign_url=$3
+      WHERE id=$1
+    `, [row.id, payloadUuid, signUrl]);
+
+    printXamanApproval(
+      "XAMAN APPROVAL 2 OF 2: MONOLITH BROKER AUTHORIZATION",
+      payloadUuid,
+      signUrl
+    );
+
+    return;
+  }
+
+  if (row.monolith_listing_status !== "active") {
+    console.log("Resuming existing MONOLITH broker authorization");
+
+    if (row.monolith_sell_sign_url) {
+      console.log(`Xaman: ${row.monolith_sell_sign_url}`);
+    }
+
+    const verified = await monolithPost(
+      "/api/nft-market/sell-offer/verify",
+      {
+        listingId: row.monolith_listing_id,
+        payloadUuid: row.monolith_sell_payload_uuid
+      }
+    );
+
+    const listing = verified.listing;
+
+    if (!listing?.listingId) {
+      throw new Error(
+        "MONOLITH sell-offer/verify did not return listing"
+      );
+    }
+
+    if (listing.listingId !== row.monolith_listing_id) {
+      throw new Error("MONOLITH listing ID changed unexpectedly");
+    }
+
+    if (listing.nftId !== row.nftoken_id) {
+      throw new Error(
+        "MONOLITH active listing NFTokenID mismatch"
+      );
+    }
+
+    if (listing.sellerWallet !== ISSUER) {
+      throw new Error(
+        "MONOLITH active listing seller mismatch"
+      );
+    }
+
+    if (listing.status !== "active") {
+      throw new Error(
+        `MONOLITH listing is not active; status=${listing.status}`
+      );
+    }
+
+    if (listing.askUsdCents !== askUsdCents) {
+      throw new Error(
+        `MONOLITH active USD ask mismatch: expected ${askUsdCents}, got ${listing.askUsdCents}`
+      );
+    }
+
+    const authorizationTxHash =
+      listing.sellTxHash ||
+      verified.xrpl?.txHash ||
+      verified.xrpl?.hash ||
+      null;
+
+    const offerIndex =
+      listing.xrplOfferIndex ||
+      verified.xrpl?.offerIndex ||
+      null;
+
+    if (!authorizationTxHash) {
+      throw new Error(
+        "MONOLITH active listing missing authorization transaction hash"
+      );
+    }
+
+    if (!offerIndex) {
+      throw new Error(
+        "MONOLITH active listing missing XRPL offer index"
+      );
+    }
+
+    await pool.query(`
+      UPDATE nft_weekly_public_copies
+      SET
+        monolith_listing_status='active',
+        authorization_tx_hash=$2,
+        offer_index=$3,
+        listed_at=COALESCE(listed_at, NOW())
+      WHERE id=$1
+    `, [
+      row.id,
+      authorizationTxHash,
+      offerIndex
+    ]);
+
+    console.log("");
+    console.log("PUBLIC MONOLITH LISTING ACTIVE");
+    console.log(`Drop ID: ${dropId}`);
+    console.log(`NFT: ${row.nftoken_id}`);
+    console.log(`Listing ID: ${listing.listingId}`);
+    console.log(`USD ask: $${(askUsdCents / 100).toFixed(2)}`);
+    console.log(`XRP ask: ${listing.askXrp || "not returned"}`);
+    console.log(`Offer index: ${offerIndex}`);
+    console.log(`Authorization tx: ${authorizationTxHash}`);
+    console.log(`Status: ${listing.status}`);
+  }
+}
+
 async function mintAll(dropId) {
   await getDrop(dropId);
 
@@ -890,9 +1454,11 @@ async function status(dropId) {
     await claimAll(dropId);
   } else if (command === "reconcile-claims" && Number.isInteger(dropId)) {
     await reconcileClaims(dropId);
+  } else if (command === "list-public" && Number.isInteger(dropId)) {
+    await listPublic(dropId, process.argv[4]);
   } else {
     console.log(
-      "Usage: node the52-mint-runner.js dry-run YYYY-MM-DD ipfs://CID | preview YYYY-MM-DD | status <drop_id> | bind-metadata <drop_id> ipfs://CID | mint-next <drop_id> | mint-all <drop_id> CONFIRM_LIVE_MINT | claim-next <drop_id> | claim-all <drop_id> CONFIRM_LIVE_CLAIMS | reconcile-claims <drop_id>"
+      "Usage: node the52-mint-runner.js dry-run YYYY-MM-DD ipfs://CID | preview YYYY-MM-DD | status <drop_id> | bind-metadata <drop_id> ipfs://CID | mint-next <drop_id> | mint-all <drop_id> CONFIRM_LIVE_MINT | claim-next <drop_id> | claim-all <drop_id> CONFIRM_LIVE_CLAIMS | reconcile-claims <drop_id> | list-public <drop_id> <usd_ask>"
     );
     process.exit(1);
   }

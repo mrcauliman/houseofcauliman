@@ -151,10 +151,26 @@ function createWeeklyRouter({ pool }) {
         minted_at TIMESTAMPTZ,
         monolith_listing_id TEXT,
         monolith_listing_status TEXT,
+        monolith_auth_payload_uuid TEXT,
+        monolith_auth_sign_url TEXT,
+        monolith_sell_payload_uuid TEXT,
+        monolith_sell_sign_url TEXT,
         authorization_tx_hash TEXT,
         offer_index TEXT,
         listed_at TIMESTAMPTZ
       );
+
+      ALTER TABLE nft_weekly_public_copies
+        ADD COLUMN IF NOT EXISTS monolith_auth_payload_uuid TEXT;
+
+      ALTER TABLE nft_weekly_public_copies
+        ADD COLUMN IF NOT EXISTS monolith_auth_sign_url TEXT;
+
+      ALTER TABLE nft_weekly_public_copies
+        ADD COLUMN IF NOT EXISTS monolith_sell_payload_uuid TEXT;
+
+      ALTER TABLE nft_weekly_public_copies
+        ADD COLUMN IF NOT EXISTS monolith_sell_sign_url TEXT;
 
       CREATE UNIQUE INDEX IF NOT EXISTS
         nft_weekly_public_copies_mint_tx_hash_uidx
