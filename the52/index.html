@@ -622,6 +622,23 @@ async function loadBuilderMarket(){
   const panel = document.getElementById("builderMarket");
   if(!panel) return;
 
+  const marketPreview =
+    new URLSearchParams(window.location.search).get("marketPreview") === "1";
+
+  if(marketPreview){
+    panel.innerHTML = `
+      <div class="market-label">MONOLITH MARKET · PREVIEW</div>
+      <div class="market-price">$100.00</div>
+      <div class="market-xrp">
+        $XRP amount populates from the live listing
+      </div>
+      <div class="market-meta">
+        Initial public listing · 1 active listing
+      </div>
+    `;
+    return;
+  }
+
   const BUILDER_METADATA_URI =
     "ipfs://QmbbFgmt5DkbBip1HHouiZZ8eQyVdgPS4C5mtodeZHKnkN";
 
@@ -716,6 +733,9 @@ async function openBuilder(){
         "FIRST DROP · SEP 27"
       );
 
+    const marketPreview =
+      new URLSearchParams(window.location.search).get("marketPreview") === "1";
+
     release.innerHTML = `
       <div class="release-panel">
         <div class="release-state">Not Yet Released</div>
@@ -724,12 +744,26 @@ async function openBuilder(){
           Holder verification activates after the drop.
         </div>
       </div>
+
+      ${
+        marketPreview
+          ? `<div class="market-panel" id="builderMarket">
+               <div class="market-label">MONOLITH MARKET · PREVIEW</div>
+               <div class="market-meta">Loading preview...</div>
+             </div>`
+          : ""
+      }
     `;
 
     primary.textContent = "Subscriber Enrollment";
     primary.href = "/nft-enrollment/";
 
     document.getElementById("modal").classList.add("open");
+
+    if(marketPreview){
+      loadBuilderMarket();
+    }
+
     return;
   }
 
