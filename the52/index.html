@@ -677,6 +677,34 @@ async function openBuilder(){
   renderBuilderHolderState(ownership);
 }
 
+
+function showBuilderUnlockEntrance(){
+  const media = document.getElementById("modalMedia");
+  const b = collectionState.builder;
+
+  if(!media || !b?.imageUrl) return;
+
+  media.innerHTML = `
+    <img
+      class="card-art builder-unlock-art"
+      src="/assets/the52/01/THE52_01_The_Builder_HOLDER_UNLOCK.webp"
+      alt="01 THE BUILDER holder unlocked">
+  `;
+
+  window.setTimeout(() => {
+    const currentMedia = document.getElementById("modalMedia");
+
+    if(!currentMedia) return;
+
+    currentMedia.innerHTML = `
+      <img
+        class="card-art"
+        src="${b.imageUrl}"
+        alt="01 THE BUILDER">
+    `;
+  }, 2500);
+}
+
 function renderBuilderHolderState(data){
   const panel =
     document.getElementById("builderHolder");
@@ -722,6 +750,8 @@ function renderBuilderHolderState(data){
     `;
     return;
   }
+
+  showBuilderUnlockEntrance();
 
   panel.innerHTML = `
     <div class="holder-title">
