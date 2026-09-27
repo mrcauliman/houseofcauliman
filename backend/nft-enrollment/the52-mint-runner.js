@@ -96,7 +96,7 @@ async function bindMetadata(dropId, metadataUri) {
           mint_attempts > 0
           OR mint_tx_hash IS NOT NULL
           OR nftoken_id IS NOT NULL
-          OR mint_status <> 'pending'
+          OR mint_status IS DISTINCT FROM 'pending'
         )
     )
     OR EXISTS (
@@ -107,7 +107,7 @@ async function bindMetadata(dropId, metadataUri) {
           mint_attempts > 0
           OR mint_tx_hash IS NOT NULL
           OR nftoken_id IS NOT NULL
-          OR mint_status <> 'pending'
+          OR mint_status IS DISTINCT FROM 'pending'
         )
     ) AS locked
   `, [dropId]);
@@ -237,8 +237,8 @@ async function claimNext(dropId) {
       AND mint_status='minted'
       AND delivered=FALSE
       AND xrpl_address <> $2
-      AND claim_offer_status <> 'open'
-      AND claim_offer_status <> 'accepted'
+      AND claim_offer_status IS DISTINCT FROM 'open'
+      AND claim_offer_status IS DISTINCT FROM 'accepted'
     ORDER BY id
     LIMIT 1
   `, [dropId, ISSUER]);
@@ -379,7 +379,7 @@ async function mintNext(dropId) {
       SELECT *
       FROM nft_weekly_recipients
       WHERE drop_id=$1
-        AND mint_status <> 'minted'
+        AND mint_status IS DISTINCT FROM 'minted'
       ORDER BY id
       LIMIT 1
     `, [dropId]);
@@ -448,7 +448,7 @@ async function mintNext(dropId) {
       SELECT *
       FROM nft_weekly_public_copies
       WHERE drop_id=$1
-        AND mint_status <> 'minted'
+        AND mint_status IS DISTINCT FROM 'minted'
       LIMIT 1
     `, [dropId]);
 
@@ -533,14 +533,14 @@ async function mintAll(dropId) {
       SELECT count(*)::int AS count
       FROM nft_weekly_recipients
       WHERE drop_id=$1
-        AND mint_status <> 'minted'
+        AND mint_status IS DISTINCT FROM 'minted'
     `, [dropId]);
 
     const remainingPublic = await pool.query(`
       SELECT count(*)::int AS count
       FROM nft_weekly_public_copies
       WHERE drop_id=$1
-        AND mint_status <> 'minted'
+        AND mint_status IS DISTINCT FROM 'minted'
     `, [dropId]);
 
     const remaining =
@@ -571,8 +571,8 @@ async function claimAll(dropId) {
         AND mint_status='minted'
         AND delivered=FALSE
         AND xrpl_address <> $2
-        AND claim_offer_status <> 'open'
-        AND claim_offer_status <> 'accepted'
+        AND claim_offer_status IS DISTINCT FROM 'open'
+        AND claim_offer_status IS DISTINCT FROM 'accepted'
     `, [dropId, ISSUER]);
 
     if (remaining.rows[0].count === 0) {
