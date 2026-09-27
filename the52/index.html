@@ -607,7 +607,7 @@ async function openBuilder(){
         <div class="release-state">Not Yet Released</div>
         <div class="release-copy">
           01 THE BUILDER releases Sunday, September 27.
-          Holder verification and ownership utility activate after the drop.
+          Holder verification activates after the drop.
         </div>
       </div>
     `;
@@ -717,7 +717,7 @@ function renderBuilderHolderState(data){
       <div class="holder-copy">
         This connected wallet does not currently hold
         01 THE BUILDER.
-        Holder utility follows the NFT when ownership changes.
+        Holder access follows current XRPL ownership of the NFT.
       </div>
     `;
     return;
@@ -725,44 +725,27 @@ function renderBuilderHolderState(data){
 
   panel.innerHTML = `
     <div class="holder-title">
-      Builder Holder Verified
+      Verified Holder
     </div>
 
     <div class="holder-copy">
-      Current XRPL ownership confirmed.
-      This wallet has access to the 01 THE BUILDER holder area.
+      Current XRPL ownership of 01 THE BUILDER is confirmed.
     </div>
 
     <div class="holder-grid">
       <div class="holder-item">
-        <strong>Builder Drops</strong>
+        <strong>Builder Access</strong>
         <span>
-          Holder-only Builder releases and claims appear here
-          when active.
-        </span>
-      </div>
-
-      <div class="holder-item">
-        <strong>Early Previews</strong>
-        <span>
-          Selected House build previews can be opened here
-          before public release.
-        </span>
-      </div>
-
-      <div class="holder-item">
-        <strong>Downloads</strong>
-        <span>
-          Builder-specific downloadable assets appear here
-          when released.
+          No active Builder perk right now.
+          Future holder perks will appear here when released.
         </span>
       </div>
 
       <div class="holder-item">
         <strong>Ownership</strong>
         <span>
-          Access follows current XRPL ownership of the NFT,
-          not the original recipient.
+          Holder access follows current XRPL ownership of the NFT,
+          including after a sale or transfer.
         </span>
       </div>
     </div>
