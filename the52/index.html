@@ -390,6 +390,22 @@ a{color:inherit;text-decoration:none}
 <section class="hero">
   <img src="/assets/the52/THE_52_logo.webp" alt="THE 52">
 </section>
+
+<section style="max-width:760px;margin:0 auto 26px;text-align:center;padding:0 18px;">
+  <p style="margin:0 0 12px;line-height:1.7;color:var(--text);">
+    THE 52 is a year-long XRPL collectible series from House of Cauliman.
+    Fifty-two original characters, each built around the personalities, habits,
+    and archetypes found throughout crypto culture. One new character is released
+    each week, creating a complete 52-card collection across the year.
+  </p>
+  <p style="margin:0;line-height:1.7;color:var(--muted);">
+    Eligible House of Cauliman 𝕏 subscribers with a registered wallet receive
+    each weekly release while their subscription is active. Every edition is
+    recorded on XRPL, and select cards may unlock holder experiences and utility
+    across the House of Cauliman ecosystem.
+  </p>
+</section>
+
 <div id="walletBar" style="max-width:620px;margin:0 auto 22px;text-align:center;">
   <a id="walletConnect"
      class="back-btn"
@@ -517,9 +533,7 @@ async function loadWalletState(){
         ? `${a.slice(0,6)}…${a.slice(-6)}`
         : a;
 
-      walletConnect.textContent = "Wallet Connected";
-      walletConnect.removeAttribute("href");
-      walletConnect.style.cursor = "default";
+      walletConnect.style.display = "none";
       walletDisconnect.style.display = "inline-block";
       walletStatus.textContent = `XRPL ${short}`;
     }
