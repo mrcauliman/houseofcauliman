@@ -205,6 +205,43 @@ a{color:inherit;text-decoration:none}
   color:#f0cc78;
 }
 
+
+.market-panel{
+  margin-top:14px;
+  padding:14px;
+  border:1px solid rgba(212,164,74,.35);
+  border-radius:14px;
+  background:rgba(212,164,74,.06);
+  text-align:center;
+}
+
+.market-label{
+  font-size:.68rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:#f0cc78;
+  font-weight:700;
+}
+
+.market-price{
+  margin-top:6px;
+  font-size:1.35rem;
+  font-weight:800;
+  color:var(--text);
+}
+
+.market-xrp{
+  margin-top:2px;
+  color:var(--muted);
+  font-size:.78rem;
+}
+
+.market-meta{
+  margin-top:7px;
+  color:var(--muted);
+  font-size:.7rem;
+}
+
 .holder-panel{
   margin-top:14px;
   padding:14px;
@@ -580,6 +617,83 @@ async function loadBuilderOwnership(){
   }
 }
 
+
+async function loadBuilderMarket(){
+  const panel = document.getElementById("builderMarket");
+  if(!panel) return;
+
+  const BUILDER_METADATA_URI =
+    "ipfs://QmbbFgmt5DkbBip1HHouiZZ8eQyVdgPS4C5mtodeZHKnkN";
+
+  try{
+    const response = await fetch(
+      "https://monolithxrpl.com/api/nft-market/listings",
+      { cache:"no-store" }
+    );
+
+    if(!response.ok){
+      throw new Error(`MONOLITH HTTP ${response.status}`);
+    }
+
+    const data = await response.json();
+    const listings = Array.isArray(data?.listings)
+      ? data.listings
+      : [];
+
+    const builderListings = listings
+      .filter(item =>
+        item &&
+        item.status === "active" &&
+        item.isTest !== true &&
+        item.uri === BUILDER_METADATA_URI
+      )
+      .sort((a,b) =>
+        Number(a.askUsdCents || Infinity) -
+        Number(b.askUsdCents || Infinity)
+      );
+
+    if(!builderListings.length){
+      panel.innerHTML = `
+        <div class="market-label">MONOLITH MARKET</div>
+        <div class="market-price">No Active Listings</div>
+        <div class="market-meta">
+          01 THE BUILDER has no current market floor.
+        </div>
+      `;
+      return;
+    }
+
+    const floor = builderListings[0];
+    const usd = Number(floor.askUsdCents || 0) / 100;
+    const xrp = Number(floor.askXrp || 0);
+
+    panel.innerHTML = `
+      <div class="market-label">MONOLITH MARKET · CURRENT FLOOR</div>
+      <div class="market-price">
+        $${usd.toFixed(2)}
+      </div>
+      <div class="market-xrp">
+        ${xrp.toLocaleString(undefined,{
+          maximumFractionDigits:6
+        })} $XRP
+      </div>
+      <div class="market-meta">
+        ${builderListings.length}
+        active listing${builderListings.length === 1 ? "" : "s"}
+      </div>
+    `;
+  }catch(error){
+    console.warn("Builder MONOLITH market unavailable", error);
+
+    panel.innerHTML = `
+      <div class="market-label">MONOLITH MARKET</div>
+      <div class="market-meta">
+        Live market data unavailable right now.
+      </div>
+    `;
+  }
+}
+
 async function openBuilder(){
   const b = collectionState.builder;
 
@@ -654,6 +768,11 @@ async function openBuilder(){
         Verifying this wallet against current XRPL ownership.
       </div>
     </div>
+
+    <div class="market-panel" id="builderMarket">
+      <div class="market-label">MONOLITH MARKET</div>
+      <div class="market-meta">Loading live market data...</div>
+    </div>
   `;
 
   if(b.monolith?.active && b.monolith?.url){
@@ -672,6 +791,8 @@ async function openBuilder(){
       : `${API}/holder/auth/start?return=/the52/`;
 
   document.getElementById("modal").classList.add("open");
+
+  loadBuilderMarket();
 
   const ownership = await loadBuilderOwnership();
   renderBuilderHolderState(ownership);
