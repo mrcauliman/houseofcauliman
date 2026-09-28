@@ -596,7 +596,25 @@
     required
   >
 
-  <label>XRPL wallet address</label>
+  <div class="help">
+    Enter your exact current 𝕏 @handle. Use your handle, not your
+    display name. This is matched against your active 𝕏 subscription.
+  </div>
+
+  <label>Confirm 𝕏 handle</label>
+  <input
+    id="x_handle_confirm"
+    name="x_handle_confirm"
+    value="@"
+    autocomplete="off"
+    required
+  >
+
+  <div class="help">
+    Enter the same 𝕏 @handle again to confirm it is correct.
+  </div>
+
+  <label>Xaman XRPL wallet address</label>
   <input
     id="xrpl_address"
     name="xrpl_address"
@@ -604,6 +622,25 @@
     autocomplete="off"
     required
   >
+
+  <div class="help">
+    Enter the public r-address from the Xaman wallet where you want
+    your House of Cauliman NFTs delivered.
+  </div>
+
+  <label>Confirm Xaman XRPL wallet address</label>
+  <input
+    id="xrpl_address_confirm"
+    name="xrpl_address_confirm"
+    placeholder="r..."
+    autocomplete="off"
+    required
+  >
+
+  <div class="help">
+    Enter the same Xaman public r-address again. Both wallet entries
+    must match exactly.
+  </div>
 
   <div class="notice">
     <strong>Xaman Wallet Required for NFT Drops</strong><br>
@@ -869,17 +906,59 @@
     button.disabled = true;
     button.textContent = "REGISTERING...";
 
-    const handleInput = document.getElementById("x_handle");
+    const handleInput =
+      document.getElementById("x_handle");
+
+    const handleConfirmInput =
+      document.getElementById("x_handle_confirm");
 
     let xHandle = handleInput.value.trim();
+    let xHandleConfirm = handleConfirmInput.value.trim();
 
     if (!xHandle.startsWith("@")) {
       xHandle = "@" + xHandle;
     }
 
+    if (!xHandleConfirm.startsWith("@")) {
+      xHandleConfirm = "@" + xHandleConfirm;
+    }
+
+    const xrplAddress =
+      document.getElementById("xrpl_address").value.trim();
+
+    const xrplAddressConfirm =
+      document.getElementById("xrpl_address_confirm").value.trim();
+
+    if (
+      xHandle.slice(1).toLowerCase() !==
+      xHandleConfirm.slice(1).toLowerCase()
+    ) {
+      message.textContent =
+        "Your 𝕏 handles do not match. Enter your exact current 𝕏 @handle twice.";
+
+      message.className = "result-box error";
+      message.style.display = "block";
+      button.disabled = false;
+      button.textContent = "REGISTER WALLET";
+      return;
+    }
+
+    if (xrplAddress !== xrplAddressConfirm) {
+      message.textContent =
+        "Your Xaman wallet addresses do not match. Enter the same public r-address twice.";
+
+      message.className = "result-box error";
+      message.style.display = "block";
+      button.disabled = false;
+      button.textContent = "REGISTER WALLET";
+      return;
+    }
+
     const payload = {
       x_handle: xHandle,
-      xrpl_address: document.getElementById("xrpl_address").value,
+      x_handle_confirm: xHandleConfirm,
+      xrpl_address: xrplAddress,
+      xrpl_address_confirm: xrplAddressConfirm,
       email: document.getElementById("email").value,
       xaman_confirmed:
         document.getElementById("xaman_confirmed").checked
