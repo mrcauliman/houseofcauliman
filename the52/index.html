@@ -350,6 +350,144 @@ a{color:inherit;text-decoration:none}
 .hoc-standard-footer-links{margin:4px 0}
 
 
+
+/* Subscriber delivery issue reporting */
+.issue-report{
+  max-width:760px;
+  margin:0 auto 34px;
+  padding:22px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:18px;
+  background:rgba(7,15,28,.72);
+  box-shadow:0 18px 50px rgba(0,0,0,.18);
+}
+
+.issue-report-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:18px;
+}
+
+.issue-report-title{
+  margin:0;
+  font-size:1.15rem;
+  font-weight:800;
+  letter-spacing:.03em;
+}
+
+.issue-report-copy{
+  margin:7px 0 0;
+  color:rgba(255,255,255,.72);
+  line-height:1.55;
+  font-size:.94rem;
+}
+
+.issue-report-toggle{
+  flex:0 0 auto;
+}
+
+.issue-report-form{
+  display:none;
+  margin-top:20px;
+  padding-top:20px;
+  border-top:1px solid rgba(255,255,255,.1);
+}
+
+.issue-report-form.open{
+  display:block;
+}
+
+.issue-field{
+  margin-bottom:16px;
+}
+
+.issue-field label{
+  display:block;
+  margin-bottom:7px;
+  font-size:.82rem;
+  font-weight:800;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+
+.issue-field select,
+.issue-field textarea,
+.issue-field input[type="file"]{
+  width:100%;
+  box-sizing:border-box;
+}
+
+.issue-field select,
+.issue-field textarea{
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:10px;
+  background:#07111f;
+  color:#fff;
+  padding:12px 13px;
+  font:inherit;
+}
+
+.issue-field textarea{
+  min-height:130px;
+  resize:vertical;
+}
+
+.issue-security{
+  margin:12px 0 16px;
+  padding:12px 14px;
+  border:1px solid rgba(255,193,7,.32);
+  border-radius:10px;
+  background:rgba(255,193,7,.07);
+  color:rgba(255,255,255,.84);
+  font-size:.86rem;
+  line-height:1.5;
+}
+
+.issue-status{
+  margin-top:14px;
+  min-height:22px;
+  color:rgba(255,255,255,.78);
+  font-size:.9rem;
+  line-height:1.5;
+}
+
+.issue-status.error{
+  color:#ffb4b4;
+}
+
+.issue-status.success{
+  color:#baf7cb;
+}
+
+.issue-file-help{
+  margin-top:7px;
+  color:rgba(255,255,255,.58);
+  font-size:.8rem;
+  line-height:1.45;
+}
+
+.issue-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
+}
+
+@media(max-width:640px){
+  .issue-report{
+    padding:18px;
+  }
+
+  .issue-report-head{
+    display:block;
+  }
+
+  .issue-report-toggle{
+    margin-top:15px;
+  }
+}
+
 /* THE 52 released-card modal sizing */
 .modal-box{
   max-height:92vh;
@@ -424,6 +562,143 @@ a{color:inherit;text-decoration:none}
   </div>
 </div>
 
+
+<section
+  class="issue-report"
+  id="issueReport"
+  aria-labelledby="issueReportTitle"
+>
+  <div class="issue-report-head">
+    <div>
+      <h2
+        class="issue-report-title"
+        id="issueReportTitle"
+      >
+        Subscriber Delivery Help
+      </h2>
+
+      <p class="issue-report-copy">
+        If something went wrong with your weekly THE 52 NFT,
+        report it here. Your connected XRPL wallet is attached
+        to the report automatically.
+      </p>
+    </div>
+
+    <button
+      class="issue-report-toggle"
+      id="issueToggle"
+      type="button"
+    >
+      REPORT A DELIVERY ISSUE
+    </button>
+  </div>
+
+  <form
+    class="issue-report-form"
+    id="issueForm"
+    novalidate
+  >
+    <div class="issue-field">
+      <label for="issueDrop">
+        Affected card
+      </label>
+
+      <select id="issueDrop" required disabled>
+        <option value="">
+          Connect Xaman to load your cards
+        </option>
+      </select>
+
+      <div class="issue-file-help" id="issueDropHelp">
+        Only THE 52 cards assigned to your subscriber registration
+        can be reported here.
+      </div>
+    </div>
+
+    <div class="issue-field">
+      <label for="issueType">
+        What happened?
+      </label>
+
+      <select id="issueType" required>
+        <option value="">Select an issue</option>
+        <option value="did_not_receive">
+          Didn't receive my NFT
+        </option>
+        <option value="claim_not_working">
+          Claim isn't working
+        </option>
+        <option value="wallet_changed">
+          Wallet changed
+        </option>
+        <option value="wrong_wallet">
+          Wrong wallet registered
+        </option>
+        <option value="nft_not_showing">
+          NFT/claim not showing
+        </option>
+        <option value="other">
+          Other
+        </option>
+      </select>
+    </div>
+
+    <div class="issue-field">
+      <label for="issueDescription">
+        Tell us what happened
+      </label>
+
+      <textarea
+        id="issueDescription"
+        maxlength="3000"
+        required
+        placeholder="Describe the problem and what you were trying to do."
+      ></textarea>
+    </div>
+
+    <div class="issue-field">
+      <label for="issueScreenshots">
+        Screenshots
+      </label>
+
+      <input
+        id="issueScreenshots"
+        type="file"
+        accept="image/png,image/jpeg,image/webp"
+        multiple
+      >
+
+      <div class="issue-file-help">
+        Optional. Up to 5 screenshots. PNG, JPEG or WebP.
+        Maximum 5 MB each.
+      </div>
+    </div>
+
+    <div class="issue-security">
+      <strong>Security warning</strong><br>
+      Screenshots only. Never upload a seed phrase,
+      secret numbers, private keys, passwords,
+      or Xaman credentials.
+    </div>
+
+    <div class="issue-actions">
+      <button
+        id="issueSubmit"
+        type="submit"
+      >
+        SUBMIT ISSUE
+      </button>
+    </div>
+
+    <div
+      class="issue-status"
+      id="issueStatus"
+      role="status"
+      aria-live="polite"
+    ></div>
+  </form>
+</section>
+
 <section class="grid" id="grid"></section>
 </main>
 <div id="modal">
@@ -485,6 +760,381 @@ const walletConnect = document.getElementById("walletConnect");
 const walletDisconnect = document.getElementById("walletDisconnect");
 const walletStatus = document.getElementById("walletStatus");
 
+const issueToggle =
+  document.getElementById("issueToggle");
+
+const issueForm =
+  document.getElementById("issueForm");
+
+const issueDrop =
+  document.getElementById("issueDrop");
+
+const issueDropHelp =
+  document.getElementById("issueDropHelp");
+
+const issueType =
+  document.getElementById("issueType");
+
+const issueDescription =
+  document.getElementById("issueDescription");
+
+const issueScreenshots =
+  document.getElementById("issueScreenshots");
+
+const issueSubmit =
+  document.getElementById("issueSubmit");
+
+const issueStatus =
+  document.getElementById("issueStatus");
+
+
+function setIssueStatus(message,type=""){
+  issueStatus.textContent = message || "";
+  issueStatus.className =
+    "issue-status" +
+    (type ? ` ${type}` : "");
+}
+
+function validateIssueScreenshots(files){
+  const list = Array.from(files || []);
+
+  if(list.length > 5){
+    return "You can attach up to 5 screenshots.";
+  }
+
+  const allowed = new Set([
+    "image/png",
+    "image/jpeg",
+    "image/webp"
+  ]);
+
+  for(const file of list){
+    if(!allowed.has(file.type)){
+      return (
+        `${file.name} isn't a supported screenshot format. ` +
+        "Use PNG, JPEG or WebP."
+      );
+    }
+
+    if(file.size > 5 * 1024 * 1024){
+      return `${file.name} is larger than 5 MB.`;
+    }
+  }
+
+  return null;
+}
+
+async function loadIssueDrops(){
+  issueDrop.disabled = true;
+  issueDrop.innerHTML =
+    '<option value="">Loading your THE 52 cards...</option>';
+
+  try{
+    const response = await fetch(
+      `${API}/holder/issues/options`,
+      {
+        credentials:"include",
+        cache:"no-store"
+      }
+    );
+
+    const data =
+      await response.json().catch(()=>({}));
+
+    if(response.status === 401){
+      issueDrop.innerHTML =
+        '<option value="">Connect Xaman to load your cards</option>';
+
+      issueDropHelp.textContent =
+        "Connect Xaman to load cards assigned to your subscriber registration.";
+
+      return;
+    }
+
+    if(!response.ok || !data.ok){
+      throw new Error(
+        data.error ||
+        `Card list failed: ${response.status}`
+      );
+    }
+
+    const drops =
+      Array.isArray(data.drops)
+        ? data.drops
+        : [];
+
+    if(!drops.length){
+      issueDrop.innerHTML =
+        '<option value="">No THE 52 cards found</option>';
+
+      issueDropHelp.textContent =
+        "No frozen THE 52 delivery record was found for this registration.";
+
+      return;
+    }
+
+    issueDrop.innerHTML =
+      '<option value="">Select the affected card</option>';
+
+    for(const drop of drops){
+      const option =
+        document.createElement("option");
+
+      option.value =
+        String(drop.id || "");
+
+      const name =
+        String(drop.dropName || "THE 52");
+
+      const date =
+        String(drop.dropDate || "");
+
+      option.textContent =
+        date
+          ? `${name} · ${date}`
+          : name;
+
+      issueDrop.appendChild(option);
+    }
+
+    issueDrop.disabled = false;
+
+    issueDropHelp.textContent =
+      drops.length === 1
+        ? "1 THE 52 card is available for this registration."
+        : `${drops.length} THE 52 cards are available for this registration.`;
+
+  }catch(error){
+    console.warn(
+      "THE 52 issue card load failed",
+      error
+    );
+
+    issueDrop.innerHTML =
+      '<option value="">Cards unavailable</option>';
+
+    issueDropHelp.textContent =
+      "Your THE 52 card list could not be loaded. Try again before submitting.";
+  }
+}
+
+
+function openIssueForm(){
+  issueForm.classList.add("open");
+
+  if(!collectionState.wallet?.csrfToken){
+    setIssueStatus(
+      "Connect Xaman first. Your connected XRPL wallet " +
+      "is used to identify your THE 52 delivery record."
+    );
+    return;
+  }
+
+  setIssueStatus(
+    "Your connected XRPL wallet will be attached " +
+    "to this report automatically."
+  );
+
+  loadIssueDrops();
+}
+
+issueToggle.addEventListener("click",()=>{
+  const opening =
+    !issueForm.classList.contains("open");
+
+  issueForm.classList.toggle("open");
+
+  if(opening){
+    openIssueForm();
+  }
+});
+
+issueScreenshots.addEventListener("change",()=>{
+  const error =
+    validateIssueScreenshots(issueScreenshots.files);
+
+  if(error){
+    setIssueStatus(error,"error");
+    issueScreenshots.value = "";
+    return;
+  }
+
+  const count =
+    issueScreenshots.files.length;
+
+  if(count){
+    setIssueStatus(
+      `${count} screenshot${count === 1 ? "" : "s"} selected.`
+    );
+  }
+});
+
+issueForm.addEventListener("submit",async event=>{
+  event.preventDefault();
+
+  if(!collectionState.wallet?.csrfToken){
+    setIssueStatus(
+      "Connect Xaman before submitting a delivery issue.",
+      "error"
+    );
+    return;
+  }
+
+  const selectedDrop =
+    issueDrop.value;
+
+  const selectedType =
+    issueType.value;
+
+  const description =
+    issueDescription.value.trim();
+
+  if(!selectedDrop){
+    setIssueStatus(
+      "Select the affected THE 52 card.",
+      "error"
+    );
+
+    return;
+  }
+
+  if(!selectedType){
+    setIssueStatus(
+      "Choose what happened.",
+      "error"
+    );
+    return;
+  }
+
+  if(description.length < 5){
+    setIssueStatus(
+      "Add a short description of the problem.",
+      "error"
+    );
+    return;
+  }
+
+  const files =
+    Array.from(issueScreenshots.files || []);
+
+  const fileError =
+    validateIssueScreenshots(files);
+
+  if(fileError){
+    setIssueStatus(fileError,"error");
+    return;
+  }
+
+  issueSubmit.disabled = true;
+  issueSubmit.textContent = "SUBMITTING...";
+
+  setIssueStatus(
+    "Creating your delivery report..."
+  );
+
+  try{
+    const response = await fetch(
+      `${API}/holder/issues`,
+      {
+        method:"POST",
+        credentials:"include",
+        headers:{
+          "Content-Type":"application/json",
+          "X-HOC-CSRF":
+            collectionState.wallet.csrfToken
+        },
+        body:JSON.stringify({
+          dropId:selectedDrop,
+          issueType:selectedType,
+          description
+        })
+      }
+    );
+
+    const data =
+      await response.json().catch(()=>({}));
+
+    if(!response.ok || !data.ok){
+      throw new Error(
+        data.error ||
+        `Issue submission failed: ${response.status}`
+      );
+    }
+
+    const reportId =
+      data.reportId;
+
+    let uploaded = 0;
+
+    for(const file of files){
+      setIssueStatus(
+        `Report ${reportId} created. ` +
+        `Uploading screenshot ${uploaded + 1} of ${files.length}...`
+      );
+
+      const upload = await fetch(
+        `${API}/holder/issues/` +
+        `${encodeURIComponent(reportId)}/screenshots`,
+        {
+          method:"POST",
+          credentials:"include",
+          headers:{
+            "Content-Type":file.type,
+            "X-HOC-CSRF":
+              collectionState.wallet.csrfToken
+          },
+          body:file
+        }
+      );
+
+      const uploadData =
+        await upload.json().catch(()=>({}));
+
+      if(!upload.ok || !uploadData.ok){
+        throw new Error(
+          uploadData.error ||
+          `Screenshot upload failed: ${upload.status}`
+        );
+      }
+
+      uploaded++;
+    }
+
+    issueDrop.value = "";
+    issueType.value = "";
+    issueDescription.value = "";
+    issueScreenshots.value = "";
+
+    setIssueStatus(
+      `Report ${reportId} received. ` +
+      (
+        data.releaseDay
+          ? "Release-day reports are reviewed by the end of the day. " +
+            "Resolution may depend on wallet or XRPL conditions."
+          : "Your report is now in the THE 52 support queue."
+      ) +
+      (
+        uploaded
+          ? ` ${uploaded} screenshot` +
+            (uploaded === 1 ? "" : "s") +
+            " attached."
+          : ""
+      ),
+      "success"
+    );
+
+  }catch(error){
+    setIssueStatus(
+      error?.message ||
+      "Your report could not be submitted.",
+      "error"
+    );
+  }finally{
+    issueSubmit.disabled = false;
+    issueSubmit.textContent = "SUBMIT ISSUE";
+  }
+});
+
 async function disconnectWallet(){
   if(!collectionState.wallet?.csrfToken) return;
 
@@ -536,6 +1186,15 @@ async function loadWalletState(){
       walletConnect.style.display = "none";
       walletDisconnect.style.display = "inline-block";
       walletStatus.textContent = `XRPL ${short}`;
+
+      if(issueForm.classList.contains("open")){
+        setIssueStatus(
+          "Your connected XRPL wallet will be attached " +
+          "to this report automatically."
+        );
+
+        loadIssueDrops();
+      }
     }
   }catch(error){
     console.warn("Holder session unavailable");
