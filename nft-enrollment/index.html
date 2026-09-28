@@ -707,60 +707,115 @@
 <div class="section-divider"></div>
 
 <div class="section-kicker">Step 3</div>
-<h2>Update My Wallet</h2>
+<h2>Update My Registration</h2>
 
 <p>
-  Already registered but need to replace your delivery wallet?
-  Submit your current registration and your new Xaman wallet below.
-  Your existing wallet will remain active until the change is verified
-  and approved.
+  Already registered but need to update your 𝕏 handle, your Xaman delivery wallet, or both?
+  Enter your current registration and the updated information below.
+  Your existing registration will remain active until the change is
+  verified and approved.
 </p>
 
 <form id="wallet-change-form">
 
-  <label>𝕏 handle</label>
+  <label>Current 𝕏 handle</label>
   <input
-    id="change_x_handle"
+    id="change_current_x_handle"
+    name="current_x_handle"
     value="@"
     autocomplete="off"
     required
   >
 
-  <label>Current registered XRPL wallet</label>
+  <div class="help">
+    Enter the exact 𝕏 @handle currently registered with THE 52.
+  </div>
+
+  <label>Current registered Xaman wallet</label>
   <input
-    id="current_xrpl_address"
+    id="change_current_xrpl_address"
+    name="current_xrpl_address"
     placeholder="r..."
+    autocomplete="off"
+    required
+  >
+
+  <div class="help">
+    Enter the Xaman public r-address currently registered with THE 52.
+  </div>
+
+  <label>New 𝕏 handle</label>
+  <input
+    id="change_new_x_handle"
+    name="new_x_handle"
+    value="@"
+    autocomplete="off"
+    required
+  >
+
+  <div class="help">
+    Enter your exact current 𝕏 @handle. Use your handle, not your
+    display name. If your handle is not changing, enter your current
+    handle again.
+  </div>
+
+  <label>Confirm new 𝕏 handle</label>
+  <input
+    id="change_new_x_handle_confirm"
+    name="new_x_handle_confirm"
+    value="@"
     autocomplete="off"
     required
   >
 
   <label>New Xaman XRPL wallet</label>
   <input
-    id="new_xrpl_address"
+    id="change_new_xrpl_address"
+    name="new_xrpl_address"
     placeholder="r..."
     autocomplete="off"
     required
   >
 
-  <label class="check">
+  <div class="help">
+    Enter the Xaman public r-address you want future THE 52 NFTs
+    delivered to. If your wallet is not changing, enter your current
+    wallet again.
+  </div>
+
+  <label>Confirm new Xaman XRPL wallet</label>
+  <input
+    id="change_new_xrpl_address_confirm"
+    name="new_xrpl_address_confirm"
+    placeholder="r..."
+    autocomplete="off"
+    required
+  >
+
+  <label class="checkbox-row">
     <input
       id="change_xaman_confirmed"
+      name="xaman_confirmed"
       type="checkbox"
       required
     >
     <span>
-      I confirm the new public XRPL address is from my Xaman wallet.
+      I confirm the Xaman wallet information above is correct.
     </span>
   </label>
 
-  <button id="wallet-change-button" type="submit">
-    REQUEST WALLET CHANGE
+  <button
+    id="wallet-change-button"
+    type="submit"
+    class="primary-button"
+  >
+    REQUEST REGISTRATION CHANGE
   </button>
 
   <div
     id="wallet-change-message"
     class="result-box"
-    aria-live="polite"
+    style="display:none"
   ></div>
 
 </form>
@@ -837,24 +892,106 @@
 
     walletChangeMessage.textContent = "";
     walletChangeMessage.style.display = "none";
+
     walletChangeButton.disabled = true;
     walletChangeButton.textContent = "SUBMITTING...";
 
-    let xHandle =
-      document.getElementById("change_x_handle").value.trim();
+    const normalizeXHandle = value => {
+      let handle = String(value || "").trim();
 
-    if (!xHandle.startsWith("@")) {
-      xHandle = "@" + xHandle;
+      if (!handle.startsWith("@")) {
+        handle = "@" + handle;
+      }
+
+      return handle;
+    };
+
+    const currentXHandle = normalizeXHandle(
+      document.getElementById("change_current_x_handle").value
+    );
+
+    const newXHandle = normalizeXHandle(
+      document.getElementById("change_new_x_handle").value
+    );
+
+    const newXHandleConfirm = normalizeXHandle(
+      document.getElementById(
+        "change_new_x_handle_confirm"
+      ).value
+    );
+
+    const currentAddress =
+      document.getElementById(
+        "change_current_xrpl_address"
+      ).value.trim();
+
+    const newAddress =
+      document.getElementById(
+        "change_new_xrpl_address"
+      ).value.trim();
+
+    const newAddressConfirm =
+      document.getElementById(
+        "change_new_xrpl_address_confirm"
+      ).value.trim();
+
+    if (
+      newXHandle.slice(1).toLowerCase() !==
+      newXHandleConfirm.slice(1).toLowerCase()
+    ) {
+      walletChangeMessage.textContent =
+        "Your new 𝕏 handles do not match.";
+
+      walletChangeMessage.className = "result-box error";
+      walletChangeMessage.style.display = "block";
+      walletChangeButton.disabled = false;
+      walletChangeButton.textContent =
+        "REQUEST REGISTRATION CHANGE";
+      return;
+    }
+
+    if (newAddress !== newAddressConfirm) {
+      walletChangeMessage.textContent =
+        "Your new Xaman wallet addresses do not match.";
+
+      walletChangeMessage.className = "result-box error";
+      walletChangeMessage.style.display = "block";
+      walletChangeButton.disabled = false;
+      walletChangeButton.textContent =
+        "REQUEST REGISTRATION CHANGE";
+      return;
+    }
+
+    const handleChanged =
+      currentXHandle.slice(1).toLowerCase() !==
+      newXHandle.slice(1).toLowerCase();
+
+    const walletChanged =
+      currentAddress !== newAddress;
+
+    if (!handleChanged && !walletChanged) {
+      walletChangeMessage.textContent =
+        "Nothing changed. Enter a new 𝕏 handle, a new Xaman wallet, or both.";
+
+      walletChangeMessage.className = "result-box error";
+      walletChangeMessage.style.display = "block";
+      walletChangeButton.disabled = false;
+      walletChangeButton.textContent =
+        "REQUEST REGISTRATION CHANGE";
+      return;
     }
 
     const payload = {
-      x_handle: xHandle,
-      current_xrpl_address:
-        document.getElementById("current_xrpl_address").value.trim(),
-      new_xrpl_address:
-        document.getElementById("new_xrpl_address").value.trim(),
+      current_x_handle: currentXHandle,
+      new_x_handle: newXHandle,
+      new_x_handle_confirm: newXHandleConfirm,
+      current_xrpl_address: currentAddress,
+      new_xrpl_address: newAddress,
+      new_xrpl_address_confirm: newAddressConfirm,
       xaman_confirmed:
-        document.getElementById("change_xaman_confirmed").checked
+        document.getElementById(
+          "change_xaman_confirmed"
+        ).checked
     };
 
     try {
@@ -873,24 +1010,40 @@
 
       if (!response.ok) {
         throw new Error(
-          data.error || "Wallet change request could not be submitted."
+          data.error ||
+          "Registration change request could not be submitted."
         );
       }
 
       walletChangeMessage.textContent =
-        "Wallet change request submitted. Your current wallet remains on file until the new Xaman wallet is verified and approved. Changes submitted after the weekly cutoff apply to the following drop.";
+        "Registration change request submitted. Your current registration remains active until the change is verified and approved. Changes submitted after the weekly cutoff apply to the following drop.";
 
       walletChangeMessage.className = "result-box success";
       walletChangeMessage.style.display = "block";
+
       walletChangeForm.reset();
-      document.getElementById("change_x_handle").value = "@";
+
+      document.getElementById(
+        "change_current_x_handle"
+      ).value = "@";
+
+      document.getElementById(
+        "change_new_x_handle"
+      ).value = "@";
+
+      document.getElementById(
+        "change_new_x_handle_confirm"
+      ).value = "@";
+
+      walletChangeButton.textContent =
+        "REQUEST SUBMITTED";
     } catch (error) {
       walletChangeMessage.textContent = error.message;
       walletChangeMessage.className = "result-box error";
       walletChangeMessage.style.display = "block";
-    } finally {
       walletChangeButton.disabled = false;
-      walletChangeButton.textContent = "REQUEST WALLET CHANGE";
+      walletChangeButton.textContent =
+        "REQUEST REGISTRATION CHANGE";
     }
   });
 
