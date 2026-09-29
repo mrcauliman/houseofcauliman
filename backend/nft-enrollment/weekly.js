@@ -38,11 +38,8 @@ function dateOnly(value) {
   return text.slice(0, 10);
 }
 
-function createWeeklyRouter({ pool }) {
-  const router = express.Router();
-
-  async function ensureTables() {
-    await pool.query(`
+async function ensureWeeklyTables(pool) {
+  await pool.query(`
       CREATE TABLE IF NOT EXISTS nft_weekly_drops (
         id BIGSERIAL PRIMARY KEY,
         drop_date DATE NOT NULL UNIQUE,
@@ -127,6 +124,23 @@ function createWeeklyRouter({ pool }) {
       ALTER TABLE nft_weekly_recipients
         ADD COLUMN IF NOT EXISTS claim_accepted_at TIMESTAMPTZ;
 
+      ALTER TABLE nft_weekly_recipients
+        ADD COLUMN IF NOT EXISTS claim_accept_status TEXT
+          NOT NULL DEFAULT 'idle';
+
+      ALTER TABLE nft_weekly_recipients
+        ADD COLUMN IF NOT EXISTS claim_accept_payload_uuid TEXT;
+
+      ALTER TABLE nft_weekly_recipients
+        ADD COLUMN IF NOT EXISTS claim_accept_tx_hash TEXT;
+
+      ALTER TABLE nft_weekly_recipients
+        ADD COLUMN IF NOT EXISTS claim_accept_attempts INTEGER
+          NOT NULL DEFAULT 0;
+
+      ALTER TABLE nft_weekly_recipients
+        ADD COLUMN IF NOT EXISTS claim_accept_error TEXT;
+
       CREATE UNIQUE INDEX IF NOT EXISTS
         nft_weekly_recipients_mint_tx_hash_uidx
       ON nft_weekly_recipients (mint_tx_hash)
@@ -135,6 +149,48 @@ function createWeeklyRouter({ pool }) {
       CREATE UNIQUE INDEX IF NOT EXISTS
         nft_weekly_recipients_nftoken_id_uidx
       ON nft_weekly_recipients (nftoken_id)
+      WHERE nftoken_id IS NOT NULL;
+
+      CREATE TABLE IF NOT EXISTS nft_weekly_mint_exceptions (
+        id BIGSERIAL PRIMARY KEY,
+        drop_id BIGINT NOT NULL
+          REFERENCES nft_weekly_drops(id)
+          ON DELETE CASCADE,
+        registration_id BIGINT NOT NULL,
+        reason_code TEXT NOT NULL,
+        justification TEXT NOT NULL,
+        status TEXT NOT NULL DEFAULT 'approved',
+        approved_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        approved_by TEXT,
+        recipient_id BIGINT
+          REFERENCES nft_weekly_recipients(id)
+          ON DELETE RESTRICT,
+        edition_before INTEGER NOT NULL,
+        edition_after INTEGER,
+        nftoken_id TEXT,
+        mint_tx_hash TEXT,
+        minted_at TIMESTAMPTZ,
+        completed_at TIMESTAMPTZ,
+        failure_reason TEXT,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        UNIQUE(drop_id, registration_id)
+      );
+
+      ALTER TABLE nft_weekly_mint_exceptions
+        ADD COLUMN IF NOT EXISTS edition_after INTEGER;
+
+      ALTER TABLE nft_weekly_mint_exceptions
+        ADD COLUMN IF NOT EXISTS approved_by TEXT;
+
+      CREATE UNIQUE INDEX IF NOT EXISTS
+        nft_weekly_mint_exceptions_recipient_uidx
+      ON nft_weekly_mint_exceptions (recipient_id)
+      WHERE recipient_id IS NOT NULL;
+
+      CREATE UNIQUE INDEX IF NOT EXISTS
+        nft_weekly_mint_exceptions_nftoken_uidx
+      ON nft_weekly_mint_exceptions (nftoken_id)
       WHERE nftoken_id IS NOT NULL;
 
       CREATE TABLE IF NOT EXISTS nft_weekly_public_copies (
@@ -181,8 +237,13 @@ function createWeeklyRouter({ pool }) {
         nft_weekly_public_copies_nftoken_id_uidx
       ON nft_weekly_public_copies (nftoken_id)
       WHERE nftoken_id IS NOT NULL;
-    `);
-  }
+  `);
+}
+
+function createWeeklyRouter({ pool }) {
+  const router = express.Router();
+
+  const ensureTables = () => ensureWeeklyTables(pool);
 
   router.use(express.urlencoded({
     extended: false,
@@ -224,7 +285,7 @@ function createWeeklyRouter({ pool }) {
         </div>
 
         <div class="wallet-block small">
-          ${d.recipients} frozen recipient${d.recipients === 1 ? "" : "s"}
+          ${d.recipients} subscriber recipient${d.recipients === 1 ? "" : "s"}
         </div>
 
         <div class="control-block">
@@ -879,6 +940,264 @@ function createWeeklyRouter({ pool }) {
     }
   });
 
+  router.post(
+    "/drop/:id/exceptional-mint",
+    async (req, res) => {
+      await ensureTables();
+
+      const dropId = Number(req.params.id);
+      const registrationId =
+        Number(req.body.registration_id);
+
+      const reasonCode =
+        String(req.body.reason_code || "").trim();
+
+      const justification =
+        String(req.body.justification || "")
+          .trim()
+          .slice(0, 3000);
+
+      const confirmation =
+        String(req.body.confirmation || "").trim();
+
+      const approvedBy =
+        String(req.houseAdminAddress || "").trim();
+
+      const allowedReasons = new Set([
+        "verified_system_failure",
+        "verified_registration_error",
+        "verified_roster_omission",
+        "verified_admin_error",
+        "approved_subscriber_remediation",
+        "admin_approved_exception"
+      ]);
+
+      if (
+        !Number.isSafeInteger(dropId) ||
+        dropId < 1 ||
+        !Number.isSafeInteger(registrationId) ||
+        registrationId < 1
+      ) {
+        return res.status(400).type("text/plain").send(
+          "Invalid drop or registration."
+        );
+      }
+
+      if (!approvedBy) {
+        return res.status(401).type("text/plain").send(
+          "Authenticated admin wallet is required."
+        );
+      }
+
+      if (!allowedReasons.has(reasonCode)) {
+        return res.status(400).type("text/plain").send(
+          "A valid exceptional mint reason is required."
+        );
+      }
+
+      if (justification.length < 10) {
+        return res.status(400).type("text/plain").send(
+          "A written justification of at least 10 characters is required."
+        );
+      }
+
+      if (confirmation !== "AUTHORIZE EXCEPTIONAL MINT") {
+        return res.status(400).type("text/plain").send(
+          "Type AUTHORIZE EXCEPTIONAL MINT exactly to approve."
+        );
+      }
+
+      const client = await pool.connect();
+
+      try {
+        await client.query("BEGIN");
+
+        const drop = await client.query(`
+          SELECT
+            id,
+            drop_date,
+            drop_name
+          FROM nft_weekly_drops
+          WHERE id = $1
+          FOR UPDATE
+        `, [dropId]);
+
+        if (!drop.rowCount) {
+          await client.query("ROLLBACK");
+          return res.sendStatus(404);
+        }
+
+        const registration = await client.query(`
+          SELECT
+            id,
+            x_handle,
+            xrpl_address,
+            email,
+            eligible_week,
+            status
+          FROM nft_subscriber_registrations
+          WHERE id = $1
+          FOR UPDATE
+        `, [registrationId]);
+
+        if (!registration.rowCount) {
+          await client.query("ROLLBACK");
+          return res.status(404).type("text/plain").send(
+            "Subscriber registration not found."
+          );
+        }
+
+        const reg = registration.rows[0];
+
+        if (reg.status === "excluded") {
+          await client.query("ROLLBACK");
+          return res.status(409).type("text/plain").send(
+            "Subscriber is excluded. Review the registration before authorizing a mint."
+          );
+        }
+
+        const existingRecipient = await client.query(`
+          SELECT
+            id,
+            mint_status,
+            mint_tx_hash,
+            nftoken_id
+          FROM nft_weekly_recipients
+          WHERE
+            drop_id = $1
+            AND registration_id = $2
+          LIMIT 1
+          FOR UPDATE
+        `, [dropId, registrationId]);
+
+        if (existingRecipient.rowCount) {
+          await client.query("ROLLBACK");
+
+          const row = existingRecipient.rows[0];
+
+          return res.status(409).type("text/plain").send(
+            "This subscriber already has a recipient record for this drop. " +
+            "Do not create another NFT. Recipient " +
+            row.id +
+            ", mint status " +
+            row.mint_status +
+            (row.nftoken_id
+              ? ", NFT " + row.nftoken_id
+              : "") +
+            "."
+          );
+        }
+
+        const existingException = await client.query(`
+          SELECT id, status
+          FROM nft_weekly_mint_exceptions
+          WHERE
+            drop_id = $1
+            AND registration_id = $2
+          LIMIT 1
+          FOR UPDATE
+        `, [dropId, registrationId]);
+
+        if (existingException.rowCount) {
+          await client.query("ROLLBACK");
+          return res.status(409).type("text/plain").send(
+            "An exceptional mint authorization already exists for this subscriber and drop."
+          );
+        }
+
+        const supply = await client.query(`
+          SELECT
+            (
+              SELECT COUNT(*)::int
+              FROM nft_weekly_recipients
+              WHERE
+                drop_id = $1
+                AND mint_status = 'minted'
+                AND nftoken_id IS NOT NULL
+            )
+            +
+            (
+              SELECT COUNT(*)::int
+              FROM nft_weekly_public_copies
+              WHERE
+                drop_id = $1
+                AND mint_status = 'minted'
+                AND nftoken_id IS NOT NULL
+            )
+            AS verified_edition
+        `, [dropId]);
+
+        const editionBefore =
+          Number(supply.rows[0]?.verified_edition || 0);
+
+        const recipient = await client.query(`
+          INSERT INTO nft_weekly_recipients (
+            drop_id,
+            registration_id,
+            x_handle,
+            xrpl_address,
+            email
+          )
+          VALUES ($1,$2,$3,$4,$5)
+          RETURNING id
+        `, [
+          dropId,
+          reg.id,
+          reg.x_handle,
+          reg.xrpl_address,
+          reg.email
+        ]);
+
+        const recipientId = recipient.rows[0].id;
+
+        await client.query(`
+          INSERT INTO nft_weekly_mint_exceptions (
+            drop_id,
+            registration_id,
+            reason_code,
+            justification,
+            status,
+            approved_by,
+            recipient_id,
+            edition_before
+          )
+          VALUES (
+            $1,$2,$3,$4,'approved',$5,$6,$7
+          )
+        `, [
+          dropId,
+          registrationId,
+          reasonCode,
+          justification,
+          approvedBy,
+          recipientId,
+          editionBefore
+        ]);
+
+        await client.query("COMMIT");
+
+        return res.redirect(
+          303,
+          `/admin/weekly/drop/${dropId}?exception=approved`
+        );
+      } catch (error) {
+        try {
+          await client.query("ROLLBACK");
+        } catch {}
+
+        if (error?.code === "23505") {
+          return res.status(409).type("text/plain").send(
+            "Duplicate protection blocked this exceptional mint authorization."
+          );
+        }
+
+        throw error;
+      } finally {
+        client.release();
+      }
+    }
+  );
+
   router.get("/drop/:id", async (req, res) => {
     await ensureTables();
 
@@ -904,6 +1223,75 @@ function createWeeklyRouter({ pool }) {
     ]);
 
     const d = drop.rows[0];
+
+    const editionResult = await pool.query(`
+      SELECT
+        (
+          SELECT COUNT(*)::int
+          FROM nft_weekly_recipients
+          WHERE
+            drop_id = $1
+            AND mint_status = 'minted'
+            AND nftoken_id IS NOT NULL
+        ) AS subscriber_minted,
+        (
+          SELECT COUNT(*)::int
+          FROM nft_weekly_public_copies
+          WHERE
+            drop_id = $1
+            AND mint_status = 'minted'
+            AND nftoken_id IS NOT NULL
+        ) AS public_minted
+    `, [d.id]);
+
+    const subscriberMinted =
+      Number(editionResult.rows[0]?.subscriber_minted || 0);
+
+    const publicMinted =
+      Number(editionResult.rows[0]?.public_minted || 0);
+
+    const verifiedEdition =
+      subscriberMinted + publicMinted;
+
+    const exceptionCandidates = await pool.query(`
+      SELECT
+        r.id,
+        r.x_handle,
+        r.xrpl_address,
+        r.email,
+        r.eligible_week,
+        r.status
+      FROM nft_subscriber_registrations r
+      WHERE
+        r.status <> 'excluded'
+        AND NOT EXISTS (
+          SELECT 1
+          FROM nft_weekly_recipients wr
+          WHERE
+            wr.drop_id = $1
+            AND wr.registration_id = r.id
+        )
+        AND NOT EXISTS (
+          SELECT 1
+          FROM nft_weekly_mint_exceptions e
+          WHERE
+            e.drop_id = $1
+            AND e.registration_id = r.id
+        )
+      ORDER BY LOWER(r.x_handle), r.id
+    `, [d.id]);
+
+    const exceptions = await pool.query(`
+      SELECT
+        e.*,
+        r.x_handle,
+        r.xrpl_address
+      FROM nft_weekly_mint_exceptions e
+      LEFT JOIN nft_weekly_recipients r
+        ON r.id = e.recipient_id
+      WHERE e.drop_id = $1
+      ORDER BY e.created_at DESC, e.id DESC
+    `, [d.id]);
 
     const walletList = recipients.rows
       .map((r, i) =>
@@ -931,7 +1319,7 @@ This is the finalized House of Cauliman subscriber NFT drop packet.
 
 Validate the recipient set for duplicate wallets, duplicate handles, invalid XRPL addresses, missing values, and eligibility conflicts.
 
-Do not add anyone who is not included in this frozen recipient set.
+Use this subscriber recipient set as the normal distribution authority. Do not add another recipient unless they have a recorded exceptional mint authorization in THE 52 administration.
 
 Prepare the execution plan for this week's NFT distribution and give me the exact next production step.`;
 
@@ -962,57 +1350,79 @@ Prepare the execution plan for this week's NFT distribution and give me the exac
         </div>
 
         <div class="control-block">
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            ${
+              r.delivered
+                ? badge("DELIVERED / OWNED", "good")
+                : r.claim_offer_status === "blocked"
+                ? badge("WALLET INACTIVE / BLOCKED", "warn")
+                : r.claim_error || r.claim_accept_error
+                ? badge("CLAIM ERROR", "warn")
+                : r.mint_error
+                ? badge("MINT ERROR", "warn")
+                : r.mint_status !== "minted"
+                ? badge("READY TO MINT", "neutral")
+                : r.claim_offer_status === "open"
+                ? badge("CLAIM OPEN", "neutral")
+                : r.claim_accept_status === "pending" ||
+                  r.claim_accept_status === "submitted"
+                ? badge("CLAIM SUBMITTING", "neutral")
+                : r.claim_offer_status === "accepted"
+                ? badge("NEEDS RECONCILIATION", "warn")
+                : badge("CLAIM READY", "neutral")
+            }
+          </div>
 
-          <form
-            method="post"
-            action="/admin/weekly/drop/${d.id}/recipient/${r.id}"
-          >
+          ${
+            r.nftoken_id
+              ? `<div class="small" style="margin-top:8px">
+                   NFT ${esc(r.nftoken_id)}
+                 </div>`
+              : ""
+          }
 
-            <label>
-              Delivery status
-            </label>
+          ${
+            r.mint_tx_hash
+              ? `<div class="small" style="margin-top:5px">
+                   Mint TX ${esc(r.mint_tx_hash)}
+                 </div>`
+              : ""
+          }
 
-            <select name="delivery_status">
-              <option
-                value="ready"
-                ${!r.delivered ? "selected" : ""}
-              >
-                Ready
-              </option>
+          ${
+            r.claim_offer_id
+              ? `<div class="small" style="margin-top:5px">
+                   Claim ${esc(r.claim_offer_id)}
+                 </div>`
+              : ""
+          }
 
-              <option
-                value="delivered"
-                ${r.delivered ? "selected" : ""}
-              >
-                Delivered
-              </option>
-            </select>
-
-            <div style="margin-top:8px">
-              <input
-                type="text"
-                name="delivery_tx_hash"
-                value="${esc(r.delivery_tx_hash || "")}"
-                placeholder="XRPL transaction hash"
-              >
-            </div>
-
-            <button
-              class="btn primary"
-              type="submit"
-              style="margin-top:8px"
-            >
-              SAVE DELIVERY
-            </button>
-
-          </form>
-
+          ${
+            r.claim_error || r.claim_accept_error || r.mint_error
+              ? `<div class="small" style="margin-top:8px">
+                   ${esc(
+                     r.claim_error ||
+                     r.claim_accept_error ||
+                     r.mint_error
+                   )}
+                 </div>`
+              : ""
+          }
         </div>
 
       </div>
     `).join("");
 
     const body = `
+
+      <div style="margin-bottom:14px">
+        <a
+          class="btn secondary"
+          href="/admin/weekly/"
+        >
+          ← BACK TO WEEKLY DROPS
+        </a>
+      </div>
 
       <div class="grid four">
 
@@ -1022,7 +1432,7 @@ Prepare the execution plan for this week's NFT distribution and give me the exac
           </div>
 
           <div class="label">
-            Frozen Wallets
+            Subscriber Recipients
           </div>
         </div>
 
@@ -1082,7 +1492,7 @@ Prepare the execution plan for this week's NFT distribution and give me the exac
             type="button"
             data-action="copy-frozen-wallets"
           >
-            COPY FROZEN WALLETS
+            COPY SUBSCRIBER WALLETS
           </button>
 
           <button
@@ -1094,6 +1504,273 @@ Prepare the execution plan for this week's NFT distribution and give me the exac
           </button>
 
         </div>
+
+      </div>
+
+      <div class="card">
+
+        <div class="handle" style="margin-bottom:10px">
+          Verified Edition
+        </div>
+
+        <div class="grid four">
+
+          <div class="stat">
+            <div class="num">${subscriberMinted}</div>
+            <div class="label">Subscriber Minted</div>
+          </div>
+
+          <div class="stat">
+            <div class="num">${publicMinted}</div>
+            <div class="label">Public Minted</div>
+          </div>
+
+          <div class="stat">
+            <div class="num">${verifiedEdition}</div>
+            <div class="label">Verified Edition</div>
+          </div>
+
+          <div class="stat">
+            <div class="num">${exceptions.rows.length}</div>
+            <div class="label">Exceptional Authorizations</div>
+          </div>
+
+        </div>
+
+        <div
+          class="small"
+          style="margin-top:12px"
+        >
+          Verified edition is derived from successful subscriber
+          and public mints. Authorization alone does not increase supply.
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <div class="handle" style="margin-bottom:8px">
+          Exceptional Subscriber Mint
+        </div>
+
+        <div class="small" style="margin-bottom:14px">
+          Use only for a verified omission, system failure,
+          registration error, administrative error, approved
+          subscriber remediation, or another explicitly approved
+          subscriber exception. Claim and delivery problems must
+          be repaired against the existing NFT instead.
+          <br><br>
+          <strong>Authorization does not mint an NFT immediately.</strong>
+          It creates an audited exceptional mint authorization and adds
+          the subscriber to the controlled mint queue. The NFT is minted
+          only when the mint runner executes the authorized recipient.
+        </div>
+
+        ${
+          exceptionCandidates.rows.length
+            ? `
+              <form
+                method="post"
+                action="/admin/weekly/drop/${d.id}/exceptional-mint"
+              >
+
+                <label>Subscriber registration</label>
+
+                <select
+                  name="registration_id"
+                  required
+                >
+                  <option value="">
+                    Select subscriber
+                  </option>
+
+                  ${exceptionCandidates.rows.map(r => `
+                    <option value="${esc(r.id)}">
+                      ${esc(r.x_handle)}
+                      · ${esc(r.xrpl_address)}
+                      · eligible ${esc(dateOnly(r.eligible_week))}
+                    </option>
+                  `).join("")}
+                </select>
+
+                <label style="margin-top:12px">
+                  Reason
+                </label>
+
+                <select
+                  name="reason_code"
+                  required
+                >
+                  <option value="">
+                    Select reason
+                  </option>
+
+                  <option value="verified_system_failure">
+                    Verified system failure
+                  </option>
+
+                  <option value="verified_registration_error">
+                    Verified registration error
+                  </option>
+
+                  <option value="verified_roster_omission">
+                    Verified roster omission
+                  </option>
+
+                  <option value="verified_admin_error">
+                    Verified administrative error
+                  </option>
+
+                  <option value="approved_subscriber_remediation">
+                    Approved subscriber remediation
+                  </option>
+
+                  <option value="admin_approved_exception">
+                    Admin approved subscriber exception
+                  </option>
+                </select>
+
+                <label style="margin-top:12px">
+                  Written justification
+                </label>
+
+                <textarea
+                  name="justification"
+                  rows="5"
+                  maxlength="3000"
+                  required
+                  placeholder="Document exactly why this subscriber requires an exceptional mint."
+                ></textarea>
+
+                <div
+                  class="small"
+                  style="margin-top:12px"
+                >
+                  Current verified edition
+                  <strong>${verifiedEdition}</strong>.
+                  If this authorization is later minted successfully,
+                  verified edition becomes
+                  <strong>${verifiedEdition + 1}</strong>.
+                </div>
+
+                <label style="margin-top:12px">
+                  Confirmation
+                </label>
+
+                <input
+                  type="text"
+                  name="confirmation"
+                  autocomplete="off"
+                  required
+                  placeholder="AUTHORIZE EXCEPTIONAL MINT"
+                >
+
+                <div
+                  class="small"
+                  style="margin-top:6px"
+                >
+                  Type <strong>AUTHORIZE EXCEPTIONAL MINT</strong>
+                  exactly to confirm. This creates the authorization.
+                  It does not submit an XRPL mint transaction.
+                </div>
+
+                <button
+                  class="btn primary"
+                  type="submit"
+                  style="margin-top:12px"
+                >
+                  AUTHORIZE EXCEPTIONAL MINT
+                </button>
+
+              </form>
+            `
+            : `
+              <div class="small">
+                No subscriber registrations are currently available
+                for exceptional recipient authorization.
+              </div>
+            `
+        }
+
+      </div>
+
+      <div class="card">
+
+        <div class="handle" style="margin-bottom:8px">
+          Exceptional Mint Audit
+        </div>
+
+        ${
+          exceptions.rows.length
+            ? exceptions.rows.map(e => `
+                <div
+                  class="person"
+                  style="margin-bottom:10px"
+                >
+                  <div>
+                    ${badge(
+                      String(e.status || "approved").toUpperCase(),
+                      e.status === "minted" ? "good" : "neutral"
+                    )}
+                  </div>
+
+                  <div>
+                    <div class="handle">
+                      ${esc(e.x_handle || `Registration ${e.registration_id}`)}
+                    </div>
+
+                    <div class="small">
+                      ${esc(e.reason_code)}
+                    </div>
+
+                    <div class="small" style="margin-top:5px">
+                      ${esc(e.justification)}
+                    </div>
+                  </div>
+
+                  <div class="wallet-block wallet">
+                    ${esc(e.xrpl_address || "")}
+                  </div>
+
+                  <div class="control-block">
+                    <div class="small">
+                      Edition ${esc(e.edition_before)}
+                      ${e.edition_after != null
+                        ? ` → ${esc(e.edition_after)}`
+                        : " → pending"}
+                    </div>
+
+                    <div class="small" style="margin-top:5px">
+                      Approved by
+                      ${e.approved_by
+                        ? esc(e.approved_by)
+                        : "Historical authorization · approver not captured"}
+                    </div>
+
+                    ${
+                      e.nftoken_id
+                        ? `<div class="small" style="margin-top:5px">
+                             NFT ${esc(e.nftoken_id)}
+                           </div>`
+                        : ""
+                    }
+
+                    ${
+                      e.mint_tx_hash
+                        ? `<div class="small" style="margin-top:5px">
+                             Mint TX ${esc(e.mint_tx_hash)}
+                           </div>`
+                        : ""
+                    }
+                  </div>
+                </div>
+              `).join("")
+            : `
+              <div class="small">
+                No exceptional mint authorizations for this drop.
+              </div>
+            `
+        }
 
       </div>
 
@@ -1155,49 +1832,6 @@ Prepare the execution plan for this week's NFT distribution and give me the exac
     }));
   });
 
-  router.post(
-    "/drop/:dropId/recipient/:recipientId",
-    async (req, res) => {
-      await ensureTables();
-
-      const dropId = Number(req.params.dropId);
-      const recipientId = Number(req.params.recipientId);
-
-      if (
-        !Number.isInteger(dropId) ||
-        !Number.isInteger(recipientId)
-      ) {
-        return res.sendStatus(400);
-      }
-
-      const delivered =
-        req.body.delivery_status === "delivered";
-
-      const txHash =
-        String(req.body.delivery_tx_hash || "")
-          .trim() || null;
-
-      await pool.query(`
-        UPDATE nft_weekly_recipients
-        SET
-          delivered = $1,
-          delivery_tx_hash = $2
-        WHERE
-          id = $3
-          AND drop_id = $4
-      `, [
-        delivered,
-        txHash,
-        recipientId,
-        dropId
-      ]);
-
-      res.redirect(
-        `/admin/weekly/drop/${dropId}`
-      );
-    }
-  );
-
   router.get(
     "/drop/:id/export.csv",
     async (req, res) => {
@@ -1246,5 +1880,6 @@ Prepare the execution plan for this week's NFT distribution and give me the exac
 }
 
 module.exports = {
-  createWeeklyRouter
+  createWeeklyRouter,
+  ensureWeeklyTables
 };

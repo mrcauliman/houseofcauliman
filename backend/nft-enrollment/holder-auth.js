@@ -673,6 +673,516 @@ function createHolderAuth({ pool }) {
   );
 
   router.get(
+    "/the52/:card/claim",
+    ownershipLimiter,
+    async (req, res) => {
+      try {
+        const session = await getSession(req);
+
+        res.setHeader("Cache-Control", "no-store");
+
+        if (!session) {
+          return res.status(401).json({
+            ok: false,
+            signedIn: false
+          });
+        }
+
+        const cardNumber =
+          String(req.params.card || "").padStart(2, "0");
+
+        const card = THE52_CARDS[cardNumber];
+
+        if (!card) {
+          return res.status(404).json({
+            ok: false,
+            error: "THE 52 card is not available."
+          });
+        }
+
+        const result = await pool.query(`
+          SELECT
+            r.id,
+            r.x_handle,
+            r.xrpl_address,
+            r.nftoken_id,
+            r.claim_offer_id,
+            r.claim_offer_status,
+            r.claim_accept_status,
+            r.claim_accept_payload_uuid,
+            r.claim_accept_tx_hash,
+            r.claim_accept_error,
+            r.claim_accepted_at
+          FROM nft_weekly_recipients r
+          JOIN nft_weekly_drops d
+            ON d.id = r.drop_id
+          WHERE
+            d.drop_date = $1
+            AND r.mint_status = 'minted'
+            AND LOWER(r.xrpl_address) = LOWER($2)
+          ORDER BY r.id DESC
+          LIMIT 1
+        `, [
+          card.dropDate,
+          session.xrpl_address
+        ]);
+
+        if (!result.rowCount) {
+          return res.json({
+            ok: true,
+            signedIn: true,
+            card: cardNumber,
+            claim: null
+          });
+        }
+
+        const row = result.rows[0];
+
+        return res.json({
+          ok: true,
+          signedIn: true,
+          card: cardNumber,
+          claim: {
+            recipientId: row.id,
+            xHandle: row.x_handle,
+            xrplAddress: row.xrpl_address,
+            nftokenId: row.nftoken_id,
+            offerId: row.claim_offer_id,
+            offerStatus: row.claim_offer_status,
+            acceptStatus: row.claim_accept_status,
+            acceptPayloadUuid: row.claim_accept_payload_uuid,
+            acceptTxHash: row.claim_accept_tx_hash,
+            acceptError: row.claim_accept_error,
+            acceptedAt: row.claim_accepted_at
+          }
+        });
+      } catch (error) {
+        console.error(
+          "THE 52 claim lookup failed",
+          error
+        );
+
+        return res.status(503).json({
+          ok: false,
+          error: "Claim lookup unavailable"
+        });
+      }
+    }
+  );
+
+  router.post(
+    "/the52/:card/claim/accept",
+    ownershipLimiter,
+    async (req, res) => {
+      try {
+        const session = await getSession(req);
+
+        res.setHeader("Cache-Control", "no-store");
+
+        if (!session) {
+          return res.status(401).json({
+            ok: false,
+            signedIn: false
+          });
+        }
+
+        const supplied =
+          String(req.headers["x-hoc-csrf"] || "");
+
+        if (!safeEqual(
+          supplied,
+          session.csrfToken
+        )) {
+          return res.status(403).json({
+            ok: false,
+            error: "Invalid CSRF token"
+          });
+        }
+
+        if (!configured || !xumm) {
+          return res.status(503).json({
+            ok: false,
+            error: "Xaman signing is not configured."
+          });
+        }
+
+        const cardNumber =
+          String(req.params.card || "").padStart(2, "0");
+
+        const card = THE52_CARDS[cardNumber];
+
+        if (!card) {
+          return res.status(404).json({
+            ok: false,
+            error: "THE 52 card is not available."
+          });
+        }
+
+        const result = await pool.query(`
+          SELECT
+            r.*
+          FROM nft_weekly_recipients r
+          JOIN nft_weekly_drops d
+            ON d.id = r.drop_id
+          WHERE
+            d.drop_date = $1
+            AND r.mint_status = 'minted'
+            AND LOWER(r.xrpl_address) = LOWER($2)
+          ORDER BY r.id DESC
+          LIMIT 1
+        `, [
+          card.dropDate,
+          session.xrpl_address
+        ]);
+
+        if (!result.rowCount) {
+          return res.status(404).json({
+            ok: false,
+            error: "No THE 52 claim is assigned to this wallet."
+          });
+        }
+
+        const row = result.rows[0];
+
+        if (!row.nftoken_id) {
+          return res.status(409).json({
+            ok: false,
+            error: "NFT has not been minted for this claim."
+          });
+        }
+
+        if (!row.claim_offer_id) {
+          return res.status(409).json({
+            ok: false,
+            error: "No open claim offer exists."
+          });
+        }
+
+        if (
+          row.claim_offer_status === "accepted" ||
+          row.delivered === true
+        ) {
+          return res.json({
+            ok: true,
+            alreadyAccepted: true,
+            delivered: true,
+            nftokenId: row.nftoken_id
+          });
+        }
+
+        if (
+          row.claim_accept_status === "pending" &&
+          row.claim_accept_payload_uuid
+        ) {
+          const existing =
+            await xumm.payload.get(
+              row.claim_accept_payload_uuid
+            );
+
+          if (
+            existing?.meta?.resolved === true &&
+            existing?.meta?.signed === true
+          ) {
+            return res.status(409).json({
+              ok: false,
+              error:
+                "Existing acceptance is resolving. " +
+                "Refresh shortly."
+            });
+          }
+
+          return res.json({
+            ok: true,
+            pending: true,
+            payloadUuid:
+              row.claim_accept_payload_uuid,
+            payloadUrl:
+              existing?.next?.always || null,
+            nftokenId: row.nftoken_id,
+            offerId: row.claim_offer_id
+          });
+        }
+
+        const client = new Client(XRPL_WS);
+        await client.connect();
+
+        try {
+          const offerResponse =
+            await client.request({
+              command: "account_objects",
+              account: ISSUER,
+              type: "nft_offer",
+              ledger_index: "validated"
+            });
+
+          const offers =
+            offerResponse.result?.account_objects || [];
+
+          const matching =
+            offers.find(offer =>
+              String(offer.index || "") ===
+                String(row.claim_offer_id) &&
+              String(offer.NFTokenID || "") ===
+                String(row.nftoken_id) &&
+              String(offer.Owner || "") ===
+                String(ISSUER) &&
+              String(offer.Destination || "") ===
+                String(session.xrpl_address)
+            );
+
+          if (!matching) {
+            return res.status(409).json({
+              ok: false,
+              error:
+                "The assigned claim offer is no longer open " +
+                "or does not match this wallet."
+            });
+          }
+
+          const created =
+            await xumm.payload.create({
+              txjson: {
+                TransactionType:
+                  "NFTokenAcceptOffer",
+
+                NFTokenSellOffer:
+                  row.claim_offer_id
+              },
+
+              options: {
+                force_network: "MAINNET",
+
+                return_url: {
+                  web:
+                    `${API_ORIGIN}` +
+                    `/holder/the52/${cardNumber}/claim/callback` +
+                    `?payload={id}`,
+
+                  app:
+                    `${API_ORIGIN}` +
+                    `/holder/the52/${cardNumber}/claim/callback` +
+                    `?payload={id}`
+                }
+              },
+
+              custom_meta: {
+                identifier:
+                  `hoc-the52-claim-${row.id}`,
+
+                instruction:
+                  `Accept THE 52 #${cardNumber} ` +
+                  `${card.name} NFT. ` +
+                  `No payment is required.`
+              }
+            });
+
+          if (
+            !created?.uuid ||
+            !created?.next?.always
+          ) {
+            throw new Error(
+              "Xaman did not return a valid acceptance payload"
+            );
+          }
+
+          await pool.query(`
+            UPDATE nft_weekly_recipients
+            SET
+              claim_accept_payload_uuid = $2,
+              claim_accept_status = 'pending',
+              claim_accept_attempts =
+                claim_accept_attempts + 1,
+              claim_accept_error = NULL
+            WHERE id = $1
+          `, [
+            row.id,
+            created.uuid
+          ]);
+
+          return res.json({
+            ok: true,
+            pending: true,
+            payloadUuid: created.uuid,
+            payloadUrl: created.next.always,
+            nftokenId: row.nftoken_id,
+            offerId: row.claim_offer_id
+          });
+        } finally {
+          await client.disconnect();
+        }
+      } catch (error) {
+        console.error(
+          "THE 52 claim acceptance creation failed",
+          error
+        );
+
+        return res.status(500).json({
+          ok: false,
+          error:
+            "Could not create the Xaman acceptance request."
+        });
+      }
+    }
+  );
+
+  router.get(
+    "/the52/:card/claim/callback",
+    async (req, res) => {
+      const payloadUuid =
+        String(req.query.payload || "").trim();
+
+      try {
+        await ensureTables();
+
+        if (
+          !configured ||
+          !xumm ||
+          !/^[0-9a-fA-F-]{36}$/.test(payloadUuid)
+        ) {
+          return res.status(400).send(
+            "Invalid claim acceptance response."
+          );
+        }
+
+        const payload =
+          await xumm.payload.get(payloadUuid);
+
+        if (!payload) {
+          return res.status(404).send(
+            "Claim acceptance payload not found."
+          );
+        }
+
+        const meta =
+          payload.meta || {};
+
+        if (
+          meta.resolved !== true ||
+          meta.signed !== true
+        ) {
+          return res.redirect(
+            303,
+            `${WEB_ORIGIN}/the52/?claim=rejected`
+          );
+        }
+
+        const txHash =
+          String(
+            payload.response?.txid ||
+            ""
+          ).trim();
+
+        if (!txHash) {
+          throw new Error(
+            "Signed claim acceptance has no transaction hash"
+          );
+        }
+
+        const cardNumber =
+          String(req.params.card || "")
+            .padStart(2, "0");
+
+        const client = new Client(XRPL_WS);
+        await client.connect();
+
+        try {
+          const tx = await client.request({
+            command: "tx",
+            transaction: txHash,
+            binary: false
+          });
+
+          const result =
+            tx.result;
+
+          if (
+            result.validated !== true ||
+            result.meta?.TransactionResult !==
+              "tesSUCCESS"
+          ) {
+            throw new Error(
+              "Claim acceptance did not validate tesSUCCESS"
+            );
+          }
+
+          if (
+            result.tx_json?.TransactionType !==
+              "NFTokenAcceptOffer"
+          ) {
+            throw new Error(
+              "Unexpected transaction type"
+            );
+          }
+
+          const acceptedOffer =
+            String(
+              result.tx_json?.NFTokenSellOffer ||
+              ""
+            );
+
+          if (!acceptedOffer) {
+            throw new Error(
+              "Accepted offer ID missing"
+            );
+          }
+
+          const update = await pool.query(`
+            UPDATE nft_weekly_recipients
+            SET
+              claim_accept_tx_hash = $2,
+              claim_accept_status = 'submitted',
+              claim_accept_error = NULL
+            WHERE
+              claim_accept_payload_uuid = $1
+              AND claim_offer_id = $3
+            RETURNING id, xrpl_address, nftoken_id
+          `, [
+            payloadUuid,
+            txHash,
+            acceptedOffer
+          ]);
+
+          if (!update.rowCount) {
+            throw new Error(
+              "Acceptance payload does not match an assigned claim"
+            );
+          }
+
+          return res.redirect(
+            303,
+            `${WEB_ORIGIN}/the52/?claim=accepted`
+          );
+        } finally {
+          await client.disconnect();
+        }
+      } catch (error) {
+        console.error(
+          "THE 52 claim acceptance callback failed",
+          error
+        );
+
+        try {
+          await pool.query(`
+            UPDATE nft_weekly_recipients
+            SET
+              claim_accept_status = 'error',
+              claim_accept_error = $2
+            WHERE claim_accept_payload_uuid = $1
+          `, [
+            payloadUuid,
+            String(error.message || error).slice(0, 1000)
+          ]);
+        } catch {}
+
+        return res.redirect(
+          303,
+          `${WEB_ORIGIN}/the52/?claim=error`
+        );
+      }
+    }
+  );
+
+  router.get(
     "/me",
     async (req, res) => {
       try {
@@ -1024,7 +1534,8 @@ function createHolderAuth({ pool }) {
 
   return {
     router,
-    getSession
+    getSession,
+    safeEqual
   };
 }
 

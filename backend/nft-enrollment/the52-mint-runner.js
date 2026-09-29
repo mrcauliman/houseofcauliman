@@ -166,18 +166,76 @@ async function finalizeRecipientMint(row, tx) {
 
   const issuerSelf = row.xrpl_address === ISSUER;
 
-  await pool.query(`
-    UPDATE nft_weekly_recipients
-    SET
-      mint_status='minted',
-      nftoken_id=$2,
-      mint_error=NULL,
-      minted_at=NOW(),
-      delivered=CASE WHEN $3 THEN TRUE ELSE delivered END,
-      delivery_tx_hash=CASE WHEN $3 THEN mint_tx_hash ELSE delivery_tx_hash END,
-      claim_offer_status=CASE WHEN $3 THEN 'not_required' ELSE claim_offer_status END
-    WHERE id=$1
-  `, [row.id, nftId, issuerSelf]);
+  const db = await pool.connect();
+
+  try {
+    await db.query("BEGIN");
+
+    await db.query(`
+      UPDATE nft_weekly_recipients
+      SET
+        mint_status='minted',
+        nftoken_id=$2,
+        mint_error=NULL,
+        minted_at=NOW(),
+        delivered=CASE WHEN $3 THEN TRUE ELSE delivered END,
+        delivery_tx_hash=CASE WHEN $3 THEN mint_tx_hash ELSE delivery_tx_hash END,
+        claim_offer_status=CASE WHEN $3 THEN 'not_required' ELSE claim_offer_status END
+      WHERE id=$1
+    `, [row.id, nftId, issuerSelf]);
+
+    const edition = await db.query(`
+      SELECT
+        (
+          SELECT COUNT(*)::int
+          FROM nft_weekly_recipients
+          WHERE
+            drop_id=$1
+            AND mint_status='minted'
+            AND nftoken_id IS NOT NULL
+        )
+        +
+        (
+          SELECT COUNT(*)::int
+          FROM nft_weekly_public_copies
+          WHERE
+            drop_id=$1
+            AND mint_status='minted'
+            AND nftoken_id IS NOT NULL
+        ) AS verified_edition
+    `, [row.drop_id]);
+
+    await db.query(`
+      UPDATE nft_weekly_mint_exceptions
+      SET
+        status='minted',
+        edition_after=$4,
+        nftoken_id=$2,
+        mint_tx_hash=$3,
+        minted_at=NOW(),
+        completed_at=NOW(),
+        failure_reason=NULL,
+        updated_at=NOW()
+      WHERE
+        recipient_id=$1
+        AND status IN ('approved','failed')
+    `, [
+      row.id,
+      nftId,
+      row.mint_tx_hash,
+      Number(edition.rows[0].verified_edition)
+    ]);
+
+    await db.query("COMMIT");
+  } catch (error) {
+    try {
+      await db.query("ROLLBACK");
+    } catch {}
+
+    throw error;
+  } finally {
+    db.release();
+  }
 
   console.log(`MINT VERIFIED ${row.x_handle}`);
   console.log(`NFT ${nftId}`);
@@ -239,6 +297,7 @@ async function claimNext(dropId) {
       AND xrpl_address <> $2
       AND claim_offer_status IS DISTINCT FROM 'open'
       AND claim_offer_status IS DISTINCT FROM 'accepted'
+      AND claim_offer_status IS DISTINCT FROM 'blocked'
     ORDER BY id
     LIMIT 1
   `, [dropId, ISSUER]);
@@ -255,6 +314,33 @@ async function claimNext(dropId) {
   await client.connect();
 
   try {
+    // Never submit an NFTokenCreateOffer to an XRPL account
+    // that does not exist on the validated ledger.
+    try {
+      await client.request({
+        command: "account_info",
+        account: row.xrpl_address,
+        ledger_index: "validated"
+      });
+    } catch (e) {
+      const message =
+        "Destination XRPL account does not exist. Claim blocked until wallet is activated.";
+
+      await pool.query(`
+        UPDATE nft_weekly_recipients
+        SET
+          claim_offer_status='blocked',
+          claim_offer_tx_hash=NULL,
+          claim_offer_id=NULL,
+          claim_error=$2
+        WHERE id=$1
+      `, [row.id, message]);
+
+      console.log(`BLOCKED ${row.x_handle}`);
+      console.log(`Destination ${row.xrpl_address}`);
+      console.log(message);
+      return;
+    }
     if (row.claim_offer_tx_hash) {
       const tx = await fetchTx(client, row.claim_offer_tx_hash);
 
@@ -432,11 +518,41 @@ async function mintNext(dropId) {
           result.result
         );
       } catch (e) {
-        await pool.query(`
-          UPDATE nft_weekly_recipients
-          SET mint_error=$2
-          WHERE id=$1
-        `, [row.id, String(e.message || e).slice(0,1000)]);
+        const failureReason =
+          String(e.message || e).slice(0,1000);
+
+        const db = await pool.connect();
+
+        try {
+          await db.query("BEGIN");
+
+          await db.query(`
+            UPDATE nft_weekly_recipients
+            SET mint_error=$2
+            WHERE id=$1
+          `, [row.id, failureReason]);
+
+          await db.query(`
+            UPDATE nft_weekly_mint_exceptions
+            SET
+              status='failed',
+              failure_reason=$2,
+              updated_at=NOW()
+            WHERE
+              recipient_id=$1
+              AND status='approved'
+          `, [row.id, failureReason]);
+
+          await db.query("COMMIT");
+        } catch (auditError) {
+          try {
+            await db.query("ROLLBACK");
+          } catch {}
+
+          throw auditError;
+        } finally {
+          db.release();
+        }
 
         throw e;
       }
@@ -1191,6 +1307,7 @@ async function reconcileClaims(dropId) {
       AND mint_status='minted'
       AND delivered=FALSE
       AND xrpl_address <> $2
+      AND claim_offer_status IS DISTINCT FROM 'blocked'
     ORDER BY id
   `, [dropId, ISSUER]);
 
@@ -1304,6 +1421,624 @@ async function preview(dropDate) {
   }
 
   console.log(`Expected total mints: ${recipients.rowCount + 1}`);
+}
+
+
+async function migrateWalletChange(requestId) {
+  if (!Number.isInteger(requestId)) {
+    throw new Error("Invalid wallet change request ID");
+  }
+
+  const wallet = readIssuerWallet();
+  const client = new Client(XRPL_WS);
+
+  await client.connect();
+
+  try {
+    const requestResult = await pool.query(`
+      SELECT *
+      FROM nft_wallet_change_requests
+      WHERE id=$1
+      LIMIT 1
+    `, [requestId]);
+
+    if (!requestResult.rowCount) {
+      throw new Error(`Wallet change ${requestId} not found`);
+    }
+
+    const change = requestResult.rows[0];
+
+    if (change.status === "approved") {
+      console.log(`Wallet change ${requestId} is already approved`);
+      return;
+    }
+
+    if (change.status !== "pending") {
+      throw new Error(
+        `Wallet change ${requestId} is not pending`
+      );
+    }
+
+    const registrationResult = await pool.query(`
+      SELECT *
+      FROM nft_subscriber_registrations
+      WHERE id=$1
+      LIMIT 1
+    `, [change.registration_id]);
+
+    if (!registrationResult.rowCount) {
+      throw new Error(
+        `Registration ${change.registration_id} not found`
+      );
+    }
+
+    const registration = registrationResult.rows[0];
+
+    const oldXHandle =
+      String(change.old_x_handle || change.x_handle || "").trim();
+
+    const newXHandle =
+      String(change.new_x_handle || change.x_handle || "").trim();
+
+    const oldXHandleNormalized =
+      oldXHandle.replace(/^@/, "").toLowerCase();
+
+    const newXHandleNormalized =
+      newXHandle.replace(/^@/, "").toLowerCase();
+
+    const handleChanged =
+      oldXHandleNormalized !== newXHandleNormalized;
+
+    const walletChanged =
+      String(change.old_xrpl_address || "") !==
+      String(change.new_xrpl_address || "");
+
+    if (
+      String(registration.xrpl_address || "") !==
+      String(change.old_xrpl_address || "")
+    ) {
+      throw new Error(
+        "Subscriber wallet changed after this request was submitted"
+      );
+    }
+
+    if (!handleChanged && !walletChanged) {
+      throw new Error(
+        "Registration change does not modify the X handle or wallet"
+      );
+    }
+
+    if (handleChanged) {
+      const duplicateHandle = await pool.query(`
+        SELECT id
+        FROM nft_subscriber_registrations
+        WHERE
+          x_handle_normalized=$1
+          AND id<>$2
+        LIMIT 1
+      `, [
+        newXHandleNormalized,
+        change.registration_id
+      ]);
+
+      if (duplicateHandle.rowCount) {
+        throw new Error(
+          `X handle @${newXHandleNormalized} is already registered`
+        );
+      }
+    }
+
+    if (!walletChanged) {
+      const db = await pool.connect();
+
+      try {
+        await db.query("BEGIN");
+
+        const lockedRequest = await db.query(`
+          SELECT *
+          FROM nft_wallet_change_requests
+          WHERE id=$1
+            AND status='pending'
+          FOR UPDATE
+        `, [requestId]);
+
+        if (!lockedRequest.rowCount) {
+          throw new Error(
+            "Registration change request is no longer pending"
+          );
+        }
+
+        const lockedRegistration = await db.query(`
+          SELECT *
+          FROM nft_subscriber_registrations
+          WHERE id=$1
+          FOR UPDATE
+        `, [change.registration_id]);
+
+        if (
+          !lockedRegistration.rowCount ||
+          String(lockedRegistration.rows[0].xrpl_address) !==
+            String(change.old_xrpl_address) ||
+          String(
+            lockedRegistration.rows[0].x_handle_normalized || ""
+          ).toLowerCase() !== oldXHandleNormalized
+        ) {
+          throw new Error(
+            "Subscriber registration changed while request was pending"
+          );
+        }
+
+        await db.query(`
+          UPDATE nft_subscriber_registrations
+          SET
+            x_handle=$1,
+            x_handle_normalized=$2,
+            updated_at=NOW()
+          WHERE id=$3
+        `, [
+          `@${newXHandleNormalized}`,
+          newXHandleNormalized,
+          change.registration_id
+        ]);
+
+        /*
+         * Keep undelivered recipient identity aligned with the
+         * corrected subscriber registration. Historical delivered
+         * recipient records remain unchanged.
+         */
+        await db.query(`
+          UPDATE nft_weekly_recipients
+          SET x_handle=$1
+          WHERE
+            registration_id=$2
+            AND delivered=FALSE
+        `, [
+          `@${newXHandleNormalized}`,
+          change.registration_id
+        ]);
+
+        await db.query(`
+          UPDATE nft_wallet_change_requests
+          SET
+            status='approved',
+            reviewed_at=NOW()
+          WHERE id=$1
+        `, [requestId]);
+
+        await db.query("COMMIT");
+
+        console.log(
+          `HANDLE CHANGE APPROVED ${oldXHandle} -> ` +
+          `@${newXHandleNormalized}`
+        );
+      } catch (e) {
+        await db.query("ROLLBACK");
+        throw e;
+      } finally {
+        db.release();
+      }
+
+      return;
+    }
+
+    try {
+      await client.request({
+        command: "account_info",
+        account: change.new_xrpl_address,
+        ledger_index: "validated"
+      });
+    } catch {
+      throw new Error(
+        `New wallet is not activated on XRPL: ${change.new_xrpl_address}`
+      );
+    }
+
+    const recipients = await pool.query(`
+      SELECT *
+      FROM nft_weekly_recipients
+      WHERE registration_id=$1
+        AND mint_status='minted'
+        AND delivered=FALSE
+        AND xrpl_address=$2
+        AND claim_offer_status='open'
+      ORDER BY id
+    `, [
+      change.registration_id,
+      change.old_xrpl_address
+    ]);
+
+    console.log(
+      `Wallet migration ${requestId} ${change.x_handle}: ` +
+      `${recipients.rowCount} open THE 52 claim(s)`
+    );
+
+    const migrations = [];
+
+    for (const row of recipients.rows) {
+      if (!row.nftoken_id) {
+        throw new Error(
+          `Recipient ${row.id} has no NFT ID`
+        );
+      }
+
+      /*
+       * Read the issuer's validated NFT offer objects directly.
+       * Do not use nft_sell_offers with nft_id here.
+       */
+      const offerObjects = await client.request({
+        command: "account_objects",
+        account: ISSUER,
+        type: "nft_offer",
+        ledger_index: "validated"
+      });
+
+      const offers =
+        offerObjects.result?.account_objects || [];
+
+      const oldOffer = offers.find(offer =>
+        String(offer.index || "") ===
+          String(row.claim_offer_id || "") &&
+        String(offer.NFTokenID || "") ===
+          String(row.nftoken_id) &&
+        String(offer.Owner || "") === String(ISSUER) &&
+        String(offer.Destination || "") ===
+          String(change.old_xrpl_address)
+      );
+
+      const newOffer = offers.find(offer =>
+        String(offer.NFTokenID || "") ===
+          String(row.nftoken_id) &&
+        String(offer.Owner || "") === String(ISSUER) &&
+        String(offer.Destination || "") ===
+          String(change.new_xrpl_address)
+      );
+
+      /*
+       * Recovery case:
+       *
+       * If the replacement offer already exists, it means a previous
+       * execution got through XRPL but may not have completed the DB
+       * transaction. Reuse that offer instead of creating another one.
+       */
+      if (newOffer) {
+        console.log(
+          `EXISTING REPLACEMENT ${row.x_handle} ` +
+          `offer ${newOffer.index}`
+        );
+
+        /*
+         * If the old offer survived alongside the replacement, remove it.
+         * There must never be two valid delivery offers for this claim.
+         */
+        if (oldOffer) {
+          const cancelPrepared = await client.autofill({
+            TransactionType: "NFTokenCancelOffer",
+            Account: ISSUER,
+            NFTokenOffers: [oldOffer.index]
+          });
+
+          const cancelSigned = wallet.sign(cancelPrepared);
+          const cancelResult =
+            await client.submitAndWait(cancelSigned.tx_blob);
+
+          if (
+            cancelResult.result.validated !== true ||
+            cancelResult.result.meta?.TransactionResult !== "tesSUCCESS"
+          ) {
+            throw new Error(
+              `Old offer cancellation failed for ${row.x_handle}: ` +
+              `${cancelResult.result.meta?.TransactionResult || "unvalidated"}`
+            );
+          }
+
+          console.log(
+            `OLD OFFER REMOVED ${row.x_handle} ${oldOffer.index}`
+          );
+        }
+
+        migrations.push({
+          recipientId: row.id,
+          nftokenId: row.nftoken_id,
+          offerId: newOffer.index,
+          txHash: row.claim_offer_tx_hash
+        });
+
+        continue;
+      }
+
+      /*
+       * Normal case:
+       * old offer exists, replacement doesn't.
+       */
+      if (oldOffer) {
+        console.log(
+          `CANCEL ${row.x_handle} ${oldOffer.index}`
+        );
+
+        const cancelPrepared = await client.autofill({
+          TransactionType: "NFTokenCancelOffer",
+          Account: ISSUER,
+          NFTokenOffers: [oldOffer.index]
+        });
+
+        const cancelSigned = wallet.sign(cancelPrepared);
+        const cancelResult =
+          await client.submitAndWait(cancelSigned.tx_blob);
+
+        if (
+          cancelResult.result.validated !== true ||
+          cancelResult.result.meta?.TransactionResult !== "tesSUCCESS"
+        ) {
+          throw new Error(
+            `Cancellation failed for ${row.x_handle}: ` +
+            `${cancelResult.result.meta?.TransactionResult || "unvalidated"}`
+          );
+        }
+
+        console.log(
+          `OLD OFFER CANCELED ${row.x_handle}`
+        );
+      }
+
+      /*
+       * Recovery case:
+       * old offer may have already been canceled by a previous attempt.
+       * Before creating anything, confirm the issuer still owns the NFT.
+       */
+      const issuerNFTs = await client.request({
+        command: "account_nfts",
+        account: ISSUER,
+        ledger_index: "validated"
+      });
+
+      const issuerOwnsNFT =
+        (issuerNFTs.result?.account_nfts || []).some(
+          nft => String(nft.NFTokenID) === String(row.nftoken_id)
+        );
+
+      if (!issuerOwnsNFT) {
+        throw new Error(
+          `Issuer no longer owns NFT ${row.nftoken_id}; ` +
+          `refusing replacement offer`
+        );
+      }
+
+      /*
+       * Re-read issuer NFT offer objects after cancellation/recovery.
+       *
+       * Do not use nft_sell_offers here. The XRPL server does not
+       * accept nft_id for that command in this environment.
+       */
+      const latestObjects = await client.request({
+        command: "account_objects",
+        account: ISSUER,
+        type: "nft_offer",
+        ledger_index: "validated"
+      });
+
+      const replacementAlreadyExists =
+        (latestObjects.result?.account_objects || []).find(offer =>
+          String(offer.NFTokenID || "") === String(row.nftoken_id) &&
+          String(offer.Owner || "") === String(ISSUER) &&
+          String(offer.Destination || "") ===
+            String(change.new_xrpl_address)
+        );
+
+      if (replacementAlreadyExists) {
+        migrations.push({
+          recipientId: row.id,
+          nftokenId: row.nftoken_id,
+          offerId: replacementAlreadyExists.index,
+          txHash: row.claim_offer_tx_hash
+        });
+
+        console.log(
+          `REUSING EXISTING REPLACEMENT ${row.x_handle} ` +
+          `offer ${replacementAlreadyExists.index}`
+        );
+
+        continue;
+      }
+
+      const prepared = await client.autofill({
+        TransactionType: "NFTokenCreateOffer",
+        Account: ISSUER,
+        NFTokenID: row.nftoken_id,
+        Amount: "0",
+        Flags: 1,
+        Destination: change.new_xrpl_address
+      });
+
+      const signed = wallet.sign(prepared);
+
+      console.log(
+        `CREATE ${row.x_handle} replacement ${signed.hash}`
+      );
+
+      const result =
+        await client.submitAndWait(signed.tx_blob);
+
+      if (
+        result.result.validated !== true ||
+        result.result.meta?.TransactionResult !== "tesSUCCESS"
+      ) {
+        throw new Error(
+          `Replacement offer failed for ${row.x_handle}: ` +
+          `${result.result.meta?.TransactionResult || "unvalidated"}`
+        );
+      }
+
+      const offerId = getCreatedOfferId(result.result.meta);
+
+      if (!offerId) {
+        throw new Error(
+          `Unable to derive replacement offer ID for ${row.x_handle}`
+        );
+      }
+
+      /*
+       * Verify the replacement directly from the issuer's validated
+       * NFT offer ledger objects.
+       */
+      const verify = await client.request({
+        command: "account_objects",
+        account: ISSUER,
+        type: "nft_offer",
+        ledger_index: "validated"
+      });
+
+      const replacement =
+        (verify.result?.account_objects || []).find(offer =>
+          String(offer.index || "") === String(offerId) &&
+          String(offer.NFTokenID || "") === String(row.nftoken_id) &&
+          String(offer.Owner || "") === String(ISSUER) &&
+          String(offer.Destination || "") ===
+            String(change.new_xrpl_address)
+        );
+
+      if (!replacement) {
+        throw new Error(
+          `Replacement offer ${offerId} could not be verified`
+        );
+      }
+
+      migrations.push({
+        recipientId: row.id,
+        nftokenId: row.nftoken_id,
+        offerId,
+        txHash: signed.hash
+      });
+
+      console.log(
+        `MIGRATION VERIFIED ${row.x_handle} ` +
+        `NFT ${row.nftoken_id} OFFER ${offerId}`
+      );
+    }
+
+    /*
+     * Reconcile database state only after XRPL state is verified.
+     * If this transaction fails, rerunning the command will detect
+     * the already-existing replacement offer instead of minting/
+     * creating another one.
+     */
+    const db = await pool.connect();
+
+    try {
+      await db.query("BEGIN");
+
+      const lockedRequest = await db.query(`
+        SELECT *
+        FROM nft_wallet_change_requests
+        WHERE id=$1
+          AND status='pending'
+        FOR UPDATE
+      `, [requestId]);
+
+      if (!lockedRequest.rowCount) {
+        throw new Error(
+          "Wallet change request is no longer pending"
+        );
+      }
+
+      const lockedRegistration = await db.query(`
+        SELECT *
+        FROM nft_subscriber_registrations
+        WHERE id=$1
+        FOR UPDATE
+      `, [change.registration_id]);
+
+      if (
+        !lockedRegistration.rowCount ||
+        String(lockedRegistration.rows[0].xrpl_address) !==
+          String(change.old_xrpl_address) ||
+        String(
+          lockedRegistration.rows[0].x_handle_normalized || ""
+        ).toLowerCase() !== oldXHandleNormalized
+      ) {
+        throw new Error(
+          "Subscriber registration changed while migration was running"
+        );
+      }
+
+      for (const migration of migrations) {
+        await db.query(`
+          UPDATE nft_weekly_recipients
+          SET
+            xrpl_address=$2,
+            claim_offer_status='open',
+            claim_offer_id=$3,
+            claim_offer_tx_hash=COALESCE($4, claim_offer_tx_hash),
+            claim_error=NULL
+          WHERE
+            id=$1
+            AND delivered=FALSE
+        `, [
+          migration.recipientId,
+          change.new_xrpl_address,
+          migration.offerId,
+          migration.txHash
+        ]);
+      }
+
+      await db.query(`
+        UPDATE nft_subscriber_registrations
+        SET
+          xrpl_address=$1,
+          x_handle=$2,
+          x_handle_normalized=$3,
+          wallet_verified=FALSE,
+          updated_at=NOW()
+        WHERE id=$4
+      `, [
+        change.new_xrpl_address,
+        `@${newXHandleNormalized}`,
+        newXHandleNormalized,
+        change.registration_id
+      ]);
+
+      /*
+       * Undelivered recipient rows follow the current subscriber
+       * identity. Delivered historical records are preserved.
+       */
+      await db.query(`
+        UPDATE nft_weekly_recipients
+        SET x_handle=$1
+        WHERE
+          registration_id=$2
+          AND delivered=FALSE
+      `, [
+        `@${newXHandleNormalized}`,
+        change.registration_id
+      ]);
+
+      await db.query(`
+        UPDATE nft_wallet_change_requests
+        SET
+          status='approved',
+          reviewed_at=NOW()
+        WHERE id=$1
+      `, [requestId]);
+
+      await db.query("COMMIT");
+
+      console.log(
+        `REGISTRATION CHANGE APPROVED ${oldXHandle} -> ` +
+        `@${newXHandleNormalized} | ` +
+        `${change.old_xrpl_address} -> ${change.new_xrpl_address}`
+      );
+
+      console.log(
+        `Migrated ${migrations.length} THE 52 claim(s)`
+      );
+    } catch (e) {
+      await db.query("ROLLBACK");
+      throw e;
+    } finally {
+      db.release();
+    }
+  } finally {
+    await client.disconnect();
+  }
 }
 
 async function status(dropId) {
@@ -1454,11 +2189,13 @@ async function status(dropId) {
     await claimAll(dropId);
   } else if (command === "reconcile-claims" && Number.isInteger(dropId)) {
     await reconcileClaims(dropId);
+  } else if (command === "migrate-wallet-change" && Number.isInteger(dropId)) {
+    await migrateWalletChange(dropId);
   } else if (command === "list-public" && Number.isInteger(dropId)) {
     await listPublic(dropId, process.argv[4]);
   } else {
     console.log(
-      "Usage: node the52-mint-runner.js dry-run YYYY-MM-DD ipfs://CID | preview YYYY-MM-DD | status <drop_id> | bind-metadata <drop_id> ipfs://CID | mint-next <drop_id> | mint-all <drop_id> CONFIRM_LIVE_MINT | claim-next <drop_id> | claim-all <drop_id> CONFIRM_LIVE_CLAIMS | reconcile-claims <drop_id> | list-public <drop_id> <usd_ask>"
+      "Usage: node the52-mint-runner.js dry-run YYYY-MM-DD ipfs://CID | preview YYYY-MM-DD | status <drop_id> | bind-metadata <drop_id> ipfs://CID | mint-next <drop_id> | mint-all <drop_id> CONFIRM_LIVE_MINT | claim-next <drop_id> | claim-all <drop_id> CONFIRM_LIVE_CLAIMS | reconcile-claims <drop_id> | migrate-wallet-change <request_id> | list-public <drop_id> <usd_ask>"
     );
     process.exit(1);
   }
