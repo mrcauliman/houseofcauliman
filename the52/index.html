@@ -18,15 +18,42 @@
 *{box-sizing:border-box}
 html,body{
   margin:0;
+  min-height:100%;
   background:
-    radial-gradient(circle at 20% 0,rgba(54,138,232,.28),transparent 34%),
-    radial-gradient(circle at 88% 18%,rgba(212,164,74,.10),transparent 28%),
-    linear-gradient(180deg,#07182c 0,#030914 52%,#010307 100%);
+    radial-gradient(circle at 50% -8%,rgba(212,164,74,.16),transparent 26%),
+    radial-gradient(circle at 15% 12%,rgba(54,138,232,.20),transparent 32%),
+    radial-gradient(circle at 88% 24%,rgba(212,164,74,.08),transparent 26%),
+    linear-gradient(180deg,#081a30 0,#030914 48%,#010307 100%);
   color:var(--text);
   font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
 }
+
+body{
+  position:relative;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.16;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:42px 42px;
+  mask-image:linear-gradient(to bottom,black,transparent 82%);
+}
+
 a{color:inherit;text-decoration:none}
-.wrap{max-width:1400px;margin:0 auto;padding:18px 16px 80px}
+
+.wrap{
+  position:relative;
+  z-index:1;
+  max-width:1400px;
+  margin:0 auto;
+  padding:18px 16px 80px;
+}
 .back-btn{
   display:inline-block;
   margin-bottom:14px;
@@ -38,11 +65,57 @@ a{color:inherit;text-decoration:none}
   border:1px solid rgba(87,169,255,.45);
   background:#07182c;
 }
+.hero{
+  position:relative;
+  max-width:760px;
+  margin:0 auto;
+  padding:0 0 4px;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  width:340px;
+  height:190px;
+  left:50%;
+  top:42%;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:rgba(212,164,74,.14);
+  filter:blur(55px);
+  pointer-events:none;
+}
+
 .hero img{
-  width:min(82%,520px);
+  position:relative;
+  width:min(58vw,400px);
   height:auto;
-  margin:0 auto 10px;
+  margin:0 auto 2px;
   display:block;
+  filter:drop-shadow(0 14px 26px rgba(0,0,0,.34));
+}
+
+.series-intro{
+  max-width:800px;
+  margin:0 auto 20px;
+  padding:0 18px;
+  text-align:center;
+}
+
+.series-intro-primary{
+  margin:0 auto 9px;
+  max-width:740px;
+  color:var(--text);
+  font-size:.93rem;
+  line-height:1.65;
+}
+
+.series-intro-secondary{
+  margin:0 auto;
+  max-width:700px;
+  color:var(--muted);
+  font-size:.82rem;
+  line-height:1.6;
 }
 .drop-banner{
   margin:6px auto 22px;
@@ -65,16 +138,72 @@ a{color:inherit;text-decoration:none}
 .card{
   border:1px solid rgba(87,169,255,.30);
   border-radius:var(--radius);
-  background:linear-gradient(135deg,rgba(10,42,78,.96),rgba(3,10,20,.99));
-  padding:10px;
+  background:
+    linear-gradient(145deg,rgba(15,53,91,.96),rgba(3,10,20,.995));
+  padding:9px;
   cursor:pointer;
-  transition:transform .15s ease,border-color .15s ease;
+  transition:
+    transform .18s ease,
+    border-color .18s ease,
+    box-shadow .18s ease;
   position:relative;
   overflow:hidden;
+  box-shadow:
+    0 14px 30px rgba(0,0,0,.24),
+    inset 0 0 0 1px rgba(255,255,255,.025);
 }
 .card:hover{
-  transform:translateY(-2px);
+  transform:translateY(-4px);
   border-color:var(--accent);
+  box-shadow:
+    0 20px 42px rgba(0,0,0,.34),
+    0 0 0 1px rgba(212,164,74,.10);
+}
+
+.card.featured{
+  border-color:rgba(212,164,74,.62);
+  box-shadow:0 16px 42px rgba(0,0,0,.28);
+}
+
+.card.next-drop{
+  border-color:rgba(87,169,255,.58);
+  background:
+    radial-gradient(circle at 50% 0,rgba(87,169,255,.15),transparent 42%),
+    linear-gradient(135deg,rgba(10,42,78,.96),rgba(3,10,20,.99));
+}
+
+.card.locked{
+  opacity:.76;
+}
+
+.card.locked:hover{
+  opacity:1;
+}
+
+.card-status{
+  position:absolute;
+  top:18px;
+  left:18px;
+  z-index:2;
+  padding:6px 9px;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:999px;
+  background:rgba(2,8,16,.84);
+  backdrop-filter:blur(8px);
+  font-size:.58rem;
+  font-weight:800;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+.card.featured .card-status{
+  color:#f0cc78;
+  border-color:rgba(212,164,74,.45);
+}
+
+.card.next-drop .card-status{
+  color:#cfe7ff;
+  border-color:rgba(87,169,255,.45);
 }
 .card::before{
   content:"";
@@ -104,7 +233,7 @@ a{color:inherit;text-decoration:none}
 /* Placeholder */
 .placeholder{
   width:100%;
-  aspect-ratio:1/1;
+  aspect-ratio:5/7;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -351,6 +480,180 @@ a{color:inherit;text-decoration:none}
 
 
 
+
+/* THE 52 Workstream 8 product presentation */
+
+.subscriber-access{
+  max-width:920px;
+  margin:18px auto 8px;
+  padding:22px;
+  border:1px solid rgba(212,164,74,.28);
+  border-radius:22px;
+  background:
+    radial-gradient(circle at 50% 0,rgba(212,164,74,.08),transparent 55%),
+    rgba(4,16,31,.76);
+  box-shadow:0 20px 55px rgba(0,0,0,.22);
+}
+
+.subscriber-access-head{
+  text-align:center;
+}
+
+.subscriber-access-kicker{
+  color:var(--accent);
+  font-size:.66rem;
+  font-weight:800;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+}
+
+.subscriber-access-title{
+  margin:7px 0 0;
+  font-size:clamp(1.15rem,3vw,1.65rem);
+}
+
+.subscriber-access-copy{
+  max-width:680px;
+  margin:8px auto 0;
+  color:var(--muted);
+  font-size:.86rem;
+  line-height:1.6;
+}
+
+.subscriber-steps{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+  margin-top:18px;
+}
+
+.subscriber-step{
+  padding:13px 11px;
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:14px;
+  background:rgba(255,255,255,.025);
+  text-align:center;
+}
+
+.subscriber-step strong{
+  display:block;
+  color:var(--text);
+  font-size:.72rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.subscriber-step span{
+  display:block;
+  margin-top:5px;
+  color:var(--muted);
+  font-size:.7rem;
+  line-height:1.45;
+}
+
+.wallet-actions{
+  margin-top:18px;
+  text-align:center;
+}
+
+.wallet-actions .back-btn{
+  margin-bottom:0;
+}
+
+#walletStatus{
+  margin-top:10px;
+  font-size:.72rem;
+  color:var(--muted);
+}
+
+.collection-head{
+  position:relative;
+  margin:34px auto 18px;
+  padding-top:18px;
+  text-align:center;
+}
+
+.collection-kicker{
+  color:var(--accent);
+  font-size:.68rem;
+  font-weight:800;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+}
+
+.collection-title{
+  margin:7px 0 0;
+  font-size:clamp(1.5rem,4vw,2.35rem);
+  line-height:1.05;
+  letter-spacing:.03em;
+}
+
+.collection-copy{
+  max-width:680px;
+  margin:10px auto 0;
+  color:var(--muted);
+  font-size:.9rem;
+  line-height:1.6;
+}
+
+@media(max-width:700px){
+  .subscriber-steps{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media(max-width:420px){
+  .hero img{
+    width:min(72vw,290px);
+  }
+
+  .series-intro{
+    padding:0 8px;
+    margin-bottom:16px;
+  }
+
+  .series-intro-primary{
+    font-size:.88rem;
+    line-height:1.58;
+  }
+
+  .series-intro-secondary{
+    font-size:.78rem;
+    line-height:1.55;
+  }
+
+  .subscriber-access{
+    padding:17px 13px;
+    margin-top:14px;
+  }
+
+  .subscriber-access-copy{
+    font-size:.8rem;
+  }
+
+  .subscriber-steps{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px;
+    margin-top:15px;
+  }
+
+  .subscriber-step{
+    padding:11px 8px;
+  }
+
+  .subscriber-step strong{
+    font-size:.65rem;
+  }
+
+  .subscriber-step span{
+    font-size:.64rem;
+  }
+
+  .collection-head{
+    margin-top:28px;
+  }
+}
+
 /* Subscriber delivery issue reporting */
 .issue-report{
   max-width:760px;
@@ -529,14 +832,15 @@ a{color:inherit;text-decoration:none}
   <img src="/assets/the52/THE_52_logo.webp" alt="THE 52">
 </section>
 
-<section style="max-width:760px;margin:0 auto 26px;text-align:center;padding:0 18px;">
-  <p style="margin:0 0 12px;line-height:1.7;color:var(--text);">
+<section class="series-intro">
+  <p class="series-intro-primary">
     THE 52 is a year-long XRPL collectible series from House of Cauliman.
     Fifty-two original characters, each built around the personalities, habits,
     and archetypes found throughout crypto culture. One new character is released
     each week, creating a complete 52-card collection across the year.
   </p>
-  <p style="margin:0;line-height:1.7;color:var(--muted);">
+
+  <p class="series-intro-secondary">
     Eligible House of Cauliman 𝕏 subscribers with a registered wallet receive
     each weekly release while their subscription is active. Every edition is
     recorded on XRPL, and select cards may unlock holder experiences and utility
@@ -544,24 +848,68 @@ a{color:inherit;text-decoration:none}
   </p>
 </section>
 
-<div id="walletBar" style="max-width:620px;margin:0 auto 22px;text-align:center;">
-  <a id="walletConnect"
-     class="back-btn"
-     href="https://api.houseofcauliman.com/holder/auth/start?return=/the52/">
-    Connect Xaman
-  </a>
-  <button id="walletDisconnect"
-          class="back-btn"
-          type="button"
-          style="display:none;margin-left:8px;">
-    Disconnect
-  </button>
-  <div id="walletStatus"
-       style="margin-top:8px;font-size:.72rem;color:var(--muted);">
-    Connect your XRPL wallet to verify THE 52 ownership.
+<section class="subscriber-access">
+  <div class="subscriber-access-head">
+    <div class="subscriber-access-kicker">SUBSCRIBER ACCESS</div>
+    <h2 class="subscriber-access-title">Collect THE 52 Every Week</h2>
+    <p class="subscriber-access-copy">
+      Eligible House of Cauliman 𝕏 subscribers receive each weekly release
+      while their subscription is active and their Xaman wallet is registered.
+    </p>
   </div>
-</div>
 
+  <div class="subscriber-steps">
+    <div class="subscriber-step">
+      <strong>01 Subscribe</strong>
+      <span>Join House of Cauliman on 𝕏 for $5 per month.</span>
+    </div>
+
+    <div class="subscriber-step">
+      <strong>02 Register</strong>
+      <span>Register your Xaman wallet for weekly NFT delivery.</span>
+    </div>
+
+    <div class="subscriber-step">
+      <strong>03 Collect</strong>
+      <span>Eligible subscribers receive the current weekly edition.</span>
+    </div>
+
+    <div class="subscriber-step">
+      <strong>04 Verify</strong>
+      <span>Connect Xaman here to verify current XRPL ownership.</span>
+    </div>
+  </div>
+
+  <div class="wallet-actions" id="walletBar">
+    <a id="walletConnect"
+       class="back-btn"
+       href="https://api.houseofcauliman.com/holder/auth/start?return=/the52/">
+      Connect Xaman
+    </a>
+
+    <button id="walletDisconnect"
+            class="back-btn"
+            type="button"
+            style="display:none;margin-left:8px;">
+      Disconnect
+    </button>
+
+    <div id="walletStatus">
+      Connect your XRPL wallet to verify THE 52 ownership.
+    </div>
+  </div>
+</section>
+
+<section class="collection-head">
+  <div class="collection-kicker">THE COLLECTION</div>
+  <h1 class="collection-title">52 Characters. 52 Weeks.</h1>
+  <p class="collection-copy">
+    Released cards reveal as the collection grows. Connect Xaman to verify
+    current XRPL ownership and access holder features tied to the cards you hold.
+  </p>
+</section>
+
+<section class="grid" id="grid"></section>
 
 <section
   class="issue-report"
@@ -698,8 +1046,6 @@ a{color:inherit;text-decoration:none}
     ></div>
   </form>
 </section>
-
-<section class="grid" id="grid"></section>
 </main>
 <div id="modal">
   <div class="modal-box">
@@ -751,7 +1097,9 @@ const collectionState = {
     monolith: {
       active: false,
       url: null
-    }
+    },
+    claim: null,
+    claimLoaded: false
   }
 };
 
@@ -1204,17 +1552,36 @@ async function loadWalletState(){
 characters.forEach((name,index)=>{
   const num = String(index + 1).padStart(2,"0");
   const state = index === 0
-    ? "FIRST DROP · SEP 27"
+    ? "LOADING"
     : index === 1
-      ? "UPCOMING"
+      ? "NEXT DROP"
+      : "LOCKED";
+
+  const edition = index === 0
+    ? "CHECKING RELEASE"
+    : index === 1
+      ? "02 OF 52"
+      : "UNRELEASED";
+
+  const cardClass = index === 0
+    ? "card featured"
+    : index === 1
+      ? "card next-drop"
+      : "card locked";
+
+  const statusLabel = index === 0
+    ? "GENESIS"
+    : index === 1
+      ? "NEXT DROP"
       : "LOCKED";
 
   grid.insertAdjacentHTML("beforeend",`
-    <div class="card" data-index="${index}" id="card-${num}">
+    <div class="${cardClass}" data-index="${index}" id="card-${num}">
+      <div class="card-status">${statusLabel}</div>
       ${placeholderHTML(num,name,state)}
       <div class="meta">${num} — ${name}</div>
       <div class="price">${state}</div>
-      <div class="edition">${index === 0 ? "Scheduled" : "Unreleased"}</div>
+      <div class="edition">${edition}</div>
     </div>
   `);
 });
@@ -1283,6 +1650,285 @@ function renderReleasedBuilderCard(){
         : "LIMITED WEEKLY EDITION";
   }
 }
+
+async function loadBuilderClaim(){
+  if(!collectionState.wallet){
+    collectionState.builder.claim = null;
+    collectionState.builder.claimLoaded = true;
+    return null;
+  }
+
+  try{
+    const response = await fetch(
+      `${API}/holder/the52/01/claim`,
+      {
+        credentials:"include",
+        cache:"no-store"
+      }
+    );
+
+    if(!response.ok){
+      throw new Error(`Claim lookup failed: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    collectionState.builder.claim =
+      data?.claim || null;
+
+    collectionState.builder.claimLoaded = true;
+
+    return collectionState.builder.claim;
+  }catch(error){
+    console.warn("Builder claim lookup failed", error);
+
+    collectionState.builder.claim = null;
+    collectionState.builder.claimLoaded = false;
+
+    return null;
+  }
+}
+
+
+async function acceptBuilderClaim(button){
+  if(
+    !collectionState.wallet?.csrfToken ||
+    !collectionState.builder.claim
+  ){
+    return;
+  }
+
+  const originalText = button.textContent;
+
+  button.disabled = true;
+  button.textContent = "Opening Xaman...";
+
+  try{
+    const response = await fetch(
+      `${API}/holder/the52/01/claim/accept`,
+      {
+        method:"POST",
+        credentials:"include",
+        headers:{
+          "X-HOC-CSRF":
+            collectionState.wallet.csrfToken
+        }
+      }
+    );
+
+    const data =
+      await response.json().catch(()=>({}));
+
+    if(!response.ok || !data.ok){
+      throw new Error(
+        data.error ||
+        `Claim acceptance failed: ${response.status}`
+      );
+    }
+
+    if(data.alreadyAccepted || data.delivered){
+      window.location.reload();
+      return;
+    }
+
+    if(!data.payloadUrl){
+      throw new Error(
+        "Xaman acceptance request is not available."
+      );
+    }
+
+    window.location.href = data.payloadUrl;
+  }catch(error){
+    console.warn("Builder claim acceptance failed", error);
+
+    button.disabled = false;
+    button.textContent = originalText;
+
+    const status =
+      document.getElementById("builderClaimStatus");
+
+    if(status){
+      status.textContent =
+        error?.message ||
+        "The claim could not be opened.";
+      status.classList.add("error");
+    }
+  }
+}
+
+
+function renderBuilderClaimState(claim){
+  const panel =
+    document.getElementById("builderClaim");
+
+  if(!panel) return;
+
+  const result =
+    new URLSearchParams(window.location.search)
+      .get("claim");
+
+  if(result === "accepted"){
+    panel.innerHTML = `
+      <div class="holder-title">
+        NFT Acceptance Submitted
+      </div>
+      <div class="holder-copy">
+        Xaman returned a validated acceptance transaction.
+        Ownership may take a moment to refresh on XRPL.
+      </div>
+    `;
+    return;
+  }
+
+  if(result === "rejected"){
+    panel.innerHTML = `
+      <div class="holder-title">
+        NFT Acceptance Canceled
+      </div>
+      <div class="holder-copy">
+        Nothing was transferred. You can reopen the claim
+        when you're ready.
+      </div>
+    `;
+    return;
+  }
+
+  if(result === "error"){
+    panel.innerHTML = `
+      <div class="holder-title">
+        Acceptance Needs Attention
+      </div>
+      <div class="holder-copy">
+        The acceptance could not be verified.
+        Use Subscriber Delivery Help below if the issue continues.
+      </div>
+    `;
+    return;
+  }
+
+  if(!collectionState.wallet){
+    panel.innerHTML = `
+      <div class="holder-title">
+        Subscriber Delivery
+      </div>
+      <div class="holder-copy">
+        Connect the registered Xaman wallet to check whether
+        this NFT is waiting for acceptance.
+      </div>
+    `;
+    return;
+  }
+
+  if(!collectionState.builder.claimLoaded){
+    panel.innerHTML = `
+      <div class="holder-title">
+        Subscriber Delivery
+      </div>
+      <div class="holder-copy">
+        Claim status is temporarily unavailable.
+      </div>
+    `;
+    return;
+  }
+
+  if(!claim){
+    panel.innerHTML = `
+      <div class="holder-title">
+        No Pending Delivery
+      </div>
+      <div class="holder-copy">
+        No 01 THE BUILDER subscriber claim is assigned to
+        this connected wallet.
+      </div>
+    `;
+    return;
+  }
+
+  const delivered =
+    claim.offerStatus === "accepted" ||
+    Boolean(claim.acceptedAt);
+
+  if(delivered){
+    panel.innerHTML = `
+      <div class="holder-title">
+        Subscriber Delivery Complete
+      </div>
+      <div class="holder-copy">
+        This Builder delivery has already been accepted.
+        Current holder access follows live XRPL ownership.
+      </div>
+    `;
+    return;
+  }
+
+  if(
+    claim.acceptStatus === "submitted" ||
+    (
+      claim.acceptStatus === "pending" &&
+      claim.acceptTxHash
+    )
+  ){
+    panel.innerHTML = `
+      <div class="holder-title">
+        Acceptance Submitted
+      </div>
+      <div class="holder-copy">
+        The acceptance transaction has been submitted.
+        Refresh shortly while ownership updates on XRPL.
+      </div>
+    `;
+    return;
+  }
+
+  if(claim.offerId){
+    panel.innerHTML = `
+      <div class="holder-title">
+        Your Builder Is Ready
+      </div>
+
+      <div class="holder-copy">
+        Your subscriber NFT has already been minted.
+        Accept the existing delivery offer in Xaman.
+        No payment is required.
+      </div>
+
+      <button
+        type="button"
+        class="back-btn"
+        id="builderClaimAccept"
+      >
+        Accept in Xaman
+      </button>
+
+      <div
+        class="holder-copy"
+        id="builderClaimStatus"
+        style="margin-top:8px;"
+      ></div>
+    `;
+
+    const button =
+      document.getElementById("builderClaimAccept");
+
+    button?.addEventListener(
+      "click",
+      ()=>acceptBuilderClaim(button)
+    );
+
+    return;
+  }
+
+  panel.innerHTML = `
+    <div class="holder-title">
+      Delivery Offer Unavailable
+    </div>
+    <div class="holder-copy">
+      Your subscriber NFT is recorded, but there is no open
+      delivery offer. Use Subscriber Delivery Help below.
+    </div>
+  `;
+}
+
 
 async function loadBuilderOwnership(){
   if(!collectionState.wallet){
@@ -1507,6 +2153,16 @@ async function openBuilder(){
       </div>
     </div>
 
+    <div class="holder-panel" id="builderClaim">
+      <div class="holder-title">
+        Checking Subscriber Delivery
+      </div>
+      <div class="holder-copy">
+        Checking whether this connected wallet has a
+        Builder delivery waiting for acceptance.
+      </div>
+    </div>
+
     <div class="market-panel" id="builderMarket">
       <div class="market-label">MONOLITH MARKET</div>
       <div class="market-meta">Loading live market data...</div>
@@ -1532,8 +2188,13 @@ async function openBuilder(){
 
   loadBuilderMarket();
 
-  const ownership = await loadBuilderOwnership();
+  const [ownership, claim] = await Promise.all([
+    loadBuilderOwnership(),
+    loadBuilderClaim()
+  ]);
+
   renderBuilderHolderState(ownership);
+  renderBuilderClaimState(claim);
 }
 
 
@@ -1649,9 +2310,9 @@ grid.addEventListener("click", e=>{
   const name = characters[index];
   const num = String(index + 1).padStart(2,"0");
   const state = index === 0
-    ? "FIRST DROP · SEP 27"
+    ? (collectionState.builder.released ? "RELEASED" : "LOADING")
     : index === 1
-      ? "UPCOMING"
+      ? "NEXT DROP"
       : "LOCKED";
 
   if(num === "01"){
