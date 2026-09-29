@@ -30,6 +30,65 @@ const THE52_PRIVATE_MEDIA = {
 
 const MONOLITH_MARKET_URL =
   "https://monolithxrpl.com/nft-market/";
+const MONOLITH_API_ORIGIN =
+  "https://monolithxrpl.com";
+const MONOLITH_LOOKUP_TIMEOUT_MS = 4000;
+
+async function getMonolithListingState(listingId) {
+  const id = String(listingId || "").trim();
+
+  if (!id) return null;
+
+  const controller = new AbortController();
+  const timer = setTimeout(
+    () => controller.abort(),
+    MONOLITH_LOOKUP_TIMEOUT_MS
+  );
+
+  try {
+    const response = await fetch(
+      `${MONOLITH_API_ORIGIN}/api/nft-market/listing-state/${encodeURIComponent(id)}`,
+      {
+        signal: controller.signal,
+        headers: {
+          accept: "application/json"
+        }
+      }
+    );
+
+    if (response.status === 404) {
+      return {
+        status: "not_found",
+        listingId: id
+      };
+    }
+
+    if (!response.ok) {
+      throw new Error(
+        `MONOLITH listing-state HTTP ${response.status}`
+      );
+    }
+
+    const listing = await response.json();
+
+    if (
+      listing?.ok !== true ||
+      listing?.listingId !== id ||
+      !String(listing?.status || "").trim()
+    ) {
+      throw new Error(
+        "MONOLITH listing-state response invalid"
+      );
+    }
+
+    return {
+      status: String(listing.status).trim(),
+      listingId: id
+    };
+  } finally {
+    clearTimeout(timer);
+  }
+}
 
 function parseCookies(header) {
   const out = {};
@@ -712,8 +771,36 @@ function createHolderAuth({ pool }) {
         `, [card.dropDate]);
 
         const listing = listingResult.rows[0] || {};
+        const listingId =
+          listing.monolith_listing_id || null;
+
+        let listingStatus =
+          listing.monolith_listing_status || null;
+        let listingSource = "house_db";
+        let listingStale = false;
+
+        if (listingId) {
+          try {
+            const liveListing =
+              await getMonolithListingState(listingId);
+
+            if (liveListing) {
+              listingStatus = liveListing.status;
+              listingSource = "monolith";
+            }
+          } catch (error) {
+            listingStale = true;
+            console.error(
+              "MONOLITH listing reconciliation failed",
+              error
+            );
+          }
+        }
+
         const listingActive =
-          listing.monolith_listing_status === "active";
+          listingStatus === "active" &&
+          listingSource === "monolith" &&
+          listingStale === false;
 
         return res.json({
           ok: true,
@@ -726,8 +813,11 @@ function createHolderAuth({ pool }) {
             `${API_ORIGIN}/holder/the52/${cardNumber}/media`,
           monolith: {
             active: listingActive,
-            listingId: listing.monolith_listing_id || null,
-            url: listingActive ? MONOLITH_MARKET_URL : null
+            status: listingStatus,
+            listingId,
+            url: listingActive ? MONOLITH_MARKET_URL : null,
+            source: listingSource,
+            stale: listingStale
           }
         });
       } catch (error) {
