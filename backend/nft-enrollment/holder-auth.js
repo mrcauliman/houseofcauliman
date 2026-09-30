@@ -34,6 +34,51 @@ const MONOLITH_API_ORIGIN =
   "https://monolithxrpl.com";
 const MONOLITH_LOOKUP_TIMEOUT_MS = 4000;
 
+async function getMonolithNftLastSale(nftId) {
+  const id = String(nftId || "").trim();
+
+  if (!id) return null;
+
+  const controller = new AbortController();
+  const timer = setTimeout(
+    () => controller.abort(),
+    MONOLITH_LOOKUP_TIMEOUT_MS
+  );
+
+  try {
+    const response = await fetch(
+      `${MONOLITH_API_ORIGIN}/api/nft-market/nft/${encodeURIComponent(id)}/last-sale`,
+      {
+        signal: controller.signal,
+        headers: {
+          accept: "application/json"
+        }
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        `MONOLITH NFT last-sale HTTP ${response.status}`
+      );
+    }
+
+    const data = await response.json();
+
+    if (
+      data?.ok !== true ||
+      data?.nftId !== id
+    ) {
+      throw new Error(
+        "MONOLITH NFT last-sale response invalid"
+      );
+    }
+
+    return data.lastSale || null;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 async function getMonolithListingState(listingId) {
   const id = String(listingId || "").trim();
 
@@ -295,6 +340,80 @@ function createHolderAuth({ pool }) {
     return result.rows
       .map(row => row.nftoken_id)
       .filter(Boolean);
+  }
+
+  async function getCardLastSale(tokenIds) {
+    if (!tokenIds.length) {
+      return {
+        sale: null,
+        source: "xrpl",
+        stale: false
+      };
+    }
+
+    try {
+      const results = [];
+      const batchSize = 6;
+
+      for (
+        let i = 0;
+        i < tokenIds.length;
+        i += batchSize
+      ) {
+        const batch =
+          tokenIds.slice(i, i + batchSize);
+
+        const batchResults = await Promise.all(
+          batch.map(async nftId => {
+            const sale =
+              await getMonolithNftLastSale(nftId);
+
+            return sale
+              ? {
+                  ...sale,
+                  nftId
+                }
+              : null;
+          })
+        );
+
+        results.push(...batchResults);
+      }
+
+      const sales = results
+        .filter(Boolean)
+        .sort((a, b) => {
+          const ledgerDiff =
+            Number(b.ledgerIndex || 0) -
+            Number(a.ledgerIndex || 0);
+
+          if (ledgerDiff !== 0) {
+            return ledgerDiff;
+          }
+
+          return (
+            Date.parse(b.soldAt || 0) -
+            Date.parse(a.soldAt || 0)
+          );
+        });
+
+      return {
+        sale: sales[0] || null,
+        source: "xrpl",
+        stale: false
+      };
+    } catch (error) {
+      console.error(
+        "THE 52 XRPL last-sale lookup failed",
+        error
+      );
+
+      return {
+        sale: null,
+        source: "xrpl",
+        stale: true
+      };
+    }
   }
 
   async function accountOwnedTokenIds(
@@ -1268,6 +1387,9 @@ function createHolderAuth({ pool }) {
 
         const tokenIds = await getCardTokenIds(card);
 
+        const lastSale =
+          await getCardLastSale(tokenIds);
+
         const listingResult = await pool.query(`
           SELECT
             p.monolith_listing_id,
@@ -1321,6 +1443,7 @@ function createHolderAuth({ pool }) {
           mintedSupply: tokenIds.length,
           imageUrl:
             `${API_ORIGIN}/holder/the52/${cardNumber}/media`,
+          lastSale,
           monolith: {
             active: listingActive,
             status: listingStatus,
