@@ -560,6 +560,17 @@ a{color:inherit;text-decoration:none}
   margin-bottom:0;
 }
 
+#walletDisconnect{
+  color:var(--text);
+  font-family:inherit;
+  cursor:pointer;
+}
+
+#walletDisconnect:disabled{
+  color:var(--muted);
+  cursor:wait;
+}
+
 #walletStatus{
   margin-top:10px;
   font-size:.72rem;
@@ -1605,6 +1616,11 @@ async function loadBuilderRelease(){
       releasedAt: data.releasedAt || null,
       mintedSupply: Number(data.mintedSupply || 0),
       imageUrl: data.imageUrl || null,
+      lastSale: data.lastSale || {
+        sale:null,
+        source:"xrpl",
+        stale:true
+      },
       monolith: data.monolith || {
         active:false,
         url:null
@@ -2163,6 +2179,13 @@ async function openBuilder(){
       </div>
     </div>
 
+    <div class="market-panel" id="builderLastSale">
+      <div class="market-label">LAST SOLD</div>
+      <div class="market-meta">
+        Loading verified XRPL sale history...
+      </div>
+    </div>
+
     <div class="market-panel" id="builderMarket">
       <div class="market-label">MONOLITH MARKET</div>
       <div class="market-meta">Loading live market data...</div>
@@ -2186,6 +2209,7 @@ async function openBuilder(){
 
   document.getElementById("modal").classList.add("open");
 
+  formatBuilderLastSale();
   loadBuilderMarket();
 
   const [ownership, claim] = await Promise.all([
@@ -2197,6 +2221,85 @@ async function openBuilder(){
   renderBuilderClaimState(claim);
 }
 
+
+function formatBuilderLastSale(){
+  const panel =
+    document.getElementById("builderLastSale");
+
+  if(!panel) return;
+
+  const state =
+    collectionState.builder?.lastSale || null;
+
+  if(!state || state.stale === true){
+    panel.innerHTML = `
+      <div class="market-label">LAST SOLD</div>
+      <div class="market-price">Unavailable</div>
+      <div class="market-meta">
+        Verified XRPL sale history is temporarily unavailable.
+      </div>
+    `;
+    return;
+  }
+
+  const sale = state.sale;
+
+  if(!sale){
+    panel.innerHTML = `
+      <div class="market-label">LAST SOLD</div>
+      <div class="market-price">No Sales Yet</div>
+      <div class="market-meta">
+        No qualifying XRPL sale has been verified for this edition.
+      </div>
+    `;
+    return;
+  }
+
+  const amount = sale.amount || {};
+  let amountText = "Verified Sale";
+
+  if(
+    amount.type === "xrp" &&
+    amount.xrp
+  ){
+    amountText = `${amount.xrp} $XRP`;
+  }else if(
+    amount.value &&
+    amount.currency
+  ){
+    amountText =
+      `${amount.value} ${amount.currency}`;
+  }else if(amount.value){
+    amountText = String(amount.value);
+  }
+
+  let soldText = "Verified on XRPL";
+
+  if(sale.soldAt){
+    const date = new Date(sale.soldAt);
+
+    if(!Number.isNaN(date.getTime())){
+      soldText =
+        `Sold ${date.toLocaleDateString(
+          undefined,
+          {
+            year:"numeric",
+            month:"short",
+            day:"numeric"
+          }
+        )}`;
+    }
+  }
+
+  panel.innerHTML = `
+    <div class="market-label">LAST SOLD</div>
+    <div class="market-price">${amountText}</div>
+    <div class="market-xrp">${soldText}</div>
+    <div class="market-meta">
+      Latest verified sale across this card edition.
+    </div>
+  `;
+}
 
 function showBuilderUnlockEntrance(){
   const media = document.getElementById("modalMedia");
