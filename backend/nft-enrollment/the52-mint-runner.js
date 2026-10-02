@@ -1365,6 +1365,33 @@ async function reconcileClaims(dropId) {
   );
 }
 
+async function reconcileAllClaims() {
+  const q = await pool.query(`
+    SELECT DISTINCT drop_id
+    FROM nft_weekly_recipients
+    WHERE mint_status='minted'
+      AND delivered=FALSE
+      AND xrpl_address <> $1
+      AND claim_offer_status IS DISTINCT FROM 'blocked'
+    ORDER BY drop_id
+  `, [ISSUER]);
+
+  if (!q.rowCount) {
+    console.log("No THE 52 claims need reconciliation");
+    return;
+  }
+
+  console.log(
+    `Reconciling ${q.rowCount} THE 52 drop(s): ` +
+    q.rows.map(row => row.drop_id).join(", ")
+  );
+
+  for (const row of q.rows) {
+    console.log(`--- DROP ${row.drop_id} ---`);
+    await reconcileClaims(Number(row.drop_id));
+  }
+}
+
 async function dryRun(dropDate, metadataUri) {
   const recipients = await pool.query(`
     SELECT
@@ -2189,13 +2216,15 @@ async function status(dropId) {
     await claimAll(dropId);
   } else if (command === "reconcile-claims" && Number.isInteger(dropId)) {
     await reconcileClaims(dropId);
+  } else if (command === "reconcile-all-claims") {
+    await reconcileAllClaims();
   } else if (command === "migrate-wallet-change" && Number.isInteger(dropId)) {
     await migrateWalletChange(dropId);
   } else if (command === "list-public" && Number.isInteger(dropId)) {
     await listPublic(dropId, process.argv[4]);
   } else {
     console.log(
-      "Usage: node the52-mint-runner.js dry-run YYYY-MM-DD ipfs://CID | preview YYYY-MM-DD | status <drop_id> | bind-metadata <drop_id> ipfs://CID | mint-next <drop_id> | mint-all <drop_id> CONFIRM_LIVE_MINT | claim-next <drop_id> | claim-all <drop_id> CONFIRM_LIVE_CLAIMS | reconcile-claims <drop_id> | migrate-wallet-change <request_id> | list-public <drop_id> <usd_ask>"
+      "Usage: node the52-mint-runner.js dry-run YYYY-MM-DD ipfs://CID | preview YYYY-MM-DD | status <drop_id> | bind-metadata <drop_id> ipfs://CID | mint-next <drop_id> | mint-all <drop_id> CONFIRM_LIVE_MINT | claim-next <drop_id> | claim-all <drop_id> CONFIRM_LIVE_CLAIMS | reconcile-claims <drop_id> | reconcile-all-claims | migrate-wallet-change <request_id> | list-public <drop_id> <usd_ask>"
     );
     process.exit(1);
   }
