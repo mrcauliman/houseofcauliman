@@ -1098,21 +1098,21 @@ const characters = [
 
 const API = "https://api.houseofcauliman.com";
 
-const collectionState = {
-  wallet: null,
-  builder: {
-    released: false,
-    releasedAt: null,
-    mintedSupply: 0,
-    imageUrl: null,
-    monolith: {
-      active: false,
-      url: null
-    },
-    claim: null,
-    claimLoaded: false
-  }
+const cards = {
+  "01": { name:"The Builder", label:"01 THE BUILDER", releaseDate:"Sunday, September 27", ordinal:"first", unlockImage:"/assets/the52/01/THE52_01_The_Builder_HOLDER_UNLOCK.webp" },
+  "02": { name:"The Whale", label:"02 THE WHALE", releaseDate:"Sunday, October 4", ordinal:"second", unlockImage:`${API}/holder/the52/02/holder-media` }
 };
+const collectionState = {
+  wallet:null,
+  cards:Object.fromEntries(Object.keys(cards).map(num=>[num,{
+    released:false, releaseLoaded:false, releasedAt:null, mintedSupply:0,
+    imageUrl:null, metadataUri:null, monolith:{active:false,url:null},
+    claim:null, claimLoaded:false
+  }]))
+};
+let modalCard = null;
+let modalGeneration = 0;
+const escapeHtml = value => String(value ?? "").replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
 const grid = document.getElementById("grid");
 const walletConnect = document.getElementById("walletConnect");
@@ -1597,21 +1597,24 @@ characters.forEach((name,index)=>{
   `);
 });
 
-async function loadBuilderRelease(){
+async function loadCardRelease(num){
   try{
     const response = await fetch(
-      `${API}/holder/the52/01/release`,
+      `${API}/holder/the52/${num}/release`,
       {
         credentials:"include",
         cache:"no-store"
       }
     );
 
-    if(!response.ok) return;
+    if(!response.ok) throw new Error(`Release lookup failed: ${response.status}`);
 
     const data = await response.json();
 
-    collectionState.builder = {
+    collectionState.cards[num] = {
+      ...collectionState.cards[num],
+      releaseLoaded: true,
+      metadataUri: data.metadataUri || (num === "01" ? "ipfs://QmbbFgmt5DkbBip1HHouiZZ8eQyVdgPS4C5mtodeZHKnkN" : null),
       released: data.released === true,
       releasedAt: data.releasedAt || null,
       mintedSupply: Number(data.mintedSupply || 0),
@@ -1627,29 +1630,31 @@ async function loadBuilderRelease(){
       }
     };
 
-    if(collectionState.builder.released){
-      renderReleasedBuilderCard();
+    if(collectionState.cards[num].released){
+      renderReleasedCard(num);
     }
   }catch(error){
-    console.warn("Builder release state unavailable");
+    console.warn("THE 52 release state unavailable");
   }
 }
 
-function renderReleasedBuilderCard(){
-  const card = document.getElementById("card-01");
+function renderReleasedCard(num){
+  const card = document.getElementById(`card-${num}`);
   if(!card) return;
 
-  const b = collectionState.builder;
+  const b = collectionState.cards[num];
 
   card.classList.add("released");
+  card.classList.remove("next-drop", "locked");
+  card.querySelector(".card-status").textContent = num === "01" ? "GENESIS" : "RELEASED";
 
   const visual = card.querySelector(".placeholder");
 
   if(visual && b.imageUrl){
     visual.outerHTML =
       `<img class="card-art"
-            src="${b.imageUrl}"
-            alt="01 THE BUILDER">`;
+            src="${escapeHtml(b.imageUrl)}"
+            alt="${cards[num].label}">`;
   }
 
   const price = card.querySelector(".price");
@@ -1667,16 +1672,16 @@ function renderReleasedBuilderCard(){
   }
 }
 
-async function loadBuilderClaim(){
+async function loadCardClaim(num){
   if(!collectionState.wallet){
-    collectionState.builder.claim = null;
-    collectionState.builder.claimLoaded = true;
+    collectionState.cards[num].claim = null;
+    collectionState.cards[num].claimLoaded = true;
     return null;
   }
 
   try{
     const response = await fetch(
-      `${API}/holder/the52/01/claim`,
+      `${API}/holder/the52/${num}/claim`,
       {
         credentials:"include",
         cache:"no-store"
@@ -1689,27 +1694,27 @@ async function loadBuilderClaim(){
 
     const data = await response.json();
 
-    collectionState.builder.claim =
+    collectionState.cards[num].claim =
       data?.claim || null;
 
-    collectionState.builder.claimLoaded = true;
+    collectionState.cards[num].claimLoaded = true;
 
-    return collectionState.builder.claim;
+    return collectionState.cards[num].claim;
   }catch(error){
-    console.warn("Builder claim lookup failed", error);
+    console.warn("THE 52 claim lookup failed", error);
 
-    collectionState.builder.claim = null;
-    collectionState.builder.claimLoaded = false;
+    collectionState.cards[num].claim = null;
+    collectionState.cards[num].claimLoaded = false;
 
     return null;
   }
 }
 
 
-async function acceptBuilderClaim(button){
+async function acceptCardClaim(num, button){
   if(
     !collectionState.wallet?.csrfToken ||
-    !collectionState.builder.claim
+    !collectionState.cards[num].claim
   ){
     return;
   }
@@ -1721,7 +1726,7 @@ async function acceptBuilderClaim(button){
 
   try{
     const response = await fetch(
-      `${API}/holder/the52/01/claim/accept`,
+      `${API}/holder/the52/${num}/claim/accept`,
       {
         method:"POST",
         credentials:"include",
@@ -1755,13 +1760,13 @@ async function acceptBuilderClaim(button){
 
     window.location.href = data.payloadUrl;
   }catch(error){
-    console.warn("Builder claim acceptance failed", error);
+    console.warn("THE 52 claim acceptance failed", error);
 
     button.disabled = false;
     button.textContent = originalText;
 
     const status =
-      document.getElementById("builderClaimStatus");
+      document.getElementById(`card-${num}-ClaimStatus`);
 
     if(status){
       status.textContent =
@@ -1773,17 +1778,16 @@ async function acceptBuilderClaim(button){
 }
 
 
-function renderBuilderClaimState(claim){
+function renderCardClaimState(num, claim){
   const panel =
-    document.getElementById("builderClaim");
+    document.getElementById(`card-${num}-Claim`);
 
   if(!panel) return;
 
-  const result =
-    new URLSearchParams(window.location.search)
-      .get("claim");
+  const params = new URLSearchParams(window.location.search);
+  const result = (params.get("card") || "01") === num ? params.get("claim") : null;
 
-  if(result === "accepted"){
+  if(result === "accepted" && claim?.offerStatus !== "accepted" && !claim?.acceptedAt){
     panel.innerHTML = `
       <div class="holder-title">
         NFT Acceptance Submitted
@@ -1835,7 +1839,7 @@ function renderBuilderClaimState(claim){
     return;
   }
 
-  if(!collectionState.builder.claimLoaded){
+  if(!collectionState.cards[num].claimLoaded){
     panel.innerHTML = `
       <div class="holder-title">
         Subscriber Delivery
@@ -1853,7 +1857,7 @@ function renderBuilderClaimState(claim){
         No Pending Delivery
       </div>
       <div class="holder-copy">
-        No 01 THE BUILDER subscriber claim is assigned to
+        No ${cards[num].label} subscriber claim is assigned to
         this connected wallet.
       </div>
     `;
@@ -1861,6 +1865,7 @@ function renderBuilderClaimState(claim){
   }
 
   const delivered =
+    claim.offerStatus === "not_required" ||
     claim.offerStatus === "accepted" ||
     Boolean(claim.acceptedAt);
 
@@ -1870,7 +1875,7 @@ function renderBuilderClaimState(claim){
         Subscriber Delivery Complete
       </div>
       <div class="holder-copy">
-        This Builder delivery has already been accepted.
+        This ${cards[num].name} delivery has already been accepted.
         Current holder access follows live XRPL ownership.
       </div>
     `;
@@ -1899,7 +1904,7 @@ function renderBuilderClaimState(claim){
   if(claim.offerId){
     panel.innerHTML = `
       <div class="holder-title">
-        Your Builder Is Ready
+        Your ${cards[num].name} Is Ready
       </div>
 
       <div class="holder-copy">
@@ -1911,24 +1916,24 @@ function renderBuilderClaimState(claim){
       <button
         type="button"
         class="back-btn"
-        id="builderClaimAccept"
+        id="card-${num}-ClaimAccept"
       >
         Accept in Xaman
       </button>
 
       <div
         class="holder-copy"
-        id="builderClaimStatus"
+        id="card-${num}-ClaimStatus"
         style="margin-top:8px;"
       ></div>
     `;
 
     const button =
-      document.getElementById("builderClaimAccept");
+      document.getElementById(`card-${num}-ClaimAccept`);
 
     button?.addEventListener(
       "click",
-      ()=>acceptBuilderClaim(button)
+      ()=>acceptCardClaim(num, button)
     );
 
     return;
@@ -1946,18 +1951,18 @@ function renderBuilderClaimState(claim){
 }
 
 
-async function loadBuilderOwnership(){
+async function loadCardOwnership(num){
   if(!collectionState.wallet){
     return {
       signedIn:false,
-      released:collectionState.builder.released,
+      released:collectionState.cards[num].released,
       owner:false
     };
   }
 
   try{
     const response = await fetch(
-      `${API}/holder/the52/01`,
+      `${API}/holder/the52/${num}`,
       {
         credentials:"include",
         cache:"no-store"
@@ -1966,8 +1971,9 @@ async function loadBuilderOwnership(){
 
     if(!response.ok){
       return {
-        signedIn:false,
-        released:collectionState.builder.released,
+        error: response.status !== 401,
+        signedIn: response.status !== 401,
+        released:collectionState.cards[num].released,
         owner:false
       };
     }
@@ -1976,7 +1982,7 @@ async function loadBuilderOwnership(){
   }catch(error){
     return {
       signedIn:true,
-      released:collectionState.builder.released,
+      released:collectionState.cards[num].released,
       owner:false,
       error:true
     };
@@ -1984,29 +1990,15 @@ async function loadBuilderOwnership(){
 }
 
 
-async function loadBuilderMarket(){
-  const panel = document.getElementById("builderMarket");
+async function loadCardMarket(num){
+  const panel = document.getElementById(`card-${num}-Market`);
   if(!panel) return;
 
-  const marketPreview =
-    new URLSearchParams(window.location.search).get("marketPreview") === "1";
-
-  if(marketPreview){
-    panel.innerHTML = `
-      <div class="market-label">MONOLITH MARKET · PREVIEW</div>
-      <div class="market-price">$100.00</div>
-      <div class="market-xrp">
-        $XRP amount populates from the live listing
-      </div>
-      <div class="market-meta">
-        Initial public listing · 1 active listing
-      </div>
-    `;
+  const metadataUri = collectionState.cards[num].metadataUri;
+  if(!metadataUri){
+    panel.textContent = "Verified market identity is unavailable.";
     return;
   }
-
-  const BUILDER_METADATA_URI =
-    "ipfs://QmbbFgmt5DkbBip1HHouiZZ8eQyVdgPS4C5mtodeZHKnkN";
 
   try{
     const response = await fetch(
@@ -2023,30 +2015,30 @@ async function loadBuilderMarket(){
       ? data.listings
       : [];
 
-    const builderListings = listings
+    const cardListings = listings
       .filter(item =>
         item &&
         item.status === "active" &&
         item.isTest !== true &&
-        item.uri === BUILDER_METADATA_URI
+        item.uri === metadataUri
       )
       .sort((a,b) =>
         Number(a.askUsdCents || Infinity) -
         Number(b.askUsdCents || Infinity)
       );
 
-    if(!builderListings.length){
+    if(!cardListings.length){
       panel.innerHTML = `
         <div class="market-label">MONOLITH MARKET</div>
         <div class="market-price">No Active Listings</div>
         <div class="market-meta">
-          01 THE BUILDER has no current market floor.
+          ${cards[num].label} has no current market floor.
         </div>
       `;
       return;
     }
 
-    const floor = builderListings[0];
+    const floor = cardListings[0];
     const usd = Number(floor.askUsdCents || 0) / 100;
     const xrp = Number(floor.askXrp || 0);
 
@@ -2061,12 +2053,12 @@ async function loadBuilderMarket(){
         })} $XRP
       </div>
       <div class="market-meta">
-        ${builderListings.length}
-        active listing${builderListings.length === 1 ? "" : "s"}
+        ${cardListings.length}
+        active listing${cardListings.length === 1 ? "" : "s"}
       </div>
     `;
   }catch(error){
-    console.warn("Builder MONOLITH market unavailable", error);
+    console.warn("THE 52 MONOLITH market unavailable", error);
 
     panel.innerHTML = `
       <div class="market-label">MONOLITH MARKET</div>
@@ -2077,8 +2069,10 @@ async function loadBuilderMarket(){
   }
 }
 
-async function openBuilder(){
-  const b = collectionState.builder;
+async function openCard(num){
+  modalCard = num;
+  const generation = ++modalGeneration;
+  const b = collectionState.cards[num];
 
   const media = document.getElementById("modalMedia");
   const release = document.getElementById("modalRelease");
@@ -2086,7 +2080,7 @@ async function openBuilder(){
   const trade = document.getElementById("modalTrade");
 
   document.getElementById("modalTitle").innerText =
-    "01 — The Builder";
+    `${num} — ${cards[num].name}`;
 
   trade.classList.add("disabled");
   trade.href = "#";
@@ -2094,31 +2088,20 @@ async function openBuilder(){
   if(!b.released){
     media.innerHTML =
       placeholderHTML(
-        "01",
-        "The Builder",
-        "FIRST DROP · SEP 27"
+        num,
+        cards[num].name,
+        collectionState.cards[num].releaseLoaded ? "NOT YET RELEASED" : "RELEASE STATUS UNAVAILABLE"
       );
-
-    const marketPreview =
-      new URLSearchParams(window.location.search).get("marketPreview") === "1";
 
     release.innerHTML = `
       <div class="release-panel">
         <div class="release-state">Not Yet Released</div>
         <div class="release-copy">
-          01 THE BUILDER releases Sunday, September 27.
+          ${cards[num].label} releases ${cards[num].releaseDate}.
           Holder verification activates after the drop.
         </div>
       </div>
 
-      ${
-        marketPreview
-          ? `<div class="market-panel" id="builderMarket">
-               <div class="market-label">MONOLITH MARKET · PREVIEW</div>
-               <div class="market-meta">Loading preview...</div>
-             </div>`
-          : ""
-      }
     `;
 
     primary.textContent = "Subscriber Enrollment";
@@ -2126,20 +2109,16 @@ async function openBuilder(){
 
     document.getElementById("modal").classList.add("open");
 
-    if(marketPreview){
-      loadBuilderMarket();
-    }
-
     return;
   }
 
   media.innerHTML = b.imageUrl
     ? `<img class="card-art"
-             src="${b.imageUrl}"
-             alt="01 THE BUILDER">`
+             src="${escapeHtml(b.imageUrl)}"
+             alt="${cards[num].label}">`
     : placeholderHTML(
-        "01",
-        "The Builder",
+        num,
+        cards[num].name,
         "RELEASED"
       );
 
@@ -2147,20 +2126,20 @@ async function openBuilder(){
     <div class="release-panel">
       <div class="release-state">Released</div>
       <div class="release-copy">
-        The first card in THE 52.
+        The ${cards[num].ordinal} card in THE 52.
         A limited weekly XRPL collectible.
       </div>
       <div class="modal-stats">
         <div class="stat-pill">
-          Card 01 of 52
+          Card ${num} of 52
         </div>
         <div class="stat-pill">
-          Final Supply ${b.mintedSupply}
+          Verified Supply ${b.mintedSupply}
         </div>
       </div>
     </div>
 
-    <div class="holder-panel" id="builderHolder">
+    <div class="holder-panel" id="card-${num}-Holder">
       <div class="holder-title">
         Checking Holder Access
       </div>
@@ -2169,24 +2148,24 @@ async function openBuilder(){
       </div>
     </div>
 
-    <div class="holder-panel" id="builderClaim">
+    <div class="holder-panel" id="card-${num}-Claim">
       <div class="holder-title">
         Checking Subscriber Delivery
       </div>
       <div class="holder-copy">
         Checking whether this connected wallet has a
-        Builder delivery waiting for acceptance.
+        ${cards[num].name} delivery waiting for acceptance.
       </div>
     </div>
 
-    <div class="market-panel" id="builderLastSale">
+    <div class="market-panel" id="card-${num}-LastSale">
       <div class="market-label">LAST SOLD</div>
       <div class="market-meta">
         Loading verified XRPL sale history...
       </div>
     </div>
 
-    <div class="market-panel" id="builderMarket">
+    <div class="market-panel" id="card-${num}-Market">
       <div class="market-label">MONOLITH MARKET</div>
       <div class="market-meta">Loading live market data...</div>
     </div>
@@ -2209,27 +2188,28 @@ async function openBuilder(){
 
   document.getElementById("modal").classList.add("open");
 
-  formatBuilderLastSale();
-  loadBuilderMarket();
+  formatCardLastSale(num);
+  loadCardMarket(num);
 
   const [ownership, claim] = await Promise.all([
-    loadBuilderOwnership(),
-    loadBuilderClaim()
+    loadCardOwnership(num),
+    loadCardClaim(num)
   ]);
 
-  renderBuilderHolderState(ownership);
-  renderBuilderClaimState(claim);
+  if(modalCard !== num || generation !== modalGeneration) return;
+  renderCardHolderState(num, ownership);
+  renderCardClaimState(num, claim);
 }
 
 
-function formatBuilderLastSale(){
+function formatCardLastSale(num){
   const panel =
-    document.getElementById("builderLastSale");
+    document.getElementById(`card-${num}-LastSale`);
 
   if(!panel) return;
 
   const state =
-    collectionState.builder?.lastSale || null;
+    collectionState.cards[num]?.lastSale || null;
 
   if(!state || state.stale === true){
     panel.innerHTML = `
@@ -2293,44 +2273,45 @@ function formatBuilderLastSale(){
 
   panel.innerHTML = `
     <div class="market-label">LAST SOLD</div>
-    <div class="market-price">${amountText}</div>
-    <div class="market-xrp">${soldText}</div>
+    <div class="market-price">${escapeHtml(amountText)}</div>
+    <div class="market-xrp">${escapeHtml(soldText)}</div>
     <div class="market-meta">
       Latest verified sale across this card edition.
     </div>
   `;
 }
 
-function showBuilderUnlockEntrance(){
+function showCardUnlockEntrance(num){
   const media = document.getElementById("modalMedia");
-  const b = collectionState.builder;
+  const b = collectionState.cards[num];
 
-  if(!media || !b?.imageUrl) return;
+  if(!media || !b?.imageUrl || !cards[num].unlockImage) return;
+  const generation = modalGeneration;
 
   media.innerHTML = `
     <img
       class="card-art builder-unlock-art"
-      src="/assets/the52/01/THE52_01_The_Builder_HOLDER_UNLOCK.webp"
-      alt="01 THE BUILDER holder unlocked">
+      src="${cards[num].unlockImage}"
+      alt="${cards[num].label} holder unlocked">
   `;
 
   window.setTimeout(() => {
     const currentMedia = document.getElementById("modalMedia");
 
-    if(!currentMedia) return;
+    if(!currentMedia || modalCard !== num || generation !== modalGeneration) return;
 
     currentMedia.innerHTML = `
       <img
         class="card-art"
-        src="${b.imageUrl}"
-        alt="01 THE BUILDER">
+        src="${escapeHtml(b.imageUrl)}"
+        alt="${cards[num].label}">
     `;
   }, 2500);
 }
 
-function renderBuilderHolderState(data){
+function renderCardHolderState(num, data){
   const panel =
-    document.getElementById("builderHolder");
+    document.getElementById(`card-${num}-Holder`);
 
   if(!panel) return;
 
@@ -2340,7 +2321,7 @@ function renderBuilderHolderState(data){
         Holder Access Locked
       </div>
       <div class="holder-copy">
-        Connect the XRPL wallet holding 01 THE BUILDER
+        Connect the XRPL wallet holding ${cards[num].label}
         to unlock the holder experience.
       </div>
     `;
@@ -2363,18 +2344,18 @@ function renderBuilderHolderState(data){
   if(!data.owner){
     panel.innerHTML = `
       <div class="holder-title">
-        01 THE BUILDER Not Found
+        ${cards[num].label} Not Found
       </div>
       <div class="holder-copy">
         This connected wallet does not currently hold
-        01 THE BUILDER.
+        ${cards[num].label}.
         Holder access follows current XRPL ownership of the NFT.
       </div>
     `;
     return;
   }
 
-  showBuilderUnlockEntrance();
+  showCardUnlockEntrance(num);
 
   panel.innerHTML = `
     <div class="holder-title">
@@ -2382,14 +2363,14 @@ function renderBuilderHolderState(data){
     </div>
 
     <div class="holder-copy">
-      Current XRPL ownership of 01 THE BUILDER is confirmed.
+      Current XRPL ownership of ${cards[num].label} is confirmed.
     </div>
 
     <div class="holder-grid">
       <div class="holder-item">
-        <strong>Builder Access</strong>
+        <strong>Holder Access</strong>
         <span>
-          No active Builder perk right now.
+          No active holder perk right now.
           Future holder perks will appear here when released.
         </span>
       </div>
@@ -2412,14 +2393,9 @@ grid.addEventListener("click", e=>{
   const index = Number(card.dataset.index);
   const name = characters[index];
   const num = String(index + 1).padStart(2,"0");
-  const state = index === 0
-    ? (collectionState.builder.released ? "RELEASED" : "LOADING")
-    : index === 1
-      ? "NEXT DROP"
-      : "LOCKED";
-
-  if(num === "01"){
-    openBuilder();
+  const state = collectionState.cards[num]?.released ? "RELEASED" : (num === "02" ? "NEXT DROP" : "LOCKED");
+  if(cards[num]){
+    openCard(num);
     return;
   }
 
@@ -2438,17 +2414,25 @@ function placeholderHTML(num,name,state){
 }
 
 function openModal(num,name,state){
+  modalCard = num;
+  ++modalGeneration;
   const media = document.getElementById("modalMedia");
   const release = document.getElementById("modalRelease");
 
   document.getElementById("modalTitle").innerText = `${num} — ${name}`;
   media.innerHTML = placeholderHTML(num,name,state);
   release.innerHTML = "";
+  const trade = document.getElementById("modalTrade");
+  trade.classList.add("disabled"); trade.href="#";
+  const primary = document.getElementById("modalPrimary");
+  primary.textContent="Subscriber Enrollment";primary.href="/nft-enrollment/";
 
   document.getElementById("modal").classList.add("open");
 }
 
 function closeModal(){
+  modalCard = null;
+  ++modalGeneration;
   document.getElementById("modal").classList.remove("open");
 }
 
@@ -2459,8 +2443,11 @@ document.getElementById("modal").onclick = e=>{
 async function boot(){
   await Promise.all([
     loadWalletState(),
-    loadBuilderRelease()
+    ...Object.keys(cards).map(loadCardRelease)
   ]);
+  const params = new URLSearchParams(window.location.search);
+  const card = params.get("card") || (params.has("claim") ? "01" : null);
+  if(card && Object.hasOwn(cards,card)) openCard(card);
 }
 
 boot();

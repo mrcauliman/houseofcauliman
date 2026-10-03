@@ -17,16 +17,7 @@ const XRPL_WS =
   process.env.XRPL_WS ||
   "wss://xrplcluster.com";
 
-const THE52_CARDS = {
-  "01": {
-    name: "THE BUILDER",
-    dropDate: "2026-09-27"
-  }
-};
-
-const THE52_PRIVATE_MEDIA = {
-  "01": "/opt/house-the52-private/01/THE52_01_The_Builder_MASTER.png"
-};
+const { THE52_ISSUER: ISSUER, getCard } = require("./the52-cards");
 
 const MONOLITH_MARKET_URL =
   "https://monolithxrpl.com/nft-market/";
@@ -448,6 +439,10 @@ function createHolderAuth({ pool }) {
         const result =
           await client.request(request);
 
+        if (result.result?.validated !== true) {
+          throw new Error("Ownership ledger is not validated");
+        }
+
         for (
           const nft of result.result.account_nfts || []
         ) {
@@ -810,13 +805,20 @@ function createHolderAuth({ pool }) {
         const cardNumber =
           String(req.params.card || "").padStart(2, "0");
 
-        const card = THE52_CARDS[cardNumber];
+        const card = getCard(cardNumber);
 
         if (!card) {
           return res.status(404).json({
             ok: false,
             error: "THE 52 card is not available."
           });
+        }
+
+        const releaseState = await pool.query(`
+          SELECT released FROM the52_release_state WHERE card_number=$1
+        `, [cardNumber]);
+        if (releaseState.rows[0]?.released !== true) {
+          return res.json({ ok: true, signedIn: true, card: cardNumber, released: false, claim: null });
         }
 
         const result = await pool.query(`
@@ -838,7 +840,7 @@ function createHolderAuth({ pool }) {
           WHERE
             d.drop_date = $1
             AND r.mint_status = 'minted'
-            AND LOWER(r.xrpl_address) = LOWER($2)
+            AND r.xrpl_address = $2
           ORDER BY r.id DESC
           LIMIT 1
         `, [
@@ -928,13 +930,20 @@ function createHolderAuth({ pool }) {
         const cardNumber =
           String(req.params.card || "").padStart(2, "0");
 
-        const card = THE52_CARDS[cardNumber];
+        const card = getCard(cardNumber);
 
         if (!card) {
           return res.status(404).json({
             ok: false,
             error: "THE 52 card is not available."
           });
+        }
+
+        const releaseState = await pool.query(`
+          SELECT released FROM the52_release_state WHERE card_number=$1
+        `, [cardNumber]);
+        if (releaseState.rows[0]?.released !== true) {
+          return res.status(409).json({ ok: false, error: "This card has not been released." });
         }
 
         const result = await pool.query(`
@@ -946,7 +955,7 @@ function createHolderAuth({ pool }) {
           WHERE
             d.drop_date = $1
             AND r.mint_status = 'minted'
-            AND LOWER(r.xrpl_address) = LOWER($2)
+            AND r.xrpl_address = $2
           ORDER BY r.id DESC
           LIMIT 1
         `, [
@@ -1026,28 +1035,26 @@ function createHolderAuth({ pool }) {
         await client.connect();
 
         try {
-          const offerResponse =
-            await client.request({
-              command: "account_objects",
-              account: ISSUER,
-              type: "nft_offer",
-              ledger_index: "validated"
+          let marker;
+          let matching;
+          do {
+            const offerResponse = await client.request({
+              command: "account_objects", account: ISSUER,
+              type: "nft_offer", ledger_index: "validated", limit: 400,
+              ...(marker ? { marker } : {})
             });
-
-          const offers =
-            offerResponse.result?.account_objects || [];
-
-          const matching =
-            offers.find(offer =>
-              String(offer.index || "") ===
-                String(row.claim_offer_id) &&
-              String(offer.NFTokenID || "") ===
-                String(row.nftoken_id) &&
-              String(offer.Owner || "") ===
-                String(ISSUER) &&
-              String(offer.Destination || "") ===
-                String(session.xrpl_address)
+            if (offerResponse.result?.validated !== true) {
+              throw new Error("Claim offer ledger is not validated");
+            }
+            matching = (offerResponse.result.account_objects || []).find(offer =>
+              offer.index === row.claim_offer_id &&
+              offer.NFTokenID === row.nftoken_id &&
+              offer.Owner === ISSUER &&
+              offer.Destination === session.xrpl_address &&
+              offer.Amount === "0" && (Number(offer.Flags) & 1) === 1
             );
+            marker = offerResponse.result.marker;
+          } while (!matching && marker);
 
           if (!matching) {
             return res.status(409).json({
@@ -1150,8 +1157,18 @@ function createHolderAuth({ pool }) {
       const payloadUuid =
         String(req.query.payload || "").trim();
 
+      const card = getCard(req.params.card);
+      const cardNumber = card?.number;
+      if (!card) return res.status(404).send("THE 52 card is not available.");
+
       try {
         await ensureTables();
+        const releaseState = await pool.query(`
+          SELECT released FROM the52_release_state WHERE card_number=$1
+        `, [cardNumber]);
+        if (releaseState.rows[0]?.released !== true) {
+          return res.status(409).send("This card has not been released.");
+        }
 
         if (
           !configured ||
@@ -1181,7 +1198,7 @@ function createHolderAuth({ pool }) {
         ) {
           return res.redirect(
             303,
-            `${WEB_ORIGIN}/the52/?claim=rejected`
+            `${WEB_ORIGIN}/the52/?card=${cardNumber}&claim=rejected`
           );
         }
 
@@ -1196,10 +1213,6 @@ function createHolderAuth({ pool }) {
             "Signed claim acceptance has no transaction hash"
           );
         }
-
-        const cardNumber =
-          String(req.params.card || "")
-            .padStart(2, "0");
 
         const client = new Client(XRPL_WS);
         await client.connect();
@@ -1249,16 +1262,21 @@ function createHolderAuth({ pool }) {
             UPDATE nft_weekly_recipients
             SET
               claim_accept_tx_hash = $2,
-              claim_accept_status = 'submitted',
+              claim_accept_status = CASE WHEN delivered OR claim_offer_status='accepted' THEN 'accepted' ELSE 'submitted' END,
               claim_accept_error = NULL
             WHERE
               claim_accept_payload_uuid = $1
               AND claim_offer_id = $3
+              AND drop_id IN (SELECT id FROM nft_weekly_drops WHERE drop_date=$4)
+              AND xrpl_address=$5
+              AND (claim_accept_tx_hash IS NULL OR claim_accept_tx_hash=$2)
             RETURNING id, xrpl_address, nftoken_id
           `, [
             payloadUuid,
             txHash,
-            acceptedOffer
+            acceptedOffer,
+            card.dropDate,
+            result.tx_json?.Account
           ]);
 
           if (!update.rowCount) {
@@ -1269,7 +1287,7 @@ function createHolderAuth({ pool }) {
 
           return res.redirect(
             303,
-            `${WEB_ORIGIN}/the52/?claim=accepted`
+            `${WEB_ORIGIN}/the52/?card=${cardNumber}&claim=accepted`
           );
         } finally {
           await client.disconnect();
@@ -1287,15 +1305,20 @@ function createHolderAuth({ pool }) {
               claim_accept_status = 'error',
               claim_accept_error = $2
             WHERE claim_accept_payload_uuid = $1
+              AND drop_id IN (SELECT id FROM nft_weekly_drops WHERE drop_date=$3)
+              AND delivered=FALSE
+              AND claim_offer_status IS DISTINCT FROM 'accepted'
+              AND claim_accept_status IS DISTINCT FROM 'submitted'
           `, [
             payloadUuid,
-            String(error.message || error).slice(0, 1000)
+            String(error.message || error).slice(0, 1000),
+            card.dropDate
           ]);
         } catch {}
 
         return res.redirect(
           303,
-          `${WEB_ORIGIN}/the52/?claim=error`
+          `${WEB_ORIGIN}/the52/?card=${cardNumber}&claim=error`
         );
       }
     }
@@ -1353,7 +1376,7 @@ function createHolderAuth({ pool }) {
           String(req.params.card || "")
             .padStart(2, "0");
 
-        const card = THE52_CARDS[cardNumber];
+        const card = getCard(cardNumber);
 
         if (!card) {
           return res.status(404).json({
@@ -1384,6 +1407,11 @@ function createHolderAuth({ pool }) {
             releasedAt: null
           });
         }
+
+        const metadataResult = await pool.query(`
+          SELECT metadata_uri FROM nft_weekly_drops WHERE drop_date=$1
+        `, [card.dropDate]);
+        const metadataUri = metadataResult.rows[0]?.metadata_uri || null;
 
         const tokenIds = await getCardTokenIds(card);
 
@@ -1441,6 +1469,7 @@ function createHolderAuth({ pool }) {
           released: true,
           releasedAt: row.released_at || null,
           mintedSupply: tokenIds.length,
+          metadataUri,
           imageUrl:
             `${API_ORIGIN}/holder/the52/${cardNumber}/media`,
           lastSale,
@@ -1464,6 +1493,36 @@ function createHolderAuth({ pool }) {
     }
   );
 
+  // Holder-entry art is private: never serve it from the public asset tree.
+  router.get(
+    "/the52/:card/holder-media",
+    ownershipLimiter,
+    async (req, res) => {
+      res.setHeader("Cache-Control", "private, no-store");
+      res.setHeader("Vary", "Cookie");
+      try {
+        const card = getCard(req.params.card);
+        if (!card?.holderMedia) return res.sendStatus(404);
+        const session = await getSession(req);
+        if (!session) return res.sendStatus(401);
+        const release = await pool.query(
+          "SELECT released FROM the52_release_state WHERE card_number=$1",
+          [card.number]
+        );
+        if (release.rows[0]?.released !== true) return res.sendStatus(404);
+        const tokenIds = await getCardTokenIds(card);
+        const owned = await accountOwnedTokenIds(session.xrpl_address, tokenIds);
+        if (!owned.length) return res.sendStatus(403);
+        return res.sendFile(card.holderMedia, error => {
+          if (error && !res.headersSent) res.sendStatus(404);
+        });
+      } catch (error) {
+        console.error("THE 52 holder media unavailable", error);
+        return res.sendStatus(503);
+      }
+    }
+  );
+
   router.get(
     "/the52/:card/media",
     async (req, res) => {
@@ -1473,8 +1532,8 @@ function createHolderAuth({ pool }) {
         const cardNumber =
           String(req.params.card || "").padStart(2, "0");
 
-        const card = THE52_CARDS[cardNumber];
-        const mediaPath = THE52_PRIVATE_MEDIA[cardNumber];
+        const card = getCard(cardNumber);
+        const mediaPath = card?.master;
 
         if (!card || !mediaPath) {
           return res.sendStatus(404);
@@ -1531,7 +1590,7 @@ function createHolderAuth({ pool }) {
             .padStart(2, "0");
 
         const card =
-          THE52_CARDS[cardNumber];
+          getCard(cardNumber);
 
         if (!card) {
           return res.status(404).json({
