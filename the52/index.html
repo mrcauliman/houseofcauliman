@@ -2069,7 +2069,26 @@ async function loadCardMarket(num){
   }
 }
 
-async function openCard(num){
+function selectedCard(){
+  const params = new URLSearchParams(location.search);
+  const values = params.getAll("card");
+  if(values.length === 0) return params.has("claim") ? "01" : null;
+  return values.length === 1 && Object.hasOwn(cards, values[0]) ? values[0] : null;
+}
+
+function writeCardContext(num, mode){
+  if(mode === "none") return;
+  const url = new URL(location.href);
+  if(num) url.searchParams.set("card",num);
+  else url.searchParams.delete("card");
+  url.searchParams.delete("wallet");
+  url.searchParams.delete("claim");
+  if(url.href !== location.href) history[mode === "push" ? "pushState" : "replaceState"]({},"",url);
+}
+
+async function openCard(num, historyMode = "push"){
+  if(!Object.hasOwn(cards,num)) return;
+  writeCardContext(num, historyMode);
   modalCard = num;
   const generation = ++modalGeneration;
   const b = collectionState.cards[num];
@@ -2184,7 +2203,7 @@ async function openCard(num){
   primary.href =
     collectionState.wallet
       ? "#"
-      : `${API}/holder/auth/start?return=/the52/`;
+      : `${API}/holder/auth/start?return=${encodeURIComponent("/the52/?card=" + num)}`;
 
   document.getElementById("modal").classList.add("open");
 
@@ -2430,7 +2449,8 @@ function openModal(num,name,state){
   document.getElementById("modal").classList.add("open");
 }
 
-function closeModal(){
+function closeModal(historyMode = "replace"){
+  writeCardContext(null, historyMode);
   modalCard = null;
   ++modalGeneration;
   document.getElementById("modal").classList.remove("open");
@@ -2440,14 +2460,31 @@ document.getElementById("modal").onclick = e=>{
   if(e.target.id==="modal") closeModal();
 };
 
+window.addEventListener("popstate",()=>{
+  const card = selectedCard();
+  if(card) openCard(card,"none");
+  else closeModal("none");
+});
+
 async function boot(){
   await Promise.all([
     loadWalletState(),
     ...Object.keys(cards).map(loadCardRelease)
   ]);
   const params = new URLSearchParams(window.location.search);
-  const card = params.get("card") || (params.has("claim") ? "01" : null);
-  if(card && Object.hasOwn(cards,card)) openCard(card);
+  const messages = {
+    cancelled:"Wallet connection was cancelled. You can try Connect Xaman again.",
+    expired:"This wallet connection expired or was already used. Start a new connection if needed.",
+    failed:"Wallet connection could not be verified. Please try again."
+  };
+  if(messages[params.get("wallet")]){
+    const notice = document.createElement("p");
+    notice.setAttribute("role","status");
+    notice.textContent = messages[params.get("wallet")];
+    document.getElementById("walletStatus").after(notice);
+  }
+  const card = selectedCard();
+  if(card) await openCard(card,"none");
 }
 
 boot();
