@@ -832,6 +832,30 @@ a{color:inherit;text-decoration:none}
   }
 }
 
+/* General subscriber acceptance guide; no card popup styles. */
+.nft-acceptance-guide{
+  margin-top:20px;
+  padding:18px;
+  border:1px solid rgba(212,164,74,.35);
+  border-radius:14px;
+  background:rgba(255,255,255,.025);
+  color:var(--muted);
+  font-size:.88rem;
+  line-height:1.65;
+  text-align:left;
+}
+.nft-acceptance-guide h3{
+  margin:0 0 10px;
+  color:var(--text);
+  font-size:1.05rem;
+}
+.nft-acceptance-guide ol{margin:0;padding-left:1.4em;}
+.nft-acceptance-guide li + li{margin-top:7px;}
+.nft-acceptance-guide p{margin:12px 0 0;}
+.nft-acceptance-guide strong{color:var(--text);}
+.nft-acceptance-guide a{color:var(--accent);text-decoration:underline;text-underline-offset:3px;}
+.nft-acceptance-guide a:focus-visible{outline:2px solid var(--accent);outline-offset:4px;}
+
 </style>
   <meta name="apple-mobile-web-app-title" content="THE 52" />
   <meta name="application-name" content="THE 52" />
@@ -890,6 +914,19 @@ a{color:inherit;text-decoration:none}
       <span>Connect Xaman here to verify current XRPL ownership.</span>
     </div>
   </div>
+
+  <aside class="nft-acceptance-guide" id="accept-your-nfts" aria-labelledby="nftAcceptanceTitle">
+    <h3 id="nftAcceptanceTitle">How to find and accept your NFTs</h3>
+    <ol>
+      <li>Open Xaman and select the <strong>wallet you registered</strong> for THE 52.</li>
+      <li>Go to <strong>Events → Requests</strong> and open the incoming NFT offer.</li>
+      <li>Check that it is the correct <strong>THE 52 NFT</strong> with an offer amount of <strong>0 XRP</strong>, then accept it.</li>
+      <li>Once acceptance is validated on the ledger, the NFT is in your wallet and should appear under <strong>NFTs</strong>.</li>
+    </ol>
+    <p><strong>Seeing “validated” in All/history?</strong> That may be the offer being created, not your acceptance. Check <strong>Requests</strong> for an offer you can act on.</p>
+    <p>The offer is 0 XRP; normal network fees and XRPL reserve requirements still apply.</p>
+    <p><strong>No offer showing?</strong> Connect your registered wallet here, open the relevant released card, and check <strong>Subscriber Delivery</strong>, or use <a href="#issueReport">Subscriber Delivery Help</a>. Do not sign unfamiliar requests.</p>
+  </aside>
 
   <div class="wallet-actions" id="walletBar">
     <a id="walletConnect"
