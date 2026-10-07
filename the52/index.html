@@ -856,6 +856,16 @@ a{color:inherit;text-decoration:none}
 .nft-acceptance-guide a{color:var(--accent);text-decoration:underline;text-underline-offset:3px;}
 .nft-acceptance-guide a:focus-visible{outline:2px solid var(--accent);outline-offset:4px;}
 
+
+/* Collector controls are scoped to the existing holder popup. */
+.collector-pack { margin-top:8px; }
+.collector-file { display:flex; align-items:center; justify-content:space-between; gap:8px; padding-top:8px; }
+.collector-file > span { flex:1; min-width:0; }
+.collector-actions { display:flex; gap:8px; flex-shrink:0; }
+.collector-actions a { display:inline-flex; align-items:center; justify-content:center; min-height:44px; padding:0 10px; border:1px solid rgba(255,255,255,.25); border-radius:8px; color:var(--text); font-size:.72rem; text-decoration:none; }
+.collector-actions a:hover { background:rgba(255,255,255,.08); }
+.collector-actions a:focus-visible { outline:2px solid currentColor; outline-offset:2px; }
+@media(max-width:350px) { .collector-file { flex-wrap:wrap; } .collector-actions { width:100%; } .collector-actions a { flex:1; } }
 </style>
   <meta name="apple-mobile-web-app-title" content="THE 52" />
   <meta name="application-name" content="THE 52" />
@@ -2370,6 +2380,7 @@ function renderCardHolderState(num, data){
     document.getElementById(`card-${num}-Holder`);
 
   if(!panel) return;
+  panel.dataset.collectorRequest = String((Number(panel.dataset.collectorRequest) || 0) + 1);
 
   if(!collectionState.wallet || !data?.signedIn){
     panel.innerHTML = `
@@ -2440,6 +2451,51 @@ function renderCardHolderState(num, data){
       </div>
     </div>
   `;
+  loadCollectorPack(num, modalGeneration);
+}
+
+async function loadCollectorPack(num, generation){
+  const panel = document.getElementById("card-" + num + "-Holder");
+  const requestId = String((Number(panel?.dataset.collectorRequest) || 0) + 1);
+  if(!panel) return;
+  panel.dataset.collectorRequest = requestId;
+  panel.querySelector(".collector-pack")?.remove();
+  const isCurrent = () => modalCard === num && generation === modalGeneration && panel.isConnected && panel.dataset.collectorRequest === requestId;
+  try {
+    const response = await fetch(API + "/holder/the52/" + num + "/collector-pack", {
+      credentials:"include", cache:"no-store"
+    });
+    if(!isCurrent()) return;
+    if(!response.ok) return;
+    const data = await response.json();
+    if(!isCurrent()) return;
+    const item = document.createElement("div");
+    item.className = "holder-item collector-pack";
+    const title = document.createElement("strong");
+    title.textContent = data.testOnly ? "Collector pack · TEST FILES ONLY" : "Collector pack";
+    item.append(title);
+    const ready = (data.files || []).filter(f=>f.available && ["print","transparent","guide"].includes(f.type));
+    if(!ready.length){
+      const text = document.createElement("span"); text.textContent = "Collector files are being prepared."; item.append(text);
+    }
+    const labels = { print:"Print PDF", transparent:"Transparent PNG", guide:"File Guide" };
+    for(const file of ready){
+      const row = document.createElement("div"); row.className = "collector-file";
+      const label = document.createElement("span"); label.textContent = labels[file.type];
+      const actions = document.createElement("div"); actions.className = "collector-actions";
+      for(const action of ["View", "Download"]){
+        const link = document.createElement("a");
+        link.href = API + "/holder/the52/" + num + "/collector-pack/" + file.type + (action === "View" ? "/view" : "");
+        link.textContent = action;
+        link.setAttribute("aria-label", action + " " + labels[file.type] + (action === "View" ? " (opens in new tab)" : ""));
+        link.referrerPolicy = "no-referrer";
+        if(action === "View"){ link.target = "_blank"; link.rel = "noopener noreferrer"; }
+        actions.append(link);
+      }
+      row.append(label, actions); item.append(row);
+    }
+    panel.append(item);
+  } catch { /* Existing verified holder content remains usable. */ }
 }
 
 grid.addEventListener("click", e=>{
