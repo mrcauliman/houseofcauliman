@@ -13,6 +13,47 @@ const {
 
 const execFileAsync = promisify(execFile);
 
+// Keep the dashboard count's existing predicate; describe every matching reason.
+function attentionReasons(row) {
+  const reasons = [];
+  if (row.wallet_change_pending) reasons.push("Pending registration / wallet change request");
+  if (row.claim_offer_status === "blocked") reasons.push("Delivery offer recorded as blocked");
+  for (const [field, label] of [
+    ["claim_error", "Recorded claim error"],
+    ["claim_accept_error", "Recorded acceptance error"],
+    ["mint_error", "Recorded mint error"]
+  ]) {
+    if (row[field]) {
+      const value = String(row[field]);
+      reasons.push(`${label}: ${value.slice(0, 500)}${value.length > 500 ? "…" : ""}`);
+    }
+  }
+  if (row.claim_offer_status === "accepted" && row.recipient_delivered !== true) {
+    reasons.push("Offer recorded as accepted, but delivery is not recorded");
+  }
+  return reasons;
+}
+
+function attentionRecord(row) {
+  // Escape the name separately: fmtDate already returns escaped display text.
+  const dropHtml = row.latest_drop_id == null ? "No recipient drop recorded"
+    : `${esc(row.latest_drop_name || "Unnamed drop")} · ${fmtDate(row.latest_drop_date)} · Drop ID ${esc(row.latest_drop_id)}`;
+  const status = row.recipient_delivered === true
+    ? "Delivery is recorded. Retained errors or statuses may be historical; they do not prove a current failure."
+    : row.claim_offer_status === "not_required"
+    ? "No delivery offer required is recorded. Retained errors may be historical."
+    : "Delivery is not recorded for this recipient. Review the recorded state before deciding whether any action is needed.";
+  return `
+    <li style="margin-top:16px;overflow-wrap:anywhere">
+      <strong>${esc(row.x_handle)}</strong>
+      <div class="small">${dropHtml}</div>
+      <ul>${attentionReasons(row).map(reason => `<li>${esc(reason)}</li>`).join("")}</ul>
+      <p class="small">${row.latest_drop_id == null ? "A registration request does not identify a failed NFT delivery." : status}</p>
+      <a href="#registration-${esc(row.registration_id ?? row.id)}">View registration</a>
+      ${row.wallet_change_pending ? ' · <a href="#pending-registration-changes">View pending request</a>' : ""}
+    </li>`;
+}
+
 function createAdminRouter({ pool, sendConfirmationEmail }) {
   const router = express.Router();
 
@@ -229,17 +270,39 @@ function createAdminRouter({ pool, sendConfirmationEmail }) {
       0
     );
 
-    const attention = result.rows.filter(r =>
-      r.wallet_change_pending ||
-      r.claim_offer_status === "blocked" ||
-      Boolean(r.claim_error) ||
-      Boolean(r.claim_accept_error) ||
-      Boolean(r.mint_error) ||
-      (
-        r.claim_offer_status === "accepted" &&
-        r.recipient_delivered !== true
-      )
-    ).length;
+    const attentionRows = result.rows.filter(r => attentionReasons(r).length > 0);
+    const attention = attentionRows.length;
+
+    // Inspect older records for these registrations, without changing their state.
+    // The extra row detects truncation; the UI never presents a partial list as complete.
+    const historyLimit = 200;
+    const attentionHistory = result.rows.length ? await pool.query(`
+      SELECT
+        r.id AS registration_id, r.x_handle,
+        d.id AS latest_drop_id, d.drop_date AS latest_drop_date,
+        d.drop_name AS latest_drop_name,
+        wr.id AS recipient_id, wr.delivered AS recipient_delivered,
+        wr.claim_offer_status, wr.claim_error, wr.claim_accept_error, wr.mint_error
+      FROM nft_weekly_recipients wr
+      JOIN nft_weekly_drops d ON d.id = wr.drop_id
+      JOIN nft_subscriber_registrations r ON r.id = wr.registration_id
+      WHERE wr.registration_id = ANY($1::bigint[])
+        AND wr.id <> ALL($2::bigint[])
+        AND (
+          wr.claim_offer_status = 'blocked'
+          OR COALESCE(wr.claim_error, '') <> ''
+          OR COALESCE(wr.claim_accept_error, '') <> ''
+          OR COALESCE(wr.mint_error, '') <> ''
+          OR (wr.claim_offer_status = 'accepted' AND wr.delivered IS NOT TRUE)
+        )
+      ORDER BY d.drop_date DESC, wr.id DESC
+      LIMIT $3
+    `, [
+      result.rows.map(r => r.id),
+      result.rows.filter(r => r.recipient_id != null).map(r => r.recipient_id),
+      historyLimit + 1
+    ]) : { rows: [] };
+    const olderAttentionRows = attentionHistory.rows.slice(0, historyLimit);
 
     const people = result.rows.map(r => {
       const emailStatus = r.confirmation_email_sent
@@ -280,7 +343,7 @@ function createAdminRouter({ pool, sendConfirmationEmail }) {
           : badge("CLAIM READY", "neutral");
 
       return `
-        <div class="person">
+        <div class="person" id="registration-${esc(r.id)}" tabindex="-1">
 
           <div>
             <input
@@ -483,10 +546,18 @@ function createAdminRouter({ pool, sendConfirmationEmail }) {
 
     const body = `
 
+      <style>
+        .attention-stat summary { cursor:pointer; min-height:48px; }
+        .attention-stat summary:focus-visible { outline:3px solid var(--gold); outline-offset:6px; }
+        .attention-stat summary .num, .attention-stat summary .label { display:block; }
+        .attention-stat[open] { grid-column:1 / -1; }
+        .attention-stat h2 { font-size:18px; margin-top:24px; }
+      </style>
+
       ${
         walletChanges.rows.length
           ? `
-            <div class="card">
+            <div class="card" id="pending-registration-changes" tabindex="-1">
               <div class="handle" style="margin-bottom:12px">
                 Pending Registration Changes
               </div>
@@ -514,10 +585,31 @@ function createAdminRouter({ pool, sendConfirmationEmail }) {
           <div class="label">Collectors Delivered</div>
         </div>
 
-        <div class="stat">
-          <div class="num">${attention}</div>
-          <div class="label">Needs Attention</div>
-        </div>
+        <details class="stat attention-stat">
+          <summary>
+            <span class="num">${attention}</span>
+            <span class="label">Needs Attention</span>
+            <span class="small">View reasons and history${olderAttentionRows.length ? ` · ${olderAttentionRows.length}${attentionHistory.rows.length > historyLimit ? "+" : ""} older records` : ""}</span>
+          </summary>
+          <p class="small">
+            The count covers pending registration requests and flags on each
+            registration's latest recipient record in the current search results.
+            Older records below are not included in that count. These are recorded
+            database states, not a live XRPL check. No records are changed by opening this panel.
+          </p>
+          <h2>Reasons behind the current count</h2>
+          ${attentionRows.length
+            ? `<ul>${attentionRows.map(attentionRecord).join("")}</ul>`
+            : '<p class="small">No current flags in these search results.</p>'}
+          <h2>Older records with attention flags</h2>
+          <p class="small">An older error can remain after a newer drop is added. A retained error alone does not establish a current delivery failure.</p>
+          ${olderAttentionRows.length
+            ? `<ul>${olderAttentionRows.map(attentionRecord).join("")}</ul>`
+            : '<p class="small">No older flagged recipient records found for these registrations.</p>'}
+          ${attentionHistory.rows.length > historyLimit
+            ? '<p class="small">Showing the newest 200 older flagged records; more exist. Narrow Search registrations by handle or wallet to inspect a smaller set.</p>'
+            : ""}
+        </details>
 
       </div>
 
