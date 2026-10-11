@@ -1193,6 +1193,7 @@ const collectionState = {
 };
 let modalCard = null;
 let modalGeneration = 0;
+let cancelUnlockEntrance = () => {};
 const escapeHtml = value => String(value ?? "").replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
 const grid = document.getElementById("grid");
@@ -2171,6 +2172,7 @@ async function openCard(num, historyMode = "push"){
   if(!Object.hasOwn(cards,num)) return;
   writeCardContext(num, historyMode);
   modalCard = num;
+  cancelUnlockEntrance();
   const generation = ++modalGeneration;
   const b = collectionState.cards[num];
 
@@ -2183,7 +2185,9 @@ async function openCard(num, historyMode = "push"){
     `${num} — ${cards[num].name}`;
 
   trade.classList.add("disabled");
-  trade.href = "#";
+  trade.removeAttribute("href");
+  trade.setAttribute("aria-disabled", "true");
+  trade.textContent = "No Active Listing";
 
   if(!b.released){
     media.innerHTML =
@@ -2271,9 +2275,12 @@ async function openCard(num, historyMode = "push"){
     </div>
   `;
 
-  if(b.monolith?.active && b.monolith?.url){
+  const listingId = b.monolith?.listingId;
+  if(b.monolith?.active && /^nftml_[a-f0-9]{32}$/.test(listingId || "")){
     trade.classList.remove("disabled");
-    trade.href = b.monolith.url;
+    trade.setAttribute("aria-disabled", "false");
+    trade.textContent = "Trade on MONOLITH";
+    trade.href = "https://monolithxrpl.com/nft-market/?listing=" + encodeURIComponent(listingId);
   }
 
   primary.textContent =
@@ -2382,31 +2389,44 @@ function formatCardLastSale(num){
 }
 
 function showCardUnlockEntrance(num){
+  cancelUnlockEntrance();
   const media = document.getElementById("modalMedia");
   const b = collectionState.cards[num];
-
   if(!media || !b?.imageUrl || !cards[num].unlockImage) return;
   const generation = modalGeneration;
-
-  media.innerHTML = `
-    <img
-      class="card-art builder-unlock-art"
-      src="${cards[num].unlockImage}"
-      alt="${cards[num].label} holder unlocked">
-  `;
-
-  window.setTimeout(() => {
-    const currentMedia = document.getElementById("modalMedia");
-
-    if(!currentMedia || modalCard !== num || generation !== modalGeneration) return;
-
-    currentMedia.innerHTML = `
-      <img
-        class="card-art"
-        src="${escapeHtml(b.imageUrl)}"
-        alt="${cards[num].label}">
-    `;
-  }, 2500);
+  const entrance = document.createElement("img");
+  entrance.className = "card-art builder-unlock-art";
+  entrance.alt = cards[num].label + " holder unlocked";
+  let timer = null, frame = null, canceled = false;
+  const isCurrent = () => !canceled && modalCard === num && generation === modalGeneration && media.contains(entrance);
+  cancelUnlockEntrance = () => {
+    canceled = true;
+    window.clearTimeout(timer);
+    window.cancelAnimationFrame(frame);
+    entrance.onload = entrance.onerror = null;
+  };
+  const showMaster = () => {
+    if(!isCurrent()) return;
+    cancelUnlockEntrance();
+    const master = document.createElement("img");
+    master.className = "card-art";
+    master.src = b.imageUrl;
+    master.alt = cards[num].label;
+    media.replaceChildren(master);
+  };
+  entrance.onload = () => {
+    if(!isCurrent() || !entrance.naturalWidth) return;
+    // Allow the loaded entrance to paint before its four-second visible hold.
+    frame = window.requestAnimationFrame(() => {
+      if(!isCurrent()) return;
+      frame = window.requestAnimationFrame(() => {
+        if(isCurrent()) timer = window.setTimeout(showMaster, 4000);
+      });
+    });
+  };
+  entrance.onerror = showMaster;
+  media.replaceChildren(entrance);
+  entrance.src = cards[num].unlockImage;
 }
 
 function renderCardHolderState(num, data){
@@ -2561,6 +2581,7 @@ function placeholderHTML(num,name,state){
 
 function openModal(num,name,state){
   modalCard = num;
+  cancelUnlockEntrance();
   ++modalGeneration;
   const media = document.getElementById("modalMedia");
   const release = document.getElementById("modalRelease");
@@ -2579,6 +2600,7 @@ function openModal(num,name,state){
 function closeModal(historyMode = "replace"){
   writeCardContext(null, historyMode);
   modalCard = null;
+  cancelUnlockEntrance();
   ++modalGeneration;
   document.getElementById("modal").classList.remove("open");
 }
