@@ -1263,6 +1263,15 @@
       }
     }
 
+
+    /* LEDGER RUN: scoped project feature */
+    #ledger-run{scroll-margin-top:90px}
+    .ledger-run-feature{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,.55fr);gap:26px;align-items:center;padding:30px;border:1px solid rgba(87,169,255,.4);border-radius:24px;background:linear-gradient(145deg,#123b68,#061425 75%)}
+    .ledger-run-feature h2{font-size:clamp(2rem,5vw,3.5rem);margin:14px 0 8px}
+    .ledger-run-feature p{color:var(--muted);line-height:1.65;max-width:650px}
+    .ledger-run-feature .run-tagline{color:var(--text);font-weight:900;letter-spacing:.08em}
+    .ledger-run-art{display:block;width:100%;max-width:310px;height:auto;margin:auto;filter:drop-shadow(0 16px 24px rgba(0,0,0,.25))}
+    @media(max-width:640px){.ledger-run-feature{grid-template-columns:1fr;padding:22px}.ledger-run-art{max-width:230px}}
   </style>
   <link rel="icon" href="/assets/favicons/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png" />
@@ -1523,19 +1532,19 @@
               <img class="card-logo" src="/assets/RAD_logo.webp" alt="RAD" />
               <h3>RAD</h3>
               <div class="verb">Belong</div>
-              <p class="copy">Community, humor, XRP culture, and the House personality layer.</p>
+              <p class="copy">RAD GARLINGTON, $XRP culture, and LEDGER RUN, the upcoming game starring COM-RAD.</p>
             </div>
             <a href="https://radxrp.com"
                data-house-modal
                data-title="RAD GARLINGTON"
-               data-role="Brand / Token"
-               data-status="LIVE · $RAD TOKEN LIVE"
-               data-lead="A live XRPL token ecosystem built around community, humor, $XRP culture, and House personality."
-               data-details="$RAD is a live XRPL token at the center of the RAD GARLINGTON ecosystem. The House brand combines community, personality, humor, $XRP culture, and direct $RAD / $XRP AMM access."
-               data-breakdown="$RAD token live on XRPL|Live $RAD / $XRP AMM access|House community brand|$XRP culture and humor|Community identity|XRPL-native trading access|Connected House presence"
+               data-role="Brand / Token / Game"
+               data-status="$RAD TOKEN LIVE · GAME COMING SOON"
+               data-lead="RAD GARLINGTON brings character, community, and $XRP culture to the House. COM-RAD stars in LEDGER RUN, coming soon."
+               data-details="$RAD is the project’s live memecoin on XRPL and the intended in-game token for LEDGER RUN. The upcoming 3D endless runner puts COM-RAD in mountain trails, torchlit labyrinths, and neon ledger highways. The game is in development; mainnet play is not yet available. No prizes or token payouts."
+               data-breakdown="$RAD token live on XRPL|LEDGER RUN coming soon|Starring COM-RAD|3D endless runner|Mobile-first game in development|No prizes or payouts|House community brand"
                data-logo="/assets/RAD_logo.webp"
-               data-href="https://radxrp.com"
-               data-link-label="Website"
+               data-href="https://radxrp.com/#ledger-run"
+               data-link-label="LEDGER RUN"
                data-external="true"
                data-href2="https://xmagnetic.org/swap/RAD+rKpaNoTRdXa48W7emkKgtCLz2MuhEroU7V_XRP+XRP?network=mainnet"
                data-link-label2="$RAD AMM"
@@ -1596,6 +1605,20 @@
 
         </div>
       </section>
+
+    <section id="ledger-run" aria-labelledby="ledger-run-title">
+      <div class="ledger-run-feature">
+        <div>
+          <span class="badge">GAME COMING SOON</span>
+          <h2 id="ledger-run-title">LEDGER RUN</h2>
+          <p class="run-tagline">PLAY IT. BURN IT. HOLD IT.</p>
+          <p>COM-RAD takes the lead in a mobile-first 3D endless runner from RAD GARLINGTON. Mountain trails, torchlit labyrinths, and neon ledger highways are in development.</p>
+          <p>$RAD is the project’s live memecoin on XRPL and its intended in-game token. LEDGER RUN is coming soon. No prizes or token payouts.</p>
+          <div class="btnrow"><a class="btn" href="https://radxrp.com/#ledger-run" target="_blank" rel="noopener">Explore LEDGER RUN</a></div>
+        </div>
+        <img class="ledger-run-art" src="/assets/COM-RAD-front.png" width="1254" height="1254" loading="lazy" alt="COM-RAD, the character starring in LEDGER RUN" />
+      </div>
+    </section>
 
       <section id="collectibles" class="section">
         <h2>Collectibles</h2>
