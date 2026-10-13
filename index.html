@@ -1272,6 +1272,14 @@
     .ledger-run-feature .run-tagline{color:var(--text);font-weight:900;letter-spacing:.08em}
     .ledger-run-art{display:block;width:100%;max-width:310px;height:auto;margin:auto;filter:drop-shadow(0 16px 24px rgba(0,0,0,.25))}
     @media(max-width:640px){.ledger-run-feature{grid-template-columns:1fr;padding:22px}.ledger-run-art{max-width:230px}}
+
+    /* RAD popup: compact copy, with reachable actions on short screens. */
+    .house-modal.rad-popup{align-items:center;touch-action:pan-y;padding:calc(10px + env(safe-area-inset-top,0px)) 10px calc(10px + env(safe-area-inset-bottom,0px))}
+    .rad-popup .house-modal-window{height:auto;min-height:0;max-height:calc(100svh - 20px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));max-height:calc(100dvh - 20px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));display:flex;flex-direction:column}
+    .rad-popup .house-modal-body{height:auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;-webkit-overflow-scrolling:touch;padding-bottom:32px}
+    .rad-popup .house-modal-body>*{flex-shrink:0}
+    .rad-popup .house-modal-details:empty,.rad-popup .house-modal-breakdown:empty{display:none}
+    .rad-popup .house-modal-actions{padding-bottom:4px}
   </style>
   <link rel="icon" href="/assets/favicons/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png" />
@@ -1539,9 +1547,9 @@
                data-title="RAD GARLINGTON"
                data-role="Brand / Token / Game"
                data-status="$RAD TOKEN LIVE · GAME COMING SOON"
-               data-lead="RAD GARLINGTON brings character, community, and $XRP culture to the House. COM-RAD stars in LEDGER RUN, coming soon."
-               data-details="$RAD is the project’s live memecoin on XRPL and the intended in-game token for LEDGER RUN. The upcoming 3D endless runner puts COM-RAD in mountain trails, torchlit labyrinths, and neon ledger highways. The game is in development; mainnet play is not yet available. Free plays are trial runs and do not trigger token burns. A revenue-funded buyback-and-burn feature is planned for paid play. Burn eligibility, limits and accounting will be published before launch. No prizes or token payouts."
-               data-breakdown="$RAD token live on XRPL|LEDGER RUN coming soon|Starring COM-RAD|3D endless runner|Mobile-first game in development|No prizes or payouts|House community brand"
+               data-lead="Meet Rad Garlington, the face of $RAD on the XRP Ledger and the star of LEDGER RUN. Explore the world of COM-RAD, the game, and the $RAD ecosystem."
+               data-details=""
+               data-breakdown=""
                data-logo="/assets/RAD_logo.webp"
                data-href="https://radxrp.com/#ledger-run"
                data-link-label="LEDGER RUN"
@@ -1844,6 +1852,7 @@
     if (trigger) {
       event.preventDefault();
 
+      modal.classList.toggle('rad-popup', trigger.dataset.title === 'RAD GARLINGTON');
       title.textContent = trigger.dataset.title || '';
       role.textContent = trigger.dataset.role || '';
       status.textContent = trigger.dataset.status || '';
@@ -1897,6 +1906,7 @@
       });
 
       modal.hidden = false;
+      if (modal.classList.contains('rad-popup')) modal.querySelector('.house-modal-body').scrollTop = 0;
       document.body.classList.add('modal-open');
       document.querySelector('.house-modal-close').focus();
       return;
