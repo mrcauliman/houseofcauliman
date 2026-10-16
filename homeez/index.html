@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
+  <!-- HOMEEZ paid-spins backend URL. Empty = demo mode only (free, no NFT). -->
+  <meta name="homeez-api" content="">
+  <!-- Paid spins UI (wallet, coins, Xaman). "on" + homeez-api set = enabled. Anything else = free spins, paid UI hidden. -->
+  <meta name="homeez-paid" content="off">
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>HOMEEZ Capsule Machine</title>
   <meta name="description" content="HOMEEZ Capsule Machine." />
@@ -197,6 +201,29 @@
       z-index:8;
     }
 
+    /* ---- paid spins: wallet, coin slot, Xaman modal ---- */
+    body.hz-paid-off #hzWallet,body.hz-paid-off #hzModal{display:none!important}
+    .hz-wallet [hidden],.hz-mcard [hidden]{display:none!important}
+    .hz-wallet{display:grid;gap:10px;margin:0 0 14px;padding:12px;border-radius:16px;background:rgba(255,216,110,.06);border:1px solid rgba(255,216,110,.25)}
+    .hz-wrow{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+    .hz-mode{font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;padding:4px 9px;border-radius:999px;background:#2a2a2a;color:#ddd}
+    .hz-mode.test{background:#1b5e9e;color:#fff}.hz-mode.demo{background:#7a3a00;color:#ffd8a8}
+    .hz-addr{font:700 13px ui-monospace,monospace;color:var(--gold)}
+    .hz-slot{display:flex;align-items:center;gap:10px;min-height:46px;padding:6px 12px;border-radius:12px;background:linear-gradient(#111,#1d1d1d);box-shadow:inset 0 3px 8px rgba(0,0,0,.8),0 1px 0 rgba(255,255,255,.08)}
+    .hz-slot-mouth{width:8px;height:30px;border-radius:4px;background:#000;box-shadow:inset 0 0 4px #000,0 0 0 2px #555}
+    .hz-coins{display:flex;flex-wrap:wrap;gap:4px;flex:1}
+    .hz-coin{width:26px;height:26px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff6c2 0 12%,#ffd86e 30%,#c48a12 75%,#7a5200);box-shadow:0 2px 4px rgba(0,0,0,.6),inset 0 0 0 2px rgba(122,82,0,.6);display:grid;place-items:center;font:900 10px system-ui;color:#5a3c00}
+    .hz-coin.drop{animation:hzCoin .5s ease-in forwards}
+    @keyframes hzCoin{to{transform:translateX(-40px) scaleX(.15);opacity:0}}
+    .hz-ccount{font-weight:900;color:var(--gold);white-space:nowrap}
+    .hz-packs{display:flex;gap:8px;flex-wrap:wrap}.hz-packs .btn{flex:1;min-width:130px}
+    .hz-small{font-size:12px;opacity:.75;margin:0}
+    .hz-claim{display:inline-block;margin-top:8px}
+    .hz-modal{position:fixed;inset:0;z-index:60;display:grid;place-items:center;background:rgba(0,0,0,.72);padding:16px}
+    .hz-modal[hidden]{display:none}
+    .hz-mcard{width:min(380px,100%);background:#141414;border:1px solid rgba(255,216,110,.35);border-radius:20px;padding:20px;text-align:center;color:#fff}
+    .hz-mcard h3{margin:0 0 6px}.hz-mcard img{width:220px;max-width:80%;border-radius:12px;background:#fff;margin:10px auto;display:block}
+    .hz-mcard .btn{width:100%;margin-top:8px}
     .machine-panel{
       margin-top:10px; padding:18px; border-radius:22px;
       background:var(--panel); border:1px solid var(--line);
@@ -458,6 +485,68 @@
     .homeez-brand-logo{display:block;width:min(360px,82vw);height:auto;margin:0 auto 16px;object-fit:contain}
     .homeez-banner-art{display:block;width:100%;max-width:980px;height:auto;margin:22px auto 0;border-radius:18px;border:1px solid rgba(240,184,48,.18);box-shadow:0 18px 50px rgba(0,0,0,.34)}
     .homeez-xrp-art{display:block;width:100%;max-width:420px;height:auto;margin:14px auto 18px;border-radius:16px;border:1px solid rgba(240,184,48,.16);box-shadow:0 14px 38px rgba(0,0,0,.28)}
+    /* ===== HOMEEZ machine v2 ===== */
+    .hzm-stage{display:flex;justify-content:center;padding:6px 0 10px;user-select:none;-webkit-user-select:none}
+    .hzm{position:relative;width:min(100%,470px);aspect-ratio:470/688;filter:drop-shadow(0 28px 50px rgba(0,0,0,.5))}
+    .hzm.shake{animation:hzShake .5s ease-in-out}
+    .hzm-layer{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+    .hzm-dome{position:absolute;left:4.5%;top:14.6%;width:91%;height:34.4%;overflow:hidden;border-radius:42% 42% 4% 4%/60% 60% 4% 4%}
+    .hzc{position:absolute;width:30%;aspect-ratio:1;transform:rotate(var(--r));transition:transform .3s}
+    .hzm-dome.jiggle .hzc{animation:hzJig .55s ease-in-out var(--d) 2}
+    .cap{position:absolute;inset:0;border-radius:50%;overflow:hidden;filter:drop-shadow(0 3px 4px rgba(0,0,0,.4))}
+    .cap>*{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+    .cap .glass{background:url(/homeez/assets/caps/glass.webp?v=2) center/100% 100% no-repeat}
+    .cap .bot{background-size:100% 100%;background-repeat:no-repeat}
+    .cap .fig{left:12%;width:76%;top:6%;height:85%;background-size:contain;background-repeat:no-repeat;background-position:center top}
+    .cap .fig.ph{background:none}
+    .hzm-knob{position:absolute;left:36.4%;top:52.3%;width:26.4%;aspect-ratio:1;border-radius:50%;padding:0;background:none;touch-action:none;cursor:grab;outline-offset:4px;z-index:5}
+    .hzm-knob:active{cursor:grabbing}
+    .hzm-knob img{width:100%;height:100%;border-radius:50%;pointer-events:none;transform:rotate(var(--a,0deg));will-change:transform}
+    .hzm-knob.ready{animation:hzPulse 1.8s ease-in-out infinite}
+    .hzm-hint{position:absolute;left:66%;top:56%;padding:6px 10px;border-radius:999px;background:var(--gold);color:#1a1200;font-weight:900;font-size:13px;letter-spacing:.06em;text-transform:uppercase;pointer-events:none;box-shadow:0 6px 18px rgba(0,0,0,.4);transition:opacity .3s}
+    .hzm-hint span{display:inline-block;animation:hzSpin 1.6s linear infinite}
+    .hzm-hint.off{opacity:0}
+    .hzm-progress{position:absolute;left:36.4%;width:26.4%;top:71.5%;height:5px;border-radius:9px;background:rgba(255,255,255,.12);overflow:hidden}
+    .hzm-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ffd86e,#ff6b4a)}
+    .hzm-cap{position:absolute;left:41%;top:76.5%;width:18%;aspect-ratio:1;padding:0;background:none;border-radius:50%;z-index:6;cursor:pointer}
+    .hzm-cap .cap{animation:none}
+    .hzm-cap.drop{animation:hzDrop .9s cubic-bezier(.3,1.4,.5,1) both}
+    .hzm-cap.wait{animation:hzWiggle 1.4s ease-in-out infinite}
+    .hzm-cap::after{content:"Tap to open";position:absolute;left:50%;top:104%;transform:translateX(-50%);white-space:nowrap;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:#ffeeb9;text-shadow:0 2px 6px #000}
+    .hz-tray-head{display:flex;justify-content:space-between;margin-top:14px;font-size:12px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+    .hz-tray{display:flex;gap:8px;overflow-x:auto;padding:10px 2px 6px;min-height:72px;scrollbar-width:thin}
+    .hz-tray:empty::before{content:"No pulls yet.";color:var(--muted);font-size:14px;align-self:center}
+    .hz-chip{flex:0 0 auto;width:58px;text-align:center;font-size:10px;font-weight:800;color:#dfe8ff}
+    .hz-chip .cap{position:relative;width:52px;height:52px;margin:0 auto 3px}
+    .hz-teaser{margin:12px 0 0;font-size:14px;color:#ffe8a7;font-weight:700}
+    .hz-reveal{position:fixed;inset:0;z-index:50;display:grid;place-items:center;background:rgba(4,6,10,.72);backdrop-filter:blur(6px);padding:16px}
+    .hz-reveal[hidden]{display:none}
+    .hz-reveal-card{position:relative;width:min(380px,100%);padding:22px 20px 20px;border-radius:24px;text-align:center;
+      background:linear-gradient(180deg,#151d2e,#0b111c);border:1px solid rgba(255,216,110,.28);box-shadow:0 30px 80px rgba(0,0,0,.6);animation:hzCard .45s cubic-bezier(.2,1.3,.4,1) both;overflow:hidden}
+    .hz-burst{position:absolute;left:50%;top:150px;width:520px;height:520px;margin:-260px 0 0 -260px;background:repeating-conic-gradient(rgba(255,216,110,.06) 0 10deg,transparent 10deg 20deg);animation:hzSpin 14s linear infinite;pointer-events:none}
+    .hz-open{position:relative;height:270px}
+    .hz-half{position:absolute;left:50%;width:150px;height:75px;margin-left:-75px;top:110px;z-index:3}
+    .hz-half.top{background:url(/homeez/assets/caps/glass.webp?v=2) top/100% 200% no-repeat;filter:drop-shadow(0 0 2px rgba(255,255,255,.5));animation:hzTop .7s .15s ease-out both}
+    .hz-half.bottom{top:185px;background:var(--bi) bottom/100% 200% no-repeat;filter:drop-shadow(0 6px 8px rgba(0,0,0,.4));animation:hzBot .7s .15s ease-out both}
+    .hz-rfig{position:absolute;left:50%;bottom:10px;width:150px;height:240px;margin-left:-75px;background-size:contain;background-repeat:no-repeat;background-position:center bottom;z-index:2;animation:hzRise .6s .35s cubic-bezier(.2,1.4,.4,1) both}
+    .hz-rfig.ph::before{content:"?";position:absolute;inset:0;display:grid;place-items:center;font-size:110px;font-weight:900;color:rgba(255,216,110,.6)}
+    .hz-rtitle{margin:6px 0 8px;font-size:30px;letter-spacing:.02em}
+    .hz-traits{list-style:none;margin:0 0 14px;padding:0;font-size:13px;color:var(--muted);line-height:1.6}
+    .hz-traits b{color:#eef5ff}
+    .hz-reveal-card .controls{justify-content:center;position:relative}
+    .hz-reveal-card>*{position:relative}.hz-reveal-card>.hz-burst{position:absolute}
+    @keyframes hzShake{0%,100%{transform:none}20%{transform:translateX(-5px) rotate(-1deg)}40%{transform:translateX(5px) rotate(1deg)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+    @keyframes hzJig{0%,100%{transform:rotate(var(--r))}30%{transform:translate(3px,-6px) rotate(calc(var(--r) + 12deg))}70%{transform:translate(-3px,-2px) rotate(calc(var(--r) - 10deg))}}
+    @keyframes hzPulse{0%,100%{filter:drop-shadow(0 0 0 rgba(255,216,110,0))}50%{filter:drop-shadow(0 0 12px rgba(255,216,110,.85))}}
+    @keyframes hzSpin{to{transform:rotate(360deg)}}
+    @keyframes hzDrop{0%{transform:translateY(-120%) scale(.6);opacity:0}50%{opacity:1}100%{transform:none}}
+    @keyframes hzWiggle{0%,80%,100%{transform:none}86%{transform:rotate(-12deg)}93%{transform:rotate(10deg)}}
+    @keyframes hzCard{from{transform:scale(.7);opacity:0}}
+    @keyframes hzTop{to{transform:translate(-90px,-60px) rotate(-40deg);opacity:0}}
+    @keyframes hzBot{to{transform:translate(90px,40px) rotate(30deg);opacity:0}}
+    @keyframes hzRise{from{transform:translateY(60px) scale(.4);opacity:0}}
+    @media (max-width:760px){.hzm{width:min(100%,400px)}.hz-open{height:240px}}
+    @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition:none!important}}
 </style>
   <meta name="apple-mobile-web-app-title" content="HOMEEZ" />
   <meta name="application-name" content="HOMEEZ" />
@@ -485,78 +574,80 @@
       <div class="wrap hero-grid">
         <div>
           <div class="eyebrow">Active Build</div>
-          <img class="homeez-brand-logo" src="/homeez/assets/HOMEEZ_logo.webp" alt="HOMEEZ" loading="eager">
+          <img class="homeez-brand-logo" src="/homeez/assets/HOMEEZ_logo.webp?v=2" alt="HOMEEZ" loading="eager">
           <h1>HOMEEZ Capsule Machine</h1>
-          <p class="sub">Tap the capsule drop area three times. Three taps. Three shakes. Then the capsule drops. Open it and reveal the result.</p>
+          <p class="sub">Grab the chrome knob and give it a full twist. A capsule drops. Crack it open to see which HOMEEZ you pulled. 18 to collect.</p>
           <picture><source srcset="/homeez/assets/HOMEEZ_banner.webp" type="image/webp"><img class="homeez-banner-art" src="/homeez/assets/HOMEEZ_banner.png" alt="HOMEEZ capsule collection banner" loading="eager"></picture>
 
           <div class="status-row">
             <span class="status gold">Founding Machine</span>
-            <span class="status">Motion Demo Live</span>
+            <span class="status">Series 1 · 18 Figures</span>
           </div>
         </div>
 
         <div class="machine-side">
-          <div class="machine-stage">
-            <div id="machineWrap" class="machine-wrap">
-              <img
-                src="/homeez/assets/homeez_capsule_machine.png"
-                alt="HOMEEZ Capsule Machine"
-                class="machine-render"
-              >
-
-              <div class="tap-callout" aria-hidden="true">
-                <div class="tap-callout-badge">Tap Here 3 Times</div>
-              </div>
-
-              <button id="handleHit" class="handle-hit" type="button" aria-label="Tap here three times to drop a capsule"></button>
-
-              <div class="tap-zone-ring" aria-hidden="true"></div>
-
-              <div id="capsuleDrop" class="capsule-drop" aria-hidden="true">
-                <div class="capsule-shell">
-                  <div class="capsule-figure"></div>
-                </div>
-              </div>
-
-              <div id="capsuleOpen" class="capsule-open" aria-hidden="true">
-                <div class="capsule-half top"></div>
-                <div class="capsule-half bottom"></div>
-              </div>
-
-              <div id="revealCard" class="reveal-card" aria-live="polite">
-                <button id="revealClose" class="reveal-close" type="button" aria-label="Close reveal" onclick="closeRevealCard(event)">×</button>
-                <div class="reveal-kicker">Capsule Opened</div>
-                <h2 id="revealTitle" class="reveal-title">HOMEEZ Pull</h2>
-            <img class="homeez-xrp-art" src="/homeez/assets/HOMEEZ_XRP.webp" alt="HOMEEZ powered by XRP" loading="lazy">
-                <p id="revealCopy" class="reveal-copy">Blurred reveal placeholder. Character asset and rarity system come next.</p>
-              </div>
+          <div class="hzm-stage">
+            <div id="hzm" class="hzm">
+              <img class="hzm-layer" src="/homeez/assets/machine_base.webp?v=2" alt="HOMEEZ capsule machine" draggable="false">
+              <div id="hzmDome" class="hzm-dome" aria-hidden="true"></div>
+              <img class="hzm-layer hzm-glass" src="/homeez/assets/machine_glass.png?v=2" alt="" aria-hidden="true" draggable="false">
+              <button id="hzmKnob" class="hzm-knob" type="button" aria-label="Twist the knob to get a HOMEEZ capsule">
+                <img src="/homeez/assets/machine_knob.png?v=2" alt="" draggable="false">
+              </button>
+              <div class="hzm-progress" aria-hidden="true"><i id="hzmProg"></i></div>
+              <button id="hzmCap" class="hzm-cap" type="button" aria-label="Open your capsule" hidden></button>
             </div>
           </div>
-
           <div class="machine-panel">
             <div class="panel-title">Machine Controls</div>
-
-            <div class="tap-meter">
-              <div id="tapDots" class="tap-dots">
-                <span class="tap-dot"></span>
-                <span class="tap-dot"></span>
-                <span class="tap-dot"></span>
+            <div id="hzWallet" class="hz-wallet">
+              <div class="hz-wrow"><span id="hzMode" class="hz-mode">Loading…</span><span id="hzAddr" class="hz-addr"></span>
+                <button id="hzConnect" class="btn btn-primary" type="button">Connect Xaman</button></div>
+              <div class="hz-slot" aria-label="Coin slot"><div class="hz-slot-mouth"></div><div id="hzCoins" class="hz-coins"></div><span id="hzCCount" class="hz-ccount">0 coins</span></div>
+              <div id="hzPacks" class="hz-packs" hidden>
+                <button class="btn" type="button" data-pack="1">1 spin · $5</button>
+                <button class="btn" type="button" data-pack="5">5 spins · $20</button>
               </div>
-              <div id="tapText" class="tap-text">Tap the handle 3 times.</div>
+              <p id="hzWNote" class="hz-small">1 coin = 1 spin = 1 HOMEEZ NFT. Priced in USD, paid in XRP at the live rate.</p>
             </div>
 
+            <div id="machineInfo" class="info" aria-live="polite">Grab the chrome knob and twist it all the way around. Or just tap it.</div>
             <div class="controls">
-              <button id="openBtn" class="btn btn-primary" type="button" disabled>Open Capsule</button>
-              <button id="resetBtn" class="btn" type="button" disabled>Reset</button>
+              <button id="turnBtn" class="btn btn-primary" type="button">Turn the knob</button>
+              <button id="clearBtn" class="btn" type="button">Clear pulls</button>
             </div>
-
-            <div id="machineInfo" class="info">Machine ready.</div>
+            <div class="hz-tray-head"><span>Your pulls</span><span id="trayCount">0 / 18 unique</span></div>
+            <div id="tray" class="hz-tray"></div>
+            <p class="hz-teaser">Own the NFT, get the figure. 3D printed HOMEEZ coming.</p>
           </div>
         </div>
       </div>
     </section>
   </main>
+
+  <div id="hzReveal" class="hz-reveal" hidden>
+    <div class="hz-reveal-card" role="dialog" aria-modal="true" aria-labelledby="hzRTitle">
+      <div class="hz-burst" aria-hidden="true"></div>
+      <div class="hz-open" aria-hidden="true">
+        <div class="hz-half top"></div><div id="hzRFig" class="hz-rfig"></div><div class="hz-half bottom"></div>
+      </div>
+      <div class="reveal-kicker">Capsule opened</div>
+      <h2 id="hzRTitle" class="hz-rtitle">HZ000</h2>
+      <ul id="hzRTraits" class="hz-traits"></ul>
+      <div id="hzRClaim"></div>
+      <div class="controls"><button id="againBtn" class="btn btn-primary" type="button">Turn again</button></div>
+    </div>
+  </div>
+
+
+  <div id="hzModal" class="hz-modal" hidden>
+    <div class="hz-mcard" role="dialog" aria-modal="true" aria-labelledby="hzMTitle">
+      <h3 id="hzMTitle">Xaman</h3><div id="hzMBody" class="hz-small"></div>
+      <img id="hzMQr" alt="Scan with Xaman" hidden>
+      <a id="hzMLink" class="btn btn-primary" href="#" target="_blank" rel="noopener" hidden>Open in Xaman</a>
+      <button id="hzMClose" class="btn" type="button">Cancel</button>
+    </div>
+  </div>
 
   <footer class="hoc-standard-footer">
   <div>A House of Cauliman Project</div>
@@ -570,177 +661,124 @@
 </footer>
 
   <script>
-    const results = [
-      { title: 'Neighborhood Archetype', copy: 'Prototype capsule result. Full character art and weighted rarity come next.' },
-      { title: 'Street Figure Pull', copy: 'Blurred silhouette placeholder. Later this opens into a real HOMEEZ reveal.' },
-      { title: 'Capsule Pull Locked', copy: 'Machine motion is working. XRPL-connected pulls come after the frontend sequence.' },
-      { title: 'Founding Capsule', copy: 'First-phase interaction demo. Real collectible assignments come in the next build.' }
-    ];
-
-    const machineWrap = document.getElementById('machineWrap');
-    const capsuleDrop = document.getElementById('capsuleDrop');
-    const capsuleOpen = document.getElementById('capsuleOpen');
-    const revealCard = document.getElementById('revealCard');
-    const revealTitle = document.getElementById('revealTitle');
-    const revealCopy = document.getElementById('revealCopy');
-    const revealClose = document.getElementById('revealClose');
-    const machineInfo = document.getElementById('machineInfo');
-    const handleHit = document.getElementById('handleHit');
-    const openBtn = document.getElementById('openBtn');
-    const resetBtn = document.getElementById('resetBtn');
-    const tapText = document.getElementById('tapText');
-    const tapDots = Array.from(document.querySelectorAll('.tap-dot'));
-
-    let state = 'ready';
-    let currentResult = null;
-    let tapCount = 0;
-    let tapBusy = false;
-
-    function vibrate(pattern) {
-      if (navigator.vibrate) navigator.vibrate(pattern);
-    }
-
-    function pickResult() {
-      return results[Math.floor(Math.random() * results.length)];
-    }
-
-    function updateTapMeter() {
-      tapDots.forEach((dot, i) => dot.classList.toggle('on', i < tapCount));
-      if (state === 'ready' || state === 'tapping') {
-        const left = Math.max(0, 3 - tapCount);
-        tapText.textContent = left === 0 ? 'Capsule dropping...' : `Tap 3 times. ${left} ${left === 1 ? 'tap' : 'taps'} left.`;
-      } else if (state === 'dropped') {
-        tapText.textContent = 'Capsule dropped. Open it.';
-      } else if (state === 'opened') {
-        tapText.textContent = 'Capsule opened.';
-      }
-    }
-
-    function flashShake() {
-      machineWrap.classList.remove('is-shaking');
-      void machineWrap.offsetWidth;
-      machineWrap.classList.add('is-shaking');
-      setTimeout(() => {
-        machineWrap.classList.remove('is-shaking');
-      }, 220);
-    }
-
-    function resetVisuals() {
-      capsuleDrop.classList.remove('active');
-      capsuleOpen.classList.remove('visible');
-      revealCard.classList.remove('visible');
-    }
-
-    function runTap(event) {
-      if (event) {
-        event.preventDefault();
-        event.stopPropagation();
-      }
-      if (state !== 'ready' && state !== 'tapping') return;
-      if (tapBusy) return;
-
-      tapBusy = true;
-      state = 'tapping';
-      tapCount += 1;
-
-      machineInfo.textContent = `Tap ${tapCount} of 3.`;
-      updateTapMeter();
-      flashShake();
-      vibrate(35);
-
-      setTimeout(() => {
-        tapBusy = false;
-      }, 240);
-
-      if (tapCount >= 3) {
-        currentResult = pickResult();
-        state = 'dropping';
-        handleHit.disabled = true;
-        machineInfo.textContent = 'Capsule dropping...';
-        vibrate([50, 40, 70]);
-
-        setTimeout(() => {
-          capsuleDrop.classList.add('active');
-        }, 120);
-
-        setTimeout(() => {
-          state = 'dropped';
-          machineInfo.textContent = 'Capsule dropped. Open it.';
-          openBtn.disabled = false;
-          resetBtn.disabled = false;
-          updateTapMeter();
-        }, 1180);
-      }
-    }
-
-    function closeRevealCard(event){
-      if (event) {
-        event.preventDefault();
-        event.stopPropagation();
-      }
-
-      if (typeof resetMachine === 'function') {
-        resetMachine();
-      } else {
-        capsuleOpen.classList.remove('visible');
-        revealCard.classList.remove('visible');
-      }
-    }
-
-    if (revealClose) {
-      revealClose.addEventListener('click', function(event){
-        event.preventDefault();
-        event.stopPropagation();
-        closeRevealCard(event);
-      });
-    }
-
-    document.addEventListener('keydown', function(event){
-      if (event.key === 'Escape' && revealCard.classList.contains('visible')) {
-        closeRevealCard(event);
-      }
-    });
-
-    function openCapsule() {
-      if (state !== 'dropped') return;
-      state = 'opened';
-      machineInfo.textContent = 'Opening capsule...';
-      openBtn.disabled = true;
-
-      revealTitle.textContent = currentResult.title;
-      revealCopy.textContent = currentResult.copy;
-
-      capsuleOpen.classList.add('visible');
-      vibrate([60, 30, 60]);
-
-      setTimeout(() => {
-        revealCard.classList.add('visible');
-        machineInfo.textContent = 'Capsule opened.';
-        updateTapMeter();
-      }, 280);
-    }
-
-    function resetMachine() {
-      state = 'ready';
-      currentResult = null;
-      tapCount = 0;
-      tapBusy = false;
-
-      resetVisuals();
-      handleHit.disabled = false;
-      openBtn.disabled = true;
-      resetBtn.disabled = true;
-      machineInfo.textContent = 'Machine ready.';
-      updateTapMeter();
-      vibrate(20);
-    }
-
-    handleHit.addEventListener('pointerdown', runTap);
-    handleHit.addEventListener('click', function(e){ e.preventDefault(); });
-    openBtn.addEventListener('click', openCapsule);
-    resetBtn.addEventListener('click', resetMachine);
-
-    updateTapMeter();
+  (()=>{
+    const COLORS=['#e8323a','#f2b822','#18a99a','#8a4fd8','#f2711c','#2f6fd8'];
+    const BOT=c=>`url(/homeez/assets/caps/bot_${String(c||'#e8323a').replace('#','')}.webp?v=2)`;
+    const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let FIGS=[];
+    const $=id=>document.getElementById(id);
+    const hzm=$('hzm'),dome=$('hzmDome'),knob=$('hzmKnob'),kimg=knob.querySelector('img'),prog=$('hzmProg'),hint={classList:{add(){}}},
+          capBtn=$('hzmCap'),info=$('machineInfo'),reveal=$('hzReveal'),tray=$('tray');
+    // ---- audio ----
+    let AC;const ac=()=>{if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(AC&&AC.state==='suspended')AC.resume();return AC};
+    function tone(f,d,type='square',v=.08,f2){const a=ac();if(!a)return;const o=a.createOscillator(),g=a.createGain(),t=a.currentTime;
+      o.type=type;o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);
+      g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g).connect(a.destination);o.start(t);o.stop(t+d+.02)}
+    const sClick=()=>{tone(1800,.03,'square',.05);tone(400,.05,'triangle',.06)};
+    const sClunk=()=>{tone(140,.25,'sine',.25,60);setTimeout(()=>tone(90,.18,'sine',.2,50),180)};
+    const sPop=()=>{tone(300,.12,'sine',.2,1200)};
+    const sChime=()=>[660,880,1320].forEach((f,i)=>setTimeout(()=>tone(f,.25,'triangle',.08),i*90));
+    const buzz=p=>{try{navigator.vibrate&&navigator.vibrate(p)}catch(e){}};
+    // ---- capsule element ----
+    function capsule(fig,color){const c=document.createElement('div');c.className='cap';c.style.setProperty('--c',color);
+      const f=document.createElement('div');f.className='fig'+(fig&&fig.img?'':' ph');if(fig&&fig.img)f.style.backgroundImage=`url(${fig.img})`;
+      const b=document.createElement('div');b.className='bot';b.style.backgroundImage=BOT(color);const g=document.createElement('div');g.className='glass';c.append(f,g,b);return c}
+    // ---- dome fill: 14 distinct figures stacked ----
+    const SLOTS=[[2,56],[25,60],[48,58],[71,55],[-4,22],[18,28],[41,26],[64,24],[84,22],[30,-4]];
+    function fillDome(){dome.innerHTML='';const pool=FIGS.slice().sort(()=>Math.random()-.5);
+      SLOTS.forEach(([x,y],i)=>{const w=document.createElement('div');w.className='hzc';w.style.left=x+'%';w.style.top=y+'%';
+        w.style.setProperty('--r',(Math.random()*50-25).toFixed(0)+'deg');w.style.setProperty('--d',(Math.random()*.15).toFixed(2)+'s');
+        w.append(capsule(pool[i%Math.max(pool.length,1)],COLORS[i%COLORS.length]));dome.append(w)})}
+    // ---- tray ----
+    const KEY='homeez_pulls_v1';let pulls=[];try{pulls=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){}
+    function renderTray(){tray.innerHTML='';pulls.slice().reverse().forEach(p=>{const fig=FIGS.find(f=>f.id===p.id);if(!fig)return;
+      const d=document.createElement('div');d.className='hz-chip';d.append(capsule(fig,p.c));d.append(fig.id+' '+fig.name);tray.append(d)});
+      $('trayCount').textContent=new Set(pulls.map(p=>p.id)).size+' / '+(FIGS.length||18)+' unique'}
+    // ---- paid spins (Xaman + coins). Backend URL from <meta name="homeez-api"> or ?api= ----
+    const PAY=(()=>{const st={api:'',cfg:null,token:'',account:'',coins:0,demo:true,pendingSpin:null};
+      const qs=new URLSearchParams(location.search);st.api=(qs.get('api')||document.querySelector('meta[name=homeez-api]')?.content||'').replace(/\/$/,'');
+      st.off=!(st.api&&((qs.get('paid')||document.querySelector('meta[name=homeez-paid]')?.content||'off').toLowerCase()==='on'));if(st.off){st.api='';document.body.classList.add('hz-paid-off')}
+      const mob=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)||matchMedia('(max-width:640px)').matches;
+      const req=async(m,p,b)=>{const r=await fetch(st.api+p,{method:m,headers:{'content-type':'application/json',...(st.token?{authorization:'Bearer '+st.token}:{})},body:b&&JSON.stringify(b)});
+        const j=await r.json().catch(()=>({}));if(!r.ok)throw Object.assign(new Error(j.error||('HTTP '+r.status)),{status:r.status});return j};
+      const modal=$('hzModal'),mT=$('hzMTitle'),mB=$('hzMBody'),mQ=$('hzMQr'),mL=$('hzMLink');let cancel=false;
+      const show=(t,b,p)=>{mT.textContent=t;mB.innerHTML=b||'';mQ.hidden=!(p&&p.qr&&!mob);if(p&&p.qr)mQ.src=p.qr;mL.hidden=!(p&&p.deeplink&&mob);if(p&&p.deeplink)mL.href=p.deeplink;modal.hidden=false;cancel=false};
+      const hide=()=>{modal.hidden=true;cancel=true};$('hzMClose').onclick=hide;
+      const wait=ms=>new Promise(r=>setTimeout(r,ms));
+      function render(){const m=$('hzMode');
+        if(st.demo){m.className='hz-mode demo';m.textContent='Demo mode · free · no NFT';}
+        else{m.className='hz-mode'+(st.cfg.network!=='mainnet'?' test':'');m.textContent=(st.cfg.network==='mainnet'?'Live':'TESTNET')+(st.cfg.mock?' · mock wallet':'');}
+        $('hzConnect').hidden=st.demo||!!st.account;$('hzAddr').textContent=st.account?st.account.slice(0,6)+'…'+st.account.slice(-4):'';
+        $('hzPacks').hidden=st.demo||!st.account;
+        const c=$('hzCoins');c.innerHTML='';for(let i=0;i<Math.min(st.coins,20);i++){const e=document.createElement('div');e.className='hz-coin';e.textContent='HZ';c.append(e)}
+        $('hzCCount').textContent=st.demo?'∞ demo':st.coins+' coin'+(st.coins===1?'':'s');
+        if(st.demo)$('hzWNote').textContent=st.api?'Paid spins are offline right now. You are in demo mode: free spins, no NFT.':'Demo mode: free spins, no NFT. Paid spins with Xaman are coming.';
+        try{st.token?sessionStorage.setItem('hz_tok',JSON.stringify({t:st.token,a:st.account})):0}catch(e){}}
+      async function init(){if(st.off){st.demo=true;return}if(st.api){try{st.cfg=await req('GET','/api/config');st.demo=false;
+          try{const s=JSON.parse(sessionStorage.getItem('hz_tok')||'null');if(s){st.token=s.t;const me=await req('GET','/api/me');st.account=me.account;st.coins=me.coins}}catch(e){st.token=''}}catch(e){st.demo=true}}render()}
+      async function connect(){try{const p=await req('POST','/api/signin');
+          show('Connect Xaman',p.mock?'Testnet mock sign-in (no Xaman key set). Creating a funded test wallet…':(mob?'Open Xaman to sign in.':'Scan with the Xaman app to sign in.'),p);
+          for(let i=0;i<150&&!cancel;i++){const r=await req('GET','/api/signin/'+p.uuid);if(r.done){if(!r.signed)throw new Error('Sign-in cancelled');st.token=r.token;st.account=r.account;st.coins=r.coins;break}await wait(2000)}
+          hide();render();info.textContent='Connected. Load coins to spin.'}catch(e){show('Sign-in failed',e.message)}}
+      async function load(pack){try{const q=await req('POST','/api/quote',{pack});
+          const left=()=>Math.max(0,Math.round((q.expiresAt-Date.now())/1000));
+          const txt=()=>`<b>${q.spins} spin${q.spins>1?'s':''} · $${q.usd} USD = ${q.xrp} XRP</b><br>Rate $${(+q.rate).toFixed(4)}/XRP · quote locked ${left()}s`;
+          show('Load coins',txt()+'<br>Preparing payment…');const p=await req('POST','/api/pay',{quoteId:q.quoteId});
+          show('Load coins',txt()+'<br>'+(p.mock?'Testnet mock: payment signed by your test wallet.':mob?'Open Xaman and sign the payment.':'Scan with Xaman and sign the payment.'),p);
+          for(let i=0;i<120&&!cancel;i++){mB.innerHTML=txt()+'<br>Waiting for the ledger…';const v=await req('POST','/api/verify',{quoteId:q.quoteId,txHash:p.txHash});
+            if(v.credited||v.already){st.coins=v.coins;break}if(!p.mock&&left()<=0&&i>60)throw new Error('Quote expired. Get a new one.');await wait(2500)}
+          hide();render();sChime();info.textContent='Coins loaded. Twist the knob!'}catch(e){show('Payment problem',e.message)}}
+      $('hzConnect').onclick=connect;document.querySelectorAll('#hzPacks [data-pack]').forEach(b=>b.onclick=()=>load(b.dataset.pack));
+      return{st,init,render,
+        gate(){if(st.demo)return true;if(!st.account){info.textContent='Connect Xaman first, then load coins to spin.';connect();return false}
+          if(st.coins<1){info.textContent='No coins. Load coins to spin.';$('hzPacks').animate([{transform:'scale(1)'},{transform:'scale(1.06)'},{transform:'scale(1)'}],400);return false}return true},
+        async spin(){const c=$('hzCoins').lastElementChild;if(c)c.classList.add('drop');const r=await req('POST','/api/spin',{});st.coins=r.coins;setTimeout(render,500);return r}}})();
+    // ---- knob ----
+    let angle=0,accum=0,busy=false,dragging=false,last=null,moved=0,lastClick=0;
+    const setA=a=>{kimg.style.setProperty('--a',a+'deg')};
+    const center=()=>{const r=knob.getBoundingClientRect();return[r.left+r.width/2,r.top+r.height/2]};
+    const ang=e=>{const[cx,cy]=center();return Math.atan2(e.clientY-cy,e.clientX-cx)*180/Math.PI};
+    function advance(d){if(busy)return;if(d<0)d*=.3;accum=Math.max(0,accum+d);angle+=d;setA(angle);
+      if(Math.floor(accum/30)>lastClick){lastClick=Math.floor(accum/30);sClick();buzz(8)}
+      prog.style.width=Math.min(100,accum/3.6)+'%';if(accum>=360)turned()}
+    knob.addEventListener('pointerdown',e=>{if(busy)return;ac();if(!PAY.gate())return;dragging=true;moved=0;last=ang(e);knob.setPointerCapture(e.pointerId);hint.classList.add('off')});
+    knob.addEventListener('pointermove',e=>{if(!dragging)return;const a=ang(e);let d=a-last;if(d>180)d-=360;if(d<-180)d+=360;last=a;moved+=Math.abs(d);advance(d)});
+    const end=e=>{if(!dragging)return;dragging=false;if(moved<8&&!busy)autoTurn()};
+    knob.addEventListener('pointerup',end);knob.addEventListener('pointercancel',()=>{dragging=false});
+    knob.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();autoTurn()}});
+    function autoTurn(){if(busy)return;ac();if(!dragging&&accum===0&&!PAY.st.demo&&!PAY.gate())return;hint.classList.add('off');const steps=12;let i=0;
+      const t=setInterval(()=>{advance(30);if(++i>=steps||busy)clearInterval(t)},RM?20:75)}
+    function turned(){busy=true;knob.classList.remove('ready');info.textContent='Clunk... here it comes.';sClunk();buzz([30,40,60]);
+      if(!RM){hzm.classList.remove('shake');void hzm.offsetWidth;hzm.classList.add('shake');dome.classList.remove('jiggle');void dome.offsetWidth;dome.classList.add('jiggle')}
+      const color=COLORS[Math.floor(Math.random()*COLORS.length)];
+      const pick=PAY.st.demo?Promise.resolve({fig:FIGS[Math.floor(Math.random()*FIGS.length)].id}):(info.textContent='Clunk... minting your HOMEEZ on the ledger...',PAY.spin());
+      pick.then(r=>{const fig=FIGS.find(f=>f.id===r.fig);capBtn.dataset.mint=r.mintTx?JSON.stringify(r):'';drop(fig,color)})
+        .catch(e=>{info.textContent=e.status===402?'No coins. Load coins to spin.':'Spin failed: '+e.message+' (coin refunded if nothing minted)';PAY.render();busy=false;accum=0;lastClick=0;prog.style.width='0';knob.classList.add('ready')})}
+    function drop(fig,color){setTimeout(()=>{capBtn.innerHTML='';capBtn.append(capsule(fig,color));capBtn.hidden=false;capBtn.className='hzm-cap drop';
+        capBtn.dataset.id=fig.id;capBtn.dataset.c=color;sPop();buzz(20);
+        setTimeout(()=>{capBtn.className='hzm-cap wait';info.textContent='Capsule dropped. Tap it to open.'},RM?10:900)},RM?50:550)}
+    capBtn.addEventListener('click',()=>{const fig=FIGS.find(f=>f.id===capBtn.dataset.id);if(!fig)return;const c=capBtn.dataset.c;
+      capBtn.hidden=true;sPop();sChime();buzz([15,30,15]);
+      const card=reveal.querySelector('.hz-reveal-card');card.style.setProperty('--c',c);card.style.setProperty('--bi',BOT(c));
+      const rf=$('hzRFig');rf.className='hz-rfig'+(fig.img?'':' ph');rf.style.backgroundImage=fig.img?`url(${fig.img})`:'';
+      $('hzRTitle').textContent=fig.id+' '+fig.name;
+      const mr=capBtn.dataset.mint?JSON.parse(capBtn.dataset.mint):null,cl=$('hzRClaim');
+      cl.innerHTML=mr?`<div class="hz-small">Edition #${mr.edition} of ${mr.cap} · minted ${PAY.st.cfg.network}</div>`+(mr.accept?`<a class="btn btn-primary hz-claim" target="_blank" rel="noopener" href="${mr.accept.deeplink}">Accept NFT in Xaman</a>`:`<div class="hz-small">Mock mode: 0 XRP offer ${mr.offerId.slice(0,10)}… created for your wallet.</div>`):(PAY.st.demo&&!PAY.st.off?'<div class="hz-small">Demo pull · no NFT</div>':'');
+      if(mr)$('hzRTitle').textContent=fig.id+' '+fig.name+' #'+mr.edition;
+      $('hzRTraits').innerHTML=Object.entries(fig.traits||{}).filter(([k,v])=>v&&v!=="None").map(([k,v])=>`<li>${k}: <b>${v}</b></li>`).join('');
+      reveal.hidden=false;[...card.querySelectorAll('.hz-half,.hz-rfig,.hz-burst')].forEach(el=>{el.style.animation='none';void el.offsetWidth;el.style.animation=''});
+      pulls.push({id:fig.id,c,t:Date.now()});pulls=pulls.slice(-60);try{localStorage.setItem(KEY,JSON.stringify(pulls))}catch(e){}renderTray();
+      info.textContent='You pulled '+fig.id+' '+fig.name+'.';$('againBtn').focus()});
+    function resetTurn(){reveal.hidden=true;busy=false;accum=0;lastClick=0;prog.style.width='0';knob.classList.add('ready');
+      info.textContent='Twist the knob for another HOMEEZ.'}
+    $('againBtn').onclick=resetTurn;reveal.addEventListener('click',e=>{if(e.target===reveal)resetTurn()});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!reveal.hidden)resetTurn()});
+    $('turnBtn').onclick=()=>{if(!reveal.hidden)resetTurn();if(!capBtn.hidden){capBtn.click();return}autoTurn()};
+    $('clearBtn').onclick=()=>{pulls=[];try{localStorage.removeItem(KEY)}catch(e){}renderTray()};
+    fetch('/homeez/figures.json',{cache:'no-cache'}).then(r=>r.json()).then(j=>{FIGS=j;fillDome();renderTray();knob.classList.add('ready');PAY.init()})
+      .catch(()=>{info.textContent='Machine is restocking. Try again soon.'});
+  })();
   </script>
+
 </body>
 </html>

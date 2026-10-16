@@ -1,0 +1,254 @@
+[
+ {
+  "id": "HZ001",
+  "num": "001",
+  "name": "MIKEY",
+  "img": "/homeez/assets/figures/HZ001_MIKEY.webp?v=2",
+  "traits": {
+   "Hair": "Slicked-back black hair with taper fade",
+   "Top": "Open black-and-white buffalo-check flannel over white tee",
+   "Bottoms": "Navy baggy jeans",
+   "Shoes": "Black-and-white low-top sneakers",
+   "Accessory": "Gold Cuban link chain",
+   "Pose": "Hands in pockets"
+  }
+ },
+ {
+  "id": "HZ002",
+  "num": "002",
+  "name": "RICO",
+  "img": "/homeez/assets/figures/HZ002_RICO.webp?v=2",
+  "traits": {
+   "Hair": "Black du-rag",
+   "Top": "Olive button-up shirt over white tee",
+   "Bottoms": "Wheat cargo pants",
+   "Shoes": "Wheat Timberland-style boots",
+   "Accessory": "Gold chain",
+   "Pose": "Arms crossed"
+  }
+ },
+ {
+  "id": "HZ003",
+  "num": "003",
+  "name": "LOLA",
+  "img": "/homeez/assets/figures/HZ003_LOLA.webp?v=2",
+  "traits": {
+   "Hair": "Sleek low bun with baby edges",
+   "Top": "Cropped pink moto jacket over black top",
+   "Bottoms": "Black high-waist straight-leg jeans",
+   "Shoes": "White chunky sneakers",
+   "Accessory": "Gold hoop earrings",
+   "Pose": "Hand on hip"
+  }
+ },
+ {
+  "id": "HZ004",
+  "num": "004",
+  "name": "JACE",
+  "img": "/homeez/assets/figures/HZ004_JACE.webp?v=2",
+  "traits": {
+   "Hair": "Straight-back cornrows",
+   "Top": "Navy snap-front jacket with white chest panel",
+   "Bottoms": "Dark wash baggy jeans",
+   "Shoes": "Wheat Timberland-style boots",
+   "Accessory": "Silver ID bracelet",
+   "Pose": "Arms at sides"
+  }
+ },
+ {
+  "id": "HZ005",
+  "num": "005",
+  "name": "DEE",
+  "img": "/homeez/assets/figures/HZ005_DEE.webp?v=2",
+  "traits": {
+   "Hair": "Sandy-blonde skater mop",
+   "Top": "Oversized white tee",
+   "Bottoms": "Orange-red cargo basketball shorts",
+   "Shoes": "White chunky sneakers",
+   "Accessory": "Thin chain",
+   "Pose": "Hand on chest, hand in pocket"
+  }
+ },
+ {
+  "id": "HZ006",
+  "num": "006",
+  "name": "NOVA",
+  "img": "/homeez/assets/figures/HZ006_NOVA.webp?v=2",
+  "traits": {
+   "Hair": "Caesar cut",
+   "Top": "Purple velour zip-up track top",
+   "Bottoms": "Cream straight-leg jeans",
+   "Shoes": "Black-and-white sneakers",
+   "Accessory": "Gold rope chain",
+   "Pose": "Hands clasped"
+  }
+ },
+ {
+  "id": "HZ007",
+  "num": "007",
+  "name": "BOOGIE",
+  "img": "/homeez/assets/figures/HZ007_BOOGIE.webp?v=2",
+  "traits": {
+   "Hair": "High-top fade",
+   "Top": "Royal blue track jacket",
+   "Bottoms": "Dark indigo straight-leg jeans",
+   "Shoes": "White shell-toe sneakers",
+   "Accessory": "Gold herringbone chain",
+   "Pose": "Hand on chest"
+  }
+ },
+ {
+  "id": "HZ008",
+  "num": "008",
+  "name": "KEI",
+  "img": "/homeez/assets/figures/HZ008_KEI.webp?v=2",
+  "traits": {
+   "Hair": "Blue-black bowl cut",
+   "Top": "Teal zip hoodie over white tee",
+   "Bottoms": "Dark cargo pants",
+   "Shoes": "Orange low-top sneakers",
+   "Accessory": "Square black glasses",
+   "Pose": "Arms crossed"
+  }
+ },
+ {
+  "id": "HZ009",
+  "num": "009",
+  "name": "TRINA",
+  "img": "/homeez/assets/figures/HZ009_TRINA.webp?v=2",
+  "traits": {
+   "Hair": "Cornrows into low bun",
+   "Top": "Red-and-white cropped sport jersey",
+   "Bottoms": "Black biker shorts",
+   "Shoes": "Black high-top sneakers",
+   "Accessory": "White headband, gold hoops",
+   "Pose": "Arms crossed"
+  }
+ },
+ {
+  "id": "HZ010",
+  "num": "010",
+  "name": "MARV",
+  "img": "/homeez/assets/figures/HZ010_MARV.webp?v=2",
+  "traits": {
+   "Hair": "Olive slouchy beanie",
+   "Top": "Olive pullover hoodie",
+   "Bottoms": "Light wash straight-leg jeans",
+   "Shoes": "Wheat Timberland-style boots",
+   "Accessory": "None",
+   "Pose": "Hands in hoodie pocket"
+  }
+ },
+ {
+  "id": "HZ011",
+  "num": "011",
+  "name": "SKYE",
+  "img": "/homeez/assets/figures/HZ011_SKYE.webp?v=2",
+  "traits": {
+   "Hair": "Auburn tight coils",
+   "Top": "Plain black oversized tee",
+   "Bottoms": "Grey baggy jeans",
+   "Shoes": "Black skate shoes",
+   "Accessory": "White wrist tape",
+   "Pose": "Hand on neck"
+  }
+ },
+ {
+  "id": "HZ012",
+  "num": "012",
+  "name": "GIO",
+  "img": "/homeez/assets/figures/HZ012_GIO.webp?v=2",
+  "traits": {
+   "Hair": "Freeform locs",
+   "Top": "Charcoal full-zip hoodie",
+   "Bottoms": "Dark indigo baggy jeans",
+   "Shoes": "White sneakers",
+   "Accessory": "Over-ear headphones, gold rope chain",
+   "Pose": "Hand to headphones"
+  }
+ },
+ {
+  "id": "HZ013",
+  "num": "013",
+  "name": "SUNNY",
+  "img": "/homeez/assets/figures/HZ013_SUNNY.webp?v=2",
+  "traits": {
+   "Hair": "Single beaded braid over shoulder",
+   "Top": "Yellow cropped hoodie",
+   "Bottoms": "Light denim wide-leg jeans",
+   "Shoes": "White platform sneakers",
+   "Accessory": "Gold nameplate chain, bead bracelet",
+   "Pose": "Hand on hip"
+  }
+ },
+ {
+  "id": "HZ014",
+  "num": "014",
+  "name": "TANK",
+  "img": "/homeez/assets/figures/HZ014_TANK.webp?v=2",
+  "traits": {
+   "Hair": "Low skin fade with full beard",
+   "Top": "Charcoal sleeveless hoodie",
+   "Bottoms": "Khaki wide-leg pants",
+   "Shoes": "Black Timberland-style boots",
+   "Accessory": "Thick gold rope chain",
+   "Pose": "Arms crossed"
+  }
+ },
+ {
+  "id": "HZ015",
+  "num": "015",
+  "name": "VEE",
+  "img": "/homeez/assets/figures/HZ015_VEE.webp?v=2",
+  "traits": {
+   "Hair": "Hood up",
+   "Top": "Slate navy pullover hoodie",
+   "Bottoms": "Olive cargo pants",
+   "Shoes": "Black-and-olive sneakers",
+   "Accessory": "None",
+   "Pose": "Hands in hoodie pocket"
+  }
+ },
+ {
+  "id": "HZ016",
+  "num": "016",
+  "name": "BLAZE",
+  "img": "/homeez/assets/figures/HZ016_BLAZE.webp?v=2",
+  "traits": {
+   "Hair": "Black fitted cap",
+   "Top": "Fire red bomber jacket over white tee",
+   "Bottoms": "Black slim jeans",
+   "Shoes": "Red work boots",
+   "Accessory": "Gold chain, black fitted cap",
+   "Pose": "Arms at sides"
+  }
+ },
+ {
+  "id": "HZ017",
+  "num": "017",
+  "name": "MELLO",
+  "img": "/homeez/assets/figures/HZ017_MELLO.webp?v=2",
+  "traits": {
+   "Hair": "Rounded afro",
+   "Top": "Slate blue open-collar shirt over white tee",
+   "Bottoms": "Grey straight-leg slacks",
+   "Shoes": "Tan Timberland-style boots",
+   "Accessory": "Wristband",
+   "Pose": "Hands in pockets"
+  }
+ },
+ {
+  "id": "HZ018",
+  "num": "018",
+  "name": "ZION",
+  "img": "/homeez/assets/figures/HZ018_ZION.webp?v=2",
+  "traits": {
+   "Hair": "Close-cropped natural coils",
+   "Top": "Forest green crewneck sweatshirt",
+   "Bottoms": "Grey wide-leg cargo pants",
+   "Shoes": "Olive-green sneakers",
+   "Accessory": "Brown leather belt",
+   "Pose": "Hand on chest"
+  }
+ }
+]
