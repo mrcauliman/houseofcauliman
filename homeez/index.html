@@ -566,6 +566,15 @@
     @keyframes hzRise{from{transform:translateY(60px) scale(.4);opacity:0}}
     @media (max-width:760px){.hzm{width:min(100%,400px)}.hz-open{height:240px}}
     @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition:none!important}}
+    .mint-bar{background:linear-gradient(90deg,#b8860b,var(--gold),#b8860b);color:#1a1200;text-align:center;font-weight:900;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:8px 12px;line-height:1.35}
+    .mint-pill{display:inline-block;padding:8px 16px;border-radius:999px;background:var(--gold);color:#1a1200;font-weight:900;font-size:15px;letter-spacing:.1em;text-transform:uppercase;box-shadow:0 6px 18px rgba(255,216,110,.35)}
+    .mint-sub{margin:8px 0 14px;font-weight:700;color:var(--gold);font-size:15px}
+    .coming{padding:0 0 56px}
+    .coming-box{padding:22px;border-radius:24px;background:var(--panel);border:1px solid var(--line);box-shadow:0 12px 26px rgba(0,0,0,.18)}
+    .coming-box h2{margin:6px 0 14px;font-size:clamp(24px,3vw,34px)}
+    .coming-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+    .coming-list li{padding:14px 16px;border-radius:16px;border:1px solid var(--line);background:rgba(255,216,110,.06);font-weight:700}
+    .coming-list li b{display:block;color:var(--gold);font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
 </style>
   <meta name="apple-mobile-web-app-title" content="HOMEEZ" />
   <meta name="application-name" content="HOMEEZ" />
@@ -576,6 +585,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/homeez/apple-touch-icon.png?v=2" />
 </head>
 <body>
+  <div class="mint-bar" role="status">Mint coming soon · Series 1 on XRPL · Spin free now</div>
   <header class="topbar">
     <div class="topbar-inner">
       <a class="brand" href="https://houseofcauliman.com/">
@@ -592,7 +602,8 @@
     <section class="hero">
       <div class="wrap hero-grid">
         <div>
-          <div class="eyebrow">Active Build</div>
+          <span class="mint-pill">Mint Coming Soon</span>
+          <p class="mint-sub">HOMEEZ Series 1 mints on the XRP Ledger. Free spins are open now.</p>
           <img class="homeez-brand-logo" src="/homeez/assets/HOMEEZ_logo.webp?v=2" alt="HOMEEZ" loading="eager">
           <h1>HOMEEZ Capsule Machine</h1>
           <p class="sub">Grab the chrome knob and give it a full twist. A capsule drops. Crack it open to see which HOMEEZ you pulled. 18 to collect.</p>
@@ -630,7 +641,7 @@
               <p id="hzWNote" class="hz-small">1 coin = 1 spin = 1 HOMEEZ NFT. Priced in USD, paid in XRP at the live rate.</p>
             </div>
 
-            <p id="hzFreeNote" class="hz-free" hidden>Connect Xaman and load coins to pull from all 18 HOMEEZ and mint for real.</p>
+            <p id="hzFreeNote" class="hz-free" hidden>Mint coming soon. Connect Xaman to pull from all 18 HOMEEZ and mint for real.</p>
             <div id="machineInfo" class="info" aria-live="polite">Grab the chrome knob and twist it all the way around. Or just tap it.</div>
             <div class="controls">
               <button id="turnBtn" class="btn btn-primary" type="button">Turn the knob</button>
@@ -656,6 +667,19 @@
         </div>
       </div>
     </section>
+
+    <section class="coming" id="coming">
+      <div class="wrap coming-box">
+        <div class="eyebrow">What's coming</div>
+        <h2>This is only Series 1</h2>
+        <ul class="coming-list">
+          <li><b>Mint</b>Series 1 mint on the XRP Ledger</li>
+          <li><b>Series</b>More HOMEEZ series dropping</li>
+          <li><b>Game</b>A HOMEEZ game built to work with your NFTs</li>
+          <li><b>Figures</b>3D-printed figures of the HOMEEZ you own</li>
+        </ul>
+      </div>
+    </section>
   </main>
 
   <div id="hzReveal" class="hz-reveal" hidden>
@@ -668,7 +692,7 @@
       <h2 id="hzRTitle" class="hz-rtitle">HZ000</h2>
       <span id="hzRBadge" class="hz-badge" hidden>RARE · MASCOT</span>
       <div class="hz-bio"><p id="hzRBio"></p><p class="hz-known"><b>Known for:</b> <span id="hzRKnown"></span></p></div>
-      <p id="hzRFree" class="hz-free" hidden>Connect Xaman and load coins to pull from all 18 HOMEEZ and mint for real.</p><div id="hzRClaim"></div>
+      <p id="hzRFree" class="hz-free" hidden>Mint coming soon. Connect Xaman to pull from all 18 HOMEEZ and mint for real.</p><div id="hzRClaim"></div>
       <div class="controls"><button id="againBtn" class="btn btn-primary" type="button">Turn again</button></div>
     </div>
   </div>
