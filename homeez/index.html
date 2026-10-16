@@ -535,6 +535,8 @@
     .hz-bio p{margin:0 0 10px;font-size:14px;line-height:1.5}
     .hz-known{margin:0;padding-top:8px;border-top:1px dashed rgba(120,85,20,.45);font-size:12px;line-height:1.4;color:#5a4210}
     .hz-known b{color:#b4361e;text-transform:uppercase;letter-spacing:.06em;font-size:11px}
+.hz-free{margin:0 0 12px;padding:8px 12px;border-radius:10px;font-size:12px;line-height:1.4;color:#ffe8a7;background:rgba(255,216,110,.08);border:1px solid rgba(255,216,110,.3)}
+    .hz-free[hidden]{display:none}
     .hz-rnum{display:block;font-size:13px;letter-spacing:.18em;color:var(--c,#ffd86e);opacity:.9}
     .hz-reveal-card{max-height:calc(100dvh - 32px);overflow-y:auto!important;overscroll-behavior:contain}
     @media (max-width:480px){.hz-open{height:210px}.hz-half{top:70px}.hz-half.bottom{top:145px}.hz-rfig{height:190px}.hz-rtitle{font-size:26px}}
@@ -616,6 +618,7 @@
               <p id="hzWNote" class="hz-small">1 coin = 1 spin = 1 HOMEEZ NFT. Priced in USD, paid in XRP at the live rate.</p>
             </div>
 
+            <p id="hzFreeNote" class="hz-free" hidden>Connect Xaman and load coins to pull from all 18 HOMEEZ and mint for real.</p>
             <div id="machineInfo" class="info" aria-live="polite">Grab the chrome knob and twist it all the way around. Or just tap it.</div>
             <div class="controls">
               <button id="turnBtn" class="btn btn-primary" type="button">Turn the knob</button>
@@ -639,7 +642,7 @@
       <div class="reveal-kicker">Capsule opened</div>
       <h2 id="hzRTitle" class="hz-rtitle">HZ000</h2>
       <div class="hz-bio"><p id="hzRBio"></p><p class="hz-known"><b>Known for:</b> <span id="hzRKnown"></span></p></div>
-      <div id="hzRClaim"></div>
+      <p id="hzRFree" class="hz-free" hidden>Connect Xaman and load coins to pull from all 18 HOMEEZ and mint for real.</p><div id="hzRClaim"></div>
       <div class="controls"><button id="againBtn" class="btn btn-primary" type="button">Turn again</button></div>
     </div>
   </div>
@@ -696,7 +699,7 @@
         w.append(capsule(pool[i%Math.max(pool.length,1)],COLORS[i%COLORS.length]));dome.append(w)})}
     // ---- tray ----
     const KEY='homeez_pulls_v1';let pulls=[];try{pulls=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){}
-    function renderTray(){tray.innerHTML='';pulls.slice().reverse().forEach(p=>{const fig=FIGS.find(f=>f.id===p.id);if(!fig)return;
+    function renderTray(){$('hzFreeNote').hidden=!PAY.st.demo;tray.innerHTML='';if(PAY.st.demo){const n=pulls.filter(p=>p.id==='HZ001').length,fig=FIGS.find(f=>f.id==='HZ001');if(n&&fig){const d=document.createElement('div');d.className='hz-chip';d.append(capsule(fig,pulls[pulls.length-1].c));d.append('MIKEY x '+n);tray.append(d)}$('trayCount').textContent=n+' free pull'+(n==1?'':'s');return}pulls.slice().reverse().forEach(p=>{const fig=FIGS.find(f=>f.id===p.id);if(!fig)return;
       const d=document.createElement('div');d.className='hz-chip';d.append(capsule(fig,p.c));d.append(fig.id+' '+fig.name);tray.append(d)});
       $('trayCount').textContent=new Set(pulls.map(p=>p.id)).size+' / '+(FIGS.length||18)+' unique'}
     // ---- paid spins (Xaman + coins). Backend URL from <meta name="homeez-api"> or ?api= ----
@@ -756,7 +759,7 @@
     function turned(){busy=true;knob.classList.remove('ready');info.textContent='Clunk... here it comes.';sClunk();buzz([30,40,60]);
       if(!RM){hzm.classList.remove('shake');void hzm.offsetWidth;hzm.classList.add('shake');dome.classList.remove('jiggle');void dome.offsetWidth;dome.classList.add('jiggle')}
       const color=COLORS[Math.floor(Math.random()*COLORS.length)];
-      const pick=PAY.st.demo?Promise.resolve({fig:FIGS[Math.floor(Math.random()*FIGS.length)].id}):(info.textContent='Clunk... minting your HOMEEZ on the ledger...',PAY.spin());
+      const pick=PAY.st.demo?Promise.resolve({fig:'HZ001'}):(info.textContent='Clunk... minting your HOMEEZ on the ledger...',PAY.spin());
       pick.then(r=>{const fig=FIGS.find(f=>f.id===r.fig);capBtn.dataset.mint=r.mintTx?JSON.stringify(r):'';drop(fig,color)})
         .catch(e=>{info.textContent=e.status===402?'No coins. Load coins to spin.':'Spin failed: '+e.message+' (coin refunded if nothing minted)';PAY.render();busy=false;accum=0;lastClick=0;prog.style.width='0';knob.classList.add('ready')})}
     function drop(fig,color){setTimeout(()=>{capBtn.innerHTML='';capBtn.append(capsule(fig,color));capBtn.hidden=false;capBtn.className='hzm-cap drop';
@@ -770,7 +773,7 @@
       const mr=capBtn.dataset.mint?JSON.parse(capBtn.dataset.mint):null,cl=$('hzRClaim');
       cl.innerHTML=mr?`<div class="hz-small">Edition #${mr.edition} of ${mr.cap} · minted ${PAY.st.cfg.network}</div>`+(mr.accept?`<a class="btn btn-primary hz-claim" target="_blank" rel="noopener" href="${mr.accept.deeplink}">Accept NFT in Xaman</a>`:`<div class="hz-small">Mock mode: 0 XRP offer ${mr.offerId.slice(0,10)}… created for your wallet.</div>`):(PAY.st.demo&&!PAY.st.off?'<div class="hz-small">Demo pull · no NFT</div>':'');
       if(mr)$('hzRTitle').innerHTML='<span class="hz-rnum">#'+fig.num+'</span>'+fig.name+' #'+mr.edition;
-      $('hzRBio').textContent=fig.bio||'';$('hzRKnown').textContent=fig.knownFor||'';card.scrollTop=0;
+      $('hzRFree').hidden=!PAY.st.demo;$('hzRBio').textContent=fig.bio||'';$('hzRKnown').textContent=fig.knownFor||'';card.scrollTop=0;
       reveal.hidden=false;[...card.querySelectorAll('.hz-half,.hz-rfig,.hz-burst')].forEach(el=>{el.style.animation='none';void el.offsetWidth;el.style.animation=''});
       pulls.push({id:fig.id,c,t:Date.now()});pulls=pulls.slice(-60);try{localStorage.setItem(KEY,JSON.stringify(pulls))}catch(e){}renderTray();
       info.textContent='You pulled '+fig.id+' '+fig.name+'.';$('againBtn').focus()});
@@ -780,7 +783,7 @@
     document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!reveal.hidden)resetTurn()});
     $('turnBtn').onclick=()=>{if(!reveal.hidden)resetTurn();if(!capBtn.hidden){capBtn.click();return}autoTurn()};
     $('clearBtn').onclick=()=>{pulls=[];try{localStorage.removeItem(KEY)}catch(e){}renderTray()};
-    fetch('/homeez/figures.json?v=3',{cache:'no-cache'}).then(r=>r.json()).then(j=>{FIGS=j;fillDome();renderTray();knob.classList.add('ready');PAY.init()})
+    fetch('/homeez/figures.json?v=3',{cache:'no-cache'}).then(r=>r.json()).then(j=>{FIGS=j;fillDome();renderTray();knob.classList.add('ready');PAY.init().then(renderTray)})
       .catch(()=>{info.textContent='Machine is restocking. Try again soon.'});
   })();
   </script>
