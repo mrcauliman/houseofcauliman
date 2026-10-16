@@ -535,6 +535,18 @@
     .hz-bio p{margin:0 0 10px;font-size:14px;line-height:1.5}
     .hz-known{margin:0;padding-top:8px;border-top:1px dashed rgba(120,85,20,.45);font-size:12px;line-height:1.4;color:#5a4210}
     .hz-known b{color:#b4361e;text-transform:uppercase;letter-spacing:.06em;font-size:11px}
+    .hz-badge{display:inline-block;margin:0 0 10px;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:900;letter-spacing:.14em;color:#1d1a14;background:linear-gradient(180deg,#ffe9a3,#e0b04a);box-shadow:0 0 12px rgba(255,216,110,.35)}
+    .hz-badge[hidden]{display:none}
+    .boss{padding:20px 0 56px}
+    .boss-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:28px;align-items:center;padding:18px;border-radius:24px;background:var(--panel);border:1px solid var(--line);box-shadow:0 12px 26px rgba(0,0,0,.18)}
+    .boss-img{width:100%;height:auto;display:block;border-radius:18px;aspect-ratio:16/9;object-fit:cover}
+    .boss h2{margin:6px 0 14px;font-size:clamp(26px,3.2vw,40px);line-height:1.1;letter-spacing:-.01em}
+    .boss h2 span{color:var(--gold)}
+    .boss-bio{margin:0 0 12px;font-size:16px;line-height:1.6;color:var(--text)}
+    .boss-known{margin:0 0 12px;font-size:14px;color:var(--muted)}
+    .boss-known b{color:var(--gold);text-transform:uppercase;letter-spacing:.08em;font-size:12px}
+    .boss-real{margin:0;font-size:14px;font-style:italic;color:#d9e2f3}
+    @media (max-width:860px){.boss-grid{grid-template-columns:1fr;gap:16px;padding:12px}.boss-bio{font-size:15px}}
 .hz-free{margin:0 0 12px;padding:8px 12px;border-radius:10px;font-size:12px;line-height:1.4;color:#ffe8a7;background:rgba(255,216,110,.08);border:1px solid rgba(255,216,110,.3)}
     .hz-free[hidden]{display:none}
     .hz-rnum{display:block;font-size:13px;letter-spacing:.18em;color:var(--c,#ffd86e);opacity:.9}
@@ -631,6 +643,19 @@
         </div>
       </div>
     </section>
+
+    <section class="boss" id="boss">
+      <div class="wrap boss-grid">
+        <img class="boss-img" src="/homeez/assets/HOMEEZ_BOSS.webp?v=1" alt="BOSS, the official HOMEEZ mascot American Bully, on the block at sunset" loading="lazy" width="1920" height="1080">
+        <div>
+          <div class="eyebrow">Meet BOSS</div>
+          <h2><span>BOSS #000</span> · Official HOMEEZ Mascot</h2>
+          <p class="boss-bio">The block's first homee, and the only one with four legs. He was guarding the corner before any of the HOMEEZ showed up, and he still decides who's cool. Chain heavy, bandana tied, he looks unbothered until somebody throws the tennis ball. Every free spin is him checking you out first.</p>
+          <p class="boss-known"><b>Known for:</b> the side-eye, the Cuban link, never dropping the ball.</p>
+          <p class="boss-real">Named after the real BOSS.</p>
+        </div>
+      </div>
+    </section>
   </main>
 
   <div id="hzReveal" class="hz-reveal" hidden>
@@ -641,6 +666,7 @@
       </div>
       <div class="reveal-kicker">Capsule opened</div>
       <h2 id="hzRTitle" class="hz-rtitle">HZ000</h2>
+      <span id="hzRBadge" class="hz-badge" hidden>RARE · MASCOT</span>
       <div class="hz-bio"><p id="hzRBio"></p><p class="hz-known"><b>Known for:</b> <span id="hzRKnown"></span></p></div>
       <p id="hzRFree" class="hz-free" hidden>Connect Xaman and load coins to pull from all 18 HOMEEZ and mint for real.</p><div id="hzRClaim"></div>
       <div class="controls"><button id="againBtn" class="btn btn-primary" type="button">Turn again</button></div>
@@ -693,15 +719,15 @@
       const b=document.createElement('div');b.className='bot';b.style.backgroundImage=BOT(color);const g=document.createElement('div');g.className='glass';c.append(f,g,b);return c}
     // ---- dome fill: 14 distinct figures stacked ----
     const SLOTS=[[2,56],[25,60],[48,58],[71,55],[-4,22],[18,28],[41,26],[64,24],[84,22],[30,-4]];
-    function fillDome(){dome.innerHTML='';const pool=FIGS.slice().sort(()=>Math.random()-.5);
+    function fillDome(){dome.innerHTML='';const pool=FIGS.filter(f=>!f.mascot).sort(()=>Math.random()-.5),boss=FIGS.find(f=>f.mascot),bi=boss?Math.floor(Math.random()*SLOTS.length):-1;
       SLOTS.forEach(([x,y],i)=>{const w=document.createElement('div');w.className='hzc';w.style.left=x+'%';w.style.top=y+'%';
         w.style.setProperty('--r',(Math.random()*50-25).toFixed(0)+'deg');w.style.setProperty('--d',(Math.random()*.15).toFixed(2)+'s');
-        w.append(capsule(pool[i%Math.max(pool.length,1)],COLORS[i%COLORS.length]));dome.append(w)})}
+        w.append(capsule(i===bi?boss:pool[i%Math.max(pool.length,1)],COLORS[i%COLORS.length]));dome.append(w)})}
     // ---- tray ----
     const KEY='homeez_pulls_v1';let pulls=[];try{pulls=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){}
-    function renderTray(){$('hzFreeNote').hidden=!PAY.st.demo;tray.innerHTML='';if(PAY.st.demo){const n=pulls.filter(p=>p.id==='HZ001').length,fig=FIGS.find(f=>f.id==='HZ001');if(n&&fig){const d=document.createElement('div');d.className='hz-chip';d.append(capsule(fig,pulls[pulls.length-1].c));d.append('MIKEY x '+n);tray.append(d)}$('trayCount').textContent=n+' free pull'+(n==1?'':'s');return}pulls.slice().reverse().forEach(p=>{const fig=FIGS.find(f=>f.id===p.id);if(!fig)return;
+    function renderTray(){$('hzFreeNote').hidden=!PAY.st.demo;tray.innerHTML='';if(PAY.st.demo){const n=pulls.filter(p=>p.id==='HZ000').length,fig=FIGS.find(f=>f.id==='HZ000');if(n&&fig){const d=document.createElement('div');d.className='hz-chip';d.append(capsule(fig,pulls[pulls.length-1].c));d.append('BOSS x '+n);tray.append(d)}$('trayCount').textContent=n+' free pull'+(n==1?'':'s');return}pulls.slice().reverse().forEach(p=>{const fig=FIGS.find(f=>f.id===p.id);if(!fig)return;
       const d=document.createElement('div');d.className='hz-chip';d.append(capsule(fig,p.c));d.append(fig.id+' '+fig.name);tray.append(d)});
-      $('trayCount').textContent=new Set(pulls.map(p=>p.id)).size+' / '+(FIGS.length||18)+' unique'}
+      $('trayCount').textContent=new Set(pulls.map(p=>p.id)).size+' / '+(FIGS.filter(f=>!f.mascot).length||18)+' unique'}
     // ---- paid spins (Xaman + coins). Backend URL from <meta name="homeez-api"> or ?api= ----
     const PAY=(()=>{const st={api:'',cfg:null,token:'',account:'',coins:0,demo:true,pendingSpin:null};
       const qs=new URLSearchParams(location.search);st.api=(qs.get('api')||document.querySelector('meta[name=homeez-api]')?.content||'').replace(/\/$/,'');
@@ -759,7 +785,7 @@
     function turned(){busy=true;knob.classList.remove('ready');info.textContent='Clunk... here it comes.';sClunk();buzz([30,40,60]);
       if(!RM){hzm.classList.remove('shake');void hzm.offsetWidth;hzm.classList.add('shake');dome.classList.remove('jiggle');void dome.offsetWidth;dome.classList.add('jiggle')}
       const color=COLORS[Math.floor(Math.random()*COLORS.length)];
-      const pick=PAY.st.demo?Promise.resolve({fig:'HZ001'}):(info.textContent='Clunk... minting your HOMEEZ on the ledger...',PAY.spin());
+      const pick=PAY.st.demo?Promise.resolve({fig:'HZ000'}):(info.textContent='Clunk... minting your HOMEEZ on the ledger...',PAY.spin());
       pick.then(r=>{const fig=FIGS.find(f=>f.id===r.fig);capBtn.dataset.mint=r.mintTx?JSON.stringify(r):'';drop(fig,color)})
         .catch(e=>{info.textContent=e.status===402?'No coins. Load coins to spin.':'Spin failed: '+e.message+' (coin refunded if nothing minted)';PAY.render();busy=false;accum=0;lastClick=0;prog.style.width='0';knob.classList.add('ready')})}
     function drop(fig,color){setTimeout(()=>{capBtn.innerHTML='';capBtn.append(capsule(fig,color));capBtn.hidden=false;capBtn.className='hzm-cap drop';
@@ -769,7 +795,7 @@
       capBtn.hidden=true;sPop();sChime();buzz([15,30,15]);
       const card=reveal.querySelector('.hz-reveal-card');card.style.setProperty('--c',c);card.style.setProperty('--bi',BOT(c));
       const rf=$('hzRFig');rf.className='hz-rfig'+(fig.img?'':' ph');rf.style.backgroundImage=fig.img?`url(${fig.img})`:'';
-      $('hzRTitle').innerHTML='<span class="hz-rnum">#'+fig.num+'</span>'+fig.name;
+      $('hzRTitle').innerHTML='<span class="hz-rnum">'+(fig.mascot?'HZ'+fig.num:'#'+fig.num)+'</span>'+fig.name;$('hzRBadge').hidden=!fig.badge;$('hzRBadge').textContent=fig.badge||'';
       const mr=capBtn.dataset.mint?JSON.parse(capBtn.dataset.mint):null,cl=$('hzRClaim');
       cl.innerHTML=mr?`<div class="hz-small">Edition #${mr.edition} of ${mr.cap} · minted ${PAY.st.cfg.network}</div>`+(mr.accept?`<a class="btn btn-primary hz-claim" target="_blank" rel="noopener" href="${mr.accept.deeplink}">Accept NFT in Xaman</a>`:`<div class="hz-small">Mock mode: 0 XRP offer ${mr.offerId.slice(0,10)}… created for your wallet.</div>`):(PAY.st.demo&&!PAY.st.off?'<div class="hz-small">Demo pull · no NFT</div>':'');
       if(mr)$('hzRTitle').innerHTML='<span class="hz-rnum">#'+fig.num+'</span>'+fig.name+' #'+mr.edition;
@@ -783,7 +809,7 @@
     document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!reveal.hidden)resetTurn()});
     $('turnBtn').onclick=()=>{if(!reveal.hidden)resetTurn();if(!capBtn.hidden){capBtn.click();return}autoTurn()};
     $('clearBtn').onclick=()=>{pulls=[];try{localStorage.removeItem(KEY)}catch(e){}renderTray()};
-    fetch('/homeez/figures.json?v=3',{cache:'no-cache'}).then(r=>r.json()).then(j=>{FIGS=j;fillDome();renderTray();knob.classList.add('ready');PAY.init().then(renderTray)})
+    fetch('/homeez/figures.json?v=4',{cache:'no-cache'}).then(r=>r.json()).then(j=>{FIGS=j;fillDome();renderTray();knob.classList.add('ready');PAY.init().then(renderTray)})
       .catch(()=>{info.textContent='Machine is restocking. Try again soon.'});
   })();
   </script>

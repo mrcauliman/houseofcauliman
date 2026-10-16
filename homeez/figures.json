@@ -1,5 +1,20 @@
 [
  {
+  "id": "HZ000",
+  "num": "000",
+  "name": "BOSS",
+  "img": "/homeez/assets/figures/HZ000_BOSS.webp?v=1",
+  "traits": {
+   "Breed": "American Bully",
+   "Coat": "Blue-grey with white chest",
+   "Accessory": "Gold Cuban link chain, studded collar, black bandana"
+  },
+  "bio": "The block's first homee, and the only one with four legs. He was guarding the corner before any of the HOMEEZ showed up, and he still decides who's cool. Chain heavy, bandana tied, he looks unbothered until somebody throws the tennis ball. Every free spin is him checking you out first.",
+  "knownFor": "the side-eye, the Cuban link, never dropping the ball.",
+  "mascot": true,
+  "badge": "RARE · MASCOT"
+ },
+ {
   "id": "HZ001",
   "num": "001",
   "name": "MIKEY",
