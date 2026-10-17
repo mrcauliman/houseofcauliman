@@ -3,7 +3,7 @@
   "id": "HZ000",
   "num": "000",
   "name": "BOSS",
-  "img": "/homeez/assets/figures/HZ000_BOSS.webp?v=1",
+  "img": "/homeez/assets/figures/HZ000_BOSS.webp?v=4",
   "traits": {
    "Breed": "American Bully",
    "Coat": "Blue-grey with white chest",
@@ -18,7 +18,7 @@
   "id": "HZ001",
   "num": "001",
   "name": "MIKEY",
-  "img": "/homeez/assets/figures/HZ001_MIKEY.webp?v=2",
+  "img": "/homeez/assets/figures/HZ001_MIKEY.webp?v=4",
   "traits": {
    "Hair": "Slicked-back black hair with taper fade",
    "Top": "Open black-and-white buffalo-check flannel over white tee",
@@ -34,7 +34,7 @@
   "id": "HZ002",
   "num": "002",
   "name": "RICO",
-  "img": "/homeez/assets/figures/HZ002_RICO.webp?v=2",
+  "img": "/homeez/assets/figures/HZ002_RICO.webp?v=4",
   "traits": {
    "Hair": "Black du-rag",
    "Top": "Olive button-up shirt over white tee",
@@ -50,7 +50,7 @@
   "id": "HZ003",
   "num": "003",
   "name": "LOLA",
-  "img": "/homeez/assets/figures/HZ003_LOLA.webp?v=2",
+  "img": "/homeez/assets/figures/HZ003_LOLA.webp?v=4",
   "traits": {
    "Hair": "Sleek low bun with baby edges",
    "Top": "Cropped pink moto jacket over black top",
@@ -66,7 +66,7 @@
   "id": "HZ004",
   "num": "004",
   "name": "JACE",
-  "img": "/homeez/assets/figures/HZ004_JACE.webp?v=2",
+  "img": "/homeez/assets/figures/HZ004_JACE.webp?v=4",
   "traits": {
    "Hair": "Straight-back cornrows",
    "Top": "Navy snap-front jacket with white chest panel",
@@ -82,7 +82,7 @@
   "id": "HZ005",
   "num": "005",
   "name": "DEE",
-  "img": "/homeez/assets/figures/HZ005_DEE.webp?v=2",
+  "img": "/homeez/assets/figures/HZ005_DEE.webp?v=4",
   "traits": {
    "Hair": "Sandy-blonde skater mop",
    "Top": "Oversized white tee",
@@ -98,7 +98,7 @@
   "id": "HZ006",
   "num": "006",
   "name": "NOVA",
-  "img": "/homeez/assets/figures/HZ006_NOVA.webp?v=2",
+  "img": "/homeez/assets/figures/HZ006_NOVA.webp?v=4",
   "traits": {
    "Hair": "Caesar cut",
    "Top": "Purple velour zip-up track top",
@@ -114,7 +114,7 @@
   "id": "HZ007",
   "num": "007",
   "name": "BOOGIE",
-  "img": "/homeez/assets/figures/HZ007_BOOGIE.webp?v=2",
+  "img": "/homeez/assets/figures/HZ007_BOOGIE.webp?v=4",
   "traits": {
    "Hair": "High-top fade",
    "Top": "Royal blue track jacket",
@@ -130,7 +130,7 @@
   "id": "HZ008",
   "num": "008",
   "name": "KEI",
-  "img": "/homeez/assets/figures/HZ008_KEI.webp?v=2",
+  "img": "/homeez/assets/figures/HZ008_KEI.webp?v=4",
   "traits": {
    "Hair": "Blue-black bowl cut",
    "Top": "Teal zip hoodie over white tee",
@@ -146,7 +146,7 @@
   "id": "HZ009",
   "num": "009",
   "name": "TRINA",
-  "img": "/homeez/assets/figures/HZ009_TRINA.webp?v=2",
+  "img": "/homeez/assets/figures/HZ009_TRINA.webp?v=4",
   "traits": {
    "Hair": "Cornrows into low bun",
    "Top": "Red-and-white cropped sport jersey",
@@ -162,7 +162,7 @@
   "id": "HZ010",
   "num": "010",
   "name": "MARV",
-  "img": "/homeez/assets/figures/HZ010_MARV.webp?v=2",
+  "img": "/homeez/assets/figures/HZ010_MARV.webp?v=4",
   "traits": {
    "Hair": "Olive slouchy beanie",
    "Top": "Olive pullover hoodie",
@@ -178,7 +178,7 @@
   "id": "HZ011",
   "num": "011",
   "name": "SKYE",
-  "img": "/homeez/assets/figures/HZ011_SKYE.webp?v=2",
+  "img": "/homeez/assets/figures/HZ011_SKYE.webp?v=4",
   "traits": {
    "Hair": "Auburn tight coils",
    "Top": "Plain black oversized tee",
@@ -194,7 +194,7 @@
   "id": "HZ012",
   "num": "012",
   "name": "GIO",
-  "img": "/homeez/assets/figures/HZ012_GIO.webp?v=2",
+  "img": "/homeez/assets/figures/HZ012_GIO.webp?v=4",
   "traits": {
    "Hair": "Freeform locs",
    "Top": "Charcoal full-zip hoodie",
@@ -210,7 +210,7 @@
   "id": "HZ013",
   "num": "013",
   "name": "SUNNY",
-  "img": "/homeez/assets/figures/HZ013_SUNNY.webp?v=2",
+  "img": "/homeez/assets/figures/HZ013_SUNNY.webp?v=4",
   "traits": {
    "Hair": "Single beaded braid over shoulder",
    "Top": "Yellow cropped hoodie",
@@ -226,7 +226,7 @@
   "id": "HZ014",
   "num": "014",
   "name": "TANK",
-  "img": "/homeez/assets/figures/HZ014_TANK.webp?v=2",
+  "img": "/homeez/assets/figures/HZ014_TANK.webp?v=4",
   "traits": {
    "Hair": "Low skin fade with full beard",
    "Top": "Charcoal sleeveless hoodie",
@@ -242,7 +242,7 @@
   "id": "HZ015",
   "num": "015",
   "name": "VEE",
-  "img": "/homeez/assets/figures/HZ015_VEE.webp?v=2",
+  "img": "/homeez/assets/figures/HZ015_VEE.webp?v=4",
   "traits": {
    "Hair": "Hood up",
    "Top": "Slate navy pullover hoodie",
@@ -258,7 +258,7 @@
   "id": "HZ016",
   "num": "016",
   "name": "BLAZE",
-  "img": "/homeez/assets/figures/HZ016_BLAZE.webp?v=2",
+  "img": "/homeez/assets/figures/HZ016_BLAZE.webp?v=4",
   "traits": {
    "Hair": "Black fitted cap",
    "Top": "Fire red bomber jacket over white tee",
@@ -274,7 +274,7 @@
   "id": "HZ017",
   "num": "017",
   "name": "MELLO",
-  "img": "/homeez/assets/figures/HZ017_MELLO.webp?v=2",
+  "img": "/homeez/assets/figures/HZ017_MELLO.webp?v=4",
   "traits": {
    "Hair": "Rounded afro",
    "Top": "Slate blue open-collar shirt over white tee",
@@ -290,7 +290,7 @@
   "id": "HZ018",
   "num": "018",
   "name": "ZION",
-  "img": "/homeez/assets/figures/HZ018_ZION.webp?v=2",
+  "img": "/homeez/assets/figures/HZ018_ZION.webp?v=4",
   "traits": {
    "Hair": "Close-cropped natural coils",
    "Top": "Forest green crewneck sweatshirt",
