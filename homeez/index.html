@@ -657,7 +657,7 @@
 
     <section class="boss" id="boss">
       <div class="wrap boss-grid">
-        <img class="boss-img" src="/homeez/assets/HOMEEZ_BOSS.webp?v=2" alt="BOSS, the official HOMEEZ mascot American Bully, on the block at sunset" loading="lazy" width="1920" height="1080">
+        <img class="boss-img" src="/homeez/assets/HOMEEZ_BOSS.webp?v=3" alt="BOSS, the official HOMEEZ mascot American Bully, on the block at sunset" loading="lazy" width="1920" height="1080">
         <div>
           <div class="eyebrow">Meet BOSS</div>
           <h2><span>BOSS #000</span> · Official HOMEEZ Mascot</h2>
@@ -833,7 +833,7 @@
     document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!reveal.hidden)resetTurn()});
     $('turnBtn').onclick=()=>{if(!reveal.hidden)resetTurn();if(!capBtn.hidden){capBtn.click();return}autoTurn()};
     $('clearBtn').onclick=()=>{pulls=[];try{localStorage.removeItem(KEY)}catch(e){}renderTray()};
-    fetch('/homeez/figures.json?v=5',{cache:'no-cache'}).then(r=>r.json()).then(j=>{FIGS=j;fillDome();renderTray();knob.classList.add('ready');PAY.init().then(renderTray)})
+    fetch('/homeez/figures.json?v=6',{cache:'no-cache'}).then(r=>r.json()).then(j=>{FIGS=j;fillDome();renderTray();knob.classList.add('ready');PAY.init().then(renderTray)})
       .catch(()=>{info.textContent='Machine is restocking. Try again soon.'});
   })();
   </script>

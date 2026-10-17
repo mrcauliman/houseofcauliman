@@ -3,7 +3,7 @@
   "id": "HZ000",
   "num": "000",
   "name": "BOSS",
-  "img": "/homeez/assets/figures/HZ000_BOSS.webp?v=4",
+  "img": "/homeez/assets/figures/HZ000_BOSS.webp?v=5",
   "traits": {
    "Breed": "American Bully",
    "Coat": "Blue-grey with white chest",
@@ -194,7 +194,7 @@
   "id": "HZ012",
   "num": "012",
   "name": "GIO",
-  "img": "/homeez/assets/figures/HZ012_GIO.webp?v=4",
+  "img": "/homeez/assets/figures/HZ012_GIO.webp?v=5",
   "traits": {
    "Hair": "Freeform locs",
    "Top": "Charcoal full-zip hoodie",
@@ -274,7 +274,7 @@
   "id": "HZ017",
   "num": "017",
   "name": "MELLO",
-  "img": "/homeez/assets/figures/HZ017_MELLO.webp?v=4",
+  "img": "/homeez/assets/figures/HZ017_MELLO.webp?v=5",
   "traits": {
    "Hair": "Rounded afro",
    "Top": "Slate blue open-collar shirt over white tee",
