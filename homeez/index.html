@@ -833,7 +833,7 @@
     document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!reveal.hidden)resetTurn()});
     $('turnBtn').onclick=()=>{if(!reveal.hidden)resetTurn();if(!capBtn.hidden){capBtn.click();return}autoTurn()};
     $('clearBtn').onclick=()=>{pulls=[];try{localStorage.removeItem(KEY)}catch(e){}renderTray()};
-    fetch('/homeez/figures.json?v=6',{cache:'no-cache'}).then(r=>r.json()).then(j=>{FIGS=j;fillDome();renderTray();knob.classList.add('ready');PAY.init().then(renderTray)})
+    fetch('/homeez/figures.json?v=7',{cache:'no-cache'}).then(r=>r.json()).then(j=>{FIGS=j;fillDome();renderTray();knob.classList.add('ready');PAY.init().then(renderTray)})
       .catch(()=>{info.textContent='Machine is restocking. Try again soon.'});
   })();
   </script>
