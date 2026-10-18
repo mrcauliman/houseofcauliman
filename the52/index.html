@@ -1186,7 +1186,7 @@ const publicCard04 = Object.freeze({
 });
 
 const cards = {
-  "04": { name:"The Diamond Hand", label:"04 THE DIAMOND HAND", releaseDate:"Sunday, October 18", ordinal:"fourth", publicPreview:true },
+  "04": { name:"The Diamond Hand", label:"04 THE DIAMOND HAND", releaseDate:"Sunday, October 18", ordinal:"fourth", unlockImage:`${API}/holder/the52/04/holder-media` },
   "01": { name:"The Builder", label:"01 THE BUILDER", releaseDate:"Sunday, September 27", ordinal:"first", unlockImage:"/assets/the52/01/THE52_01_The_Builder_HOLDER_UNLOCK.webp" },
   "02": { name:"The Whale", label:"02 THE WHALE", releaseDate:"Sunday, October 4", ordinal:"second", unlockImage:`${API}/holder/the52/02/holder-media` },
   "03": { name:"The Degen", label:"03 THE DEGEN", releaseDate:"Sunday, October 11", ordinal:"third", unlockImage:`${API}/holder/the52/03/holder-media` }
@@ -1688,17 +1688,6 @@ characters.forEach((name,index)=>{
 });
 
 async function loadCardRelease(num){
-  if(cards[num]?.publicPreview){
-    Object.assign(collectionState.cards[num], publicCard04, {released:false, releaseLoaded:true});
-    const tile = document.getElementById("card-" + num);
-    tile.classList.remove("locked", "next-drop");
-    tile.classList.add("featured");
-    tile.querySelector(".card-status").textContent = "MINTED";
-    tile.querySelector(".placeholder").outerHTML = '<img class="card-art" src="' + escapeHtml(publicCard04.imageUrl) + '" alt="' + cards[num].label + '">';
-    tile.querySelector(".price").textContent = "PUBLIC EDITION";
-    tile.querySelector(".edition").textContent = "EDITION · 60 MINTED";
-    return;
-  }
   try{
     const response = await fetch(
       `${API}/holder/the52/${num}/release`,
@@ -2207,16 +2196,6 @@ async function openCard(num, historyMode = "push"){
   trade.removeAttribute("href");
   trade.setAttribute("aria-disabled", "true");
   trade.textContent = "No Active Listing";
-
-  if(cards[num].publicPreview){
-    media.innerHTML = '<img class="card-art" src="' + escapeHtml(publicCard04.imageUrl) + '" alt="' + cards[num].label + '">';
-    release.innerHTML = '<div class="release-panel"><div class="release-state">Minted · October 18, 2026</div><div class="release-copy">The fourth card in THE 52. Subscriber delivery and holder access will open after the public launch.</div><div class="modal-stats"><div class="stat-pill">Card 04 of 52</div><div class="stat-pill">Verified Supply 60</div></div></div><div class="market-panel" id="card-04-Market"><div class="market-label">MONOLITH MARKET</div><div class="market-meta">Checking the public copy...</div></div>';
-    primary.textContent = "Subscriber Enrollment";
-    primary.href = "/nft-enrollment/";
-    document.getElementById("modal").classList.add("open");
-    await loadPublicCard04Market(generation);
-    return;
-  }
 
   if(!b.released){
     media.innerHTML =
