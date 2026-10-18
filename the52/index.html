@@ -1178,7 +1178,15 @@ const characters = [
 
 const API = "https://api.houseofcauliman.com";
 
+const publicCard04 = Object.freeze({
+  imageUrl:"https://tired-teal-sawfish.myfilebase.com/ipfs/QmXvA1W1UkxPRuCMrzDrc9hjhP2KqURoq2fh3xEh4Bh8cK",
+  metadataUri:"ipfs://QmW9iVt5GKpYpd2JuUrpbUPWEtu5YDJb63AreTGQ3dM7J1",
+  nftId:"0008138849588295B82B938BC17754D3CA09FAE1F0E88A4D87B2D63805D7B8C7",
+  mintedSupply:60
+});
+
 const cards = {
+  "04": { name:"The Diamond Hand", label:"04 THE DIAMOND HAND", releaseDate:"Sunday, October 18", ordinal:"fourth", publicPreview:true },
   "01": { name:"The Builder", label:"01 THE BUILDER", releaseDate:"Sunday, September 27", ordinal:"first", unlockImage:"/assets/the52/01/THE52_01_The_Builder_HOLDER_UNLOCK.webp" },
   "02": { name:"The Whale", label:"02 THE WHALE", releaseDate:"Sunday, October 4", ordinal:"second", unlockImage:`${API}/holder/the52/02/holder-media` },
   "03": { name:"The Degen", label:"03 THE DEGEN", releaseDate:"Sunday, October 11", ordinal:"third", unlockImage:`${API}/holder/the52/03/holder-media` }
@@ -1680,6 +1688,17 @@ characters.forEach((name,index)=>{
 });
 
 async function loadCardRelease(num){
+  if(cards[num]?.publicPreview){
+    Object.assign(collectionState.cards[num], publicCard04, {released:false, releaseLoaded:true});
+    const tile = document.getElementById("card-" + num);
+    tile.classList.remove("locked", "next-drop");
+    tile.classList.add("featured");
+    tile.querySelector(".card-status").textContent = "MINTED";
+    tile.querySelector(".placeholder").outerHTML = '<img class="card-art" src="' + escapeHtml(publicCard04.imageUrl) + '" alt="' + cards[num].label + '">';
+    tile.querySelector(".price").textContent = "PUBLIC EDITION";
+    tile.querySelector(".edition").textContent = "EDITION · 60 MINTED";
+    return;
+  }
   try{
     const response = await fetch(
       `${API}/holder/the52/${num}/release`,
@@ -2189,6 +2208,16 @@ async function openCard(num, historyMode = "push"){
   trade.setAttribute("aria-disabled", "true");
   trade.textContent = "No Active Listing";
 
+  if(cards[num].publicPreview){
+    media.innerHTML = '<img class="card-art" src="' + escapeHtml(publicCard04.imageUrl) + '" alt="' + cards[num].label + '">';
+    release.innerHTML = '<div class="release-panel"><div class="release-state">Minted · October 18, 2026</div><div class="release-copy">The fourth card in THE 52. Subscriber delivery and holder access will open after the public launch.</div><div class="modal-stats"><div class="stat-pill">Card 04 of 52</div><div class="stat-pill">Verified Supply 60</div></div></div><div class="market-panel" id="card-04-Market"><div class="market-label">MONOLITH MARKET</div><div class="market-meta">Checking the public copy...</div></div>';
+    primary.textContent = "Subscriber Enrollment";
+    primary.href = "/nft-enrollment/";
+    document.getElementById("modal").classList.add("open");
+    await loadPublicCard04Market(generation);
+    return;
+  }
+
   if(!b.released){
     media.innerHTML =
       placeholderHTML(
@@ -2308,6 +2337,36 @@ async function openCard(num, historyMode = "push"){
   renderCardClaimState(num, claim);
 }
 
+
+
+async function loadPublicCard04Market(generation){
+  const panel = document.getElementById("card-04-Market");
+  try {
+    const response = await fetch("https://monolithxrpl.com/api/nft-market/listings", {cache:"no-store"});
+    if(!response.ok) throw new Error("Market unavailable");
+    const data = await response.json();
+    if(modalCard !== "04" || generation !== modalGeneration) return;
+    const listing = (Array.isArray(data.listings) ? data.listings : []).find(item =>
+      item.status === "active" && item.isTest !== true &&
+      item.nftId === publicCard04.nftId && item.uri === publicCard04.metadataUri &&
+      item.sellerWallet === "rfgFM8z2abu2uahXFaRre8aWw9PEv48QbS" &&
+      Number(item.askUsdCents) === 10000 &&
+      /^nftml_[a-f0-9]{32}$/.test(item.listingId || ""));
+    if(!listing){
+      panel.innerHTML = '<div class="market-label">MONOLITH MARKET</div><div class="market-meta">Public copy listing is being prepared.</div>';
+      return;
+    }
+    panel.innerHTML = '<div class="market-label">ONE PUBLIC COPY</div><div class="market-price">$100.00 USD</div><div class="market-meta">Paid in XRP. Review the current quote on MONOLITH.</div>';
+    const trade = document.getElementById("modalTrade");
+    trade.classList.remove("disabled");
+    trade.setAttribute("aria-disabled", "false");
+    trade.textContent = "View Public Copy";
+    trade.href = "https://monolithxrpl.com/nft-market/?listing=" + encodeURIComponent(listing.listingId);
+  } catch {
+    if(modalCard === "04" && generation === modalGeneration)
+      panel.textContent = "Live marketplace status is unavailable. Please try again shortly.";
+  }
+}
 
 function formatCardLastSale(num){
   const panel =
