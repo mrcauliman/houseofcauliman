@@ -2304,7 +2304,8 @@ async function openCard(num, historyMode = "push"){
   document.getElementById("modal").classList.add("open");
 
   formatCardLastSale(num);
-  loadCardMarket(num);
+  if(num === "04") loadPublicCard04Market(generation);
+  else loadCardMarket(num);
 
   const [ownership, claim] = await Promise.all([
     loadCardOwnership(num),
