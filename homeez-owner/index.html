@@ -1104,7 +1104,9 @@
     function turned(){busy=true;knob.classList.remove('ready');info.textContent='Clunk... here it comes.';sClunk();buzz([30,40,60]);
       if(!RM){hzm.classList.remove('shake');void hzm.offsetWidth;hzm.classList.add('shake');dome.classList.remove('jiggle');void dome.offsetWidth;dome.classList.add('jiggle')}
       const color=COLORS[Math.floor(Math.random()*COLORS.length)];
-      const pick=PAY.hasPaid()?PAY.spin():Promise.resolve({fig:'HZ000',free:true});
+      // Free preview (no NFT): disconnected -> BOSS mascot; wallet connected without paid spins -> random one of the 18 (never HZ000). Paid -> server pick only.
+      const freeFig=()=>{const p=FIGS.filter(f=>!f.mascot&&f.id!=='HZ000');return PAY.st.account&&p.length?p[Math.floor(Math.random()*p.length)].id:'HZ000'};
+      const pick=PAY.hasPaid()?PAY.spin():Promise.resolve({fig:freeFig(),free:true});
       pick.then(r=>{if(!r)r={fig:'HZ000',free:true};const fig=FIGS.find(f=>f.id===r.fig);capBtn.dataset.paid=r.ref?JSON.stringify(r.ref):'';drop(fig,color)})
         .catch(e=>{info.textContent='Spin problem: '+e.message+'. Your paid spins are safe; try again.';PAY.render();busy=false;accum=0;lastClick=0;prog.style.width='0';knob.classList.add('ready')})}
     function drop(fig,color){setTimeout(()=>{capBtn.innerHTML='';capBtn.append(capsule(fig,color));capBtn.hidden=false;capBtn.className='hzm-cap drop';
@@ -1122,7 +1124,7 @@
       $('hzRFree').hidden=!!mr||!(PAY.st.demo||fig.mascot);$('hzRBio').textContent=fig.bio||'';$('hzRKnown').textContent=fig.knownFor||'';card.scrollTop=0;
       DLG.open(reveal,{onEsc:resetTurn,focus:$('againBtn')});[...card.querySelectorAll('.hz-half,.hz-rfig,.hz-burst')].forEach(el=>{el.style.animation='none';void el.offsetWidth;el.style.animation=''});
       if(mr&&fig.id!=='HZ000'){pulls.push({id:fig.id,c,t:Date.now()});pulls=pulls.slice(-60);try{localStorage.setItem(KEY,JSON.stringify(pulls))}catch(e){}}renderTray();
-      info.textContent=mr?'You pulled '+fig.id+' '+fig.name+'.':'BOSS preview only. No NFT received.'});
+      info.textContent=mr?'You pulled '+fig.id+' '+fig.name+'.':(fig.mascot?'BOSS preview only. No NFT received.':'Free preview: '+fig.id+' '+fig.name+'. No NFT received.')});
     function resetTurn(){PAY.clearClaimUI();DLG.close(reveal,knob);busy=false;accum=0;lastClick=0;prog.style.width='0';knob.classList.add('ready');
       info.textContent='Twist the knob for another HOMEEZ.'}
     $('againBtn').onclick=resetTurn;reveal.addEventListener('click',e=>{if(e.target===reveal)resetTurn()});
