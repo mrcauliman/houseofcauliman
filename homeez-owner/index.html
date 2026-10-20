@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <!-- HOMEEZ backend URL (trusted origin only; no query-string overrides). Empty = demo mode only (free, no NFT, sign-in unavailable). -->
+  <meta name="homeez-api" content="https://homeez-api.houseofcauliman.com">
+  <!-- Xaman sign-in availability. Needs homeez-api. "off" = sign-in unavailable. Independent of purchases; connecting grants no NFT. -->
+  <meta name="homeez-connect" content="on">
+  <!-- Purchase availability. "on" + homeez-api + sign-in available = paid spins enabled. Anything else = purchase controls shown disabled. -->
+  <meta name="homeez-paid" content="on">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HOMEEZ Capsule Machine</title>
+  <meta name="description" content="HOMEEZ Capsule Machine." />
+  <link rel="canonical" href="https://houseofcauliman.com/homeez/" />
+
+  <meta property="og:title" content="HOMEEZ Capsule Machine" />
+  <meta property="og:description" content="HOMEEZ Capsule Machine." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://houseofcauliman.com/homeez/" />
+  <meta property="og:image" content="https://houseofcauliman.com/homeez/assets/HOMEEZ_banner.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="HOMEEZ Capsule Machine" />
+  <meta name="twitter:description" content="HOMEEZ Capsule Machine." />
+  <meta name="twitter:image" content="https://houseofcauliman.com/homeez/assets/HOMEEZ_banner.png" />
+
+  <style>
+    :root{
+      --bg:#080b12;
+      --bg2:#0d1320;
+      --text:#f5f7fb;
+      --muted:#a4b0c7;
+      --line:rgba(255,255,255,.08);
+      --gold:#ffd86e;
+      --panel:rgba(255,255,255,.04);
+      --max:1320px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(84,132,255,.10), transparent 32%),
+        radial-gradient(circle at top right, rgba(255,72,72,.08), transparent 26%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+    }
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
+    button{appearance:none;border:0;cursor:pointer;font:inherit}
+    a, button, .handle-hit{
+      touch-action:manipulation;
+    }
+    .wrap{width:min(calc(100% - 28px), var(--max));margin:0 auto}
+
+    .topbar{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter:blur(14px);
+      background:rgba(8,11,18,.74);
+      border-bottom:1px solid var(--line);
+    }
+    .topbar-inner{
+      width:min(calc(100% - 28px), var(--max));
+      margin:0 auto;
+      min-height:68px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      font-weight:900; letter-spacing:.08em;
+    }
+    .brand-mark{
+      width:40px; height:40px; border-radius:12px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.22), transparent 36%),
+        linear-gradient(135deg, rgba(239,63,71,.28), rgba(255,216,110,.18));
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.14), 0 12px 32px rgba(0,0,0,.35);
+    }
+    .top-links{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    .pill{
+      padding:10px 14px; border:1px solid var(--line); border-radius:999px;
+      color:#d8e5ff; background:rgba(255,255,255,.03); font-weight:800; font-size:14px;
+    }
+
+    .hero{padding:24px 0 40px}
+    .hero-grid{
+      display:grid;
+      grid-template-columns:minmax(320px,420px) 1fr;
+      gap:26px;
+      align-items:start;
+    }
+    .eyebrow{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:8px 12px; border-radius:999px;
+      border:1px solid rgba(255,216,110,.22);
+      color:#ffe8a7; background:rgba(255,216,110,.08);
+      font-size:12px; font-weight:900; letter-spacing:.12em; text-transform:uppercase;
+    }
+    h1{
+      margin:16px 0 10px;
+      font-size:clamp(42px,6vw,82px);
+      line-height:.94; letter-spacing:-.05em;
+    }
+    .sub{
+      margin:0; font-size:18px; line-height:1.6; color:var(--muted); max-width:460px;
+    }
+    .status-row{
+      margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;
+    }
+    .status{
+      display:inline-flex; align-items:center; justify-content:center;
+      min-height:38px; padding:0 14px; border-radius:999px;
+      font-size:12px; font-weight:900; letter-spacing:.12em; text-transform:uppercase;
+      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); color:#eef5ff;
+    }
+    .status.gold{
+      background:rgba(255,216,110,.10); border-color:rgba(255,216,110,.22); color:#ffeeb9;
+    }
+
+    .machine-side{position:relative}
+    .machine-stage{
+      position:relative;
+      display:flex; justify-content:center; align-items:center;
+      min-height:760px; padding:8px 0 0;
+    }
+    .machine-wrap{
+      position:relative;
+      width:min(100%, 820px);
+      display:flex; justify-content:center; align-items:flex-start;
+    }
+    .machine-wrap.is-shaking .machine-render{
+      animation:machineShake .18s ease-in-out 1;
+    }
+    .machine-render{
+      width:min(100%, 820px);
+      height:auto; display:block;
+      filter:drop-shadow(0 28px 50px rgba(0,0,0,.38));
+      user-select:none; pointer-events:none;
+    }
+
+    /* Visible instruction and tap zone at capsule drop area */
+    .tap-callout{
+      position:absolute;
+      left:50%;
+      top:47.5%;
+      transform:translateX(-50%);
+      z-index:18;
+      pointer-events:none;
+      text-align:center;
+    }
+    .tap-callout-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:36px;
+      padding:0 14px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:#fff2bf;
+      background:rgba(255,216,110,.12);
+      border:1px solid rgba(255,216,110,.24);
+      box-shadow:0 8px 22px rgba(0,0,0,.22);
+      backdrop-filter:blur(10px);
+      white-space:nowrap;
+    }
+
+    .handle-hit{
+      position:absolute;
+      left:50%;
+      top:47.5%;
+      transform:translateX(-50%);
+      width:23%;
+      height:16%;
+      background:transparent;
+      z-index:20;
+      touch-action:manipulation;
+      border-radius:18px;
+    }
+
+    .tap-zone-ring{
+      position:absolute;
+      left:50%;
+      top:63.5%;
+      transform:translateX(-50%);
+      width:18%;
+      height:10%;
+      border-radius:18px;
+      background:radial-gradient(circle at 50% 50%, rgba(255,255,255,.08), transparent 70%);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,.05),
+        inset 0 0 0 1px rgba(255,255,255,.04);
+      opacity:.20;
+      pointer-events:none;
+      z-index:8;
+    }
+
+    /* ---- paid spins: wallet, coin slot, Xaman modal ---- */
+    /* paid off: wallet/sign-in stays visible; purchase controls render disabled (see #hzPacks.is-off) */
+    .hz-packs.is-off .btn{border-style:dashed}
+    .hz-orders-err{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border-radius:12px;background:rgba(138,31,31,.25);border:1px solid rgba(255,120,120,.35);font-size:13px}
+    .hz-orders-err[hidden]{display:none}.hz-orders-err .btn{min-height:36px;padding:0 12px}
+    .hz-mcard:focus{outline:none}
+    .hz-mcard .btn:focus-visible,.hz-reveal-card .btn:focus-visible,.hzm-knob:focus-visible,.hzm-cap:focus-visible,.hz-wallet .btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+    .hz-wallet [hidden],.hz-mcard [hidden]{display:none!important}
+    .hz-wallet{display:grid;gap:10px;margin:0 0 14px;padding:12px;border-radius:16px;background:rgba(255,216,110,.06);border:1px solid rgba(255,216,110,.25)}
+    .hz-wrow{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+    .hz-mode{font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;padding:4px 9px;border-radius:999px;background:#2a2a2a;color:#ddd}
+    .hz-mode.test{background:#1b5e9e;color:#fff}.hz-mode.demo{background:#7a3a00;color:#ffd8a8}
+    .hz-addr{font:700 13px ui-monospace,monospace;color:var(--gold)}
+    .hz-slot{display:flex;align-items:center;gap:10px;min-height:46px;padding:6px 12px;border-radius:12px;background:linear-gradient(#111,#1d1d1d);box-shadow:inset 0 3px 8px rgba(0,0,0,.8),0 1px 0 rgba(255,255,255,.08)}
+    .hz-slot-mouth{width:8px;height:30px;border-radius:4px;background:#000;box-shadow:inset 0 0 4px #000,0 0 0 2px #555}
+    .hz-coins{display:flex;flex-wrap:wrap;gap:4px;flex:1}
+    .hz-coin{width:26px;height:26px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff6c2 0 12%,#ffd86e 30%,#c48a12 75%,#7a5200);box-shadow:0 2px 4px rgba(0,0,0,.6),inset 0 0 0 2px rgba(122,82,0,.6);display:grid;place-items:center;font:900 10px system-ui;color:#5a3c00}
+    .hz-coin.drop{animation:hzCoin .5s ease-in forwards}
+    @keyframes hzCoin{to{transform:translateX(-40px) scaleX(.15);opacity:0}}
+    .hz-ccount{font-weight:900;color:var(--gold);white-space:nowrap}
+    .hz-packs{display:flex;gap:8px;flex-wrap:wrap}.hz-packs .btn{flex:1;min-width:130px}
+    .hz-small{font-size:12px;opacity:.75;margin:0}
+    .hz-claim{display:inline-block;margin-top:8px}
+    .hz-orders{display:grid;gap:6px}.hz-order{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px;padding:8px 10px;border-radius:12px;background:rgba(0,0,0,.25);font-size:13px}
+    .hz-order .btn{padding:6px 12px;min-width:0}.hz-order .hz-small{flex-basis:100%}
+    .hz-ost{font-size:11px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:999px;background:#333;color:#eee;margin-right:6px}
+    .hz-ost.payment_pending{background:#7a5a00;color:#ffe9a8}.hz-ost.mint_pending{background:#1b5e9e;color:#fff}.hz-ost.ready_to_claim{background:#ffd86e;color:#3a2a00}.hz-ost.delivered{background:#1f7a3a;color:#fff}.hz-ost.error{background:#8a1f1f;color:#fff}
+    .hz-qamt{font-size:26px;color:var(--gold)}
+    .hz-modal{position:fixed;inset:0;z-index:60;display:grid;place-items:center;background:rgba(0,0,0,.72);padding:16px}
+    .hz-modal[hidden]{display:none}
+    .hz-mcard{width:min(380px,100%);background:#141414;border:1px solid rgba(255,216,110,.35);border-radius:20px;padding:20px;text-align:center;color:#fff}
+    .hz-mcard h3{margin:0 0 6px}.hz-mcard img{width:220px;max-width:80%;border-radius:12px;background:#fff;margin:10px auto;display:block}
+    .hz-mcard .btn{width:100%;margin-top:8px}
+    .machine-panel{
+      margin-top:10px; padding:18px; border-radius:22px;
+      background:var(--panel); border:1px solid var(--line);
+      box-shadow:0 12px 26px rgba(0,0,0,.18);
+    }
+    .panel-title{
+      margin:0 0 14px;
+      font-size:14px; font-weight:900; letter-spacing:.12em; text-transform:uppercase;
+      color:#d9e2f3;
+    }
+    .tap-meter{
+      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+    }
+    .tap-dots{display:flex; gap:8px}
+    .tap-dot{
+      width:12px; height:12px; border-radius:50%;
+      background:rgba(255,255,255,.14);
+      border:1px solid rgba(255,255,255,.08);
+      transition:transform .15s ease, background .15s ease, box-shadow .15s ease;
+    }
+    .tap-dot.on{
+      background:linear-gradient(180deg, rgba(255,216,110,.95), rgba(214,146,16,.86));
+      box-shadow:0 0 16px rgba(255,216,110,.22);
+      transform:scale(1.08);
+    }
+    .tap-text{
+      font-size:13px; color:#d8e5ff; font-weight:800; letter-spacing:.02em;
+    }
+    .controls{
+      display:flex; flex-wrap:wrap; gap:12px; margin-top:14px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      min-height:48px; padding:0 18px; border-radius:14px;
+      font-weight:900; letter-spacing:.02em;
+      border:1px solid var(--line); background:rgba(255,255,255,.04); color:var(--text);
+      transition:transform .15s ease, opacity .15s ease, background .15s ease;
+    }
+    .btn:hover:not(:disabled){
+      transform:translateY(-1px); background:rgba(255,255,255,.07);
+    }
+    .btn:disabled{
+      opacity:.45; cursor:not-allowed; transform:none;
+    }
+    .btn-primary{
+      background:linear-gradient(180deg, rgba(255,216,110,.22), rgba(214,146,16,.10));
+      border:1px solid rgba(255,216,110,.24); color:#ffefbf;
+    }
+    .info{
+      margin-top:14px; color:var(--muted); font-size:14px; line-height:1.55; min-height:22px;
+    }
+
+    .capsule-drop{
+      position:absolute;
+      left:50%; top:52%;
+      width:14.5%; max-width:108px; aspect-ratio:1/1;
+      transform:translate(-50%, -220px) scale(.82);
+      opacity:0; z-index:6; pointer-events:none;
+    }
+    .capsule-drop.active{animation:capsuleDrop 1s cubic-bezier(.2,.8,.2,1) forwards}
+    .capsule-shell{
+      position:relative; width:100%; height:100%; border-radius:50%;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(255,255,255,.55), rgba(255,255,255,.18) 20%, rgba(255,255,255,.06) 38%, rgba(255,255,255,.02) 65%, rgba(255,255,255,.03) 100%);
+      border:1px solid rgba(255,255,255,.22);
+      box-shadow: inset 0 8px 10px rgba(255,255,255,.18), inset 0 -10px 14px rgba(0,0,0,.12), 0 10px 18px rgba(0,0,0,.18);
+      backdrop-filter:blur(1px); overflow:hidden;
+    }
+    .capsule-shell::before{
+      content:""; position:absolute; left:8%; right:8%; top:49%; height:2px; border-radius:999px;
+      background:rgba(255,255,255,.20); box-shadow:0 0 0 1px rgba(0,0,0,.03);
+    }
+    .capsule-figure{
+      position:absolute; left:50%; top:52%; width:46%; height:56%;
+      transform:translate(-50%, -50%);
+      border-radius:45% 45% 34% 34%;
+      background:rgba(60,70,85,.33);
+      filter:blur(7px);
+    }
+    .capsule-figure::before{
+      content:""; position:absolute; left:50%; top:-18%; width:48%; height:34%;
+      transform:translateX(-50%); border-radius:50%; background:rgba(60,70,85,.33);
+    }
+
+    .capsule-open{
+      position:absolute; left:50%; top:71%; width:22%; max-width:160px; aspect-ratio:1/1;
+      transform:translate(-50%, -50%) scale(.2);
+      opacity:0; pointer-events:none; z-index:8;
+    }
+    .capsule-open.visible{animation:capsuleReveal .55s ease-out forwards}
+    .capsule-half{
+      position:absolute; left:50%; width:100%; height:50%; transform:translateX(-50%);
+      background:
+        radial-gradient(circle at 30% 25%, rgba(255,255,255,.55), rgba(255,255,255,.16) 20%, rgba(255,255,255,.06) 48%, rgba(255,255,255,.02) 100%);
+      border:1px solid rgba(255,255,255,.22);
+      backdrop-filter:blur(1px);
+      box-shadow: inset 0 6px 8px rgba(255,255,255,.18), 0 8px 14px rgba(0,0,0,.16);
+    }
+    .capsule-half.top{
+      top:0; border-radius:999px 999px 16px 16px; transform-origin:50% 100%;
+    }
+    .capsule-open.visible .capsule-half.top{
+      animation:openTop .45s ease-out forwards;
+    }
+    .capsule-half.bottom{
+      bottom:0; border-radius:16px 16px 999px 999px;
+    }
+
+    .reveal-card{
+      position:absolute; left:50%; top:72%; width:min(100%, 300px);
+      transform:translate(-50%, 20px);
+      padding:18px 18px 16px; border-radius:22px;
+      background:rgba(8,11,18,.88); border:1px solid rgba(255,255,255,.12);
+      box-shadow:0 18px 34px rgba(0,0,0,.26);
+      opacity:0; pointer-events:none; z-index:9; text-align:center;
+    }
+    .reveal-card.visible{animation:cardIn .45s ease-out forwards}
+    .reveal-card.visible{
+      pointer-events:auto;
+      z-index:1000;
+    }
+    .reveal-close{
+      pointer-events:auto;
+      position:absolute;
+      top:10px;
+      right:10px;
+      z-index:50;
+      width:38px;
+      height:38px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.28);
+      background:rgba(0,0,0,.78);
+      color:#fff;
+      font-size:28px;
+      line-height:34px;
+      font-weight:800;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+    .reveal-close:hover{
+      transform:scale(1.06);
+      background:rgba(216,32,32,.92);
+      border-color:rgba(255,255,255,.45);
+    }
+    .reveal-card:not(.visible) .reveal-close{
+      display:none;
+    }
+
+    .reveal-kicker{
+      font-size:11px; font-weight:900; letter-spacing:.16em; text-transform:uppercase;
+      color:#ffe7a1; margin-bottom:8px;
+    }
+    .reveal-title{
+      font-size:26px; font-weight:1000; letter-spacing:-.04em; margin:0 0 8px;
+    }
+    .reveal-copy{
+      margin:0; color:var(--muted); font-size:14px; line-height:1.5;
+    }
+
+    .footer{padding:20px 0 46px; color:var(--muted)}
+    .footer-box{
+      display:flex; flex-wrap:wrap; justify-content:space-between; gap:14px;
+      padding-top:18px; border-top:1px solid var(--line);
+    }
+
+    @keyframes machineShake{
+      0%,100%{transform:translateX(0)}
+      25%{transform:translateX(-2px)}
+      50%{transform:translateX(2px)}
+      75%{transform:translateX(-1px)}
+    }
+    @keyframes capsuleDrop{
+      0%{transform:translate(-50%, -220px) scale(.82); opacity:0}
+      12%{opacity:1}
+      68%{transform:translate(-50%, 148px) scale(1); opacity:1}
+      100%{transform:translate(-50%, 148px) scale(1); opacity:1}
+    }
+    @keyframes capsuleReveal{
+      0%{opacity:0; transform:translate(-50%, -50%) scale(.2)}
+      100%{opacity:1; transform:translate(-50%, -50%) scale(1)}
+    }
+    @keyframes openTop{
+      0%{transform:translateX(-50%) rotate(0deg)}
+      100%{transform:translateX(-50%) rotate(-42deg) translateY(-12px)}
+    }
+    @keyframes cardIn{
+      0%{opacity:0; transform:translate(-50%, 20px)}
+      100%{opacity:1; transform:translate(-50%, 0)}
+    }
+
+    @media (max-width:980px){
+      .hero-grid{grid-template-columns:1fr}
+      .machine-stage{min-height:640px}
+      .machine-wrap{width:min(100%, 620px)}
+    }
+    @media (max-width:640px){
+      .topbar-inner{
+        padding:8px 0; align-items:flex-start; flex-direction:column;
+      }
+      .top-links{
+        width:100%; overflow:auto; flex-wrap:nowrap; padding-bottom:2px;
+      }
+      .pill{white-space:nowrap}
+      .hero{padding:20px 0 32px}
+      h1{font-size:clamp(36px, 10vw, 62px)}
+      .sub{font-size:16px}
+      .machine-stage{min-height:470px}
+      .machine-wrap{width:min(100%, 460px)}
+      .tap-callout{
+        top:45.5%;
+      }
+      .tap-callout-badge{
+        min-height:34px;
+        padding:0 12px;
+        font-size:11px;
+      }
+      .handle-hit{
+        top:47.5%;
+        width:28%;
+        height:18%;
+      }
+      .tap-zone-ring{
+        top:63%;
+        width:22%;
+        height:11%;
+      }
+      .machine-panel{margin-top:8px; padding:16px}
+      .controls{gap:10px}
+      .btn{
+        min-height:46px;
+        padding:0 16px;
+        font-size:16px;
+      }
+      .reveal-card{width:min(100%, 260px); top:78%}
+      .capsule-drop{
+        max-width:92px;
+        top:41.5%;
+      }
+    }
+  
+.hoc-standard-footer{
+  margin:28px auto 10px;
+  padding:18px 14px 28px;
+  border-top:1px solid rgba(255,255,255,.12);
+  color:rgba(230,238,247,.72);
+  font-size:12px;
+  text-align:center;
+  line-height:1.7;
+}
+.hoc-standard-footer a{color:inherit;text-decoration:none}
+.hoc-standard-footer a:hover{text-decoration:underline}
+.hoc-standard-footer-links{margin:4px 0}
+
+
+    /* HOMEEZ NEW ART LOCK */
+    .homeez-brand-logo{display:block;width:min(360px,82vw);height:auto;margin:0 auto 16px;object-fit:contain}
+    .homeez-banner-art{display:block;width:100%;max-width:980px;height:auto;margin:22px auto 0;border-radius:18px;border:1px solid rgba(240,184,48,.18);box-shadow:0 18px 50px rgba(0,0,0,.34)}
+    .homeez-xrp-art{display:block;width:100%;max-width:420px;height:auto;margin:14px auto 18px;border-radius:16px;border:1px solid rgba(240,184,48,.16);box-shadow:0 14px 38px rgba(0,0,0,.28)}
+    /* ===== HOMEEZ machine v2 ===== */
+    .hzm-stage{display:flex;justify-content:center;padding:6px 0 10px;user-select:none;-webkit-user-select:none}
+    .hzm{position:relative;width:min(100%,470px);aspect-ratio:470/688;filter:drop-shadow(0 28px 50px rgba(0,0,0,.5))}
+    .hzm.shake{animation:hzShake .5s ease-in-out}
+    .hzm-layer{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+    .hzm-dome{position:absolute;left:4.5%;top:14.6%;width:91%;height:34.4%;overflow:hidden;border-radius:42% 42% 4% 4%/60% 60% 4% 4%}
+    .hzc{position:absolute;width:30%;aspect-ratio:1;transform:rotate(var(--r));transition:transform .3s}
+    .hzm-dome.jiggle .hzc{animation:hzJig .55s ease-in-out var(--d) 2}
+    .cap{position:absolute;inset:0;border-radius:50%;overflow:hidden;filter:drop-shadow(0 3px 4px rgba(0,0,0,.4))}
+    .cap>*{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+    .cap .glass{background:url(/homeez/assets/caps/glass.webp?v=2) center/100% 100% no-repeat}
+    .cap .bot{background-size:100% 100%;background-repeat:no-repeat}
+    .cap .fig{left:12%;width:76%;top:6%;height:85%;background-size:contain;background-repeat:no-repeat;background-position:center top}
+    .cap .fig.ph{background:none}
+    .hzm-knob{position:absolute;left:36.4%;top:52.3%;width:26.4%;aspect-ratio:1;border-radius:50%;padding:0;background:none;touch-action:none;cursor:grab;outline-offset:4px;z-index:5}
+    .hzm-knob:active{cursor:grabbing}
+    .hzm-knob img{width:100%;height:100%;border-radius:50%;pointer-events:none;transform:rotate(var(--a,0deg));will-change:transform}
+    .hzm-knob.ready{animation:hzPulse 1.8s ease-in-out infinite}
+    .hzm-hint{position:absolute;left:66%;top:56%;padding:6px 10px;border-radius:999px;background:var(--gold);color:#1a1200;font-weight:900;font-size:13px;letter-spacing:.06em;text-transform:uppercase;pointer-events:none;box-shadow:0 6px 18px rgba(0,0,0,.4);transition:opacity .3s}
+    .hzm-hint span{display:inline-block;animation:hzSpin 1.6s linear infinite}
+    .hzm-hint.off{opacity:0}
+    .hzm-progress{position:absolute;left:36.4%;width:26.4%;top:71.5%;height:5px;border-radius:9px;background:rgba(255,255,255,.12);overflow:hidden}
+    .hzm-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ffd86e,#ff6b4a)}
+    .hzm-cap{position:absolute;left:41%;top:76.5%;width:18%;aspect-ratio:1;padding:0;background:none;border-radius:50%;z-index:6;cursor:pointer}
+    .hzm-cap .cap{animation:none}
+    .hzm-cap.drop{animation:hzDrop .9s cubic-bezier(.3,1.4,.5,1) both}
+    .hzm-cap.wait{animation:hzWiggle 1.4s ease-in-out infinite}
+    .hzm-cap::after{content:"Tap to open";position:absolute;left:50%;top:104%;transform:translateX(-50%);white-space:nowrap;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:#ffeeb9;text-shadow:0 2px 6px #000}
+    .hz-tray-head{display:flex;justify-content:space-between;margin-top:14px;font-size:12px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+    .hz-tray{display:flex;gap:8px;overflow-x:auto;padding:10px 2px 6px;min-height:72px;scrollbar-width:thin}
+    .hz-tray:empty::before{content:"No pulls yet.";color:var(--muted);font-size:14px;align-self:center}
+    .hz-chip{flex:0 0 auto;width:58px;text-align:center;font-size:10px;font-weight:800;color:#dfe8ff}
+    .hz-chip .cap{position:relative;width:52px;height:52px;margin:0 auto 3px}
+    .hz-teaser{margin:12px 0 0;font-size:14px;color:#ffe8a7;font-weight:700}
+    .hz-reveal{position:fixed;inset:0;z-index:50;display:grid;place-items:center;background:rgba(4,6,10,.72);backdrop-filter:blur(6px);padding:16px}
+    .hz-reveal[hidden]{display:none}
+    .hz-reveal-card{position:relative;width:min(380px,100%);padding:22px 20px 20px;border-radius:24px;text-align:center;
+      background:linear-gradient(180deg,#151d2e,#0b111c);border:1px solid rgba(255,216,110,.28);box-shadow:0 30px 80px rgba(0,0,0,.6);animation:hzCard .45s cubic-bezier(.2,1.3,.4,1) both;overflow:hidden}
+    .hz-burst{position:absolute;left:50%;top:150px;width:520px;height:520px;margin:-260px 0 0 -260px;background:repeating-conic-gradient(rgba(255,216,110,.06) 0 10deg,transparent 10deg 20deg);animation:hzSpin 14s linear infinite;pointer-events:none}
+    .hz-open{position:relative;height:270px}
+    .hz-half{position:absolute;left:50%;width:150px;height:75px;margin-left:-75px;top:110px;z-index:3}
+    .hz-half.top{background:url(/homeez/assets/caps/glass.webp?v=2) top/100% 200% no-repeat;filter:drop-shadow(0 0 2px rgba(255,255,255,.5));animation:hzTop .7s .15s ease-out both}
+    .hz-half.bottom{top:185px;background:var(--bi) bottom/100% 200% no-repeat;filter:drop-shadow(0 6px 8px rgba(0,0,0,.4));animation:hzBot .7s .15s ease-out both}
+    .hz-rfig{position:absolute;left:50%;bottom:10px;width:150px;height:240px;margin-left:-75px;background-size:contain;background-repeat:no-repeat;background-position:center bottom;z-index:2;animation:hzRise .6s .35s cubic-bezier(.2,1.4,.4,1) both}
+    .hz-rfig.ph::before{content:"?";position:absolute;inset:0;display:grid;place-items:center;font-size:110px;font-weight:900;color:rgba(255,216,110,.6)}
+    .hz-rtitle{margin:6px 0 8px;font-size:30px;letter-spacing:.02em}
+    .hz-bio{margin:0 0 14px;padding:14px 14px 12px;text-align:left;border-radius:14px;background:linear-gradient(180deg,#f7efd9,#efe2bf);color:#1d1a14;border:2px solid #d9b45a;box-shadow:inset 0 0 0 3px #f7efd9,inset 0 0 0 4px rgba(150,110,30,.35)}
+    .hz-bio p{margin:0 0 10px;font-size:14px;line-height:1.5}
+    .hz-known{margin:0;padding-top:8px;border-top:1px dashed rgba(120,85,20,.45);font-size:12px;line-height:1.4;color:#5a4210}
+    .hz-known b{color:#b4361e;text-transform:uppercase;letter-spacing:.06em;font-size:11px}
+    .hz-badge{display:inline-block;margin:0 0 10px;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:900;letter-spacing:.14em;color:#1d1a14;background:linear-gradient(180deg,#ffe9a3,#e0b04a);box-shadow:0 0 12px rgba(255,216,110,.35)}
+    .hz-badge[hidden]{display:none}
+    .boss{padding:20px 0 56px}
+    .boss-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:28px;align-items:center;padding:18px;border-radius:24px;background:var(--panel);border:1px solid var(--line);box-shadow:0 12px 26px rgba(0,0,0,.18)}
+    .boss-img{width:100%;height:auto;display:block;border-radius:18px;aspect-ratio:16/9;object-fit:cover}
+    .boss h2{margin:6px 0 14px;font-size:clamp(26px,3.2vw,40px);line-height:1.1;letter-spacing:-.01em}
+    .boss h2 span{color:var(--gold)}
+    .boss-bio{margin:0 0 12px;font-size:16px;line-height:1.6;color:var(--text)}
+    .boss-known{margin:0 0 12px;font-size:14px;color:var(--muted)}
+    .boss-known b{color:var(--gold);text-transform:uppercase;letter-spacing:.08em;font-size:12px}
+    .boss-real{margin:0;font-size:14px;font-style:italic;color:#d9e2f3}
+    @media (max-width:860px){.boss-grid{grid-template-columns:1fr;gap:16px;padding:12px}.boss-bio{font-size:15px}}
+.hz-free{margin:0 0 12px;padding:8px 12px;border-radius:10px;font-size:12px;line-height:1.4;color:#ffe8a7;background:rgba(255,216,110,.08);border:1px solid rgba(255,216,110,.3)}
+    .hz-free[hidden]{display:none}
+    .hz-rnum{display:block;font-size:13px;letter-spacing:.18em;color:var(--c,#ffd86e);opacity:.9}
+    .hz-reveal-card{max-height:calc(100dvh - 32px);overflow-y:auto!important;overscroll-behavior:contain}
+    @media (max-width:480px){.hz-open{height:210px}.hz-half{top:70px}.hz-half.bottom{top:145px}.hz-rfig{height:190px}.hz-rtitle{font-size:26px}}
+    .hz-reveal-card .controls{justify-content:center;position:relative}
+    .hz-reveal-card>*{position:relative}.hz-reveal-card>.hz-burst{position:absolute}
+    @keyframes hzShake{0%,100%{transform:none}20%{transform:translateX(-5px) rotate(-1deg)}40%{transform:translateX(5px) rotate(1deg)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+    @keyframes hzJig{0%,100%{transform:rotate(var(--r))}30%{transform:translate(3px,-6px) rotate(calc(var(--r) + 12deg))}70%{transform:translate(-3px,-2px) rotate(calc(var(--r) - 10deg))}}
+    @keyframes hzPulse{0%,100%{filter:drop-shadow(0 0 0 rgba(255,216,110,0))}50%{filter:drop-shadow(0 0 12px rgba(255,216,110,.85))}}
+    @keyframes hzSpin{to{transform:rotate(360deg)}}
+    @keyframes hzDrop{0%{transform:translateY(-120%) scale(.6);opacity:0}50%{opacity:1}100%{transform:none}}
+    @keyframes hzWiggle{0%,80%,100%{transform:none}86%{transform:rotate(-12deg)}93%{transform:rotate(10deg)}}
+    @keyframes hzCard{from{transform:scale(.7);opacity:0}}
+    @keyframes hzTop{to{transform:translate(-90px,-60px) rotate(-40deg);opacity:0}}
+    @keyframes hzBot{to{transform:translate(90px,40px) rotate(30deg);opacity:0}}
+    @keyframes hzRise{from{transform:translateY(60px) scale(.4);opacity:0}}
+    @media (max-width:760px){.hzm{width:min(100%,400px)}.hz-open{height:240px}}
+    @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition:none!important}}
+    .mint-bar{background:linear-gradient(90deg,#b8860b,var(--gold),#b8860b);color:#1a1200;text-align:center;font-weight:900;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:8px 12px;line-height:1.35}
+    .mint-pill{display:inline-block;padding:8px 16px;border-radius:999px;background:var(--gold);color:#1a1200;font-weight:900;font-size:15px;letter-spacing:.1em;text-transform:uppercase;box-shadow:0 6px 18px rgba(255,216,110,.35)}
+    .mint-sub{margin:8px 0 14px;font-weight:700;color:var(--gold);font-size:15px}
+    .coming{padding:0 0 56px}
+    .coming-box{padding:22px;border-radius:24px;background:var(--panel);border:1px solid var(--line);box-shadow:0 12px 26px rgba(0,0,0,.18)}
+    .coming-box h2{margin:6px 0 14px;font-size:clamp(24px,3vw,34px)}
+    .coming-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+    .coming-list li{padding:14px 16px;border-radius:16px;border:1px solid var(--line);background:rgba(255,216,110,.06);font-weight:700}
+    .coming-list li b{display:block;color:var(--gold);font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+    .hzm-marquee{position:absolute;left:12.77%;top:2.33%;width:74.04%;height:7.7%;border-radius:999px;overflow:hidden;display:flex;align-items:center;justify-content:center;pointer-events:none;box-shadow:inset 0 2px 4px rgba(0,0,0,.55),inset 0 -1px 0 rgba(255,255,255,.06)}
+    .hzm-marquee img{display:block;max-width:84%;max-height:84%;width:auto;height:auto;object-fit:contain;filter:drop-shadow(0 1px 0 rgba(255,255,255,.14)) drop-shadow(0 -1px 1px rgba(0,0,0,.7)) drop-shadow(0 2px 2px rgba(0,0,0,.45))}
+    .hzm-marquee::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,rgba(255,255,255,.13) 0%,rgba(255,255,255,.04) 38%,rgba(255,255,255,0) 52%),linear-gradient(105deg,rgba(255,255,255,0) 58%,rgba(255,255,255,.07) 66%,rgba(255,255,255,0) 74%)}
+.hz-order .hz-pay-primary{background:#ffdc69;color:#171717;border:3px solid #fff1b8;font-weight:800;font-size:1.08rem;min-height:48px;padding:12px 22px;box-shadow:0 0 0 2px #171717}
+    .hz-order .hz-pay-primary:focus-visible{outline:3px solid #fff;outline-offset:4px}
+    .hz-order .hz-pay-primary:disabled{opacity:.55;box-shadow:none;cursor:not-allowed}
+    .hz-pay-help,.hz-quote-clock{flex-basis:100%;margin:4px 0;font-size:1rem;color:#fff}.hz-quote-clock{font-weight:700;font-variant-numeric:tabular-nums}
+  
+/* Contained NFT status and primary claim action. */
+#hzRClaim{display:grid;gap:12px;position:relative;isolation:isolate;min-width:0;margin:16px 0;padding:16px;border:1px solid #627089;border-radius:16px;background:#101a2a;color:#f4f7fc;text-align:left;overflow-wrap:anywhere}
+#hzRClaim:empty{display:none}.hz-claim-status{display:flex;flex-wrap:wrap;align-items:center;gap:8px;line-height:1.5}.hz-claim-status .hz-ost{display:inline-flex;position:static;margin:0;max-width:100%;white-space:normal}.hz-claim-edition{font-size:12px;color:#d1d9e5}.hz-claim-help{margin:0;font-size:14px;line-height:1.55;color:#e0e6ef}.hz-claim-link{color:#ffe28a;text-decoration:underline}
+.hz-reveal-card .hz-claim-primary,.hz-order .hz-claim-primary{display:flex;justify-content:center;align-items:center;min-height:56px;padding:14px 20px;width:100%;border:2px solid #fff0b3;border-radius:12px;background:#ffdc69;color:#17130a;font-size:18px;font-weight:900;line-height:1.3;white-space:normal;text-align:center;box-shadow:0 4px 0 #986d18;cursor:pointer}.hz-claim-primary:hover{filter:brightness(1.08)}.hz-claim-primary:focus-visible{outline:3px solid white;outline-offset:4px}.hz-order .hz-claim-primary{font-size:16px;min-height:48px;width:auto;flex:1 1 180px}.hz-reveal-card{isolation:isolate}.hz-reveal-card>.hz-burst{z-index:-1}.hz-reveal-card .controls{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}.hz-reveal-card .controls .btn{flex:1 1 120px;min-height:48px}.hz-reveal-card .hz-bio{min-width:0;overflow-wrap:anywhere}
+@media(max-width:480px){.hz-reveal{padding:8px}.hz-reveal-card{width:100%;padding:16px 12px;max-height:calc(100dvh - 16px)}#hzRClaim{padding:14px}.hz-claim-status{align-items:flex-start}}
+
+.hz-receipts{margin-top:12px;min-width:0;overflow-wrap:anywhere}.hz-receipts summary{cursor:pointer;padding:14px;font-weight:800;color:#ffe28a}.hz-receipts .hz-order{margin-top:8px}.hz-receipts summary:focus-visible{outline:3px solid #ffdc69}
+
+/* Keep long transaction references inside responsive grid/flex tracks. */
+.hero-grid > *, .machine-panel, .hz-wallet, .hz-orders, .hz-order, .hz-order > *{min-width:0}
+.hz-orders{grid-template-columns:minmax(0,1fr)}
+.hz-order{max-width:100%;overflow-wrap:anywhere}
+.hz-order > *{max-width:100%}
+</style>
+  <meta name="apple-mobile-web-app-title" content="HOMEEZ" />
+  <meta name="application-name" content="HOMEEZ" />
+  <!-- favicon: HOMEEZ -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/homeez/favicon-32x32.png?v=2" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/homeez/favicon-16x16.png?v=2" />
+  <link rel="shortcut icon" href="/assets/favicons/homeez/favicon.ico?v=2" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/homeez/apple-touch-icon.png?v=2" />
+<meta name="robots" content="noindex,nofollow"></head>
+<body>
+  <div class="mint-bar" role="status">Mint coming soon · Series 1 on XRPL · Spin free now</div>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="https://houseofcauliman.com/">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>HOMEEZ</span>
+      </a>
+      <nav class="top-links" aria-label="Page navigation">
+        <a class="pill" href="my-homeez.html">MY HOMEEZ</a>
+        <a class="pill" href="https://houseofcauliman.com/">House</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="mint-pill">Mint Coming Soon</span>
+          <p class="mint-sub">HOMEEZ Series 1 mints on the XRP Ledger. Free spins are open now.</p>
+          <img class="homeez-brand-logo" src="/homeez/assets/HOMEEZ_logo.webp?v=2" alt="HOMEEZ" loading="eager">
+          <h1>HOMEEZ Capsule Machine</h1>
+          <p class="sub">Grab the chrome knob and give it a full twist. A capsule drops. Crack it open to see which HOMEEZ you pulled. 18 to collect.</p>
+          <picture><source srcset="/homeez/assets/HOMEEZ_banner.webp" type="image/webp"><img class="homeez-banner-art" src="/homeez/assets/HOMEEZ_banner.png" alt="HOMEEZ capsule collection banner" loading="eager"></picture>
+
+          <div class="status-row">
+            <span class="status gold">Founding Machine</span>
+            <span class="status">Series 1 · 18 Figures</span>
+          </div>
+        </div>
+
+        <div class="machine-side">
+          <div class="hzm-stage">
+            <div id="hzm" class="hzm">
+              <img class="hzm-layer" src="/homeez/assets/machine_base.webp?v=3" alt="HOMEEZ capsule machine" draggable="false">
+              <div class="hzm-marquee" aria-hidden="true"><img src="/homeez/assets/machine_wordmark.webp?v=2" alt="" draggable="false"></div><div id="hzmDome" class="hzm-dome" aria-hidden="true"></div>
+              <img class="hzm-layer hzm-glass" src="/homeez/assets/machine_glass.png?v=2" alt="" aria-hidden="true" draggable="false">
+              <button id="hzmKnob" class="hzm-knob" type="button" aria-label="Twist the knob to get a HOMEEZ capsule">
+                <img src="/homeez/assets/machine_knob.png?v=2" alt="" draggable="false">
+              </button>
+              <div class="hzm-progress" aria-hidden="true"><i id="hzmProg"></i></div>
+              <button id="hzmCap" class="hzm-cap" type="button" aria-label="Open your capsule" hidden></button>
+            </div>
+          </div>
+          <div class="machine-panel">
+            <div class="panel-title">Machine Controls</div>
+            <div id="hzWallet" class="hz-wallet">
+              <div class="hz-wrow"><span id="hzMode" class="hz-mode">Loading…</span><span id="hzAddr" class="hz-addr"></span>
+                <span id="hzStatus" class="hz-small" aria-live="polite"></span>
+                <button id="hzConnect" class="btn btn-primary" type="button">Connect Xaman</button>
+                <button id="hzDisconnect" class="btn" type="button" hidden>Disconnect</button></div>
+              <div class="hz-slot" aria-label="Coin slot"><div class="hz-slot-mouth"></div><div id="hzCoins" class="hz-coins"></div><span id="hzCCount" class="hz-ccount">0 paid spins</span></div>
+              <div id="hzPacks" class="hz-packs" role="group" aria-label="Buy paid spins">
+                <button class="btn" type="button" data-pack="1">1 spin · $5</button>
+                <button class="btn" type="button" data-pack="5">5 spins · $20</button>
+              </div>
+              <p id="hzWNote" class="hz-small">1 paid spin = 1 HOMEEZ NFT. Priced in USD, paid in XRP at the live rate.</p>
+              <div id="hzOrdersErr" class="hz-orders-err" role="status" hidden><span>Orders unavailable right now. You are still signed in, and your orders are saved.</span> <button id="hzOrdersRetry" class="btn" type="button">Retry orders</button></div>
+              <div id="hzOrders" class="hz-orders" hidden></div>
+            </div>
+
+            <p id="hzFreeNote" class="hz-free" hidden>BOSS preview only. No NFT received. Playing the demo or connecting a wallet does not give you BOSS.</p>
+            <div id="machineInfo" class="info" aria-live="polite">Grab the chrome knob and twist it all the way around. Or just tap it.</div>
+            <div class="controls">
+              <button id="turnBtn" class="btn btn-primary" type="button">Turn the knob</button>
+              <button id="clearBtn" class="btn" type="button">Clear pulls</button>
+            </div>
+            <div class="hz-tray-head"><span>Your pulls</span><span id="trayCount">0 / 18 unique</span></div>
+            <div id="tray" class="hz-tray"></div>
+            <p class="hz-teaser">Own the NFT, get the figure. 3D printed HOMEEZ coming.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="boss" id="boss">
+      <div class="wrap boss-grid">
+        <img class="boss-img" src="/homeez/assets/HOMEEZ_BOSS.webp?v=1" alt="BOSS, the official HOMEEZ mascot American Bully, on the block at sunset" loading="lazy" width="1920" height="1080">
+        <div>
+          <div class="eyebrow">Meet BOSS</div>
+          <h2><span>BOSS #000</span> · Official HOMEEZ Mascot</h2>
+          <p class="boss-bio">The block's first homee, and the only one with four legs. He was guarding the corner before any of the HOMEEZ showed up, and he still decides who's cool. Chain heavy, bandana tied, he looks unbothered until somebody throws the tennis ball. Every free spin is him checking you out first.</p>
+          <p class="boss-known"><b>Known for:</b> the side-eye, the Cuban link, never dropping the ball.</p>
+          
+        </div>
+      </div>
+    </section>
+
+    <section class="coming" id="coming">
+      <div class="wrap coming-box">
+        <div class="eyebrow">What's coming</div>
+        <h2>This is only Series 1</h2>
+        <ul class="coming-list">
+          <li><b>Mint</b>Series 1 mint on the XRP Ledger</li>
+          <li><b>Series</b>More HOMEEZ series dropping</li>
+          <li><b>Game</b>A HOMEEZ game built to work with your NFTs</li>
+          <li><b>Figures</b>3D-printed figures of the HOMEEZ you own</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <div id="hzReveal" class="hz-reveal" hidden>
+    <div class="hz-reveal-card" role="dialog" aria-modal="true" aria-labelledby="hzRTitle" aria-describedby="hzRBio" tabindex="-1">
+      <div class="hz-burst" aria-hidden="true"></div>
+      <div class="hz-open" aria-hidden="true">
+        <div class="hz-half top"></div><div id="hzRFig" class="hz-rfig"></div><div class="hz-half bottom"></div>
+      </div>
+      <div class="reveal-kicker">Capsule opened</div>
+      <h2 id="hzRTitle" class="hz-rtitle">HZ000</h2>
+      <span id="hzRBadge" class="hz-badge" hidden>RARE · MASCOT</span>
+      <div class="hz-bio"><p id="hzRBio"></p><p class="hz-known"><b>Known for:</b> <span id="hzRKnown"></span></p></div>
+      <p id="hzRFree" class="hz-free" hidden>BOSS preview only. No NFT received. Playing the demo or connecting a wallet does not give you BOSS.</p><section id="hzRClaim" aria-label="NFT status and claim"></section>
+      <div class="controls"><a class="btn" href="my-homeez.html">MY HOMEEZ</a><button id="againBtn" class="btn" type="button">Turn again</button></div>
+    </div>
+  </div>
+
+
+  <div id="hzModal" class="hz-modal" hidden>
+    <div class="hz-mcard" role="dialog" aria-modal="true" aria-labelledby="hzMTitle" aria-describedby="hzMBody" tabindex="-1">
+      <h3 id="hzMTitle">Xaman</h3><div id="hzMBody" class="hz-small" aria-live="polite"></div>
+      <img id="hzMQr" alt="Xaman QR code. Scan it with the Xaman app on your phone." hidden>
+      <a id="hzMLink" class="btn btn-primary" href="#" target="_blank" rel="noopener" hidden>Open in Xaman</a>
+      <button id="hzMQrToggle" class="btn" type="button" hidden>Show QR code instead</button>
+      <button id="hzMAct" class="btn btn-primary" type="button" hidden>Continue</button>
+      <button id="hzMClose" class="btn" type="button">Cancel</button>
+    </div>
+  </div>
+
+  <footer class="hoc-standard-footer">
+  <div>A House of Cauliman Project</div>
+  <div class="hoc-standard-footer-links">
+    <a href="/terms.html">Terms</a> ·
+    <a href="/privacy.html">Privacy</a> ·
+    <a href="/disclaimer.html">Disclaimer</a> ·
+    <a href="https://houseofcauliman.com">houseofcauliman.com</a>
+  </div>
+  <div>© 2026 House of Cauliman. All rights reserved.</div>
+</footer>
+
+  <script>
+  (()=>{
+    const COLORS=['#e8323a','#f2b822','#18a99a','#8a4fd8','#f2711c','#2f6fd8'];
+    const BOT=c=>`url(/homeez/assets/caps/bot_${String(c||'#e8323a').replace('#','')}.webp?v=2)`;
+    const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let FIGS=[];
+    const $=id=>document.getElementById(id);
+    const hzm=$('hzm'),dome=$('hzmDome'),knob=$('hzmKnob'),kimg=knob.querySelector('img'),prog=$('hzmProg'),hint={classList:{add(){}}},
+          capBtn=$('hzmCap'),info=$('machineInfo'),reveal=$('hzReveal'),tray=$('tray');
+    // ---- audio ----
+    let AC;const ac=()=>{if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(AC&&AC.state==='suspended')AC.resume();return AC};
+    function tone(f,d,type='square',v=.08,f2){const a=ac();if(!a)return;const o=a.createOscillator(),g=a.createGain(),t=a.currentTime;
+      o.type=type;o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);
+      g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g).connect(a.destination);o.start(t);o.stop(t+d+.02)}
+    const sClick=()=>{tone(1800,.03,'square',.05);tone(400,.05,'triangle',.06)};
+    const sClunk=()=>{tone(140,.25,'sine',.25,60);setTimeout(()=>tone(90,.18,'sine',.2,50),180)};
+    const sPop=()=>{tone(300,.12,'sine',.2,1200)};
+    const sChime=()=>[660,880,1320].forEach((f,i)=>setTimeout(()=>tone(f,.25,'triangle',.08),i*90));
+    const buzz=p=>{try{navigator.vibrate&&navigator.vibrate(p)}catch(e){}};
+    // ---- capsule element ----
+    function capsule(fig,color){const c=document.createElement('div');c.className='cap';c.style.setProperty('--c',color);
+      const f=document.createElement('div');f.className='fig'+(fig&&fig.img?'':' ph');if(fig&&fig.img)f.style.backgroundImage=`url(${fig.img})`;
+      const b=document.createElement('div');b.className='bot';b.style.backgroundImage=BOT(color);const g=document.createElement('div');g.className='glass';c.append(f,g,b);return c}
+    // ---- dome fill: 14 distinct figures stacked ----
+    const SLOTS=[[2,56],[25,60],[48,58],[71,55],[-4,22],[18,28],[41,26],[64,24],[84,22],[30,-4]];
+    function fillDome(){dome.innerHTML='';const pool=FIGS.filter(f=>!f.mascot).sort(()=>Math.random()-.5),boss=FIGS.find(f=>f.mascot),bi=boss?Math.floor(Math.random()*SLOTS.length):-1;
+      SLOTS.forEach(([x,y],i)=>{const w=document.createElement('div');w.className='hzc';w.style.left=x+'%';w.style.top=y+'%';
+        w.style.setProperty('--r',(Math.random()*50-25).toFixed(0)+'deg');w.style.setProperty('--d',(Math.random()*.15).toFixed(2)+'s');
+        w.append(capsule(i===bi?boss:pool[i%Math.max(pool.length,1)],COLORS[i%COLORS.length]));dome.append(w)})}
+    // ---- tray ----
+    const KEY='homeez_pulls_v1';let pulls=[];try{pulls=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){}
+    pulls=pulls.filter(p=>p.id!=='HZ000'); // discard legacy demo history, never ownership
+    function renderTray(){$('hzFreeNote').hidden=!PAY.st.demo;tray.innerHTML='';if(PAY.st.demo){$('trayCount').textContent='Preview only · no NFT received';return}pulls.slice().reverse().forEach(p=>{const fig=FIGS.find(f=>f.id===p.id);if(!fig)return;
+      const d=document.createElement('div');d.className='hz-chip';d.append(capsule(fig,p.c));d.append(fig.id+' '+fig.name);tray.append(d)});
+      $('trayCount').textContent=new Set(pulls.map(p=>p.id)).size+' / '+(FIGS.filter(f=>!f.mascot).length||18)+' unique'}
+    // ---- accessible dialogs: focus trap, Esc, inert background, focus return ----
+    const DLG=(()=>{const stack=[],SEL='a[href],button:not([disabled]),[tabindex]:not([tabindex="-1"])';
+      const vis=el=>!!el&&el!==document.body&&el.getClientRects().length>0&&!el.closest('[hidden]')&&!el.closest('[inert]');
+      const items=ov=>[...ov.querySelectorAll(SEL)].filter(el=>el.getClientRects().length>0&&!el.closest('[hidden]'));
+      function sync(){const top=stack[stack.length-1];[...document.body.children].forEach(e=>{if(e.tagName==='SCRIPT')return;if(top&&e!==top.ov)e.setAttribute('inert','');else e.removeAttribute('inert')})}
+      function refocus(s,pref){const a=document.activeElement;if(a&&s.ov.contains(a)&&a!==document.body&&a.getClientRects().length&&!a.closest('[hidden]'))return;
+        const f=(pref&&items(s.ov).includes(pref)?pref:null)||items(s.ov)[0]||s.ov.querySelector('[role=dialog]');if(f)f.focus()}
+      function open(ov,o={}){let s=stack.find(s=>s.ov===ov);const fresh=!s;if(fresh){s={ov,ret:document.activeElement};stack.push(s)}s.onEsc=o.onEsc;ov.hidden=false;sync();
+        if(fresh&&o.focus&&items(ov).includes(o.focus))o.focus.focus();else refocus(s,o.focus)}
+      function close(ov,fallback){ov.hidden=true;const i=stack.findIndex(s=>s.ov===ov);if(i<0)return;const s=stack.splice(i,1)[0];sync();
+        if(stack.length){refocus(stack[stack.length-1]);return}const r=vis(s.ret)?s.ret:vis(fallback)?fallback:null;if(r)r.focus()}
+      document.addEventListener('keydown',e=>{const s=stack[stack.length-1];if(!s)return;
+        if(e.key==='Escape'){e.preventDefault();e.stopImmediatePropagation();if(s.onEsc)s.onEsc();return}
+        if(e.key==='Tab'){const it=items(s.ov);if(!it.length){e.preventDefault();return}const f=it[0],l=it[it.length-1],a=document.activeElement,inside=s.ov.contains(a);
+          if(e.shiftKey&&(a===f||!inside)){e.preventDefault();l.focus()}else if(!e.shiftKey&&(a===l||!inside)){e.preventDefault();f.focus()}}},true);
+      return{open,close,update(ov){const s=stack.find(s=>s.ov===ov);if(s)refocus(s)}}})();
+    // ---- Xaman sign-in and paid spins. Backend URL comes only from trusted <meta> tags (no query-string overrides). ----
+    // Sign-in availability (homeez-api + homeez-connect) is separate from purchase availability (homeez-paid).
+    // Connecting a wallet never grants an NFT. The browser never decides payment or delivery: it only asks the backend,
+    // which verifies everything on the validated ledger.
+    const PAY=(()=>{const meta=n=>(document.querySelector('meta[name="'+n+'"]')?.content||'').trim();
+      const st={api:meta('homeez-api').replace(/\/$/,''),cfg:null,token:'',account:'',orders:[],signin:'unconfigured',paid:false,demo:true,off:true,connecting:false,verifying:false};
+      st.connectFlag=!!st.api&&meta('homeez-connect').toLowerCase()!=='off';
+      st.paidFlag=st.connectFlag&&meta('homeez-paid').toLowerCase()==='on';
+      st.off=!st.paidFlag;if(st.off)document.body.classList.add('hz-paid-off');
+      const sessionKey=()=> 'hz_sess_v2:'+st.api+':'+(st.cfg?.network||'unknown');
+      // ---- Xaman link allowlist: https on xumm.app / xaman.app, or the xumm:// / xaman:// app schemes (deep links only) ----
+      const XHOSTS=['xumm.app','xaman.app'];
+      function safeLink(u,kind){if(typeof u!=='string'||!u||u.length>2048)return null;let x;try{x=new URL(u)}catch(e){return null}
+        if(x.protocol==='https:'&&XHOSTS.includes(x.hostname)&&!x.port&&!x.username&&!x.password)return x.href;
+        if(kind==='deeplink'&&(x.protocol==='xumm:'||x.protocol==='xaman:'))return u;return null}
+      const unsafe=()=>Object.assign(new Error('Xaman sent a link this page does not trust, so it was not opened.'),{code:'unsafe_link'});
+      const okUuid=u=>typeof u==='string'&&/^[A-Za-z0-9_-]{8,80}$/.test(u);
+      function vet(p,allowNone){if(!p||typeof p!=='object')throw unsafe();const o={uuid:p.uuid,qr:null,deeplink:null};
+        if(p.qr!=null&&p.qr!==''){o.qr=safeLink(p.qr,'qr');if(!o.qr)throw unsafe()}
+        if(p.deeplink!=null&&p.deeplink!==''){o.deeplink=safeLink(p.deeplink,'deeplink');if(!o.deeplink)throw unsafe()}
+        if(!allowNone&&!o.qr&&!o.deeplink)throw unsafe();return o}
+      const PEND='hz_signin_pending:'+st.api,PEND_TTL=5*60*1000;
+      // Pending sign-in (mobile reload recovery). Cleanup is compare-and-clear: an attempt removes the saved entry only while it
+      // still holds ITS uuid and that attempt still owns it (pendOwner = attempt id that saved or resumed it), so a stale attempt
+      // can never erase a newer attempt's entry.
+      let pendOwner=0;
+      const pendRaw=()=>{try{return sessionStorage.getItem(PEND)}catch(e){return null}};
+      const pend={get(){const raw=pendRaw();let p=null;try{p=JSON.parse(raw||'null')}catch(e){p={bad:true}}if(!p)return null;
+          if(typeof p.ts!=='number'||Date.now()-p.ts>=PEND_TTL){pend.clearRaw(raw);return null}
+          if(!okUuid(p.uuid)||(p.deeplink&&!safeLink(p.deeplink,'deeplink')))return {bad:true,raw};return {uuid:p.uuid,deeplink:p.deeplink||'',ts:p.ts}},
+        save(p,owner){try{sessionStorage.setItem(PEND,JSON.stringify({uuid:p.uuid,deeplink:p.deeplink||'',ts:Date.now()}));pendOwner=owner}catch(e){}},
+        cur(){let c=null;try{c=JSON.parse(pendRaw()||'null')}catch(e){}return c&&typeof c.uuid==='string'?c.uuid:null},
+        adopt(owner,uuid){if(uuid&&pend.cur()===uuid)pendOwner=owner},
+        snap(){return{uuid:pend.cur(),owner:pendOwner}},
+        // remove only if the stored entry is still `uuid` and (when given) still owned by `owner`
+        clearIf(uuid,owner){if(!uuid||pend.cur()!==uuid||(owner!==undefined&&pendOwner!==owner))return false;try{sessionStorage.removeItem(PEND)}catch(e){}pendOwner=0;return true},
+        // remove a malformed/expired entry only if it is still byte-identical to the one that was inspected
+        clearRaw(raw){if(raw!=null&&pendRaw()===raw){try{sessionStorage.removeItem(PEND)}catch(e){}pendOwner=0}},
+        // disconnect only (a wallet is connected, so no sign-in attempt can be live): unconditional, synchronous
+        clearAll(){try{sessionStorage.removeItem(PEND)}catch(e){}pendOwner=0}};
+      const mob=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)||matchMedia('(max-width:640px)').matches;
+      const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+      let sessGen=0;
+      // o.token: send this bearer token instead of the current one; o.signal: abort with the auth attempt
+      const req=async(m,p,b,o={})=>{const tok=o.token!==undefined?o.token:st.token;let r;
+        const sig=o.signal&&AbortSignal.any?AbortSignal.any([AbortSignal.timeout(15000),o.signal]):AbortSignal.timeout(15000);
+        try{r=await fetch(st.api+p,{method:m,signal:sig,headers:{'content-type':'application/json',...(tok?{authorization:'Bearer '+tok}:{})},body:b&&JSON.stringify(b)})}
+        catch(e){if(o.signal&&o.signal.aborted)throw Object.assign(new Error('Cancelled'),{code:'aborted'});throw Object.assign(new Error(e&&e.name==='TimeoutError'?'The wallet service took too long to respond.':'Could not reach the wallet service.'),{code:'offline'})}
+        const j=await r.json().catch(()=>({}));if(o.signal&&o.signal.aborted)throw Object.assign(new Error('Cancelled'),{code:'aborted',body:j});
+        if(r.status===401&&tok&&st.token===tok){forget();render()}if(!r.ok)throw Object.assign(new Error(typeof j.error==='string'&&j.error?j.error:('HTTP '+r.status)),{status:r.status,code:j.code});return j};
+      const modal=$('hzModal'),mT=$('hzMTitle'),mB=$('hzMBody'),mQ=$('hzMQr'),mL=$('hzMLink'),mA=$('hzMAct'),mC=$('hzMClose'),mQT=$('hzMQrToggle');let gen=0,signinGen=-1,signinPend=null;
+      // p must already be vetted (vet()) when it carries links; unvetted links are re-checked here and rejected.
+      const show=(t,b,p,act,closeLabel)=>{if(p&&((p.qr&&!safeLink(p.qr,'qr'))||(p.deeplink&&!safeLink(p.deeplink,'deeplink'))))throw unsafe();
+        mT.textContent=t;mB.innerHTML=b||'';const qr=!!(p&&p.qr),dl=!!(p&&p.deeplink);
+        mQ.hidden=!(qr&&!mob);if(qr)mQ.src=p.qr;else mQ.removeAttribute('src');mQT.hidden=!(qr&&mob);
+        mL.hidden=!(dl&&(mob||!qr));if(dl)mL.href=p.deeplink;else mL.setAttribute('href','#');mA.hidden=!act;if(act){mA.textContent=act.label;mA.onclick=act.fn}mC.textContent=closeLabel||'Cancel';
+        DLG.open(modal,{onEsc:hide,focus:!mL.hidden?mL:!mA.hidden?mA:mC});DLG.update(modal);return ++gen};
+      function hide(){const sign=gen===signinGen;if(sign){if(signinPend)pend.clearIf(signinPend.uuid,signinPend.id);cancelAttempt(true)}DLG.close(modal,st.account?$('hzDisconnect'):$('hzConnect'));gen++;if(wake)wake()}
+      mC.onclick=hide;mQT.onclick=()=>{mQ.hidden=false;mQT.hidden=true;DLG.update(modal)};
+      mL.addEventListener('click',e=>{if(paymentWindow&&paymentWindow.g===gen&&(quoteExpired(paymentWindow.o)||paymentWindow.o.paymentStatus==='submitted')){e.preventDefault();tickPayments();return}if(!safeLink(mL.getAttribute('href'),'deeplink')){e.preventDefault();mL.hidden=true;mB.textContent='That Xaman link was not trusted, so it was not opened.'}});
+      const wait=ms=>new Promise(r=>setTimeout(r,ms));
+      let wake=null;const nap=ms=>new Promise(r=>{const t=setTimeout(()=>{wake=null;r()},ms);wake=()=>{clearTimeout(t);wake=null;r()}});
+      const LBL={refunded:'Refunded',payment_pending:'Awaiting payment',mint_pending:'Mint pending',ready_to_claim:'Ready to claim',delivered:'Delivered',error:'Needs attention'};
+      const quoteExpired=o=>o.expired||Date.now()>=Number(o.expiresAt);
+      const hasReceipt=o=>!!o.payment||!!o.needsPaymentReview||(o.receipts||[]).length>0;
+      const canPay=o=>o.uiState==='payment_pending'&&!quoteExpired(o)&&!hasReceipt(o)&&o.paymentStatus!=='submitted';
+      const paymentLabel=o=>o.refund?'Refunded':hasReceipt(o)&&!o.payment?'Payment received — review':o.paymentStatus==='submitted'?'Submitted — confirming':quoteExpired(o)&&o.uiState==='payment_pending'?'Quote expired':LBL[o.uiState]||o.state;
+      const countdown=o=>{const n=Math.max(0,Math.ceil((Number(o.expiresAt)-Date.now())/1000));return n?'Time to approve: '+Math.floor(n/60)+':'+String(n%60).padStart(2,'0'):'Quote expired — do not approve this payment';};
+      let paymentWindow=null;
+      function tickPayments(){for(const e of document.querySelectorAll('[data-quote-countdown]')){const o=st.orders.find(x=>x.orderId===e.dataset.quoteCountdown);if(o)e.textContent=countdown(o)}
+        for(const b of document.querySelectorAll('[data-pay-order]')){const o=st.orders.find(x=>x.orderId===b.dataset.payOrder);if(o)b.disabled=!st.paid||!canPay(o)}
+        if(paymentWindow&&paymentWindow.g===gen&&(quoteExpired(paymentWindow.o)||paymentWindow.o.paymentStatus==='submitted')){mL.hidden=true;mL.removeAttribute('href');mQ.hidden=true;mQT.hidden=true;mA.hidden=true;const e=$('hzPSt');if(e)e.textContent=paymentWindow.o.paymentStatus==='submitted'?'Payment submitted; confirming on the ledger. Do not pay again.':'Quote expired. Do not approve it in Xaman. Checking whether a payment was already submitted; do not pay again.';}
+      }
+      const short=a=>a?a.slice(0,6)+'…'+a.slice(-4):'';
+      const queue=()=>{const q=[];for(const o of st.orders.slice().reverse())for(const it of o.items)if(!it.revealed)q.push({o,it});return q};
+      function forget(){sessGen++;st.token='';st.account='';st.orders=[];st.ordersUnavailable=false;try{localStorage.removeItem(sessionKey());localStorage.removeItem('hz_sess')}catch(e){}}
+      // ---- order status checks (work while purchases are off; bounded: 4 attempts, 0/2/4/8 s backoff) ----
+      const checking=new Set(),notes={},CHECK_DELAYS=[0,2000,4000,8000];
+      const isPayPending=o=>o.uiState==='payment_pending'||o.state==='expired';
+      const readyItems=o=>(Array.isArray(o.items)?o.items:[]).filter(i=>i&&i.uiState==='ready_to_claim');
+      const listed=o=>o.needsPaymentReview||(o.state!=='delivered'&&!(o.state==='quoted'&&o.expired)&&!(o.state==='expired'&&!o.payment&&Date.now()-(+o.expiresAt||0)>864e5));
+      function orderNote(o){const ref=' Order '+o.orderId+'.';
+        if(o.state==='delivered')return 'Delivered to your wallet.';
+        if(o.refund)return 'Late payment refunded in full. No NFT was minted. Refund transaction '+o.refund.txHash+'.';
+        if(hasReceipt(o)&&!o.payment)return 'Payment received and recorded for review. Do not pay again. No NFT has been credited.'+ref;
+        if(o.paymentStatus==='submitted')return 'Payment signed and submitted; confirming on the ledger. Do not pay again.'+ref;
+        const r=readyItems(o).length;if(r)return r+' item'+(r>1?'s':'')+' ready to claim. The offer is 0 XRP; a network fee applies.';
+        if(isPayPending(o)&&!o.payment)return st.paid?(o.expired||o.state==='expired'?'Quote expired with no payment found yet. If you already sent one, check again; do not pay again.':'Awaiting your approval. Open Xaman to approve this payment. No payment has been confirmed.')
+          :'Purchases are paused. No payment has been found for this order yet. If you sent one before purchases were paused, it may still be recorded: check again later or contact support with this order. Do not pay again.'+ref;
+        if(o.uiState==='mint_pending')return st.paid?'Payment recorded. Minting is in progress.':'Payment recorded. New minting is on hold while purchases are paused; your order is saved. Do not pay again.'+ref;
+        if(o.uiState==='error')return (o.error?String(o.error)+' ':'')+'Your order is saved. Contact support with this order if it does not resolve. Do not pay again.'+ref;
+        return ''}
+      function upsert(v,id){if(!v||v.orderId!==id||!Array.isArray(v.items))return false;const i=st.orders.findIndex(o=>o.orderId===id);if(i>=0)st.orders[i]=v;else st.orders.unshift(v);return true}
+      async function checkOrder(id){if(checking.has(id)||!st.token)return;checking.add(id);const sg=sessGen,o0=st.orders.find(o=>o.orderId===id),ui0=o0?.uiState,st0=o0?.state,pay0=!!o0?.payment;let last=null,err=null;
+        try{for(let i=0;i<CHECK_DELAYS.length;i++){if(CHECK_DELAYS[i])await wait(CHECK_DELAYS[i]);if(sg!==sessGen||!st.token)return;
+            notes[id]='Checking status… (attempt '+(i+1)+' of '+CHECK_DELAYS.length+')';render();
+            try{const v=await req('POST','/api/orders/'+encodeURIComponent(id)+'/check');if(sg!==sessGen)return;err=null;if(upsert(v,id))last=v;else throw new Error('Invalid order response')}
+            catch(e){err=e;if(e.status===401||sg!==sessGen)return;continue}
+            if(last&&(last.state==='delivered'||readyItems(last).length||last.needsPaymentReview||last.uiState!==ui0||last.state!==st0||!!last.payment!==pay0))break}
+          notes[id]=err&&!last?'Status check is unavailable right now. Your order is saved. Do not pay again.':(last?orderNote(last):'')+(last&&last.uiState===ui0&&last.state===st0&&!!last.payment===pay0&&last.state!=='delivered'&&!readyItems(last).length?' (Checked '+CHECK_DELAYS.length+' times; try again later.)':'')}
+        finally{checking.delete(id);if(sg===sessGen)render()}}
+      function render(){const m=$('hzMode'),ready=st.signin==='ready'&&!!st.cfg,net=st.cfg?.network;
+        if(!ready){m.className='hz-mode demo';m.textContent='Demo mode · free · no NFT';}
+        else{m.className='hz-mode'+(net!=='mainnet'?' test':'');m.textContent=(net==='mainnet'?'Live':'TESTNET')+(st.paid?'':' · sign-in only')+(st.cfg.xaman==='mock'?' · mock Xaman':'');}
+        const cb=$('hzConnect');cb.hidden=!!st.account;cb.disabled=st.connecting||st.verifying||!(st.signin==='ready'||st.signin==='offline');cb.setAttribute('aria-busy',String(st.connecting||st.verifying));
+        cb.textContent=st.connecting||st.verifying?'Connecting…':st.signin==='offline'?'Retry Xaman connect':'Connect Xaman';$('hzDisconnect').hidden=!st.account;
+        $('hzAddr').textContent=short(st.account);$('hzAddr').title=st.account||'';
+        $('hzStatus').textContent=st.account?'Connected':st.verifying?'Checking wallet…':{unconfigured:'Wallet sign-in coming soon',loading:'Checking wallet service…',offline:'Wallet service unavailable',ready:'Not connected'}[st.signin]||'';
+        const canBuy=st.paid&&!!st.account;$('hzPacks').hidden=false;$('hzPacks').classList.toggle('is-off',!canBuy);
+        document.querySelectorAll('#hzPacks [data-pack]').forEach(b=>{b.disabled=!canBuy;b.setAttribute('aria-describedby','hzWNote')});
+        const n=st.paid?queue().length:0,c=$('hzCoins');c.innerHTML='';for(let i=0;i<Math.min(n,20);i++){const e=document.createElement('div');e.className='hz-coin';e.textContent='HZ';c.append(e)}
+        $('hzCCount').textContent=st.demo?'∞ demo':n+' paid spin'+(n===1?'':'s');
+        if(!st.paid)$('hzWNote').textContent=(st.account?'Wallet connected. Connecting does not give you an NFT. ':'')+'Paid spins are not open yet. Mint coming soon. Priced in USD, paid in XRP: 1 spin $5, 5 spins $20. Free spins work now: BOSS preview only, no NFT.';
+        else $('hzWNote').textContent=st.account?'1 paid spin = 1 HOMEEZ NFT. Priced in USD, paid in XRP at the live rate. With no paid spins loaded, the knob gives a free spin (no NFT).':'Connect Xaman to buy spins. Free spins work without a wallet.';
+        const oe=$('hzOrdersErr'),orb=$('hzOrdersRetry');oe.hidden=!(st.account&&st.ordersUnavailable);orb.disabled=ordersRetrying;orb.setAttribute('aria-busy',String(ordersRetrying));orb.textContent=ordersRetrying?'Retrying…':'Retry orders';
+        const ol=$('hzOrders');ol.innerHTML='';const open=st.account?st.orders.filter(listed):[];
+        ol.hidden=!open.length;open.slice(0,6).forEach(o=>{const d=document.createElement('div');d.className='hz-order';d.dataset.order=o.orderId;
+          d.innerHTML=`<span><b>${esc(o.spins)} spin${o.spins>1?'s':''}</b> · ${esc(o.xrp)} XRP</span><span class="hz-ost ${esc(o.uiState)}">${esc(paymentLabel(o))}</span>`;
+          if(o.uiState==='payment_pending'&&!hasReceipt(o)&&o.paymentStatus!=='submitted'){
+            const help=document.createElement('p');help.className='hz-pay-help';help.id='pay-help-'+o.orderId;help.textContent=quoteExpired(o)?'Quote expired. Check status before starting another purchase. Do not approve an old request.':'Open Xaman to approve this payment.';
+            const clock=document.createElement('p');clock.className='hz-quote-clock';clock.dataset.quoteCountdown=o.orderId;clock.setAttribute('role','timer');clock.setAttribute('aria-live','off');clock.textContent=countdown(o);
+            const b=document.createElement('button');b.className='btn hz-pay-primary';b.type='button';b.textContent='Pay with Xaman';b.dataset.act='resume';b.dataset.payOrder=o.orderId;b.setAttribute('aria-describedby',help.id);b.disabled=!st.paid||!canPay(o);if(!st.paid)b.title='Payments are paused';b.onclick=()=>payFlow(o);d.append(b,help,clock)}
+          if(o.paymentStatus==='submitted'){const e=document.createElement('p');e.className='hz-pay-help';e.setAttribute('role','status');e.textContent='Submitted — confirming on the ledger. Do not pay again.';d.append(e)}
+          // every item that is ready_to_claim is claimable, whatever the overall order status (claiming is not a purchase)
+          for(const r of readyItems(o)){const b=document.createElement('button');b.className='btn hz-claim-primary';b.type='button';b.dataset.act='claim';b.dataset.idx=r.idx;
+            b.textContent='Claim '+(r.name||r.fig||'item')+(r.edition!=null?' #'+r.edition:'');b.onclick=()=>claim({orderId:o.orderId,idx:r.idx,item:r},document.createElement('div')).then(()=>refresh());d.append(b)}
+          if(o.state!=='delivered'){const b=document.createElement('button');b.className='btn';b.type='button';b.dataset.act='check';b.textContent=checking.has(o.orderId)?'Checking…':'Check status';b.disabled=checking.has(o.orderId);b.onclick=()=>checkOrder(o.orderId);d.append(b)}
+          const txt=notes[o.orderId]||orderNote(o);if(txt){const e=document.createElement('div');e.className='hz-small';e.dataset.note='1';e.setAttribute('aria-live','polite');e.textContent=txt;d.append(e)}
+          if(o.needsPaymentReview){const e=document.createElement('div');e.className='hz-small';e.textContent='Received XRP needs review. Funds are recorded; no refund has been sent. Contact support with order '+o.orderId+'.';d.append(e)}
+          ol.append(d)});
+        const completed=st.account?st.orders.filter(o=>o.state==='delivered'):[];
+        if(completed.length){ol.hidden=false;const history=document.createElement('details'),summary=document.createElement('summary');history.className='hz-receipts';summary.textContent='Completed receipts ('+completed.length+')';history.append(summary);
+          for(const o of completed){const row=document.createElement('div');row.className='hz-order';const title=document.createElement('strong');title.textContent=o.spins+' spin'+(o.spins===1?'':'s')+' · '+o.xrp+' XRP · Delivered';const ref=document.createElement('p');ref.className='hz-small';ref.textContent='Order '+o.orderId;row.append(title,ref);
+            if(o.payment?.txHash&&/^[A-Fa-f0-9]{64}$/.test(o.payment.txHash)){const a=document.createElement('a');a.className='btn';a.href=(st.cfg.network==='mainnet'?'https://livenet.xrpl.org':'https://testnet.xrpl.org')+'/transactions/'+encodeURIComponent(o.payment.txHash);a.target='_blank';a.rel='noopener';a.textContent='View payment receipt';row.append(a)}history.append(row)}ol.append(history);}
+
+        try{st.token&&st.account?localStorage.setItem(sessionKey(),JSON.stringify({t:st.token,a:st.account})):0}catch(e){}}
+      // returns 'ok' | 'auth' (401: session cleared) | 'stale' (session changed / attempt cancelled) | 'error' | 'none'
+      async function refresh(sg=sessGen,o={}){if(!st.token)return 'none';const tok=st.token;const alive=()=>sg===sessGen&&st.token===tok&&(!o.alive||o.alive());try{
+        const orders=[];let before='',page;const cursors=new Set();
+        do{page=await req('GET','/api/orders'+(before?'?before='+encodeURIComponent(before):''),null,{token:tok,signal:o.signal});if(!alive())return 'stale';if(!Array.isArray(page))throw new Error('Invalid order list');orders.push(...page);
+          if(page.length===50){before=page[page.length-1].orderId;if(cursors.has(before))throw new Error('Order recovery cursor repeated');cursors.add(before)}
+        }while(page.length===50);st.orders=orders;st.ordersUnavailable=false;render();return 'ok'
+      }catch(e){if(e.code==='aborted'||!alive())return e.status===401?'auth':'stale';if(e.status===401)return 'auth';
+        st.ordersUnavailable=true;if(st.account&&!o.quiet)info.textContent='Your orders could not be loaded. Use Retry orders; your orders are saved.';render();return 'error'}}
+      // ---- auth attempts: one id per sign-in; closing the dialog (Cancel/Esc) invalidates it everywhere, aborts its requests,
+      //      discards its token (best-effort server sign-out), persists nothing and announces nothing ----
+      let attempt=0,attemptCtl=null,verifyOwner=0,connSeq=0;
+      function newAttempt(){if(attemptCtl){attemptCtl.abort();attemptCtl=null}const id=++attempt;attemptCtl=new AbortController();const sig=attemptCtl.signal;return{id,signal:sig,alive:()=>id===attempt&&!sig.aborted}}
+      // user=true (dialog closed by the user): also release the Connect in-flight lock now, without waiting for stale requests
+      function cancelAttempt(user){attempt++;if(attemptCtl){attemptCtl.abort();attemptCtl=null}if(user&&st.connecting){connSeq++;st.connecting=false;render()}
+        if(st.verifying&&!st.account){const t=st.token;sessGen++;st.token='';st.orders=[];st.verifying=false;st.ordersUnavailable=false;verifyOwner=0;render();
+          if(t)req('POST','/api/auth/signout',null,{token:t}).catch(()=>{})}}
+      // A session counts as connected only after /api/auth/me returns the same account AND an authenticated order refresh succeeds.
+      // returns 'ok' | 'partial' (session confirmed, orders not loaded) | 'auth' | 'stale' | 'cancelled'; throws on network errors
+      async function establish(tok,acct,att){const sg=++sessGen;verifyOwner=sg;st.token=tok;st.account='';st.orders=[];st.ordersUnavailable=false;st.verifying=true;render();
+        const dead=()=>!!att&&!att.alive();
+        const discard=()=>{if(st.token===tok&&!st.account){st.token='';st.orders=[];st.ordersUnavailable=false}return 'cancelled'};
+        try{const me=await req('GET','/api/auth/me',null,{token:tok,signal:att?.signal});if(dead())return discard();if(sg!==sessGen||st.token!==tok)return 'stale';
+          if(typeof me.account!=='string'||me.account!==acct){forget();return 'auth'}
+          const r=await refresh(sg,{signal:att?.signal,alive:att?.alive,quiet:true});if(dead())return discard();
+          if(r==='auth'){if(st.token===tok)forget();return 'auth'}if(r==='stale'||sg!==sessGen||st.token!==tok)return 'stale';
+          st.account=acct;return r==='ok'?'ok':'partial'}
+        catch(e){if(dead()||e.code==='aborted')return discard();if(sg!==sessGen||e.status===401){if(e.status===401&&st.token===tok)forget();return e.status===401?'auth':'stale'}if(st.token===tok){st.token='';st.account=''}throw e}
+        finally{if(verifyOwner===sg){st.verifying=false;verifyOwner=0}render()}}
+      // ---- global "Retry orders" (session confirmed, order list not loaded yet) ----
+      let ordersRetrying=false;
+      async function retryOrders(){if(ordersRetrying||!st.account||!st.token)return;ordersRetrying=true;render();
+        try{const r=await refresh(sessGen,{quiet:true});
+          if(r==='ok')info.textContent='Orders loaded.';else if(r==='auth')info.textContent='Your wallet session ended. Connect again to check orders.';
+          else if(r==='error')info.textContent='Orders are still unavailable. Your wallet stays signed in; try Retry orders again shortly.'}
+        finally{ordersRetrying=false;render()}}
+      async function loadCfg(){st.signin='loading';render();try{const c=await req('GET','/api/config');if(!c||c.apiVersion!==2)throw new Error('Order API v2 required');st.cfg=c;st.signin='ready';st.paid=st.paidFlag}
+        catch(e){st.cfg=null;st.signin='offline';st.paid=false}st.demo=!st.paid}
+      async function restoreSession(){let s=null;try{s=JSON.parse(localStorage.getItem(sessionKey())||'null')}catch(e){}
+        if(!(s&&typeof s.t==='string'&&s.t))return;if(typeof s.a!=='string'||!s.a){forget();return}
+        try{const r=await establish(s.t,s.a);if(r==='auth')info.textContent='Your wallet session ended. Connect again to check orders.';else if(r==='partial')info.textContent='Signed in, but your orders could not be loaded. Use Retry orders.'}
+        catch(e){info.textContent='Could not check your saved wallet session. Free spins still work; try again later.'}}
+      function badPending(pd){if(pd)pend.clearRaw(pd.raw);show('Sign-in link not trusted','A saved Xaman sign-in link was not valid, so it was cleared and not opened. No wallet was connected. You can connect again.',null,null,'Close')}
+      async function init(){if(!st.connectFlag){st.signin='unconfigured';st.paid=false;st.demo=true;render();return}
+        await loadCfg();if(st.signin==='ready')await restoreSession();render();setInterval(tickPayments,1000);
+        // unfinished paid orders keep moving even after a refresh / closed browser
+        // while purchases are off this background check is bounded (15 rounds ≈ 2 min per page load); Check status stays available
+        let autoRounds=0;setInterval(()=>{if(!st.paid&&autoRounds>=15)return;if(st.account&&st.orders.some(o=>['payment_pending','mint_pending','ready_to_claim'].includes(o.uiState)&&!(o.uiState==='payment_pending'&&o.expired)))
+          Promise.all(st.orders.filter(o=>['payment_pending','mint_pending'].includes(o.uiState)&&!o.expired||o.uiState==='mint_pending').map(o=>req('POST','/api/orders/'+o.orderId+'/check').catch(()=>{}))).then(()=>{autoRounds++;refresh()})},8000);
+        document.addEventListener('visibilitychange',()=>{if(document.hidden)return;if(wake)wake();if(st.account&&!st.verifying)refresh()});
+        window.addEventListener('pageshow',e=>{if(e.persisted&&wake)wake()});
+        // returning from the Xaman app (mobile deep link) may reload this tab: resume the pending sign-in check.
+        // If config is unavailable now, the pending entry is kept and resumed after a successful Retry.
+        const pd=pend.get();if(pd&&pd.bad){badPending(pd);return}if(pd&&st.account){pend.clearIf(pd.uuid);return}if(pd&&st.signin==='ready')connect(pd)}
+      async function connect(resume){if(st.connecting||st.verifying||st.account)return;const mine=++connSeq;st.connecting=true;render();const ps=pend.snap();
+        try{
+          if(st.signin==='offline'){await loadCfg();render();if(st.signin!=='ready'){show('Wallet service unavailable','Xaman sign-in is not reachable right now. No wallet was connected. Free spins still work.',null,null,'Close');return}
+            await restoreSession();if(st.account){pend.clearIf(ps.uuid,ps.owner);info.textContent='Wallet connected. No NFT was added.';return}
+            if(!resume){const pd=pend.get();if(pd&&pd.bad){badPending(pd);return}if(pd)resume=pd}}
+          if(st.signin!=='ready')return;await signin(resume)}
+        finally{if(connSeq!==mine)return;st.connecting=false;render();
+          // the dialog may have closed while Connect was still disabled (in flight): put focus back once it is usable
+          if(modal.hidden&&(!document.activeElement||document.activeElement===document.body||modal.contains(document.activeElement))){const t=st.account?$('hzDisconnect'):$('hzConnect');if(!t.hidden&&!t.disabled)t.focus()}}}
+      // a sign-in result that arrives for a closed/stale attempt is never adopted; its token (if any) gets a best-effort sign-out
+      const dropResult=r=>{if(r&&r.done&&r.signed&&typeof r.token==='string'&&r.token)req('POST','/api/auth/signout',null,{token:r.token}).catch(()=>{})};
+      async function signin(resume){let g=-1,p=null;const att=newAttempt();try{
+          if(resume&&okUuid(resume.uuid)){p=vet({uuid:resume.uuid,qr:null,deeplink:resume.deeplink||null},true);pend.adopt(att.id,p.uuid)}
+          else{const raw=await req('POST','/api/auth/signin',null,{signal:att.signal});if(!att.alive())return;if(!raw||!okUuid(raw.uuid))throw new Error('Invalid sign-in request. Try again.');p=vet(raw,false);pend.save(p,att.id)}
+          const note='<br><span class="hz-small">Signing in only proves you own the wallet. It sends no XRP and does not give you an NFT.<br><br>Keep this tab open. After signing, return to this same tab if Xaman does not bring you back. In-app browser users: open HOMEEZ in your usual browser before connecting. Opening another tab or browser may require a fresh sign-in.</span>';
+          g=show(resume?'Finishing Xaman sign-in':'Connect Xaman',(resume?'Checking your Xaman sign-in…':mob?'Open Xaman and approve the sign-in. Then come back to this page.':'Scan with the Xaman app to sign in.')+note,p,null,'Cancel');signinGen=g;signinPend={id:att.id,uuid:p.uuid};
+          let res=null,errs=0;for(let i=0;i<150&&g===gen;i++){let r;
+            try{r=await req('GET','/api/auth/signin/'+encodeURIComponent(p.uuid),null,{signal:att.signal});errs=0}
+            catch(e){if(g!==gen||!att.alive()){dropResult(e.body);break}if(e.status===409)throw new Error('This sign-in request was already used. No wallet was connected; connect again.');if(e.status===404||e.status===410)throw new Error('Sign-in expired. Try again.');
+              if(e.status&&e.status<500&&e.status!==408&&e.status!==429)throw e;if(++errs>=3)throw new Error('Could not reach the wallet service. No wallet was connected; try again.');await nap(2000);continue}
+            if(g!==gen||!att.alive()){dropResult(r);break}
+            if(r&&r.done){if(!r.signed)throw new Error(r.reason==='rejected'?'Sign-in was declined in Xaman.':r.reason==='expired'?'Sign-in expired. Try again.':r.reason||'Sign-in failed');
+              if(typeof r.token!=='string'||!r.token||typeof r.account!=='string'||!r.account)throw new Error('Invalid sign-in response. Please reconnect.');res=r;break}
+            await nap(2000)}
+          if(!att.alive())return;if(g!==gen){pend.clearIf(p.uuid,att.id);return}pend.clearIf(p.uuid,att.id);if(!res)throw new Error('Sign-in timed out. No connection was established; try again.');
+          mT.textContent='Confirming your wallet';mB.textContent='Checking your wallet session…';
+          const out=await establish(res.token,res.account,att);
+          if(out==='cancelled'||!att.alive())return;
+          if(out==='auth'){info.textContent='Wallet session ended. No wallet is connected.';throw new Error('Your wallet session could not be confirmed (it ended or did not match).')}
+          if(out==='stale'){if(g===gen)hide();return}
+          if(g===gen)hide();
+          info.textContent=out==='partial'?'Signed in, but your orders could not be loaded. Use Retry orders. No NFT was added.'
+            :st.paid?'Connected. Buy spins to pull from all 18 HOMEEZ.':'Wallet connected. No NFT was added. Paid spins open at mint; free spins still work.'}
+        catch(e){if(e.code==='aborted'||!att.alive())return;if(p)pend.clearIf(p.uuid,att.id);if(g===-1||g===gen)show('Sign-in failed',esc(e.message)+'<br><span class="hz-small">No wallet was connected.</span>',null,null,'Close')}}
+      window.addEventListener('storage',e=>{if(e.key===sessionKey())location.reload();});
+      async function disconnect(){pend.clearAll();const t=st.token;try{if(t)await req('POST','/api/auth/signout',null,{token:t})}catch(e){}if(!st.token||st.token===t)forget();for(const k in notes)delete notes[k];render();info.textContent='Wallet disconnected.';$('hzConnect').focus()}
+      async function buy(pack){if(!st.paid||!st.account)return;try{const o=await req('POST','/api/orders',{pack});upsert(o,o.orderId);render();quoteView(o)}catch(e){show('Quote problem',esc(e.message),null,null,'Close')}}
+      function quoteView(o){const left=()=>Math.max(0,Math.round((o.expiresAt-Date.now())/1000));
+        const txt=()=>`<b class="hz-qamt">${esc(o.xrp)} XRP</b><br>${esc(o.spins)} spin${o.spins>1?'s':''} · $${(+o.usd).toFixed(2)} USD<br>Rate $${(+o.rate).toFixed(4)}/XRP · <span role="timer" aria-live="off">Time to approve ${Math.floor(left()/60)}:${String(left()%60).padStart(2,'0')}</span><br>Open Xaman to approve this payment.<br><span class="hz-small">Pays the HOMEEZ operations wallet ${esc(short(o.destination))} · ref ${esc(o.orderId.slice(0,8))}</span>`;
+        const g=show('Confirm your spins',txt(),null,{label:'Pay with Xaman',fn:()=>payFlow(o)});
+        const t=setInterval(()=>{if(g!==gen){clearInterval(t);return}if(left()<=0){clearInterval(t);mB.textContent='Quote expired. Do not approve an old request. Check status before starting another purchase.';mA.hidden=true;checkOrder(o.orderId);DLG.update(modal);return}mB.innerHTML=txt()},1000)}
+      async function payFlow(o){if(!st.paid)return;if(!canPay(o)){await checkOrder(o.orderId);show('Check payment status','This payment link is no longer actionable. Check the saved order; do not pay again.',null,null,'Close');return}try{const p=vet(await req('POST','/api/orders/'+o.orderId+'/pay'));
+          if(quoteExpired(o)){await checkOrder(o.orderId);show('Quote expired','Do not approve an old Xaman request. Check status before starting another purchase.',null,null,'Close');return}
+          const head=`<b class="hz-qamt">${esc(o.xrp)} XRP</b> · ${esc(o.spins)} spin${o.spins>1?'s':''} · $${(+o.usd).toFixed(2)}<br>`;
+          const g=show('Pay in Xaman',head+(mob?'Open Xaman and sign the payment.':'Scan with Xaman and sign the payment.')+'<br><span id="hzPSt" role="status">Awaiting your approval in Xaman. No payment confirmed.</span><p role="timer" aria-live="off" data-quote-countdown="'+esc(o.orderId)+'">'+esc(countdown(o))+'</p>',p);paymentWindow={o,g};
+          for(let i=0;i<400&&g===gen;i++){await nap(2500);if(g!==gen)break;const v=await req('POST','/api/orders/'+o.orderId+'/check');const s=$('hzPSt');
+            upsert(v,o.orderId);paymentWindow={o:v,g};if(v.uiState==='payment_pending'){if(s)s.textContent=orderNote(v);tickPayments();if(quoteExpired(v)&&i>24)throw new Error('Quote expired. Check the saved order; do not approve an old request or pay again.');continue}
+            if(v.uiState==='error')throw new Error(v.error||'Payment problem');
+            if(!['mint_pending','ready_to_claim','delivered'].includes(v.uiState)||v.orderId!==o.orderId||typeof v.payment?.txHash!=='string'||!v.payment.txHash)throw new Error('Invalid payment confirmation. Check this saved order later; do not pay again.');
+            await refresh();hide();sChime();info.textContent='Payment confirmed on the ledger. '+v.spins+' paid spin'+(v.spins>1?'s':'')+' loaded. Twist the knob!';return}
+        if(g===gen){show('Check payment status','Confirmation timed out. Check this saved order; do not create another purchase or pay again.',null,null,'Close');await refresh();}
+        }catch(e){if(e.code==='already_signed'){refresh();show('Checking payment','A payment was already signed for this order. Checking the ledger…',null,null,'Close');return}show('Payment status',esc(e.message)+' Do not pay again. Check this saved order.',null,null,'Close');refresh()}}
+      // Reveal card claim area for a paid item
+      let claimViewGeneration=0;
+      function clearClaimUI(){claimViewGeneration++;const el=$('hzRClaim');el.replaceChildren();el.removeAttribute('data-item');}
+      async function claimUI(el,ref){
+        const generation=++claimViewGeneration,sg=sessGen,token=st.token,key=ref.orderId+':'+ref.idx;
+        el.dataset.item=key;el.setAttribute('aria-live','polite');el.setAttribute('aria-atomic','true');
+        const alive=()=>generation===claimViewGeneration&&sg===sessGen&&token===st.token;
+        const add=(tag,text,cls)=>{const n=document.createElement(tag);n.textContent=text;if(cls)n.className=cls;return n};
+        const draw=it=>{if(!alive()||!it)return;const focused=el.contains(document.activeElement);el.replaceChildren();
+          const row=add('div','','hz-claim-status');row.append(add('span',LBL[it.uiState]||'Checking status','hz-ost '+it.uiState),add('span','Edition #'+it.edition+' · '+st.cfg.network,'hz-claim-edition'));el.append(row);
+          if(it.uiState==='mint_pending')el.append(add('p',it.error||'Payment received. Your NFT is being prepared. You can close this card and return later.','hz-claim-help'));
+          if(it.uiState==='ready_to_claim'){const b=add('button','Claim your NFT','btn hz-claim-primary');b.type='button';b.setAttribute('aria-label','Claim '+(it.name||it.fig||'your NFT')+' edition '+it.edition+' in Xaman');b.onclick=()=>claim({...ref,item:it},el);el.append(b,add('p','Accept in Xaman to add this HOMEEZ to your wallet. The offer is 0 XRP; a small network fee applies.','hz-claim-help'));if(focused)b.focus();}
+          if(it.uiState==='delivered'){el.append(add('p','Confirmed in your wallet.','hz-claim-help'));const a=add('a','View your NFT','hz-claim-link');a.target='_blank';a.rel='noopener';a.href=(st.cfg.network==='mainnet'?'https://livenet.xrpl.org':'https://testnet.xrpl.org')+'/nft/'+encodeURIComponent(it.nft_id);el.append(a);}
+          if(it.uiState==='error')el.append(add('p',it.error||'Delivery needs attention. Your order is saved; do not pay again.','hz-claim-help'));
+        };
+        el.replaceChildren(add('p','Checking current NFT status…','hz-claim-help'));
+        let it=st.orders.find(o=>o.orderId===ref.orderId)?.items?.find(i=>i.idx===ref.idx)||ref.item,lastState='';
+        for(let i=0;i<120&&alive();i++){
+          if(i){await wait(3000);if(!alive()||reveal.hidden)break;}
+          try{const o=await req('POST','/api/orders/'+encodeURIComponent(ref.orderId)+'/check');if(!alive())return;const fresh=o.items?.find(x=>x.idx===ref.idx);if(!fresh)throw new Error('Item status unavailable');it=fresh;const state=JSON.stringify([it.uiState,it.error,it.nft_id]);if(state!==lastState){draw(it);lastState=state;}if(it.uiState==='delivered')break;}
+          catch(e){if(!alive())return;if(!lastState){el.replaceChildren(add('p','Current NFT status is unavailable. Check this saved order before taking action.','hz-claim-help'));}if(e.status===401)break;}
+        }
+        if(alive())refresh();
+      }
+
+      async function claim(ref,el){try{const p=vet(await req('POST','/api/orders/'+encodeURIComponent(ref.orderId)+'/items/'+encodeURIComponent(ref.idx)+'/claim'));
+          const g=show('Claim your HOMEEZ',(mob?'Open Xaman and accept the NFT offer.':'Scan with Xaman and accept the NFT offer.')+'<br><span class="hz-small">The offer is 0 XRP and only your wallet can accept it. A small network fee applies.</span>',p);
+          for(let i=0;i<240&&g===gen;i++){await nap(2500);if(g!==gen)break;const o=await req('POST','/api/orders/'+ref.orderId+'/items/'+ref.idx+'/check');const it=o.items[ref.idx];
+            if(it.uiState==='delivered'){hide();sChime();if(el.dataset.item===ref.orderId+':'+ref.idx&&!reveal.hidden)claimUI(el,{...ref,item:it});else refresh();return}}
+        if(g===gen){show('Claim still pending','Confirmation timed out. Your order is saved; check or resume the claim later.',null,null,'Close');await refresh();}
+        }catch(e){if(e.code==='delivered'){hide();refresh();return}show('Claim problem',esc(e.message),null,null,'Close')}}
+      $('hzConnect').onclick=()=>connect();$('hzOrdersRetry').onclick=retryOrders;$('hzDisconnect').onclick=disconnect;document.querySelectorAll('#hzPacks [data-pack]').forEach(b=>b.onclick=()=>buy(b.dataset.pack));
+      return{st,init,render,claimUI,clearClaimUI,
+        hasPaid(){return st.paid&&!!st.account&&queue().length>0},
+        async spin(){const q=queue();if(!q.length)return null;const{o,it}=q[0];const c=$('hzCoins').lastElementChild;if(c)c.classList.add('drop');
+          await req('POST','/api/orders/'+o.orderId+'/items/'+it.idx+'/reveal');it.revealed=1;setTimeout(render,500);return{fig:it.fig,ref:{orderId:o.orderId,idx:it.idx,item:it}}}}})();
+    // ---- knob ----
+    let angle=0,accum=0,busy=false,dragging=false,last=null,moved=0,lastClick=0;
+    const setA=a=>{kimg.style.setProperty('--a',a+'deg')};
+    const center=()=>{const r=knob.getBoundingClientRect();return[r.left+r.width/2,r.top+r.height/2]};
+    const ang=e=>{const[cx,cy]=center();return Math.atan2(e.clientY-cy,e.clientX-cx)*180/Math.PI};
+    function advance(d){if(busy)return;if(d<0)d*=.3;accum=Math.max(0,accum+d);angle+=d;setA(angle);
+      if(Math.floor(accum/30)>lastClick){lastClick=Math.floor(accum/30);sClick();buzz(8)}
+      prog.style.width=Math.min(100,accum/3.6)+'%';if(accum>=360)turned()}
+    knob.addEventListener('pointerdown',e=>{if(busy)return;ac();dragging=true;moved=0;last=ang(e);knob.setPointerCapture(e.pointerId);hint.classList.add('off')});
+    knob.addEventListener('pointermove',e=>{if(!dragging)return;const a=ang(e);let d=a-last;if(d>180)d-=360;if(d<-180)d+=360;last=a;moved+=Math.abs(d);advance(d)});
+    const end=e=>{if(!dragging)return;dragging=false;if(moved<8&&!busy)autoTurn()};
+    knob.addEventListener('pointerup',end);knob.addEventListener('pointercancel',()=>{dragging=false});
+    knob.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();autoTurn()}});
+    function autoTurn(){if(busy)return;ac();hint.classList.add('off');const steps=12;let i=0;
+      const t=setInterval(()=>{advance(30);if(++i>=steps||busy)clearInterval(t)},RM?20:75)}
+    function turned(){busy=true;knob.classList.remove('ready');info.textContent='Clunk... here it comes.';sClunk();buzz([30,40,60]);
+      if(!RM){hzm.classList.remove('shake');void hzm.offsetWidth;hzm.classList.add('shake');dome.classList.remove('jiggle');void dome.offsetWidth;dome.classList.add('jiggle')}
+      const color=COLORS[Math.floor(Math.random()*COLORS.length)];
+      const pick=PAY.hasPaid()?PAY.spin():Promise.resolve({fig:'HZ000',free:true});
+      pick.then(r=>{if(!r)r={fig:'HZ000',free:true};const fig=FIGS.find(f=>f.id===r.fig);capBtn.dataset.paid=r.ref?JSON.stringify(r.ref):'';drop(fig,color)})
+        .catch(e=>{info.textContent='Spin problem: '+e.message+'. Your paid spins are safe; try again.';PAY.render();busy=false;accum=0;lastClick=0;prog.style.width='0';knob.classList.add('ready')})}
+    function drop(fig,color){setTimeout(()=>{capBtn.innerHTML='';capBtn.append(capsule(fig,color));capBtn.hidden=false;capBtn.className='hzm-cap drop';
+        capBtn.dataset.id=fig.id;capBtn.dataset.c=color;sPop();buzz(20);
+        if(document.activeElement===knob)capBtn.focus();
+        setTimeout(()=>{capBtn.className='hzm-cap wait';info.textContent='Capsule dropped. Tap it to open.'},RM?10:900)},RM?50:550)}
+    capBtn.addEventListener('click',()=>{const fig=FIGS.find(f=>f.id===capBtn.dataset.id);if(!fig)return;const c=capBtn.dataset.c;
+      capBtn.hidden=true;sPop();sChime();buzz([15,30,15]);
+      const card=reveal.querySelector('.hz-reveal-card');card.style.setProperty('--c',c);card.style.setProperty('--bi',BOT(c));
+      const rf=$('hzRFig');rf.className='hz-rfig'+(fig.img?'':' ph');rf.style.backgroundImage=fig.img?`url(${fig.img})`:'';
+      $('hzRTitle').innerHTML='<span class="hz-rnum">'+(fig.mascot?'HZ'+fig.num:'#'+fig.num)+'</span>'+fig.name;$('hzRBadge').hidden=!fig.badge;$('hzRBadge').textContent=fig.badge||'';
+      const mr=fig.id!=='HZ000'&&capBtn.dataset.paid?JSON.parse(capBtn.dataset.paid):null,cl=$('hzRClaim');
+      cl.innerHTML=mr?'':(!PAY.st.demo&&!PAY.st.off?'<div class="hz-small">Free spin · no NFT</div>':'');if(mr)PAY.claimUI(cl,mr);
+      if(mr)$('hzRTitle').innerHTML='<span class="hz-rnum">#'+fig.num+'</span>'+fig.name+' #'+mr.item.edition;
+      $('hzRFree').hidden=!!mr||!(PAY.st.demo||fig.mascot);$('hzRBio').textContent=fig.bio||'';$('hzRKnown').textContent=fig.knownFor||'';card.scrollTop=0;
+      DLG.open(reveal,{onEsc:resetTurn,focus:$('againBtn')});[...card.querySelectorAll('.hz-half,.hz-rfig,.hz-burst')].forEach(el=>{el.style.animation='none';void el.offsetWidth;el.style.animation=''});
+      if(mr&&fig.id!=='HZ000'){pulls.push({id:fig.id,c,t:Date.now()});pulls=pulls.slice(-60);try{localStorage.setItem(KEY,JSON.stringify(pulls))}catch(e){}}renderTray();
+      info.textContent=mr?'You pulled '+fig.id+' '+fig.name+'.':'BOSS preview only. No NFT received.'});
+    function resetTurn(){PAY.clearClaimUI();DLG.close(reveal,knob);busy=false;accum=0;lastClick=0;prog.style.width='0';knob.classList.add('ready');
+      info.textContent='Twist the knob for another HOMEEZ.'}
+    $('againBtn').onclick=resetTurn;reveal.addEventListener('click',e=>{if(e.target===reveal)resetTurn()});
+    $('turnBtn').onclick=()=>{if(!reveal.hidden)resetTurn();if(!capBtn.hidden){capBtn.click();return}autoTurn()};
+    $('clearBtn').onclick=()=>{pulls=[];try{localStorage.removeItem(KEY)}catch(e){}renderTray()};
+    fetch('/homeez/figures.json?v=4',{cache:'no-cache'}).then(r=>r.json()).then(j=>{FIGS=j;fillDome();renderTray();knob.classList.add('ready');PAY.init().then(renderTray)})
+      .catch(()=>{info.textContent='Machine is restocking. Try again soon.'});
+  })();
+  </script>
+
+</body>
+</html>

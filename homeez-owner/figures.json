@@ -1,0 +1,305 @@
+[
+ {
+  "id": "HZ000",
+  "num": "000",
+  "name": "BOSS",
+  "img": "/homeez/assets/figures/HZ000_BOSS.webp?v=6",
+  "traits": {
+   "Breed": "American Bully",
+   "Coat": "Blue-grey with white chest",
+   "Accessory": "Gold Cuban link chain, studded collar, black bandana"
+  },
+  "bio": "The block's first homee, and the only one with four legs. He was guarding the corner before any of the HOMEEZ showed up, and he still decides who's cool. Chain heavy, bandana tied, he looks unbothered until somebody throws the tennis ball. Every free spin is him checking you out first.",
+  "knownFor": "the side-eye, the Cuban link, never dropping the ball.",
+  "mascot": true,
+  "badge": "RARE · MASCOT"
+ },
+ {
+  "id": "HZ001",
+  "num": "001",
+  "name": "MIKEY",
+  "img": "/homeez/assets/figures/HZ001_MIKEY.webp?v=4",
+  "traits": {
+   "Hair": "Slicked-back black hair with taper fade",
+   "Top": "Open black-and-white buffalo-check flannel over white tee",
+   "Bottoms": "Navy baggy jeans",
+   "Shoes": "Black-and-white low-top sneakers",
+   "Accessory": "Gold Cuban link chain",
+   "Pose": "Hands in pockets"
+  },
+  "bio": "The unofficial mayor of the block. Slicked hair, flannel open, thumbs in his pockets like he already knows how it ends. Mikey never raises his voice because he's never had to. When something needs sorting out, everybody says his name first.",
+  "knownFor": "never rushing, knowing everybody's cousin."
+ },
+ {
+  "id": "HZ002",
+  "num": "002",
+  "name": "RICO",
+  "img": "/homeez/assets/figures/HZ002_RICO.webp?v=4",
+  "traits": {
+   "Hair": "Black du-rag",
+   "Top": "Olive button-up shirt over white tee",
+   "Bottoms": "Wheat cargo pants",
+   "Shoes": "Wheat Timberland-style boots",
+   "Accessory": "Gold chain",
+   "Pose": "Arms crossed"
+  },
+  "bio": "Rico says little, and when he talks, the block listens. Du-rag tight, arms crossed, posted where he can see the whole street. He walks the younger kids home without being asked. If Rico's got your back, you're covered.",
+  "knownFor": "the stare, Timbs without a scuff."
+ },
+ {
+  "id": "HZ003",
+  "num": "003",
+  "name": "LOLA",
+  "img": "/homeez/assets/figures/HZ003_LOLA.webp?v=4",
+  "traits": {
+   "Hair": "Sleek low bun with baby edges",
+   "Top": "Cropped pink moto jacket over black top",
+   "Bottoms": "Black high-waist straight-leg jeans",
+   "Shoes": "White chunky sneakers",
+   "Accessory": "Gold hoop earrings",
+   "Pose": "Hand on hip"
+  },
+  "bio": "Edges laid, hoops on, comeback loaded. Lola runs the group chat, plans every link-up, and never forgets a birthday. Pink moto jacket, hand on hip, zero patience for nonsense. Cross one of her people and she remembers.",
+  "knownFor": "the winged liner, the side-eye, being right."
+ },
+ {
+  "id": "HZ004",
+  "num": "004",
+  "name": "JACE",
+  "img": "/homeez/assets/figures/HZ004_JACE.webp?v=4",
+  "traits": {
+   "Hair": "Straight-back cornrows",
+   "Top": "Navy snap-front jacket with white chest panel",
+   "Bottoms": "Dark wash baggy jeans",
+   "Shoes": "Wheat Timberland-style boots",
+   "Accessory": "Silver ID bracelet",
+   "Pose": "Arms at sides"
+  },
+  "bio": "Fresh cornrows every Sunday, no exceptions. Jace stays still while everything around him moves. He's stacking every dollar from his weekend job toward a plan he hasn't told anyone. The silver ID bracelet was his grandpa's, and it never comes off.",
+  "knownFor": "the brow slit, quiet plans, keeping it a hundred."
+ },
+ {
+  "id": "HZ005",
+  "num": "005",
+  "name": "DEE",
+  "img": "/homeez/assets/figures/HZ005_DEE.webp?v=4",
+  "traits": {
+   "Hair": "Sandy-blonde skater mop",
+   "Top": "Oversized white tee",
+   "Bottoms": "Orange-red cargo basketball shorts",
+   "Shoes": "White chunky sneakers",
+   "Accessory": "Thin chain",
+   "Pose": "Hand on chest, hand in pocket"
+  },
+  "bio": "Dee skated onto the block two summers ago and never left. Sandy mop, big tee, shorts in any weather. He talks to strangers like old friends, and somehow it works. When the crew ends up at the beach on a Tuesday, it's Dee's fault.",
+  "knownFor": "curb kickflips, the ears, zero bad days."
+ },
+ {
+  "id": "HZ006",
+  "num": "006",
+  "name": "NOVA",
+  "img": "/homeez/assets/figures/HZ006_NOVA.webp?v=4",
+  "traits": {
+   "Hair": "Caesar cut",
+   "Top": "Purple velour zip-up track top",
+   "Bottoms": "Cream straight-leg jeans",
+   "Shoes": "Black-and-white sneakers",
+   "Accessory": "Gold rope chain",
+   "Pose": "Hands clasped"
+  },
+  "bio": "Purple velour, Caesar lined up sharp, hands folded. Nova clocks everything and says only what matters. Smartest one in the room, and she lets you figure that out yourself. Old-school taste, new-school mind.",
+  "knownFor": "the velour set, winning arguments quietly."
+ },
+ {
+  "id": "HZ007",
+  "num": "007",
+  "name": "BOOGIE",
+  "img": "/homeez/assets/figures/HZ007_BOOGIE.webp?v=4",
+  "traits": {
+   "Hair": "High-top fade",
+   "Top": "Royal blue track jacket",
+   "Bottoms": "Dark indigo straight-leg jeans",
+   "Shoes": "White shell-toe sneakers",
+   "Accessory": "Gold herringbone chain",
+   "Pose": "Hand on chest"
+  },
+  "bio": "Born to move. High-top fade, shell-toes, a royal blue track jacket that has seen a hundred dance circles. Any beat, any corner, he's already in it. He swears the goatee makes him look grown.",
+  "knownFor": "the high-top, never standing still."
+ },
+ {
+  "id": "HZ008",
+  "num": "008",
+  "name": "KEI",
+  "img": "/homeez/assets/figures/HZ008_KEI.webp?v=4",
+  "traits": {
+   "Hair": "Blue-black bowl cut",
+   "Top": "Teal zip hoodie over white tee",
+   "Bottoms": "Dark cargo pants",
+   "Shoes": "Orange low-top sneakers",
+   "Accessory": "Square black glasses",
+   "Pose": "Arms crossed"
+  },
+  "bio": "Kei has fixed half the phones on the block and won't take a dollar for it. Bowl cut, square frames, teal hoodie zipped to the same spot every day. Arms crossed because he's thinking, not mad. If it has wires, Kei can make it better.",
+  "knownFor": "the frames, orange kicks, jokes that land late."
+ },
+ {
+  "id": "HZ009",
+  "num": "009",
+  "name": "TRINA",
+  "img": "/homeez/assets/figures/HZ009_TRINA.webp?v=4",
+  "traits": {
+   "Hair": "Cornrows into low bun",
+   "Top": "Red-and-white cropped sport jersey",
+   "Bottoms": "Black biker shorts",
+   "Shoes": "Black high-top sneakers",
+   "Accessory": "White headband, gold hoops",
+   "Pose": "Arms crossed"
+  },
+  "bio": "First on the court, last off it. Headband on, jersey cropped, arms folded after every bucket. Trina's jumper has humbled a lot of people who thought they could hoop. She competes at everything, even the walk to the store.",
+  "knownFor": "fox eyes, freckles, never losing twice."
+ },
+ {
+  "id": "HZ010",
+  "num": "010",
+  "name": "MARV",
+  "img": "/homeez/assets/figures/HZ010_MARV.webp?v=4",
+  "traits": {
+   "Hair": "Olive slouchy beanie",
+   "Top": "Olive pullover hoodie",
+   "Bottoms": "Light wash straight-leg jeans",
+   "Shoes": "Wheat Timberland-style boots",
+   "Accessory": "None",
+   "Pose": "Hands in hoodie pocket"
+  },
+  "bio": "Marv always looks like he just woke up, because he did. All olive, beanie low, hands in the hoodie pocket. He's up all night making beats on a laptop with a cracked screen. The tired eyes are earned.",
+  "knownFor": "all-olive fits, late-night beats."
+ },
+ {
+  "id": "HZ011",
+  "num": "011",
+  "name": "SKYE",
+  "img": "/homeez/assets/figures/HZ011_SKYE.webp?v=4",
+  "traits": {
+   "Hair": "Auburn tight coils",
+   "Top": "Plain black oversized tee",
+   "Bottoms": "Grey baggy jeans",
+   "Shoes": "Black skate shoes",
+   "Accessory": "White wrist tape",
+   "Pose": "Hand on neck"
+  },
+  "bio": "Skye taped her wrists for skating once and never stopped. Auburn coils, black tee, shoes worn down to the grip. She rubs the back of her neck while she reads you. Not shy, just picky about who gets the real her.",
+  "knownFor": "the wrist tape, landing it first try."
+ },
+ {
+  "id": "HZ012",
+  "num": "012",
+  "name": "GIO",
+  "img": "/homeez/assets/figures/HZ012_GIO.webp?v=5",
+  "traits": {
+   "Hair": "Freeform locs",
+   "Top": "Charcoal full-zip hoodie",
+   "Bottoms": "Dark indigo baggy jeans",
+   "Shoes": "White sneakers",
+   "Accessory": "Over-ear headphones, gold rope chain",
+   "Pose": "Hand to headphones"
+  },
+  "bio": "Gio hears the world through his headphones and only takes them off for people who matter. Freeform locs, charcoal zip-up, a brow ring he fought to get. He knows the song before it blows up. Ask him for a playlist and get one for every mood.",
+  "knownFor": "the cans, the brow ring, early ears."
+ },
+ {
+  "id": "HZ013",
+  "num": "013",
+  "name": "SUNNY",
+  "img": "/homeez/assets/figures/HZ013_SUNNY.webp?v=4",
+  "traits": {
+   "Hair": "Single beaded braid over shoulder",
+   "Top": "Yellow cropped hoodie",
+   "Bottoms": "Light denim wide-leg jeans",
+   "Shoes": "White platform sneakers",
+   "Accessory": "Gold nameplate chain, bead bracelet",
+   "Pose": "Hand on hip"
+  },
+  "bio": "Yellow hoodie, one beaded braid, a nameplate chain so nobody forgets who walked in. Sunny makes bracelets by hand and has customers three streets over. Hand on hip, deal closed. She can turn anyone's bad day around.",
+  "knownFor": "the nameplate, the beads, the hustle."
+ },
+ {
+  "id": "HZ014",
+  "num": "014",
+  "name": "TANK",
+  "img": "/homeez/assets/figures/HZ014_TANK.webp?v=4",
+  "traits": {
+   "Hair": "Low skin fade with full beard",
+   "Top": "Charcoal sleeveless hoodie",
+   "Bottoms": "Khaki wide-leg pants",
+   "Shoes": "Black Timberland-style boots",
+   "Accessory": "Thick gold rope chain",
+   "Pose": "Arms crossed"
+  },
+  "bio": "The biggest homee on the block, and the gentlest. Beard came in early, sleeveless hoodie in every season, arms crossed like a wall. Little kids climb him like a jungle gym. Nothing starts when Tank's around, and that's how he likes it.",
+  "knownFor": "the thick rope chain, the softest heart."
+ },
+ {
+  "id": "HZ015",
+  "num": "015",
+  "name": "VEE",
+  "img": "/homeez/assets/figures/HZ015_VEE.webp?v=4",
+  "traits": {
+   "Hair": "Hood up",
+   "Top": "Slate navy pullover hoodie",
+   "Bottoms": "Olive cargo pants",
+   "Shoes": "Black-and-olive sneakers",
+   "Accessory": "None",
+   "Pose": "Hands in hoodie pocket"
+  },
+  "bio": "Hood up, hands in the pocket, maybe four words a day. Vee shows up everywhere, sees everything, and is gone before the streetlights. Word is there's a sketchbook with a drawing of everyone on the block. Nobody has seen it.",
+  "knownFor": "the hood, the mystery."
+ },
+ {
+  "id": "HZ016",
+  "num": "016",
+  "name": "BLAZE",
+  "img": "/homeez/assets/figures/HZ016_BLAZE.webp?v=4",
+  "traits": {
+   "Hair": "Black fitted cap",
+   "Top": "Fire red bomber jacket over white tee",
+   "Bottoms": "Black slim jeans",
+   "Shoes": "Red work boots",
+   "Accessory": "Gold chain, black fitted cap",
+   "Pose": "Arms at sides"
+  },
+  "bio": "Red bomber, red work boots, fitted cap low. Blaze doesn't do quiet colors. He keeps the mustache groomed like it's a full beard, and he's always got a plan and a car he's going to buy. Loud, loyal, impossible to miss.",
+  "knownFor": "head-to-toe red, the mustache."
+ },
+ {
+  "id": "HZ017",
+  "num": "017",
+  "name": "MELLO",
+  "img": "/homeez/assets/figures/HZ017_MELLO.webp?v=5",
+  "traits": {
+   "Hair": "Rounded afro",
+   "Top": "Slate blue open-collar shirt over white tee",
+   "Bottoms": "Grey straight-leg slacks",
+   "Shoes": "Tan Timberland-style boots",
+   "Accessory": "Wristband",
+   "Pose": "Hands in pockets"
+  },
+  "bio": "Mellow by name and nature. Rounded afro, open collar, slacks pressed like he's got an interview, because he usually does. Every auntie on the block compliments the freckles. He keeps the peace without trying.",
+  "knownFor": "the afro, the calmest voice in the room."
+ },
+ {
+  "id": "HZ018",
+  "num": "018",
+  "name": "ZION",
+  "img": "/homeez/assets/figures/HZ018_ZION.webp?v=4",
+  "traits": {
+   "Hair": "Close-cropped natural coils",
+   "Top": "Forest green crewneck sweatshirt",
+   "Bottoms": "Grey wide-leg cargo pants",
+   "Shoes": "Olive-green sneakers",
+   "Accessory": "Brown leather belt",
+   "Pose": "Hand on chest"
+  },
+  "bio": "Zion is the one the HOMEEZ trust with the plan. Close-cut coils, forest green crewneck, hand on his chest when he gives his word, and he keeps it. Good grades he never brags about, and a little brother he never loses sight of. The last figure in the series, holding it all together.",
+  "knownFor": "keeping promises, big brother to everyone."
+ }
+]
