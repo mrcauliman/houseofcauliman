@@ -226,6 +226,7 @@
     .hz-packs{display:flex;gap:8px;flex-wrap:wrap}.hz-packs .btn{flex:1;min-width:130px}
     .hz-small{font-size:12px;opacity:.75;margin:0}
     .hz-claim{display:inline-block;margin-top:8px}
+    .hz-stage{display:block;width:100%;font-size:12px;opacity:.9}.hz-stage b{color:#ffd86e}.hz-order.hz-hint{outline:2px solid #ffd86e}
     .hz-orders{display:grid;gap:6px}.hz-order{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px;padding:8px 10px;border-radius:12px;background:rgba(0,0,0,.25);font-size:13px}
     .hz-order .btn{padding:6px 12px;min-width:0}.hz-order .hz-small{flex-basis:100%}
     .hz-ost{font-size:11px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:999px;background:#333;color:#eee;margin-right:6px}
@@ -616,7 +617,9 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/homeez/favicon-16x16.png?v=2" />
   <link rel="shortcut icon" href="/assets/favicons/homeez/favicon.ico?v=2" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/homeez/apple-touch-icon.png?v=2" />
-<meta name="robots" content="noindex,nofollow"></head>
+<meta name="robots" content="noindex,nofollow"><script src="claimux.js?v=claimux3"></script>
+<style>.hz-help-row{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px;margin:10px auto 0;padding:0;max-width:100%}.hz-hp{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;height:32px;min-width:0;margin:0;padding:0 12px;border:1px solid rgba(255,216,110,.55);border-radius:999px;background:rgba(0,0,0,.35);color:#ffd86e;font:600 12px/1 system-ui,-apple-system,Arial,sans-serif;letter-spacing:0;text-transform:none;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:clip;cursor:pointer;box-shadow:none}.hz-hp:hover{background:rgba(255,216,110,.12)}.hz-hp:focus-visible{outline:2px solid #ffd86e;outline-offset:2px}.hz-hp .s{display:none}@media(max-width:420px){.hz-help-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;width:100%}.hz-hp{width:100%;padding:0 4px;font-size:11.5px}.hz-hp .l{display:none}.hz-hp .s{display:inline}}@media(max-width:340px){.hz-help-row{grid-template-columns:repeat(2,minmax(0,1fr))}.hz-help-row>.hz-hp:last-child{grid-column:1/-1}}</style>
+</head>
 <body>
   <div class="mint-bar" role="status">Mint coming soon · Series 1 on XRPL · Spin free now</div>
   <header class="topbar">
@@ -627,6 +630,7 @@
       </a>
       <nav class="top-links" aria-label="Page navigation">
         <a class="pill" href="my-homeez.html">MY HOMEEZ</a>
+        <a class="pill" href="support/#how-to-claim" data-howto>How to Claim</a>
         <a class="pill" href="https://houseofcauliman.com/">House</a>
       </nav>
     </div>
@@ -677,6 +681,7 @@
               <p id="hzWNote" class="hz-small">1 paid spin = 1 HOMEEZ NFT. Priced in USD, paid in XRP at the live rate.</p>
               <div id="hzOrdersErr" class="hz-orders-err" role="status" hidden><span>Orders unavailable right now. You are still signed in, and your orders are saved.</span> <button id="hzOrdersRetry" class="btn" type="button">Retry orders</button></div>
               <div id="hzOrders" class="hz-orders" hidden></div>
+              <div class="hz-help-row" id="how-to-claim"><a class="hz-hp" href="support/#how-to-claim" data-howto aria-label="How to claim?" title="How to claim?"><span class="l">How to claim?</span><span class="s" aria-hidden="true">How to claim</span></a><button class="hz-hp" id="hzCheckOrder" type="button" aria-label="Check My Order" title="Check My Order"><span class="l">Check My Order</span><span class="s" aria-hidden="true">My order</span></button><a class="hz-hp" href="my-homeez.html" aria-label="Return to My HOMEEZ" title="Return to My HOMEEZ"><span class="l">Return to My HOMEEZ</span><span class="s" aria-hidden="true">My HOMEEZ</span></a></div>
             </div>
 
             <p id="hzFreeNote" class="hz-free" hidden>BOSS preview only. No NFT received. Playing the demo or connecting a wallet does not give you BOSS.</p>
@@ -895,7 +900,7 @@
         if(o.refund)return 'Late payment refunded in full. No NFT was minted. Refund transaction '+o.refund.txHash+'.';
         if(hasReceipt(o)&&!o.payment)return 'Payment received and recorded for review. Do not pay again. No NFT has been credited.'+ref;
         if(o.paymentStatus==='submitted')return 'Payment signed and submitted; confirming on the ledger. Do not pay again.'+ref;
-        const r=readyItems(o).length;if(r)return r+' item'+(r>1?'s':'')+' ready to claim. The offer is 0 XRP; a network fee applies.';
+        const r=readyItems(o).length;if(r)return r+' item'+(r>1?'s':'')+' ready to claim.';
         if(isPayPending(o)&&!o.payment)return st.paid?(o.expired||o.state==='expired'?'Quote expired with no payment found yet. If you already sent one, check again; do not pay again.':'Awaiting your approval. Open Xaman to approve this payment. No payment has been confirmed.')
           :'Purchases are paused. No payment has been found for this order yet. If you sent one before purchases were paused, it may still be recorded: check again later or contact support with this order. Do not pay again.'+ref;
         if(o.uiState==='mint_pending')return st.paid?'Payment recorded. Minting is in progress.':'Payment recorded. New minting is on hold while purchases are paused; your order is saved. Do not pay again.'+ref;
@@ -927,14 +932,15 @@
         const ol=$('hzOrders');ol.innerHTML='';const open=st.account?st.orders.filter(listed):[];
         ol.hidden=!open.length;open.slice(0,6).forEach(o=>{const d=document.createElement('div');d.className='hz-order';d.dataset.order=o.orderId;
           d.innerHTML=`<span><b>${esc(o.spins)} spin${o.spins>1?'s':''}</b> · ${esc(o.xrp)} XRP</span><span class="hz-ost ${esc(o.uiState)}">${esc(paymentLabel(o))}</span>`;
+          {const sg0=UX&&UX.stage(o);if(sg0){const e=document.createElement('span');e.className='hz-stage';e.dataset.stage=sg0;e.innerHTML='<b>'+esc(UX.LABEL[sg0])+'</b> · '+esc(sg0==='ready'&&readyItems(o).some(r=>UX.showClaimFallback(o,r,autoSeen,autoActive))?UX.FALLBACK_LINE:UX.HELP[sg0]);d.append(e)}if(hintId&&hintId===o.orderId)d.classList.add('hz-hint')}
           if(o.uiState==='payment_pending'&&!hasReceipt(o)&&o.paymentStatus!=='submitted'){
             const help=document.createElement('p');help.className='hz-pay-help';help.id='pay-help-'+o.orderId;help.textContent=quoteExpired(o)?'Quote expired. Check status before starting another purchase. Do not approve an old request.':'Open Xaman to approve this payment.';
             const clock=document.createElement('p');clock.className='hz-quote-clock';clock.dataset.quoteCountdown=o.orderId;clock.setAttribute('role','timer');clock.setAttribute('aria-live','off');clock.textContent=countdown(o);
             const b=document.createElement('button');b.className='btn hz-pay-primary';b.type='button';b.textContent='Pay with Xaman';b.dataset.act='resume';b.dataset.payOrder=o.orderId;b.setAttribute('aria-describedby',help.id);b.disabled=!st.paid||!canPay(o);if(!st.paid)b.title='Payments are paused';b.onclick=()=>payFlow(o);d.append(b,help,clock)}
           if(o.paymentStatus==='submitted'){const e=document.createElement('p');e.className='hz-pay-help';e.setAttribute('role','status');e.textContent='Submitted — confirming on the ledger. Do not pay again.';d.append(e)}
           // every item that is ready_to_claim is claimable, whatever the overall order status (claiming is not a purchase)
-          for(const r of readyItems(o)){const b=document.createElement('button');b.className='btn hz-claim-primary';b.type='button';b.dataset.act='claim';b.dataset.idx=r.idx;
-            b.textContent='Claim '+(r.name||r.fig||'item')+(r.edition!=null?' #'+r.edition:'');b.onclick=()=>claim({orderId:o.orderId,idx:r.idx,item:r},document.createElement('div')).then(()=>refresh());d.append(b)}
+          for(const r of readyItems(o)){if(UX&&!UX.showClaimFallback(o,r,autoSeen,autoActive))continue;const b=document.createElement('button');b.className='btn hz-claim-primary';b.type='button';b.dataset.act='claim';b.dataset.idx=r.idx;
+            b.textContent='Claim NFT · '+(r.name||r.fig||'item')+(r.edition!=null?' #'+r.edition:'');b.onclick=()=>claim({orderId:o.orderId,idx:r.idx,item:r},document.createElement('div')).then(()=>refresh());d.append(b)}
           if(o.state!=='delivered'){const b=document.createElement('button');b.className='btn';b.type='button';b.dataset.act='check';b.textContent=checking.has(o.orderId)?'Checking…':'Check status';b.disabled=checking.has(o.orderId);b.onclick=()=>checkOrder(o.orderId);d.append(b)}
           const txt=notes[o.orderId]||orderNote(o);if(txt){const e=document.createElement('div');e.className='hz-small';e.dataset.note='1';e.setAttribute('aria-live','polite');e.textContent=txt;d.append(e)}
           if(o.needsPaymentReview){const e=document.createElement('div');e.className='hz-small';e.textContent='Received XRP needs review. Funds are recorded; no refund has been sent. Contact support with order '+o.orderId+'.';d.append(e)}
@@ -950,7 +956,7 @@
         const orders=[];let before='',page;const cursors=new Set();
         do{page=await req('GET','/api/orders'+(before?'?before='+encodeURIComponent(before):''),null,{token:tok,signal:o.signal});if(!alive())return 'stale';if(!Array.isArray(page))throw new Error('Invalid order list');orders.push(...page);
           if(page.length===50){before=page[page.length-1].orderId;if(cursors.has(before))throw new Error('Order recovery cursor repeated');cursors.add(before)}
-        }while(page.length===50);st.orders=orders;st.ordersUnavailable=false;render();return 'ok'
+        }while(page.length===50);st.orders=orders;st.ordersUnavailable=false;if(!hintId&&UX)hintId=UX.orderHint(location.search,orders);render();setTimeout(maybeAutoClaim,0);return 'ok'
       }catch(e){if(e.code==='aborted'||!alive())return e.status===401?'auth':'stale';if(e.status===401)return 'auth';
         st.ordersUnavailable=true;if(st.account&&!o.quiet)info.textContent='Your orders could not be loaded. Use Retry orders; your orders are saved.';render();return 'error'}}
       // ---- auth attempts: one id per sign-in; closing the dialog (Cancel/Esc) invalidates it everywhere, aborts its requests,
@@ -1061,7 +1067,7 @@
         const draw=it=>{if(!alive()||!it)return;const focused=el.contains(document.activeElement);el.replaceChildren();
           const row=add('div','','hz-claim-status');row.append(add('span',LBL[it.uiState]||'Checking status','hz-ost '+it.uiState),add('span','Edition #'+it.edition+' · '+st.cfg.network,'hz-claim-edition'));el.append(row);
           if(it.uiState==='mint_pending')el.append(add('p',it.error||'Payment received. Your NFT is being prepared. You can close this card and return later.','hz-claim-help'));
-          if(it.uiState==='ready_to_claim'){const b=add('button','Claim your NFT','btn hz-claim-primary');b.type='button';b.setAttribute('aria-label','Claim '+(it.name||it.fig||'your NFT')+' edition '+it.edition+' in Xaman');b.onclick=()=>claim({...ref,item:it},el);el.append(b,add('p','Accept in Xaman to add this HOMEEZ to your wallet. The offer is 0 XRP; a small network fee applies.','hz-claim-help'));if(focused)b.focus();}
+          if(it.uiState==='ready_to_claim'){const b=add('button','Claim your NFT','btn hz-claim-primary');b.type='button';b.setAttribute('aria-label','Claim '+(it.name||it.fig||'your NFT')+' edition '+it.edition+' in Xaman');b.onclick=()=>claim({...ref,item:it},el);el.append(b,add('p','Accept in Xaman to add this HOMEEZ to your wallet. The offer is 0 XRP. A small XRPL network fee still applies when accepting.','hz-claim-help'));if(focused)b.focus();}
           if(it.uiState==='delivered'){el.append(add('p','Confirmed in your wallet.','hz-claim-help'));const a=add('a','View your NFT','hz-claim-link');a.target='_blank';a.rel='noopener';a.href=(st.cfg.network==='mainnet'?'https://livenet.xrpl.org':'https://testnet.xrpl.org')+'/nft/'+encodeURIComponent(it.nft_id);el.append(a);}
           if(it.uiState==='error')el.append(add('p',it.error||'Delivery needs attention. Your order is saved; do not pay again.','hz-claim-help'));
         };
@@ -1075,13 +1081,20 @@
         if(alive())refresh();
       }
 
+      // CLAIMUX v1: auto-open the existing claim request once per offer/payload, only when the backend reports ready_to_claim with an offer id.
+      const UX=window.HZClaimUX||null;let hintId=null,autoBusy=false,autoActive=null;new MutationObserver(()=>{if(modal.hidden&&autoActive){autoActive=null;render()}}).observe(modal,{attributes:true,attributeFilter:['hidden']});const autoSeen=UX?UX.seenStore(localStorage):{has:()=>true,add:()=>{}};
+      function maybeAutoClaim(){if(!UX||autoBusy||!st.account||!st.token||!modal.hidden||paymentWindow&&paymentWindow.g===gen)return;
+        const c=UX.autoClaimCandidate(st.orders,autoSeen);if(!c)return;autoSeen.add(c.key);autoBusy=true;autoActive=c.key;render();const k0=c.key;setTimeout(()=>{if(autoActive===k0){autoActive=null;render()}},60000);
+        claim({orderId:c.orderId,idx:c.idx,item:c.item,auto:true},document.createElement('div')).finally(()=>{autoBusy=false})}
       async function claim(ref,el){try{const p=vet(await req('POST','/api/orders/'+encodeURIComponent(ref.orderId)+'/items/'+encodeURIComponent(ref.idx)+'/claim'));
-          const g=show('Claim your HOMEEZ',(mob?'Open Xaman and accept the NFT offer.':'Scan with Xaman and accept the NFT offer.')+'<br><span class="hz-small">The offer is 0 XRP and only your wallet can accept it. A small network fee applies.</span>',p);
+          if(!UX||!UX.claimLinkOk(p)){autoActive=null;render();show('Claim request not verified','The claim request from HOMEEZ could not be verified, so nothing was opened. Your order is saved. Tap <b>Claim NFT</b> to try again, or contact support.',null,null,'Close');return}
+          if(ref.auto){const k='uuid:'+p.uuid;if(autoSeen.has(k))return;autoSeen.add(k)}
+          const g=show('Claim your HOMEEZ',(mob?'Open Xaman and accept the NFT offer.':'Scan with Xaman and accept the NFT offer.')+'<br><span class="hz-small">The offer is 0 XRP and only your wallet can accept it. A small XRPL network fee still applies when accepting.</span>',p);
           for(let i=0;i<240&&g===gen;i++){await nap(2500);if(g!==gen)break;const o=await req('POST','/api/orders/'+ref.orderId+'/items/'+ref.idx+'/check');const it=o.items[ref.idx];
             if(it.uiState==='delivered'){hide();sChime();if(el.dataset.item===ref.orderId+':'+ref.idx&&!reveal.hidden)claimUI(el,{...ref,item:it});else refresh();return}}
         if(g===gen){show('Claim still pending','Confirmation timed out. Your order is saved; check or resume the claim later.',null,null,'Close');await refresh();}
-        }catch(e){if(e.code==='delivered'){hide();refresh();return}show('Claim problem',esc(e.message),null,null,'Close')}}
-      $('hzConnect').onclick=()=>connect();$('hzOrdersRetry').onclick=retryOrders;$('hzDisconnect').onclick=disconnect;document.querySelectorAll('#hzPacks [data-pack]').forEach(b=>b.onclick=()=>buy(b.dataset.pack));
+        }catch(e){if(autoActive){autoActive=null;render()}if(e.code==='delivered'){hide();refresh();return}show('Claim problem',esc(e.message),null,null,'Close')}}
+      $('hzConnect').onclick=()=>connect();$('hzCheckOrder').onclick=()=>{if(st.account&&st.token)refresh();else connect();$('hzOrders').scrollIntoView({block:'nearest'})};$('hzOrdersRetry').onclick=retryOrders;$('hzDisconnect').onclick=disconnect;document.querySelectorAll('#hzPacks [data-pack]').forEach(b=>b.onclick=()=>buy(b.dataset.pack));
       return{st,init,render,claimUI,clearClaimUI,
         hasPaid(){return st.paid&&!!st.account&&queue().length>0},
         async spin(){const q=queue();if(!q.length)return null;const{o,it}=q[0];const c=$('hzCoins').lastElementChild;if(c)c.classList.add('drop');
