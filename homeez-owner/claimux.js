@@ -5,7 +5,7 @@
   const HELP={confirming:'Payment received. Confirming on the XRPL.',minting:'Your HOMEEZ is being minted.',
     ready:'Your HOMEEZ is ready. Approve it in Xaman.',delivered:'Delivered to your wallet.',awaiting:'Approve the payment in Xaman.',
     attention:'Order saved. Contact support. Do not pay again.',refunded:'Refunded. No NFT minted.'};
-  const COPY=['Open Xaman.','Tap the HOMEEZ request (Events → Requests).','Approve the 0 XRP NFT offer (small network fee applies).','Come back to My HOMEEZ.'];
+  const COPY=['Open Xaman → Events → Requests. Approve the HOMEEZ 0 XRP NFT offer.','Viewing the offer in Xaman history is not the same as accepting it.','No request waiting? Return to the Capsule Machine.','Use Check My Order, then tap Claim NFT.'];
   function readyItems(o){return (o&&Array.isArray(o.items)?o.items:[]).filter(i=>i&&i.uiState==='ready_to_claim'&&typeof i.offer_id==='string'&&/^[A-F0-9]{64}$/i.test(i.offer_id))}
   function stage(o){if(!o||typeof o!=='object')return null;
     if(o.refund||o.uiState==='refunded')return 'refunded';
@@ -47,6 +47,6 @@
   function offerKey(it){return it&&typeof it.offer_id==='string'&&/^[A-F0-9]{64}$/i.test(it.offer_id)?'offer:'+it.offer_id.toUpperCase():null}
   function showClaimFallback(o,it,seen,activeKey){if(!o||o.state==='delivered'||o.state==='expired'||o.state==='refund_review'||o.refund||o.uiState==='refunded')return false;
     if(!it||it.uiState!=='ready_to_claim')return false;const k=offerKey(it);if(!k)return false;return !!seen&&seen.has(k)&&activeKey!==k}
-  const FALLBACK_LINE="Didn't see the request? Tap Claim NFT.";
+  const FALLBACK_LINE="No HOMEEZ request in Xaman → Events → Requests? Tap Claim NFT to send a new one.";
   const api={LABEL,HELP,COPY,claimLinkOk,mountHowTo,offerKey,showClaimFallback,FALLBACK_LINE,stage,readyItems,autoClaimCandidate,seenStore,orderHint};
   if(typeof module==='object'&&module.exports)module.exports=api;else root.HZClaimUX=api})(this);
