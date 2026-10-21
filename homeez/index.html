@@ -582,12 +582,24 @@
     .mint-bar{background:linear-gradient(90deg,#b8860b,var(--gold),#b8860b);color:#1a1200;text-align:center;font-weight:900;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:8px 12px;line-height:1.35}
     .mint-pill{display:inline-block;padding:8px 16px;border-radius:999px;background:var(--gold);color:#1a1200;font-weight:900;font-size:15px;letter-spacing:.1em;text-transform:uppercase;box-shadow:0 6px 18px rgba(255,216,110,.35)}
     .mint-sub{margin:8px 0 14px;font-weight:700;color:var(--gold);font-size:15px}
-    .coming{padding:0 0 56px}
-    .coming-box{padding:22px;border-radius:24px;background:var(--panel);border:1px solid var(--line);box-shadow:0 12px 26px rgba(0,0,0,.18)}
-    .coming-box h2{margin:6px 0 14px;font-size:clamp(24px,3vw,34px)}
-    .coming-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
-    .coming-list li{padding:14px 16px;border-radius:16px;border:1px solid var(--line);background:rgba(255,216,110,.06);font-weight:700}
-    .coming-list li b{display:block;color:var(--gold);font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+    .coming{padding:8px 0 64px}
+    .coming-box{padding:28px;border-radius:24px;background:var(--panel);border:1px solid var(--line);box-shadow:0 12px 26px rgba(0,0,0,.18)}
+    .coming-box h2{display:flex;flex-wrap:wrap;align-items:center;column-gap:.3em;margin:8px 0 14px;font-size:clamp(28px,4.4vw,48px);line-height:1.05;letter-spacing:-.02em}
+    .coming-box h2 span{color:var(--gold)}
+    .coming-box h2 .coming-boss{height:1.7em;width:auto;filter:drop-shadow(0 8px 14px rgba(0,0,0,.55))}
+    .coming-live{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:0 0 14px;padding:12px 16px;border-radius:16px;border:1px solid var(--line);background:rgba(255,216,110,.08);font-weight:700}
+    .coming-live b{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#080b12;background:var(--gold);border-radius:999px;padding:5px 10px}
+    .coming-lead{color:var(--muted);max-width:640px;line-height:1.55;margin:0 0 22px}
+    .coming-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+    .coming-card{display:flex;flex-direction:column;overflow:hidden;padding:22px 22px 0;border-radius:20px;border:1px solid var(--line);background:rgba(255,255,255,.03)}
+    .coming-card .tag{align-self:flex-start;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#080b12;background:var(--gold);border-radius:999px;padding:5px 10px}
+    .coming-card h3{margin:14px 0 8px;font-size:22px}
+    .coming-card p{color:var(--muted);line-height:1.55;margin:0 0 10px}
+    .coming-card ul{margin:0 0 16px;padding-left:18px;line-height:1.7}
+    .coming-card .crew{display:flex;justify-content:center;align-items:flex-end;gap:4px;margin-top:auto;height:170px}
+    .coming-card .crew img{height:160px;width:auto;object-fit:contain;filter:drop-shadow(0 10px 16px rgba(0,0,0,.5))}
+    @media (max-width:1000px){.coming-grid{grid-template-columns:1fr 1fr}}
+    @media (max-width:700px){.coming-grid{grid-template-columns:1fr}.coming-card .crew{height:140px}.coming-card .crew img{height:130px}}
     .hzm-marquee{position:absolute;left:12.77%;top:2.33%;width:74.04%;height:7.7%;border-radius:999px;overflow:hidden;display:flex;align-items:center;justify-content:center;pointer-events:none;box-shadow:inset 0 2px 4px rgba(0,0,0,.55),inset 0 -1px 0 rgba(255,255,255,.06)}
     .hzm-marquee img{display:block;max-width:84%;max-height:84%;width:auto;height:auto;object-fit:contain;filter:drop-shadow(0 1px 0 rgba(255,255,255,.14)) drop-shadow(0 -1px 1px rgba(0,0,0,.7)) drop-shadow(0 2px 2px rgba(0,0,0,.45))}
     .hzm-marquee::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,rgba(255,255,255,.13) 0%,rgba(255,255,255,.04) 38%,rgba(255,255,255,0) 52%),linear-gradient(105deg,rgba(255,255,255,0) 58%,rgba(255,255,255,.07) 66%,rgba(255,255,255,0) 74%)}
@@ -714,13 +726,32 @@
     <section class="coming" id="coming">
       <div class="wrap coming-box">
         <div class="eyebrow">What's coming</div>
-        <h2>This is only Series 1</h2>
-        <ul class="coming-list">
-          <li><b>Mint</b>Series 1 mint on the XRP Ledger</li>
-          <li><b>Series</b>More HOMEEZ series dropping</li>
-          <li><b>Game</b>A HOMEEZ game built to work with your NFTs</li>
-          <li><b>Figures</b>3D-printed figures of the HOMEEZ you own</li>
-        </ul>
+        <h2>Your HOMEEZ, <span>off the shelf.</span><img class="coming-boss" src="assets/HOMEEZ_BOSS_coming.webp" alt="BOSS" width="126" height="160" loading="lazy"></h2>
+        <p class="coming-live"><b>Now minting</b>Series 1 is live on XRPL. 1 spin for $5 or 5 spins for $20, paid in $XRP.</p>
+        <p class="coming-lead">Next up, we're bringing your crew to life, on screen and on your shelf.</p>
+        <div class="coming-grid">
+          <article class="coming-card">
+            <span class="tag">Coming soon</span>
+            <h3>The HOMEEZ animated series</h3>
+            <p>Short episodes from the block. Season 1 follows each HOMEEZ as they bust out of their capsule and find the rest of the crew, one by one, until the whole block is together.</p>
+            <ul><li>Short episodes</li><li>Season 1: escape the capsule, group up</li><li>All 18 HOMEEZ, plus BOSS</li></ul>
+            <div class="crew"><img src="assets/figures/HZ014_TANK.webp" alt="TANK" loading="lazy"><img src="assets/figures/HZ016_BLAZE.webp" alt="BLAZE" loading="lazy"></div>
+          </article>
+          <article class="coming-card">
+            <span class="tag">Coming soon</span>
+            <h3>Interactive HOMEEZ</h3>
+            <p>Make the HOMEEZ you own move. Pick a pose, a dance or a move, and get a fresh image or a short clip of your character doing it.</p>
+            <ul><li>Dance, pose and act out moves</li><li>Fresh images and short clips</li><li>Starring the HOMEEZ in your wallet</li></ul>
+            <div class="crew"><img src="assets/figures/HZ005_DEE.webp" alt="DEE" loading="lazy"><img src="assets/figures/HZ001_MIKEY.webp" alt="MIKEY" loading="lazy"><img src="assets/figures/HZ009_TRINA.webp" alt="TRINA" loading="lazy"></div>
+          </article>
+          <article class="coming-card">
+            <span class="tag">Coming soon</span>
+            <h3>3D printed characters</h3>
+            <p>Your HOMEEZ, off the screen and onto your actual shelf.</p>
+            <ul><li>Collectible figures of your crew</li><li>Made for your real-life shelf</li></ul>
+            <div class="crew"><img src="assets/figures/HZ013_SUNNY.webp" alt="SUNNY" loading="lazy"></div>
+          </article>
+        </div>
       </div>
     </section>
   </main>
