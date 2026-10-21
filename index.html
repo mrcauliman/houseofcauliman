@@ -203,6 +203,15 @@
     }
 
 
+    /* Existing Projects section discovery filters */
+    .project-discovery{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 10px}
+    .project-filter{font:inherit;font-size:.73rem;font-weight:800;color:#b8c4dc;background:rgba(61,160,255,.06);border:1px solid rgba(61,160,255,.24);border-radius:999px;padding:10px 13px;cursor:pointer}
+    .project-filter:hover,.project-filter:focus-visible,.project-filter.is-selected{color:#fff;background:rgba(61,160,255,.2);border-color:rgba(61,160,255,.65)}
+    .project-filter:focus-visible{outline:2px solid #3da0ff;outline-offset:2px}
+    .project-discovery-count{color:var(--muted);font-size:.8rem;margin:0 0 14px}
+    #projectDiscoveryGrid .card[hidden]{display:none}
+    @media(max-width:640px){.project-discovery{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin;padding-bottom:8px}.project-filter{white-space:nowrap;flex:none}}
+
     /* Premium project portals */
     .grid{
       grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
@@ -1326,12 +1335,20 @@
         </div>
       </section>
 
-      <section id="projects" class="section">
-        <h2>Projects</h2>
-        <p class="lead">Explore the platforms, brands, tools, collections, and media built inside the House.</p>
-        <div class="grid">
+      <section id="projects" class="section" aria-labelledby="projects-heading">
+        <h2 id="projects-heading">Projects</h2>
+        <p class="lead">Find House of Cauliman applications by what you want to do on XRPL. Learn, own, understand, protect, or create.</p>
+        <div class="project-discovery" aria-label="Filter House projects">
+          <button type="button" class="project-filter is-selected" data-project-filter="all" aria-pressed="true">All projects</button>
+          <button type="button" class="project-filter" data-project-filter="learn" aria-pressed="false">Learn</button>
+          <button type="button" class="project-filter" data-project-filter="commerce" aria-pressed="false">Ownership &amp; commerce</button>
+          <button type="button" class="project-filter" data-project-filter="intelligence" aria-pressed="false">Intelligence &amp; safety</button>
+          <button type="button" class="project-filter" data-project-filter="creators" aria-pressed="false">Games &amp; creators</button>
+        </div>
+        <p class="project-discovery-count" id="projectDiscoveryCount" aria-live="polite">Showing all 11 projects</p>
+        <div class="grid" id="projectDiscoveryGrid">
 
-          <article class="card">
+          <article class="card" data-project-category="commerce">
             <div>
               <div class="topline"><span class="role">Platform</span><span class="badge utility-live">UTILITY LIVE</span></div>
               <img class="card-logo" src="/assets/monolith/monolith_logo.webp" alt="MONOLITH" />
@@ -1356,7 +1373,7 @@
                data-external2="true">Explore</a>
           </article>
 
-          <article class="card">
+          <article class="card" data-project-category="intelligence">
             <div>
               <div class="topline"><span class="role">Platform</span><span class="badge utility-live">UTILITY LIVE</span></div>
               <img class="card-logo" src="/assets/augur/augur_logo.png" alt="AUGUR" />
@@ -1387,13 +1404,13 @@
             </div>
           </article>
 
-          <article class="card">
+          <article class="card" data-project-category="intelligence">
             <div>
               <div class="topline"><span class="role">Platform</span><span class="badge utility-live">UTILITY LIVE</span></div>
               <img class="card-logo" src="/assets/lav/lav_icon.png" alt="LAV" />
               <h3>LAV</h3>
               <div class="verb">Protect</div>
-              <p class="copy">Digital continuity, vault planning, recovery paths, and legacy protection for crypto holders and families.</p>
+              <p class="copy">Digital asset records, trusted roles, and a family action plan to help prepare for future handoff.</p>
             </div>
             <a href="https://lavxrpl.com/"
                data-house-modal
@@ -1401,8 +1418,8 @@
                data-role="Legacy Infrastructure"
                data-status="UTILITY LIVE"
                data-lead="Digital continuity and legacy protection for crypto holders and families."
-               data-details="LAV provides continuity planning, protected recovery paths, family access, and future handoff without becoming a centralized seed database."
-               data-breakdown="Digital inheritance planning|Family recovery workflows|Guided legacy setup|Protected future handoff|XRPL-native continuity infrastructure|Security-first nontechnical UX"
+               data-details="LAV Standard helps organize wallet records, trusted roles, family instructions, and an action plan without collecting seeds or private keys."
+               data-breakdown="Digital asset organization|Trusted roles|Family Action Plan|Release planning|Heir guidance|Review history"
                data-logo="/assets/lav/lav_icon.png"
                data-href="https://lavxrpl.com/"
                data-link-label="Enter LAV"
@@ -1412,7 +1429,7 @@
                data-external2="true">Explore</a>
           </article>
 
-          <article class="card">
+          <article class="card" data-project-category="intelligence">
             <div>
               <div class="topline"><span class="role">Platform</span><span class="badge active-build">ACTIVE BUILD</span></div>
               <img class="card-logo" src="/neb/assets/neb_icon.webp" alt="NEB" />
@@ -1436,7 +1453,7 @@
                data-external2="true">Explore</a>
           </article>
 
-          <article class="card">
+          <article class="card" data-project-category="intelligence">
             <div>
               <div class="topline"><span class="role">Safety Utility</span><span class="badge active-build">ACTIVE BUILD</span></div>
               <img class="card-logo" src="/assets/warden/WARDEN_icon.webp" alt="WARDEN" />
@@ -1455,10 +1472,10 @@
                data-logo="/assets/warden/WARDEN_logo.webp">Explore</a>
           </article>
 
-          <article class="card">
+          <article class="card" data-project-category="creators">
             <div>
               <div class="topline"><span class="role">House IP</span><span class="badge active-build">ACTIVE BUILD</span></div>
-              <div class="token-hud">TOKEN LIVE · $WCK</div>
+              <div class="token-hud">TOKEN ISSUED · $WCK</div>
               <img class="card-logo" src="/assets/wck_logo.webp" alt="Continental Wick" />
               <h3>Continental Wick</h3>
               <div class="verb">Expand</div>
@@ -1468,7 +1485,7 @@
                data-house-modal
                data-title="CONTINENTAL WICK"
                data-role="House IP"
-               data-status="ACTIVE BUILD · $WCK TOKEN LIVE"
+               data-status="ACTIVE BUILD · $WCK TOKEN ISSUED"
                data-lead="An original House universe powered by a live XRPL token, collectibles, characters, story, and future game experiences."
                data-details="Continental Wick is a House-created character universe with the live $WCK token on XRPL, Pixel Protocol Genesis collectibles, expanding story and future interactive experiences. $WCK is live, but no House-listed AMM is currently active."
                data-breakdown="$WCK token live on XRPL|Original House character universe|XRPL collectible ownership|Pixel Protocol Genesis|18-character Genesis structure|Story and world expansion|Future Continental Wick game"
@@ -1481,7 +1498,7 @@
                data-external2="true">Explore</a>
           </article>
 
-          <article class="card">
+          <article class="card" data-project-category="learn">
             <div>
               <div class="topline"><span class="role">Education</span><span class="badge utility-live">UTILITY LIVE</span></div>
               <img class="card-logo" src="/assets/xrpl/xrpl_layman_logo.png" alt="XRPL LAYMAN" />
@@ -1502,7 +1519,7 @@
                data-link-label="Enter XRPL Layman">Explore</a>
           </article>
 
-          <article class="card">
+          <article class="card" data-project-category="commerce">
             <div>
               <div class="topline"><span class="role">Platform</span><span class="badge active-build">ACTIVE BUILD</span></div>
               <div class="token-hud">TOKEN LIVE · $BAG</div>
@@ -1533,7 +1550,7 @@
 
 
 
-          <article class="card">
+          <article class="card" data-project-category="creators">
             <div>
               <div class="topline"><span class="role">Brand</span><span class="badge live">LIVE</span></div>
               <div class="token-hud">TOKEN LIVE · $RAD</div>
@@ -1569,7 +1586,7 @@
 
 
 
-          <article class="card">
+          <article class="card" data-project-category="creators">
             <div>
               <div class="topline"><span class="role">Media</span><span class="badge utility-live">UTILITY LIVE</span></div>
               <img class="card-logo" src="/assets/ledger_drop_xrpl.png" alt="Ledger Drop XRPL" />
@@ -1593,7 +1610,7 @@
                data-external2="true">Explore</a>
           </article>
 
-          <article class="card">
+          <article class="card" data-project-category="creators">
             <div>
               <div class="topline"><span class="role">Interactive Entertainment</span><span class="badge active-build">ACTIVE BUILD</span></div>
               <img class="card-logo" src="/assets/dungeon-house/DUNGEON HOUSE ICON.webp" alt="Dungeon House" />
@@ -1834,6 +1851,28 @@
 
 <script>
 (() => {
+  const filters = document.querySelectorAll('[data-project-filter]');
+  const projectCards = document.querySelectorAll('#projectDiscoveryGrid [data-project-category]');
+  const projectCount = document.getElementById('projectDiscoveryCount');
+  filters.forEach(button => {
+    button.addEventListener('click', () => {
+      const selected = button.dataset.projectFilter;
+      let visible = 0;
+      projectCards.forEach(card => {
+        card.hidden = selected !== 'all' && card.dataset.projectCategory !== selected;
+        if (!card.hidden) visible++;
+      });
+      filters.forEach(filter => {
+        const active = filter === button;
+        filter.classList.toggle('is-selected', active);
+        filter.setAttribute('aria-pressed', String(active));
+      });
+      projectCount.textContent = selected === 'all'
+        ? 'Showing all ' + visible + ' projects'
+        : 'Showing ' + visible + ' ' + (visible === 1 ? 'project' : 'projects');
+    });
+  });
+
   const modal = document.getElementById('houseModal');
   const title = document.getElementById('houseModalTitle');
   const role = document.getElementById('houseModalRole');
