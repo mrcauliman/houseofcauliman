@@ -1067,7 +1067,9 @@
         const draw=it=>{if(!alive()||!it)return;const focused=el.contains(document.activeElement);el.replaceChildren();
           const row=add('div','','hz-claim-status');row.append(add('span',LBL[it.uiState]||'Checking status','hz-ost '+it.uiState),add('span','Edition #'+it.edition+' · '+st.cfg.network,'hz-claim-edition'));el.append(row);
           if(it.uiState==='mint_pending')el.append(add('p',it.error||'Payment received. Your NFT is being prepared. You can close this card and return later.','hz-claim-help'));
-          if(it.uiState==='ready_to_claim'){const b=add('button','Claim your NFT','btn hz-claim-primary');b.type='button';b.setAttribute('aria-label','Claim '+(it.name||it.fig||'your NFT')+' edition '+it.edition+' in Xaman');b.onclick=()=>claim({...ref,item:it},el);el.append(b,add('p','Accept in Xaman to add this HOMEEZ to your wallet. The offer is 0 XRP. A small XRPL network fee still applies when accepting.','hz-claim-help'));if(focused)b.focus();}
+          if(it.uiState==='ready_to_claim'){const ord=st.orders.find(o=>o.orderId===ref.orderId)||{orderId:ref.orderId,state:'ready_to_claim',uiState:'ready_to_claim',items:[it]};
+            if(UX&&!UX.showClaimFallback(ord,it,autoSeen,autoActive)){el.dataset.claimFallback='0';el.append(add('p',UX.HELP.ready,'hz-claim-help'));if(!autoSeen.has(UX.offerKey(it)||''))setTimeout(maybeAutoClaim,0)}
+            else{el.dataset.claimFallback='1';const b=add('button','Claim your NFT','btn hz-claim-primary');b.type='button';b.dataset.act='reveal-claim';b.setAttribute('aria-label','Claim '+(it.name||it.fig||'your NFT')+' edition '+it.edition+' in Xaman');b.onclick=()=>claim({...ref,item:it},el);el.append(b,add('p',UX?UX.FALLBACK_LINE:'Accept in Xaman. The offer is 0 XRP; a small XRPL network fee applies.','hz-claim-help'));if(focused)b.focus();}}
           if(it.uiState==='delivered'){el.append(add('p','Confirmed in your wallet.','hz-claim-help'));const a=add('a','View your NFT','hz-claim-link');a.target='_blank';a.rel='noopener';a.href=(st.cfg.network==='mainnet'?'https://livenet.xrpl.org':'https://testnet.xrpl.org')+'/nft/'+encodeURIComponent(it.nft_id);el.append(a);}
           if(it.uiState==='error')el.append(add('p',it.error||'Delivery needs attention. Your order is saved; do not pay again.','hz-claim-help'));
         };
@@ -1075,25 +1077,26 @@
         let it=st.orders.find(o=>o.orderId===ref.orderId)?.items?.find(i=>i.idx===ref.idx)||ref.item,lastState='';
         for(let i=0;i<120&&alive();i++){
           if(i){await wait(3000);if(!alive()||reveal.hidden)break;}
-          try{const o=await req('POST','/api/orders/'+encodeURIComponent(ref.orderId)+'/check');if(!alive())return;const fresh=o.items?.find(x=>x.idx===ref.idx);if(!fresh)throw new Error('Item status unavailable');it=fresh;const state=JSON.stringify([it.uiState,it.error,it.nft_id]);if(state!==lastState){draw(it);lastState=state;}if(it.uiState==='delivered')break;}
+          try{const o=await req('POST','/api/orders/'+encodeURIComponent(ref.orderId)+'/check');if(!alive())return;const fresh=o.items?.find(x=>x.idx===ref.idx);if(!fresh)throw new Error('Item status unavailable');it=fresh;upsert(o,ref.orderId);el._hzRedraw=()=>{if(alive()&&!reveal.hidden)draw(it)};const state=JSON.stringify([it.uiState,it.error,it.nft_id]);if(state!==lastState){draw(it);lastState=state;}if(it.uiState==='delivered')break;}
           catch(e){if(!alive())return;if(!lastState){el.replaceChildren(add('p','Current NFT status is unavailable. Check this saved order before taking action.','hz-claim-help'));}if(e.status===401)break;}
         }
         if(alive())refresh();
       }
 
       // CLAIMUX v1: auto-open the existing claim request once per offer/payload, only when the backend reports ready_to_claim with an offer id.
-      const UX=window.HZClaimUX||null;let hintId=null,autoBusy=false,autoActive=null;new MutationObserver(()=>{if(modal.hidden&&autoActive){autoActive=null;render()}}).observe(modal,{attributes:true,attributeFilter:['hidden']});const autoSeen=UX?UX.seenStore(localStorage):{has:()=>true,add:()=>{}};
+      const UX=window.HZClaimUX||null;let hintId=null,autoBusy=false,autoActive=null;new MutationObserver(()=>{if(modal.hidden&&autoActive){autoActive=null;render();redrawCards()}}).observe(modal,{attributes:true,attributeFilter:['hidden']});const autoSeen=UX?UX.seenStore(localStorage):{has:()=>true,add:()=>{}};
+      function redrawCards(){document.querySelectorAll('[data-item]').forEach(e=>{if(e._hzRedraw)e._hzRedraw()})}
       function maybeAutoClaim(){if(!UX||autoBusy||!st.account||!st.token||!modal.hidden||paymentWindow&&paymentWindow.g===gen)return;
-        const c=UX.autoClaimCandidate(st.orders,autoSeen);if(!c)return;autoSeen.add(c.key);autoBusy=true;autoActive=c.key;render();const k0=c.key;setTimeout(()=>{if(autoActive===k0){autoActive=null;render()}},60000);
+        const c=UX.autoClaimCandidate(st.orders,autoSeen);if(!c)return;autoSeen.add(c.key);autoBusy=true;autoActive=c.key;render();redrawCards();const k0=c.key;setTimeout(()=>{if(autoActive===k0){autoActive=null;render();redrawCards()}},60000);
         claim({orderId:c.orderId,idx:c.idx,item:c.item,auto:true},document.createElement('div')).finally(()=>{autoBusy=false})}
       async function claim(ref,el){try{const p=vet(await req('POST','/api/orders/'+encodeURIComponent(ref.orderId)+'/items/'+encodeURIComponent(ref.idx)+'/claim'));
-          if(!UX||!UX.claimLinkOk(p)){autoActive=null;render();show('Claim request not verified','The claim request from HOMEEZ could not be verified, so nothing was opened. Your order is saved. Tap <b>Claim NFT</b> to try again, or contact support.',null,null,'Close');return}
+          if(!UX||!UX.claimLinkOk(p)){autoActive=null;render();redrawCards();show('Claim request not verified','The claim request from HOMEEZ could not be verified, so nothing was opened. Your order is saved. Tap <b>Claim NFT</b> to try again, or contact support.',null,null,'Close');return}
           if(ref.auto){const k='uuid:'+p.uuid;if(autoSeen.has(k))return;autoSeen.add(k)}
           const g=show('Claim your HOMEEZ',(mob?'Open Xaman and accept the NFT offer.':'Scan with Xaman and accept the NFT offer.')+'<br><span class="hz-small">The offer is 0 XRP and only your wallet can accept it. A small XRPL network fee still applies when accepting.</span>',p);
           for(let i=0;i<240&&g===gen;i++){await nap(2500);if(g!==gen)break;const o=await req('POST','/api/orders/'+ref.orderId+'/items/'+ref.idx+'/check');const it=o.items[ref.idx];
             if(it.uiState==='delivered'){hide();sChime();if(el.dataset.item===ref.orderId+':'+ref.idx&&!reveal.hidden)claimUI(el,{...ref,item:it});else refresh();return}}
         if(g===gen){show('Claim still pending','Confirmation timed out. Your order is saved; check or resume the claim later.',null,null,'Close');await refresh();}
-        }catch(e){if(autoActive){autoActive=null;render()}if(e.code==='delivered'){hide();refresh();return}show('Claim problem',esc(e.message),null,null,'Close')}}
+        }catch(e){if(autoActive){autoActive=null;render();redrawCards()}if(e.code==='delivered'){hide();refresh();return}show('Claim problem',esc(e.message),null,null,'Close')}}
       $('hzConnect').onclick=()=>connect();$('hzCheckOrder').onclick=()=>{if(st.account&&st.token)refresh();else connect();$('hzOrders').scrollIntoView({block:'nearest'})};$('hzOrdersRetry').onclick=retryOrders;$('hzDisconnect').onclick=disconnect;document.querySelectorAll('#hzPacks [data-pack]').forEach(b=>b.onclick=()=>buy(b.dataset.pack));
       return{st,init,render,claimUI,clearClaimUI,
         hasPaid(){return st.paid&&!!st.account&&queue().length>0},
