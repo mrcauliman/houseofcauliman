@@ -1,0 +1,31 @@
+{
+  "sourceLibrary": "libfile_15a34b04848081918b06289e5533c57d",
+  "source": "mascot-review-current/BOSS-standalone.png",
+  "sourceSha256": "d15ee59669fb6bf448cd0d82f1eb7ec44938cc79665a1511a2f2c4f962af6fca",
+  "outputSha256": "fe9a28b9329b27e19b73ccf24804a4f191befa433070a9a05a8745e5107c552c",
+  "idatSha256": "11635e7372f31d5846d1d294b0225b70c6e24a209e7b32032c78cf9c98f2426c",
+  "dimensions": [
+    1713,
+    2048
+  ],
+  "alpha": {
+    "transparent": 2350989,
+    "opaque": 1150899,
+    "partial": 6336,
+    "bounds": [
+      235,
+      235,
+      1478,
+      1813
+    ]
+  },
+  "metadata": {
+    "Title": "BOSS - MY HOMEEZ website mascot",
+    "Author": "House of Cauliman",
+    "Copyright": "© 2026 House of Cauliman. All rights reserved.",
+    "Keywords": "HOMEEZ; BOSS; House of Cauliman; website mascot; seated; transparent PNG; satin molded plastic",
+    "Comment": "Owner-supplied Grok standalone mascot. Website presentation only; not an NFT master, ownership or claim entitlement. Original pixel and alpha data preserved."
+  },
+  "role": "Display-only website mascot, excluded from collectible slots/counts",
+  "pixelsPreserved": true
+}
