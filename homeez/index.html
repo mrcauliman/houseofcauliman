@@ -5,7 +5,7 @@
   <!-- HOMEEZ backend URL (trusted origin only; no query-string overrides). Empty = demo mode only (free, no NFT, sign-in unavailable). -->
   <meta name="homeez-api" content="https://homeez-api.houseofcauliman.com">
   <!-- Xaman sign-in availability. Needs homeez-api. "off" = sign-in unavailable. Independent of purchases; connecting grants no NFT. -->
-  <meta name="homeez-connect" content="off">
+  <meta name="homeez-connect" content="on">
   <!-- Purchase availability. "on" + homeez-api + sign-in available = paid spins enabled. Anything else = purchase controls shown disabled. -->
   <meta name="homeez-paid" content="off">
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -653,7 +653,7 @@
       <div class="wrap hero-grid">
         <div>
           <span class="mint-pill">Purchasing &amp; delivery paused</span>
-          <p class="mint-sub">Purchasing and NFT delivery are paused while we resolve a delivery issue. Already paid? Do not pay again or approve an old payment request. Keep your payment transaction ID. Wallet sign-in and order status are temporarily unavailable. Free spins are a preview only and do not mint an NFT.</p>
+          <p class="mint-sub">Purchasing and NFT delivery are paused while we resolve a delivery issue. Already paid? Do not pay again or approve an old payment request. Keep your payment transaction ID. Connect your wallet to check your saved orders. Delivery remains paused. Free spins are a preview only and do not mint an NFT.</p>
           <img class="homeez-brand-logo" src="/homeez/assets/HOMEEZ_logo.webp?v=2" alt="HOMEEZ" loading="eager">
           <h1>HOMEEZ Capsule Machine</h1>
           <p class="sub">Grab the chrome knob and give it a full twist. A capsule drops. Crack it open to see which HOMEEZ you pulled. 18 to collect.</p>
@@ -690,7 +690,7 @@
                 <button class="btn" type="button" data-pack="1" disabled>1 spin · $5</button>
                 <button class="btn" type="button" data-pack="5" disabled>5 spins · $20</button>
               </div>
-              <p id="hzWNote" class="hz-small">Purchasing and NFT delivery are paused while we resolve a delivery issue. Already paid? Do not pay again or approve an old payment request. Keep your payment transaction ID. Wallet sign-in and order status are temporarily unavailable. Free spins are a preview only and do not mint an NFT.</p>
+              <p id="hzWNote" class="hz-small">Purchasing and NFT delivery are paused while we resolve a delivery issue. Already paid? Do not pay again or approve an old payment request. Keep your payment transaction ID. Connect your wallet to check your saved orders. Delivery remains paused. Free spins are a preview only and do not mint an NFT.</p>
               <div id="hzOrdersErr" class="hz-orders-err" role="status" hidden><span>Orders unavailable right now. You are still signed in, and your orders are saved.</span> <button id="hzOrdersRetry" class="btn" type="button">Retry orders</button></div>
               <div id="hzOrders" class="hz-orders" hidden></div>
               <div class="hz-help-row" id="how-to-claim"><a class="hz-hp" href="support/#how-to-claim" data-howto aria-label="How to claim?" title="How to claim?"><span class="l">How to claim?</span><span class="s" aria-hidden="true">How to claim</span></a><button class="hz-hp" id="hzCheckOrder" type="button" aria-label="Check My Order" title="Check My Order"><span class="l">Check My Order</span><span class="s" aria-hidden="true">My order</span></button><a class="hz-hp" href="my-homeez.html" aria-label="Return to My HOMEEZ" title="Return to My HOMEEZ"><span class="l">Return to My HOMEEZ</span><span class="s" aria-hidden="true">My HOMEEZ</span></a></div>
@@ -889,7 +889,7 @@
       const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
       let sessGen=0;
       // o.token: send this bearer token instead of the current one; o.signal: abort with the auth attempt
-      const req=async(m,p,b,o={})=>{throw Object.assign(new Error('Purchasing and NFT delivery are paused. Do not pay again.'),{code:'maintenance'}); /* Maintenance: block all wallet/order API requests, including stale callbacks. */const tok=o.token!==undefined?o.token:st.token;let r;
+      const req=async(m,p,b,o={})=>{const safeRead=m==='GET'&&/^\/api\/(config|auth\/me|auth\/signin\/[^/?]+|orders(?:\/[^/?]+)?)(?:\?.*)?$/.test(p);const safeAction=m==='POST'&&(/^\/api\/auth\/(signin|signout)$/.test(p)||/^\/api\/orders\/[^/?]+\/check$/.test(p));if(!safeRead&&!safeAction)throw Object.assign(new Error('Purchasing and NFT delivery are paused. Do not pay again.'),{code:'maintenance'}); /* Only sign-in and saved-order status; no payment or claim requests. */const tok=o.token!==undefined?o.token:st.token;let r;
         const sig=o.signal&&AbortSignal.any?AbortSignal.any([AbortSignal.timeout(15000),o.signal]):AbortSignal.timeout(15000);
         try{r=await fetch(st.api+p,{method:m,signal:sig,headers:{'content-type':'application/json',...(tok?{authorization:'Bearer '+tok}:{})},body:b&&JSON.stringify(b)})}
         catch(e){if(o.signal&&o.signal.aborted)throw Object.assign(new Error('Cancelled'),{code:'aborted'});throw Object.assign(new Error(e&&e.name==='TimeoutError'?'The wallet service took too long to respond.':'Could not reach the wallet service.'),{code:'offline'})}
@@ -907,7 +907,7 @@
       mL.addEventListener('click',e=>{if(paymentWindow&&paymentWindow.g===gen&&(quoteExpired(paymentWindow.o)||paymentWindow.o.paymentStatus==='submitted')){e.preventDefault();tickPayments();return}if(!safeLink(mL.getAttribute('href'),'deeplink')){e.preventDefault();mL.hidden=true;mB.textContent='That Xaman link was not trusted, so it was not opened.'}});
       const wait=ms=>new Promise(r=>setTimeout(r,ms));
       let wake=null;const nap=ms=>new Promise(r=>{const t=setTimeout(()=>{wake=null;r()},ms);wake=()=>{clearTimeout(t);wake=null;r()}});
-      const LBL={refunded:'Refunded',payment_pending:'Awaiting payment',mint_pending:'Mint pending',ready_to_claim:'Ready to claim',delivered:'Delivered',error:'Needs attention'};
+      const LBL={refunded:'Refunded',payment_pending:'Payments paused',mint_pending:'Delivery paused',ready_to_claim:'Delivery paused',delivered:'Delivered',error:'Needs attention'};
       const quoteExpired=o=>o.expired||Date.now()>=Number(o.expiresAt);
       const hasReceipt=o=>!!o.payment||!!o.needsPaymentReview||(o.receipts||[]).length>0;
       const canPay=o=>o.uiState==='payment_pending'&&!quoteExpired(o)&&!hasReceipt(o)&&o.paymentStatus!=='submitted';
@@ -928,10 +928,11 @@
       const listed=o=>o.needsPaymentReview||(o.state!=='delivered'&&!(o.state==='quoted'&&o.expired)&&!(o.state==='expired'&&!o.payment&&Date.now()-(+o.expiresAt||0)>864e5));
       function orderNote(o){const ref=' Order '+o.orderId+'.';
         if(o.state==='delivered')return 'Delivered to your wallet.';
+        if(o.payment)return 'Your original payment is recorded. NFT delivery is paused. Do not pay again.'+ref;
         if(o.refund)return 'Late payment refunded in full. No NFT was minted. Refund transaction '+o.refund.txHash+'.';
         if(hasReceipt(o)&&!o.payment)return 'Payment received and recorded for review. Do not pay again. No NFT has been credited.'+ref;
         if(o.paymentStatus==='submitted')return 'Payment signed and submitted; confirming on the ledger. Do not pay again.'+ref;
-        const r=readyItems(o).length;if(r)return r+' item'+(r>1?'s':'')+' ready to claim.';
+        const r=readyItems(o).length;if(r)return r+' item'+(r>1?'s':'')+' saved. NFT delivery and claims are paused. Do not pay again.';
         if(isPayPending(o)&&!o.payment)return st.paid?(o.expired||o.state==='expired'?'Quote expired with no payment found yet. If you already sent one, check again; do not pay again.':'Awaiting your approval. Open Xaman to approve this payment. No payment has been confirmed.')
           :'Purchases are paused. No payment has been found for this order yet. If you sent one before purchases were paused, it may still be recorded: check again later or contact support with this order. Do not pay again.'+ref;
         if(o.uiState==='mint_pending')return st.paid?'Payment recorded. Minting is in progress.':'Payment recorded. New minting is on hold while purchases are paused; your order is saved. Do not pay again.'+ref;
@@ -957,7 +958,7 @@
         document.querySelectorAll('#hzPacks [data-pack]').forEach(b=>{b.disabled=!canBuy;b.setAttribute('aria-describedby','hzWNote')});
         const n=st.paid?queue().length:0,c=$('hzCoins');c.innerHTML='';for(let i=0;i<Math.min(n,20);i++){const e=document.createElement('div');e.className='hz-coin';e.textContent='HZ';c.append(e)}
         $('hzCCount').textContent=st.demo?'∞ demo':n+' paid spin'+(n===1?'':'s');
-        if(!st.paid)$('hzWNote').textContent="Purchasing and NFT delivery are paused. Already paid? Do not pay again or approve an old payment request. Keep your payment transaction ID. Wallet sign-in and order status are temporarily unavailable. Free spins are a preview only and do not mint an NFT.";
+        if(!st.paid)$('hzWNote').textContent="Purchasing and NFT delivery are paused. Already paid? Do not pay again or approve an old payment request. Keep your payment transaction ID. Connect your wallet to check your saved orders. Delivery remains paused. Free spins are a preview only and do not mint an NFT.";
         else $('hzWNote').textContent=st.account?'1 paid spin = 1 HOMEEZ NFT. Priced in USD, paid in XRP at the live rate. With no paid spins loaded, the knob gives a free spin (no NFT).':'Connect Xaman to buy spins. Free spins work without a wallet.';
         const oe=$('hzOrdersErr'),orb=$('hzOrdersRetry');oe.hidden=!(st.account&&st.ordersUnavailable);orb.disabled=ordersRetrying;orb.setAttribute('aria-busy',String(ordersRetrying));orb.textContent=ordersRetrying?'Retrying…':'Retry orders';
         const ol=$('hzOrders');ol.innerHTML='';const open=st.account?st.orders.filter(listed):[];
@@ -971,7 +972,7 @@
           if(o.paymentStatus==='submitted'){const e=document.createElement('p');e.className='hz-pay-help';e.setAttribute('role','status');e.textContent='Submitted — confirming on the ledger. Do not pay again.';d.append(e)}
           // every item that is ready_to_claim is claimable, whatever the overall order status (claiming is not a purchase)
           for(const r of readyItems(o)){if(UX&&!UX.showClaimFallback(o,r,autoSeen,autoActive))continue;const b=document.createElement('button');b.className='btn hz-claim-primary';b.type='button';b.dataset.act='claim';b.dataset.idx=r.idx;
-            b.textContent='Claim NFT · '+(r.name||r.fig||'item')+(r.edition!=null?' #'+r.edition:'');b.onclick=()=>claim({orderId:o.orderId,idx:r.idx,item:r},document.createElement('div')).then(()=>refresh());d.append(b)}
+            b.disabled=true;b.textContent='Delivery paused · '+(r.name||r.fig||'item')+(r.edition!=null?' #'+r.edition:'');b.onclick=()=>claim({orderId:o.orderId,idx:r.idx,item:r},document.createElement('div')).then(()=>refresh());d.append(b)}
           if(o.state!=='delivered'){const b=document.createElement('button');b.className='btn';b.type='button';b.dataset.act='check';b.textContent=checking.has(o.orderId)?'Checking…':'Check status';b.disabled=checking.has(o.orderId);b.onclick=()=>checkOrder(o.orderId);d.append(b)}
           const txt=notes[o.orderId]||orderNote(o);if(txt){const e=document.createElement('div');e.className='hz-small';e.dataset.note='1';e.setAttribute('aria-live','polite');e.textContent=txt;d.append(e)}
           if(o.needsPaymentReview){const e=document.createElement('div');e.className='hz-small';e.textContent='Received XRP needs review. Funds are recorded; no refund has been sent. Contact support with order '+o.orderId+'.';d.append(e)}
@@ -1093,7 +1094,8 @@ if(!st.paid)return;if(!canPay(o)){await checkOrder(o.orderId);show('Check paymen
       // Reveal card claim area for a paid item
       let claimViewGeneration=0;
       function clearClaimUI(){claimViewGeneration++;const el=$('hzRClaim');el.replaceChildren();el.removeAttribute('data-item');}
-      async function claimUI(el,ref){
+      async function claimUI(el,ref){el.textContent='NFT delivery is paused. Your original order is retained. Do not pay again.';return;
+
         const generation=++claimViewGeneration,sg=sessGen,token=st.token,key=ref.orderId+':'+ref.idx;
         el.dataset.item=key;el.setAttribute('aria-live','polite');el.setAttribute('aria-atomic','true');
         const alive=()=>generation===claimViewGeneration&&sg===sessGen&&token===st.token;
@@ -1120,10 +1122,12 @@ if(!st.paid)return;if(!canPay(o)){await checkOrder(o.orderId);show('Check paymen
       // CLAIMUX v1: auto-open the existing claim request once per offer/payload, only when the backend reports ready_to_claim with an offer id.
       const UX=window.HZClaimUX||null;let hintId=null,autoBusy=false,autoActive=null;new MutationObserver(()=>{if(modal.hidden&&autoActive){autoActive=null;render();redrawCards()}}).observe(modal,{attributes:true,attributeFilter:['hidden']});const autoSeen=UX?UX.seenStore(localStorage):{has:()=>true,add:()=>{}};
       function redrawCards(){document.querySelectorAll('[data-item]').forEach(e=>{if(e._hzRedraw)e._hzRedraw()})}
-      function maybeAutoClaim(){if(!UX||autoBusy||!st.account||!st.token||!modal.hidden||paymentWindow&&paymentWindow.g===gen)return;
+      function maybeAutoClaim(){return; // Maintenance: never launch a claim automatically.
+if(!UX||autoBusy||!st.account||!st.token||!modal.hidden||paymentWindow&&paymentWindow.g===gen)return;
         const c=UX.autoClaimCandidate(st.orders,autoSeen);if(!c)return;autoSeen.add(c.key);autoBusy=true;autoActive=c.key;render();redrawCards();const k0=c.key;setTimeout(()=>{if(autoActive===k0){autoActive=null;render();redrawCards()}},60000);
         claim({orderId:c.orderId,idx:c.idx,item:c.item,auto:true},document.createElement('div')).finally(()=>{autoBusy=false})}
-      async function claim(ref,el){try{const p=vet(await req('POST','/api/orders/'+encodeURIComponent(ref.orderId)+'/items/'+encodeURIComponent(ref.idx)+'/claim'));
+      async function claim(ref,el){show('NFT delivery paused','Your original order is retained. Do not pay again.',null,null,'Close');return;
+try{const p=vet(await req('POST','/api/orders/'+encodeURIComponent(ref.orderId)+'/items/'+encodeURIComponent(ref.idx)+'/claim'));
           if(!UX||!UX.claimLinkOk(p)){autoActive=null;render();redrawCards();show('Claim request not verified','The claim request from HOMEEZ could not be verified, so nothing was opened. Your order is saved. Tap <b>Claim NFT</b> to try again, or contact support.',null,null,'Close');return}
           if(ref.auto){const k='uuid:'+p.uuid;if(autoSeen.has(k))return;autoSeen.add(k)}
           const g=show('Claim your HOMEEZ',(mob?'Open Xaman and accept the NFT offer.':'Scan with Xaman and accept the NFT offer.')+'<br><span class="hz-small">The offer is 0 XRP and only your wallet can accept it. A small XRPL network fee still applies when accepting.</span>',p);
