@@ -5,9 +5,9 @@
   <!-- HOMEEZ backend URL (trusted origin only; no query-string overrides). Empty = demo mode only (free, no NFT, sign-in unavailable). -->
   <meta name="homeez-api" content="https://homeez-api.houseofcauliman.com">
   <!-- Xaman sign-in availability. Needs homeez-api. "off" = sign-in unavailable. Independent of purchases; connecting grants no NFT. -->
-  <meta name="homeez-connect" content="on">
+  <meta name="homeez-connect" content="off">
   <!-- Purchase availability. "on" + homeez-api + sign-in available = paid spins enabled. Anything else = purchase controls shown disabled. -->
-  <meta name="homeez-paid" content="on">
+  <meta name="homeez-paid" content="off">
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>HOMEEZ Capsule Machine</title>
   <meta name="description" content="HOMEEZ Capsule Machine." />
@@ -629,11 +629,11 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/homeez/favicon-16x16.png?v=2" />
   <link rel="shortcut icon" href="/assets/favicons/homeez/favicon.ico?v=2" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/homeez/apple-touch-icon.png?v=2" />
-<script src="claimux.js?v=claimux4"></script>
+<script src="/homeez/claimux.js?v=claimux4"></script>
 <style>.hz-help-row{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px;margin:10px auto 0;padding:0;max-width:100%}.hz-hp{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;height:32px;min-width:0;margin:0;padding:0 12px;border:1px solid rgba(255,216,110,.55);border-radius:999px;background:rgba(0,0,0,.35);color:#ffd86e;font:600 12px/1 system-ui,-apple-system,Arial,sans-serif;letter-spacing:0;text-transform:none;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:clip;cursor:pointer;box-shadow:none}.hz-hp:hover{background:rgba(255,216,110,.12)}.hz-hp:focus-visible{outline:2px solid #ffd86e;outline-offset:2px}.hz-hp .s{display:none}@media(max-width:420px){.hz-help-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;width:100%}.hz-hp{width:100%;padding:0 4px;font-size:11.5px}.hz-hp .l{display:none}.hz-hp .s{display:inline}}@media(max-width:340px){.hz-help-row{grid-template-columns:repeat(2,minmax(0,1fr))}.hz-help-row>.hz-hp:last-child{grid-column:1/-1}}</style>
 </head>
 <body>
-  <div class="mint-bar" role="status">Now minting · Series 1 on XRPL · 1 spin $5 · 5 spins $20 in $XRP</div>
+  <div class="mint-bar" role="status">Purchasing and NFT delivery are paused. Already paid? Do not pay again.</div>
   <header class="topbar">
     <div class="topbar-inner">
       <a class="brand" href="https://houseofcauliman.com/">
@@ -652,8 +652,8 @@
     <section class="hero">
       <div class="wrap hero-grid">
         <div>
-          <span class="mint-pill">Now Minting</span>
-          <p class="mint-sub">HOMEEZ Series 1 mints on XRPL. Free spins are open too.</p>
+          <span class="mint-pill">Purchasing &amp; delivery paused</span>
+          <p class="mint-sub">Purchasing and NFT delivery are paused while we resolve a delivery issue. Already paid? Do not pay again or approve an old payment request. Keep your payment transaction ID. Wallet sign-in and order status are temporarily unavailable. Free spins are a preview only and do not mint an NFT.</p>
           <img class="homeez-brand-logo" src="/homeez/assets/HOMEEZ_logo.webp?v=2" alt="HOMEEZ" loading="eager">
           <h1>HOMEEZ Capsule Machine</h1>
           <p class="sub">Grab the chrome knob and give it a full twist. A capsule drops. Crack it open to see which HOMEEZ you pulled. 18 to collect.</p>
@@ -687,10 +687,10 @@
                 <button id="hzDisconnect" class="btn" type="button" hidden>Disconnect</button></div>
               <div class="hz-slot" aria-label="Coin slot"><div class="hz-slot-mouth"></div><div id="hzCoins" class="hz-coins"></div><span id="hzCCount" class="hz-ccount">0 paid spins</span></div>
               <div id="hzPacks" class="hz-packs" role="group" aria-label="Buy paid spins">
-                <button class="btn" type="button" data-pack="1">1 spin · $5</button>
-                <button class="btn" type="button" data-pack="5">5 spins · $20</button>
+                <button class="btn" type="button" data-pack="1" disabled>1 spin · $5</button>
+                <button class="btn" type="button" data-pack="5" disabled>5 spins · $20</button>
               </div>
-              <p id="hzWNote" class="hz-small">1 paid spin = 1 HOMEEZ NFT. Priced in USD, paid in XRP at the live rate.</p>
+              <p id="hzWNote" class="hz-small">Purchasing and NFT delivery are paused while we resolve a delivery issue. Already paid? Do not pay again or approve an old payment request. Keep your payment transaction ID. Wallet sign-in and order status are temporarily unavailable. Free spins are a preview only and do not mint an NFT.</p>
               <div id="hzOrdersErr" class="hz-orders-err" role="status" hidden><span>Orders unavailable right now. You are still signed in, and your orders are saved.</span> <button id="hzOrdersRetry" class="btn" type="button">Retry orders</button></div>
               <div id="hzOrders" class="hz-orders" hidden></div>
               <div class="hz-help-row" id="how-to-claim"><a class="hz-hp" href="support/#how-to-claim" data-howto aria-label="How to claim?" title="How to claim?"><span class="l">How to claim?</span><span class="s" aria-hidden="true">How to claim</span></a><button class="hz-hp" id="hzCheckOrder" type="button" aria-label="Check My Order" title="Check My Order"><span class="l">Check My Order</span><span class="s" aria-hidden="true">My order</span></button><a class="hz-hp" href="my-homeez.html" aria-label="Return to My HOMEEZ" title="Return to My HOMEEZ"><span class="l">Return to My HOMEEZ</span><span class="s" aria-hidden="true">My HOMEEZ</span></a></div>
@@ -726,8 +726,8 @@
     <section class="coming" id="coming">
       <div class="wrap coming-box">
         <div class="eyebrow">What's coming</div>
-        <h2>Your HOMEEZ, <span>off the shelf.</span><img class="coming-boss" src="assets/HOMEEZ_BOSS_coming.webp" alt="BOSS" width="126" height="160" loading="lazy"></h2>
-        <p class="coming-live"><b>Now minting</b>Series 1 is live on XRPL. 1 spin for $5 or 5 spins for $20, paid in $XRP.</p>
+        <h2>Your HOMEEZ, <span>off the shelf.</span><img class="coming-boss" src="/homeez/assets/HOMEEZ_BOSS_coming.webp" alt="BOSS" width="126" height="160" loading="lazy"></h2>
+        <p class="coming-live"><b>Purchasing and NFT delivery paused</b>Series 1 purchases are temporarily unavailable. If you already paid, do not pay again.</p>
         <p class="coming-lead">Next up, we're bringing your crew to life, on screen and on your shelf.</p>
         <div class="coming-grid">
           <article class="coming-card">
@@ -889,7 +889,7 @@
       const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
       let sessGen=0;
       // o.token: send this bearer token instead of the current one; o.signal: abort with the auth attempt
-      const req=async(m,p,b,o={})=>{const tok=o.token!==undefined?o.token:st.token;let r;
+      const req=async(m,p,b,o={})=>{throw Object.assign(new Error('Purchasing and NFT delivery are paused. Do not pay again.'),{code:'maintenance'}); /* Maintenance: block all wallet/order API requests, including stale callbacks. */const tok=o.token!==undefined?o.token:st.token;let r;
         const sig=o.signal&&AbortSignal.any?AbortSignal.any([AbortSignal.timeout(15000),o.signal]):AbortSignal.timeout(15000);
         try{r=await fetch(st.api+p,{method:m,signal:sig,headers:{'content-type':'application/json',...(tok?{authorization:'Bearer '+tok}:{})},body:b&&JSON.stringify(b)})}
         catch(e){if(o.signal&&o.signal.aborted)throw Object.assign(new Error('Cancelled'),{code:'aborted'});throw Object.assign(new Error(e&&e.name==='TimeoutError'?'The wallet service took too long to respond.':'Could not reach the wallet service.'),{code:'offline'})}
@@ -952,12 +952,12 @@
         const cb=$('hzConnect');cb.hidden=!!st.account;cb.disabled=st.connecting||st.verifying||!(st.signin==='ready'||st.signin==='offline');cb.setAttribute('aria-busy',String(st.connecting||st.verifying));
         cb.textContent=st.connecting||st.verifying?'Connecting…':st.signin==='offline'?'Retry Xaman connect':'Connect Xaman';$('hzDisconnect').hidden=!st.account;
         $('hzAddr').textContent=short(st.account);$('hzAddr').title=st.account||'';
-        $('hzStatus').textContent=st.account?'Connected':st.verifying?'Checking wallet…':{unconfigured:'Wallet sign-in coming soon',loading:'Checking wallet service…',offline:'Wallet service unavailable',ready:'Not connected'}[st.signin]||'';
+        $('hzStatus').textContent=st.account?'Connected':st.verifying?'Checking wallet…':{unconfigured:'Wallet sign-in and order status paused',loading:'Checking wallet service…',offline:'Wallet service unavailable',ready:'Not connected'}[st.signin]||'';
         const canBuy=st.paid&&!!st.account;$('hzPacks').hidden=false;$('hzPacks').classList.toggle('is-off',!canBuy);
         document.querySelectorAll('#hzPacks [data-pack]').forEach(b=>{b.disabled=!canBuy;b.setAttribute('aria-describedby','hzWNote')});
         const n=st.paid?queue().length:0,c=$('hzCoins');c.innerHTML='';for(let i=0;i<Math.min(n,20);i++){const e=document.createElement('div');e.className='hz-coin';e.textContent='HZ';c.append(e)}
         $('hzCCount').textContent=st.demo?'∞ demo':n+' paid spin'+(n===1?'':'s');
-        if(!st.paid)$('hzWNote').textContent=(st.account?'Wallet connected. Connecting does not give you an NFT. ':'')+'Paid spins are not open yet. Mint coming soon. Priced in USD, paid in XRP: 1 spin $5, 5 spins $20. Free spins work now: BOSS preview only, no NFT.';
+        if(!st.paid)$('hzWNote').textContent="Purchasing and NFT delivery are paused. Already paid? Do not pay again or approve an old payment request. Keep your payment transaction ID. Wallet sign-in and order status are temporarily unavailable. Free spins are a preview only and do not mint an NFT.";
         else $('hzWNote').textContent=st.account?'1 paid spin = 1 HOMEEZ NFT. Priced in USD, paid in XRP at the live rate. With no paid spins loaded, the knob gives a free spin (no NFT).':'Connect Xaman to buy spins. Free spins work without a wallet.';
         const oe=$('hzOrdersErr'),orb=$('hzOrdersRetry');oe.hidden=!(st.account&&st.ordersUnavailable);orb.disabled=ordersRetrying;orb.setAttribute('aria-busy',String(ordersRetrying));orb.textContent=ordersRetrying?'Retrying…':'Retry orders';
         const ol=$('hzOrders');ol.innerHTML='';const open=st.account?st.orders.filter(listed):[];
@@ -1071,12 +1071,15 @@
         catch(e){if(e.code==='aborted'||!att.alive())return;if(p)pend.clearIf(p.uuid,att.id);if(g===-1||g===gen)show('Sign-in failed',esc(e.message)+'<br><span class="hz-small">No wallet was connected.</span>',null,null,'Close')}}
       window.addEventListener('storage',e=>{if(e.key===sessionKey())location.reload();});
       async function disconnect(){pend.clearAll();const t=st.token;try{if(t)await req('POST','/api/auth/signout',null,{token:t})}catch(e){}if(!st.token||st.token===t)forget();for(const k in notes)delete notes[k];render();info.textContent='Wallet disconnected.';$('hzConnect').focus()}
-      async function buy(pack){if(!st.paid||!st.account)return;try{const o=await req('POST','/api/orders',{pack});upsert(o,o.orderId);render();quoteView(o)}catch(e){show('Quote problem',esc(e.message),null,null,'Close')}}
-      function quoteView(o){const left=()=>Math.max(0,Math.round((o.expiresAt-Date.now())/1000));
+      async function buy(pack){return; // Maintenance: no quotes.
+if(!st.paid||!st.account)return;try{const o=await req('POST','/api/orders',{pack});upsert(o,o.orderId);render();quoteView(o)}catch(e){show('Quote problem',esc(e.message),null,null,'Close')}}
+      function quoteView(o){return; // Maintenance: no payment prompts.
+const left=()=>Math.max(0,Math.round((o.expiresAt-Date.now())/1000));
         const txt=()=>`<b class="hz-qamt">${esc(o.xrp)} XRP</b><br>${esc(o.spins)} spin${o.spins>1?'s':''} · $${(+o.usd).toFixed(2)} USD<br>Rate $${(+o.rate).toFixed(4)}/XRP · <span role="timer" aria-live="off">Time to approve ${Math.floor(left()/60)}:${String(left()%60).padStart(2,'0')}</span><br>Open Xaman to approve this payment.<br><span class="hz-small">Pays the HOMEEZ operations wallet ${esc(short(o.destination))} · ref ${esc(o.orderId.slice(0,8))}</span>`;
         const g=show('Confirm your spins',txt(),null,{label:'Pay with Xaman',fn:()=>payFlow(o)});
         const t=setInterval(()=>{if(g!==gen){clearInterval(t);return}if(left()<=0){clearInterval(t);mB.textContent='Quote expired. Do not approve an old request. Check status before starting another purchase.';mA.hidden=true;checkOrder(o.orderId);DLG.update(modal);return}mB.innerHTML=txt()},1000)}
-      async function payFlow(o){if(!st.paid)return;if(!canPay(o)){await checkOrder(o.orderId);show('Check payment status','This payment link is no longer actionable. Check the saved order; do not pay again.',null,null,'Close');return}try{const p=vet(await req('POST','/api/orders/'+o.orderId+'/pay'));
+      async function payFlow(o){return; // Maintenance: no payment requests.
+if(!st.paid)return;if(!canPay(o)){await checkOrder(o.orderId);show('Check payment status','This payment link is no longer actionable. Check the saved order; do not pay again.',null,null,'Close');return}try{const p=vet(await req('POST','/api/orders/'+o.orderId+'/pay'));
           if(quoteExpired(o)){await checkOrder(o.orderId);show('Quote expired','Do not approve an old Xaman request. Check status before starting another purchase.',null,null,'Close');return}
           const head=`<b class="hz-qamt">${esc(o.xrp)} XRP</b> · ${esc(o.spins)} spin${o.spins>1?'s':''} · $${(+o.usd).toFixed(2)}<br>`;
           const g=show('Pay in Xaman',head+(mob?'Open Xaman and sign the payment.':'Scan with Xaman and sign the payment.')+'<br><span id="hzPSt" role="status">Awaiting your approval in Xaman. No payment confirmed.</span><p role="timer" aria-live="off" data-quote-countdown="'+esc(o.orderId)+'">'+esc(countdown(o))+'</p>',p);paymentWindow={o,g};
