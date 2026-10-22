@@ -1131,7 +1131,10 @@ try{const p=vet(await req('POST','/api/orders/'+encodeURIComponent(ref.orderId)+
           if(!UX||!UX.claimLinkOk(p)){autoActive=null;render();redrawCards();show('Claim request not verified','The claim request from HOMEEZ could not be verified, so nothing was opened. Your order is saved. Tap <b>Claim NFT</b> to try again, or contact support.',null,null,'Close');return}
           if(ref.auto){const k='uuid:'+p.uuid;if(autoSeen.has(k))return;autoSeen.add(k)}
           const g=show('Claim your HOMEEZ',(mob?'Open Xaman and accept the NFT offer.':'Scan with Xaman and accept the NFT offer.')+'<br><span class="hz-small">The offer is 0 XRP and only your wallet can accept it. A small XRPL network fee still applies when accepting.</span>',p);
-          for(let i=0;i<240&&g===gen;i++){await nap(2500);if(g!==gen)break;const o=await req('POST','/api/orders/'+ref.orderId+'/items/'+ref.idx+'/check');const it=o.items[ref.idx];
+          for(let i=0;i<240&&g===gen;i++){await nap(2500);if(g!==gen)break;const o=await req('POST','/api/orders/'+ref.orderId+'/items/'+ref.idx+'/check');const it=Array.isArray(o?.items)?o.items.find(x=>x.idx===ref.idx):null;
+            if(o?.orderId!==ref.orderId||!it||!['mint_pending','ready_to_claim','delivered','error'].includes(it.uiState)||(ref.item?.nft_id&&it.nft_id!==ref.item.nft_id))throw new Error('Invalid claim confirmation. Check this saved order; do not pay again.');
+            if(it.uiState==='error')throw new Error(it.error||'Claim needs attention. Your original order is saved; do not pay again.');
+            if(it.uiState==='delivered'&&(!it.nft_id||typeof it.nft_id!=='string'))throw new Error('Invalid NFT delivery confirmation. Check this saved order; do not pay again.');
             if(it.uiState==='delivered'){hide();sChime();if(el.dataset.item===ref.orderId+':'+ref.idx&&!reveal.hidden)claimUI(el,{...ref,item:it});else refresh();return}}
         if(g===gen){show('Claim still pending','Confirmation timed out. Your order is saved; check or resume the claim later.',null,null,'Close');await refresh();}
         }catch(e){if(autoActive){autoActive=null;render();redrawCards()}if(e.code==='delivered'){hide();refresh();return}show('Claim problem',esc(e.message),null,null,'Close')}}
