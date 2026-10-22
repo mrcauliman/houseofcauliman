@@ -7,7 +7,7 @@
   <!-- Xaman sign-in availability. Needs homeez-api. "off" = sign-in unavailable. Independent of purchases; connecting grants no NFT. -->
   <meta name="homeez-connect" content="on">
   <!-- Purchase availability. "on" + homeez-api + sign-in available = paid spins enabled. Anything else = purchase controls shown disabled. -->
-  <meta name="homeez-paid" content="off">
+  <meta name="homeez-paid" content="on">
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>HOMEEZ Capsule Machine</title>
   <meta name="description" content="HOMEEZ Capsule Machine." />
@@ -902,7 +902,7 @@
         DLG.open(modal,{onEsc:hide,focus:!mL.hidden?mL:!mA.hidden?mA:mC});DLG.update(modal);return ++gen};
       function hide(){const sign=gen===signinGen;if(sign){if(signinPend)pend.clearIf(signinPend.uuid,signinPend.id);cancelAttempt(true)}DLG.close(modal,st.account?$('hzDisconnect'):$('hzConnect'));gen++;if(wake)wake()}
       mC.onclick=hide;mQT.onclick=()=>{mQ.hidden=false;mQT.hidden=true;DLG.update(modal)};
-      mL.addEventListener('click',e=>{if(paymentWindow&&paymentWindow.g===gen&&(quoteExpired(paymentWindow.o)||paymentWindow.o.paymentStatus==='submitted')){e.preventDefault();tickPayments();return}if(!safeLink(mL.getAttribute('href'),'deeplink')){e.preventDefault();mL.hidden=true;mB.textContent='That Xaman link was not trusted, so it was not opened.'}});
+      mL.addEventListener('click',e=>{if(paymentWindow&&paymentWindow.g===gen&&(!st.paid||quoteExpired(paymentWindow.o)||paymentWindow.o.paymentStatus==='submitted')){e.preventDefault();tickPayments();return}if(!safeLink(mL.getAttribute('href'),'deeplink')){e.preventDefault();mL.hidden=true;mB.textContent='That Xaman link was not trusted, so it was not opened.'}});
       const wait=ms=>new Promise(r=>setTimeout(r,ms));
       let wake=null;const nap=ms=>new Promise(r=>{const t=setTimeout(()=>{wake=null;r()},ms);wake=()=>{clearTimeout(t);wake=null;r()}});
       const LBL={refunded:'Refunded',payment_pending:'Awaiting payment',mint_pending:'Minting',ready_to_claim:'Ready to claim',delivered:'Delivered',error:'Needs attention'};
@@ -914,7 +914,7 @@
       let paymentWindow=null;
       function tickPayments(){for(const e of document.querySelectorAll('[data-quote-countdown]')){const o=st.orders.find(x=>x.orderId===e.dataset.quoteCountdown);if(o)e.textContent=countdown(o)}
         for(const b of document.querySelectorAll('[data-pay-order]')){const o=st.orders.find(x=>x.orderId===b.dataset.payOrder);if(o)b.disabled=!st.paid||!canPay(o)}
-        if(paymentWindow&&paymentWindow.g===gen&&(quoteExpired(paymentWindow.o)||paymentWindow.o.paymentStatus==='submitted')){mL.hidden=true;mL.removeAttribute('href');mQ.hidden=true;mQT.hidden=true;mA.hidden=true;const e=$('hzPSt');if(e)e.textContent=paymentWindow.o.paymentStatus==='submitted'?'Payment submitted; confirming on the ledger. Do not pay again.':'Quote expired. Do not approve it in Xaman. Checking whether a payment was already submitted; do not pay again.';}
+        if(paymentWindow&&paymentWindow.g===gen&&(!st.paid||quoteExpired(paymentWindow.o)||paymentWindow.o.paymentStatus==='submitted')){mL.hidden=true;mL.removeAttribute('href');mQ.hidden=true;mQT.hidden=true;mA.hidden=true;const e=$('hzPSt');if(e)e.textContent=!st.paid?'Purchasing is paused. Do not approve this payment; use your saved order.':paymentWindow.o.paymentStatus==='submitted'?'Payment submitted; confirming on the ledger. Do not pay again.':'Quote expired. Do not approve it in Xaman. Checking whether a payment was already submitted; do not pay again.';}
       }
       const short=a=>a?a.slice(0,6)+'…'+a.slice(-4):'';
       const queue=()=>{const q=[];for(const o of st.orders.slice().reverse())for(const it of o.items)if(!it.revealed)q.push({o,it});return q};
@@ -1016,8 +1016,11 @@
           if(r==='ok')info.textContent='Orders loaded.';else if(r==='auth')info.textContent='Your wallet session ended. Connect again to check orders.';
           else if(r==='error')info.textContent='Orders are still unavailable. Your wallet stays signed in; try Retry orders again shortly.'}
         finally{ordersRetrying=false;render()}}
-      async function loadCfg(){st.signin='loading';render();try{const c=await req('GET','/api/config');if(!c||c.apiVersion!==2)throw new Error('Order API v2 required');st.cfg=c;st.signin='ready';st.paid=st.paidFlag}
-        catch(e){st.cfg=null;st.signin='offline';st.paid=false}st.demo=!st.paid}
+      let cfgGeneration=0;
+      async function loadCfg(){const mine=++cfgGeneration;st.signin='loading';render();try{const c=await req('GET','/api/config');if(mine!==cfgGeneration)return;if(!c||c.apiVersion!==2)throw new Error('Order API v2 required');st.cfg=c;st.signin='ready';st.paid=st.paidFlag&&c.purchasingAvailable===true}
+        catch(e){if(mine!==cfgGeneration)return;st.cfg=null;st.signin='offline';st.paid=false}st.demo=!st.paid;
+        document.querySelector('.mint-bar').textContent=st.paid?'Purchasing is available. Already paid? Use your saved order; do not pay again.':'Purchasing is temporarily paused while we investigate a technical issue. Already paid? Use your saved order; do not pay again.';
+        if(!st.paid&&paymentWindow&&paymentWindow.g===gen){hide();paymentWindow=null;}const label=document.querySelector('.coming-live b');if(label)label.textContent=st.paid?'Series 1 purchasing available':'Purchasing is temporarily paused';}
       async function restoreSession(){let s=null;try{s=JSON.parse(localStorage.getItem(sessionKey())||'null')}catch(e){}
         if(!(s&&typeof s.t==='string'&&s.t))return;if(typeof s.a!=='string'||!s.a){forget();return}
         try{const r=await establish(s.t,s.a);if(r==='auth')info.textContent='Your wallet session ended. Connect again to check orders.';else if(r==='partial')info.textContent='Signed in, but your orders could not be loaded. Use Retry orders.'}
@@ -1025,11 +1028,12 @@
       function badPending(pd){if(pd)pend.clearRaw(pd.raw);show('Sign-in link not trusted','A saved Xaman sign-in link was not valid, so it was cleared and not opened. No wallet was connected. You can connect again.',null,null,'Close')}
       async function init(){if(!st.connectFlag){st.signin='unconfigured';st.paid=false;st.demo=true;render();return}
         await loadCfg();if(st.signin==='ready')await restoreSession();render();setInterval(tickPayments,1000);
+        let availabilityBusy=false;setInterval(async()=>{if(document.hidden||availabilityBusy)return;availabilityBusy=true;try{await loadCfg();render()}finally{availabilityBusy=false}},30000);
         // unfinished paid orders keep moving even after a refresh / closed browser
         // while purchases are off this background check is bounded (15 rounds ≈ 2 min per page load); Check status stays available
         let autoRounds=0;setInterval(()=>{if(!st.paid&&autoRounds>=15)return;if(st.account&&st.orders.some(o=>['payment_pending','mint_pending','ready_to_claim'].includes(o.uiState)&&!(o.uiState==='payment_pending'&&o.expired)))
           Promise.all(st.orders.filter(o=>['payment_pending','mint_pending'].includes(o.uiState)&&!o.expired||o.uiState==='mint_pending').map(o=>req('POST','/api/orders/'+o.orderId+'/check').catch(()=>{}))).then(()=>{autoRounds++;refresh()})},8000);
-        document.addEventListener('visibilitychange',()=>{if(document.hidden)return;if(wake)wake();if(st.account&&!st.verifying)refresh()});
+        document.addEventListener('visibilitychange',()=>{if(document.hidden)return;loadCfg().then(render);if(wake)wake();if(st.account&&!st.verifying)refresh()});
         window.addEventListener('pageshow',e=>{if(e.persisted&&wake)wake()});
         // returning from the Xaman app (mobile deep link) may reload this tab: resume the pending sign-in check.
         // If config is unavailable now, the pending entry is kept and resumed after a successful Retry.
