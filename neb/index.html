@@ -1,1 +1,329 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>NEB · Your trading, understood</title><link rel="stylesheet" href="./style.css"><script src="./app.js" defer></script></head><body><a href="#main" class="skip">Skip to content</a><aside class="rail"><div class="brand"><img src="./assets/neb-icon.png" alt=""><div><strong>NEB</strong><small>Network Exchange Bot</small></div></div><nav aria-label="Main navigation"><button data-page="home" aria-current="page"><span aria-hidden="true">⌂</span>Home</button><button data-page="wallet"><span aria-hidden="true">▣</span>My Wallet</button><button data-page="trading"><span aria-hidden="true">⇄</span>Trading</button><button data-page="activity"><span aria-hidden="true">◷</span>Activity</button><button data-page="settings"><span aria-hidden="true">⚙</span>Settings</button></nav><div class="rail-note"><span class="dot"></span> Preview mode<p>Your funds stay yours.<br>No wallet connected.</p><button data-go="settings" class="text-button">Help &amp; access →</button></div></aside><div class="workspace"><header><span class="breadcrumb">YOUR NEB SPACE <span>/</span> <b id="crumb">Home</b></span><span class="badge">Coming soon preview</span></header><main id="main" tabindex="-1"></main><footer>Network Exchange Bot · Built for XRPL / XRP<span>Coming soon. No live market or account connection.</span></footer></div></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>NEB · Network Exchange Bot · Preview, launching soon</title>
+  <meta name="description" content="Public preview of NEB, the Network Exchange Bot. A non-custodial XRP Ledger auto-trading app that is launching soon. This page does not connect a wallet, take payment, or trade.">
+  <link rel="canonical" href="https://houseofcauliman.com/neb/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="NEB · Network Exchange Bot">
+  <meta property="og:description" content="Preview, launching soon. A look at the NEB app. No wallet, no payment, and no trading on this page.">
+  <meta property="og:url" content="https://houseofcauliman.com/neb/">
+  <meta property="og:image" content="https://houseofcauliman.com/neb/assets/neb_icon.webp">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="NEB · Network Exchange Bot">
+  <meta name="twitter:description" content="Preview, launching soon. No wallet, no payment, and no trading on this page.">
+  <meta name="twitter:image" content="https://houseofcauliman.com/neb/assets/neb_icon.webp">
+  <meta name="theme-color" content="#000000">
+  <link rel="icon" href="../assets/favicons/neb/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicons/neb/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="../assets/favicons/neb/apple-touch-icon.png">
+  <link rel="stylesheet" href="./style.css?v=20261024">
+  <script src="./app.js?v=20261024" defer></script>
+</head>
+<body>
+  <a class="skip" href="#welcome">Skip to preview</a>
+
+  <div class="topbar">
+    <p class="banner">Preview, launching soon</p>
+    <div class="banner-sub">
+      <p>No wallet, payment, or trading.</p>
+      <a class="notify" href="mailto:mrcauliman@gmail.com?subject=NEB%20launch%20notification">Get notified</a>
+    </div>
+    <nav class="jump" aria-label="Preview screens">
+      <a href="#welcome" data-screen-link>Welcome</a>
+      <a href="#signin" data-screen-link>Sign in</a>
+      <a href="#create" data-screen-link>Wallet</a>
+      <a href="#fund" data-screen-link>Fund</a>
+      <a href="#access" data-screen-link>Access</a>
+      <a href="#limits" data-screen-link>Limits</a>
+      <a href="#dash" data-screen-link>Dashboard</a>
+      <a href="#plans" data-screen-link>Plans</a>
+    </nav>
+  </div>
+
+  <main class="stage" id="preview">
+    <section class="screen" id="signin" aria-labelledby="signin-title">
+      <div class="nav">
+        <a class="back" href="#welcome">‹ Back</a>
+        <span class="steps">Step 1 of 5</span>
+      </div>
+      <h1 id="signin-title" tabindex="-1">Sign in with Xaman</h1>
+      <p class="sub">The future sign-in screen. Nothing here can be scanned or approved.</p>
+      <div class="card qr-wrap">
+        <div class="qr" role="img" aria-label="Example placeholder. Not a sign-in code.">
+          <svg viewBox="0 0 29 29" aria-hidden="true">
+            <rect width="29" height="29" fill="#fff"/>
+            <path fill="#111" d="M2 2h7v7H2zm1 1v5h5V3zm1 1h3v3H4zm12-2h7v7h-7zm1 1v5h5V3zm1 1h3v3h-3zM2 16h7v7H2zm1 1v5h5v-5zm1 1h3v3H4z"/>
+            <path fill="#111" d="M12 2h2v2h-2zm0 4h2v3h-2zM16 12h3v2h-3zm4 0h3v2h-3zm-8 2h2v2h-2zm4 2h2v3h-2zm6 0h3v2h-3zM12 16h2v2h-2zm4 4h2v3h-2zm-4 2h3v2h-3zm8-2h3v5h-3z"/>
+          </svg>
+          <span class="ex">EXAMPLE</span>
+        </div>
+        <p class="note">Not a sign-in code. This preview does not open Xaman.</p>
+      </div>
+      <div class="spacer"></div>
+      <button class="btn" type="button" disabled>Open Xaman &amp; Approve<span class="soon">Coming soon</span></button>
+      <p class="fine">Does not connect a wallet.</p>
+    </section>
+
+    <section class="screen" id="create" aria-labelledby="create-title">
+      <div class="nav">
+        <a class="back" href="#signin">‹ Back</a>
+        <span class="steps">Step 2 of 5</span>
+      </div>
+      <h1 id="create-title" tabindex="-1">Create your NEB wallet</h1>
+      <p class="sub">A separate wallet just for trading. Your main wallet stays untouched.</p>
+      <div class="card">
+        <div class="step"><div class="num">1</div><div><b>In Xaman, tap “Add account”</b><small>Choose “Generate a new account.”</small></div></div>
+        <div class="step"><div class="num">2</div><div><b>Write down your recovery phrase</b><small>On paper, kept somewhere safe.</small></div></div>
+        <div class="step"><div class="num">3</div><div><b>Name it “NEB Trading”</b><small>So it’s easy to spot later.</small></div></div>
+        <div class="step"><div class="num">4</div><div><b>Come back here</b><small>NEB will find it when you sign in.</small></div></div>
+      </div>
+      <div class="callout">
+        <b>NEB never sees your recovery phrase.</b>
+        <p>It’s created and stored only in Xaman on your phone. Nobody from NEB will ever ask for it.</p>
+      </div>
+      <p class="note">These steps are a preview of the flow. This page cannot create a wallet.</p>
+      <div class="spacer"></div>
+      <button class="btn" type="button" disabled>I’ve created it<span class="soon">Coming soon</span></button>
+      <p class="fine">Does not create a wallet.</p>
+    </section>
+
+    <section class="screen" id="fund" aria-labelledby="fund-title">
+      <div class="nav">
+        <a class="back" href="#create">‹ Back</a>
+        <span class="steps">Step 3 of 5</span>
+      </div>
+      <h1 id="fund-title" tabindex="-1">How much to trade?</h1>
+      <p class="sub">NEB can only use what’s in your NEB wallet. That’s your limit.</p>
+      <p class="big">250 <span class="unit">XRP</span></p>
+      <p class="center"><span class="ex">EXAMPLE</span></p>
+      <div class="card" style="margin-top:16px">
+        <div class="chips" role="group" aria-disabled="true" aria-label="Example amount, coming soon">
+          <button class="chip" type="button" disabled>100</button>
+          <button class="chip on" type="button" disabled aria-pressed="true">250</button>
+          <button class="chip" type="button" disabled>500</button>
+          <button class="chip" type="button" disabled>Custom</button>
+        </div>
+        <input class="slider" type="range" min="10" max="2000" step="10" value="250" disabled aria-label="Example amount, 250 XRP, coming soon">
+      </div>
+      <div class="card">
+        <div class="row"><span>Amount to trade</span><span class="val">250 XRP</span></div>
+        <div class="row"><span>Wallet setup <small style="color:#a1a1a6">(held by the ledger)</small></span><span class="val">1 XRP</span></div>
+        <div class="row"><span>You’ll send <span class="ex">EXAMPLE</span></span><b>251 XRP</b></div>
+      </div>
+      <p class="note">Example amounts. The XRP Ledger sets aside a 1 XRP base reserve to keep a new wallet open. That reserve stays in the wallet. It is not a fee paid to NEB. A token trust line can raise it a little.</p>
+      <div class="spacer"></div>
+      <button class="btn" type="button" disabled>Fund with Xaman<span class="soon">Coming soon</span></button>
+      <p class="fine">Does not send XRP. No payment is created.</p>
+    </section>
+
+    <section class="screen" id="access" aria-labelledby="access-title">
+      <div class="nav">
+        <a class="back" href="#fund">‹ Back</a>
+        <span class="steps">Step 4 of 5</span>
+      </div>
+      <h1 id="access-title" tabindex="-1">Trading-only access</h1>
+      <p class="sub">Let NEB place and cancel trades in your NEB wallet. Nothing more.</p>
+      <div class="card">
+        <div class="can"><span class="dot ok" aria-hidden="true">✓</span>NEB can trade</div>
+        <div class="can"><span class="dot no" aria-hidden="true">✕</span>NEB can’t withdraw</div>
+      </div>
+      <div class="card">
+        <div class="row"><span>Take back access</span><span class="val">Anytime</span></div>
+        <div class="row"><span>Your main wallet</span><span class="val">Not involved</span></div>
+      </div>
+      <p class="note">A preview of a future permission. Access is not requested or granted here.</p>
+      <div class="spacer"></div>
+      <button class="btn" type="button" disabled>Approve in Xaman<span class="soon">Coming soon</span></button>
+      <p class="fine">Does not grant access.</p>
+    </section>
+
+    <section class="screen" id="limits" aria-labelledby="limits-title">
+      <div class="nav">
+        <a class="back" href="#access">‹ Back</a>
+        <span class="steps">Step 5 of 5</span>
+      </div>
+      <h1 id="limits-title" tabindex="-1">Your limits</h1>
+      <p class="sub">Preset for you. Change them now or anytime — once NEB launches.</p>
+      <p class="label">Risk level</p>
+      <div class="card">
+        <div class="seg" role="radiogroup" aria-disabled="true" aria-label="Risk level, example, coming soon">
+          <button type="button" disabled role="radio" aria-checked="false">Careful</button>
+          <button type="button" disabled role="radio" aria-checked="true">Balanced</button>
+          <button type="button" disabled role="radio" aria-checked="false">Bold</button>
+        </div>
+      </div>
+      <p class="label">Daily loss stop</p>
+      <div class="card">
+        <div class="row"><span>Pause if down</span><b>5%</b></div>
+        <input class="slider" type="range" min="1" max="20" value="5" disabled aria-label="Example daily loss stop, 5 percent, coming soon">
+      </div>
+      <p class="label">Max trade size</p>
+      <div class="card">
+        <div class="row"><span>Per trade</span><b>25 XRP</b></div>
+        <input class="slider" type="range" min="5" max="250" step="5" value="25" disabled aria-label="Example max trade size, 25 XRP, coming soon">
+      </div>
+      <div class="card">
+        <div class="split">
+          <div>
+            <b>Paper mode</b>
+            <p class="note">Practice with pretend XRP first</p>
+          </div>
+          <label class="tog">
+            <input type="checkbox" checked disabled>
+            <i aria-hidden="true"></i>
+            <span class="vh">Paper mode on. Example. Coming soon.</span>
+          </label>
+        </div>
+      </div>
+      <p class="note">Example settings for Balanced. Coming soon — nothing here can be changed, saved, or started.</p>
+      <div class="spacer"></div>
+      <button class="btn" type="button" disabled>Start NEB<span class="soon">Coming soon</span></button>
+      <p class="fine">Does not start trading.</p>
+    </section>
+
+    <section class="screen" id="dash" aria-labelledby="dash-title">
+      <div class="nav">
+        <span class="badge">PAPER MODE</span>
+        <span class="ex">EXAMPLE</span>
+      </div>
+      <h1 id="dash-title" tabindex="-1">NEB</h1>
+      <div class="card center">
+        <p class="note">NEB wallet balance</p>
+        <p class="big">251.40 <span class="unit">XRP</span></p>
+        <p><span class="ex">EXAMPLE</span></p>
+        <p class="note" style="margin-top:10px">Example balance only. Not a live balance. No results are shown.</p>
+      </div>
+      <div class="card">
+        <div class="split">
+          <div>
+            <b>NEB is running</b> <span class="ex">EXAMPLE</span>
+            <p class="note">Example control. Trading is off. Pause cannot be switched here.</p>
+          </div>
+          <label class="tog">
+            <input type="checkbox" checked disabled>
+            <i aria-hidden="true"></i>
+            <span class="vh">Running switch shown on. Example. Coming soon. Trading is off.</span>
+          </label>
+        </div>
+      </div>
+      <div class="grid3">
+        <button class="tile" type="button" disabled><span aria-hidden="true">+</span>Add funds<small class="soon">Coming soon</small></button>
+        <button class="tile" type="button" disabled><span aria-hidden="true">↑</span>Withdraw<small class="soon">Coming soon</small></button>
+        <button class="tile danger" type="button" disabled><span aria-hidden="true">⊘</span>Revoke access<small class="soon">Coming soon</small></button>
+      </div>
+      <p class="label">Recent activity · Example</p>
+      <div class="card">
+        <p class="note" style="margin-bottom:12px">Example explanations. Not real trades, and not results.</p>
+        <div class="act"><span class="dot ok" aria-hidden="true">B</span><div><b>Bought 20 XRP</b><small>XRP was cheaper on the order book than in a nearby AMM pool, with enough size on both sides.</small></div></div>
+        <div class="act"><span class="dot" style="background:rgba(10,132,255,.2);color:#0a84ff" aria-hidden="true">S</span><div><b>Sold 20 XRP</b><small>The gap on the path back toward XRP had closed.</small></div></div>
+        <div class="act"><span class="dot" style="background:#3a3a3c;color:#fff" aria-hidden="true">–</span><div><b>Skipped a trade</b><small>The order book looked too thin to trade safely.</small></div></div>
+      </div>
+      <nav class="tabbar" aria-label="Dashboard sections">
+        <a href="#dash" data-screen-link><span aria-hidden="true">●</span>Home</a>
+        <a href="#limits" data-screen-link><span aria-hidden="true">⚙</span>Limits</a>
+        <a href="#plans" data-screen-link><span aria-hidden="true">★</span>Plans</a>
+      </nav>
+    </section>
+
+    <section class="screen" id="plans" aria-labelledby="plans-title">
+      <div class="nav">
+        <a class="back" href="#dash">‹ Dashboard</a>
+        <span class="steps">Preview</span>
+      </div>
+      <h1 id="plans-title" tabindex="-1">Plans</h1>
+      <p class="sub">Pay in XRP with one Xaman tap, once payments open. No subscription.</p>
+
+      <article class="card plan">
+        <h2>Free</h2>
+        <p class="note">Always free</p>
+        <ul>
+          <li>Simulated auto trading</li>
+          <li>Limited signals</li>
+        </ul>
+        <button class="btn secondary" type="button" disabled>Free plan<span class="soon">Coming soon</span></button>
+      </article>
+
+      <article class="card plan pro">
+        <div class="plan-top">
+          <h2>Pro</h2>
+          <span class="badge">LIFETIME</span>
+        </div>
+        <p class="price">$99 <span>USD</span></p>
+        <p class="note">One-time. Lifetime. Paid in XRP at the live rate when checkout opens. This page does not show a live XRP price.</p>
+        <ul>
+          <li>Everything in Free</li>
+          <li>Live signals</li>
+          <li>A plain explanation for every action</li>
+          <li>Auto trading inside your limits</li>
+        </ul>
+        <button class="btn" type="button" disabled>Get Pro with Xaman<span class="soon">Coming soon</span></button>
+        <p class="fine">Does not start a payment.</p>
+      </article>
+
+      <article class="card">
+        <h2>Fees</h2>
+        <div class="row"><span>Platform fee</span><b>0.1% per trade</b></div>
+        <div class="row"><span>Performance fee</span><b>10% of new profit</b></div>
+        <p class="note" style="margin-top:12px">The performance fee uses a high-water mark. It applies only to new profit above the previous peak, not to the same gain twice.</p>
+        <p class="note">The XRP Ledger also charges its own network fee. NEB does not set that fee. No subscription.</p>
+      </article>
+    </section>
+
+    <section class="screen" id="welcome" aria-labelledby="welcome-title">
+      <img class="icon" src="./assets/neb_icon.webp" width="110" height="110" alt="">
+      <h1 id="welcome-title" class="center" tabindex="-1">NEB</h1>
+      <p class="sub center">Network Exchange Bot<br>Your trading, understood.</p>
+      <div class="card feature">
+        <div class="row">
+          <span class="glyph" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22">
+              <rect x="5" y="10" width="14" height="10" rx="2" fill="#ffd60a"/>
+              <path d="M8 10V8a4 4 0 0 1 8 0v2" fill="none" stroke="#ffd60a" stroke-width="1.8"/>
+            </svg>
+          </span>
+          Your XRP stays in your wallet
+        </div>
+        <div class="row">
+          <span class="glyph" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#30d158" stroke-width="1.8">
+              <path d="M9 3h6M10 3v5L6.5 16.2A3.5 3.5 0 0 0 9.7 21h4.6a3.5 3.5 0 0 0 3.2-4.8L14 8V3" stroke-linejoin="round"/>
+              <path d="M8.2 14h7.6" stroke="#30d158"/>
+            </svg>
+          </span>
+          Starts in Paper mode
+        </div>
+        <div class="row">
+          <span class="glyph" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22">
+              <rect x="6" y="5" width="4" height="14" rx="1.2" fill="#ff9f0a"/>
+              <rect x="14" y="5" width="4" height="14" rx="1.2" fill="#ff9f0a"/>
+            </svg>
+          </span>
+          Pause anytime, one tap
+        </div>
+      </div>
+      <p class="note">NEB is a non-custodial auto-trading bot for the XRP Ledger. It looks for small price gaps between the XRP/RLUSD order book and AMM pools, and across loops such as XRP → RLUSD → XRP. Hard limits. A pause control. A plain reason for every action.</p>
+      <div class="spacer"></div>
+      <button class="btn" type="button" disabled>Start with NEB<span class="soon">Coming soon</span></button>
+      <p class="fine">Does not start trading. A House of Cauliman app · XRP Ledger</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p><b style="color:#f2f2f7">Network Exchange Bot</b> · A House of Cauliman preview. Your keys stay in your wallet.</p>
+    <p>Planned fees, when trading exists: a 0.1% platform fee per trade, and a 10% performance fee on new profit only (high-water mark). Pro is $99 USD, one-time, lifetime, paid in XRP at the live rate. No subscription. No live price and no results are shown here.</p>
+    <p>Trading can lose money. This preview is not financial advice and not an offer.</p>
+    <nav aria-label="House">
+      <a href="/">House of Cauliman</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/disclaimer.html">Disclaimer</a>
+      <a href="mailto:mrcauliman@gmail.com?subject=NEB%20launch%20notification">Get notified</a>
+    </nav>
+    <p>© 2026 House of Cauliman</p>
+  </footer>
+</body>
+</html>
