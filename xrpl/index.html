@@ -120,6 +120,7 @@
 .hoc-standard-footer a:hover{text-decoration:underline}
 .hoc-standard-footer-links{margin:4px 0}
 
+.xrpl-language-row{display:flex;justify-content:flex-end;align-items:center;gap:10px;margin-bottom:18px;color:#c4ccda}.xrpl-language-row select{background:#0d182a;color:#fff;border:1px solid #476995;border-radius:10px;padding:9px 12px}.xrpl-language-note{font-size:12px;color:#aeb8c6}@media(max-width:760px){.xrpl-language-row{justify-content:center;flex-wrap:wrap}}
 </style>
 <style id="xrpl-layman-header-icon-style">
 .xrpl-layman-brand{display:inline-flex;align-items:center;gap:10px}
@@ -572,7 +573,7 @@ body{
 </head>
 <body id="top">
   <div class="wrap">
-<section class="xrpl-dashboard">
+<section class="xrpl-dashboard"><div class="xrpl-language-row"><label for="xrpl-language">🌐 Language / Idioma</label><select id="xrpl-language" aria-label="Dashboard language"><option value="en">English</option><option value="pt-BR">Português (Brasil)</option><option value="es">Español</option></select><span class="xrpl-language-note">Dashboard preview. Lessons currently in English.</span></div>
 
   <header class="xrpl-dashboard-hero">
     <div class="xrpl-dashboard-logo">
@@ -713,5 +714,5 @@ body{
   <div>© 2026 House of Cauliman. All rights reserved.</div>
 </footer>
   </div>
-</body>
+<script src="/xrpl/i18n/dashboard.js" defer></script></body>
 </html>
