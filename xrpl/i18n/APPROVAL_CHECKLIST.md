@@ -2,7 +2,7 @@
 
 This checklist is not an approval. No language below is approved. The approver and date columns are blank on purpose. A native speaker still has to read every row.
 
-Reviewer packets that do not require the source tree are in `xrpl/i18n/review-packages/`. There is one Markdown file and one CSV per language. Those packets use the same 230 strings. Section counts there: wallet recovery and seed 33, signing 48, destination tags 5, trust lines 41, reserves and fees 39, DEX and AMM 9, NFTs 16, other 39. This checklist still files signing and destination tags together as tier 2 (52). The packets file “Blind QR” with signing, four fee sentences with reserves and fees, and one burning-collectible sentence with NFTs. Approved stays 0 in both places.
+Reviewer packets that do not require the source tree are in `xrpl/i18n/review-packages/`. There is one Markdown file and one CSV per language. Those packets use the same 230 strings. Section counts there: wallet recovery and seed 33, signing 48, destination tags 5, trust lines 41, reserves and fees 39, DEX and AMM 9, NFTs 16, other 39. This checklist still files signing and destination tags together as tier 2 (52). The packets file “Blind QR” with signing, four fee sentences with reserves and fees, and one burning-collectible sentence with NFTs. Approved stays 0 in both places. Imported reviewer decisions, when a person sends a CSV back, are stored in `xrpl/i18n/review-packages/approvals/<lang>.json`. That record does not change `xrpl/i18n/release.json`. A person sets one language to `approved` there only after the review is accepted. An automated check is not approval.
 
 Scope: the 230 English strings in `NEEDS_REVIEW.md`, shown once per language. English is the source and has no approval row.
 

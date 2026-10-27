@@ -37,7 +37,7 @@ There is no separate `foundation.html`. `xrpl/index.html.bak_definitions_link` i
 1. `xrpl/i18n/tools/annotate.py` marked user-facing text with stable `data-i18n` keys and wrote `catalogs/en.json`. English copy stays in the HTML.
 2. `xrpl/i18n/i18n.js` reads the URL slug, then `localStorage`, then English. It swaps text for `[data-i18n]` without reloading, and it keeps the `#lesson` hash. After the swap it scrolls that hashed section back into view, so a taller or shorter translation does not leave the section off the screen. The raw scroll offset can still change. An unprefixed `/xrpl/` URL follows the saved language and `history.replaceState` updates the address bar on `http` and `https` only. A locale URL such as `/xrpl/es/definitions.html` wins over the saved language.
 3. Quiz correctness stays on `data-correct` and `data-choice-id`. It is never compared to the button label.
-4. Calculator math is unchanged. Only the sentences around the numbers are translated. `$XRP` stays `$XRP`. The reserve example is still `1 + objects * 0.2`, displayed with `toFixed(1)`.
+4. Calculator math is unchanged. Only the sentences around the numbers are translated. `$XRP` stays `$XRP`. The reserve example is still `1 + objects * 0.2`, displayed with `toFixed(1)`. The investing market-cap figure is a US dollar amount. It is formatted with `toLocaleString('en-US')` and `currency: 'USD'` on every language, so a browser in another region cannot turn `$2,000` into `2.000 $` or `US$ 2.000`. The grouping stays the same English comma the rest of the site already uses.
 5. Arabic sets `dir="rtl"`. A whole English phrase such as `XRP Ledger` or `House of Cauliman` is one left-to-right isolate, including a parenthetical gloss such as `(trust line)`. The brand heading `XRPL LAYMAN` stays left-to-right as well, because the two words are separate elements. Addresses, hashes, codes, and numbers stay inside that same isolate rule.
 
 Switching language rewrites in-page links that point at `/xrpl/` so the next click stays in that language. Links to `/`, `/terms.html`, `/privacy.html`, `/disclaimer.html`, and outside sites are unchanged. Those pages are not translated and are not given `hreflang`.
@@ -56,7 +56,13 @@ Generated directories, committed next to the English pages:
 - `/xrpl/hi/`
 - `/xrpl/ar/`
 
-Each directory repeats the English page paths (`definitions.html`, `wallet-basics.html`, `builders/create-token.html`, and the rest). `index.html` is served as the directory URL. A locale page sets `lang`, `dir`, the translated `<title>` and description, a self canonical URL, and `hreflang` alternates including `x-default` (English). `hreflang` is written only for languages whose catalog contains every English key.
+Each directory repeats the English page paths (`definitions.html`, `wallet-basics.html`, `builders/create-token.html`, and the rest). `index.html` is served as the directory URL. A locale page sets `lang`, `dir`, the translated `<title>` and description, and a self canonical URL.
+
+`xrpl/i18n/release.json` is the only release switch. English is `source` and always public. Each other language is `unapproved` or `approved`. The default is `unapproved` for all nine. Approving one language does not approve any other. The file does not publish the site.
+
+Unapproved languages stay in the selector, with ` (under review)` after the native name, and their existing lesson URLs keep working. Hiding them would make a shared draft link look finished. They are not certified: the page shows the English notice “Translation under review. This is not a certified XRPL LAYMAN translation.”, a `noindex, follow` robots tag, and no `hreflang`. `xrpl/i18n/sitemap.proposed.xml` lists only public languages. A public page lists `hreflang` for the public languages plus `x-default` (English). `xrpl/i18n/release.js` is generated from `release.json` so the browser can apply the same rule without a network request.
+
+Fonts for Japanese, Korean, Simplified Chinese, Hindi, and Arabic use the operating-system UI font first (`Hiragino Sans`, `Yu Gothic`, `Apple SD Gothic Neo`, `Malgun Gothic`, `PingFang SC`, `Microsoft YaHei`, `Noto Sans Devanagari`, `Noto Naskh Arabic`, and the other names in `i18n.css`). `system-ui` is not in those stacks, because it is often a Latin font and would hide a later CJK font. `WenQuanYi Micro Hei` and `Droid Sans Fallback` cover CJK when the OS font is absent. No font file is added and no third-party font CDN is used. A CJK subset would be large and would have to be rebuilt whenever the copy changes, while current Windows, macOS, and Android devices already ship a UI font for these scripts.
 
 `xrpl/i18n/tools/build_locales.py` is the generator. Regenerate after catalog edits:
 
@@ -76,8 +82,10 @@ Do not translate or rewrite: `$XRP`, addresses, transaction hashes, `NFTokenID`,
 ## Checks
 
 - `node xrpl/i18n/check-catalogs.mjs` prints coverage for en, pt-BR, es, fr, de, ja, ko, zh-CN, hi, and ar. It fails if a key, placeholder, `$XRP`, or preserved token is missing.
-- `python3 xrpl/i18n/tools/check_behavior.py` checks quiz ids and the calculator formulas.
+- `python3 xrpl/i18n/tools/check_behavior.py` checks quiz ids, the calculator formulas, and the en-US USD market-cap format.
+- `python3 xrpl/i18n/tools/check_release.py` checks the release gate, the nine review packets, and the CSV importer. Passing it is not native-speaker approval.
 - `python3 xrpl/i18n/tools/needs_review.py` writes `NEEDS_REVIEW.md` for the security and finance strings. Those translations stay close to the English and still need a human XRPL review.
+- `python3 xrpl/i18n/tools/import_review.py <lang> <file.csv>` checks a returned review CSV. `--apply` writes corrections and records the reviewer’s name and date. It does not set `release.json` to `approved`. See `review-packages/REVIEWER_INSTRUCTIONS.md`.
 
 ## Publishing
 
