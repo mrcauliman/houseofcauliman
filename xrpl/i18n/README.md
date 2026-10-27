@@ -35,7 +35,7 @@ There is no separate `foundation.html`. `xrpl/index.html.bak_definitions_link` i
 ## How language works
 
 1. `xrpl/i18n/tools/annotate.py` marked user-facing text with stable `data-i18n` keys and wrote `catalogs/en.json`. English copy stays in the HTML.
-2. `xrpl/i18n/i18n.js` reads the URL slug, then `localStorage`, then English. It swaps text for `[data-i18n]` without reloading, so the scroll position and any `#lesson` hash stay put. It then updates the address bar with `history.replaceState` on `http` and `https` only.
+2. `xrpl/i18n/i18n.js` reads the URL slug, then `localStorage`, then English. It swaps text for `[data-i18n]` without reloading, and it keeps the `#lesson` hash. The section you were reading stays in view. The raw scroll offset can change when the translated text above that section is taller or shorter. An unprefixed `/xrpl/` URL follows the saved language and `history.replaceState` updates the address bar on `http` and `https` only. A locale URL such as `/xrpl/es/definitions.html` wins over the saved language.
 3. Quiz correctness stays on `data-correct` and `data-choice-id`. It is never compared to the button label.
 4. Calculator math is unchanged. Only the sentences around the numbers are translated. `$XRP` stays `$XRP`. The reserve example is still `1 + objects * 0.2`, displayed with `toFixed(1)`.
 5. Arabic sets `dir="rtl"`. Addresses, hashes, codes, and numbers are isolated left-to-right.

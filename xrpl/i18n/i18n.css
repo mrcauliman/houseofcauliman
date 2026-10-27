@@ -25,9 +25,12 @@
 .next-card,
 .concept,
 .mistake,
-.checklist label{
+.checklist label,
+.xrpl-app-card h2,
+.xrpl-app-card p{
   overflow-wrap:anywhere;
 }
+.xrpl-app-card{min-width:0}
 html[dir="rtl"] .xrpl-language-row{justify-content:flex-start}
 html[dir="rtl"] .callout{
   border-left:0;
