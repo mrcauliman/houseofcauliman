@@ -142,18 +142,25 @@ Recorded from this workspace on 2026-10-27. Commands were run after `3f4bb49`. T
 
 | Commit | Subject |
 | --- | --- |
+| `c31a7bc476052e81dfb170f767ca5681a763e216` | Record the XRPL release-candidate audit |
 | `3f4bb493a334b5fb54e78bc9ba9288980f8a3a24` | Fail closed when a locale is unapproved or a review import fails |
 | `3d2b635ce9fa10a41cf788ef565b951fdbb44e03` | Record the release-gate checks and the pull-request refusal |
 | `6b279a5b8f4f5c028d7b429b74f77a1607ac9db4` | Add a human CSV importer for XRPL review packets |
 | `1b1f59005be932f50689f049db8082ad5a5bff30` | Gate unapproved XRPL translations out of search metadata |
 
-The audit document commit is the tip after this file. `release.json` at that tip still has all nine languages `unapproved`.
+`release.json` at `c31a7bc` still has all nine languages `unapproved`. The commit that records the pull-request refusal below is the tip after that.
 
 ## Remaining blockers
 
 - No language has a native-speaker approval. All nine stay `unapproved`. Do not set one to `approved` from this audit.
 - This branch cannot be published by itself. Pages serves `main`.
-- Opening the pull request needs a collaborator. If the draft request is refused, use the compare URL below. Do not bypass that refusal.
+- Opening the pull request needs a collaborator. The draft request was retried after `c31a7bc` and refused. Do not bypass that refusal.
+
+Draft pull request into `feature/xrpl-layman-i18n-foundation-20261023` from `cursor/xrpl-layman-i18n-276c` returned:
+
+`Validation Failed: {"resource":"Issue","code":"custom","message":"must be a collaborator"}`
+
+No pull request exists. A collaborator opens it from the compare URL, as a draft, with the base `feature/xrpl-layman-i18n-foundation-20261023` and the compare branch `cursor/xrpl-layman-i18n-276c`. Suggested title: `Add XRPL LAYMAN locale pages, held unapproved`. The testing and rollback text is in this file.
 
 ## Recommendation
 
