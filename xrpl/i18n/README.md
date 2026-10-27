@@ -77,6 +77,7 @@ Do not translate or rewrite: `$XRP`, addresses, transaction hashes, `NFTokenID`,
 
 - `node xrpl/i18n/check-catalogs.mjs` prints coverage for en, pt-BR, es, fr, de, ja, ko, zh-CN, hi, and ar. It fails if a key, placeholder, `$XRP`, or preserved token is missing.
 - `python3 xrpl/i18n/tools/check_behavior.py` checks quiz ids and the calculator formulas.
+- `python3 xrpl/i18n/tools/needs_review.py` writes `NEEDS_REVIEW.md` for the security and finance strings. Those translations stay close to the English and still need a human XRPL review.
 
 ## Publishing
 
