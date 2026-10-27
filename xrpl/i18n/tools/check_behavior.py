@@ -7,6 +7,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from htmltree import find_all, parse, walk_elements  # noqa: E402
+from build_locales import isolate  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[3]
 PAGES = [
@@ -70,6 +71,22 @@ def main():
         errors.append("builder quiz no longer reads data-correct")
     if ".xrpl-app-card h2" in dashboard:
         errors.append("dashboard shim still uses position-based headings")
+    phrases = {
+        "XRPL LAYMAN": "\u2066XRPL LAYMAN\u2069",
+        "افهم XRP Ledger. استخدمه": "افهم \u2066XRP Ledger.\u2069 استخدمه",
+        "مشروع House of Cauliman": "مشروع \u2066House of Cauliman\u2069",
+        "(trust line)": "\u2066(trust line)\u2069",
+        "1 $XRP": "\u20661 $XRP\u2069",
+        "0.2 $XRP": "\u20660.2 $XRP\u2069",
+        "DEX + AMM": "\u2066DEX + AMM\u2069",
+        "DEX/AMM": "\u2066DEX/AMM\u2069",
+    }
+    for source, expected in phrases.items():
+        got = isolate(source, "rtl")
+        if got != expected:
+            errors.append(f"rtl phrase isolate {source!r} -> {got!r}")
+        if isolate(source, "ltr") != source:
+            errors.append(f"ltr isolate changed {source!r}")
     print(f"quiz buttons {correct} unique choices {len(seen)}")
     if errors:
         print("\n".join(errors))

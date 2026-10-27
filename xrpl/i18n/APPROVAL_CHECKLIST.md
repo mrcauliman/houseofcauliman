@@ -2,6 +2,8 @@
 
 This checklist is not an approval. No language below is approved. The approver and date columns are blank on purpose. A native speaker still has to read every row.
 
+Reviewer packets that do not require the source tree are in `xrpl/i18n/review-packages/`. There is one Markdown file and one CSV per language. Those packets use the same 230 strings. Section counts there: wallet recovery and seed 33, signing 48, destination tags 5, trust lines 41, reserves and fees 39, DEX and AMM 9, NFTs 16, other 39. This checklist still files signing and destination tags together as tier 2 (52). The packets file “Blind QR” with signing, four fee sentences with reserves and fees, and one burning-collectible sentence with NFTs. Approved stays 0 in both places.
+
 Scope: the 230 English strings in `NEEDS_REVIEW.md`, shown once per language. English is the source and has no approval row.
 
 Risk tiers, highest first:
@@ -22,7 +24,8 @@ These were meaning or grammar errors that can be checked against the English wit
 
 - de `first-check-the-network-and-exact-as.aadd4c6c`. “Display support” had been “Anzeige im Support” (a notice in customer support). It now says whether an interface can display the asset, and whether the asset exists in the ledger, are two different things.
 - ar `first-check-the-network-and-exact-as.aadd4c6c`. “Ledger existence” had been “وجود السجل” (the ledger exists). It is now “الوجود على السجل” (existence on the ledger).
-- zh-CN `what-a-trustline-doesn-t-mean.c56a66d8`. “What a trustline doesn’t mean” had been “信任线并不意味着什么”, which reads as “a trust line means nothing.” It is now “信任线（trust line）并不表示的含义”.
+- zh-CN `what-a-trustline-doesn-t-mean.c56a66d8`. “What a trustline doesn’t mean” had been “信任线并不意味着什么”, which reads as “a trust line means nothing.” A follow-up wording, “信任线（trust line）并不表示的含义”, was still not a grammatical noun phrase. It is now “信任线（trust line）所不表示的含义” (the meanings a trust line does not express). Still not native-approved.
+- All catalogs, `lang.select`. The accessible name said “Dashboard language” (and the equivalent in each language) even though the same control is on every lesson page. It now matches `lang.label` (“Language”, “اللغة”, “भाषा”, “言語”, and the rest). This is not one of the 230 review rows.
 - ko `scammers-can-trick-you-into-authoriz.82c7e021`. “속을 수 있습니다” is “can be tricked.” The subject is the scammers, so the sentence had them being fooled. It is now “속일 수 있습니다” (can trick).
 - ar `media-availability-and-ledger-existe.dfb56766` is the same ledger-existence wording. It is not one of the 230 review strings. “وجود السجل” is now “الوجود على السجل”. It is not in the tables below.
 
@@ -1810,7 +1813,7 @@ Approval status: pending. Approved rows: 0.
 | `trustline.9ba9cbe8` | Trustline | 信任线（trust line） |  |  |  |
 | `trustlines.57b2be31` | Trustlines | 信任线（trust line） |  |  |  |
 | `trustset-creates-or-modifies-a-trust.a6fb1a7c` | TrustSet creates or modifies a trust-line relationship. Its LimitAmount identifies the currency, the counterparty issuer and the limit. Native XRP does not use trust lines. This lesson covers trust-line tokens, not MPT authorization. | TrustSet 创建或修改一条信任线（trust line）关系。它的 LimitAmount 标识货币、对方发行方和限额。原生 XRP 不使用信任线（trust line）。这一课讲的是信任线代币，不是 MPT 授权。 |  |  |  |
-| `what-a-trustline-doesn-t-mean.c56a66d8` | What a trustline doesn’t mean | 信任线（trust line）并不表示的含义 |  |  | corrected: heading lists what a trust line does not mean |
+| `what-a-trustline-doesn-t-mean.c56a66d8` | What a trustline doesn’t mean | 信任线（trust line）所不表示的含义 |  |  | corrected: grammatical heading for what a trust line does not mean; not native-approved |
 | `what-s-a-trustline.b2cf3ed9` | What’s a trustline? | 什么是信任线（trust line）？ |  |  |  |
 | `xrp-is-native-trust-lines-describe-i.d8c8105e` | XRP is native; trust lines describe issued currencies. | XRP 是原生的；信任线（trust line）描述的是发行货币。 |  |  |  |
 | `your-account-usually-needs-a-trustli.bee0965e` | Your account usually needs a trustline to the exact issuer and currency. | 你的账户通常需要一条通向确切发行方和货币的信任线（trust line）。 |  |  |  |

@@ -96,3 +96,20 @@ Headless Chrome on this tree, cache disabled, desktop 1280×900 and mobile 390×
 - A follow-up on the same tree waited for `#reserves` after each language change. All 10 stayed on that hash, on the localized URL, with the section inside the viewport. Arabic was `rtl`. A 200ms sample inside the main pass caught the smooth scroll mid-way and is not the settled result.
 - Arabic wallet text contained U+2066 isolates. On Arabic definitions, the reserve input and `#reserveValue` computed `direction:ltr`.
 - Glyph rasters for العربية, हिन्दी, 日本語, 한국어, and 中文 differed from the missing-glyph box. Arabic and Devanagari resolved to the named Noto families, which are installed. The named Noto CJK families are not installed; Japanese, Korean, and Chinese fell through to `system-ui` and still drew glyphs via WenQuanYi Micro Hei and Droid Sans Fallback. A machine without a CJK fallback can show boxes even though the CSS names Noto CJK.
+
+## Quality pass
+
+Production is still locked. `sitemap.xml` was not edited. `sitemap.proposed.xml` stays a proposal.
+
+Visual checks in headless Chrome, cache disabled:
+
+- Japanese issuer-control heading `誰がまだルールを変えられるかを知る` at 1280×900 now breaks as `誰がまだルールを変えられるかを` / `知る`. `word-break` computed `auto-phrase`, `line-break` `strict`, `overflow-wrap` `break-word`. The last line is the word 知る, not the single character る. Page overflow was 0.
+- Arabic dashboard brand boxes: XRPL left 215, LAYMAN left 436, so the order is XRPL then LAYMAN. The intro is one isolate, `XRP Ledger.` The House card is one isolate, `House of Cauliman.` The definitions title is `تعريفات ⁦XRPL⁩ | ⁦XRPL LAYMAN⁩`.
+- Hindi dashboard at 390×844: page overflow 0, no measured clipping, tagline line-height 27.2px on a 16px font (1.7). French card titles, including `Réalité de l’investissement`, overflowed 0px at 1280.
+- Language select on the dashboard and on a lesson: 10 options, each with `lang`, Arabic option `dir=rtl`, accessible name `Language`, padding `9px 12px`, radius `10px`, min-height `40px`. Tabbing to it matched `:focus-visible` with outline `rgb(255, 204, 102) solid 3px`.
+
+Catalog and behavior checks after these edits: `check-catalogs.mjs` exit 0, 1013 keys, 100% coverage, 0 problems. `check_behavior.py` passed, 92 buttons, 92 choice ids, and the phrase-isolate samples passed. Static crawl: 13×10 pages, 0 broken internal links, 0 quiz mismatches. The crawl still reports that the dashboard does not link to itself and that the definitions top bar does not link to `/xrpl/builders/`. That is the original English nav.
+
+Headless pass after the edits, same viewports: 0 script errors. 92 quiz clicks per language, 0 mismatches, 0 missing builder feedback. Reserve `3.0 $XRP`, slippage `5.00%`, ratio `25.0%` on desktop and again on mobile for all 10 languages. 19 internal links per language, 0 missing. Desktop page overflow 0. Mobile overflow 0 on the dashboard, definitions, usage, investing reality, and issuer-control pages. `#reserves` stayed visible after each language change. Saved `ja` still rewrites an unprefixed URL. A locale URL still wins.
+
+`lang.select` now matches `lang.label` in every catalog. The Chinese trust-line heading is `信任线（trust line）所不表示的含义`. Neither change is native approval. Approved rows remain 0. Reviewer packets are `xrpl/i18n/review-packages/<lang>.md` and `.csv`.

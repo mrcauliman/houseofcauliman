@@ -43,9 +43,13 @@
     });
   }
 
+  // One left-to-right isolate per English phrase. Isolating each word on its
+  // own lets the Arabic bidi algorithm reverse "XRPL LAYMAN" and "XRP Ledger".
+  var LATIN_PHRASE = /\(?[A-Za-z0-9$][A-Za-z0-9$._:%+\-]*(?:(?:[ \t]+[+&]?[ \t]*|[ \t]*\/[ \t]*)[A-Za-z0-9$][A-Za-z0-9$._:%+\-]*)*\)?/g;
+
   function isolateRuns(value) {
     if (document.documentElement.getAttribute("dir") !== "rtl") return value;
-    return String(value).replace(/[A-Za-z0-9$][A-Za-z0-9$._:%+\-]*/g, function (match) {
+    return String(value).replace(LATIN_PHRASE, function (match) {
       return "\u2066" + match + "\u2069";
     });
   }
@@ -188,10 +192,10 @@
     var page = document.documentElement.getAttribute("data-xrpl-page");
     if (!page) return;
     var title = lookup(lang, "meta." + page + ".title");
-    if (title) document.title = title;
+    if (title) document.title = isolateRuns(title);
     var description = lookup(lang, "meta." + page + ".description");
     var meta = document.querySelector('meta[name="description"]');
-    if (description && meta) meta.setAttribute("content", description);
+    if (description && meta) meta.setAttribute("content", isolateRuns(description));
   }
 
   function englishRest() {
@@ -234,13 +238,27 @@
     if (next !== current) history.replaceState({ xrplLang: lang }, "", next);
   }
 
+  function fillOptions(select) {
+    replaceChildren(select, LANGS.map(function (lang) {
+      var option = document.createElement("option");
+      option.value = lang.id;
+      option.textContent = lang.native;
+      option.lang = lang.htmlLang;
+      if (lang.dir === "rtl") option.dir = "rtl";
+      return option;
+    }));
+    select.dataset.ready = "1";
+  }
+
   function ensureSelector() {
     var select = document.getElementById("xrpl-language");
+    var label = null;
     if (!select) {
       var bar = document.querySelector(".appbar");
       if (!bar) return null;
-      var label = document.createElement("label");
+      label = document.createElement("label");
       label.className = "xrpl-lang";
+      label.id = "xrpl-language-label";
       label.htmlFor = "xrpl-language";
       var text = document.createElement("span");
       text.setAttribute("data-i18n", "lang.label");
@@ -250,18 +268,18 @@
       label.appendChild(text);
       label.appendChild(select);
       bar.appendChild(label);
+    } else {
+      label = select.closest("label") || document.querySelector('label[for="xrpl-language"]');
+      if (label && !label.id) label.id = "xrpl-language-label";
     }
-    if (select.dataset.ready !== "1" || select.options.length !== LANGS.length) {
-      replaceChildren(select, LANGS.map(function (lang) {
-        var option = document.createElement("option");
-        option.value = lang.id;
-        option.textContent = lang.native;
-        option.lang = lang.htmlLang;
-        if (lang.dir === "rtl") option.dir = "rtl";
-        return option;
-      }));
-      select.dataset.ready = "1";
-    }
+    if (select.dataset.ready !== "1" || select.options.length !== LANGS.length) fillOptions(select);
+    Array.prototype.forEach.call(select.options, function (option) {
+      var item = BY_ID[option.value];
+      if (!item) return;
+      option.lang = item.htmlLang;
+      if (item.dir === "rtl") option.dir = "rtl";
+    });
+    if (label) select.setAttribute("aria-labelledby", label.id);
     return select;
   }
 
@@ -291,6 +309,8 @@
     updateTitle(lang);
     updateSeo(lang);
     if (select) {
+      var accessibleName = lookup(lang, "lang.label") || "Language";
+      select.setAttribute("aria-label", accessibleName);
       select.value = lang;
       if (!select.dataset.bound) {
         select.addEventListener("change", function () { apply(select.value); });

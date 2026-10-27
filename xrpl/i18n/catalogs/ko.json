@@ -411,7 +411,7 @@
   "knowledge-check.67f1d1d1": "이해 확인",
   "lang.label": "언어",
   "lang.note": "이 기기에 저장됩니다. 모든 XRPL LAYMAN 페이지에 적용됩니다.",
-  "lang.select": "대시보드 언어",
+  "lang.select": "언어",
   "large-trades-against-thin-liquidity.360e8e91": "얇은 유동성에 대한 큰 거래는 가격을 크게 움직입니다.",
   "last-price.bd495cb6": "마지막 가격",
   "lastledgersequence.d595602e": "LastLedgerSequence",

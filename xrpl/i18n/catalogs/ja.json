@@ -411,7 +411,7 @@
   "knowledge-check.67f1d1d1": "理解度チェック",
   "lang.label": "言語",
   "lang.note": "この端末に保存されます。すべてのXRPL LAYMANのページに適用されます。",
-  "lang.select": "ダッシュボードの言語",
+  "lang.select": "言語",
   "large-trades-against-thin-liquidity.360e8e91": "薄い流動性に対する大きな取引は、価格を強く動かします。",
   "last-price.bd495cb6": "直近価格",
   "lastledgersequence.d595602e": "LastLedgerSequence",

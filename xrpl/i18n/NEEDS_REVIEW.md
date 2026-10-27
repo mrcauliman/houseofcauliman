@@ -2652,7 +2652,7 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - de: Was eine Trustline nicht bedeutet
 - ja: トラストライン（trust line）が意味しないこと
 - ko: 트러스트 라인(trust line)이 뜻하지 않는 것
-- zh-CN: 信任线（trust line）并不表示的含义
+- zh-CN: 信任线（trust line）所不表示的含义
 - hi: ट्रस्टलाइन (trustline) का अर्थ क्या नहीं है
 - ar: ما لا يعنيه خط الثقة (trust line)
 

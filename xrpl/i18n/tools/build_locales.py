@@ -87,10 +87,18 @@ def lookup(catalogs, lang, key):
     return None
 
 
+# Keep this in step with LATIN_PHRASE in xrpl/i18n/i18n.js. A phrase such as
+# "XRP Ledger" or "House of Cauliman" is one isolate, so Arabic does not
+# reverse the English word order. Parentheses that wrap the phrase stay inside.
+_LATIN = r"[A-Za-z0-9$][A-Za-z0-9$._:%+\-]*"
+_SEP = r"(?:[ \t]+[+&]?[ \t]*|[ \t]*/[ \t]*)"
+_PHRASE = re.compile(rf"\(?{_LATIN}(?:{_SEP}{_LATIN})*\)?")
+
+
 def isolate(value, direction):
     if direction != "rtl":
         return value
-    return re.sub(r"[A-Za-z0-9$][A-Za-z0-9$._:%+\-]*", lambda match: "\u2066" + match.group(0) + "\u2069", value)
+    return _PHRASE.sub(lambda match: "\u2066" + match.group(0) + "\u2069", value)
 
 
 def apply_tree(node, catalogs, lang, direction):
@@ -213,14 +221,15 @@ def fill_seo(root, rel, canonical_slug, catalogs):
 
 def set_meta(root, catalogs, lang):
     page = first(root, tag="html").attr("data-xrpl-page")
+    direction = next(item[3] for item in LANGS if item[0] == lang)
     title = lookup(catalogs, lang, f"meta.{page}.title")
     title_node = first(root, tag="title")
     if title and title_node is not None:
-        title_node.children = [Node("text", text=title)]
+        title_node.children = [Node("text", text=isolate(title, direction))]
     description = lookup(catalogs, lang, f"meta.{page}.description")
     for meta in find_all(root, tag="meta"):
         if meta.attr("name") == "description" and description:
-            meta.set_attr("content", description)
+            meta.set_attr("content", isolate(description, direction))
 
 
 def write_page(rel, slug, html_lang, direction, catalogs):

@@ -26,7 +26,7 @@ This file does not certify the translations. It records a meaning check against 
 
 ## (a) Fixed
 
-A later pass, recorded in `APPROVAL_CHECKLIST.md`, corrected four more meaning errors and one matching Arabic sentence outside this 230-string list. After those corrections, class (a) remaining is still 0. Those strings stay in class (c) until a native speaker signs the checklist.
+A later pass, recorded in `APPROVAL_CHECKLIST.md`, corrected four more meaning errors and one matching Arabic sentence outside this 230-string list. The Chinese heading `what-a-trustline-doesn-t-mean.c56a66d8` was corrected again after that: “并不表示的含义” was not a grammatical noun phrase, and the catalog now says “信任线（trust line）所不表示的含义”. After those corrections, class (a) remaining is still 0. Those strings stay in class (c) until a native speaker signs the checklist. None of this is native-speaker approval.
 
 ### pt-BR `this-lesson-follows-the-classic-trus.fc252c0f`
 

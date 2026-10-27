@@ -411,7 +411,7 @@
   "knowledge-check.67f1d1d1": "Comprobación de conocimiento",
   "lang.label": "Idioma",
   "lang.note": "Se guarda en este dispositivo. Se aplica a todas las páginas de XRPL LAYMAN.",
-  "lang.select": "Idioma del panel",
+  "lang.select": "Idioma",
   "large-trades-against-thin-liquidity.360e8e91": "Las operaciones grandes contra una liquidez escasa mueven el precio con fuerza.",
   "last-price.bd495cb6": "Último precio",
   "lastledgersequence.d595602e": "LastLedgerSequence",

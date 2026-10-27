@@ -38,7 +38,7 @@ There is no separate `foundation.html`. `xrpl/index.html.bak_definitions_link` i
 2. `xrpl/i18n/i18n.js` reads the URL slug, then `localStorage`, then English. It swaps text for `[data-i18n]` without reloading, and it keeps the `#lesson` hash. After the swap it scrolls that hashed section back into view, so a taller or shorter translation does not leave the section off the screen. The raw scroll offset can still change. An unprefixed `/xrpl/` URL follows the saved language and `history.replaceState` updates the address bar on `http` and `https` only. A locale URL such as `/xrpl/es/definitions.html` wins over the saved language.
 3. Quiz correctness stays on `data-correct` and `data-choice-id`. It is never compared to the button label.
 4. Calculator math is unchanged. Only the sentences around the numbers are translated. `$XRP` stays `$XRP`. The reserve example is still `1 + objects * 0.2`, displayed with `toFixed(1)`.
-5. Arabic sets `dir="rtl"`. Addresses, hashes, codes, and numbers are isolated left-to-right.
+5. Arabic sets `dir="rtl"`. A whole English phrase such as `XRP Ledger` or `House of Cauliman` is one left-to-right isolate, including a parenthetical gloss such as `(trust line)`. The brand heading `XRPL LAYMAN` stays left-to-right as well, because the two words are separate elements. Addresses, hashes, codes, and numbers stay inside that same isolate rule.
 
 Switching language rewrites in-page links that point at `/xrpl/` so the next click stays in that language. Links to `/`, `/terms.html`, `/privacy.html`, `/disclaimer.html`, and outside sites are unchanged. Those pages are not translated and are not given `hreflang`.
 
