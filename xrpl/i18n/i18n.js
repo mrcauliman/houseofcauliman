@@ -80,13 +80,22 @@
     return table[id] || "";
   }
 
+  function bakedPublic() {
+    return document.documentElement.getAttribute("data-xrpl-public") === "1";
+  }
+
   // Missing release data fails closed: only English is public.
+  // A missing catalog key fails closed, including English text used as a
+  // fallback. release.js cannot promote the page being viewed unless the
+  // generator baked data-xrpl-public on that page.
   function isPublic(id) {
     if (!catalogComplete(id)) return false;
     var table = window.XRPL_RELEASE;
     if (!table) return id === "en";
-    if (id === "en") return releaseStatus(id) === "source";
-    return releaseStatus(id) === "approved";
+    var statusOk = id === "en" ? releaseStatus(id) === "source" : releaseStatus(id) === "approved";
+    if (!statusOk) return false;
+    if (id === state.lang && !bakedPublic()) return false;
+    return true;
   }
 
   function sitePath() {

@@ -6,10 +6,12 @@ is not native-speaker approval.
 """
 from __future__ import annotations
 
+import copy
 import importlib.util
 import json
 import re
 import sys
+import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -18,13 +20,18 @@ from build_locales import (  # noqa: E402
     LANGS,
     PAGES,
     REVIEW_NOTICE,
+    audit_release_output,
+    commit_generated,
     fill_seo,
     hreflang_codes,
     is_public,
     load_catalogs,
     load_release,
     public_path,
+    render_site,
     sitemap_locs,
+    snapshot_sources,
+    stale_locale_files,
 )
 from htmltree import find_all, parse  # noqa: E402
 from needs_review import LANGS as REVIEW_LANGS  # noqa: E402
@@ -45,6 +52,50 @@ def load_import_review():
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
+
+
+def _test_commit_restores():
+    """A rejected or crashed write must leave the previous bytes in place."""
+    with tempfile.TemporaryDirectory() as tmp_name:
+        root = Path(tmp_name)
+        page = root / "nested" / "page.html"
+        page.parent.mkdir(parents=True)
+        page.write_text("OLD", encoding="utf-8")
+        other = root / "keep.html"
+        other.write_text("KEEP", encoding="utf-8")
+        files = {"nested/page.html": "NEW", "keep.html": "CHANGED"}
+
+        def rejected(_disk):
+            return ["forced mismatch"]
+
+        try:
+            commit_generated(files, root, rejected)
+        except SystemExit as exc:
+            if "forced mismatch" not in str(exc):
+                return "audit rejection raised an unexpected error"
+        else:
+            return "audit rejection did not abort the write"
+        if page.read_text(encoding="utf-8") != "OLD" or other.read_text(encoding="utf-8") != "KEEP":
+            return "audit rejection left new bytes on disk"
+        if list(root.rglob("*.xrpl-tmp")):
+            return "audit rejection left a temporary file"
+
+        def crashed(_disk):
+            raise RuntimeError("partial write")
+
+        try:
+            commit_generated(files, root, crashed)
+        except RuntimeError:
+            pass
+        else:
+            return "crashed write did not raise"
+        if page.read_text(encoding="utf-8") != "OLD" or other.read_text(encoding="utf-8") != "KEEP":
+            return "crashed write left new bytes on disk"
+
+        commit_generated(files, root, lambda _disk: [])
+        if page.read_text(encoding="utf-8") != "NEW" or other.read_text(encoding="utf-8") != "CHANGED":
+            return "successful write did not stick"
+    return ""
 
 
 def main():
@@ -181,6 +232,115 @@ def main():
     importer = load_import_review()
     if importer.self_test() != 0:
         errors.append("import_review self-test failed")
+    import test_import_review
+    try:
+        if test_import_review.main() != 0:
+            errors.append("import_review sample tests failed")
+    except SystemExit as exc:
+        errors.append(f"import_review sample tests failed: {exc}")
+
+    runtime = (ROOT / "xrpl/i18n/i18n.js").read_text(encoding="utf-8")
+    if "if (!catalogComplete(id)) return false;" not in runtime:
+        errors.append("runtime ignores a missing catalog key")
+    if 'getAttribute("data-xrpl-public")' not in runtime:
+        errors.append("runtime can promote a page that was baked unapproved")
+    restore_error = _test_commit_restores()
+    if restore_error:
+        errors.append(restore_error)
+
+    release_bytes = (ROOT / "xrpl/i18n/release.json").read_bytes()
+    sources = snapshot_sources()
+    base_files = render_site(sources, catalogs, release)
+    for rel, text in base_files.items():
+        disk_path = ROOT / rel
+        if not disk_path.exists() or disk_path.read_text(encoding="utf-8") != text:
+            errors.append(f"disk does not match release.json: {rel}")
+    errors.extend(stale_locale_files(set(base_files)))
+    errors.extend(audit_release_output(base_files, release, catalogs))
+    tampered = dict(base_files)
+    marker = "<!--xrpl-seo-end-->"
+    tamper_page = "xrpl/ja/definitions.html"
+    if marker not in tampered[tamper_page]:
+        errors.append("tamper fixture missing seo marker")
+    else:
+        tampered[tamper_page] = tampered[tamper_page].replace(
+            marker,
+            '<link rel="alternate" hreflang="ja" href="https://houseofcauliman.com/xrpl/ja/definitions.html">' + marker,
+            1,
+        )
+        if not audit_release_output(tampered, release, catalogs):
+            errors.append("tampered unapproved hreflang was accepted")
+
+    approved = copy.deepcopy(release)
+    approved["languages"]["pt-BR"] = "approved"
+    mid = render_site(sources, catalogs, approved)
+    changed = sorted(path for path in base_files if base_files[path] != mid[path])
+    pt_changed = [path for path in changed if path.startswith("xrpl/pt-br/")]
+    other_locales = [
+        path for path in changed
+        if path.startswith("xrpl/") and path.split("/")[1] in {"es", "fr", "de", "ja", "ko", "zh-cn", "hi", "ar"}
+    ]
+    native = "Português (Brasil)"
+    marked = f">{native} (under review)</option>"
+    unmarked = f">{native}</option>"
+    # Lesson pages bake no language selector, so they stay byte-identical.
+    # Each other dashboard changes only the approved language's option label.
+    if len(other_locales) != 8 or any(not path.endswith("/index.html") for path in other_locales):
+        errors.append(f"pt-BR approval touched {len(other_locales)} other locale files")
+    for path in other_locales:
+        expected = base_files[path].replace(marked, unmarked, 1)
+        if mid[path] != expected or hreflangs(mid[path]) or REVIEW_NOTICE not in mid[path] or "data-xrpl-public" in mid[path]:
+            errors.append(f"{path} changed beyond the pt-BR selector label")
+            break
+    if len(pt_changed) != 13:
+        errors.append(f"pt-BR approval changed {len(pt_changed)} pt-BR files")
+    if "xrpl/i18n/sitemap.proposed.xml" not in changed or "xrpl/i18n/release.js" not in changed:
+        errors.append("pt-BR approval did not change the sitemap and release.js")
+    english_changed = [
+        path for path in changed
+        if path.startswith("xrpl/") and not path.startswith("xrpl/i18n/") and path.split("/")[1] not in {
+            "pt-br", "es", "fr", "de", "ja", "ko", "zh-cn", "hi", "ar",
+        }
+    ]
+    if len(english_changed) != 13:
+        errors.append(f"english hreflang cluster changed {len(english_changed)} files")
+    mid_errors = audit_release_output(mid, approved, catalogs)
+    if mid_errors:
+        errors.append("approved render failed audit: " + mid_errors[0])
+    if hreflangs(mid["xrpl/ja/definitions.html"]):
+        errors.append("ja gained hreflang when only pt-BR was approved")
+    if REVIEW_NOTICE not in mid["xrpl/ja/definitions.html"]:
+        errors.append("ja lost its notice when pt-BR was approved")
+    if hreflangs(mid["xrpl/pt-br/definitions.html"]) != ["en", "pt-BR", "x-default"]:
+        errors.append("pt-BR hreflang " + ",".join(hreflangs(mid["xrpl/pt-br/definitions.html"])))
+    if REVIEW_NOTICE in mid["xrpl/pt-br/definitions.html"] or "data-xrpl-robots" in mid["xrpl/pt-br/definitions.html"]:
+        errors.append("approved pt-BR is still marked under review")
+    if 'data-xrpl-public="1"' not in mid["xrpl/pt-br/definitions.html"]:
+        errors.append("approved pt-BR is missing data-xrpl-public")
+    if "data-xrpl-public" in mid["xrpl/ja/definitions.html"]:
+        errors.append("ja was baked public when only pt-BR was approved")
+    reverted = copy.deepcopy(approved)
+    reverted["languages"]["pt-BR"] = "unapproved"
+    back = render_site(sources, catalogs, reverted)
+    if back != base_files:
+        errors.append("reversal did not restore the unapproved render")
+
+    thin = copy.deepcopy(catalogs)
+    thin["ja"].pop(next(iter(thin["ja"])))
+    claim = copy.deepcopy(release)
+    claim["languages"]["ja"] = "approved"
+    hidden = render_site(sources, thin, claim)
+    hidden_page = hidden["xrpl/ja/definitions.html"]
+    if hreflangs(hidden_page) or REVIEW_NOTICE not in hidden_page or "noindex" not in hidden_page:
+        errors.append("a missing translation key made ja indexable")
+    if "/xrpl/ja/" in hidden["xrpl/i18n/sitemap.proposed.xml"]:
+        errors.append("a missing translation key put ja in the sitemap")
+    if ">日本語 (under review)</option>" not in hidden["xrpl/ja/index.html"]:
+        errors.append("incomplete ja is unmarked in the selector")
+    if "data-xrpl-public" in hidden_page:
+        errors.append("a missing translation key marked ja public")
+    if (ROOT / "xrpl/i18n/release.json").read_bytes() != release_bytes:
+        errors.append("release audit wrote release.json")
 
     for rel in PAGES:
         text = (ROOT / rel).read_text(encoding="utf-8")

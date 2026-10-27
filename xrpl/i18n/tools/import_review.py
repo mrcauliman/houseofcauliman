@@ -179,26 +179,24 @@ def _update_md(text, decisions):
         key = row["key"]
         start = rendered.find(f"`{key}`")
         if start < 0:
-            raise SystemExit(f"package markdown is missing {key}")
+            raise RuntimeError(f"package markdown is missing {key}")
         end = rendered.find("\n### ", start)
         if end < 0:
             end = len(rendered)
         block = rendered[start:end]
         translation = row["translation"]
         if "\n" in translation:
-            raise SystemExit(f"{key}: translation cannot be written into the markdown row")
-        block2, n1 = re.subn(
-            r"- Current translation:.*",
-            "- Current translation: " + translation,
-            block,
-            count=1,
-        )
-        block2, n2 = re.subn(r"- Approve:.*", "- Approve: " + row["approve"], block2, count=1)
-        block2, n3 = re.subn(r"- Correction:.*", "- Correction: " + row["correction"], block2, count=1)
-        block2, n4 = re.subn(r"- Reviewer:.*", "- Reviewer: " + row["reviewer"], block2, count=1)
-        block2, n5 = re.subn(r"- Date:.*", "- Date: " + row["date"], block2, count=1)
+            raise RuntimeError(f"{key}: translation cannot be written into the markdown row")
+        def _line(prefix, value):
+            return lambda _match: prefix + value
+
+        block2, n1 = re.subn(r"- Current translation:.*", _line("- Current translation: ", translation), block, count=1)
+        block2, n2 = re.subn(r"- Approve:.*", _line("- Approve: ", row["approve"]), block2, count=1)
+        block2, n3 = re.subn(r"- Correction:.*", _line("- Correction: ", row["correction"]), block2, count=1)
+        block2, n4 = re.subn(r"- Reviewer:.*", _line("- Reviewer: ", row["reviewer"]), block2, count=1)
+        block2, n5 = re.subn(r"- Date:.*", _line("- Date: ", row["date"]), block2, count=1)
         if min(n1, n2, n3, n4, n5) != 1:
-            raise SystemExit(f"package markdown fields missing for {key}")
+            raise RuntimeError(f"package markdown fields missing for {key}")
         rendered = rendered[:start] + block2 + rendered[end:]
     return rendered
 
@@ -238,8 +236,11 @@ def apply_rows(lang, rows, english, catalog, package_rows, catalog_path, package
     backups = {}
     for path in (catalog_path, package_csv, package_md, approvals_path):
         backups[path] = path.read_bytes() if path.exists() else None
-    approvals_path.parent.mkdir(parents=True, exist_ok=True)
+    created_dir = False
     try:
+        if not approvals_path.parent.exists():
+            approvals_path.parent.mkdir(parents=True, exist_ok=True)
+            created_dir = True
         catalog_path.write_text(json.dumps(catalog, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         _write_csv(package_csv, merged)
         if package_md.exists():
@@ -253,13 +254,15 @@ def apply_rows(lang, rows, english, catalog, package_rows, catalog_path, package
         if run_checks:
             subprocess.run(["node", str(I18N / "check-catalogs.mjs")], cwd=ROOT, check=True)
             subprocess.run([sys.executable, str(I18N / "tools/check_behavior.py")], cwd=ROOT, check=True)
-    except Exception:
+    except BaseException:
         for path, payload in backups.items():
             if payload is None:
                 if path.exists():
                     path.unlink()
             else:
                 path.write_bytes(payload)
+        if created_dir and approvals_path.parent.exists() and not any(approvals_path.parent.iterdir()):
+            approvals_path.parent.rmdir()
         raise
     return changed
 
