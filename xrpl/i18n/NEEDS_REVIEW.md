@@ -1418,7 +1418,7 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - ja: Mainnetは現在、{s1}に、{s2}を加えたものを使います。これらの値はバリデータの手数料投票で変わることがあるため、ソフトウェアは恒久的に固定せず、ネットワークへ問い合わせるべきです。
 - ko: Mainnet은 현재 {s1}에 {s2}를 더해 씁니다. 이 값은 검증자 수수료 투표로 바뀔 수 있으므로, 소프트웨어는 영원히 하드코딩하지 말고 네트워크에 조회해야 합니다.
 - zh-CN: Mainnet 目前使用{s1}，外加{s2}。这些数值可以通过验证者的费用投票改变，因此软件应当查询网络，而不是把它们永久写死。
-- hi: Mainnet अभी {s1} तथा {s2} का उपयोग करता है। ये मान वैलिडेटर फ़ीस वोटिंग से बदल सकते हैं, इसलिए सॉफ़्टवेयर इन्हें हमेशा के लिए हार्ड-कोड करने के बजाय नेटवर्क से पूछे।
+- hi: Mainnet अभी {s1} प्लस {s2} का उपयोग करता है। ये मान वैलिडेटर फ़ीस वोटिंग से बदल सकते हैं, इसलिए सॉफ़्टवेयर इन्हें हमेशा के लिए हार्ड-कोड करने के बजाय नेटवर्क से पूछे।
 - ar: تستخدم Mainnet حالياً {s1} إضافة إلى {s2}. يمكن أن تتغير هذه القيم عبر تصويت المدققين (validators) على الرسم، لذلك ينبغي للبرنامج أن يستعلم الشبكة بدل تثبيتها في الرمز إلى الأبد.
 
 ## `mark-irreversible-or-order-sensitive.88613afa`
@@ -2419,13 +2419,13 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - ja: これは点検の演習であり、ブラックホール化（blackholing）の手順書ではありません。このレッスンに従いながら、鍵を無効にしたり、取り消せないフラグ（flags）を設定したり、署名者を外したりしないでください。
 - ko: 이것은 점검 연습이지 블랙홀화(blackholing) 조리법이 아닙니다. 이 레슨을 따라가며 키를 끄거나, 되돌릴 수 없는 플래그를 설정하거나, 서명자를 제거하지 마세요.
 - zh-CN: 这是一次检查练习，不是黑洞化（blackholing）的做法。跟随这一课时，不要禁用密钥、设置不可逆标志（flags），或移除签名者。
-- hi: यह जाँच अभ्यास है, ब्लैकहोलिंग (blackholing) की विधि नहीं। इस पाठ का पालन करते समय की (keys) बंद न करें, अपरिवर्तनीय फ़्लैग (flags) सेट न करें और साइनर (signer) न हटाएँ।
+- hi: यह जाँच अभ्यास है, ब्लैकहोलिंग (blackholing) की विधि नहीं। इस पाठ का पालन करते हुए न तो की (keys) बंद करें, न अपरिवर्तनीय फ़्लैग (flags) सेट करें, न साइनर (signer) हटाएँ।
 - ar: هذا تمرين فحص، لا وصفة للثقب الأسود (blackholing). لا تعطّل المفاتيح ولا تضبط أعلاماً (flags) لا رجعة فيها ولا تُزِل الموقّعين أثناء اتباع هذا الدرس.
 
 ## `this-lesson-follows-the-classic-trus.fc252c0f`
 
 - en: This lesson follows the classic trust-line token model. XRPL also has Multi-Purpose Tokens (MPTs), with different identifiers and capabilities. Choose the standard deliberately and check the intended network and wallet support before following a tutorial. These lessons do not create either kind of token.
-- pt-BR: Esta lição segue o modelo clássico de token de trust line. O XRPL também tem Multi-Purpose Tokens (MPTs), com identificadores e capacidades diferentes. Escolha o padrão de propósito e confira a rede pretendida e o suporte da carteira antes de seguir um tutorial. Estas lições não criam nenhum dos dois tipos de token.
+- pt-BR: Esta lição segue o modelo clássico de token de trust line. O XRPL também tem Multi-Purpose Tokens (MPTs), com identificadores e capacidades diferentes. Escolha o padrão deliberadamente e confira a rede pretendida e o suporte da carteira antes de seguir um tutorial. Estas lições não criam nenhum dos dois tipos de token.
 - es: Esta lección sigue el modelo clásico de token de línea de confianza. XRPL también tiene Multi-Purpose Tokens (MPTs), con identificadores y capacidades distintos. Elige el estándar de forma deliberada y comprueba la red prevista y el soporte de la billetera antes de seguir un tutorial. Estas lecciones no crean ninguno de los dos tipos de token.
 - fr: Cette leçon suit le modèle classique du jeton de trust line. XRPL a aussi les Multi-Purpose Tokens (MPTs), avec des identifiants et des capacités différents. Choisissez le standard délibérément, et vérifiez le réseau prévu et le support du portefeuille avant de suivre un tutoriel. Ces leçons ne créent ni l’un ni l’autre type de jeton.
 - de: Diese Lektion folgt dem klassischen Trust-Line-Token-Modell. XRPL hat auch Multi-Purpose Tokens (MPTs), mit anderen Kennungen und Fähigkeiten. Wähl den Standard bewusst und prüfe das beabsichtigte Netzwerk und die Wallet-Unterstützung, bevor du einem Tutorial folgst. Diese Lektionen erstellen keine der beiden Token-Arten.
