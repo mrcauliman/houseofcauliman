@@ -55,6 +55,8 @@ def main():
                 seen.add(choice)
         if 'script src="/xrpl/i18n/i18n.js"' not in text and "script src='/xrpl/i18n/i18n.js'" not in text:
             errors.append(f"{rel}: missing i18n runtime")
+        if 'script src="/xrpl/i18n/release.js"' not in text:
+            errors.append(f"{rel}: missing release status")
     definitions = (ROOT / "xrpl/definitions.html").read_text(encoding="utf-8")
     usage = (ROOT / "xrpl/usage.html").read_text(encoding="utf-8")
     reality = (ROOT / "xrpl/investing-reality.html").read_text(encoding="utf-8")
@@ -67,6 +69,8 @@ def main():
         errors.append("slippage math changed")
     if "c=p*s" not in reality or "currency:'USD'" not in reality or "r=p/d*100" not in reality:
         errors.append("investing calculator math changed")
+    if "toLocaleString('en-US'" not in reality:
+        errors.append("market cap is not pinned to en-US USD")
     if "dataset.correct" not in (ROOT / "xrpl/builders/builders.js").read_text(encoding="utf-8"):
         errors.append("builder quiz no longer reads data-correct")
     if ".xrpl-app-card h2" in dashboard:

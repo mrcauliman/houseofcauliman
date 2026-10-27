@@ -72,6 +72,23 @@
     return true;
   }
 
+  var REVIEW_NOTICE = "Translation under review. This is not a certified XRPL LAYMAN translation.";
+
+  function releaseStatus(id) {
+    var table = window.XRPL_RELEASE;
+    if (!table) return "";
+    return table[id] || "";
+  }
+
+  // Missing release data fails closed: only English is public.
+  function isPublic(id) {
+    if (!catalogComplete(id)) return false;
+    var table = window.XRPL_RELEASE;
+    if (!table) return id === "en";
+    if (id === "en") return releaseStatus(id) === "source";
+    return releaseStatus(id) === "approved";
+  }
+
   function sitePath() {
     var path = location.pathname;
     var at = path.indexOf("/xrpl/");
@@ -224,11 +241,45 @@
       start.parentNode.insertBefore(link, end);
     }
     add("canonical", { href: absolute(lang) });
+    if (!isPublic(lang)) return;
     LANGS.forEach(function (item) {
-      if (!catalogComplete(item.id)) return;
+      if (!isPublic(item.id)) return;
       add("alternate", { hreflang: item.hreflang, href: absolute(item.id) });
     });
     add("alternate", { hreflang: "x-default", href: absolute("en") });
+  }
+
+  function updateRobots(lang) {
+    var existing = document.querySelector('meta[name="robots"][data-xrpl-robots]');
+    if (isPublic(lang)) {
+      if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
+      return;
+    }
+    if (!existing) {
+      existing = document.createElement("meta");
+      existing.setAttribute("name", "robots");
+      existing.setAttribute("data-xrpl-robots", "1");
+      document.head.appendChild(existing);
+    }
+    existing.setAttribute("content", "noindex, follow");
+  }
+
+  function updateNotice(lang) {
+    var notice = document.getElementById("xrpl-review-notice");
+    if (isPublic(lang)) {
+      if (notice && notice.parentNode) notice.parentNode.removeChild(notice);
+      return;
+    }
+    if (!notice) {
+      notice = document.createElement("p");
+      notice.id = "xrpl-review-notice";
+      notice.className = "xrpl-review-notice";
+      notice.setAttribute("role", "status");
+      var anchor = document.querySelector(".xrpl-language-row") || document.querySelector(".appbar");
+      if (anchor && anchor.parentNode) anchor.parentNode.insertBefore(notice, anchor.nextSibling);
+      else document.body.insertBefore(notice, document.body.firstChild);
+    }
+    notice.textContent = REVIEW_NOTICE;
   }
 
   function updateUrl(lang) {
@@ -242,7 +293,7 @@
     replaceChildren(select, LANGS.map(function (lang) {
       var option = document.createElement("option");
       option.value = lang.id;
-      option.textContent = lang.native;
+      option.textContent = isPublic(lang.id) ? lang.native : lang.native + " (under review)";
       option.lang = lang.htmlLang;
       if (lang.dir === "rtl") option.dir = "rtl";
       return option;
@@ -278,6 +329,7 @@
       if (!item) return;
       option.lang = item.htmlLang;
       if (item.dir === "rtl") option.dir = "rtl";
+      option.textContent = isPublic(item.id) ? item.native : item.native + " (under review)";
     });
     if (label) select.setAttribute("aria-labelledby", label.id);
     return select;
@@ -308,6 +360,8 @@
     updateLinks(lang);
     updateTitle(lang);
     updateSeo(lang);
+    updateRobots(lang);
+    updateNotice(lang);
     if (select) {
       var accessibleName = lookup(lang, "lang.label") || "Language";
       select.setAttribute("aria-label", accessibleName);

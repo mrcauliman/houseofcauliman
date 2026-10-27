@@ -3,8 +3,10 @@
 
 Hosting is a static file tree (CNAME + .nojekyll, no redirects). Each
 translated language gets a real directory such as /xrpl/pt-br/. English
-URLs stay where they are. hreflang is emitted only for catalogs that
-contain every English key.
+URLs stay where they are. hreflang, the review notice, robots, and
+sitemap.proposed.xml follow xrpl/i18n/release.json. English is always
+the source. An unapproved language stays at its existing URL and is not
+listed as a certified alternate.
 """
 from __future__ import annotations
 
@@ -46,6 +48,9 @@ LANGS = [
     ("ar", "ar", "ar", "rtl", "ar"),
 ]
 SLUGS = {slug for _lang, slug, _html, _dir, _href in LANGS if slug}
+REVIEW_NOTICE = "Translation under review. This is not a certified XRPL LAYMAN translation."
+REVIEW_SUFFIX = " (under review)"
+LANG_ORDER = [lang for lang, _slug, _html, _dir, _href in LANGS]
 
 
 def load_catalogs():
@@ -60,6 +65,44 @@ def complete(catalogs, lang):
     english = catalogs.get("en") or {}
     local = catalogs.get(lang) or {}
     return bool(english) and all(key in local and local[key] != "" for key in english)
+
+
+def load_release(path=None):
+    path = path or (ROOT / "xrpl/i18n/release.json")
+    data = json.loads(path.read_text(encoding="utf-8"))
+    languages = data.get("languages")
+    if not isinstance(languages, dict) or list(languages) != LANG_ORDER:
+        raise SystemExit("release.json languages must be en, pt-BR, es, fr, de, ja, ko, zh-CN, hi, ar")
+    if languages["en"] != "source":
+        raise SystemExit("release.json en must be source")
+    for lang in LANG_ORDER[1:]:
+        if languages[lang] not in {"unapproved", "approved"}:
+            raise SystemExit(f"release.json {lang} must be unapproved or approved")
+    return data
+
+
+def is_public(release, lang, catalogs=None):
+    status = release["languages"][lang]
+    allowed = status == "source" if lang == "en" else status == "approved"
+    if not allowed:
+        return False
+    if catalogs is not None and not complete(catalogs, lang):
+        return False
+    return True
+
+
+def hreflang_codes(release, catalogs):
+    return [href for lang, _slug, _html, _dir, href in LANGS if is_public(release, lang, catalogs)]
+
+
+def sitemap_locs(release, catalogs):
+    locs = []
+    for lang, slug, _html, _dir, _href in LANGS:
+        if not is_public(release, lang, catalogs):
+            continue
+        for rel in PAGES:
+            locs.append(ORIGIN + public_path(rel, slug))
+    return locs
 
 
 def public_rest(rel):
@@ -184,7 +227,7 @@ def rewrite_links(root, slug):
         link.set_attr("href", next_path + suffix)
 
 
-def fill_seo(root, rel, canonical_slug, catalogs):
+def fill_seo(root, rel, lang_id, canonical_slug, catalogs, release):
     html_node = first(root, tag="html")
     head = first(html_node, tag="head")
     start = end = None
@@ -202,21 +245,165 @@ def fill_seo(root, rel, canonical_slug, catalogs):
     end = next(child for child in head.children if child.kind == "comment" and child.text == "xrpl-seo-end")
     insert_at = head.children.index(end)
     links = [Node("element", tag="link", attrs=[("rel", "canonical"), ("href", ORIGIN + public_path(rel, canonical_slug))])]
-    for lang, slug, _html, _dir, href_lang in LANGS:
-        if not complete(catalogs, lang):
-            continue
+    # Unapproved pages keep a self canonical and do not advertise alternates.
+    if is_public(release, lang_id, catalogs):
+        for lang, slug, _html, _dir, href_lang in LANGS:
+            if not is_public(release, lang, catalogs):
+                continue
+            links.append(Node("element", tag="link", attrs=[
+                ("rel", "alternate"),
+                ("hreflang", href_lang),
+                ("href", ORIGIN + public_path(rel, slug)),
+            ]))
         links.append(Node("element", tag="link", attrs=[
             ("rel", "alternate"),
-            ("hreflang", href_lang),
-            ("href", ORIGIN + public_path(rel, slug)),
+            ("hreflang", "x-default"),
+            ("href", ORIGIN + public_path(rel, "")),
         ]))
-    links.append(Node("element", tag="link", attrs=[
-        ("rel", "alternate"),
-        ("hreflang", "x-default"),
-        ("href", ORIGIN + public_path(rel, "")),
-    ]))
     for offset, link in enumerate(links):
         head.children.insert(insert_at + offset, link)
+
+
+def ensure_release_script(root):
+    scripts = find_all(root, tag="script")
+    i18n = None
+    for script in scripts:
+        src = script.attr("src") or ""
+        if src == "/xrpl/i18n/release.js":
+            return
+        if src == "/xrpl/i18n/i18n.js":
+            i18n = script
+    if i18n is None or i18n.parent is None:
+        raise SystemExit("missing i18n.js script tag")
+    node = Node("element", tag="script", attrs=[("src", "/xrpl/i18n/release.js"), ("defer", None)])
+    parent = i18n.parent
+    node.parent = parent
+    parent.children.insert(parent.children.index(i18n), node)
+
+
+def _option_text(option):
+    return "".join(child.text for child in option.children if child.kind == "text")
+
+
+def mark_options(root, release):
+    select = first(root, tag="select", attr="id", value="xrpl-language")
+    if select is None:
+        return
+    for option in select.children:
+        if option.kind != "element" or option.tag != "option":
+            continue
+        lang = option.attr("value")
+        if lang not in release["languages"]:
+            continue
+        text = _option_text(option)
+        base = text[: -len(REVIEW_SUFFIX)] if text.endswith(REVIEW_SUFFIX) else text
+        new = base if is_public(release, lang) else base + REVIEW_SUFFIX
+        if new == text:
+            continue
+        text_node = Node("text", text=new)
+        text_node.parent = option
+        option.children = [text_node]
+
+
+def _remove_nodes(nodes):
+    for node in nodes:
+        parent = node.parent
+        if parent is not None:
+            parent.children = [child for child in parent.children if child is not node]
+
+
+def remove_notice(root):
+    found = []
+
+    def visit(element):
+        if element.attr("id") == "xrpl-review-notice":
+            found.append(element)
+
+    walk_elements(root, visit)
+    _remove_nodes(found)
+
+
+def insert_notice(root):
+    remove_notice(root)
+    anchor = first(root, attr="class", value="xrpl-language-row") or first(root, attr="class", value="appbar")
+    if anchor is None or anchor.parent is None:
+        raise SystemExit("no anchor for the review notice")
+    notice = Node("element", tag="p", attrs=[
+        ("id", "xrpl-review-notice"),
+        ("class", "xrpl-review-notice"),
+        ("role", "status"),
+    ])
+    text = Node("text", text=REVIEW_NOTICE)
+    text.parent = notice
+    notice.children = [text]
+    parent = anchor.parent
+    notice.parent = parent
+    parent.children.insert(parent.children.index(anchor) + 1, notice)
+
+
+def set_robots(root, noindex):
+    head = first(first(root, tag="html"), tag="head")
+    existing = [
+        child for child in head.children
+        if child.kind == "element" and child.tag == "meta" and child.attr("data-xrpl-robots") is not None
+    ]
+    _remove_nodes(existing)
+    if not noindex:
+        return
+    meta = Node("element", tag="meta", attrs=[
+        ("name", "robots"),
+        ("content", "noindex, follow"),
+        ("data-xrpl-robots", "1"),
+    ])
+    meta.parent = head
+    head.children.append(meta)
+
+
+def apply_release(root, rel, lang, slug, catalogs, release):
+    fill_seo(root, rel, lang, slug, catalogs, release)
+    ensure_release_script(root)
+    mark_options(root, release)
+    public = is_public(release, lang, catalogs)
+    if public:
+        remove_notice(root)
+        set_robots(root, False)
+    else:
+        insert_notice(root)
+        set_robots(root, True)
+
+
+def write_release_js(release):
+    payload = json.dumps(release["languages"], ensure_ascii=False, indent=2)
+    text = (
+        "/* Generated from xrpl/i18n/release.json. Do not edit by hand. */\n"
+        f"window.XRPL_RELEASE = {payload};\n"
+    )
+    (ROOT / "xrpl/i18n/release.js").write_text(text, encoding="utf-8")
+
+
+def write_sitemap(release, catalogs):
+    lines = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        "<!--",
+        "Proposed sitemap for XRPL LAYMAN. Generated from xrpl/i18n/release.json.",
+        "Do not replace /sitemap.xml with this file.",
+        "The live sitemap lists only https://houseofcauliman.com/.",
+        "A non-English language is included here only when release.json marks it approved.",
+        "Enabling one language does not add the others. None of this publishes the site.",
+        "-->",
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    ]
+    for lang, slug, _html, _dir, _href in LANGS:
+        if not is_public(release, lang, catalogs):
+            continue
+        lines.append(f"  <!-- {lang} -->")
+        for rel in PAGES:
+            lines.append("  <url>")
+            lines.append(f"    <loc>{ORIGIN + public_path(rel, slug)}</loc>")
+            lines.append("  </url>")
+    lines.append("</urlset>")
+    lines.append("")
+    (ROOT / "xrpl/i18n/sitemap.proposed.xml").write_text("\n".join(lines), encoding="utf-8")
 
 
 def set_meta(root, catalogs, lang):
@@ -232,56 +419,50 @@ def set_meta(root, catalogs, lang):
             meta.set_attr("content", isolate(description, direction))
 
 
-def write_page(rel, slug, html_lang, direction, catalogs):
+def write_page(rel, catalogs, release):
     root = parse((ROOT / rel).read_text(encoding="utf-8"))
     html_node = first(root, tag="html")
-    html_node.set_attr("lang", html_lang)
-    html_node.set_attr("dir", direction)
-    fill_seo(root, rel, slug, catalogs)
-    if slug:
-        apply_tree(root, catalogs, html_lang if html_lang != "en" else "en", direction)
-        # html_lang for pt-BR matches catalog id. For en, html lang is en.
-        set_meta(root, catalogs, {html: lang for lang, _slug, html, _dir, _href in LANGS}[html_lang])
-        rewrite_links(root, slug)
-    text = serialize(root)
-    if slug:
-        destination = ROOT / "xrpl" / slug / rel[len("xrpl/"):]
-    else:
-        destination = ROOT / rel
+    html_node.set_attr("lang", "en")
+    html_node.set_attr("dir", "ltr")
+    apply_release(root, rel, "en", "", catalogs, release)
+    destination = ROOT / rel
     destination.parent.mkdir(parents=True, exist_ok=True)
-    destination.write_text(text, encoding="utf-8")
+    destination.write_text(serialize(root), encoding="utf-8")
     return destination
 
 
 def main():
     catalogs = load_catalogs()
-    ready = [lang for lang, slug, _html, _dir, _href in LANGS if complete(catalogs, lang)]
+    release = load_release()
+    ready = [lang for lang, _slug, _html, _dir, _href in LANGS if complete(catalogs, lang)]
+    public = [lang for lang in LANG_ORDER if is_public(release, lang, catalogs)]
     print("complete catalogs:", ", ".join(ready) or "(none)")
+    print("public languages:", ", ".join(public) or "(none)")
+    write_release_js(release)
+    write_sitemap(release, catalogs)
     for rel in PAGES:
+        # English is rewritten first. Locale pages are still read from that
+        # source, so release marking has to be idempotent.
+        print(write_page(rel, catalogs, release).relative_to(ROOT))
         for lang, slug, html_lang, direction, _href in LANGS:
-            if lang not in ready:
+            if not slug or lang not in ready:
                 continue
-            if not slug:
-                path = write_page(rel, "", "en", "ltr", catalogs)
-            else:
-                # Catalog ids are pt-BR, not the html lang attribute alone.
-                path = write_locale(rel, lang, slug, html_lang, direction, catalogs)
+            path = write_locale(rel, lang, slug, html_lang, direction, catalogs, release)
             print(path.relative_to(ROOT))
 
 
-def write_locale(rel, lang, slug, html_lang, direction, catalogs):
+def write_locale(rel, lang, slug, html_lang, direction, catalogs, release):
     root = parse((ROOT / rel).read_text(encoding="utf-8"))
     html_node = first(root, tag="html")
     html_node.set_attr("lang", html_lang)
     html_node.set_attr("dir", direction)
-    fill_seo(root, rel, slug, catalogs)
     apply_tree(root, catalogs, lang, direction)
     set_meta(root, catalogs, lang)
     rewrite_links(root, slug)
-    text = serialize(root)
+    apply_release(root, rel, lang, slug, catalogs, release)
     destination = ROOT / "xrpl" / slug / rel[len("xrpl/"):]
     destination.parent.mkdir(parents=True, exist_ok=True)
-    destination.write_text(text, encoding="utf-8")
+    destination.write_text(serialize(root), encoding="utf-8")
     return destination
 
 
