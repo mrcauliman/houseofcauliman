@@ -298,7 +298,15 @@
       }
     }
     updateUrl(lang);
+    revealHash();
     document.dispatchEvent(new CustomEvent("xrpl:language", { detail: { lang: lang } }));
+  }
+
+  function revealHash() {
+    var hash = location.hash;
+    if (!hash || hash === "#") return;
+    var target = document.getElementById(decodeURIComponent(hash.slice(1)));
+    if (target && target.scrollIntoView) target.scrollIntoView({ block: "start", behavior: "auto" });
   }
 
   window.XRPL_I18N = {
