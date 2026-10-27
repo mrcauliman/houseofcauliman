@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="ar" data-xrpl-page="definitions" data-xrpl-i18n="1" dir="rtl">
+<head><script data-xrpl-early="1">(function(){
+  var KNOWN={"en":1,"pt-BR":1,"es":1,"fr":1,"de":1,"ja":1,"ko":1,"zh-CN":1,"hi":1,"ar":1};
+  var SLUGS={"pt-br":"pt-BR","es":"es","fr":"fr","de":"de","ja":"ja","ko":"ko","zh-cn":"zh-CN","hi":"hi","ar":"ar"};
+  var path=location.pathname, at=path.indexOf("/xrpl/"), lang="";
+  if(at>=0){
+    var slug=path.slice(at+6).split("/")[0];
+    if(SLUGS[slug]) lang=SLUGS[slug];
+  }
+  if(!lang){ try{ lang=localStorage.getItem("xrpl-layman-language")||""; }catch(e){} }
+  if(!KNOWN[lang]) return;
+  document.documentElement.lang=lang;
+  document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+})();</script><link rel="stylesheet" href="/xrpl/i18n/i18n.css"><!--xrpl-seo-start--><link rel="canonical" href="https://houseofcauliman.com/xrpl/ar/definitions.html"><link rel="alternate" hreflang="en" href="https://houseofcauliman.com/xrpl/definitions.html"><link rel="alternate" hreflang="pt-BR" href="https://houseofcauliman.com/xrpl/pt-br/definitions.html"><link rel="alternate" hreflang="es" href="https://houseofcauliman.com/xrpl/es/definitions.html"><link rel="alternate" hreflang="fr" href="https://houseofcauliman.com/xrpl/fr/definitions.html"><link rel="alternate" hreflang="de" href="https://houseofcauliman.com/xrpl/de/definitions.html"><link rel="alternate" hreflang="ja" href="https://houseofcauliman.com/xrpl/ja/definitions.html"><link rel="alternate" hreflang="ko" href="https://houseofcauliman.com/xrpl/ko/definitions.html"><link rel="alternate" hreflang="zh-CN" href="https://houseofcauliman.com/xrpl/zh-cn/definitions.html"><link rel="alternate" hreflang="hi" href="https://houseofcauliman.com/xrpl/hi/definitions.html"><link rel="alternate" hreflang="ar" href="https://houseofcauliman.com/xrpl/ar/definitions.html"><link rel="alternate" hreflang="x-default" href="https://houseofcauliman.com/xrpl/definitions.html"><!--xrpl-seo-end-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title data-i18n="meta.definitions.title">تعريفات XRPL | XRPL LAYMAN</title>
+<meta name="description" content="افهم XRP Ledger والمحافظ والحسابات والمُصدِرين (issuer) وخطوط الثقة (trust line) والاحتياطيات (reserve) والرموز والمعاملات وDEX وAMM وNFT وكيف تتصل كلها.">
+<meta property="og:title" content="XRPL Definitions | XRPL LAYMAN">
+<meta property="og:description" content="The core XRP Ledger concepts explained clearly, deeply, and without the usual confusion.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#030812">
+<meta name="apple-mobile-web-app-title" content="XRPL LAYMAN">
+<meta name="application-name" content="XRPL LAYMAN">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/xrpl_layman/favicon-32x32.png?v=2">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/xrpl_layman/favicon-16x16.png?v=2">
+<link rel="shortcut icon" href="/assets/favicons/xrpl_layman/favicon.ico?v=2">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/xrpl_layman/apple-touch-icon.png?v=2">
+<style>
+:root{
+  --bg:#02050b;
+  --panel:#07101d;
+  --panel2:#0a1423;
+  --line:rgba(132,168,219,.17);
+  --text:#f4f7fb;
+  --muted:#aeb9c9;
+  --blue:#168cff;
+  --cyan:#00d6d1;
+  --gold:#ff9d25;
+  --green:#59d879;
+  --red:#ff4059;
+  --purple:#9a55ff;
+  --shadow:0 22px 60px rgba(0,0,0,.38);
+  --max:1320px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{margin:0;padding:0}
+body{
+  min-height:100vh;
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:
+    radial-gradient(circle at 8% 4%,rgba(0,106,255,.20),transparent 28%),
+    radial-gradient(circle at 92% 12%,rgba(100,44,220,.15),transparent 30%),
+    linear-gradient(145deg,#020711,#02050b 50%,#000);
+}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+.wrap{width:min(100%,var(--max));margin:auto;padding:24px 20px 80px}
+
+.appbar{
+  position:sticky;
+  top:12px;
+  z-index:20;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  margin-bottom:28px;
+  padding:12px 16px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:rgba(4,10,20,.82);
+  backdrop-filter:blur(20px);
+  box-shadow:0 14px 35px rgba(0,0,0,.30);
+}
+.appbar-brand{display:flex;align-items:center;gap:12px;min-width:0}
+.appbar-brand img{width:44px;height:44px;object-fit:contain}
+.appbar-title{font-size:15px;font-weight:850;letter-spacing:.02em}
+.appbar-sub{margin-top:2px;color:var(--muted);font-size:11px}
+.appbar-links{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.appbar-links a{
+  padding:9px 12px;
+  border:1px solid transparent;
+  border-radius:10px;
+  color:var(--muted);
+  font-size:12px;
+  font-weight:750;
+}
+.appbar-links a:hover,.appbar-links a.active{
+  color:#fff;
+  border-color:rgba(22,140,255,.35);
+  background:rgba(22,140,255,.10);
+}
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  align-items:center;
+  gap:34px;
+  padding:44px;
+  border:1px solid rgba(40,112,230,.26);
+  border-radius:26px;
+  background:
+    radial-gradient(circle at 12% 0,rgba(18,126,255,.24),transparent 40%),
+    linear-gradient(145deg,rgba(7,18,35,.98),rgba(2,7,15,.99));
+  box-shadow:var(--shadow);
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  width:560px;
+  height:560px;
+  right:-300px;
+  top:-340px;
+  border:1px solid rgba(80,137,255,.25);
+  border-radius:50%;
+  box-shadow:0 0 0 24px rgba(55,100,220,.05),0 0 0 48px rgba(55,100,220,.025);
+}
+.hero-logo{
+  position:relative;
+  z-index:1;
+  width:150px;
+  height:150px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(101,166,255,.45);
+  border-radius:34px;
+  background:linear-gradient(145deg,#09265f,#020916);
+  box-shadow:inset 0 1px rgba(255,255,255,.15),0 25px 60px rgba(0,0,0,.45);
+}
+.hero-logo img{width:108px;height:108px;object-fit:contain;filter:drop-shadow(0 0 18px rgba(52,160,255,.6))}
+.hero-copy{position:relative;z-index:1}
+.eyebrow{color:var(--blue);font-size:12px;font-weight:850;letter-spacing:.16em;text-transform:uppercase}
+h1{margin:8px 0 12px;font-size:clamp(38px,6vw,72px);line-height:.98;letter-spacing:-.045em}
+.hero p{max-width:820px;margin:0;color:var(--muted);font-size:18px;line-height:1.65}
+.progress{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:22px;
+  color:#d8e7fb;
+  font-size:12px;
+  font-weight:750;
+}
+.progress-track{width:190px;height:6px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}
+.progress-fill{width:0;height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan));transition:width .25s ease}
+
+.chapter-nav{
+  display:grid;
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:10px;
+  margin:22px 0;
+}
+.chapter-nav a{
+  padding:13px 10px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:rgba(255,255,255,.025);
+  color:var(--muted);
+  font-size:11px;
+  font-weight:800;
+  text-align:center;
+}
+.chapter-nav a:hover{color:#fff;border-color:rgba(22,140,255,.40);background:rgba(22,140,255,.08)}
+
+.lesson{
+  margin-top:22px;
+  padding:30px;
+  border:1px solid var(--line);
+  border-radius:22px;
+  background:linear-gradient(145deg,rgba(8,18,32,.96),rgba(3,9,18,.98));
+  box-shadow:var(--shadow);
+}
+.lesson-head{
+  display:grid;
+  grid-template-columns:58px 1fr;
+  gap:16px;
+  align-items:start;
+  margin-bottom:22px;
+}
+.lesson-number{
+  width:58px;height:58px;
+  display:grid;place-items:center;
+  border-radius:16px;
+  color:var(--accent,var(--blue));
+  border:1px solid color-mix(in srgb,var(--accent,var(--blue)) 38%,transparent);
+  background:color-mix(in srgb,var(--accent,var(--blue)) 10%,transparent);
+  font-size:18px;font-weight:900;
+}
+.lesson h2{margin:0;font-size:30px;letter-spacing:-.025em}
+.lesson-lead{max-width:900px;margin:7px 0 0;color:var(--muted);font-size:16px;line-height:1.65}
+.lesson h3{margin:28px 0 9px;font-size:18px}
+.lesson p,.lesson li{color:var(--muted);font-size:15px;line-height:1.75}
+.lesson strong{color:#fff}
+
+.concept-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:20px}
+.concept{
+  padding:20px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:rgba(255,255,255,.025);
+}
+.concept h3{margin:0 0 8px;color:var(--accent,var(--blue));font-size:16px}
+.concept p{margin:0;font-size:14px}
+
+.flow{
+  display:flex;
+  align-items:stretch;
+  gap:10px;
+  margin:22px 0;
+  overflow:auto;
+  padding:8px 2px 12px;
+}
+.flow-step{
+  flex:1 0 145px;
+  min-height:110px;
+  display:grid;
+  place-items:center;
+  padding:16px;
+  border:1px solid var(--line);
+  border-radius:15px;
+  background:#08111e;
+  text-align:center;
+  font-size:13px;
+  font-weight:800;
+}
+.flow-arrow{align-self:center;color:var(--blue);font-size:24px}
+
+.compare{width:100%;border-collapse:collapse;margin-top:20px}
+.compare th,.compare td{padding:14px;border:1px solid var(--line);text-align:left;vertical-align:top}
+.compare th{background:rgba(22,140,255,.09);color:#fff;font-size:13px}
+.compare td{color:var(--muted);font-size:14px}
+
+.callout{
+  margin-top:20px;
+  padding:17px 18px;
+  border-left:3px solid var(--accent,var(--blue));
+  border-radius:12px;
+  background:color-mix(in srgb,var(--accent,var(--blue)) 8%,transparent);
+}
+.callout strong{display:block;margin-bottom:5px;color:var(--accent,var(--blue));font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.callout p{margin:0}
+
+.tool{
+  margin-top:24px;
+  padding:22px;
+  border:1px solid rgba(22,140,255,.25);
+  border-radius:18px;
+  background:rgba(3,11,23,.82);
+}
+.tool h3{margin:0 0 8px;font-size:20px}
+.tool-intro{margin:0 0 18px;color:var(--muted)}
+.fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.field label{display:block;margin-bottom:7px;color:#c8d4e3;font-size:12px;font-weight:800}
+.field input{
+  width:100%;
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:#030914;
+  color:#fff;
+  outline:none;
+}
+.field input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(22,140,255,.10)}
+.result{
+  margin-top:15px;
+  padding:17px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:rgba(255,255,255,.025);
+}
+.result-value{font-size:26px;font-weight:900;color:var(--green)}
+.result-copy{margin-top:5px;color:var(--muted);font-size:13px;line-height:1.55}
+
+.identity-demo{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+.asset-card{padding:18px;border:1px solid var(--line);border-radius:15px;background:#060e1a}
+.asset-code{font-size:27px;font-weight:900}
+.asset-issuer{margin-top:8px;color:var(--muted);font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:11px;overflow-wrap:anywhere}
+.asset-status{margin-top:13px;font-size:12px;font-weight:850}
+.good{color:var(--green)}.warning{color:var(--red)}
+
+.trust-demo{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;margin-top:20px}
+.trust-node{
+  min-height:130px;
+  display:grid;
+  place-items:center;
+  padding:18px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:#06101d;
+  text-align:center;
+}
+.trust-line{
+  position:relative;
+  width:190px;
+  height:8px;
+  border-radius:999px;
+  background:rgba(255,255,255,.08);
+  overflow:hidden;
+}
+.trust-line span{
+  display:block;width:0;height:100%;
+  background:linear-gradient(90deg,var(--cyan),var(--blue));
+  transition:width .45s ease;
+}
+.trust-demo.active .trust-line span{width:100%}
+.tool-button{
+  margin-top:16px;
+  padding:11px 16px;
+  border:1px solid rgba(22,140,255,.38);
+  border-radius:11px;
+  background:rgba(22,140,255,.12);
+  color:#fff;
+  cursor:pointer;
+  font-weight:850;
+}
+.tool-button:hover{background:rgba(22,140,255,.20)}
+
+.mistakes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:18px}
+.mistake{padding:16px;border:1px solid rgba(255,64,89,.22);border-radius:13px;background:rgba(255,64,89,.045);color:#d9e0e9;font-size:14px}
+.mistake b{color:var(--red)}
+
+.quiz-question{margin-top:18px;padding:18px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.02)}
+.quiz-question h3{margin:0 0 12px;font-size:16px}
+.quiz-options{display:grid;gap:8px}
+.quiz-options button{
+  width:100%;
+  padding:11px 13px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:#050d18;
+  color:var(--muted);
+  text-align:left;
+  cursor:pointer;
+}
+.quiz-options button.correct{border-color:rgba(89,216,121,.55);background:rgba(89,216,121,.10);color:#fff}
+.quiz-options button.wrong{border-color:rgba(255,64,89,.55);background:rgba(255,64,89,.10);color:#fff}
+
+.next-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.next-card{
+  padding:22px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:rgba(255,255,255,.025);
+}
+.next-card strong{display:block;font-size:18px}
+.next-card span{display:block;margin-top:7px;color:var(--muted);font-size:13px;line-height:1.5}
+.next-card b{display:block;margin-top:20px;color:var(--blue)}
+
+.footer{
+  margin-top:36px;
+  padding:22px 14px;
+  border-top:1px solid var(--line);
+  color:#8f9bad;
+  font-size:12px;
+  line-height:1.8;
+  text-align:center;
+}
+.footer a{color:inherit}
+
+@media(max-width:900px){
+  .appbar-links{display:none}
+  .hero{grid-template-columns:1fr;text-align:center;padding:34px 24px}
+  .hero-logo{margin:auto}
+  .hero p{margin:auto}
+  .progress{justify-content:center}
+  .chapter-nav{grid-template-columns:repeat(3,1fr)}
+  .concept-grid,.fields,.next-grid{grid-template-columns:1fr}
+  .trust-demo{grid-template-columns:1fr}
+  .trust-line{width:8px;height:90px;margin:auto}
+  .trust-line span{width:100%;height:0}
+  .trust-demo.active .trust-line span{height:100%;width:100%}
+}
+@media(max-width:620px){
+  .wrap{padding:14px 12px 60px}
+  .hero-logo{width:120px;height:120px}
+  .hero-logo img{width:86px;height:86px}
+  .lesson{padding:22px 17px}
+  .lesson-head{grid-template-columns:46px 1fr}
+  .lesson-number{width:46px;height:46px}
+  .lesson h2{font-size:24px}
+  .chapter-nav{grid-template-columns:repeat(2,1fr)}
+  .concept-grid,.identity-demo,.mistakes{grid-template-columns:1fr}
+}
+
+.home-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  min-height:42px;
+  padding:10px 15px;
+  border:1px solid rgba(22,140,255,.40);
+  border-radius:11px;
+  background:rgba(22,140,255,.12);
+  color:#fff;
+  font-size:12px;
+  font-weight:850;
+  white-space:nowrap;
+}
+.home-button:hover{
+  background:rgba(22,140,255,.22);
+  border-color:rgba(22,140,255,.65);
+}
+@media(max-width:900px){
+  .home-button-text{display:none}
+}
+
+
+
+
+</style>
+</head>
+<body id="top">
+<div class="wrap">
+
+<nav class="appbar">
+  <a class="appbar-brand" href="/xrpl/ar/">
+    <img src="/assets/xrpl/xrpl_layman_icon.png" alt="XRPL LAYMAN">
+    <span>
+      <span class="appbar-title">XRPL LAYMAN</span>
+      <span class="appbar-sub" data-i18n="nav.backDashboard">العودة إلى لوحة التحكم</span>
+    </span>
+  </a>
+  
+<a class="home-button" href="/xrpl/ar/" aria-label="العودة إلى ⁦XRPL⁩ ⁦LAYMAN⁩" data-i18n-attr="aria-label:nav.backHome">
+  <span aria-hidden="true">←</span>
+  <span class="home-button-text" data-i18n="nav.backHome">العودة إلى ⁦XRPL⁩ ⁦LAYMAN⁩</span>
+</a>
+<div class="appbar-links">
+    <a href="/xrpl/ar/" data-i18n="nav.dashboard">لوحة التحكم</a>
+    <a class="active" href="/xrpl/ar/definitions.html" data-i18n="nav.definitions">التعريفات</a>
+    <a href="/xrpl/ar/wallet-basics.html" data-i18n="nav.wallets">المحافظ</a>
+    <a href="/xrpl/ar/usage.html" data-i18n="nav.usage">الاستخدام</a>
+    <a href="/xrpl/ar/safety.html" data-i18n="nav.safety">الأمان</a>
+    <a href="/xrpl/ar/investing-reality.html" data-i18n="nav.reality">الواقع</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-logo">
+    <img src="/assets/xrpl/xrpl_layman_icon.png" alt="XRPL LAYMAN">
+  </div>
+  <div class="hero-copy">
+    <div class="eyebrow" data-i18n="definitions-application.e04aef1b">تطبيق التعريفات</div>
+    <h1 data-i18n="understand-the-system.c6a69f4f">افهم النظام.</h1>
+    <p data-i18n="this-isn-t-a-list-of-crypto-words-it.82d33c34">هذه ليست قائمة كلمات عن العملات الرقمية. إنه الأساس الذي تحتاجه لفهم ما هو ⁦XRPL⁩، وما تتحكم فيه محفظتك، وكيف تُحدَّد الأصول، وما يحدث فعلاً عندما تستخدم السجل.</p>
+    <div class="progress">
+      <span data-i18n="lesson-progress.2f777fc9">تقدم الدرس</span>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <span id="progressText">0%</span>
+    </div>
+  </div>
+</header>
+
+<nav class="chapter-nav">
+  <a href="#ledger" data-i18n="the-ledger.8ab5668d">السجل</a>
+  <a href="#wallets" data-i18n="nav.wallets">المحافظ</a>
+  <a href="#assets" data-i18n="assets.20e33862">الأصول</a>
+  <a href="#issuers" data-i18n="issuers.888090ef">المُصدِرون (⁦issuer⁩)</a>
+  <a href="#trustlines" data-i18n="trustlines.57b2be31">خطوط الثقة (⁦trust⁩ ⁦line⁩)</a>
+  <a href="#reserves" data-i18n="reserves.5ac63fc4">احتياطيات (⁦reserve⁩)</a>
+  <a href="#transactions" data-i18n="transactions.1e3281a9">معاملات</a>
+  <a href="#markets" data-i18n="dex-amm.22b33553">⁦DEX⁩ + ⁦AMM⁩</a>
+  <a href="#nfts">NFTs</a>
+  <a href="#mistakes" data-i18n="mistakes.7868f675">أخطاء</a>
+  <a href="#quiz" data-i18n="knowledge-check.67f1d1d1">اختبار الفهم</a>
+  <a href="#next" data-i18n="next-step.574f02b7">الخطوة التالية</a>
+</nav>
+
+<section class="lesson" id="ledger" style="--accent:var(--blue)">
+  <div class="lesson-head">
+    <div class="lesson-number">01</div>
+    <div>
+      <h2 data-i18n="what-s-the-xrp-ledger.9e19a408">ما هو ⁦XRP⁩ ⁦Ledger⁩؟</h2>
+      <p class="lesson-lead" data-i18n="xrpl-is-a-public-ledger-that-keeps-o.bba3d4a1">⁦XRPL⁩ سجل عام يحتفظ بسجل مشترك واحد للحسابات والأرصدة والأصول والعروض (⁦offer⁩) و⁦NFT⁩ والإعدادات والمعاملات.</p>
+    </div>
+  </div>
+
+  <p data-i18n="forget-the-price-chart-for-a-minute.c08ab92d">انسَ مخطط السعر لحظة. السجل هو النظام الفعلي. إنه السجل العام الذي يتفق عليه الجميع. عندما تُتحقَّق معاملة (⁦validated⁩)، يُحدَّث السجل ويصبح ذلك الناتج جزءاً من التاريخ المشترك.</p>
+
+  <div class="concept-grid">
+    <div class="concept">
+      <h3 data-i18n="public.dc5eb704">عام</h3>
+      <p data-i18n="anyone-can-inspect-addresses-transac.fe505816">يستطيع أي شخص فحص العناوين والمعاملات والأرصدة والعروض (⁦offer⁩) وعناصر السجل.</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="shared.50d0d8dd">مشترك</h3>
+      <p data-i18n="independent-servers-agree-on-the-sam.6f55feae">تتفق خوادم مستقلة على الحالة المرتبة نفسها بدل أن تملك شركة واحدة قاعدة البيانات.</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="final.672b22cc">نهائي</h3>
+      <p data-i18n="once-your-transaction-is-validated-t.ab3a35e3">بعد أن تُتحقَّق معاملتك (⁦validated⁩)، لا يوجد مكتب خدمة عملاء يستطيع عكسها لك.</p>
+    </div>
+  </div>
+
+  <div class="flow">
+    <div class="flow-step" data-i18n="you-create-a-transaction.76a614dc">تنشئ معاملة</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step" data-i18n="your-wallet-signs-it.f2d9a2bd">محفظتك توقّعه (⁦signing⁩)</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step" data-i18n="the-network-validates-it.c15e86c1">تتحقق الشبكة منه (⁦validated⁩)</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step" data-i18n="the-ledger-updates.d815416d">يُحدَّث السجل</div>
+  </div>
+
+  <div class="callout">
+    <strong data-i18n="layman-tip.4b644ca0">نصيحة مبسطة</strong>
+    <p data-i18n="think-of-xrpl-as-the-shared-database.0c61a794">فكّر في ⁦XRPL⁩ كقاعدة البيانات المشتركة تحت التطبيقات. ⁦Xaman⁩ والمنصات والمستكشفون والألعاب والأسواق واجهات. السجل هو القيد الذي تقرأه هذه الواجهات وتكتب إليه.</p>
+  </div>
+</section>
+
+<section class="lesson" id="wallets" style="--accent:var(--cyan)">
+  <div class="lesson-head">
+    <div class="lesson-number">02</div>
+    <div>
+      <h2 data-i18n="wallet-account-address-and-keys.adf082b6">المحفظة والحساب والعنوان والمفاتيح</h2>
+      <p class="lesson-lead" data-i18n="people-use-these-words-like-they-re.4dbc34b9">يستخدم الناس هذه الكلمات كأنها مترادفة. هي مترابطة، لكنها ليست الشيء نفسه.</p>
+    </div>
+  </div>
+
+  <div class="concept-grid">
+    <div class="concept">
+      <h3 data-i18n="account.85dfa32c">الحساب</h3>
+      <p data-i18n="the-account-s-the-on-ledger-identity.29528beb">الحساب هو الهوية على السجل التي تحمل الأرصدة والإعدادات والعناصر المملوكة.</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="address.d70f93df">العنوان</h3>
+      <p data-i18n="the-public-identifier-people-use-to.41735ee5">المعرّف العام الذي يستخدمه الناس لإرسال الأصول إلى حسابك على ⁦XRPL.⁩ يبدأ بـ <strong data-i18n-slot="s1" dir="ltr" class="xrpl-ltr" translate="no">r</strong>.</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="wallet-app.45c65b75">تطبيق المحفظة</h3>
+      <p data-i18n="the-software-that-helps-you-view-the.bd40376a">البرنامج الذي يساعدك على عرض الحساب وبناء المعاملات وتوقيعها (⁦signing⁩) بمفاتيحك.</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="private-keys.f0dbb3c7">مفاتيح خاصة (⁦private⁩ ⁦key⁩)</h3>
+      <p data-i18n="the-secret-authority-that-proves-you.94c08ea2">السلطة السرية التي تثبت أنك تتحكم في الحساب. من يتحكم في المفاتيح يتحكم في الحساب.</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="seed.32fe9f5b">بذرة (⁦seed⁩)</h3>
+      <p data-i18n="a-human-manageable-secret-that-can-d.8636fdfc">سر يستطيع الإنسان إدارته ويُشتق منه المفاتيح. إنه ليس كلمة مرور يمكن إعادة تعيينها (⁦seed⁩).</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="exchange-balance.f5960b4e">رصيد المنصة</h3>
+      <p data-i18n="usually-an-entry-inside-the-exchange.72600dd7">عادة قيد داخل نظام المنصة. قد تتحكم المنصة في الحساب الفعلي على السجل.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong data-i18n="reality-check.9feddbab">فحص الواقع</strong>
+    <p data-i18n="your-wallet-app-doesn-t-hold-your-as.3bd4da5d">تطبيق محفظتك لا يحتفظ بأصولك كما تحتفظ المحفظة المادية بالنقد. السجل يسجّل حالة الحساب. محفظتك تحتفظ بالسلطة اللازمة للتحكم فيه.</p>
+  </div>
+</section>
+
+<section class="lesson" id="assets" style="--accent:var(--gold)">
+  <div class="lesson-head">
+    <div class="lesson-number">03</div>
+    <div>
+      <h2 data-i18n="xrp-vs-issued-assets.f5c63a0f">⁦$XRP⁩ مقابل الأصول المُصدَرة</h2>
+      <p class="lesson-lead" data-i18n="xrp-is-native-to-xrpl-issued-assets.a96959a6">⁦$XRP⁩ أصلي في ⁦XRPL.⁩ تُنشأ الأصول المُصدَرة من الحسابات وتُحدَّد برمز عملة ومُصدِر (⁦issuer⁩) معاً.</p>
+    </div>
+  </div>
+
+  <table class="compare">
+    <thead>
+      <tr><th dir="ltr" class="xrpl-ltr" translate="no">$XRP</th><th data-i18n="issued-asset.beac78cd">أصل مُصدَر</th></tr>
+    </thead>
+    <tbody>
+      <tr><td data-i18n="native-asset-of-the-ledger.5826b6b8">الأصل الأصلي للسجل</td><td data-i18n="created-and-issued-by-an-xrpl-accoun.106e71f9">أُنشئ وأُصدر من حساب ⁦XRPL⁩</td></tr>
+      <tr><td data-i18n="no-issuer-address.197f7a7a">لا يوجد عنوان مُصدِر (⁦issuer⁩)</td><td data-i18n="issuer-address-is-part-of-its-identi.d1b4ce8a">عنوان المُصدِر (⁦issuer⁩) جزء من هويته</td></tr>
+      <tr><td data-i18n="no-trustline-needed.3867ff13">لا يلزم خط ثقة (⁦trust⁩ ⁦line⁩)</td><td data-i18n="trustline-usually-required.cb68ce8d">خط الثقة (⁦trust⁩ ⁦line⁩) مطلوب عادة</td></tr>
+      <tr><td data-i18n="used-for-reserves-and-transaction-co.64cd2832">يُستخدم للاحتياطيات (⁦reserve⁩) وتكاليف المعاملات</td><td data-i18n="can-represent-stablecoins-loyalty-po.c7bae63a">يمكن أن يمثل عملات مستقرة أو نقاط ولاء أو أصول ألعاب أو مطالبات أو رموز مشاريع</td></tr>
+      <tr><td data-i18n="can-t-be-frozen-by-an-issuer.739bc330">لا يستطيع مُصدِر (⁦issuer⁩) تجميده (⁦freeze⁩)</td><td data-i18n="issuer-settings-may-allow-freezing-o.bda31d2f">قد تسمح إعدادات المُصدِر (⁦issuer⁩) بضوابط تجميد (⁦freeze⁩) أو تفويض (⁦authorization⁩)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <strong data-i18n="reality-check.9feddbab">فحص الواقع</strong>
+    <p data-i18n="a-token-named-xrp-isn-t-xrp-native-x.c68c4f04">رمز اسمه ⁦XRP⁩ ليس ⁦$XRP.⁩ ليس لـ ⁦$XRP⁩ الأصلي مُصدِر (⁦issuer⁩). يستطيع رمز مزيف نسخ الرمز المختصر (⁦ticker⁩) والشعار، لكنه لا يستطيع أن يصبح الأصل الأصلي للسجل.</p>
+  </div>
+</section>
+
+<section class="lesson" id="issuers" style="--accent:var(--purple)">
+  <div class="lesson-head">
+    <div class="lesson-number">04</div>
+    <div>
+      <h2 data-i18n="the-issuer-is-part-of-the-asset.fdc265fe">المُصدِر (⁦issuer⁩) جزء من الأصل</h2>
+      <p class="lesson-lead" data-i18n="on-xrpl-the-ticker-alone-doesn-t-ide.1b88095c">على ⁦XRPL⁩، لا يحدّد الرمز المختصر (⁦ticker⁩) وحده أصلاً مُصدَراً. الهوية الحقيقية هي رمز العملة مع حساب المُصدِر (⁦issuer⁩).</p>
+    </div>
+  </div>
+
+  <div class="identity-demo">
+    <div class="asset-card">
+      <div class="asset-code">USD</div>
+      <div class="asset-issuer" data-i18n="issuer-rexampleissuer111111111111111.4bef734d">المُصدِر (⁦issuer⁩): ⁦rExampleIssuer111111111111111111⁩</div>
+      <div class="asset-status good" data-i18n="asset-identity-a.36698d87">هوية الأصل ⁦A⁩</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-code">USD</div>
+      <div class="asset-issuer" data-i18n="issuer-rdifferentissuer2222222222222.a35dc473">المُصدِر (⁦issuer⁩): ⁦rDifferentIssuer2222222222222222⁩</div>
+      <div class="asset-status warning" data-i18n="different-asset-identity.cfea5bbd">هوية أصل مختلفة</div>
+    </div>
+  </div>
+
+  <p data-i18n="both-assets-can-display-usd-that-doe.e62398d1">يستطيع الأصلان عرض ⁦USD.⁩ هذا لا يجعلهما متساويين. قد يسترد مُصدِر (⁦issuer⁩) رمزه بدولارات حقيقية. وقد يكون آخر مجهولاً أو بلا قيمة أو خبيثاً.</p>
+
+  <div class="flow">
+    <div class="flow-step" data-i18n="issuer-account.5b899c53">حساب المُصدِر (⁦issuer⁩)</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step" data-i18n="currency-code.28a6fbbe">رمز العملة</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step" data-i18n="trustline.9ba9cbe8">خط ثقة (⁦trust⁩ ⁦line⁩)</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step" data-i18n="balance-in-your-account.2179d06f">الرصيد في حسابك</div>
+  </div>
+
+  <div class="callout">
+    <strong data-i18n="layman-tip.4b644ca0">نصيحة مبسطة</strong>
+    <p data-i18n="the-ticker-s-the-name-on-the-jersey.c7344cab">الرمز المختصر (⁦ticker⁩) هو الاسم على القميص. المُصدِر (⁦issuer⁩) هو هوية اللاعب الذي يرتديه. تحقق من الاثنين دائماً.</p>
+  </div>
+</section>
+
+<section class="lesson" id="trustlines" style="--accent:var(--cyan)">
+  <div class="lesson-head">
+    <div class="lesson-number">05</div>
+    <div>
+      <h2 data-i18n="what-s-a-trustline.b2cf3ed9">ما خط الثقة (⁦trust⁩ ⁦line⁩)؟</h2>
+      <p class="lesson-lead" data-i18n="a-trustline-is-an-on-ledger-relation.5f24b5a6">خط الثقة (⁦trust⁩ ⁦line⁩) علاقة على السجل بين حسابين لرمز عملة محدد واحد.</p>
+    </div>
+  </div>
+
+  <p data-i18n="a-trustline-tells-xrpl-that-your-acc.0ac7c82b">يخبر خط الثقة (⁦trust⁩ ⁦line⁩) شبكة ⁦XRPL⁩ أن حسابك مستعد لحيازة أصل مُصدَر مرتبط بمُصدِر (⁦issuer⁩) محدد. يمكن أن يتضمن حداً وإعدادات أخرى. لا يستخدم ⁦$XRP⁩ خطوط الثقة (⁦trust⁩ ⁦line⁩) لأنه أصلي في السجل.</p>
+
+  <div class="tool">
+    <h3 data-i18n="trustline-visualizer.1fb70a8d">عارض خط الثقة (⁦trust⁩ ⁦line⁩)</h3>
+    <p class="tool-intro" data-i18n="activate-the-trustline-and-watch-the.bfd64ab7">فعّل خط الثقة (⁦trust⁩ ⁦line⁩) وراقب تكوّن العلاقة.</p>
+    <div class="trust-demo" id="trustDemo">
+      <div class="trust-node"><strong data-i18n="your-wallet.7fdc1073">محفظتك</strong><br><small data-i18n="can-t-hold-this-issued-asset-yet.c6789f31">لا يستطيع حيازة هذا الأصل المُصدَر بعد</small></div>
+      <div class="trust-line"><span></span></div>
+      <div class="trust-node"><strong data-i18n="issuer.2587e48b">المُصدِر (⁦issuer⁩)</strong><br><small data-i18n="currency-token.96418786">العملة: ⁦TOKEN⁩</small></div>
+    </div>
+    <button class="tool-button" id="trustButton" type="button" data-i18n="definitions.trust.create">إنشاء خط ثقة (⁦trust⁩ ⁦line⁩)</button>
+    <div class="result-copy" id="trustResult" data-i18n="no-trustline-exists.e4056ea4">لا يوجد خط ثقة (⁦trust⁩ ⁦line⁩).</div>
+  </div>
+
+  <h3 data-i18n="what-a-trustline-doesn-t-mean.c56a66d8">ما لا يعنيه خط الثقة (⁦trust⁩ ⁦line⁩)</h3>
+  <ul>
+    <li data-i18n="it-doesn-t-prove-the-token-s-legitim.db996327">لا يثبت مشروعية الرمز.</li>
+    <li data-i18n="it-doesn-t-mean-the-issuer-owes-you.a2616d08">لا يعني أن المُصدِر (⁦issuer⁩) يدين لك بشيء يتجاوز شروطه المعلنة.</li>
+    <li data-i18n="it-doesn-t-guarantee-liquidity-or-va.852ba36d">لا يضمن السيولة أو القيمة.</li>
+    <li data-i18n="it-doesn-t-give-the-issuer-control-o.c28ce01e">لا يمنح المُصدِر (⁦issuer⁩) التحكم في ⁦$XRP⁩ الخاص بك.</li>
+  </ul>
+
+  <div class="callout">
+    <strong data-i18n="reality-check.9feddbab">فحص الواقع</strong>
+    <p data-i18n="creating-a-trustline-is-permission-t.6a7a834b">إنشاء خط الثقة (⁦trust⁩ ⁦line⁩) إذن بحيازة أصل. ليس تزكية، ولا ضماناً استثمارياً، ولا مراجعة أمنية.</p>
+  </div>
+</section>
+
+<section class="lesson" id="reserves" style="--accent:var(--green)">
+  <div class="lesson-head">
+    <div class="lesson-number">06</div>
+    <div>
+      <h2 data-i18n="why-some-xrp-stays-reserved.bb60d0fd">لماذا يبقى بعض ⁦$XRP⁩ محجوزاً (⁦reserve⁩)</h2>
+      <p class="lesson-lead" data-i18n="xrpl-makes-accounts-hold-a-minimum-a.209bb466">تُلزم ⁦XRPL⁩ الحسابات بالاحتفاظ بحد أدنى من ⁦$XRP⁩ لردع الرسائل غير المرغوبة وعناصر السجل غير الضرورية.</p>
+    </div>
+  </div>
+
+  <p data-i18n="mainnet-currently-uses-a-plus-these.85124d92">تستخدم ⁦Mainnet⁩ حالياً <strong data-i18n-slot="s1" data-i18n="1-xrp-base-reserve.824f6b20">احتياطي أساسي (⁦reserve⁩) قدره ⁦1⁩ ⁦$XRP⁩</strong> إضافة إلى <strong data-i18n-slot="s2" data-i18n="0-2-xrp-for-each-qualifying-owned-le.6132bf23">⁦0.2⁩ ⁦$XRP⁩ لكل عنصر سجل مملوك مؤهل</strong>. يمكن أن تتغير هذه القيم عبر تصويت المدققين (⁦validators⁩) على الرسم، لذلك ينبغي للبرنامج أن يستعلم الشبكة بدل تثبيتها في الرمز إلى الأبد.</p>
+
+  <div class="tool">
+    <h3 data-i18n="reserve-calculator.67176307">حاسبة الاحتياطي (⁦reserve⁩)</h3>
+    <p class="tool-intro" data-i18n="estimate-the-reserve-for-a-simple-ac.4984109c">قدّر الاحتياطي (⁦reserve⁩) لحساب بسيط. الملكية الفعلية وسلوك الاحتياطي قد يختلفان حسب نوع العنصر.</p>
+    <div class="fields">
+      <div class="field">
+        <label for="trustlinesInput" data-i18n="owned-trustlines.fa5a4cf5">خطوط ثقة مملوكة (⁦trust⁩ ⁦line⁩)</label>
+        <input id="trustlinesInput" type="number" min="0" value="0" dir="ltr" class="xrpl-ltr">
+      </div>
+      <div class="field">
+        <label for="offersInput" data-i18n="open-offers.6e67d057">عروض مفتوحة (⁦offer⁩)</label>
+        <input id="offersInput" type="number" min="0" value="0" dir="ltr" class="xrpl-ltr">
+      </div>
+      <div class="field">
+        <label for="objectsInput" data-i18n="other-owned-objects.ace0e7ad">عناصر مملوكة أخرى</label>
+        <input id="objectsInput" type="number" min="0" value="0" dir="ltr" class="xrpl-ltr">
+      </div>
+    </div>
+    <div class="result">
+      <div class="result-value xrpl-ltr" id="reserveValue" dir="ltr" translate="no" data-i18n-skip="dynamic">1.0 $XRP</div>
+      <div class="result-copy xrpl-ltr" id="reserveCopy" dir="ltr" translate="no" data-i18n-skip="dynamic">1 $XRP base reserve + 0 owned objects.</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong data-i18n="important.4b6d6a30">مهم</strong>
+    <p data-i18n="an-nft-doesn-t-always-equal-one-owne.12e690f6">لا يساوي ⁦NFT⁩ دائماً عنصر احتياطي مالك واحد. تخزّن ⁦XRPL⁩ رموز ⁦NFT⁩ في عناصر ⁦NFTokenPage⁩، ويمكن لكل صفحة أن تحمل عدة ⁦NFT.⁩ لا تعد كل ⁦NFT⁩ عنصراً احتياطياً مستقلاً.</p>
+  </div>
+</section>
+
+<section class="lesson" id="transactions" style="--accent:var(--blue)">
+  <div class="lesson-head">
+    <div class="lesson-number">07</div>
+    <div>
+      <h2 data-i18n="transactions-and-signing.ba626ab1">المعاملات والتوقيع (⁦signing⁩)</h2>
+      <p class="lesson-lead" data-i18n="a-transaction-is-an-instruction-your.21d93739">المعاملة تعليمات. توقيعك (⁦signing⁩) يثبت أن الحساب أذن بها.</p>
+    </div>
+  </div>
+
+  <div class="concept-grid">
+    <div class="concept">
+      <h3 data-i18n="transaction.1a7b7c1b">معاملة</h3>
+      <p data-i18n="the-structured-instruction-such-as-s.85b5421e">التعليمات المنظمة، مثل إرسال دفعة أو إنشاء عرض (⁦offer⁩) أو ضبط خيار حساب.</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="signature.2f32be1d">توقيع (⁦signature⁩)</h3>
+      <p data-i18n="cryptographic-proof-that-the-transac.9a658d6c">برهان تشفيري على أن مفتاحاً صالحاً لذلك الحساب أذن بالمعاملة.</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="sequence.5c8f4e0e">تسلسل (⁦sequence⁩)</h3>
+      <p data-i18n="a-number-that-helps-order-transactio.f79ede80">رقم يساعد على ترتيب المعاملات ويمنع إعادة تشغيل المعاملة الموقَّعة (⁦signing⁩) نفسها مراراً.</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="fee.c6e89c9c">الرسم</h3>
+      <p data-i18n="a-small-amount-of-xrp-destroyed-by-t.c56c62c2">مقدار صغير من ⁦$XRP⁩ تدمّره المعاملة. لا يُدفع إلى مُصدِر (⁦issuer⁩) ولا إلى مدقق (⁦validator⁩).</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="validation.dd74d182">التحقّق (⁦validated⁩)</h3>
+      <p data-i18n="the-point-where-the-network-agrees-t.0b8fb470">النقطة التي تتفق فيها الشبكة على أن المعاملة تنتمي إلى سجل متحقَّق (⁦validated⁩).</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="metadata.251edc0e">بيانات وصفية (⁦metadata⁩)</h3>
+      <p data-i18n="the-record-showing-what-changed-beca.898dcf52">السجل الذي يبيّن ما تغيّر بسبب المعاملة، بما فيه المبالغ المسلَّمة والعناصر المتأثرة.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong data-i18n="reality-check.9feddbab">فحص الواقع</strong>
+    <p data-i18n="never-sign-based-only-on-what-a-webs.62ad144b">لا توقّع (⁦signing⁩) بناءً على ما يقوله زر الموقع فقط. اقرأ المعاملة التي تطلب محفظتك الموافقة عليها.</p>
+  </div>
+</section>
+
+<section class="lesson" id="markets" style="--accent:var(--green)">
+  <div class="lesson-head">
+    <div class="lesson-number">08</div>
+    <div>
+      <h2 data-i18n="dex-offers-and-amms.93651ac8">⁦DEX⁩ والعروض (⁦offer⁩) و⁦AMM⁩</h2>
+      <p class="lesson-lead" data-i18n="xrpl-has-native-market-infrastructur.c793f4dd">لدى ⁦XRPL⁩ بنية سوق أصلية. يمكن للرموز أن تتداول عبر دفاتر الأوامر أو صنّاع السوق الآليين أو مسارات تستخدم الاثنين.</p>
+    </div>
+  </div>
+
+  <div class="concept-grid">
+    <div class="concept">
+      <h3>DEX</h3>
+      <p data-i18n="the-ledger-s-decentralized-exchange.4646316c">نظام التبادل اللامركزي في السجل. يتتبع أزواج العملات عندما ينشئ المستخدمون عروضاً (⁦offer⁩) ويجرون صفقات.</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="offer.3898b9aa">عرض (⁦offer⁩)</h3>
+      <p data-i18n="an-on-ledger-instruction-offering-on.31d6dfc0">تعليمات على السجل تعرض أصلاً مقابل أصل آخر بسعر محدد.</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="order-book.86c86ea6">دفتر أوامر (⁦order⁩ ⁦book⁩)</h3>
+      <p data-i18n="the-collection-of-open-offers-for-a.1d1c50fd">مجموعة العروض المفتوحة (⁦offer⁩) لزوج أصول محدد.</p>
+    </div>
+    <div class="concept">
+      <h3>AMM</h3>
+      <p data-i18n="a-liquidity-pool-that-prices-swaps-t.ece1398f">مجمع سيولة يسعّر المبادلات من أرصدة المجمع بدل الاعتماد فقط على مطابقة العروض الفردية (⁦offer⁩).</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="liquidity.76a3e625">السيولة</h3>
+      <p data-i18n="the-real-depth-available-to-trade-wi.7bba6c10">العمق الحقيقي المتاح للتداول من غير إحداث حركة سعر متطرفة.</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="slippage.98bc091b">انزلاق (⁦slippage⁩)</h3>
+      <p data-i18n="the-difference-between-the-price-you.98f04c72">الفرق بين السعر الذي توقعته والنتيجة الفعلية التي تستلمها.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong data-i18n="reality-check.9feddbab">فحص الواقع</strong>
+    <p data-i18n="a-chart-price-isn-t-proof-that-you-c.8c1a1d0e">سعر المخطط ليس برهاناً على أنك تستطيع بيع مركزك كله بذلك السعر. السيولة تقرر ما يستطيع خروجك تنفيذه فعلاً.</p>
+  </div>
+</section>
+
+<section class="lesson" id="nfts" style="--accent:var(--purple)">
+  <div class="lesson-head">
+    <div class="lesson-number">09</div>
+    <div>
+      <h2 data-i18n="nfts-and-ledger-ownership.e1250f55">⁦NFT⁩ وملكية السجل</h2>
+      <p class="lesson-lead" data-i18n="an-xrpl-nft-is-a-unique-on-ledger-to.e0bd5a2f">⁦NFT⁩ على ⁦XRPL⁩ رمز فريد على السجل له معرّفه وأعلامه (⁦flags⁩) ومُصدِره (⁦issuer⁩) وتصنيفه (⁦taxon⁩) وتسلسله (⁦sequence⁩) ورسم نقل اختياري.</p>
+    </div>
+  </div>
+
+  <p data-i18n="the-nft-proves-ownership-of-the-on-l.95932ce1">يثبت ⁦NFT⁩ ملكية الرمز على السجل. ما يمثله ذلك الرمز يعتمد على المشروع والبيانات الوصفية (⁦metadata⁩) والشروط القانونية والمنفعة المرتبطة به.</p>
+
+  <div class="concept-grid">
+    <div class="concept">
+      <h3 dir="ltr" class="xrpl-ltr" translate="no">NFTokenID</h3>
+      <p data-i18n="the-unique-identifier-for-the-nft-on.ad9bffe5">المعرّف الفريد لـ ⁦NFT⁩ على ⁦XRPL.⁩</p>
+    </div>
+    <div class="concept">
+      <h3 dir="ltr" class="xrpl-ltr" translate="no">URI</h3>
+      <p data-i18n="an-optional-data-field-commonly-used.323ac786">حقل بيانات اختياري يُستخدم عادة للإشارة إلى بيانات وصفية (⁦metadata⁩) أو محتوى.</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="transfer-fee.3a7f5395">رسم النقل</h3>
+      <p data-i18n="an-optional-mint-time-percentage-tha.da69968b">نسبة اختيارية وقت السك (⁦mint⁩) يمكن أن تعيد جزءاً من قيمة بيع ثانوي مؤهل إلى المُصدِر (⁦issuer⁩).</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="offer.3898b9aa">عرض (⁦offer⁩)</h3>
+      <p data-i18n="a-buy-or-sell-offer-used-to-trade-th.3a24bba5">عرض شراء أو بيع (⁦offer⁩) يُستخدم لتداول ⁦NFT⁩ على السجل.</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="flags.5d728758">أعلام (⁦flags⁩)</h3>
+      <p data-i18n="settings-that-can-control-whether-th.33debda7">إعدادات يمكن أن تتحكم في ما إذا كان ⁦NFT⁩ قابلاً للنقل وما إذا كان المُصدِر (⁦issuer⁩) يستطيع حرقه (⁦burn⁩).</p>
+    </div>
+    <div class="concept">
+      <h3 dir="ltr" class="xrpl-ltr" translate="no">NFTokenPage</h3>
+      <p data-i18n="the-ledger-object-that-stores-groups.e8e7aa1d">عنصر السجل الذي يخزّن مجموعات من ⁦NFT⁩ يملكها حساب.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong data-i18n="reality-check.9feddbab">فحص الواقع</strong>
+    <p data-i18n="owning-an-nft-doesn-t-automatically.397d2c1e">ملكية ⁦NFT⁩ لا تمنحك تلقائياً حقوق النشر أو ملكية شركة أو منفعة مضمونة أو مشترياً مستقبلياً. يجب أن تأتي تلك الحقوق من شروط المشروع الفعلية.</p>
+  </div>
+</section>
+
+<section class="lesson" id="mistakes" style="--accent:var(--red)">
+  <div class="lesson-head">
+    <div class="lesson-number">10</div>
+    <div>
+      <h2 data-i18n="what-people-keep-mixing-up.27ebd92b">ما يخلط الناس بينه باستمرار</h2>
+      <p class="lesson-lead" data-i18n="these-mistakes-are-responsible-for-a.8ce88a08">هذه الأخطاء مسؤولة عن قدر هائل من الالتباس والقرارات السيئة.</p>
+    </div>
+  </div>
+
+  <div class="mistakes">
+    <div class="mistake" data-i18n="a-token-ticker-proves-identity-curre.24be02d0"><b data-i18n-slot="s1" data-i18n="common.wrong">الخطأ:</b> الرمز المختصر (⁦ticker⁩) يثبت الهوية.<br data-i18n-slot="br2"><strong data-i18n-slot="s3" data-i18n="common.truth">الصواب:</strong> رمز العملة مع المُصدِر (⁦issuer⁩) يحدّد الأصل المُصدَر.</div>
+    <div class="mistake" data-i18n="a-trustline-proves-a-token-is-safe-i.70f360f9"><b data-i18n-slot="s1" data-i18n="common.wrong">الخطأ:</b> خط الثقة (⁦trust⁩ ⁦line⁩) يثبت أن الرمز آمن.<br data-i18n-slot="br2"><strong data-i18n-slot="s3" data-i18n="common.truth">الصواب:</strong> هو ينشئ فقط علاقة الحساب اللازمة لحيازته.</div>
+    <div class="mistake" data-i18n="wallet-and-account-mean-exactly-the.9fef2614"><b data-i18n-slot="s1" data-i18n="common.wrong">الخطأ:</b> المحفظة والحساب يعنيان الشيء نفسه بالضبط.<br data-i18n-slot="br2"><strong data-i18n-slot="s3" data-i18n="common.truth">الصواب:</strong> التطبيق يدير الوصول إلى الحساب على السجل.</div>
+    <div class="mistake" data-i18n="every-displayed-xrp-is-spendable-som.2dedfbaa"><b data-i18n-slot="s1" data-i18n="common.wrong">الخطأ:</b> كل ⁦$XRP⁩ معروض قابل للإنفاق.<br data-i18n-slot="br2"><strong data-i18n-slot="s3" data-i18n="common.truth">الصواب:</strong> قد يُلزم بعضه لاحتياطي الحساب واحتياطي المالك (⁦reserve⁩).</div>
+    <div class="mistake" data-i18n="market-cap-equals-available-exit-mon.823a30b4"><b data-i18n-slot="s1" data-i18n="common.wrong">الخطأ:</b> القيمة السوقية تساوي مال الخروج المتاح.<br data-i18n-slot="br2"><strong data-i18n-slot="s3" data-i18n="common.truth">الصواب:</strong> السيولة تحدد العمق القابل للتنفيذ.</div>
+    <div class="mistake" data-i18n="a-failed-transaction-always-means-no.8f5f2c21"><b data-i18n-slot="s1" data-i18n="common.wrong">الخطأ:</b> المعاملة الفاشلة تعني دائماً أن لا شيء تغيّر.<br data-i18n-slot="br2"><strong data-i18n-slot="s3" data-i18n="common.truth">الصواب:</strong> قد تستهلك المعاملات الفاشلة تكلفة المعاملة رغم ذلك.</div>
+    <div class="mistake" data-i18n="a-wallet-can-reverse-a-signed-paymen.72956ce8"><b data-i18n-slot="s1" data-i18n="common.wrong">الخطأ:</b> تستطيع المحفظة عكس دفعة موقَّعة (⁦signing⁩).<br data-i18n-slot="br2"><strong data-i18n-slot="s3" data-i18n="common.truth">الصواب:</strong> معاملات السجل المتحقَّقة (⁦validated⁩) نهائية.</div>
+    <div class="mistake" data-i18n="the-network-fee-goes-to-validators-x.e7651eb0"><b data-i18n-slot="s1" data-i18n="common.wrong">الخطأ:</b> رسم الشبكة يذهب إلى المدققين (⁦validators⁩).<br data-i18n-slot="br2"><strong data-i18n-slot="s3" data-i18n="common.truth">الصواب:</strong> تُدمَّر تكاليف معاملات ⁦XRPL.⁩</div>
+  </div>
+</section>
+
+<section class="lesson" id="quiz" style="--accent:var(--gold)">
+  <div class="lesson-head">
+    <div class="lesson-number">11</div>
+    <div>
+      <h2 data-i18n="quiz.heading">هل اتضح؟</h2>
+      <p class="lesson-lead" data-i18n="answer-these-without-guessing-the-pa.2b9672a4">أجب عن هذه من غير تخمين. الصفحة لا تكتمل حتى يصبح النظام مفهوماً.</p>
+    </div>
+  </div>
+
+  <div class="quiz-question" data-quiz-id="definitions-q1">
+    <h3 data-i18n="1-what-identifies-an-issued-xrpl-ass.4d05ffb9">⁦1.⁩ ما الذي يحدّد أصل ⁦XRPL⁩ المُصدَر؟</h3>
+    <div class="quiz-options">
+      <button data-correct="false" data-i18n="its-ticker-alone.6bbd02b8" data-choice-id="definitions-q1-c1">رمزه المختصر (⁦ticker⁩) وحده</button>
+      <button data-correct="true" data-i18n="its-currency-code-and-issuer.bfead693" data-choice-id="definitions-q1-c2">رمز عملته ومُصدِره (⁦issuer⁩)</button>
+      <button data-correct="false" data-i18n="its-logo-and-website.b1846bef" data-choice-id="definitions-q1-c3">شعاره وموقعه</button>
+    </div>
+  </div>
+
+  <div class="quiz-question" data-quiz-id="definitions-q2">
+    <h3 data-i18n="2-which-asset-doesn-t-need-a-trustli.9a866002">⁦2.⁩ أي أصل لا يحتاج إلى خط ثقة (⁦trust⁩ ⁦line⁩)؟</h3>
+    <div class="quiz-options">
+      <button data-correct="true" dir="ltr" class="xrpl-ltr" translate="no" data-choice-id="definitions-q2-c1">$XRP</button>
+      <button data-correct="false" data-i18n="every-stablecoin.6b61e6e3" data-choice-id="definitions-q2-c2">كل عملة مستقرة</button>
+      <button data-correct="false" data-i18n="every-project-token.370704f5" data-choice-id="definitions-q2-c3">كل رمز مشروع</button>
+    </div>
+  </div>
+
+  <div class="quiz-question" data-quiz-id="definitions-q3">
+    <h3 data-i18n="3-what-does-a-wallet-signature-prove.8f0ca436">⁦3.⁩ ماذا يثبت توقيع (⁦signing⁩) المحفظة؟</h3>
+    <div class="quiz-options">
+      <button data-correct="false" data-i18n="the-transaction-will-make-money.9db1bb87" data-choice-id="definitions-q3-c1">ستدر المعاملة مالاً</button>
+      <button data-correct="true" data-i18n="a-valid-account-key-authorized-the-t.a38c0c04" data-choice-id="definitions-q3-c2">مفتاح حساب صالح أذن بالمعاملة</button>
+      <button data-correct="false" data-i18n="the-receiving-project-is-legitimate.c4aa39cf" data-choice-id="definitions-q3-c3">المشروع المستلم شرعي</button>
+    </div>
+  </div>
+
+  <div class="quiz-question" data-quiz-id="definitions-q4">
+    <h3 data-i18n="4-where-does-the-standard-xrpl-trans.cd6bf9f9">⁦4.⁩ إلى أين تذهب تكلفة معاملة ⁦XRPL⁩ القياسية؟</h3>
+    <div class="quiz-options">
+      <button data-correct="false" data-i18n="to-the-token-issuer.9d4de583" data-choice-id="definitions-q4-c1">إلى مُصدِر الرمز (⁦issuer⁩)</button>
+      <button data-correct="false" data-i18n="to-validators-as-a-reward.59938ddd" data-choice-id="definitions-q4-c2">إلى المدققين (⁦validators⁩) كمكافأة</button>
+      <button data-correct="true" data-i18n="it-s-destroyed.c09b8e94" data-choice-id="definitions-q4-c3">إنها تُدمَّر</button>
+    </div>
+  </div>
+
+  <div class="quiz-question" data-quiz-id="definitions-q5">
+    <h3 data-i18n="5-does-market-cap-prove-you-can-sell.28c3a4d3">⁦5.⁩ هل تثبت القيمة السوقية أنك تستطيع البيع بالسعر المعروض؟</h3>
+    <div class="quiz-options">
+      <button data-correct="false" data-i18n="common.yes" data-choice-id="definitions-q5-c1">نعم</button>
+      <button data-correct="true" data-i18n="no-executable-liquidity-matters.994ed981" data-choice-id="definitions-q5-c2">لا. السيولة القابلة للتنفيذ هي المهمة</button>
+    </div>
+  </div>
+</section>
+
+<section class="lesson" id="next" style="--accent:var(--blue)">
+  <div class="lesson-head">
+    <div class="lesson-number">12</div>
+    <div>
+      <h2 data-i18n="next.heading">واصل التقدم</h2>
+      <p class="lesson-lead" data-i18n="definitions-give-you-the-map-the-nex.b8ffdfb7">التعريفات تعطيك الخريطة. التطبيقات التالية تعلّمك كيف تتحكم في حساب، وتستخدم السجل، وتحمي نفسك.</p>
+    </div>
+  </div>
+
+  <div class="next-grid">
+    <a class="next-card" href="/xrpl/ar/wallet-basics.html">
+      <strong data-i18n="nav.wallets">المحافظ</strong>
+      <span data-i18n="learn-custody-seeds-signing-funding.0a144ab8">تعلّم الحفظ (⁦custody⁩) والبذور (⁦seed⁩) والتوقيع (⁦signing⁩) والتمويل والتحكم في الحساب وحدود الاستعادة.</span>
+      <b data-i18n="open-wallets.35ad0204">افتح المحافظ →</b>
+    </a>
+    <a class="next-card" href="/xrpl/ar/usage.html">
+      <strong data-i18n="nav.usage">الاستخدام</strong>
+      <span data-i18n="learn-payments-destination-tags-trus.fce7b359">تعلّم الدفعات وأوسمة الوجهة (⁦destination⁩ ⁦tag⁩) وخطوط الثقة (⁦trust⁩ ⁦line⁩) وتداول الرموز و⁦NFT⁩ والعروض (⁦offer⁩) والتنفيذ.</span>
+      <b data-i18n="open-usage.680d208a">افتح الاستخدام →</b>
+    </a>
+    <a class="next-card" href="/xrpl/ar/safety.html">
+      <strong data-i18n="nav.safety">الأمان</strong>
+      <span data-i18n="learn-issuer-verification-scam-detec.e793d8e5">تعلّم التحقق من المُصدِر (⁦issuer⁩) وكشف الاحتيال والدفاع عند التوقيع (⁦signing⁩) وحماية الحساب.</span>
+      <b data-i18n="open-safety.8041cc85">افتح الأمان →</b>
+    </a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div><a href="https://houseofcauliman.com" data-i18n="footer.project">مشروع ⁦House⁩ ⁦of⁩ ⁦Cauliman⁩</a></div>
+  <div data-i18n="s.59a7bc31"><a href="/terms.html" data-i18n-slot="s1" data-i18n="footer.terms">الشروط</a> · <a href="/privacy.html" data-i18n-slot="s2" data-i18n="footer.privacy">الخصوصية</a> · <a href="/disclaimer.html" data-i18n-slot="s3" data-i18n="footer.disclaimer">إخلاء المسؤولية</a> · <a href="https://houseofcauliman.com" data-i18n-slot="s4">houseofcauliman.com</a></div>
+  <div data-i18n="footer.rights">© ⁦2026⁩ ⁦House⁩ ⁦of⁩ ⁦Cauliman.⁩ جميع الحقوق محفوظة.</div>
+</footer>
+
+</div>
+
+<script>
+(() => {
+  function xrplT(key, fallback, vars) {
+    if (window.XRPL_I18N && window.XRPL_I18N.t) return window.XRPL_I18N.t(key, fallback, vars);
+    var text = fallback;
+    if (vars) Object.keys(vars).forEach(function (name) { text = text.split("{" + name + "}").join(String(vars[name])); });
+    return text;
+  }
+  const trustDemo = document.getElementById("trustDemo");
+  const trustButton = document.getElementById("trustButton");
+  const trustResult = document.getElementById("trustResult");
+  let active = false;
+  let trustTouched = false;
+
+  function renderTrust() {
+    if (!trustTouched) return;
+    trustButton.textContent = active
+      ? xrplT("definitions.trust.remove", "Remove Trustline")
+      : xrplT("definitions.trust.create", "Create Trustline");
+    trustResult.textContent = active
+      ? xrplT("definitions.trust.active", "Trustline active. This wallet can now hold this issuer’s TOKEN asset, subject to its limit and settings.")
+      : xrplT("definitions.trust.inactive", "No trustline exists. This wallet can’t hold this issuer’s TOKEN asset.");
+  }
+
+  trustButton.addEventListener("click", () => {
+    active = !active;
+    trustTouched = true;
+    trustDemo.classList.toggle("active", active);
+    renderTrust();
+  });
+  document.addEventListener("xrpl:language", renderTrust);
+
+  const inputs = [
+    document.getElementById("trustlinesInput"),
+    document.getElementById("offersInput"),
+    document.getElementById("objectsInput")
+  ];
+
+  const reserveValue = document.getElementById("reserveValue");
+  const reserveCopy = document.getElementById("reserveCopy");
+
+  function calculateReserve(){
+    const counts = inputs.map(input => Math.max(0, Number(input.value) || 0));
+    const objects = counts.reduce((sum, value) => sum + value, 0);
+    const reserve = 1 + objects * .2;
+    reserveValue.textContent = reserve.toFixed(1) + " $XRP";
+    var reserveKey = objects === 1 ? "definitions.reserve.one" : "definitions.reserve.many";
+    var reserveFallback = objects === 1
+      ? "1 $XRP base reserve + {objects} owned object × 0.2 $XRP."
+      : "1 $XRP base reserve + {objects} owned objects × 0.2 $XRP.";
+    reserveCopy.textContent = xrplT(reserveKey, reserveFallback, {objects: objects});
+  }
+
+  inputs.forEach(input => input.addEventListener("input", calculateReserve));
+  document.addEventListener("xrpl:language", calculateReserve);
+  calculateReserve();
+
+  document.querySelectorAll(".quiz-options button").forEach(button => {
+    button.addEventListener("click", () => {
+      const group = button.closest(".quiz-options");
+      group.querySelectorAll("button").forEach(item => {
+        item.classList.remove("correct", "wrong");
+      });
+      button.classList.add(button.dataset.correct === "true" ? "correct" : "wrong");
+    });
+  });
+
+  const sections = [...document.querySelectorAll(".lesson")];
+  const progressFill = document.getElementById("progressFill");
+  const progressText = document.getElementById("progressText");
+
+  function updateProgress(){
+    const viewportBottom = window.scrollY + window.innerHeight;
+    const pageHeight = document.documentElement.scrollHeight;
+    const percent = Math.min(100, Math.max(0, Math.round(viewportBottom / pageHeight * 100)));
+    progressFill.style.width = percent + "%";
+    progressText.textContent = percent + "%";
+  }
+
+  updateProgress();
+  window.addEventListener("scroll", updateProgress, {passive:true});
+})();
+</script>
+<script src="/xrpl/i18n/catalogs.js" defer></script><script src="/xrpl/i18n/i18n.js" defer></script></body>
+</html>
