@@ -79,3 +79,20 @@ python3 xrpl/i18n/tools/needs_review.py
 - The two corrected sentences are present in `xrpl/pt-br/builders/create-token.html` and `xrpl/hi/definitions.html`.
 
 Headless Chrome language, quiz, and calculator clicks were run on the previous tip (`2e504a8`), before these two wording fixes. They were not repeated in this review. The wording fix does not change calculator code.
+
+## Release-prep pass
+
+`APPROVAL_CHECKLIST.md` lists all 230 review strings for each of the nine translations. Approved rows: 0 in every language. `sitemap.proposed.xml` is not the live sitemap.
+
+Four meaning errors were corrected and baked: German “display support”, Arabic “existence on the ledger” (including the media sentence outside the 230), Chinese trust-line heading, and Korean “scammers can trick you”. `i18n.js` now scrolls the hashed section back into view after a language swap.
+
+Headless Chrome on this tree, cache disabled, desktop 1280×900 and mobile 390×844:
+
+- 13 pages loaded for en, pt-BR, es, fr, de, ja, ko, zh-CN, hi, and ar. `lang` and `dir` matched. hreflang order was en, pt-BR, es, fr, de, ja, ko, zh-CN, hi, ar, x-default.
+- 92 quiz buttons clicked in each language. 0 class mismatches. Builder feedback was present. A Japanese issuer-control click showed `correct` and `正解。 レギュラーキー（regular key）は、別の署名経路です。`
+- Reserve inputs 2, 3, and 5 produced `3.0 $XRP` in all 10 languages. Slippage pool 1000, trade 50, fee 0.50 produced `5.00%`, and the copy included 5.00 and 0.50. Position 25 and depth 100 produced `25.0%`. Market cap at price 2, supply 1000, liquidity 100 was `$2,000` with copy containing `20.0`. That currency string used the browser locale, not the page language.
+- 19 internal links checked per language, 0 missing. Horizontal overflow was 0 on the desktop pages and on each mobile dashboard.
+- Saved language `ja` rewrote `/xrpl/` to `/xrpl/ja/` and `/xrpl/definitions.html#reserves` to `/xrpl/ja/definitions.html#reserves`. Opening `/xrpl/es/definitions.html#reserves` used Spanish and then stored `es`.
+- A follow-up on the same tree waited for `#reserves` after each language change. All 10 stayed on that hash, on the localized URL, with the section inside the viewport. Arabic was `rtl`. A 200ms sample inside the main pass caught the smooth scroll mid-way and is not the settled result.
+- Arabic wallet text contained U+2066 isolates. On Arabic definitions, the reserve input and `#reserveValue` computed `direction:ltr`.
+- Glyph rasters for العربية, हिन्दी, 日本語, 한국어, and 中文 differed from the missing-glyph box. Arabic and Devanagari resolved to the named Noto families, which are installed. The named Noto CJK families are not installed; Japanese, Korean, and Chinese fell through to `system-ui` and still drew glyphs via WenQuanYi Micro Hei and Droid Sans Fallback. A machine without a CJK fallback can show boxes even though the CSS names Noto CJK.

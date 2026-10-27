@@ -26,6 +26,8 @@ This file does not certify the translations. It records a meaning check against 
 
 ## (a) Fixed
 
+A later pass, recorded in `APPROVAL_CHECKLIST.md`, corrected four more meaning errors and one matching Arabic sentence outside this 230-string list. After those corrections, class (a) remaining is still 0. Those strings stay in class (c) until a native speaker signs the checklist.
+
 ### pt-BR `this-lesson-follows-the-classic-trus.fc252c0f`
 
 English: “Choose the standard deliberately and check the intended network and wallet support before following a tutorial.”
