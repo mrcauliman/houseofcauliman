@@ -1024,12 +1024,12 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - pt-BR: Primeiro confira a rede e a identidade exata do ativo. Suporte de exibição e existência no ledger são coisas diferentes. Não crie trust lines repetidas nem envie dinheiro para um logo aparecer.
 - es: Primero revisa la red y la identidad exacta del activo. Que se muestre en una interfaz y que exista en el ledger son cosas distintas. No crees líneas de confianza repetidas ni envíes dinero para que aparezca un logo.
 - fr: Vérifiez d’abord le réseau et l’identité exacte de l’actif. La prise en charge de l’affichage et l’existence sur le registre sont deux choses différentes. Ne créez pas des trust lines répétées et n’envoyez pas d’argent pour faire apparaître un logo.
-- de: Prüfe zuerst das Netzwerk und die genaue Asset-Identität. Anzeige im Support und Existenz im Ledger sind verschieden. Erstelle nicht wiederholt Trust Lines und sende kein Geld, damit ein Logo erscheint.
+- de: Prüfe zuerst das Netzwerk und die genaue Asset-Identität. Ob eine Oberfläche das Asset anzeigen kann und ob es im Ledger existiert, sind zwei verschiedene Dinge. Erstelle nicht wiederholt Trust Lines und sende kein Geld, damit ein Logo erscheint.
 - ja: まずネットワークと、正確な資産の識別情報を確認してください。表示の対応と、レジャー上の存在は別です。ロゴを出すために、トラストライン（trust line）を繰り返して作ったり、お金を送ったりしないでください。
 - ko: 먼저 네트워크와 정확한 자산 정체성을 확인하세요. 화면에 보이는 것과 원장에 있는 것은 다릅니다. 로고가 보이게 하려고 트러스트 라인을 반복 생성하거나 돈을 보내지 마세요.
 - zh-CN: 先检查网络和确切的资产身份。能否在界面里显示，和账本上是否存在，是两回事。不要为了让 Logo 出现而反复创建信任线（trust line），或把钱发出去。
 - hi: पहले नेटवर्क और सटीक परिसंपत्ति पहचान जाँचें। प्रदर्शन समर्थन और लेजर पर मौजूदगी अलग बातें हैं। लोगो दिखाने के लिए बार-बार ट्रस्ट लाइन (trust line) न बनाएँ और पैसा न भेजें।
-- ar: تحقق أولاً من الشبكة وهوية الأصل بالضبط. دعم العرض ووجود السجل أمران مختلفان. لا تنشئ خطوط ثقة (trust line) متكررة ولا ترسل مالاً ليظهر شعار.
+- ar: تحقق أولاً من الشبكة وهوية الأصل بالضبط. دعم العرض والوجود على السجل أمران مختلفان. لا تنشئ خطوط ثقة (trust line) متكررة ولا ترسل مالاً ليظهر شعار.
 
 ## `flags-uri-taxon-offers-transfer-fees.f3d2bfe9`
 
@@ -2079,7 +2079,7 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - fr: Des arnaqueurs peuvent vous pousser à autoriser vous-même la transaction.
 - de: Betrüger können dich dazu bringen, die Transaktion selbst zu autorisieren.
 - ja: 詐欺師は、あなた自身にトランザクションを認可させることができます。
-- ko: 사기꾼은 당신이 직접 트랜잭션을 승인하도록 속을 수 있습니다.
+- ko: 사기꾼은 당신이 직접 트랜잭션을 승인하도록 속일 수 있습니다.
 - zh-CN: 骗子可以诱使你自己去授权这笔交易。
 - hi: ठग आपसे स्वयं लेनदेन अधिकृत करवा सकते हैं।
 - ar: يستطيع المحتالون خداعك لتأذن بالمعاملة بنفسك.
@@ -2652,7 +2652,7 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - de: Was eine Trustline nicht bedeutet
 - ja: トラストライン（trust line）が意味しないこと
 - ko: 트러스트 라인(trust line)이 뜻하지 않는 것
-- zh-CN: 信任线（trust line）并不意味着什么
+- zh-CN: 信任线（trust line）并不表示的含义
 - hi: ट्रस्टलाइन (trustline) का अर्थ क्या नहीं है
 - ar: ما لا يعنيه خط الثقة (trust line)
 

@@ -683,7 +683,7 @@
   "save-completion-and-its-unique-trans.887365a1": "완료와 그 고유한 트랜잭션 참조를 하나의 업무 동작으로 지속되게 저장하세요. 같은 알림을 세 번 전달해도 예약은 하나여야 합니다. 확인과 권리 업데이트 사이에 서버가 멈추면, 복구는 같은 주문을 끝내야 하며 두 번째 지급 요청을 만들면 안 됩니다.",
   "save-the-authority-map-and-plain-eng.f68c90c5": "권한 지도와 쉬운 말로 된 제어 공시를 저장하세요. 다른 사람에게 레귤러 키(regular key)가 3명 중 2명 예시를 어떻게 바꾸는지 설명하게 하세요. 설명하지 못하면, 서명 흐름 레슨으로 가기 전에 설명을 고치세요.",
   "save-the-four-box-account-worksheet.54d9854d": "네 칸 계정 작업지, 제어 점검 목록, 종료 계획을 저장하세요. 레슨 4에서는 같은 발행자로, 찾은 제한을 누가 제어하는지 설명하세요.",
-  "scammers-can-trick-you-into-authoriz.82c7e021": "사기꾼은 당신이 직접 트랜잭션을 승인하도록 속을 수 있습니다.",
+  "scammers-can-trick-you-into-authoriz.82c7e021": "사기꾼은 당신이 직접 트랜잭션을 승인하도록 속일 수 있습니다.",
   "secret-seed.e3cdd578": "비밀 시드(seed)",
   "security-essentials-scams-to-avoid-a.a2a6c5fb": "보안의 기본, 피할 사기, 자산 보호.",
   "seed-shared.43114c2d": "시드(seed) 공유됨:",

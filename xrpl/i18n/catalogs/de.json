@@ -301,7 +301,7 @@
   "fee.c6e89c9c": "Gebühr",
   "fictional-issuer-a-has-master-signin.286a3096": "Der fiktive Issuer A hat Master-Signieren deaktiviert, einen Regular Key zugewiesen und eine Signer List aus drei Personen mit Gewicht eins und Quorum zwei. Das ist ein Prüfbeispiel, keine empfohlene Konfiguration.",
   "final.672b22cc": "Endgültig",
-  "first-check-the-network-and-exact-as.aadd4c6c": "Prüfe zuerst das Netzwerk und die genaue Asset-Identität. Anzeige im Support und Existenz im Ledger sind verschieden. Erstelle nicht wiederholt Trust Lines und sende kein Geld, damit ein Logo erscheint.",
+  "first-check-the-network-and-exact-as.aadd4c6c": "Prüfe zuerst das Netzwerk und die genaue Asset-Identität. Ob eine Oberfläche das Asset anzeigen kann und ob es im Ledger existiert, sind zwei verschiedene Dinge. Erstelle nicht wiederholt Trust Lines und sende kein Geld, damit ein Logo erscheint.",
   "flags-uri-taxon-offers-transfer-fees.f3d2bfe9": "Flags, URI, Taxon, Offers, Transfergebühren und Lebenszyklus.",
   "flags.5d728758": "Flags",
   "follow-a-fictional-neighborhood-club.3379ae6e": "Begleite einen fiktiven Nachbarschaftsclub von Workshop-Credits über ein Sammlerstück bis zu einem Buchungsablauf. Jede Lektion enthält Definitionen, ein geführtes Papier-Arbeitsblatt, eine ausgearbeitete Entscheidung, häufige Fehler und Fragen mit Erklärungen. Lies die Lektion, versuch das Arbeitsblatt, bevor du die Antwort prüfst, und behalte die entstehende Notizseite. Es gibt kein Konto, kein Punktezeugnis und kein gespeichertes Lernprofil.",
