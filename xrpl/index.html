@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>XRPL Layman | House of Cauliman</title>
-  <meta name="description" content="Learn how to actually use the XRP Ledger. Wallets, buying tokens, NFTs, liquidity, and execution."/>
+<html lang="en" data-xrpl-page="index" data-xrpl-i18n="1" dir="ltr">
+<head><script data-xrpl-early="1">(function(){
+  var KNOWN={"en":1,"pt-BR":1,"es":1,"fr":1,"de":1,"ja":1,"ko":1,"zh-CN":1,"hi":1,"ar":1};
+  var SLUGS={"pt-br":"pt-BR","es":"es","fr":"fr","de":"de","ja":"ja","ko":"ko","zh-cn":"zh-CN","hi":"hi","ar":"ar"};
+  var path=location.pathname, at=path.indexOf("/xrpl/"), lang="";
+  if(at>=0){
+    var slug=path.slice(at+6).split("/")[0];
+    if(SLUGS[slug]) lang=SLUGS[slug];
+  }
+  if(!lang){ try{ lang=localStorage.getItem("xrpl-layman-language")||""; }catch(e){} }
+  if(!KNOWN[lang]) return;
+  document.documentElement.lang=lang;
+  document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+})();</script><link rel="stylesheet" href="/xrpl/i18n/i18n.css"><!--xrpl-seo-start--><link rel="canonical" href="https://houseofcauliman.com/xrpl/"><link rel="alternate" hreflang="en" href="https://houseofcauliman.com/xrpl/"><link rel="alternate" hreflang="x-default" href="https://houseofcauliman.com/xrpl/"><!--xrpl-seo-end-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="meta.index.title">XRPL Layman | House of Cauliman</title>
+  <meta name="description" content="Learn how to actually use the XRP Ledger. Wallets, buying tokens, NFTs, liquidity, and execution.">
   <style>
     :root{
       --bg:#05070b;
@@ -127,13 +139,13 @@
 .xrpl-layman-brand img{width:32px;height:32px;object-fit:contain;display:block;flex:0 0 auto}
 @media (max-width:640px){.xrpl-layman-brand img{width:28px;height:28px}}
 </style>
-  <meta name="apple-mobile-web-app-title" content="XRPL LAYMAN" />
-  <meta name="application-name" content="XRPL LAYMAN" />
+  <meta name="apple-mobile-web-app-title" content="XRPL LAYMAN">
+  <meta name="application-name" content="XRPL LAYMAN">
   <!-- favicon: XRPL LAYMAN -->
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/xrpl_layman/favicon-32x32.png?v=2" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/xrpl_layman/favicon-16x16.png?v=2" />
-  <link rel="shortcut icon" href="/assets/favicons/xrpl_layman/favicon.ico?v=2" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/xrpl_layman/apple-touch-icon.png?v=2" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/xrpl_layman/favicon-32x32.png?v=2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/xrpl_layman/favicon-16x16.png?v=2">
+  <link rel="shortcut icon" href="/assets/favicons/xrpl_layman/favicon.ico?v=2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/xrpl_layman/apple-touch-icon.png?v=2">
 
 <style id="xrpl-dashboard-v2">
 body{
@@ -573,7 +585,7 @@ body{
 </head>
 <body id="top">
   <div class="wrap">
-<section class="xrpl-dashboard"><div class="xrpl-language-row"><label for="xrpl-language">🌐 Language / Idioma</label><select id="xrpl-language" aria-label="Dashboard language"><option value="en">English</option><option value="pt-BR">Português (Brasil)</option><option value="es">Español</option></select><span class="xrpl-language-note">Dashboard preview. Lessons currently in English.</span></div>
+<section class="xrpl-dashboard"><div class="xrpl-language-row"><label for="xrpl-language"><span aria-hidden="true">🌐</span> <span data-i18n="lang.label">Language</span></label><select id="xrpl-language" aria-label="Dashboard language" data-i18n-attr="aria-label:lang.select"><option value="en">English</option><option value="pt-BR">Português (Brasil)</option><option value="es">Español</option></select><span class="xrpl-language-note" data-i18n="lang.note">Saved on this device. It applies to every XRPL LAYMAN page.</span></div>
 
   <header class="xrpl-dashboard-hero">
     <div class="xrpl-dashboard-logo">
@@ -581,18 +593,18 @@ body{
     </div>
 
     <div class="xrpl-dashboard-title">
-      <h1>XRPL <span>LAYMAN</span></h1>
-      <div class="xrpl-dashboard-tagline">UNDERSTAND. USE. BUILD.</div>
+      <h1 data-i18n="xrpl.dc649ba3">XRPL <span data-i18n-slot="s1">LAYMAN</span></h1>
+      <div class="xrpl-dashboard-tagline" data-i18n="understand-use-build.8aa41112">UNDERSTAND. USE. BUILD.</div>
     </div>
   </header>
 
   <div class="xrpl-dashboard-rule"></div>
 
-  <p class="xrpl-dashboard-intro">
+  <p class="xrpl-dashboard-intro" data-i18n="understand-the-xrp-ledger-use-it-wit.0a80ead4">
     Understand the XRP Ledger. Use it with confidence. Build what’s next.
   </p>
 
-  <nav class="xrpl-app-grid" aria-label="XRPL LAYMAN learning applications">
+  <nav class="xrpl-app-grid" aria-label="XRPL LAYMAN learning applications" data-i18n-attr="aria-label:xrpl-layman-learning-applications.363081c1">
 
     <a class="xrpl-app-card xrpl-card-foundation" href="/xrpl/definitions.html">
       <div class="xrpl-app-icon">
@@ -602,8 +614,8 @@ body{
           <path d="M22 15h20M18 25h28M18 39h28M22 49h20"/>
         </svg>
       </div>
-      <h2>Foundation</h2>
-      <p>Start here. Core concepts, the ledger, and how it all fits together.</p>
+      <h2 data-i18n="foundation.fdde6afa">Foundation</h2>
+      <p data-i18n="start-here-core-concepts-the-ledger.d99137a0">Start here. Core concepts, the ledger, and how it all fits together.</p>
       <span class="xrpl-app-arrow">→</span>
     </a>
 
@@ -615,8 +627,8 @@ body{
           <path d="M32 17v38"/>
         </svg>
       </div>
-      <h2>Definitions</h2>
-      <p>Plain-English definitions of key terms and XRPL concepts.</p>
+      <h2 data-i18n="nav.definitions">Definitions</h2>
+      <p data-i18n="plain-english-definitions-of-key-ter.bedc662d">Plain-English definitions of key terms and XRPL concepts.</p>
       <span class="xrpl-app-arrow">→</span>
     </a>
 
@@ -628,8 +640,8 @@ body{
           <circle cx="45" cy="36" r="1.5"/>
         </svg>
       </div>
-      <h2>Wallets</h2>
-      <p>Wallet types, accounts, setup, funding, custody, and protection.</p>
+      <h2 data-i18n="nav.wallets">Wallets</h2>
+      <p data-i18n="wallet-types-accounts-setup-funding.ca68cd74">Wallet types, accounts, setup, funding, custody, and protection.</p>
       <span class="xrpl-app-arrow">→</span>
     </a>
 
@@ -639,8 +651,8 @@ body{
           <path d="M36 5 16 36h16l-4 23 20-32H32z"/>
         </svg>
       </div>
-      <h2>Usage</h2>
-      <p>Payments, tokens, NFTs, liquidity, transactions, and real execution.</p>
+      <h2 data-i18n="nav.usage">Usage</h2>
+      <p data-i18n="payments-tokens-nfts-liquidity-trans.fd385814">Payments, tokens, NFTs, liquidity, transactions, and real execution.</p>
       <span class="xrpl-app-arrow">→</span>
     </a>
 
@@ -651,8 +663,8 @@ body{
           <path d="M32 19v18M32 45h.01"/>
         </svg>
       </div>
-      <h2>Safety</h2>
-      <p>Security essentials, scams to avoid, and protecting your assets.</p>
+      <h2 data-i18n="nav.safety">Safety</h2>
+      <p data-i18n="security-essentials-scams-to-avoid-a.a2a6c5fb">Security essentials, scams to avoid, and protecting your assets.</p>
       <span class="xrpl-app-arrow">→</span>
     </a>
 
@@ -663,8 +675,8 @@ body{
           <path d="M6 55h52"/>
         </svg>
       </div>
-      <h2>Investing Reality</h2>
-      <p>The truth about risk, liquidity, cycles, and long-term perspective.</p>
+      <h2 data-i18n="investing-reality.b1d9866c">Investing Reality</h2>
+      <p data-i18n="the-truth-about-risk-liquidity-cycle.b4fbd981">The truth about risk, liquidity, cycles, and long-term perspective.</p>
       <span class="xrpl-app-arrow">→</span>
     </a>
 
@@ -676,8 +688,8 @@ body{
           <path d="M19 27v24M28 27v24M36 27v24M45 27v24"/>
         </svg>
       </div>
-      <h2>The House</h2>
-      <p>Return to the main hub and explore House of Cauliman projects.</p>
+      <h2 data-i18n="the-house.41f95977">The House</h2>
+      <p data-i18n="return-to-the-main-hub-and-explore-h.23a2c35c">Return to the main hub and explore House of Cauliman projects.</p>
       <span class="xrpl-app-arrow">→</span>
     </a>
 
@@ -694,25 +706,25 @@ body{
     </div>
 
     <div class="xrpl-builder-copy">
-      <h2>BUILDERS HUB</h2>
-      <p>Six practical lessons. Create, control and build on XRPL.</p>
+      <h2 data-i18n="builders-hub.47501cc6">BUILDERS HUB</h2>
+      <p data-i18n="six-practical-lessons-create-control.bcddfcc3">Six practical lessons. Create, control and build on XRPL.</p>
     </div>
 
-    <a class="xrpl-builder-status" href="/xrpl/builders/">OPEN BUILDERS HUB →</a>
+    <a class="xrpl-builder-status" href="/xrpl/builders/" data-i18n="open-builders-hub.e92257e8">OPEN BUILDERS HUB →</a>
   </section>
 
 </section>
 
     <footer class="hoc-standard-footer">
-  <div>A House of Cauliman Project</div>
-  <div class="hoc-standard-footer-links">
-    <a href="/terms.html">Terms</a> ·
-    <a href="/privacy.html">Privacy</a> ·
-    <a href="/disclaimer.html">Disclaimer</a> ·
-    <a href="https://houseofcauliman.com">houseofcauliman.com</a>
+  <div data-i18n="footer.project">A House of Cauliman Project</div>
+  <div class="hoc-standard-footer-links" data-i18n="s.59a7bc31">
+    <a href="/terms.html" data-i18n-slot="s1" data-i18n="footer.terms">Terms</a> ·
+    <a href="/privacy.html" data-i18n-slot="s2" data-i18n="footer.privacy">Privacy</a> ·
+    <a href="/disclaimer.html" data-i18n-slot="s3" data-i18n="footer.disclaimer">Disclaimer</a> ·
+    <a href="https://houseofcauliman.com" data-i18n-slot="s4">houseofcauliman.com</a>
   </div>
-  <div>© 2026 House of Cauliman. All rights reserved.</div>
+  <div data-i18n="footer.rights">© 2026 House of Cauliman. All rights reserved.</div>
 </footer>
   </div>
-<script src="/xrpl/i18n/dashboard.js" defer></script></body>
+<script src="/xrpl/i18n/catalogs.js" defer></script><script src="/xrpl/i18n/i18n.js" defer></script></body>
 </html>

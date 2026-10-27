@@ -1,5 +1,14 @@
-(()=>{"use strict";const key="xrpl-layman-language";const strings={
-en:{tag:"UNDERSTAND. USE. BUILD.",intro:"Understand the XRP Ledger. Use it with confidence. Build what’s next.",titles:["Foundation","Definitions","Wallets","Usage","Safety","Investing Reality","The House"],builder:"BUILDERS HUB",open:"OPEN BUILDERS HUB →"},
-"pt-BR":{tag:"ENTENDA. USE. CONSTRUA.",intro:"Entenda o XRP Ledger. Use com confiança. Construa o que vem pela frente.",titles:["Fundamentos","Definições","Carteiras","Utilização","Segurança","Realidade dos investimentos","A Casa"],builder:"CENTRAL DE DESENVOLVEDORES",open:"ABRIR CENTRAL →"},
-es:{tag:"ENTIENDE. USA. CONSTRUYE.",intro:"Entiende el XRP Ledger. Úsalo con confianza. Construye lo que viene.",titles:["Fundamentos","Definiciones","Billeteras","Uso","Seguridad","Realidad de la inversión","La Casa"],builder:"CENTRO DE DESARROLLADORES",open:"ABRIR CENTRO →"}
-};const picker=document.getElementById("xrpl-language");if(!picker)return;const put=(q,v)=>{const el=document.querySelector(q);if(el)el.textContent=v};function apply(lang){if(!strings[lang])lang="en";const t=strings[lang];document.documentElement.lang=lang;put(".xrpl-dashboard-tagline",t.tag);put(".xrpl-dashboard-intro",t.intro);document.querySelectorAll(".xrpl-app-card h2").forEach((el,i)=>{if(t.titles[i])el.textContent=t.titles[i]});put(".xrpl-builder-copy h2",t.builder);put(".xrpl-builder-status",t.open);picker.value=lang;try{localStorage.setItem(key,lang)}catch(e){}}let lang="en";try{lang=localStorage.getItem(key)||"en"}catch(e){}apply(lang);picker.addEventListener("change",()=>apply(picker.value));})();
+/* Compatibility shim for cached dashboard HTML that still requests this file.
+   Language selection lives in /xrpl/i18n/i18n.js and uses data-i18n keys. */
+(function () {
+  "use strict";
+  if (window.XRPL_I18N || document.querySelector('script[src="/xrpl/i18n/i18n.js"]')) return;
+  var catalog = document.createElement("script");
+  catalog.src = "/xrpl/i18n/catalogs.js";
+  catalog.defer = true;
+  var runtime = document.createElement("script");
+  runtime.src = "/xrpl/i18n/i18n.js";
+  runtime.defer = true;
+  document.head.appendChild(catalog);
+  document.head.appendChild(runtime);
+})();
