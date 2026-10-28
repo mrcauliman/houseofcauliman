@@ -1,0 +1,15 @@
+{
+  "policy": "Unapproved languages stay in the language selector, marked '(under review)', so a reviewer can open the existing lesson URL. They are not certified: the page shows an English notice, robots noindex, and they are omitted from hreflang and from sitemap.proposed.xml. English is always source. Approving one language does not approve the others. This file does not publish the site.",
+  "languages": {
+    "en": "source",
+    "pt-BR": "unapproved",
+    "es": "unapproved",
+    "fr": "unapproved",
+    "de": "unapproved",
+    "ja": "unapproved",
+    "ko": "unapproved",
+    "zh-CN": "unapproved",
+    "hi": "unapproved",
+    "ar": "unapproved"
+  }
+}
