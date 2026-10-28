@@ -1,0 +1,3319 @@
+# XRPL LAYMAN review package: हिन्दी
+
+This file is for a native speaker of हिन्दी. You do not need the website source code, and you do not need to open the site. The English sentence and the current हिन्दी translation are both in this file. The CSV next to this file has the same rows.
+
+Nothing in this package is native-approved. The Approve, Correction, Reviewer, and Date lines are blank on purpose.
+
+## How to review
+
+1. Read one row at a time. The sections follow this order: wallet recovery and seed, signing, destination tags, trust lines, reserves and fees, DEX and AMM, NFTs, then other security and finance copy.
+2. A sentence is filed under the first matching section. Seed wins over every later topic. A destination-tag sentence is in the destination-tag section even if it also mentions signing.
+3. Decide whether a reader of हिन्दी learns the same fact as the English, including every “not”, “never”, and “cannot”. A quiz answer that is false in English must stay false.
+4. Do not change `$XRP`, the numbers `1` and `0.2`, account addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`, or `TakerPays`.
+5. Terms in the glossary stay in English. A parenthetical gloss such as `(trust line)` or `(seed)` may stay next to the translated term.
+6. If the translation is right, write `approve` on the Approve line. If it should change, leave Approve blank and write the full replacement on the Correction line.
+7. Write your name and the date yourself. Do not mark a row approved for someone else.
+
+## Glossary of terms kept in English
+
+| Term | Keep it because |
+| --- | --- |
+| `XRPL` | The XRP Ledger. Keep the letters XRPL. |
+| `XRPL LAYMAN` | The name of this lesson site. Keep both words, in that order. |
+| `$XRP` | The way this site writes the reserve and fee unit. Keep the dollar sign. |
+| `XRP` | The asset. Keep the letters XRP. |
+| `Xaman` | A wallet application. Keep the name. |
+| `Testnet` | The public test network. Keep the name. |
+| `Mainnet` | The public network with real assets. Keep the name. |
+| `NFT` | A non-fungible token. The short label often stays NFT. |
+| `NFTokenID` | The ledger’s identifier for one NFT. Do not translate the field name. |
+| `NFTokenPage` | The ledger page that stores NFTs. Do not translate the field name. |
+| `DEX` | The built-in exchange. Keep the letters DEX. |
+| `AMM` | An automated market maker. Keep the letters AMM. |
+| `TakerGets` | One side of a DEX offer. Do not translate the field name. |
+| `TakerPays` | The other side of a DEX offer. Do not translate the field name. |
+| `MPT` | A multi-purpose token. It is a different standard from a trust-line token. |
+| `URI` | The link field on an NFT. Keep the letters URI. |
+| `Seed` | Some short labels are still the English word Seed on purpose. |
+| `Trust line` | Some short labels are still the English words Trust line on purpose. |
+| `Freeze` | Some short labels are still the English word Freeze on purpose. |
+| `Destination Tag` | Some short labels are still the English words Destination Tag on purpose. |
+| `Regular key` | An extra signing key. The English name may stay beside the translation. |
+| `Master key` | The original signing key. The English name may stay beside the translation. |
+| `AUGUR` | A name used in an example. Keep the spelling. |
+| `House of Cauliman` | The publisher of this site. Keep the name, in that order. |
+
+## Counts
+
+| Section | Rows | Approved |
+| --- | ---: | ---: |
+| 1. Wallet recovery and seed | 33 | 0 |
+| 2. Signing | 48 | 0 |
+| 3. Destination tags | 5 | 0 |
+| 4. Trust lines | 41 | 0 |
+| 5. Reserves and fees | 39 | 0 |
+| 6. DEX and AMM | 9 | 0 |
+| 7. NFTs | 16 | 0 |
+| 8. Other security and finance | 39 | 0 |
+| Total | 230 | 0 |
+
+## 1. Wallet recovery and seed
+
+This sentence is about the secret that can recreate the account.
+
+What the reader must understand for this whole section: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed.
+
+### 1.1 `a-human-manageable-secret-that-can-d.8636fdfc`
+
+- Risk tier: Wallet recovery and seed
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: Seed
+- Purpose: This sentence is about the secret that can recreate the account.
+- What the reader must understand: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed. The English wording to preserve is: A human-manageable secret that can derive the keys. It’s not a password you can reset.
+- English: A human-manageable secret that can derive the keys. It’s not a password you can reset.
+- Current translation: ऐसा सीक्रेट (secret) जिसे व्यक्ति संभाल सके और जिससे क्रिप्टोग्राफ़िक कुंजियाँ (keys) निकाली जा सकें। यह ऐसा पासवर्ड नहीं है जिसे आप रीसेट कर सकें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 1.2 `a-signer-list-assigns-weights-and-a.88fc3ebe`
+
+- Risk tier: Wallet recovery and seed
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Use shared authority deliberately
+- Purpose: This sentence is about the secret that can recreate the account.
+- What the reader must understand: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed. The English wording to preserve is: A signer list assigns weights and a quorum. For example, three independent signers of weight one with quorum two requires enough valid signatures to reach two. This only protects the intended signing route: review any enabled master or regular key as well. Test recovery on a non-production network before moving authority.
+- English: A signer list assigns weights and a quorum. For example, three independent signers of weight one with quorum two requires enough valid signatures to reach two. This only protects the intended signing route: review any enabled master or regular key as well. Test recovery on a non-production network before moving authority.
+- Current translation: साइनर लिस्ट (signer list) वेट और कोरम (quorum) तय करती है। उदाहरण के लिए, वेट एक वाले तीन स्वतंत्र साइनर (signer) और कोरम दो का अर्थ है कि दो तक पहुँचने के लिए पर्याप्त वैध सिग्नेचर (signature) चाहिए। यह केवल इच्छित साइनिंग (signing) मार्ग की रक्षा करता है: चालू मास्टर की (master key) या रेगुलर की (regular key) भी देखें। अथॉरिटी ले जाने से पहले गैर-उत्पादन नेटवर्क पर रिकवरी का परीक्षण करें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 1.3 `a-xaman-payload-is-a-signing-request.d7a646f5`
+
+- Risk tier: Wallet recovery and seed
+- Page: Xaman flows (/xrpl/builders/xaman-flows.html)
+- Heading on that page: Start with a clear request
+- Purpose: This sentence is about the secret that can recreate the account.
+- What the reader must understand: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed. The English wording to preserve is: A Xaman payload is a signing request. Your product should first explain the action, network, signing account, exact asset, recipient and amount or permissions. A sign-in identifies an account; it is not a payment. Never ask users to paste a seed, secret numbers or a private key into your page.
+- English: A Xaman payload is a signing request. Your product should first explain the action, network, signing account, exact asset, recipient and amount or permissions. A sign-in identifies an account; it is not a payment. Never ask users to paste a seed, secret numbers or a private key into your page.
+- Current translation: Xaman पेलोड (payload) एक साइनिंग (signing) अनुरोध है। आपके उत्पाद को पहले कार्रवाई, नेटवर्क, साइनिंग खाता, सटीक परिसंपत्ति, प्राप्तकर्ता और राशि या अनुमतियाँ समझानी चाहिए। साइन-इन खाते की पहचान करता है; वह भुगतान नहीं है। उपयोगकर्ताओं से कभी सीड (seed), गुप्त संख्याएँ या प्राइवेट की (private key) अपने पृष्ठ में चिपकाने को न कहें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 1.4 `are-read-only-learning-material-with.acd12af2`
+
+- Risk tier: Wallet recovery and seed
+- Page: Builders hub (/xrpl/builders/)
+- Heading on that page: Three environments that must not be confused
+- Purpose: This sentence is about the secret that can recreate the account.
+- What the reader must understand: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed. The English wording to preserve is: {s1} are read-only learning material with fictional examples and local quiz feedback. {s2} is a separate ledger for later implementation rehearsal; its test assets do not pay Mainnet bills. {s3} carries real assets and consequences. Devnet can include experimental changes; success there does not establish Mainnet availability. Do not reuse real secrets in experiments. Check {s4} and the actual target amendment status before implementation.
+- English: {s1} are read-only learning material with fictional examples and local quiz feedback. {s2} is a separate ledger for later implementation rehearsal; its test assets do not pay Mainnet bills. {s3} carries real assets and consequences. Devnet can include experimental changes; success there does not establish Mainnet availability. Do not reuse real secrets in experiments. Check {s4} and the actual target amendment status before implementation.
+- Current translation: {s1} काल्पनिक उदाहरणों और स्थानीय क्विज़ फ़ीडबैक वाली केवल-पढ़ने की सीखने की सामग्री हैं। {s2} बाद के कार्यान्वयन अभ्यास के लिए एक अलग लेजर है; इसके परीक्षण एसेट Mainnet के बिल नहीं चुकाते। {s3} असली परिसंपत्तियाँ और परिणाम रखता है। Devnet में प्रयोगात्मक बदलाव हो सकते हैं; वहाँ की सफलता Mainnet पर उपलब्धता स्थापित नहीं करती। प्रयोगों में असली सीक्रेट (secret) दोबारा इस्तेमाल न करें। लागू करने से पहले {s4} और वास्तविक लक्षित संशोधन (amendment) की स्थिति जाँचें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 1.5 `assume-a-leaked-seed-is-permanently.0fc76985`
+
+- Risk tier: Wallet recovery and seed
+- Page: Safety (/xrpl/safety.html)
+- Heading on that page: Protect signing authority
+- Purpose: This sentence is about the secret that can recreate the account.
+- What the reader must understand: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed. The English wording to preserve is: Assume a leaked seed is permanently compromised.
+- English: Assume a leaked seed is permanently compromised.
+- Current translation: मानकर चलें कि लीक हुआ सीड (seed) स्थायी रूप से असुरक्षित हो चुका है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 1.6 `bring-your-asset-specification-from.2de6be48`
+
+- Risk tier: Wallet recovery and seed
+- Page: NFT basics (/xrpl/builders/nft-basics.html)
+- Heading on that page: Before you start
+- Purpose: This sentence is about the secret that can recreate the account.
+- What the reader must understand: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed. The English wording to preserve is: Bring your asset specification from lesson 1. Know the difference between a public identifier and a secret. You can complete every exercise using the fictional records below; opening an explorer is optional.
+- English: Bring your asset specification from lesson 1. Know the difference between a public identifier and a secret. You can complete every exercise using the fictional records below; opening an explorer is optional.
+- Current translation: पाठ 1 से अपना परिसंपत्ति विनिर्देश लाइए। सार्वजनिक पहचानकर्ता और सीक्रेट (secret) का अंतर जानें। नीचे दिए काल्पनिक रिकॉर्ड से हर अभ्यास पूरा हो सकता है; एक्सप्लोरर खोलना वैकल्पिक है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 1.7 `can-a-seed-be-reset.4e3ce397`
+
+- Risk tier: Wallet recovery and seed
+- Page: Wallets (/xrpl/wallet-basics.html)
+- Heading on that page: Can a seed be reset?
+- Purpose: This sentence is about the secret that can recreate the account.
+- What the reader must understand: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed. The English wording to preserve is: Can a seed be reset?
+- English: Can a seed be reset?
+- Current translation: क्या सीड (seed) रीसेट हो सकता है?
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 1.8 `create-a-failure-table-with-input-ex.2a93267d`
+
+- Risk tier: Wallet recovery and seed
+- Page: Project launch (/xrpl/builders/project-launch-basics.html)
+- Heading on that page: Hold a tabletop launch review
+- Purpose: This sentence is about the secret that can recreate the account.
+- What the reader must understand: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed. The English wording to preserve is: Create a failure table with input, expected user message, stored state and recovery. Include rejection, wrong signer/network/asset/recipient, insufficient delivery, request expiry, network outage, duplicate callback, restart and stale data. For each, state what must never happen: no false receipt, duplicate entitlement or silent second payment.
+- English: Create a failure table with input, expected user message, stored state and recovery. Include rejection, wrong signer/network/asset/recipient, insufficient delivery, request expiry, network outage, duplicate callback, restart and stale data. For each, state what must never happen: no false receipt, duplicate entitlement or silent second payment.
+- Current translation: इनपुट, अपेक्षित उपयोगकर्ता संदेश, संग्रहीत अवस्था और रिकवरी वाली विफलता तालिका बनाएँ। अस्वीकृति, गलत साइनर (signer)/नेटवर्क/परिसंपत्ति/प्राप्तकर्ता, अपर्याप्त डिलीवरी, अनुरोध समाप्ति, नेटवर्क रुकावट, दोहरा कॉलबैक (callback), रीस्टार्ट और पुराना डेटा शामिल करें। हर एक के लिए लिखें कि क्या कभी नहीं होना चाहिए: झूठी रसीद नहीं, दोहरी हकदारी नहीं, या चुप दूसरा भुगतान नहीं।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 1.9 `does-changing-an-app-password-fix-a.002dd115`
+
+- Risk tier: Wallet recovery and seed
+- Page: Safety (/xrpl/safety.html)
+- Heading on that page: Does changing an app password fix a leaked seed?
+- Purpose: This sentence is about the secret that can recreate the account.
+- What the reader must understand: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed. The English wording to preserve is: Does changing an app password fix a leaked seed?
+- English: Does changing an app password fix a leaked seed?
+- Current translation: क्या ऐप का पासवर्ड बदलने से लीक हुआ सीड (seed) ठीक हो जाता है?
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 1.10 `draw-a-box-for-each-account-from-les.ad557ea8`
+
+- Risk tier: Wallet recovery and seed
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Map who can act for the club
+- Purpose: This sentence is about the secret that can recreate the account.
+- What the reader must understand: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed. The English wording to preserve is: Draw a box for each account from lesson 1. Under each, list enabled master signing, regular key and signer-list route separately. Add unknown if the public record does not answer a question; do not request anyone secret to complete the map.
+- English: Draw a box for each account from lesson 1. Under each, list enabled master signing, regular key and signer-list route separately. Add unknown if the public record does not answer a question; do not request anyone secret to complete the map.
+- Current translation: पाठ 1 के हर खाते के लिए एक बॉक्स बनाएँ। हर एक के नीचे चालू मास्टर साइनिंग (master signing), रेगुलर की (regular key) और साइनर-लिस्ट (signer list) मार्ग अलग-अलग लिखें। यदि सार्वजनिक रिकॉर्ड प्रश्न का उत्तर न दे तो अज्ञात जोड़ें; नक्शा पूरा करने के लिए किसी का सीक्रेट (secret) न माँगें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 1.11 `family-access-planning-and-ledger-si.553a225c`
+
+- Risk tier: Wallet recovery and seed
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Keep building
+- Purpose: This sentence is about the secret that can recreate the account.
+- What the reader must understand: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed. The English wording to preserve is: Family access planning and ledger signing authority are different layers; document both without exposing secrets.
+- English: Family access planning and ledger signing authority are different layers; document both without exposing secrets.
+- Current translation: परिवार की पहुँच की योजना और लेजर साइनिंग अथॉरिटी (signing authority) अलग परतें हैं; सीक्रेट (secret) खोले बिना दोनों लिखें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 1.12 `freeze-restricts-movement-of-tokens.8ccf6190`
+
+- Risk tier: Wallet recovery and seed
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Words you will use
+- Purpose: This sentence is about the secret that can recreate the account.
+- What the reader must understand: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed. The English wording to preserve is: Freeze restricts movement of tokens; clawback can recover an issuer token balance when the capability is enabled. Neither applies to native XRP.
+- English: Freeze restricts movement of tokens; clawback can recover an issuer token balance when the capability is enabled. Neither applies to native XRP.
+- Current translation: फ़्रीज़ (freeze) टोकन के हस्तांतरण को प्रतिबंधित करता है; क्लॉबैक (clawback) क्षमता चालू होने पर जारीकर्ता अपने जारी किए टोकन का बैलेंस वापस ले सकता है। इनमें से कोई भी मूल XRP पर लागू नहीं होता।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 1.13 `keep-backend-api-secrets-out-of-brow.f5ff651f`
+
+- Risk tier: Wallet recovery and seed
+- Page: Xaman flows (/xrpl/builders/xaman-flows.html)
+- Heading on that page: Work through this example
+- Purpose: This sentence is about the secret that can recreate the account.
+- What the reader must understand: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed. The English wording to preserve is: Keep backend API secrets out of browser code. Use a documented Xaman integration model appropriate to the application. These pages have no wallet connection, QR signing request or submit action.
+- English: Keep backend API secrets out of browser code. Use a documented Xaman integration model appropriate to the application. These pages have no wallet connection, QR signing request or submit action.
+- Current translation: बैकएंड API सीक्रेट ब्राउज़र कोड से बाहर रखें। ऐप्लिकेशन के अनुकूल दस्तावेज़ी Xaman इंटीग्रेशन मॉडल इस्तेमाल करें। इन पृष्ठों पर वॉलेट कनेक्शन, QR साइनिंग (signing) अनुरोध या सबमिट कार्रवाई नहीं है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 1.14 `keep-the-seed-offline-and-private.ac2d7a8b`
+
+- Risk tier: Wallet recovery and seed
+- Page: Safety (/xrpl/safety.html)
+- Heading on that page: Protect signing authority
+- Purpose: This sentence is about the secret that can recreate the account.
+- What the reader must understand: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed. The English wording to preserve is: Keep the seed offline and private.
+- English: Keep the seed offline and private.
+- Current translation: सीड (seed) को ऑफ़लाइन और गोपनीय रखें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 1.15 `learn-and-inspect-first-no-wallet-co.b6c6fd0a`
+
+- Risk tier: Wallet recovery and seed
+- Page: Create a token; NFT basics; Trust lines lesson; Issuer control; Xaman flows; Project launch (/xrpl/builders/create-token.html; /xrpl/builders/nft-basics.html; /xrpl/builders/trust-lines.html; /xrpl/builders/issuer-control.html; /xrpl/builders/xaman-flows.html; /xrpl/builders/project-launch-basics.html)
+- Heading on that page: Create a token with a clear identity; Read an NFT beyond its picture; Set a boundary for an issued asset; Know who can still change the rules; Follow a signing request to its real result; Launch something people can verify
+- Purpose: This sentence is about the secret that can recreate the account.
+- What the reader must understand: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed. The English wording to preserve is: Learn and inspect first. No wallet connection, seed entry, signing or transactions on this page.
+- English: Learn and inspect first. No wallet connection, seed entry, signing or transactions on this page.
+- Current translation: पहले सीखें और जाँचें। इस पृष्ठ पर वॉलेट कनेक्शन, सीड (seed) दर्ज करना, साइनिंग (signing) या लेनदेन नहीं।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 1.16 `learn-custody-seeds-signing-funding.0a144ab8`
+
+- Risk tier: Wallet recovery and seed
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: Keep moving
+- Purpose: This sentence is about the secret that can recreate the account.
+- What the reader must understand: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed. The English wording to preserve is: Learn custody, seeds, signing, funding, account control, and recovery limits.
+- English: Learn custody, seeds, signing, funding, account control, and recovery limits.
+- Current translation: कस्टडी (custody), सीड (seed), साइनिंग (signing), धन जोड़ना, खाता नियंत्रण और रिकवरी की सीमाएँ सीखें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 1.17 `mark-irreversible-or-order-sensitive.88613afa`
+
+- Risk tier: Wallet recovery and seed
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Map who can act for the club
+- Purpose: This sentence is about the secret that can recreate the account.
+- What the reader must understand: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed. The English wording to preserve is: Mark irreversible or order-sensitive choices. No Freeze cannot be undone. Trust-line clawback must be deliberately enabled under its account requirements before the issuer has populated its owner directory; it is not a recovery button an issuer can freely add later. Check the exact current AccountSet rules before implementation.
+- English: Mark irreversible or order-sensitive choices. No Freeze cannot be undone. Trust-line clawback must be deliberately enabled under its account requirements before the issuer has populated its owner directory; it is not a recovery button an issuer can freely add later. Check the exact current AccountSet rules before implementation.
+- Current translation: अपरिवर्तनीय या क्रम-संवेदनशील विकल्प चिह्नित करें। No Freeze पूर्ववत नहीं हो सकता। ट्रस्ट-लाइन (trust line) क्लॉबैक (clawback) को जारीकर्ता (issuer) की ओनर डायरेक्टरी भरने से पहले, उसकी खाता शर्तों के तहत जानबूझकर चालू करना होता है; वह रिकवरी बटन नहीं जिसे जारीकर्ता बाद में स्वतंत्र रूप से जोड़ सके। लागू करने से पहले सटीक वर्तमान AccountSet नियम जाँचें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 1.18 `meta.wallet.description`
+
+- Risk tier: Wallet recovery and seed
+- Page: Wallets (/xrpl/wallet-basics.html)
+- Heading on that page: Wallets
+- Purpose: This sentence is about the secret that can recreate the account.
+- What the reader must understand: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed. The English wording to preserve is: Control, custody, seeds, signing, funding, recovery, and the mistakes that cost people everything.
+- English: Control, custody, seeds, signing, funding, recovery, and the mistakes that cost people everything.
+- Current translation: नियंत्रण, कस्टडी (custody), सीड (seed), साइनिंग (signing), धन जोड़ना, रिकवरी, और वे गलतियाँ जिनसे लोग अपना सब कुछ खो सकते हैं।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 1.19 `never-type-your-seed-into-a-random-w.9a621f43`
+
+- Risk tier: Wallet recovery and seed
+- Page: Wallets (/xrpl/wallet-basics.html)
+- Heading on that page: Seeds, keys, and signatures
+- Purpose: This sentence is about the secret that can recreate the account.
+- What the reader must understand: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed. The English wording to preserve is: Never type your seed into a random website.
+- English: Never type your seed into a random website.
+- Current translation: अपना सीड (seed) किसी भी बेतरतीब वेबसाइट में कभी टाइप न करें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 1.20 `no-the-regular-key-remains-a-signing.03e57ab8`
+
+- Risk tier: Wallet recovery and seed
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Work through this example
+- Purpose: This sentence is about the secret that can recreate the account.
+- What the reader must understand: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed. The English wording to preserve is: No. The regular key remains a signing route with broad powers. Inspect its presence and the signer list, then document which actions remain possible. Public evidence of account configuration cannot prove how securely somebody stores a secret or whether a private key is truly unknown.
+- English: No. The regular key remains a signing route with broad powers. Inspect its presence and the signer list, then document which actions remain possible. Public evidence of account configuration cannot prove how securely somebody stores a secret or whether a private key is truly unknown.
+- Current translation: नहीं। रेगुलर की (regular key) व्यापक अधिकारों वाला साइनिंग (signing) मार्ग बनी रहती है। उसकी उपस्थिति और साइनर लिस्ट (signer list) जाँचें, फिर लिखें कि कौन सी कार्रवाइयाँ संभव रहती हैं। खाता कॉन्फ़िगरेशन का सार्वजनिक साक्ष्य यह साबित नहीं कर सकता कि कोई सीक्रेट (secret) कितनी सुरक्षित रखता है या प्राइवेट की (private key) सच में अज्ञात है या नहीं।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 1.21 `prove-mismatched-payments-cannot-unl.c94250d1`
+
+- Risk tier: Wallet recovery and seed
+- Page: Project launch (/xrpl/builders/project-launch-basics.html)
+- Heading on that page: Work through this example
+- Purpose: This sentence is about the secret that can recreate the account.
+- What the reader must understand: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed. The English wording to preserve is: Prove mismatched payments cannot unlock access, duplicates cannot double-credit, expiry and network outages recover, and records survive restart. Review the exact release diff, account authority and fee disclosures; rehearse backup/restore and rollback; assign support and monitoring. One happy-path payment is not full acceptance.
+- English: Prove mismatched payments cannot unlock access, duplicates cannot double-credit, expiry and network outages recover, and records survive restart. Review the exact release diff, account authority and fee disclosures; rehearse backup/restore and rollback; assign support and monitoring. One happy-path payment is not full acceptance.
+- Current translation: साबित करें कि बेमेल भुगतान पहुँच नहीं खोल सकते, डुप्लिकेट दोहरा क्रेडिट नहीं दे सकते, समाप्ति और नेटवर्क रुकावट से उबरा जा सकता है, और रिकॉर्ड रीस्टार्ट के बाद बचते हैं। सटीक रिलीज़ अंतर, खाता अथॉरिटी और फ़ीस खुलासा देखें; बैकअप/रिस्टोर और रोलबैक (rollback) का अभ्यास करें; सहायता और निगरानी तय करें। एक सफल-पथ भुगतान पूरी स्वीकृति नहीं है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 1.22 `secret-seed.e3cdd578`
+
+- Risk tier: Wallet recovery and seed
+- Page: Wallets (/xrpl/wallet-basics.html)
+- Heading on that page: Seeds, keys, and signatures
+- Purpose: This sentence is about the secret that can recreate the account.
+- What the reader must understand: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed. The English wording to preserve is: Secret seed
+- English: Secret seed
+- Current translation: गुप्त सीड (secret seed)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 1.23 `seed-shared.43114c2d`
+
+- Risk tier: Wallet recovery and seed
+- Page: Wallets (/xrpl/wallet-basics.html)
+- Heading on that page: Wallet mistakes that destroy accounts
+- Purpose: This sentence is about the secret that can recreate the account.
+- What the reader must understand: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed. The English wording to preserve is: Seed shared:
+- English: Seed shared:
+- Current translation: सीड साझा (seed shared):
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 1.24 `seed.32fe9f5b`
+
+- Risk tier: Wallet recovery and seed
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: Seed
+- Purpose: This sentence is about the secret that can recreate the account.
+- What the reader must understand: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed. The English wording to preserve is: Seed
+- English: Seed
+- Current translation: सीड (seed)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 1.25 `seeds-keys-and-signatures.5b661568`
+
+- Risk tier: Wallet recovery and seed
+- Page: Wallets (/xrpl/wallet-basics.html)
+- Heading on that page: Seeds, keys, and signatures
+- Purpose: This sentence is about the secret that can recreate the account.
+- What the reader must understand: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed. The English wording to preserve is: Seeds, keys, and signatures
+- English: Seeds, keys, and signatures
+- Current translation: सीड (seed), की (keys) और सिग्नेचर (signature)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 1.26 `separate-recovery-layers-reverting-a.e8e2e17b`
+
+- Risk tier: Wallet recovery and seed
+- Page: Project launch (/xrpl/builders/project-launch-basics.html)
+- Heading on that page: Hold a tabletop launch review
+- Purpose: This sentence is about the secret that can recreate the account.
+- What the reader must understand: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed. The English wording to preserve is: Separate recovery layers. Reverting a page can hide a bad button; restoring a database can lose newer legitimate receipts; neither reverses ledger transfers. Document backup boundaries, restore verification and how reconciliation preserves transactions after the backup point.
+- English: Separate recovery layers. Reverting a page can hide a bad button; restoring a database can lose newer legitimate receipts; neither reverses ledger transfers. Document backup boundaries, restore verification and how reconciliation preserves transactions after the backup point.
+- Current translation: रिकवरी परतें अलग करें। पेज को पुराने संस्करण पर लौटाने से खराब बटन छिप सकता है; डेटाबेस रिस्टोर करने से नई वैध रसीदें खो सकती हैं; दोनों में से कोई लेजर ट्रांसफ़र नहीं उलटता। बैकअप सीमाएँ, रिस्टोर सत्यापन और यह लिखें कि मिलान (reconciliation) बैकअप बिंदु के बाद के लेनदेन कैसे बचाता है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 1.27 `someone-asks-for-your-seed.d7298656`
+
+- Risk tier: Wallet recovery and seed
+- Page: Safety (/xrpl/safety.html)
+- Heading on that page: Phishing and fake connection flows
+- Purpose: This sentence is about the secret that can recreate the account.
+- What the reader must understand: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed. The English wording to preserve is: {s1} Someone asks for your seed.
+- English: {s1} Someone asks for your seed.
+- Current translation: {s1} कोई आपका सीड (seed) माँगता है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 1.28 `start-here-be-able-to-distinguish-a.8a3a6b4c`
+
+- Risk tier: Wallet recovery and seed
+- Page: Create a token (/xrpl/builders/create-token.html)
+- Heading on that page: Before you start
+- Purpose: This sentence is about the secret that can recreate the account.
+- What the reader must understand: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed. The English wording to preserve is: Start here. Be able to distinguish a public account address from a private signing secret. If that is unfamiliar, read Wallet Basics first. You need only a notebook; no account, funds or coding tools.
+- English: Start here. Be able to distinguish a public account address from a private signing secret. If that is unfamiliar, read Wallet Basics first. You need only a notebook; no account, funds or coding tools.
+- Current translation: यहीं से शुरू करें। सार्वजनिक खाता पते को निजी साइनिंग सीक्रेट (signing secret) से अलग पहचान सकें। यदि यह अपरिचित हो, तो पहले वॉलेट बेसिक्स पढ़ें। आपको केवल नोटबुक चाहिए; खाता, धन या कोडिंग उपकरण नहीं।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 1.29 `the-secret-authority-that-proves-you.94c08ea2`
+
+- Risk tier: Wallet recovery and seed
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: Private Keys
+- Purpose: This sentence is about the secret that can recreate the account.
+- What the reader must understand: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed. The English wording to preserve is: The secret authority that proves you control the account. Whoever controls the keys controls the account.
+- English: The secret authority that proves you control the account. Whoever controls the keys controls the account.
+- Current translation: वह गुप्त अथॉरिटी जो साबित करती है कि आप खाता नियंत्रित करते हैं। जिसके पास की (keys) हैं, उसके पास खाता है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 1.30 `the-server-side-part-of-an-applicati.d228df9c`
+
+- Risk tier: Wallet recovery and seed
+- Page: Xaman flows (/xrpl/builders/xaman-flows.html)
+- Heading on that page: Words you will use
+- Purpose: This sentence is about the secret that can recreate the account.
+- What the reader must understand: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed. The English wording to preserve is: The server-side part of an application where secrets and authoritative order checks belong.
+- English: The server-side part of an application where secrets and authoritative order checks belong.
+- Current translation: ऐप्लिकेशन का सर्वर-पक्ष, जहाँ सीक्रेट (secret) और आधिकारिक ऑर्डर जाँच रहती हैं।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 1.31 `use-separate-test-accounts-and-a-non.d2a66d3c`
+
+- Risk tier: Wallet recovery and seed
+- Page: Project launch (/xrpl/builders/project-launch-basics.html)
+- Heading on that page: Rehearse the unhappy paths
+- Purpose: This sentence is about the secret that can recreate the account.
+- What the reader must understand: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed. The English wording to preserve is: Use separate test accounts and a non-production network. Rehearse rejected signatures, expiry, insufficient funds/reserve, wrong network, unavailable RPC and duplicate callbacks. Keep secrets outside frontend assets and logs. Verify current wallet support and amendment availability for the actual network; a documentation page is not evidence of activation everywhere.
+- English: Use separate test accounts and a non-production network. Rehearse rejected signatures, expiry, insufficient funds/reserve, wrong network, unavailable RPC and duplicate callbacks. Keep secrets outside frontend assets and logs. Verify current wallet support and amendment availability for the actual network; a documentation page is not evidence of activation everywhere.
+- Current translation: अलग परीक्षण खाते और गैर-उत्पादन नेटवर्क इस्तेमाल करें। अस्वीकृत सिग्नेचर (signature), समाप्ति, अपर्याप्त धन/रिज़र्व (reserve), गलत नेटवर्क, अनुपलब्ध RPC और दोहरे कॉलबैक (callback) का अभ्यास करें। सीक्रेट (secret) फ़्रंटएंड एसेट और लॉग से बाहर रखें। वास्तविक नेटवर्क के लिए वर्तमान वॉलेट समर्थन और संशोधन उपलब्धता सत्यापित करें; दस्तावेज़ पृष्ठ हर जगह सक्रियण का साक्ष्य नहीं है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 1.32 `write-recovery-scenarios-on-paper-on.cab7e62d`
+
+- Risk tier: Wallet recovery and seed
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Map who can act for the club
+- Purpose: This sentence is about the secret that can recreate the account.
+- What the reader must understand: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed. The English wording to preserve is: Write recovery scenarios on paper: one signer unavailable; two unavailable; one compromised; the regular-key custodian absent. State which actions remain possible and who decides to pause operations. A private off-ledger promise to require two approvals is not the same as ledger enforcement.
+- English: Write recovery scenarios on paper: one signer unavailable; two unavailable; one compromised; the regular-key custodian absent. State which actions remain possible and who decides to pause operations. A private off-ledger promise to require two approvals is not the same as ledger enforcement.
+- Current translation: कागज़ पर रिकवरी परिदृश्य लिखें: एक साइनर (signer) अनुपलब्ध; दो अनुपलब्ध; एक साइनर की सुरक्षा भंग हुई; रेगुलर-की (regular key) संरक्षक अनुपस्थित। लिखें कि कौन सी कार्रवाइयाँ संभव रहती हैं और संचालन रोकने का निर्णय कौन करता है। दो मंज़ूरियों की निजी, लेजर-बाहरी प्रतिज्ञा लेजर प्रवर्तन के समान नहीं है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 1.33 `your-seed-isn-t-a-password-there-s-n.3a1be27d`
+
+- Risk tier: Wallet recovery and seed
+- Page: Wallets (/xrpl/wallet-basics.html)
+- Heading on that page: Seeds, keys, and signatures
+- Purpose: This sentence is about the secret that can recreate the account.
+- What the reader must understand: A seed or secret is not a resettable password. Anyone who has it can control the account. Changing an app password does not fix a leaked seed. The English wording to preserve is: Your seed isn’t a password. There’s no reset desk behind the ledger.
+- English: Your seed isn’t a password. There’s no reset desk behind the ledger.
+- Current translation: आपका सीड (seed) पासवर्ड नहीं है। लेजर के पीछे कोई रीसेट डेस्क नहीं है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+## 2. Signing
+
+This sentence is about who is allowed to authorize a transaction.
+
+What the reader must understand for this whole section: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished.
+
+### 2.1 `a-callback-is-a-reason-for-the-backe.50625123`
+
+- Risk tier: Signing
+- Page: Xaman flows (/xrpl/builders/xaman-flows.html)
+- Heading on that page: Verify beyond the callback
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: A callback is a reason for the backend to fetch the payload result, not proof to trust blindly. Check the resolved/signed state, expected account and intended network. For a ledger transaction, look up its transaction hash and verify validation, result and the exact intended operation. A signed request can still fail or remain unresolved on ledger.
+- English: A callback is a reason for the backend to fetch the payload result, not proof to trust blindly. Check the resolved/signed state, expected account and intended network. For a ledger transaction, look up its transaction hash and verify validation, result and the exact intended operation. A signed request can still fail or remain unresolved on ledger.
+- Current translation: कॉलबैक (callback) बैकएंड के लिए पेलोड (payload) परिणाम लाने का कारण है, आँख मूँदकर भरोसा करने का प्रमाण नहीं। हल हुई/साइन हुई अवस्था, अपेक्षित खाता और इच्छित नेटवर्क जाँचें। लेजर लेनदेन के लिए उसका ट्रांज़ैक्शन हैश देखें और वैलिडेशन (validation), परिणाम तथा ठीक वही इच्छित कार्रवाई सत्यापित करें। साइन किया अनुरोध फिर भी विफल हो सकता है या लेजर पर अनसुलझा रह सकता है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.2 `a-fictional-club-proposes-1-000-club.bd5125de`
+
+- Risk tier: Signing
+- Page: Create a token (/xrpl/builders/create-token.html)
+- Heading on that page: Work through this example
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: A fictional club proposes 1,000 CLUB credits. Its launch sheet lists a logo and ticker, but no issuer address, redemption policy or signing authority. What must be added before a member could identify the asset or judge the promise?
+- English: A fictional club proposes 1,000 CLUB credits. Its launch sheet lists a logo and ticker, but no issuer address, redemption policy or signing authority. What must be added before a member could identify the asset or judge the promise?
+- Current translation: एक काल्पनिक क्लब 1,000 CLUB क्रेडिट प्रस्तावित करता है। उसकी लॉन्च शीट में लोगो और टिकर हैं, पर जारीकर्ता पता, रिडेम्पशन (redemption) नीति या साइनिंग अथॉरिटी (signing authority) नहीं। सदस्य परिसंपत्ति पहचान सके या वादे का आकलन कर सके, इसके पहले क्या जोड़ना ज़रूरी है?
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.3 `a-multisigning-setup-requiring-enoug.5a733927`
+
+- Risk tier: Signing
+- Page: Wallets (/xrpl/wallet-basics.html)
+- Heading on that page: Signer List
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: A multisigning setup requiring enough signer weight.
+- English: A multisigning setup requiring enough signer weight.
+- Current translation: एक मल्टीसाइनिंग (multisigning) व्यवस्था जिसमें पर्याप्त साइनर वेट (signer weight) चाहिए।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.4 `a-project-says-master-key-disabled-t.dc0aa5ea`
+
+- Risk tier: Signing
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Work through this example
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: A project says “master key disabled, therefore nobody can change anything.” Its account still has an enabled regular key. Is the conclusion supported?
+- English: A project says “master key disabled, therefore nobody can change anything.” Its account still has an enabled regular key. Is the conclusion supported?
+- Current translation: एक प्रोजेक्ट कहता है “मास्टर की (master key) बंद है, इसलिए कोई कुछ नहीं बदल सकता।” उसके खाते में अब भी एक चालू रेगुलर की (regular key) है। क्या यह निष्कर्ष समर्थित है?
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.5 `a-regular-key-is-a-separate-signing.81ac6af9`
+
+- Risk tier: Signing
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Check your understanding
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: A regular key is a separate signing route.
+- English: A regular key is a separate signing route.
+- Current translation: रेगुलर की (regular key) एक अलग साइनिंग (signing) मार्ग है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.6 `a-support-message-says-your-25-credi.f5084773`
+
+- Risk tier: Signing
+- Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
+- Heading on that page: Read a member account before changing anything
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: A support message says your 25 credits are stuck because your limit is only 100 and asks you to sign an unlimited limit. That explanation does not follow from the sample. Inspect the exact failure, issuer/network, authorization, freezes, destination and intended operation first. Increasing a limit is not a general repair for token problems.
+- English: A support message says your 25 credits are stuck because your limit is only 100 and asks you to sign an unlimited limit. That explanation does not follow from the sample. Inspect the exact failure, issuer/network, authorization, freezes, destination and intended operation first. Increasing a limit is not a general repair for token problems.
+- Current translation: एक सहायता संदेश कहता है कि आपके 25 क्रेडिट अटके हैं क्योंकि आपकी लिमिट (limit) केवल 100 है, और असीमित लिमिट साइन करने को कहता है। वह व्याख्या नमूने से नहीं निकलती। पहले सटीक विफलता, जारीकर्ता/नेटवर्क, ऑथराइज़ेशन (authorization), फ़्रीज़ (freeze), गंतव्य और इच्छित कार्रवाई देखें। लिमिट बढ़ाना टोकन समस्याओं की सामान्य मरम्मत नहीं है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.7 `an-attempt-to-remove-usable-account.dbb3b496`
+
+- Risk tier: Signing
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Words you will use
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: An attempt to remove usable account signing authority. Treat it as a permanent loss-of-control decision, not a safety rating.
+- English: An attempt to remove usable account signing authority. Treat it as a permanent loss-of-control decision, not a safety rating.
+- Current translation: खाते की उपयोगी साइनिंग अथॉरिटी (signing authority) हटाने का प्रयास। इसे नियंत्रण के स्थायी नुकसान का निर्णय मानें, सुरक्षा रेटिंग नहीं।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.8 `an-explorer-asks-for-a-signature-jus.626777f6`
+
+- Risk tier: Signing
+- Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
+- Heading on that page: An explorer asks for a signature just to inspect a public trust line. Is that necessary for reading?
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: An explorer asks for a signature just to inspect a public trust line. Is that necessary for reading?
+- English: An explorer asks for a signature just to inspect a public trust line. Is that necessary for reading?
+- Current translation: एक एक्सप्लोरर सार्वजनिक ट्रस्ट लाइन (trust line) देखने भर के लिए सिग्नेचर (signature) माँगता है। क्या पढ़ने के लिए यह ज़रूरी है?
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.9 `ask-whether-the-task-needs-a-trust-l.0a67f2fc`
+
+- Risk tier: Signing
+- Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
+- Heading on that page: Read a member account before changing anything
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: Ask whether the task needs a trust line at all. Reading a public record needs no signature. Receiving native XRP needs no trust line. Avoid adding a setting just because an advertisement labels it mandatory.
+- English: Ask whether the task needs a trust line at all. Reading a public record needs no signature. Receiving native XRP needs no trust line. Avoid adding a setting just because an advertisement labels it mandatory.
+- Current translation: पूछें कि कार्य को ट्रस्ट लाइन (trust line) की ज़रूरत है भी या नहीं। सार्वजनिक रिकॉर्ड पढ़ने के लिए सिग्नेचर (signature) नहीं चाहिए। मूल XRP पाने के लिए ट्रस्ट लाइन नहीं चाहिए। कोई सेटिंग केवल इसलिए न जोड़ें कि विज्ञापन उसे अनिवार्य कहता है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.10 `before-a-request-exists-write-the-st.eb61acbb`
+
+- Risk tier: Signing
+- Page: Xaman flows (/xrpl/builders/xaman-flows.html)
+- Heading on that page: Walk a pretend booking through every state
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: Before a request exists, write the stored intent: customer/session, expected action, expected signer where required, destination, network, asset, amount, any routing tag, expiry and order reference. A wallet address typed into a box is not proof of control.
+- English: Before a request exists, write the stored intent: customer/session, expected action, expected signer where required, destination, network, asset, amount, any routing tag, expiry and order reference. A wallet address typed into a box is not proof of control.
+- Current translation: अनुरोध से पहले संग्रहीत इरादा लिखें: ग्राहक/सत्र, अपेक्षित कार्रवाई, जहाँ ज़रूरी हो अपेक्षित साइनर (signer), गंतव्य, नेटवर्क, परिसंपत्ति, राशि, कोई रूटिंग टैग, समाप्ति और ऑर्डर संदर्भ। बॉक्स में टाइप किया वॉलेट पता नियंत्रण का प्रमाण नहीं है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.11 `bind-the-request-identifier-to-o-17.c97a7290`
+
+- Risk tier: Signing
+- Page: Xaman flows (/xrpl/builders/xaman-flows.html)
+- Heading on that page: Walk a pretend booking through every state
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: Bind the request identifier to O-17 on the backend. On notification, fetch the payload result and compare it with that record. Confirm the expected signer and network. For SignIn verify the bound proof and session; there is no payment transaction to pretend was received.
+- English: Bind the request identifier to O-17 on the backend. On notification, fetch the payload result and compare it with that record. Confirm the expected signer and network. For SignIn verify the bound proof and session; there is no payment transaction to pretend was received.
+- Current translation: बैकएंड पर अनुरोध पहचानकर्ता को O-17 से बाँधें। सूचना पर पेलोड (payload) परिणाम लाएँ और उस रिकॉर्ड से तुलना करें। अपेक्षित साइनर (signer) और नेटवर्क की पुष्टि करें। SignIn के लिए बाउंड प्रमाण और सत्र सत्यापित करें; प्राप्त हुआ बताने के लिए कोई भुगतान लेनदेन नहीं है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.12 `blind-qr.72c0d255`
+
+- Risk tier: Signing
+- Page: Safety (/xrpl/safety.html)
+- Heading on that page: Phishing and fake connection flows
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: Blind QR:
+- English: Blind QR:
+- Current translation: ब्लाइंड QR:
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.13 `blind-signing.3a15e830`
+
+- Risk tier: Signing
+- Page: Wallets (/xrpl/wallet-basics.html)
+- Heading on that page: Wallet mistakes that destroy accounts
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: Blind signing:
+- English: Blind signing:
+- Current translation: ब्लाइंड साइनिंग (blind signing):
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.14 `check-delegated-permissions-too.d6011765`
+
+- Risk tier: Signing
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Check delegated permissions too
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: Check delegated permissions too
+- English: Check delegated permissions too
+- Current translation: डेलिगेटेड (delegated) अनुमतियाँ भी जाँचें
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.15 `compare-against-the-intended-identit.e3f280f0`
+
+- Risk tier: Signing
+- Page: Xaman flows (/xrpl/builders/xaman-flows.html)
+- Heading on that page: A different wallet answered the request
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: Compare against the intended identity and policy. Reject a wrong signer where account control is required; do not silently relabel the order owner.
+- English: Compare against the intended identity and policy. Reject a wrong signer where account control is required; do not silently relabel the order owner.
+- Current translation: इच्छित पहचान और नीति से तुलना करें। जहाँ खाता नियंत्रण ज़रूरी हो, गलत साइनर (signer) को अस्वीकार करें; ऑर्डर मालिक का लेबल चुपचाप न बदलें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.16 `does-disabling-master-signing-disabl.02780c47`
+
+- Risk tier: Signing
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Does disabling master signing disable a regular key too?
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: Does disabling master signing disable a regular key too?
+- English: Does disabling master signing disable a regular key too?
+- Current translation: क्या मास्टर साइनिंग (master signing) बंद करने से रेगुलर की (regular key) भी बंद हो जाती है?
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.17 `fictional-issuer-a-has-master-signin.286a3096`
+
+- Risk tier: Signing
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Map who can act for the club
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: Fictional Issuer A has master signing disabled, a regular key assigned, and a signer list of three people with weight one each and quorum two. This is an inspection example, not a suggested configuration.
+- English: Fictional Issuer A has master signing disabled, a regular key assigned, and a signer list of three people with weight one each and quorum two. This is an inspection example, not a suggested configuration.
+- Current translation: काल्पनिक Issuer A में मास्टर साइनिंग (master signing) बंद है, एक रेगुलर की (regular key) नियत है, और तीन लोगों की साइनर लिस्ट (signer list) है जिनमें प्रत्येक का वेट एक और कोरम (quorum) दो है। यह जाँच का उदाहरण है, सुझाई गई कॉन्फ़िगरेशन नहीं।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.18 `for-the-signer-list-route-calculate.3ed3575f`
+
+- Risk tier: Signing
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Map who can act for the club
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: For the signer-list route, calculate that any two weight-one signers reach quorum two, while one does not. Now circle the regular-key route: it is an alternative signing route. A two-person signer list does not force two-person control over every transaction while a separate single-key route remains.
+- English: For the signer-list route, calculate that any two weight-one signers reach quorum two, while one does not. Now circle the regular-key route: it is an alternative signing route. A two-person signer list does not force two-person control over every transaction while a separate single-key route remains.
+- Current translation: साइनर-लिस्ट (signer list) मार्ग के लिए गणना करें कि वेट-एक वाले कोई भी दो साइनर (signer) कोरम (quorum) दो तक पहुँचते हैं, एक नहीं। अब रेगुलर-की (regular key) मार्ग पर घेरा लगाएँ: वह वैकल्पिक साइनिंग (signing) मार्ग है। जब अलग एकल-की (single-key) मार्ग बचा हो, तो दो लोगों की साइनर लिस्ट हर लेनदेन पर दो लोगों का नियंत्रण बाध्य नहीं करती।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.19 `inspect-a-public-account-using-a-rea.e2e1a467`
+
+- Risk tier: Signing
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Optional: connect the worksheet to a public record
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: Inspect a public account using a read-only explorer: look for account flags, regular key, signer list and any delegation records supported by that network. Use the linked official definitions to interpret names. Capture public facts only, with their observation time. A missing explorer panel is not proof that an authority route does not exist; use complete ledger data or leave the item unresolved.
+- English: Inspect a public account using a read-only explorer: look for account flags, regular key, signer list and any delegation records supported by that network. Use the linked official definitions to interpret names. Capture public facts only, with their observation time. A missing explorer panel is not proof that an authority route does not exist; use complete ledger data or leave the item unresolved.
+- Current translation: केवल-पढ़ने वाले एक्सप्लोरर से सार्वजनिक खाता जाँचें: खाता फ़्लैग (flags), रेगुलर की (regular key), साइनर लिस्ट (signer list) और उस नेटवर्क द्वारा समर्थित डेलिगेशन (delegation) रिकॉर्ड देखें। नाम समझने के लिए जुड़े आधिकारिक परिभाषाएँ इस्तेमाल करें। केवल सार्वजनिक तथ्य लिखें, उनके अवलोकन समय के साथ। एक्सप्लोरर पैनल का न होना इस बात का प्रमाण नहीं कि अथॉरिटी मार्ग मौजूद नहीं; पूरा लेजर डेटा इस्तेमाल करें या मद को अनसुलझा छोड़ें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.20 `inspect-public-information-without-s.3f3b7211`
+
+- Risk tier: Signing
+- Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
+- Heading on that page: Work through this example
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: Inspect public information without signing. Check the full issuer address and network, why a trust line is needed, the proposed limit and flags, issuer authorization/freeze controls, and reserve implications. A public wallet lookup does not require granting a trust line. A large limit is not a quality signal.
+- English: Inspect public information without signing. Check the full issuer address and network, why a trust line is needed, the proposed limit and flags, issuer authorization/freeze controls, and reserve implications. A public wallet lookup does not require granting a trust line. A large limit is not a quality signal.
+- Current translation: साइनिंग (signing) के बिना सार्वजनिक जानकारी जाँचें। पूरा जारीकर्ता पता और नेटवर्क, ट्रस्ट लाइन (trust line) क्यों चाहिए, प्रस्तावित लिमिट (limit) और फ़्लैग (flags), जारीकर्ता ऑथराइज़ेशन (authorization)/फ़्रीज़ (freeze) नियंत्रण, और रिज़र्व (reserve) प्रभाव देखें। सार्वजनिक वॉलेट खोज के लिए ट्रस्ट लाइन देना ज़रूरी नहीं। बड़ी लिमिट गुणवत्ता का संकेत नहीं है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.21 `inspect-signer-weights-quorum-author.ad6c69bd`
+
+- Risk tier: Signing
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Two signatures still fail
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: Inspect signer weights, quorum, authorized signer identities and the intended account/network. Do not weaken quorum or enable another key as a quick fix.
+- English: Inspect signer weights, quorum, authorized signer identities and the intended account/network. Do not weaken quorum or enable another key as a quick fix.
+- Current translation: साइनर वेट (signer weight), कोरम (quorum), अधिकृत साइनर (signer) पहचान और इच्छित खाता/नेटवर्क जाँचें। त्वरित समाधान के रूप में कोरम कमज़ोर न करें और दूसरी की (key) चालू न करें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.22 `list-the-issuer-operational-accounts.7d59a5dd`
+
+- Risk tier: Signing
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Make an authority map
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: List the issuer, operational accounts, enabled master signing, regular key and signer list. A regular key can authorize most account actions; it is not merely a read-only API credential. Disabling master signing does not prove that all other signing routes are gone.
+- English: List the issuer, operational accounts, enabled master signing, regular key and signer list. A regular key can authorize most account actions; it is not merely a read-only API credential. Disabling master signing does not prove that all other signing routes are gone.
+- Current translation: जारीकर्ता (issuer), परिचालन खाते, चालू मास्टर साइनिंग (master signing), रेगुलर की (regular key) और साइनर लिस्ट (signer list) सूचीबद्ध करें। रेगुलर की (regular key) अधिकांश खाता कार्रवाइयाँ अधिकृत कर सकती है; वह केवल पढ़ने वाला API क्रेडेंशियल नहीं है। मास्टर साइनिंग बंद करना यह साबित नहीं करता कि बाकी साइनिंग (signing) मार्ग चले गए।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.23 `master-key.15d812b8`
+
+- Risk tier: Signing
+- Page: Wallets (/xrpl/wallet-basics.html)
+- Heading on that page: Master Key
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: Master Key
+- English: Master Key
+- Current translation: मास्टर की (master key)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.24 `master-key.68952d53`
+
+- Risk tier: Signing
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Words you will use
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: Master key
+- English: Master key
+- Current translation: मास्टर की (master key)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.25 `meta.safety.description`
+
+- Risk tier: Signing
+- Page: Safety (/xrpl/safety.html)
+- Heading on that page: Safety
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: Issuer verification, phishing defense, signing review, custody risk, and what to do when something goes wrong.
+- English: Issuer verification, phishing defense, signing review, custody risk, and what to do when something goes wrong.
+- Current translation: जारीकर्ता (issuer) सत्यापन, फ़िशिंग रक्षा, साइनिंग (signing) समीक्षा, कस्टडी (custody) जोखिम, और जब कुछ गलत हो तो क्या करें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.26 `multisigning.632671a2`
+
+- Risk tier: Signing
+- Page: Builders hub (/xrpl/builders/)
+- Heading on that page: Multisigning
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: Multisigning
+- English: Multisigning
+- Current translation: मल्टीसाइनिंग (multisigning)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.27 `no-freeze-permanently-gives-up-indiv.bc752856`
+
+- Risk tier: Signing
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Treat irreversible choices as irreversible
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: No Freeze permanently gives up individual and deep-freeze authority and the ability to clear a global freeze; it is not a general promise that no restriction can ever exist. Blackholing aims to remove usable signing authority. Neither label proves fair distribution, liquidity, backing or safe application code. Inspect actual account settings and every signing route rather than relying on a badge.
+- English: No Freeze permanently gives up individual and deep-freeze authority and the ability to clear a global freeze; it is not a general promise that no restriction can ever exist. Blackholing aims to remove usable signing authority. Neither label proves fair distribution, liquidity, backing or safe application code. Inspect actual account settings and every signing route rather than relying on a badge.
+- Current translation: No Freeze व्यक्तिगत और डीप-फ़्रीज़ (deep freeze) अथॉरिटी तथा ग्लोबल फ़्रीज़ (global freeze) हटाने की क्षमता स्थायी रूप से छोड़ देता है; यह सामान्य वादा नहीं कि कोई प्रतिबंध कभी नहीं हो सकता। ब्लैकहोलिंग (blackholing) का लक्ष्य उपयोगी साइनिंग अथॉरिटी (signing authority) हटाना है। कोई भी लेबल निष्पक्ष वितरण, तरलता, वित्तीय आधार (backing) या सुरक्षित ऐप्लिकेशन कोड साबित नहीं करता। बैज पर भरोसा करने के बजाय वास्तविक खाता सेटिंग और हर साइनिंग (signing) मार्ग जाँचें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.28 `official-permission-delegation-guida.680580b1`
+
+- Risk tier: Signing
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Check delegated permissions too
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: Official permission delegation guidance and current warnings
+- English: Official permission delegation guidance and current warnings
+- Current translation: आधिकारिक अनुमति डेलिगेशन (delegation) मार्गदर्शन और वर्तमान चेतावनियाँ
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.29 `on-a-read-only-explorer-select-the-i.cdb893fe`
+
+- Risk tier: Signing
+- Page: NFT basics (/xrpl/builders/nft-basics.html)
+- Heading on that page: Optional: connect the worksheet to a public record
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: On a read-only explorer, select the intended network and search the full NFTokenID. Locate the current owner, issuer, taxon, flags and URI. Decode flags using the linked transaction reference if the explorer does not explain them. Record the observation time and ledger if available. Treat remote metadata links as untrusted content; do not sign a request to reveal a picture.
+- English: On a read-only explorer, select the intended network and search the full NFTokenID. Locate the current owner, issuer, taxon, flags and URI. Decode flags using the linked transaction reference if the explorer does not explain them. Record the observation time and ledger if available. Treat remote metadata links as untrusted content; do not sign a request to reveal a picture.
+- Current translation: केवल-पढ़ने वाले एक्सप्लोरर पर इच्छित नेटवर्क चुनें और पूरा NFTokenID खोजें। वर्तमान मालिक, जारीकर्ता (issuer), टैक्सन (taxon), फ़्लैग (flags) और URI ढूँढें। यदि एक्सप्लोरर फ़्लैग न समझाए तो जुड़े लेनदेन संदर्भ से उन्हें पढ़ें। यदि उपलब्ध हो तो अवलोकन समय और लेजर लिखें। दूर के मेटाडेटा लिंक को अविश्वसनीय सामग्री मानें; चित्र दिखाने के लिए अनुरोध साइन न करें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.30 `quorum.fdaafe2d`
+
+- Risk tier: Signing
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Words you will use
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: Quorum
+- English: Quorum
+- Current translation: कोरम (quorum)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.31 `regular-key.26e205f4`
+
+- Risk tier: Signing
+- Page: Wallets (/xrpl/wallet-basics.html)
+- Heading on that page: Regular Key
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: Regular Key
+- English: Regular Key
+- Current translation: रेगुलर की (regular key)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.32 `regular-key.77459c09`
+
+- Risk tier: Signing
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Words you will use
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: Regular key
+- English: Regular key
+- Current translation: रेगुलर की (regular key)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.33 `regular-keys-and-multisigning.5d237b3f`
+
+- Risk tier: Signing
+- Page: Wallets (/xrpl/wallet-basics.html)
+- Heading on that page: Regular keys and multisigning
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: Regular keys and multisigning
+- English: Regular keys and multisigning
+- Current translation: रेगुलर की (regular key) और मल्टीसाइनिंग (multisigning)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.34 `regular-keys.33fe0531`
+
+- Risk tier: Signing
+- Page: Builders hub (/xrpl/builders/)
+- Heading on that page: Regular Keys
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: Regular Keys
+- English: Regular Keys
+- Current translation: रेगुलर की (regular keys)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.35 `review-regular-key-and-signer-list-s.f0f0de49`
+
+- Risk tier: Signing
+- Page: Safety (/xrpl/safety.html)
+- Heading on that page: Protect signing authority
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: Review regular-key and signer-list settings.
+- English: Review regular-key and signer-list settings.
+- Current translation: रेगुलर-की (regular key) और साइनर-लिस्ट (signer list) सेटिंग की समीक्षा करें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.36 `rotate-regular-keys-or-signer-lists.e8c00579`
+
+- Risk tier: Signing
+- Page: Safety (/xrpl/safety.html)
+- Heading on that page: What to do after compromise
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: Rotate regular keys or signer lists when appropriate.
+- English: Rotate regular keys or signer lists when appropriate.
+- Current translation: उचित होने पर रेगुलर की (regular key) या साइनर लिस्ट (signer list) बदलें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.37 `save-the-authority-map-and-plain-eng.f68c90c5`
+
+- Risk tier: Signing
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: What to keep before moving on
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: Save the authority map and plain-English control disclosure. Have another person explain how the regular key changes the two-of-three example. If they cannot, improve the explanation before proceeding to the signing-flow lesson.
+- English: Save the authority map and plain-English control disclosure. Have another person explain how the regular key changes the two-of-three example. If they cannot, improve the explanation before proceeding to the signing-flow lesson.
+- Current translation: अथॉरिटी का नक्शा और सरल भाषा में नियंत्रणों का खुलासा सहेजें। किसी दूसरे व्यक्ति से समझाने को कहें कि रेगुलर की (regular key) तीन-में-से-दो वाले उदाहरण को कैसे बदलती है। यदि वे न समझा सकें, तो साइनिंग-फ़्लो (signing) पाठ पर जाने से पहले स्पष्टीकरण सुधारें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.38 `separate-freeze-authorization-clawba.254e71c0`
+
+- Risk tier: Signing
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Work through this example
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: Separate freeze, authorization, clawback and signing authority in your disclosure.
+- English: Separate freeze, authorization, clawback and signing authority in your disclosure.
+- Current translation: अपने खुलासे में फ़्रीज़ (freeze), ऑथराइज़ेशन (authorization), क्लॉबैक (clawback) और साइनिंग अथॉरिटी (signing authority) अलग करें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.39 `signer-list.166a4390`
+
+- Risk tier: Signing
+- Page: Wallets (/xrpl/wallet-basics.html)
+- Heading on that page: Signer List
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: Signer List
+- English: Signer List
+- Current translation: साइनर लिस्ट (signer list)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.40 `the-minimum-combined-signer-weight-n.8c1f333f`
+
+- Risk tier: Signing
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Words you will use
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: The minimum combined signer weight needed for a multi-signed transaction.
+- English: The minimum combined signer weight needed for a multi-signed transaction.
+- Current translation: मल्टी-साइन लेनदेन के लिए ज़रूरी न्यूनतम संयुक्त साइनर वेट (signer weight)।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.41 `the-website-says-nobody-can-alter-th.18cab641`
+
+- Risk tier: Signing
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Map who can act for the club
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: The website says nobody can alter the asset because master signing is disabled. Your map shows a regular key. Replace the claim with an accurate statement of the enabled routes and remaining capabilities. You do not have enough evidence to claim nobody knows a key, or to certify the team storage practices.
+- English: The website says nobody can alter the asset because master signing is disabled. Your map shows a regular key. Replace the claim with an accurate statement of the enabled routes and remaining capabilities. You do not have enough evidence to claim nobody knows a key, or to certify the team storage practices.
+- Current translation: वेबसाइट कहती है कि मास्टर साइनिंग (master signing) बंद होने से कोई परिसंपत्ति नहीं बदल सकता। आपका नक्शा रेगुलर की (regular key) दिखाता है। दावे को चालू मार्गों और बची क्षमताओं के सटीक कथन से बदलें। यह दावा करने के लिए पर्याप्त साक्ष्य नहीं कि कोई की (key) नहीं जानता, या टीम की भंडारण प्रथाएँ प्रमाणित करने के लिए।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.42 `this-is-an-inspection-exercise-not-a.3723d0c3`
+
+- Risk tier: Signing
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Work through this example
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: This is an inspection exercise, not a blackholing recipe. Do not disable keys, set irreversible flags or remove signers while following this lesson.
+- English: This is an inspection exercise, not a blackholing recipe. Do not disable keys, set irreversible flags or remove signers while following this lesson.
+- Current translation: यह जाँच अभ्यास है, ब्लैकहोलिंग (blackholing) की विधि नहीं। इस पाठ का पालन करते हुए न तो की (keys) बंद करें, न अपरिवर्तनीय फ़्लैग (flags) सेट करें, न साइनर (signer) हटाएँ।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.43 `two-of-three-signers-exist-alongside.90b1f87d`
+
+- Risk tier: Signing
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Two-of-three signers exist alongside an enabled regular key. Is every action forced through two people?
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: Two-of-three signers exist alongside an enabled regular key. Is every action forced through two people?
+- English: Two-of-three signers exist alongside an enabled regular key. Is every action forced through two people?
+- Current translation: तीन में से दो साइनरों (signer) की आवश्यकता वाली व्यवस्था के साथ एक चालू रेगुलर की (regular key) भी मौजूद है। क्या हर कार्रवाई के लिए दो लोगों की मंज़ूरी अनिवार्य है?
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.44 `use-the-exact-asset-identity-from-le.4fd4d9d1`
+
+- Risk tier: Signing
+- Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
+- Heading on that page: Before you start
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: Use the exact asset identity from lesson 1. A trust line belongs to the classic fungible-token model; this is not an NFT purchase or native XRP setup. No signing is needed for this worksheet.
+- English: Use the exact asset identity from lesson 1. A trust line belongs to the classic fungible-token model; this is not an NFT purchase or native XRP setup. No signing is needed for this worksheet.
+- Current translation: पाठ 1 की सटीक परिसंपत्ति पहचान इस्तेमाल करें। ट्रस्ट लाइन (trust line) क्लासिक फ़ंजिबल (fungible) टोकन मॉडल की है; यह NFT खरीद या मूल XRP सेटअप नहीं है। इस वर्कशीट के लिए साइनिंग (signing) की ज़रूरत नहीं।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.45 `where-the-network-supports-permissio.1ed55fc2`
+
+- Risk tier: Signing
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Check delegated permissions too
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: Where the network supports permission delegation, an account can authorize another account to perform specified actions. A delegate is not the same as a regular key or a signer on the owner account. Include existing delegation records and their exact permissions in a real authority review; a map containing only three key routes may be incomplete. Check current amendment support and the official permission-specific warnings before using this feature. This course does not configure delegation.
+- English: Where the network supports permission delegation, an account can authorize another account to perform specified actions. A delegate is not the same as a regular key or a signer on the owner account. Include existing delegation records and their exact permissions in a real authority review; a map containing only three key routes may be incomplete. Check current amendment support and the official permission-specific warnings before using this feature. This course does not configure delegation.
+- Current translation: जहाँ नेटवर्क अनुमति डेलिगेशन (delegation) का समर्थन करे, एक खाता दूसरे खाते को निर्दिष्ट कार्रवाइयाँ करने के लिए अधिकृत कर सकता है। डेलिगेट (delegate) रेगुलर की (regular key) या मालिक खाते का साइनर (signer) नहीं है। वास्तविक अथॉरिटी समीक्षा में मौजूदा डेलिगेशन रिकॉर्ड और उनकी सटीक अनुमतियाँ शामिल करें; केवल तीन की (key) मार्गों वाला नक्शा अधूरा हो सकता है। इस सुविधा से पहले वर्तमान संशोधन समर्थन और आधिकारिक अनुमति-विशिष्ट चेतावनियाँ जाँचें। यह पाठ्यक्रम डेलिगेशन कॉन्फ़िगर नहीं करता।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.46 `write-a-user-disclosure-with-three-c.e47148cd`
+
+- Risk tier: Signing
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Map who can act for the club
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: Write a user disclosure with three columns: capability, present evidence and operating policy. Example: regular key present / observed account field / club says two staff approve its use. Label the last column as policy, not a protocol guarantee.
+- English: Write a user disclosure with three columns: capability, present evidence and operating policy. Example: regular key present / observed account field / club says two staff approve its use. Label the last column as policy, not a protocol guarantee.
+- Current translation: तीन कॉलम वाला उपयोगकर्ता खुलासा लिखें: क्षमता, मौजूद साक्ष्य और संचालन नीति। उदाहरण: रेगुलर की (regular key) मौजूद / देखा गया खाता फ़ील्ड / क्लब कहता है कि दो कर्मचारी इसके उपयोग को मंज़ूर करते हैं। अंतिम कॉलम को नीति लिखें, प्रोटोकॉल गारंटी नहीं।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.47 `xrpl-lets-accounts-separate-everyday.ce4f8952`
+
+- Risk tier: Signing
+- Page: Wallets (/xrpl/wallet-basics.html)
+- Heading on that page: Regular keys and multisigning
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: XRPL lets accounts separate everyday signing from the master key and require multiple signers.
+- English: XRPL lets accounts separate everyday signing from the master key and require multiple signers.
+- Current translation: XRPL खातों को रोज़ की साइनिंग (signing) को मास्टर की (master key) से अलग करने और कई साइनर (signer) माँगने देता है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 2.48 `yes-the-signer-list-overrides-every.25ea3015`
+
+- Risk tier: Signing
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Two-of-three signers exist alongside an enabled regular key. Is every action forced through two people?
+- Purpose: This sentence is about who is allowed to authorize a transaction.
+- What the reader must understand: A signature authorizes the exact transaction the signer approved. A sign-in is not a payment, and the wrong signer, key, or quorum does not become valid because the interface looked finished. The English wording to preserve is: Yes; the signer list overrides every other key
+- English: Yes; the signer list overrides every other key
+- Current translation: हाँ; साइनर लिस्ट (signer list) हर दूसरी की (key) को ओवरराइड करती है
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+## 3. Destination tags
+
+This sentence is about the extra number some receiving accounts require so a payment is credited to the right person.
+
+What the reader must understand for this whole section: Some destinations require a destination tag. Omitting it, or inventing one, can send the payment to the wrong place. The tag is not a memo and not a seed.
+
+### 3.1 `destination-tag.d07f561a`
+
+- Risk tier: Destination tags
+- Page: Wallets; Usage (/xrpl/wallet-basics.html; /xrpl/usage.html)
+- Heading on that page: Destination Tag; Destination Tag
+- Purpose: This sentence is about the extra number some receiving accounts require so a payment is credited to the right person.
+- What the reader must understand: Some destinations require a destination tag. Omitting it, or inventing one, can send the payment to the wrong place. The tag is not a memo and not a seed. The English wording to preserve is: Destination Tag
+- English: Destination Tag
+- Current translation: डेस्टिनेशन टैग (destination tag)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 3.2 `destination-tags-and-memos.2178c264`
+
+- Risk tier: Destination tags
+- Page: Usage (/xrpl/usage.html)
+- Heading on that page: Destination tags and memos
+- Purpose: This sentence is about the extra number some receiving accounts require so a payment is credited to the right person.
+- What the reader must understand: Some destinations require a destination tag. Omitting it, or inventing one, can send the payment to the wrong place. The tag is not a memo and not a seed. The English wording to preserve is: Destination tags and memos
+- English: Destination tags and memos
+- Current translation: डेस्टिनेशन टैग (destination tag) और मेमो (memo)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 3.3 `for-payments-compare-recipient-asset.6a526a68`
+
+- Risk tier: Destination tags
+- Page: Xaman flows (/xrpl/builders/xaman-flows.html)
+- Heading on that page: Confirm payment facts
+- Purpose: This sentence is about the extra number some receiving accounts require so a payment is credited to the right person.
+- What the reader must understand: Some destinations require a destination tag. Omitting it, or inventing one, can send the payment to the wrong place. The tag is not a memo and not a seed. The English wording to preserve is: For payments, compare recipient, asset identity, delivered amount and any required destination tag/reference with the stored intent. Partial payments make the requested amount unsafe as a receipt: inspect delivered_amount in metadata. Record a transaction once so a repeat callback cannot grant a second entitlement. Unknown or unavailable ledger evidence stays pending.
+- English: For payments, compare recipient, asset identity, delivered amount and any required destination tag/reference with the stored intent. Partial payments make the requested amount unsafe as a receipt: inspect delivered_amount in metadata. Record a transaction once so a repeat callback cannot grant a second entitlement. Unknown or unavailable ledger evidence stays pending.
+- Current translation: भुगतान के लिए प्राप्तकर्ता, परिसंपत्ति पहचान, डिलीवर राशि और कोई ज़रूरी डेस्टिनेशन टैग (destination tag)/संदर्भ संग्रहीत इरादे से तुलना करें। आंशिक भुगतान माँगी गई राशि को रसीद के रूप में असुरक्षित बनाते हैं: मेटाडेटा में delivered_amount देखें। लेनदेन एक बार दर्ज करें ताकि दोहरा कॉलबैक (callback) दूसरी हकदारी न दे। अज्ञात या अनुपलब्ध लेजर साक्ष्य लंबित रहता है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 3.4 `learn-payments-destination-tags-trus.fce7b359`
+
+- Risk tier: Destination tags
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: Keep moving
+- Purpose: This sentence is about the extra number some receiving accounts require so a payment is credited to the right person.
+- What the reader must understand: Some destinations require a destination tag. Omitting it, or inventing one, can send the payment to the wrong place. The tag is not a memo and not a seed. The English wording to preserve is: Learn payments, destination tags, trustlines, token trades, NFTs, offers, and execution.
+- English: Learn payments, destination tags, trustlines, token trades, NFTs, offers, and execution.
+- Current translation: भुगतान, डेस्टिनेशन टैग (destination tag), ट्रस्टलाइन (trustline), टोकन ट्रेड, NFT, ऑफ़र (offer) और निष्पादन सीखें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 3.5 `what-does-a-destination-tag-do.850bd82c`
+
+- Risk tier: Destination tags
+- Page: Usage (/xrpl/usage.html)
+- Heading on that page: What does a destination tag do?
+- Purpose: This sentence is about the extra number some receiving accounts require so a payment is credited to the right person.
+- What the reader must understand: Some destinations require a destination tag. Omitting it, or inventing one, can send the payment to the wrong place. The tag is not a memo and not a seed. The English wording to preserve is: What does a destination tag do?
+- English: What does a destination tag do?
+- Current translation: डेस्टिनेशन टैग (destination tag) क्या करता है?
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+## 4. Trust lines
+
+This sentence is about the opt-in that lets an account hold an issued token.
+
+What the reader must understand for this whole section: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it.
+
+### 4.1 `2-which-asset-doesn-t-need-a-trustli.9a866002`
+
+- Risk tier: Trust lines
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: 2. Which asset doesn’t need a trustline?
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: 2. Which asset doesn’t need a trustline?
+- English: 2. Which asset doesn’t need a trustline?
+- Current translation: 2. किस परिसंपत्ति को ट्रस्टलाइन (trustline) की ज़रूरत नहीं?
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.2 `a-promotional-page-asks-you-to-add-a.9a219adb`
+
+- Risk tier: Trust lines
+- Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
+- Heading on that page: Work through this example
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: A promotional page asks you to add an unlimited trust line to a token with a familiar ticker. You only wanted to inspect the project. What should you do next?
+- English: A promotional page asks you to add an unlimited trust line to a token with a familiar ticker. You only wanted to inspect the project. What should you do next?
+- Current translation: एक प्रचार पृष्ठ आपसे एक परिचित टिकर वाले टोकन पर असीमित ट्रस्ट लाइन (trust line) जोड़ने को कहता है। आप केवल प्रोजेक्ट देखना चाहते थे। आगे क्या करें?
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.3 `a-trust-line-records-a-relationship.41fdf4ce`
+
+- Risk tier: Trust lines
+- Page: Builders hub (/xrpl/builders/)
+- Heading on that page: Disclosure
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: A trust line records a relationship between accounts for one currency. “Trust” here does not mean the issuer has been approved as safe.
+- English: A trust line records a relationship between accounts for one currency. “Trust” here does not mean the issuer has been approved as safe.
+- Current translation: ट्रस्ट लाइन (trust line) एक मुद्रा के लिए खातों के बीच संबंध दर्ज करती है। यहाँ “Trust” का अर्थ यह नहीं कि जारीकर्ता (issuer) को सुरक्षित मानकर मंज़ूरी मिली है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.4 `a-trustline-is-an-on-ledger-relation.5f24b5a6`
+
+- Risk tier: Trust lines
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: What’s a trustline?
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: A trustline is an on-ledger relationship between two accounts for one specific currency code.
+- English: A trustline is an on-ledger relationship between two accounts for one specific currency code.
+- Current translation: ट्रस्टलाइन (trustline) एक विशिष्ट मुद्रा कोड के लिए दो खातों के बीच लेजर पर संबंध है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.5 `a-trustline-proves-a-token-is-safe-i.70f360f9`
+
+- Risk tier: Trust lines
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: What people keep mixing up
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: {s1} A trustline proves a token is safe.{br2}{s3} It only creates the account relationship needed to hold it.
+- English: {s1} A trustline proves a token is safe.{br2}{s3} It only creates the account relationship needed to hold it.
+- Current translation: {s1} ट्रस्टलाइन (trustline) साबित करती है कि टोकन सुरक्षित है।{br2}{s3} यह केवल उसे रखने के लिए ज़रूरी खाता संबंध बनाती है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.6 `a-trustline-tells-xrpl-that-your-acc.0ac7c82b`
+
+- Risk tier: Trust lines
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: What’s a trustline?
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: A trustline tells XRPL that your account is willing to hold an issued asset connected to a specific issuer. It can include a limit and other settings. $XRP doesn’t use trustlines because it’s native to the ledger.
+- English: A trustline tells XRPL that your account is willing to hold an issued asset connected to a specific issuer. It can include a limit and other settings. $XRP doesn’t use trustlines because it’s native to the ledger.
+- Current translation: ट्रस्टलाइन (trustline) XRPL को बताती है कि आपका खाता किसी विशिष्ट जारीकर्ता (issuer) से जुड़ी जारी परिसंपत्ति रखने को तैयार है। इसमें लिमिट (limit) और अन्य सेटिंग हो सकती हैं। $XRP ट्रस्टलाइन का उपयोग नहीं करता क्योंकि वह लेजर का मूल है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.7 `activate-the-trustline-and-watch-the.bfd64ab7`
+
+- Risk tier: Trust lines
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: Trustline visualizer
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: Activate the trustline and watch the relationship form.
+- English: Activate the trustline and watch the relationship form.
+- Current translation: ट्रस्टलाइन (trustline) सक्रिय करें और संबंध बनते देखें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.8 `create-trustline.c92ac803`
+
+- Risk tier: Trust lines
+- Page: Usage (/xrpl/usage.html)
+- Heading on that page: Receiving issued assets
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: Create trustline
+- English: Create trustline
+- Current translation: ट्रस्टलाइन बनाएँ (trustline)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.9 `creating-a-trustline-is-permission-t.6a7a834b`
+
+- Risk tier: Trust lines
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: What a trustline doesn’t mean
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: Creating a trustline is permission to hold an asset. It isn’t an endorsement, investment guarantee, or security review.
+- English: Creating a trustline is permission to hold an asset. It isn’t an endorsement, investment guarantee, or security review.
+- Current translation: ट्रस्टलाइन (trustline) बनाना परिसंपत्ति रखने की अनुमति है। यह समर्थन, निवेश गारंटी या सुरक्षा समीक्षा नहीं है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.10 `currency-code-issuer-supply-trustlin.090f0f84`
+
+- Risk tier: Trust lines
+- Page: Builders hub (/xrpl/builders/)
+- Heading on that page: Issued Assets
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: Currency code, issuer, supply, trustlines, and controls.
+- English: Currency code, issuer, supply, trustlines, and controls.
+- Current translation: मुद्रा कोड, जारीकर्ता (issuer), आपूर्ति, ट्रस्टलाइन (trustline) और नियंत्रण।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.11 `definitions.trust.active`
+
+- Risk tier: Trust lines
+- Page: Shared chrome or meta text
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: Trustline active. This wallet can now hold this issuer’s TOKEN asset, subject to its limit and settings.
+- English: Trustline active. This wallet can now hold this issuer’s TOKEN asset, subject to its limit and settings.
+- Current translation: ट्रस्टलाइन (trustline) सक्रिय। यह वॉलेट अब इस जारीकर्ता (issuer) की TOKEN परिसंपत्ति रख सकता है, उसकी लिमिट (limit) और सेटिंग के अधीन।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.12 `definitions.trust.create`
+
+- Risk tier: Trust lines
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: Trustline visualizer
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: Create Trustline
+- English: Create Trustline
+- Current translation: ट्रस्टलाइन बनाएँ (trustline)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.13 `definitions.trust.inactive`
+
+- Risk tier: Trust lines
+- Page: Shared chrome or meta text
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: No trustline exists. This wallet can’t hold this issuer’s TOKEN asset.
+- English: No trustline exists. This wallet can’t hold this issuer’s TOKEN asset.
+- Current translation: कोई ट्रस्टलाइन (trustline) मौजूद नहीं। यह वॉलेट इस जारीकर्ता (issuer) की TOKEN परिसंपत्ति नहीं रख सकता।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.14 `definitions.trust.remove`
+
+- Risk tier: Trust lines
+- Page: Shared chrome or meta text
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: Remove Trustline
+- English: Remove Trustline
+- Current translation: ट्रस्टलाइन हटाएँ (trustline)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.15 `do-you-need-a-trust-line-to-receive.e5034039`
+
+- Risk tier: Trust lines
+- Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
+- Heading on that page: Do you need a trust line to receive native XRP?
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: Do you need a trust line to receive native XRP?
+- English: Do you need a trust line to receive native XRP?
+- Current translation: मूल XRP पाने के लिए क्या ट्रस्ट लाइन (trust line) चाहिए?
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.16 `does-a-trustline-prove-safety.e60fa2c6`
+
+- Risk tier: Trust lines
+- Page: Usage (/xrpl/usage.html)
+- Heading on that page: Does a trustline prove safety?
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: Does a trustline prove safety?
+- English: Does a trustline prove safety?
+- Current translation: क्या ट्रस्टलाइन (trustline) सुरक्षा साबित करती है?
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.17 `explain-why-xrp-needs-no-trust-line.ce59177b`
+
+- Risk tier: Trust lines
+- Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
+- Heading on that page: Work through this example
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: Explain why XRP needs no trust line and why a ticker alone is insufficient.
+- English: Explain why XRP needs no trust line and why a ticker alone is insufficient.
+- Current translation: समझाएँ कि XRP को ट्रस्ट लाइन (trust line) क्यों नहीं चाहिए और अकेला टिकर क्यों अपर्याप्त है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.18 `first-check-the-network-and-exact-as.aadd4c6c`
+
+- Risk tier: Trust lines
+- Page: Create a token (/xrpl/builders/create-token.html)
+- Heading on that page: The token does not appear in a wallet
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: First check the network and exact asset identity. Display support and ledger existence are different. Do not create repeated trust lines or send money to make a logo appear.
+- English: First check the network and exact asset identity. Display support and ledger existence are different. Do not create repeated trust lines or send money to make a logo appear.
+- Current translation: पहले नेटवर्क और सटीक परिसंपत्ति पहचान जाँचें। प्रदर्शन समर्थन और लेजर पर मौजूदगी अलग बातें हैं। लोगो दिखाने के लिए बार-बार ट्रस्ट लाइन (trust line) न बनाएँ और पैसा न भेजें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.19 `in-this-model-a-holder-establishes-a.1894c32f`
+
+- Risk tier: Trust lines
+- Page: Create a token (/xrpl/builders/create-token.html)
+- Heading on that page: Understand the lifecycle
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: In this model, a holder establishes a trust line and the issuer sends issued currency to that holder. A trust line alone does not distribute tokens. Returning a balance to its issuer reduces the amount outstanding. A trust limit is not a project-wide supply cap, and a supply promise on a website is not ledger enforcement. Explain issuance, redemption and remaining authority before promoting the asset.
+- English: In this model, a holder establishes a trust line and the issuer sends issued currency to that holder. A trust line alone does not distribute tokens. Returning a balance to its issuer reduces the amount outstanding. A trust limit is not a project-wide supply cap, and a supply promise on a website is not ledger enforcement. Explain issuance, redemption and remaining authority before promoting the asset.
+- Current translation: इस मॉडल में धारक ट्रस्ट लाइन (trust line) बनाता है और जारीकर्ता (issuer) उस धारक को जारी मुद्रा भेजता है। अकेली ट्रस्ट लाइन टोकन वितरित नहीं करती। बैलेंस जारीकर्ता को लौटाने से आउटस्टैंडिंग (outstanding) राशि घटती है। ट्रस्ट लिमिट (trust limit) पूरे प्रोजेक्ट की आपूर्ति सीमा नहीं है, और वेबसाइट पर आपूर्ति का वादा लेजर पर लागू होना नहीं है। परिसंपत्ति का प्रचार करने से पहले जारी करना, रिडेम्पशन (redemption) और बची अथॉरिटी समझाएँ।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.20 `issuer-authorization-controls-who-ma.0238879b`
+
+- Risk tier: Trust lines
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Distinguish the controls
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: Issuer authorization controls who may hold a currency when required. Individual freeze restricts spending through a trust line; deep freeze adds receiving restrictions, with issuer-direct exceptions. Global freeze has broader effects. These token controls do not freeze native XRP. Clawback is a separate capability and should be disclosed separately; it is not another name for freeze.
+- English: Issuer authorization controls who may hold a currency when required. Individual freeze restricts spending through a trust line; deep freeze adds receiving restrictions, with issuer-direct exceptions. Global freeze has broader effects. These token controls do not freeze native XRP. Clawback is a separate capability and should be disclosed separately; it is not another name for freeze.
+- Current translation: जहाँ जारीकर्ता ऑथराइज़ेशन (issuer authorization) ज़रूरी हो, वह तय करता है कि मुद्रा कौन रख सकता है। व्यक्तिगत फ़्रीज़ (individual freeze) ट्रस्ट लाइन (trust line) के माध्यम से खर्च करने पर प्रतिबंध लगाता है; डीप फ़्रीज़ (deep freeze) प्राप्त करने पर भी प्रतिबंध जोड़ता है, लेकिन जारीकर्ता के साथ सीधे लेनदेन के लिए अपवाद होते हैं। ग्लोबल फ़्रीज़ (global freeze) के प्रभाव अधिक व्यापक हैं। ये टोकन नियंत्रण मूल XRP को फ़्रीज़ नहीं करते। क्लॉबैक (clawback) अलग क्षमता है और उसका अलग खुलासा होना चाहिए; वह फ़्रीज़ का दूसरा नाम नहीं है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.21 `meta.definitions.description`
+
+- Risk tier: Trust lines
+- Page: Shared chrome or meta text
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: Understand the XRP Ledger, wallets, accounts, issuers, trustlines, reserves, tokens, transactions, the DEX, AMMs, NFTs, and how they all connect.
+- English: Understand the XRP Ledger, wallets, accounts, issuers, trustlines, reserves, tokens, transactions, the DEX, AMMs, NFTs, and how they all connect.
+- Current translation: XRP Ledger, वॉलेट, खाते, जारीकर्ता (issuer), ट्रस्टलाइन (trustline), रिज़र्व (reserve), टोकन, लेनदेन, DEX, AMM, NFT, और ये सब कैसे जुड़ते हैं, समझें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.22 `meta.trust-lines.description`
+
+- Risk tier: Trust lines
+- Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
+- Heading on that page: Set a boundary for an issued asset
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: A trust line records a relationship between accounts for one currency. “Trust” here does not mean the issuer has been approved as safe.
+- English: A trust line records a relationship between accounts for one currency. “Trust” here does not mean the issuer has been approved as safe.
+- Current translation: ट्रस्ट लाइन (trust line) एक मुद्रा के लिए खातों के बीच संबंध दर्ज करती है। यहाँ “Trust” का अर्थ यह नहीं कि जारीकर्ता (issuer) को सुरक्षित मानकर मंज़ूरी मिली है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.23 `meta.trust-lines.title`
+
+- Risk tier: Trust lines
+- Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
+- Heading on that page: Trust lines lesson
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: Trust lines | Builders Hub | XRPL LAYMAN
+- English: Trust lines | Builders Hub | XRPL LAYMAN
+- Current translation: ट्रस्ट लाइनें (trust lines) | बिल्डर्स हब | XRPL LAYMAN
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.24 `meta.usage.description`
+
+- Risk tier: Trust lines
+- Page: Usage (/xrpl/usage.html)
+- Heading on that page: Usage
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: Payments, tags, trustlines, offers, AMMs, NFTs, and how XRPL transactions execute.
+- English: Payments, tags, trustlines, offers, AMMs, NFTs, and how XRPL transactions execute.
+- Current translation: भुगतान, टैग, ट्रस्टलाइन (trustline), ऑफ़र (offer), AMM, NFT, और XRPL लेनदेन कैसे निष्पादित होते हैं।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.25 `no-trustline-exists.e4056ea4`
+
+- Risk tier: Trust lines
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: Trustline visualizer
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: No trustline exists.
+- English: No trustline exists.
+- Current translation: कोई ट्रस्टलाइन (trustline) मौजूद नहीं।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.26 `no-trustline-needed.3867ff13`
+
+- Risk tier: Trust lines
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: $XRP vs issued assets
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: No trustline needed
+- English: No trustline needed
+- Current translation: ट्रस्टलाइन (trustline) की ज़रूरत नहीं
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.27 `owned-trustlines.fa5a4cf5`
+
+- Risk tier: Trust lines
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: Reserve calculator
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: Owned trustlines
+- English: Owned trustlines
+- Current translation: स्वामित्व वाली ट्रस्टलाइन (trustlines)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.28 `payment-trustline-offer-nft-offer-or.5e4d07c6`
+
+- Risk tier: Trust lines
+- Page: Wallets (/xrpl/wallet-basics.html)
+- Heading on that page: Type
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: Payment, trustline, offer, NFT offer, or account setting?
+- English: Payment, trustline, offer, NFT offer, or account setting?
+- Current translation: Payment, ट्रस्टलाइन (trustline), ऑफ़र (offer), NFT ऑफ़र, या खाता सेटिंग?
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.29 `trust-line.ecacf5fe`
+
+- Risk tier: Trust lines
+- Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
+- Heading on that page: Words you will use
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: Trust line
+- English: Trust line
+- Current translation: ट्रस्ट लाइन (trust line)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.30 `trust-lines.145a705b`
+
+- Risk tier: Trust lines
+- Page: Builders hub; NFT basics; Issuer control (/xrpl/builders/; /xrpl/builders/nft-basics.html; /xrpl/builders/issuer-control.html)
+- Heading on that page: Disclosure; Keep building; Keep building
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: Trust lines
+- English: Trust lines
+- Current translation: ट्रस्ट लाइनें (trust lines)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.31 `trust-lines.d4c063e8`
+
+- Risk tier: Trust lines
+- Page: Builders hub (/xrpl/builders/)
+- Heading on that page: Start with a project, finish with evidence
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: Trust lines:
+- English: Trust lines:
+- Current translation: ट्रस्ट लाइनें (trust lines):
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.32 `trust-lines.fdb24683`
+
+- Risk tier: Trust lines
+- Page: Builders hub; Create a token; NFT basics; Trust lines lesson; Issuer control; Xaman flows; Project launch (/xrpl/builders/; /xrpl/builders/create-token.html; /xrpl/builders/nft-basics.html; /xrpl/builders/trust-lines.html; /xrpl/builders/issuer-control.html; /xrpl/builders/xaman-flows.html; /xrpl/builders/project-launch-basics.html)
+- Heading on that page: Builders Hub; Create a token with a clear identity; Read an NFT beyond its picture; Set a boundary for an issued asset; Know who can still change the rules; Follow a signing request to its real result; Launch something people can verify
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: {s1}Trust lines
+- English: {s1}Trust lines
+- Current translation: {s1}ट्रस्ट लाइनें (trust lines)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.33 `trustline-usually-required.cb68ce8d`
+
+- Risk tier: Trust lines
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: $XRP vs issued assets
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: Trustline usually required
+- English: Trustline usually required
+- Current translation: ट्रस्टलाइन (trustline) आमतौर पर ज़रूरी
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.34 `trustline-visualizer.1fb70a8d`
+
+- Risk tier: Trust lines
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: Trustline visualizer
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: Trustline visualizer
+- English: Trustline visualizer
+- Current translation: ट्रस्टलाइन (trustline) विज़ुअलाइज़र
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.35 `trustline.9ba9cbe8`
+
+- Risk tier: Trust lines
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: The issuer is part of the asset
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: Trustline
+- English: Trustline
+- Current translation: ट्रस्टलाइन (trustline)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.36 `trustlines.57b2be31`
+
+- Risk tier: Trust lines
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: Understand the system.
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: Trustlines
+- English: Trustlines
+- Current translation: ट्रस्टलाइनें (trustlines)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.37 `trustset-creates-or-modifies-a-trust.a6fb1a7c`
+
+- Risk tier: Trust lines
+- Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
+- Heading on that page: Understand what changes
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: TrustSet creates or modifies a trust-line relationship. Its LimitAmount identifies the currency, the counterparty issuer and the limit. Native XRP does not use trust lines. This lesson covers trust-line tokens, not MPT authorization.
+- English: TrustSet creates or modifies a trust-line relationship. Its LimitAmount identifies the currency, the counterparty issuer and the limit. Native XRP does not use trust lines. This lesson covers trust-line tokens, not MPT authorization.
+- Current translation: TrustSet ट्रस्ट-लाइन (trust line) संबंध बनाता या बदलता है। उसका LimitAmount मुद्रा, प्रतिपक्ष जारीकर्ता (issuer) और लिमिट (limit) पहचानता है। मूल XRP ट्रस्ट लाइन का उपयोग नहीं करता। यह पाठ ट्रस्ट-लाइन टोकन कवर करता है, MPT ऑथराइज़ेशन (authorization) नहीं।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.38 `what-a-trustline-doesn-t-mean.c56a66d8`
+
+- Risk tier: Trust lines
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: What a trustline doesn’t mean
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: What a trustline doesn’t mean
+- English: What a trustline doesn’t mean
+- Current translation: ट्रस्टलाइन (trustline) का अर्थ क्या नहीं है
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.39 `what-s-a-trustline.b2cf3ed9`
+
+- Risk tier: Trust lines
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: What’s a trustline?
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: What’s a trustline?
+- English: What’s a trustline?
+- Current translation: ट्रस्टलाइन (trustline) क्या है?
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.40 `xrp-is-native-trust-lines-describe-i.d8c8105e`
+
+- Risk tier: Trust lines
+- Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
+- Heading on that page: Check your understanding
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: XRP is native; trust lines describe issued currencies.
+- English: XRP is native; trust lines describe issued currencies.
+- Current translation: XRP मूल है; ट्रस्ट लाइनें (trust lines) जारी मुद्राओं का वर्णन करती हैं।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.41 `your-account-usually-needs-a-trustli.bee0965e`
+
+- Risk tier: Trust lines
+- Page: Usage (/xrpl/usage.html)
+- Heading on that page: Receiving issued assets
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: Your account usually needs a trustline to the exact issuer and currency.
+- English: Your account usually needs a trustline to the exact issuer and currency.
+- Current translation: आपके खाते को आमतौर पर सटीक जारीकर्ता (issuer) और मुद्रा की ट्रस्टलाइन (trustline) चाहिए।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+## 5. Reserves and fees
+
+This sentence is about XRP an account must keep, or about a fee.
+
+What the reader must understand for this whole section: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network.
+
+### 5.1 `1-xrp-base-reserve.824f6b20`
+
+- Risk tier: Reserves and fees
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: Why some $XRP stays reserved
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: 1 $XRP base reserve
+- English: 1 $XRP base reserve
+- Current translation: 1 $XRP आधार रिज़र्व (base reserve)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.2 `a-sale-normally-uses-an-nft-offer-an.ae15a8df`
+
+- Risk tier: Reserves and fees
+- Page: NFT basics (/xrpl/builders/nft-basics.html)
+- Heading on that page: Follow the offer lifecycle
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: A sale normally uses an NFT offer and its acceptance. Creating an offer is not completed payment or delivery. Before acceptance, review the exact NFT, payment asset, amount, destination restriction, expiration and issuer transfer fee. NFT transfer fees use units of 0.001%; for example 1,000 represents 1%, not 1,000 XRP. Applicability depends on the transfer. Confirm the validated outcome and ownership afterward.
+- English: A sale normally uses an NFT offer and its acceptance. Creating an offer is not completed payment or delivery. Before acceptance, review the exact NFT, payment asset, amount, destination restriction, expiration and issuer transfer fee. NFT transfer fees use units of 0.001%; for example 1,000 represents 1%, not 1,000 XRP. Applicability depends on the transfer. Confirm the validated outcome and ownership afterward.
+- Current translation: बिक्री आमतौर पर NFT ऑफ़र (offer) और उसकी स्वीकृति का उपयोग करती है। ऑफ़र बनाना पूरा भुगतान या डिलीवरी नहीं है। स्वीकृति से पहले सटीक NFT, भुगतान परिसंपत्ति, राशि, गंतव्य प्रतिबंध, समाप्ति और जारीकर्ता ट्रांसफ़र फ़ीस देखें। NFT ट्रांसफ़र फ़ीस 0.001% की इकाइयों में होती है; उदाहरण के लिए 1,000 का अर्थ 1% है, 1,000 XRP नहीं। लागू होना ट्रांसफ़र पर निर्भर करता है। बाद में वैलिडेटेड (validated) परिणाम और स्वामित्व की पुष्टि करें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.3 `amm-fee.8a9bd5c7`
+
+- Risk tier: Reserves and fees
+- Page: Usage (/xrpl/usage.html)
+- Heading on that page: Simple slippage visual
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: AMM fee %
+- English: AMM fee %
+- Current translation: AMM फ़ीस %
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.4 `an-account-becomes-active-on-ledger.93d4ca9b`
+
+- Risk tier: Reserves and fees
+- Page: Wallets (/xrpl/wallet-basics.html)
+- Heading on that page: Funding an XRPL account
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: An account becomes active on-ledger when it receives enough $XRP to meet the current reserve.
+- English: An account becomes active on-ledger when it receives enough $XRP to meet the current reserve.
+- Current translation: खाता लेजर पर तब सक्रिय होता है जब उसे वर्तमान रिज़र्व (reserve) पूरा करने जितना $XRP मिलता है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.5 `an-nft-doesn-t-always-equal-one-owne.12e690f6`
+
+- Risk tier: Reserves and fees
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: Reserve calculator
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: An NFT doesn’t always equal one owner-reserve item. XRPL stores NFTs in NFTokenPage objects, and each page can hold multiple NFTs. Don’t count individual NFTs as individual reserve objects.
+- English: An NFT doesn’t always equal one owner-reserve item. XRPL stores NFTs in NFTokenPage objects, and each page can hold multiple NFTs. Don’t count individual NFTs as individual reserve objects.
+- Current translation: NFT हमेशा एक मालिक-रिज़र्व (owner reserve) वस्तु के बराबर नहीं होता। XRPL NFT को NFTokenPage वस्तुओं में रखता है, और हर पेज कई NFT रख सकता है। अलग-अलग NFT को अलग रिज़र्व वस्तुएँ न गिनें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.6 `an-xrpl-nft-is-a-unique-on-ledger-to.e0bd5a2f`
+
+- Risk tier: Reserves and fees
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: NFTs and ledger ownership
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: An XRPL NFT is a unique on-ledger token with its own identifier, flags, issuer, taxon, sequence, and optional transfer fee.
+- English: An XRPL NFT is a unique on-ledger token with its own identifier, flags, issuer, taxon, sequence, and optional transfer fee.
+- Current translation: XRPL NFT एक अनोखा लेजर-पर टोकन है, जिसकी अपनी पहचान, फ़्लैग (flags), जारीकर्ता (issuer), टैक्सन (taxon), सीक्वेंस (sequence) और वैकल्पिक ट्रांसफ़र फ़ीस होती है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.7 `current-reserve-rules.57f361c2`
+
+- Risk tier: Reserves and fees
+- Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
+- Heading on that page: Go deeper with official sources
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: Current reserve rules
+- English: Current reserve rules
+- Current translation: वर्तमान रिज़र्व (reserve) नियम
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.8 `definitions.reserve.many`
+
+- Risk tier: Reserves and fees
+- Page: Shared chrome or meta text
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: 1 $XRP base reserve + {objects} owned objects × 0.2 $XRP.
+- English: 1 $XRP base reserve + {objects} owned objects × 0.2 $XRP.
+- Current translation: 1 $XRP आधार रिज़र्व (base reserve) + {objects} स्वामित्व वाली वस्तुएँ × 0.2 $XRP.
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.9 `definitions.reserve.one`
+
+- Risk tier: Reserves and fees
+- Page: Shared chrome or meta text
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: 1 $XRP base reserve + {objects} owned object × 0.2 $XRP.
+- English: 1 $XRP base reserve + {objects} owned object × 0.2 $XRP.
+- Current translation: 1 $XRP आधार रिज़र्व (base reserve) + {objects} स्वामित्व वाली वस्तु × 0.2 $XRP.
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.10 `distinguish-balance-limit-controls-a.e936c1d1`
+
+- Risk tier: Reserves and fees
+- Page: Builders hub (/xrpl/builders/)
+- Heading on that page: Start with a project, finish with evidence
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: {s1} distinguish balance, limit, controls and reserves.
+- English: {s1} distinguish balance, limit, controls and reserves.
+- Current translation: {s1} बैलेंस, लिमिट (limit), नियंत्रण और रिज़र्व (reserve) अलग पहचानें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.11 `estimate-the-reserve-for-a-simple-ac.4984109c`
+
+- Risk tier: Reserves and fees
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: Reserve calculator
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: Estimate the reserve for a simple account. Actual ownership and reserve behavior can vary by object type.
+- English: Estimate the reserve for a simple account. Actual ownership and reserve behavior can vary by object type.
+- Current translation: एक साधारण खाते का रिज़र्व (reserve) अनुमान लगाएँ। वास्तविक स्वामित्व और रिज़र्व व्यवहार वस्तु के प्रकार के अनुसार बदल सकता है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.12 `every-displayed-xrp-is-spendable-som.2dedfbaa`
+
+- Risk tier: Reserves and fees
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: What people keep mixing up
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: {s1} Every displayed $XRP is spendable.{br2}{s3} Some may be required for account and owner reserves.
+- English: {s1} Every displayed $XRP is spendable.{br2}{s3} Some may be required for account and owner reserves.
+- Current translation: {s1} दिखाया गया हर $XRP खर्च किया जा सकता है।{br2}{s3} कुछ खाता और ओनर रिज़र्व (owner reserve) के लिए ज़रूरी हो सकता है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.13 `fee.c6e89c9c`
+
+- Risk tier: Reserves and fees
+- Page: Definitions; Wallets; Safety (/xrpl/definitions.html; /xrpl/wallet-basics.html; /xrpl/safety.html)
+- Heading on that page: Fee; Fee; Fee
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: Fee
+- English: Fee
+- Current translation: फ़ीस (fee)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.14 `flags-uri-taxon-offers-transfer-fees.f3d2bfe9`
+
+- Risk tier: Reserves and fees
+- Page: Builders hub (/xrpl/builders/)
+- Heading on that page: NFTs
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: Flags, URI, taxon, offers, transfer fees, and lifecycle.
+- English: Flags, URI, taxon, offers, transfer fees, and lifecycle.
+- Current translation: फ़्लैग (flags), URI, टैक्सन (taxon), ऑफ़र (offer), ट्रांसफ़र फ़ीस और जीवनचक्र।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.15 `footer.rights`
+
+- Risk tier: Reserves and fees
+- Page: Dashboard; Definitions; Wallets; Usage; Safety; Investing reality; Builders hub; Create a token; NFT basics; Trust lines lesson; Issuer control; Xaman flows; Project launch (/xrpl/; /xrpl/definitions.html; /xrpl/wallet-basics.html; /xrpl/usage.html; /xrpl/safety.html; /xrpl/investing-reality.html; /xrpl/builders/; /xrpl/builders/create-token.html; /xrpl/builders/nft-basics.html; /xrpl/builders/trust-lines.html; /xrpl/builders/issuer-control.html; /xrpl/builders/xaman-flows.html; /xrpl/builders/project-launch-basics.html)
+- Heading on that page: BUILDERS HUB; Keep moving; Keep moving; Keep moving; Keep moving; Keep moving; Keep moving; Keep building; Keep building; Keep building; Keep building; Keep building; Keep building
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: © 2026 House of Cauliman. All rights reserved.
+- English: © 2026 House of Cauliman. All rights reserved.
+- Current translation: © 2026 House of Cauliman. सर्वाधिकार सुरक्षित।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.16 `inspect-a-fictional-proposed-sale-nf.f3daf39c`
+
+- Risk tier: Reserves and fees
+- Page: NFT basics (/xrpl/builders/nft-basics.html)
+- Heading on that page: Inspect the club membership collectible
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: Inspect a fictional proposed sale: NFT Record N, price 20 XRP, restricted recipient Member C, and a stated expiry. The NFT transfer-fee field 1,000 represents 1%. On an applicable 20 XRP sale that is 0.2 XRP; check the actual sale mode and settlement accounting rather than assuming every displayed price is the seller net.
+- English: Inspect a fictional proposed sale: NFT Record N, price 20 XRP, restricted recipient Member C, and a stated expiry. The NFT transfer-fee field 1,000 represents 1%. On an applicable 20 XRP sale that is 0.2 XRP; check the actual sale mode and settlement accounting rather than assuming every displayed price is the seller net.
+- Current translation: एक काल्पनिक प्रस्तावित बिक्री जाँचें: NFT Record N, कीमत 20 XRP, सीमित प्राप्तकर्ता Member C, और बताई गई समाप्ति। NFT ट्रांसफ़र-फ़ीस फ़ील्ड 1,000 का अर्थ 1% है। लागू होने वाली 20 XRP बिक्री पर यह 0.2 XRP है; हर दिखाई गई कीमत को विक्रेता की शुद्ध राशि न मानें, वास्तविक बिक्री मोड और निपटान लेखांकन जाँचें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.17 `is-the-fee-abnormal.20139bf0`
+
+- Risk tier: Reserves and fees
+- Page: Safety (/xrpl/safety.html)
+- Heading on that page: Fee
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: Is the fee abnormal?
+- English: Is the fee abnormal?
+- Current translation: क्या फ़ीस (fee) असामान्य है?
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.18 `ledger-objects-can-affect-the-xrp-re.e36fd0f5`
+
+- Risk tier: Reserves and fees
+- Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
+- Heading on that page: Plan for reserves and removal
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: Ledger objects can affect the XRP reserve needed by an account. Reserve rules and amounts can change, and trust-line exceptions exist: check the current network rules rather than assuming every line costs the same. Setting a limit to zero does not erase a nonzero balance or guarantee immediate removal. A removable line must meet the ledger’s default-state conditions.
+- English: Ledger objects can affect the XRP reserve needed by an account. Reserve rules and amounts can change, and trust-line exceptions exist: check the current network rules rather than assuming every line costs the same. Setting a limit to zero does not erase a nonzero balance or guarantee immediate removal. A removable line must meet the ledger’s default-state conditions.
+- Current translation: लेजर वस्तुएँ खाते के लिए ज़रूरी XRP रिज़र्व (reserve) को प्रभावित कर सकती हैं। रिज़र्व नियम और राशियाँ बदल सकती हैं, और ट्रस्ट-लाइन (trust line) अपवाद हैं: यह न मानें कि हर लाइन की लागत समान है, वर्तमान नेटवर्क नियम जाँचें। लिमिट (limit) शून्य करने से गैर-शून्य बैलेंस नहीं मिटता और तुरंत हटने की गारंटी नहीं। हटने योग्य लाइन को लेजर की डिफ़ॉल्ट-अवस्था शर्तें पूरी करनी होती हैं।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.19 `mainnet-currently-uses-a-plus-these.85124d92`
+
+- Risk tier: Reserves and fees
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: Why some $XRP stays reserved
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: Mainnet currently uses a {s1} plus {s2}. These values can change through validator fee voting, so software should query the network instead of hard-coding them forever.
+- English: Mainnet currently uses a {s1} plus {s2}. These values can change through validator fee voting, so software should query the network instead of hard-coding them forever.
+- Current translation: Mainnet अभी {s1} प्लस {s2} का उपयोग करता है। ये मान वैलिडेटर फ़ीस वोटिंग से बदल सकते हैं, इसलिए सॉफ़्टवेयर इन्हें हमेशा के लिए हार्ड-कोड करने के बजाय नेटवर्क से पूछे।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.20 `our-fictional-neighborhood-club-want.30fb4b14`
+
+- Risk tier: Reserves and fees
+- Page: Create a token (/xrpl/builders/create-token.html)
+- Heading on that page: Build the club-credit specification
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: Our fictional neighborhood club wants members to reserve workshop seats with credits. Carry this same project through the course. Labels such as Issuer A are paper labels, not usable addresses. The point is to find missing decisions before anyone creates an asset.
+- English: Our fictional neighborhood club wants members to reserve workshop seats with credits. Carry this same project through the course. Labels such as Issuer A are paper labels, not usable addresses. The point is to find missing decisions before anyone creates an asset.
+- Current translation: हमारा काल्पनिक मोहल्ला क्लब चाहता है कि सदस्य क्रेडिट से वर्कशॉप सीटें आरक्षित करें। इसी प्रोजेक्ट को पूरे पाठ्यक्रम में ले चलें। Issuer A जैसे लेबल कागज़ी लेबल हैं, उपयोग योग्य पते नहीं। उद्देश्य यह है कि कोई परिसंपत्ति बनाए उससे पहले छूटे निर्णय मिलें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.21 `plan-for-reserves-and-removal.05cef868`
+
+- Risk tier: Reserves and fees
+- Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
+- Heading on that page: Plan for reserves and removal
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: Plan for reserves and removal
+- English: Plan for reserves and removal
+- Current translation: रिज़र्व (reserve) और हटाने की योजना बनाएँ
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.22 `plan-reserve-inspection-separately-f.62e08c92`
+
+- Risk tier: Reserves and fees
+- Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
+- Heading on that page: Read a member account before changing anything
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: Plan reserve inspection separately from the token quantity. Obtain the network current base/incremental reserves and the account relevant owner objects when implementing a real tool. Do not multiply every visible token balance by one fixed XRP charge: trust-line and other object rules have exceptions.
+- English: Plan reserve inspection separately from the token quantity. Obtain the network current base/incremental reserves and the account relevant owner objects when implementing a real tool. Do not multiply every visible token balance by one fixed XRP charge: trust-line and other object rules have exceptions.
+- Current translation: टोकन मात्रा से अलग रिज़र्व (reserve) जाँच की योजना बनाएँ। वास्तविक उपकरण लागू करते समय नेटवर्क के वर्तमान आधार/वृद्धिशील रिज़र्व और खाते की संबंधित ओनर वस्तुएँ प्राप्त करें। हर दिखते टोकन बैलेंस को एक स्थिर XRP शुल्क से गुणा न करें: ट्रस्ट-लाइन (trust line) और अन्य वस्तु नियमों में अपवाद हैं।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.23 `read-balance-limit-issuer-controls-a.88aa5ddc`
+
+- Risk tier: Reserves and fees
+- Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
+- Heading on that page: Before you start
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: {s1} Read balance, limit, issuer controls and reserve implications without confusing a settings change with receiving money.
+- English: {s1} Read balance, limit, issuer controls and reserve implications without confusing a settings change with receiving money.
+- Current translation: {s1} बैलेंस, लिमिट (limit), जारीकर्ता (issuer) नियंत्रण और रिज़र्व (reserve) प्रभाव पढ़ें, सेटिंग बदलाव को पैसा पाने से न मिलाएँ।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.24 `reserve-calculator.67176307`
+
+- Risk tier: Reserves and fees
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: Reserve calculator
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: Reserve calculator
+- English: Reserve calculator
+- Current translation: रिज़र्व (reserve) कैलकुलेटर
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.25 `reserve.187579e3`
+
+- Risk tier: Reserves and fees
+- Page: Wallets; Trust lines lesson (/xrpl/wallet-basics.html; /xrpl/builders/trust-lines.html)
+- Heading on that page: Reserve; Words you will use
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: Reserve
+- English: Reserve
+- Current translation: रिज़र्व (reserve)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.26 `reserves.5ac63fc4`
+
+- Risk tier: Reserves and fees
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: Understand the system.
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: Reserves
+- English: Reserves
+- Current translation: रिज़र्व (reserves)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.27 `separate-product-revenue-from-xrpl-n.48a70ebe`
+
+- Risk tier: Reserves and fees
+- Page: Builders hub (/xrpl/builders/)
+- Heading on that page: Builder standard
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: Separate product revenue from XRPL network fees.
+- English: Separate product revenue from XRPL network fees.
+- Current translation: उत्पाद राजस्व को XRPL नेटवर्क फ़ीस से अलग करें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.28 `technical-references-checked-3-octob.9bab9f8c`
+
+- Risk tier: Reserves and fees
+- Page: Create a token; NFT basics; Trust lines lesson; Issuer control; Xaman flows; Project launch (/xrpl/builders/create-token.html; /xrpl/builders/nft-basics.html; /xrpl/builders/trust-lines.html; /xrpl/builders/issuer-control.html; /xrpl/builders/xaman-flows.html; /xrpl/builders/project-launch-basics.html)
+- Heading on that page: Go deeper with official sources; Go deeper with official sources; Go deeper with official sources; Go deeper with official sources; Go deeper with official sources; Go deeper with official sources
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: Technical references checked 3 October 2026. Network amendments, wallet support and reserve rules can change. Check current documentation before implementing real transactions.
+- English: Technical references checked 3 October 2026. Network amendments, wallet support and reserve rules can change. Check current documentation before implementing real transactions.
+- Current translation: तकनीकी संदर्भ 3 अक्टूबर 2026 को जाँचे गए। नेटवर्क संशोधन, वॉलेट समर्थन और रिज़र्व (reserve) नियम बदल सकते हैं। वास्तविक लेनदेन लागू करने से पहले वर्तमान दस्तावेज़ जाँचें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.29 `the-club-now-proposes-an-optional-co.3e0bfebc`
+
+- Risk tier: Reserves and fees
+- Page: NFT basics (/xrpl/builders/nft-basics.html)
+- Heading on that page: Inspect the club membership collectible
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: The club now proposes an optional commemorative NFT. It is separate from the credits. Use this fictional record: network Testnet; NFT identity Record N; issuer Issuer A; owner Member B; transferable yes; burnable yes; mutable yes; transfer-fee field 1,000; URI an HTTPS metadata page. These are descriptive fields, not transaction JSON.
+- English: The club now proposes an optional commemorative NFT. It is separate from the credits. Use this fictional record: network Testnet; NFT identity Record N; issuer Issuer A; owner Member B; transferable yes; burnable yes; mutable yes; transfer-fee field 1,000; URI an HTTPS metadata page. These are descriptive fields, not transaction JSON.
+- Current translation: क्लब अब एक वैकल्पिक स्मारक NFT प्रस्तावित करता है। वह क्रेडिट से अलग है। यह काल्पनिक रिकॉर्ड इस्तेमाल करें: नेटवर्क Testnet; NFT पहचान Record N; जारीकर्ता Issuer A; मालिक Member B; ट्रांसफ़रेबल हाँ; बर्न करने योग्य (burnable) हाँ; म्यूटेबल (mutable) हाँ; ट्रांसफ़र-फ़ीस फ़ील्ड 1,000; URI एक HTTPS मेटाडेटा पृष्ठ। ये वर्णनात्मक फ़ील्ड हैं, लेनदेन JSON नहीं।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.30 `the-network-fee-goes-to-validators-x.e7651eb0`
+
+- Risk tier: Reserves and fees
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: What people keep mixing up
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: {s1} The network fee goes to validators.{br2}{s3} XRPL transaction costs are destroyed.
+- English: {s1} The network fee goes to validators.{br2}{s3} XRPL transaction costs are destroyed.
+- Current translation: {s1} नेटवर्क फ़ीस वैलिडेटरों को जाती है।{br2}{s3} XRPL लेनदेन लागत नष्ट होती है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.31 `total-balance-is-not-the-same-as-xrp.cd4ebe84`
+
+- Risk tier: Reserves and fees
+- Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
+- Heading on that page: There is XRP but a new object cannot be created
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: Total balance is not the same as XRP available above reserve and fee needs. Check the exact result and current reserve rules before changing unrelated settings.
+- English: Total balance is not the same as XRP available above reserve and fee needs. Check the exact result and current reserve rules before changing unrelated settings.
+- Current translation: कुल बैलेंस उस XRP के समान नहीं जो रिज़र्व (reserve) और फ़ीस ज़रूरतों के ऊपर उपलब्ध है। असंबंधित सेटिंग बदलने से पहले सटीक परिणाम और वर्तमान रिज़र्व नियम जाँचें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.32 `transfer-fee.3a7f5395`
+
+- Risk tier: Reserves and fees
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: Transfer Fee
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: Transfer Fee
+- English: Transfer Fee
+- Current translation: ट्रांसफ़र फ़ीस (transfer fee)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.33 `usage.slippage.copy`
+
+- Risk tier: Reserves and fees
+- Page: Shared chrome or meta text
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: Trade size is {pct}% of the selected pool side before a {fee}% fee.
+- English: Trade size is {pct}% of the selected pool side before a {fee}% fee.
+- Current translation: ट्रेड का आकार चुने गए पूल पक्ष का {pct}% है, {fee}% फ़ीस से पहले।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.34 `used-for-reserves-and-transaction-co.64cd2832`
+
+- Risk tier: Reserves and fees
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: $XRP vs issued assets
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: Used for reserves and transaction costs
+- English: Used for reserves and transaction costs
+- Current translation: रिज़र्व (reserve) और लेनदेन लागत के लिए इस्तेमाल
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.35 `why-some-xrp-stays-reserved.bb60d0fd`
+
+- Risk tier: Reserves and fees
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: Why some $XRP stays reserved
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: Why some $XRP stays reserved
+- English: Why some $XRP stays reserved
+- Current translation: कुछ $XRP रिज़र्व (reserve) क्यों रहता है
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.36 `write-a-one-page-release-contract-us.4be7eeff`
+
+- Risk tier: Reserves and fees
+- Page: Project launch (/xrpl/builders/project-launch-basics.html)
+- Heading on that page: Work through this example
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: Write a one-page release contract: user outcome, scope, identities, controls, fees and limitations.
+- English: Write a one-page release contract: user outcome, scope, identities, controls, fees and limitations.
+- Current translation: एक-पृष्ठ रिलीज़ अनुबंध लिखें: उपयोगकर्ता परिणाम, दायरा, पहचान, नियंत्रण, फ़ीस और सीमाएँ।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.37 `write-a-redemption-promise-one-credi.303df116`
+
+- Risk tier: Reserves and fees
+- Page: Create a token (/xrpl/builders/create-token.html)
+- Heading on that page: Build the club-credit specification
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: Write a redemption promise: one credit reserves one eligible seat, subject to the written booking terms. Decide cancellations, expiry, refunds, support and what happens if the club closes. The token protocol does not write or enforce those business terms for you.
+- English: Write a redemption promise: one credit reserves one eligible seat, subject to the written booking terms. Decide cancellations, expiry, refunds, support and what happens if the club closes. The token protocol does not write or enforce those business terms for you.
+- Current translation: रिडेम्पशन (redemption) वादा लिखें: एक क्रेडिट एक योग्य सीट आरक्षित करता है, लिखित बुकिंग शर्तों के अधीन। रद्दीकरण, समाप्ति, रिफ़ंड, सहायता और यह तय करें कि क्लब बंद हो तो क्या होगा। टोकन प्रोटोकॉल वे व्यावसायिक शर्तें आपके लिए नहीं लिखता या लागू नहीं करता।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.38 `write-down-the-problem-intended-user.45e28e9c`
+
+- Risk tier: Reserves and fees
+- Page: Project launch (/xrpl/builders/project-launch-basics.html)
+- Heading on that page: Publish a project contract
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: Write down the problem, intended user and smallest useful outcome. Publish exact asset identities, account roles, remaining issuer authority, product fees and network costs. Distinguish a prototype, a test-network rehearsal and a working Mainnet feature. Avoid promising profit, permanent availability or a security guarantee you cannot establish.
+- English: Write down the problem, intended user and smallest useful outcome. Publish exact asset identities, account roles, remaining issuer authority, product fees and network costs. Distinguish a prototype, a test-network rehearsal and a working Mainnet feature. Avoid promising profit, permanent availability or a security guarantee you cannot establish.
+- Current translation: समस्या, इच्छित उपयोगकर्ता और सबसे छोटा उपयोगी परिणाम लिखें। सटीक परिसंपत्ति पहचान, खाता भूमिकाएँ, बची जारीकर्ता (issuer) अथॉरिटी, उत्पाद फ़ीस और नेटवर्क लागत प्रकाशित करें। प्रोटोटाइप, परीक्षण-नेटवर्क अभ्यास और काम करती Mainnet सुविधा अलग पहचानें। लाभ, स्थायी उपलब्धता या ऐसी सुरक्षा गारंटी का वादा न करें जिसे आप स्थापित नहीं कर सकते।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.39 `xrp-that-must-remain-available-to-su.dfbf0556`
+
+- Risk tier: Reserves and fees
+- Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
+- Heading on that page: Words you will use
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: XRP that must remain available to support an account and relevant ledger objects; it is different from a transaction fee.
+- English: XRP that must remain available to support an account and relevant ledger objects; it is different from a transaction fee.
+- Current translation: खाते और संबंधित लेजर वस्तुओं की आवश्यक रिज़र्व शर्तें पूरी करने के लिए उपलब्ध रखा जाने वाला XRP; यह लेनदेन फ़ीस से अलग है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+## 6. DEX and AMM
+
+This sentence is about exchanging tokens, including slippage and the offer fields.
+
+What the reader must understand for this whole section: A trade can move the price. Slippage is that movement. TakerGets and TakerPays name the two sides of an offer. Neither field is a guarantee of a future price.
+
+### 6.1 `amms-and-slippage.da4418e3`
+
+- Risk tier: DEX and AMM
+- Page: Usage (/xrpl/usage.html)
+- Heading on that page: AMMs and slippage
+- Purpose: This sentence is about exchanging tokens, including slippage and the offer fields.
+- What the reader must understand: A trade can move the price. Slippage is that movement. TakerGets and TakerPays name the two sides of an offer. Neither field is a guarantee of a future price. The English wording to preserve is: AMMs and slippage
+- English: AMMs and slippage
+- Current translation: AMM और स्लिपेज (slippage)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 6.2 `an-amm-holds-two-assets-in-a-pool-an.45dadf03`
+
+- Risk tier: DEX and AMM
+- Page: Usage (/xrpl/usage.html)
+- Heading on that page: AMMs and slippage
+- Purpose: This sentence is about exchanging tokens, including slippage and the offer fields.
+- What the reader must understand: A trade can move the price. Slippage is that movement. TakerGets and TakerPays name the two sides of an offer. Neither field is a guarantee of a future price. The English wording to preserve is: An AMM holds two assets in a pool and prices swaps from pool balances.
+- English: An AMM holds two assets in a pool and prices swaps from pool balances.
+- Current translation: AMM पूल में दो परिसंपत्तियाँ रखता है और स्वैप की कीमत पूल बैलेंस से लगाता है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 6.3 `dex-amm.22b33553`
+
+- Risk tier: DEX and AMM
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: Understand the system.
+- Purpose: This sentence is about exchanging tokens, including slippage and the offer fields.
+- What the reader must understand: A trade can move the price. Slippage is that movement. TakerGets and TakerPays name the two sides of an offer. Neither field is a guarantee of a future price. The English wording to preserve is: DEX + AMM
+- English: DEX + AMM
+- Current translation: (same as the English) DEX + AMM
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 6.4 `dex-offers-and-amms.93651ac8`
+
+- Risk tier: DEX and AMM
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: DEX, offers, and AMMs
+- Purpose: This sentence is about exchanging tokens, including slippage and the offer fields.
+- What the reader must understand: A trade can move the price. Slippage is that movement. TakerGets and TakerPays name the two sides of an offer. Neither field is a guarantee of a future price. The English wording to preserve is: DEX, offers, and AMMs
+- English: DEX, offers, and AMMs
+- Current translation: DEX, ऑफ़र (offer) और AMM
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 6.5 `meta.reality.description`
+
+- Risk tier: DEX and AMM
+- Page: Investing reality (/xrpl/investing-reality.html)
+- Heading on that page: Investing Reality
+- Purpose: This sentence is about exchanging tokens, including slippage and the offer fields.
+- What the reader must understand: A trade can move the price. Slippage is that movement. TakerGets and TakerPays name the two sides of an offer. Neither field is a guarantee of a future price. The English wording to preserve is: Price, liquidity, slippage, issuer controls, concentration, cycles, and the risk people ignore until it hurts.
+- English: Price, liquidity, slippage, issuer controls, concentration, cycles, and the risk people ignore until it hurts.
+- Current translation: कीमत, तरलता, स्लिपेज (slippage), जारीकर्ता (issuer) नियंत्रण, संकेंद्रण, चक्र, और वह जोखिम जिसे लोग तब तक अनदेखा करते हैं जब तक चोट न लगे।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 6.6 `simple-slippage-visual.076d9ff0`
+
+- Risk tier: DEX and AMM
+- Page: Usage (/xrpl/usage.html)
+- Heading on that page: Simple slippage visual
+- Purpose: This sentence is about exchanging tokens, including slippage and the offer fields.
+- What the reader must understand: A trade can move the price. Slippage is that movement. TakerGets and TakerPays name the two sides of an offer. Neither field is a guarantee of a future price. The English wording to preserve is: Simple slippage visual
+- English: Simple slippage visual
+- Current translation: सरल स्लिपेज (slippage) दृश्य
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 6.7 `slippage-and-pool-depth.e68d4e14`
+
+- Risk tier: DEX and AMM
+- Page: Investing reality (/xrpl/investing-reality.html)
+- Heading on that page: Slippage and pool depth
+- Purpose: This sentence is about exchanging tokens, including slippage and the offer fields.
+- What the reader must understand: A trade can move the price. Slippage is that movement. TakerGets and TakerPays name the two sides of an offer. Neither field is a guarantee of a future price. The English wording to preserve is: Slippage and pool depth
+- English: Slippage and pool depth
+- Current translation: स्लिपेज (slippage) और पूल गहराई
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 6.8 `slippage.98bc091b`
+
+- Risk tier: DEX and AMM
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: Slippage
+- Purpose: This sentence is about exchanging tokens, including slippage and the offer fields.
+- What the reader must understand: A trade can move the price. Slippage is that movement. TakerGets and TakerPays name the two sides of an offer. Neither field is a guarantee of a future price. The English wording to preserve is: Slippage
+- English: Slippage
+- Current translation: स्लिपेज (slippage)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 6.9 `xrpl-s-dex-uses-offers-to-exchange-o.3578c8fc`
+
+- Risk tier: DEX and AMM
+- Page: Usage (/xrpl/usage.html)
+- Heading on that page: Order books and offers
+- Purpose: This sentence is about exchanging tokens, including slippage and the offer fields.
+- What the reader must understand: A trade can move the price. Slippage is that movement. TakerGets and TakerPays name the two sides of an offer. Neither field is a guarantee of a future price. The English wording to preserve is: XRPL’s DEX uses offers to exchange one asset for another.
+- English: XRPL’s DEX uses offers to exchange one asset for another.
+- Current translation: XRPL का DEX एक परिसंपत्ति को दूसरी से बदलने के लिए ऑफ़र (offer) इस्तेमाल करता है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+## 7. NFTs
+
+This sentence is about NFToken objects and what a holder or an issuer can change.
+
+What the reader must understand for this whole section: An NFT on the ledger is an NFToken. The owner does not get to rewrite the issuer’s mint-time rules. A transfer fee is not a seed and not a trust line.
+
+### 7.1 `a-listing-says-permanent-collectible.fc19f9eb`
+
+- Risk tier: NFTs
+- Page: NFT basics (/xrpl/builders/nft-basics.html)
+- Heading on that page: Work through this example
+- Purpose: This sentence is about NFToken objects and what a holder or an issuer can change.
+- What the reader must understand: An NFT on the ledger is an NFToken. The owner does not get to rewrite the issuer’s mint-time rules. A transfer fee is not a seed and not a trust line. The English wording to preserve is: A listing says “permanent collectible.” The NFT is mutable, its image sits on an ordinary web server, and the seller shows a screenshot rather than the NFTokenID. Which claims remain unproven?
+- English: A listing says “permanent collectible.” The NFT is mutable, its image sits on an ordinary web server, and the seller shows a screenshot rather than the NFTokenID. Which claims remain unproven?
+- Current translation: एक लिस्टिंग कहती है “स्थायी संग्रहणीय।” NFT म्यूटेबल (mutable) है, उसकी छवि एक साधारण वेब सर्वर पर है, और विक्रेता NFTokenID की जगह स्क्रीनशॉट दिखाता है। कौन से दावे अब भी अप्रमाणित हैं?
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 7.2 `burn.b96d6af1`
+
+- Risk tier: NFTs
+- Page: Usage (/xrpl/usage.html)
+- Heading on that page: Burn
+- Purpose: This sentence is about NFToken objects and what a holder or an issuer can change.
+- What the reader must understand: An NFT on the ledger is an NFToken. The owner does not get to rewrite the issuer’s mint-time rules. A transfer fee is not a seed and not a trust line. The English wording to preserve is: Burn
+- English: Burn
+- Current translation: बर्न (burn)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 7.3 `check-burn-transfer-and-uri-mutation.fe95a3bd`
+
+- Risk tier: NFTs
+- Page: NFT basics (/xrpl/builders/nft-basics.html)
+- Heading on that page: Work through this example
+- Purpose: This sentence is about NFToken objects and what a holder or an issuer can change.
+- What the reader must understand: An NFT on the ledger is an NFToken. The owner does not get to rewrite the issuer’s mint-time rules. A transfer fee is not a seed and not a trust line. The English wording to preserve is: Check burn, transfer and URI-mutation permissions; write down uncertainty rather than assuming defaults.
+- English: Check burn, transfer and URI-mutation permissions; write down uncertainty rather than assuming defaults.
+- Current translation: बर्न (burn), ट्रांसफ़र और URI-परिवर्तन की अनुमतियाँ जाँचें; डिफ़ॉल्ट मानने के बजाय अनिश्चितता लिखें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 7.4 `choose-a-publicly-viewable-example-a.976801e6`
+
+- Risk tier: NFTs
+- Page: NFT basics (/xrpl/builders/nft-basics.html)
+- Heading on that page: Work through this example
+- Purpose: This sentence is about NFToken objects and what a holder or an issuer can change.
+- What the reader must understand: An NFT on the ledger is an NFToken. The owner does not get to rewrite the issuer’s mint-time rules. A transfer fee is not a seed and not a trust line. The English wording to preserve is: Choose a publicly viewable example and locate its NFTokenID, issuer, owner and taxon without connecting a wallet.
+- English: Choose a publicly viewable example and locate its NFTokenID, issuer, owner and taxon without connecting a wallet.
+- Current translation: सार्वजनिक रूप से दिखने वाला उदाहरण चुनें और वॉलेट जोड़े बिना उसका NFTokenID, जारीकर्ता (issuer), मालिक और टैक्सन (taxon) ढूँढें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 7.5 `choose-the-asset-model-on-paper-inte.54d58c47`
+
+- Risk tier: NFTs
+- Page: Create a token (/xrpl/builders/create-token.html)
+- Heading on that page: Build the club-credit specification
+- Purpose: This sentence is about NFToken objects and what a holder or an issuer can change.
+- What the reader must understand: An NFT on the ledger is an NFToken. The owner does not get to rewrite the issuer’s mint-time rules. A transfer fee is not a seed and not a trust line. The English wording to preserve is: Choose the asset model on paper: interchangeable credits suggest a fungible token; one separately identifiable membership collectible suggests an NFT. Record classic trust-line token for this exercise. MPTs are another standard, not a different name for the same setup.
+- English: Choose the asset model on paper: interchangeable credits suggest a fungible token; one separately identifiable membership collectible suggests an NFT. Record classic trust-line token for this exercise. MPTs are another standard, not a different name for the same setup.
+- Current translation: कागज़ पर परिसंपत्ति मॉडल चुनें: अदला-बदली योग्य क्रेडिट फ़ंजिबल (fungible) टोकन सुझाते हैं; अलग पहचान वाली एक सदस्यता संग्रहणीय वस्तु NFT सुझाती है। इस अभ्यास के लिए क्लासिक ट्रस्ट-लाइन (trust line) टोकन दर्ज करें। MPTs एक और मानक हैं, उसी सेटअप का दूसरा नाम नहीं।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 7.6 `mint-burn-and-offer.04456e16`
+
+- Risk tier: NFTs
+- Page: NFT basics (/xrpl/builders/nft-basics.html)
+- Heading on that page: Words you will use
+- Purpose: This sentence is about NFToken objects and what a holder or an issuer can change.
+- What the reader must understand: An NFT on the ledger is an NFToken. The owner does not get to rewrite the issuer’s mint-time rules. A transfer fee is not a seed and not a trust line. The English wording to preserve is: Mint, burn and offer
+- English: Mint, burn and offer
+- Current translation: मिंट (mint), बर्न (burn) और ऑफ़र (offer)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 7.7 `mint-creates-the-nft-burn-destroys-i.a7c1145f`
+
+- Risk tier: NFTs
+- Page: NFT basics (/xrpl/builders/nft-basics.html)
+- Heading on that page: Words you will use
+- Purpose: This sentence is about NFToken objects and what a holder or an issuer can change.
+- What the reader must understand: An NFT on the ledger is an NFToken. The owner does not get to rewrite the issuer’s mint-time rules. A transfer fee is not a seed and not a trust line. The English wording to preserve is: Mint creates the NFT; burn destroys its ledger token; an offer proposes an exchange and can remain unaccepted.
+- English: Mint creates the NFT; burn destroys its ledger token; an offer proposes an exchange and can remain unaccepted.
+- Current translation: मिंट (mint) NFT बनाता है; बर्न (burn) उसके लेजर टोकन को नष्ट करता है; ऑफ़र (offer) विनिमय का प्रस्ताव रखता है और बिना स्वीकार हुए रह सकता है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 7.8 `nftokenmint-sets-important-flags-tra.4a3171c3`
+
+- Risk tier: NFTs
+- Page: NFT basics (/xrpl/builders/nft-basics.html)
+- Heading on that page: Check the mint choices
+- Purpose: This sentence is about NFToken objects and what a holder or an issuer can change.
+- What the reader must understand: An NFT on the ledger is an NFToken. The owner does not get to rewrite the issuer’s mint-time rules. A transfer fee is not a seed and not a trust line. The English wording to preserve is: NFTokenMint sets important flags. Transferable allows transfers between ordinary holders; without it, issuer-related transfers have special restrictions. Burnable gives the issuer or its authorized party burn authority; owners can burn their own NFTs. A mutable NFT can have its URI updated by the issuer or authorized minter through NFTokenModify. Do not assume every NFT’s metadata pointer is fixed.
+- English: NFTokenMint sets important flags. Transferable allows transfers between ordinary holders; without it, issuer-related transfers have special restrictions. Burnable gives the issuer or its authorized party burn authority; owners can burn their own NFTs. A mutable NFT can have its URI updated by the issuer or authorized minter through NFTokenModify. Do not assume every NFT’s metadata pointer is fixed.
+- Current translation: NFTokenMint महत्वपूर्ण फ़्लैग (flags) सेट करता है। Transferable साधारण धारकों के बीच ट्रांसफ़र की अनुमति देता है; इसके बिना जारीकर्ता-संबंधी ट्रांसफ़र पर विशेष प्रतिबंध हैं। Burnable जारीकर्ता (issuer) या उसके अधिकृत पक्ष को बर्न (burn) अथॉरिटी देता है; मालिक अपने NFT बर्न कर सकते हैं। म्यूटेबल (mutable) NFT का URI जारीकर्ता या अधिकृत मिंटर NFTokenModify से अपडेट कर सकता है। यह न मानें कि हर NFT का मेटाडेटा पॉइंटर स्थिर है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 7.9 `nftokenmodify-authority-is-separate.989d0e2a`
+
+- Risk tier: NFTs
+- Page: NFT basics (/xrpl/builders/nft-basics.html)
+- Heading on that page: The metadata URL fails. What can you conclude?
+- Purpose: This sentence is about NFToken objects and what a holder or an issuer can change.
+- What the reader must understand: An NFT on the ledger is an NFToken. The owner does not get to rewrite the issuer’s mint-time rules. A transfer fee is not a seed and not a trust line. The English wording to preserve is: NFTokenModify authority is separate from ordinary ownership.
+- English: NFTokenModify authority is separate from ordinary ownership.
+- Current translation: NFTokenModify अथॉरिटी साधारण स्वामित्व से अलग है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 7.10 `nfts-move-through-mint-offer-accept.c0ce1be3`
+
+- Risk tier: NFTs
+- Page: Usage (/xrpl/usage.html)
+- Heading on that page: Using XRPL NFTs
+- Purpose: This sentence is about NFToken objects and what a holder or an issuer can change.
+- What the reader must understand: An NFT on the ledger is an NFToken. The owner does not get to rewrite the issuer’s mint-time rules. A transfer fee is not a seed and not a trust line. The English wording to preserve is: NFTs move through mint, offer, accept, transfer, and burn transactions.
+- English: NFTs move through mint, offer, accept, transfer, and burn transactions.
+- Current translation: NFT मिंट (mint), ऑफ़र (offer), स्वीकार, ट्रांसफ़र और बर्न (burn) लेनदेन से चलते हैं।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 7.11 `ownership-alone-is-not-editing-permi.008cb31b`
+
+- Risk tier: NFTs
+- Page: NFT basics (/xrpl/builders/nft-basics.html)
+- Heading on that page: The owner cannot change the URI
+- Purpose: This sentence is about NFToken objects and what a holder or an issuer can change.
+- What the reader must understand: An NFT on the ledger is an NFToken. The owner does not get to rewrite the issuer’s mint-time rules. A transfer fee is not a seed and not a trust line. The English wording to preserve is: Ownership alone is not editing permission. For a mutable NFT, NFTokenModify is limited to the issuer or authorized minter; network amendment and wallet support also matter.
+- English: Ownership alone is not editing permission. For a mutable NFT, NFTokenModify is limited to the issuer or authorized minter; network amendment and wallet support also matter.
+- Current translation: स्वामित्व अकेले संपादन की अनुमति नहीं है। म्यूटेबल (mutable) NFT के लिए NFTokenModify जारीकर्ता (issuer) या अधिकृत मिंटर तक सीमित है; नेटवर्क संशोधन और वॉलेट समर्थन भी मायने रखते हैं।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 7.12 `record-the-network-nftokenid-issuer.20050e5d`
+
+- Risk tier: NFTs
+- Page: NFT basics (/xrpl/builders/nft-basics.html)
+- Heading on that page: Inspect the record
+- Purpose: This sentence is about NFToken objects and what a holder or an issuer can change.
+- What the reader must understand: An NFT on the ledger is an NFToken. The owner does not get to rewrite the issuer’s mint-time rules. A transfer fee is not a seed and not a trust line. The English wording to preserve is: Record the network, NFTokenID, issuer, current owner and taxon. A taxon groups related NFTs from an issuer; it is not proof of rarity or a promise that a collection is finished. Ownership and minting are different roles.
+- English: Record the network, NFTokenID, issuer, current owner and taxon. A taxon groups related NFTs from an issuer; it is not proof of rarity or a promise that a collection is finished. Ownership and minting are different roles.
+- Current translation: नेटवर्क, NFTokenID, जारीकर्ता (issuer), वर्तमान मालिक और टैक्सन (taxon) लिखें। टैक्सन (taxon) एक जारीकर्ता के संबंधित NFT का समूह है; वह दुर्लभता का प्रमाण या यह वादा नहीं कि संग्रह पूरा हो गया। स्वामित्व और मिंटिंग अलग भूमिकाएँ हैं।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 7.13 `separate-a-balance-restriction-from.9ab9e330`
+
+- Risk tier: NFTs
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Freeze is described as destroying tokens
+- Purpose: This sentence is about NFToken objects and what a holder or an issuer can change.
+- What the reader must understand: An NFT on the ledger is an NFToken. The owner does not get to rewrite the issuer’s mint-time rules. A transfer fee is not a seed and not a trust line. The English wording to preserve is: Separate a balance restriction from clawback or NFT burning. Ask for the exact asset standard and control being used.
+- English: Separate a balance restriction from clawback or NFT burning. Ask for the exact asset standard and control being used.
+- Current translation: बैलेंस प्रतिबंध को क्लॉबैक (clawback) या NFT बर्न (burn) से अलग करें। सटीक परिसंपत्ति मानक और इस्तेमाल हो रहा नियंत्रण पूछें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 7.14 `settings-that-can-control-whether-th.33debda7`
+
+- Risk tier: NFTs
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: Flags
+- Purpose: This sentence is about NFToken objects and what a holder or an issuer can change.
+- What the reader must understand: An NFT on the ledger is an NFToken. The owner does not get to rewrite the issuer’s mint-time rules. A transfer fee is not a seed and not a trust line. The English wording to preserve is: Settings that can control whether the NFT is transferable and whether the issuer can burn it.
+- English: Settings that can control whether the NFT is transferable and whether the issuer can burn it.
+- Current translation: वे सेटिंग जो नियंत्रित कर सकती हैं कि NFT ट्रांसफ़र हो सकता है या नहीं और जारीकर्ता (issuer) उसे बर्न (burn) कर सकता है या नहीं।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 7.15 `the-club-calls-this-collectible-perm.688a760e`
+
+- Risk tier: NFTs
+- Page: NFT basics (/xrpl/builders/nft-basics.html)
+- Heading on that page: Inspect the club membership collectible
+- Purpose: This sentence is about NFToken objects and what a holder or an issuer can change.
+- What the reader must understand: An NFT on the ledger is an NFToken. The owner does not get to rewrite the issuer’s mint-time rules. A transfer fee is not a seed and not a trust line. The English wording to preserve is: The club calls this collectible permanent, but the sample explicitly permits URI changes and issuer-authorized burning. Rewrite the claim as: a transferable collectible with disclosed issuer controls and externally hosted content. State the preservation plan and license separately. A clearer promise is more useful than a permanence badge.
+- English: The club calls this collectible permanent, but the sample explicitly permits URI changes and issuer-authorized burning. Rewrite the claim as: a transferable collectible with disclosed issuer controls and externally hosted content. State the preservation plan and license separately. A clearer promise is more useful than a permanence badge.
+- Current translation: क्लब इस संग्रहणीय वस्तु को स्थायी कहता है, पर नमूना URI बदलाव और जारीकर्ता-अधिकृत बर्न (burn) की स्पष्ट अनुमति देता है। दावे को ऐसे लिखें: बताए गए जारीकर्ता (issuer) नियंत्रण और बाहर होस्ट की गई सामग्री वाली ट्रांसफ़र योग्य संग्रहणीय वस्तु। संरक्षण योजना और लाइसेंस अलग बताएँ। स्पष्ट वादा स्थायित्व बैज से अधिक उपयोगी है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 7.16 `the-screenshot-does-not-identify-the.90d66079`
+
+- Risk tier: NFTs
+- Page: NFT basics (/xrpl/builders/nft-basics.html)
+- Heading on that page: Work through this example
+- Purpose: This sentence is about NFToken objects and what a holder or an issuer can change.
+- What the reader must understand: An NFT on the ledger is an NFToken. The owner does not get to rewrite the issuer’s mint-time rules. A transfer fee is not a seed and not a trust line. The English wording to preserve is: The screenshot does not identify the NFT. Obtain its network and NFTokenID, inspect issuer and owner, then inspect flags and URI. Mutable metadata and external hosting require a disclosure and preservation plan. Ledger ownership does not automatically transfer copyright or prove permanent image availability.
+- English: The screenshot does not identify the NFT. Obtain its network and NFTokenID, inspect issuer and owner, then inspect flags and URI. Mutable metadata and external hosting require a disclosure and preservation plan. Ledger ownership does not automatically transfer copyright or prove permanent image availability.
+- Current translation: स्क्रीनशॉट NFT की पहचान नहीं करता। उसका नेटवर्क और NFTokenID प्राप्त करें, जारीकर्ता (issuer) और मालिक जाँचें, फिर फ़्लैग (flags) और URI जाँचें। म्यूटेबल (mutable) मेटाडेटा और बाहरी होस्टिंग के लिए खुलासा और संरक्षण योजना चाहिए। लेजर स्वामित्व अपने आप कॉपीराइट ट्रांसफ़र नहीं करता और स्थायी छवि उपलब्धता साबित नहीं करता।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+## 8. Other security and finance
+
+This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+
+What the reader must understand for this whole section: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false.
+
+### 8.1 `a-member-sees-two-assets-with-the-sa.a08c1393`
+
+- Risk tier: Other security and finance
+- Page: Create a token (/xrpl/builders/create-token.html)
+- Heading on that page: Build the club-credit specification
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: A member sees two assets with the same club logo. One is from Issuer A and one from Issuer C. The correct decision is to compare complete identities against the club specification, not select the nicer image. Even the matching asset still needs the separate redemption and authority review.
+- English: A member sees two assets with the same club logo. One is from Issuer A and one from Issuer C. The correct decision is to compare complete identities against the club specification, not select the nicer image. Even the matching asset still needs the separate redemption and authority review.
+- Current translation: एक सदस्य एक ही क्लब लोगो वाली दो परिसंपत्तियाँ देखता है। एक Issuer A से है और एक Issuer C से। सही निर्णय क्लब विनिर्देश से पूरी पहचान की तुलना करना है, सुंदर छवि चुनना नहीं। मेल खाती परिसंपत्ति को भी अलग रिडेम्पशन (redemption) और अथॉरिटी समीक्षा चाहिए।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.2 `add-a-control-column-note-whether-is.b0a44ba6`
+
+- Risk tier: Other security and finance
+- Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
+- Heading on that page: Read a member account before changing anything
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: Add a control column. Note whether issuer authorization is required and granted, whether freeze restrictions exist, and what the relevant ripple settings are. Unknown is a valid result: it means you need evidence, not a guessed default.
+- English: Add a control column. Note whether issuer authorization is required and granted, whether freeze restrictions exist, and what the relevant ripple settings are. Unknown is a valid result: it means you need evidence, not a guessed default.
+- Current translation: एक नियंत्रण कॉलम जोड़ें। नोट करें कि जारीकर्ता ऑथराइज़ेशन (authorization) ज़रूरी है और दी गई है या नहीं, फ़्रीज़ (freeze) प्रतिबंध हैं या नहीं, और संबंधित रिपल सेटिंग क्या हैं। अज्ञात वैध परिणाम है: इसका अर्थ है साक्ष्य चाहिए, अनुमानित डिफ़ॉल्ट नहीं।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.3 `authorization-may-be-required-by-an.060da144`
+
+- Risk tier: Other security and finance
+- Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
+- Heading on that page: Understand the controls
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: Authorization may be required by an issuer before a holder can hold its currency. Freeze settings can restrict the asset. Rippling can move value across compatible trust-line relationships as part of payments. No Ripple settings affect those paths; they do not make a token safe or remove issuer risk. Review both account and line settings before changing defaults.
+- English: Authorization may be required by an issuer before a holder can hold its currency. Freeze settings can restrict the asset. Rippling can move value across compatible trust-line relationships as part of payments. No Ripple settings affect those paths; they do not make a token safe or remove issuer risk. Review both account and line settings before changing defaults.
+- Current translation: ज़रूरी होने पर धारक मुद्रा रख सके, इसके पहले जारीकर्ता ऑथराइज़ेशन (authorization) माँगा जा सकता है। फ़्रीज़ (freeze) सेटिंग परिसंपत्ति को सीमित कर सकती हैं। रिपलिंग (rippling) भुगतान के हिस्से के रूप में संगत ट्रस्ट-लाइन (trust line) संबंधों के पार मूल्य ले जा सकती है। No Ripple सेटिंग तय करती हैं कि वे पथ इस्तेमाल हो सकते हैं या नहीं; वे टोकन को सुरक्षित नहीं बनातीं और जारीकर्ता जोखिम नहीं हटातीं। डिफ़ॉल्ट बदलने से पहले खाता और लाइन दोनों की सेटिंग देखें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.4 `blackhole-status.60b409e6`
+
+- Risk tier: Other security and finance
+- Page: Investing reality (/xrpl/investing-reality.html)
+- Heading on that page: Blackhole status
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: Blackhole status
+- English: Blackhole status
+- Current translation: ब्लैकहोल (blackhole) स्थिति
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.5 `bring-the-project-identity-and-autho.48f611b5`
+
+- Risk tier: Other security and finance
+- Page: Xaman flows (/xrpl/builders/xaman-flows.html)
+- Heading on that page: Before you start
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: Bring the project identity and authority notes. You do not need a wallet for this lesson. If you later implement an integration, use a separate test environment and the current official Xaman documentation.
+- English: Bring the project identity and authority notes. You do not need a wallet for this lesson. If you later implement an integration, use a separate test environment and the current official Xaman documentation.
+- Current translation: प्रोजेक्ट पहचान और अथॉरिटी नोट्स लाइए। इस पाठ के लिए वॉलेट की ज़रूरत नहीं। यदि बाद में इंटीग्रेशन लागू करें, तो अलग परीक्षण वातावरण और वर्तमान आधिकारिक Xaman दस्तावेज़ इस्तेमाल करें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.6 `can-an-issuer-freeze-native-xrp-usin.99e811b3`
+
+- Risk tier: Other security and finance
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Can an issuer freeze native XRP using its token freeze controls?
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: Can an issuer freeze native XRP using its token freeze controls?
+- English: Can an issuer freeze native XRP using its token freeze controls?
+- Current translation: क्या जारीकर्ता (issuer) अपने टोकन फ़्रीज़ (freeze) नियंत्रणों से मूल XRP फ़्रीज़ कर सकता है?
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.7 `creation-does-not-create-buyers-a-ma.30fb7d14`
+
+- Risk tier: Other security and finance
+- Page: Create a token (/xrpl/builders/create-token.html)
+- Heading on that page: A token exists but nobody can sell it
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: Creation does not create buyers, a market price or redemption funds. Inspect actual market depth and published redemption terms; never describe an unsupported price as guaranteed value.
+- English: Creation does not create buyers, a market price or redemption funds. Inspect actual market depth and published redemption terms; never describe an unsupported price as guaranteed value.
+- Current translation: बनाने से खरीदार, बाज़ार कीमत या रिडेम्पशन (redemption) निधि नहीं बनते। वास्तविक बाज़ार गहराई और प्रकाशित रिडेम्पशन शर्तें देखें; असमर्थित कीमत को कभी गारंटीशुदा मूल्य न बताएँ।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.8 `does-freezing-an-issued-token-mean-t.021d0f68`
+
+- Risk tier: Other security and finance
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Does freezing an issued token mean the issuer can freeze the holder native XRP?
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: Does freezing an issued token mean the issuer can freeze the holder native XRP?
+- English: Does freezing an issued token mean the issuer can freeze the holder native XRP?
+- Current translation: क्या जारी टोकन को फ़्रीज़ (freeze) करने का अर्थ है कि जारीकर्ता (issuer) धारक का मूल XRP फ़्रीज़ कर सकता है?
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.9 `explain-your-answer-without-looking.0a3835d8`
+
+- Risk tier: Other security and finance
+- Page: Create a token; NFT basics; Trust lines lesson; Issuer control; Xaman flows; Project launch (/xrpl/builders/create-token.html; /xrpl/builders/nft-basics.html; /xrpl/builders/trust-lines.html; /xrpl/builders/issuer-control.html; /xrpl/builders/xaman-flows.html; /xrpl/builders/project-launch-basics.html)
+- Heading on that page: What to keep before moving on; What to keep before moving on; What to keep before moving on; What to keep before moving on; What to keep before moving on; What to keep before moving on
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: Explain your answer without looking at the worked example, then compare. If you guessed, revisit the relevant section. The checkboxes and quiz feedback stay on this page only; keep your project notes yourself.
+- English: Explain your answer without looking at the worked example, then compare. If you guessed, revisit the relevant section. The checkboxes and quiz feedback stay on this page only; keep your project notes yourself.
+- Current translation: हल उदाहरण देखे बिना अपना उत्तर समझाएँ, फिर तुलना करें। यदि अनुमान लगाया, तो संबंधित भाग फिर पढ़ें। चेकबॉक्स और क्विज़ फ़ीडबैक केवल इस पृष्ठ पर रहते हैं; अपने प्रोजेक्ट नोट्स स्वयं रखें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.10 `follow-a-fictional-neighborhood-club.3379ae6e`
+
+- Risk tier: Other security and finance
+- Page: Builders hub (/xrpl/builders/)
+- Heading on that page: Start with a project, finish with evidence
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: Follow a fictional neighborhood club from workshop credits to a collectible and a booking flow. Each lesson contains definitions, a guided paper worksheet, a worked decision, common mistakes and questions with explanations. Read the lesson, attempt the worksheet before checking the answer, and keep the resulting page of notes. There is no account, score certificate or saved learning profile.
+- English: Follow a fictional neighborhood club from workshop credits to a collectible and a booking flow. Each lesson contains definitions, a guided paper worksheet, a worked decision, common mistakes and questions with explanations. Read the lesson, attempt the worksheet before checking the answer, and keep the resulting page of notes. There is no account, score certificate or saved learning profile.
+- Current translation: एक काल्पनिक मोहल्ले के क्लब को वर्कशॉप क्रेडिट से संग्रहणीय वस्तु और बुकिंग प्रवाह तक देखें। हर पाठ में परिभाषाएँ, निर्देशित कागज़ी वर्कशीट, हल निर्णय, आम गलतियाँ और स्पष्टीकरण वाले प्रश्न हैं। पाठ पढ़ें, उत्तर देखने से पहले वर्कशीट करें, और नोट्स का वह पृष्ठ रखें। कोई खाता, अंक प्रमाणपत्र या सहेजी सीखने की प्रोफ़ाइल नहीं है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.11 `freeze-controls.8523f760`
+
+- Risk tier: Other security and finance
+- Page: Investing reality (/xrpl/investing-reality.html)
+- Heading on that page: Freeze controls
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: Freeze controls
+- English: Freeze controls
+- Current translation: फ़्रीज़ (freeze) नियंत्रण
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.12 `freeze-is-described-as-destroying-to.9896b013`
+
+- Risk tier: Other security and finance
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Freeze is described as destroying tokens
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: Freeze is described as destroying tokens
+- English: Freeze is described as destroying tokens
+- Current translation: फ़्रीज़ (freeze) को टोकन नष्ट करने के रूप में बताया गया है
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.13 `freeze-types-and-no-freeze.7a6c33a3`
+
+- Risk tier: Other security and finance
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Go deeper with official sources
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: Freeze types and No Freeze
+- English: Freeze types and No Freeze
+- Current translation: फ़्रीज़ (freeze) प्रकार और No Freeze
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.14 `freeze-versus-clawback.0c521a9b`
+
+- Risk tier: Other security and finance
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Words you will use
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: Freeze versus clawback
+- English: Freeze versus clawback
+- Current translation: फ़्रीज़ (freeze) बनाम क्लॉबैक (clawback)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.15 `freeze.5a6b2d30`
+
+- Risk tier: Other security and finance
+- Page: Builders hub (/xrpl/builders/)
+- Heading on that page: Freeze
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: Freeze
+- English: Freeze
+- Current translation: फ़्रीज़ (freeze)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.16 `in-a-read-only-explorer-account-view.b057c38f`
+
+- Risk tier: Other security and finance
+- Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
+- Heading on that page: Optional: connect the worksheet to a public record
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: In a read-only explorer account view, open the issued balances or trust-line section. Locate the precise currency and peer issuer, then compare balance, limit and any shown freeze/authorization/ripple fields. Identify whose perspective is displayed. If a field is missing from the interface, write not shown rather than assuming disabled. Your learning worksheet can stay fictional if no suitable record is available.
+- English: In a read-only explorer account view, open the issued balances or trust-line section. Locate the precise currency and peer issuer, then compare balance, limit and any shown freeze/authorization/ripple fields. Identify whose perspective is displayed. If a field is missing from the interface, write not shown rather than assuming disabled. Your learning worksheet can stay fictional if no suitable record is available.
+- Current translation: केवल-पढ़ने वाले एक्सप्लोरर के खाता दृश्य में जारी बैलेंस या ट्रस्ट-लाइन (trust line) खंड खोलें। सटीक मुद्रा और साथी जारीकर्ता (issuer) ढूँढें, फिर बैलेंस, लिमिट (limit) और दिखे फ़्रीज़ (freeze)/ऑथराइज़ेशन (authorization)/रिपल फ़ील्ड की तुलना करें। पहचानें कि किसका दृष्टिकोण दिखाया गया है। यदि इंटरफ़ेस में कोई फ़ील्ड नहीं है, तो बंद मानने के बजाय नहीं दिखा लिखें। उपयुक्त रिकॉर्ड न हो तो आपकी सीखने की वर्कशीट काल्पनिक रह सकती है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.17 `interactive-feedback-requires-javasc.047d8e72`
+
+- Risk tier: Other security and finance
+- Page: Create a token; NFT basics; Trust lines lesson; Issuer control; Xaman flows; Project launch (/xrpl/builders/create-token.html; /xrpl/builders/nft-basics.html; /xrpl/builders/trust-lines.html; /xrpl/builders/issuer-control.html; /xrpl/builders/xaman-flows.html; /xrpl/builders/project-launch-basics.html)
+- Heading on that page: The club only needs an internal booking list. Must it issue a token?; You own a mutable NFT. Does ownership alone let you change its URI?; An explorer asks for a signature just to inspect a public trust line. Is that necessary for reading?; Does freezing an issued token mean the issuer can freeze the holder native XRP?; A bound SignIn succeeds. Has the booking been paid?; Can reverting a web page reverse a validated ledger transfer?
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: Interactive feedback requires JavaScript. All lesson content and the worked answer above remain available.
+- English: Interactive feedback requires JavaScript. All lesson content and the worked answer above remain available.
+- Current translation: इंटरैक्टिव फ़ीडबैक के लिए JavaScript चाहिए। सारा पाठ और ऊपर दिया हल उदाहरण उपलब्ध रहता है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.18 `list-the-evidence-a-reviewer-needs-e.71edfb57`
+
+- Risk tier: Other security and finance
+- Page: Create a token (/xrpl/builders/create-token.html)
+- Heading on that page: Build the club-credit specification
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: List the evidence a reviewer needs: exact asset identity; who can issue or change controls; distribution records; redemption terms; any claimed cap mechanism; and what remains unknown. Use lesson 4 to complete the authority section instead of assuming the account cannot change.
+- English: List the evidence a reviewer needs: exact asset identity; who can issue or change controls; distribution records; redemption terms; any claimed cap mechanism; and what remains unknown. Use lesson 4 to complete the authority section instead of assuming the account cannot change.
+- Current translation: समीक्षक को जो साक्ष्य चाहिए उसकी सूची बनाएँ: सटीक परिसंपत्ति पहचान; कौन जारी कर सकता है या नियंत्रण बदल सकता है; वितरण रिकॉर्ड; रिडेम्पशन (redemption) शर्तें; कोई दावा किया कैप तंत्र; और क्या अब भी अज्ञात है। यह मानने के बजाय कि खाता नहीं बदल सकता, अथॉरिटी खंड पूरा करने के लिए पाठ 4 इस्तेमाल करें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.19 `list-token-controls-separately-from.1cffbef3`
+
+- Risk tier: Other security and finance
+- Page: Issuer control (/xrpl/builders/issuer-control.html)
+- Heading on that page: Map who can act for the club
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: List token controls separately from keys: required authorization, individual/deep/global freeze, No Freeze and clawback capability. Explain the effect on holders and the evidence you inspected. Do not translate a restriction on one token relationship into a restriction on XRP or every asset.
+- English: List token controls separately from keys: required authorization, individual/deep/global freeze, No Freeze and clawback capability. Explain the effect on holders and the evidence you inspected. Do not translate a restriction on one token relationship into a restriction on XRP or every asset.
+- Current translation: टोकन नियंत्रणों को की (keys) से अलग सूचीबद्ध करें: ज़रूरी ऑथराइज़ेशन (authorization), व्यक्तिगत/डीप/ग्लोबल फ़्रीज़ (freeze), No Freeze और क्लॉबैक (clawback) क्षमता। धारकों पर प्रभाव और जाँचा साक्ष्य समझाएँ। एक टोकन संबंध के प्रतिबंध को XRP या हर परिसंपत्ति के प्रतिबंध के रूप में न पढ़ें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.20 `meta.xaman.title`
+
+- Risk tier: Other security and finance
+- Page: Xaman flows (/xrpl/builders/xaman-flows.html)
+- Heading on that page: Xaman flows
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: Xaman flows | Builders Hub | XRPL LAYMAN
+- English: Xaman flows | Builders Hub | XRPL LAYMAN
+- Current translation: Xaman फ़्लो | बिल्डर्स हब | XRPL LAYMAN
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.21 `neb-s-public-page-describes-a-future.2da289c9`
+
+- Risk tier: Other security and finance
+- Page: Project launch (/xrpl/builders/project-launch-basics.html)
+- Heading on that page: Keep building
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: NEB’s public page describes a future trading system. Its preview is not evidence of live feeds or execution.
+- English: NEB’s public page describes a future trading system. Its preview is not evidence of live feeds or execution.
+- Current translation: NEB का सार्वजनिक पृष्ठ भविष्य की ट्रेडिंग व्यवस्था बताता है। उसका प्रीव्यू लाइव फ़ीड या निष्पादन का साक्ष्य नहीं है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.22 `never-change-rippling-freeze-or-auth.5af57760`
+
+- Risk tier: Other security and finance
+- Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
+- Heading on that page: Work through this example
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: Never change rippling, freeze or authorization flags just to clear a warning you do not understand. A successful TrustSet is a settings change, not a purchase or a safety endorsement.
+- English: Never change rippling, freeze or authorization flags just to clear a warning you do not understand. A successful TrustSet is a settings change, not a purchase or a safety endorsement.
+- Current translation: ऐसी चेतावनी हटाने के लिए जिसे आप नहीं समझते, रिपलिंग (rippling), फ़्रीज़ (freeze) या ऑथराइज़ेशन (authorization) फ़्लैग न बदलें। सफल TrustSet सेटिंग बदलाव है, खरीदारी या सुरक्षा समर्थन नहीं।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.23 `phishing-and-fake-connection-flows.27a92c45`
+
+- Risk tier: Other security and finance
+- Page: Safety (/xrpl/safety.html)
+- Heading on that page: Phishing and fake connection flows
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: Phishing and fake connection flows
+- English: Phishing and fake connection flows
+- Current translation: फ़िशिंग और नकली कनेक्शन प्रवाह
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.24 `redemption.843604af`
+
+- Risk tier: Other security and finance
+- Page: Investing reality; Create a token (/xrpl/investing-reality.html; /xrpl/builders/create-token.html)
+- Heading on that page: Redemption; Words you will use
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: Redemption
+- English: Redemption
+- Current translation: रिडेम्पशन (redemption)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.25 `rehearse-an-uncertain-transaction-a.dd025fa6`
+
+- Risk tier: Other security and finance
+- Page: Project launch (/xrpl/builders/project-launch-basics.html)
+- Heading on that page: Hold a tabletop launch review
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: Rehearse an uncertain transaction: a hash exists but a lookup cannot find it. Keep the original intent and bounded expiry evidence. Ask whether the queried server has the required history and has passed the relevant ledger boundary before concluding non-inclusion. Do not issue a fresh payment merely because one lookup was empty.
+- English: Rehearse an uncertain transaction: a hash exists but a lookup cannot find it. Keep the original intent and bounded expiry evidence. Ask whether the queried server has the required history and has passed the relevant ledger boundary before concluding non-inclusion. Do not issue a fresh payment merely because one lookup was empty.
+- Current translation: अनिश्चित लेनदेन का अभ्यास करें: हैश मौजूद है पर लुकअप उसे नहीं पाता। मूल इरादा और समाप्ति की निर्धारित सीमा का साक्ष्य रखें। गैर-शामिल होने का निष्कर्ष निकालने से पहले पूछें कि पूछे गए सर्वर के पास ज़रूरी इतिहास है और वह संबंधित लेजर सीमा पार कर चुका है या नहीं। केवल एक खाली लुकअप के कारण नया भुगतान न भेजें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.26 `save-a-one-page-asset-specification.286034dc`
+
+- Risk tier: Other security and finance
+- Page: Create a token (/xrpl/builders/create-token.html)
+- Heading on that page: What to keep before moving on
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: Save a one-page asset specification with purpose, chosen standard, network, identity, redemption terms, supply calculation and open authority questions. In lesson 2 you will add a separate collectible; do not treat the credit and collectible as the same asset.
+- English: Save a one-page asset specification with purpose, chosen standard, network, identity, redemption terms, supply calculation and open authority questions. In lesson 2 you will add a separate collectible; do not treat the credit and collectible as the same asset.
+- Current translation: उद्देश्य, चुना मानक, नेटवर्क, पहचान, रिडेम्पशन (redemption) शर्तें, आपूर्ति गणना और खुले अथॉरिटी प्रश्नों वाला एक-पृष्ठ परिसंपत्ति विनिर्देश सहेजें। पाठ 2 में आप अलग संग्रहणीय वस्तु जोड़ेंगे; क्रेडिट और संग्रहणीय वस्तु को एक ही परिसंपत्ति न मानें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.27 `scammers-can-trick-you-into-authoriz.82c7e021`
+
+- Risk tier: Other security and finance
+- Page: Safety (/xrpl/safety.html)
+- Heading on that page: Phishing and fake connection flows
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: Scammers can trick you into authorizing the transaction yourself.
+- English: Scammers can trick you into authorizing the transaction yourself.
+- Current translation: ठग आपसे स्वयं लेनदेन अधिकृत करवा सकते हैं।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.28 `think-of-xrpl-as-the-shared-database.0c61a794`
+
+- Risk tier: Other security and finance
+- Page: Definitions (/xrpl/definitions.html)
+- Heading on that page: Final
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: Think of XRPL as the shared database underneath the apps. Xaman, exchanges, explorers, games, and marketplaces are interfaces. The ledger’s the record they’re reading and writing to.
+- English: Think of XRPL as the shared database underneath the apps. Xaman, exchanges, explorers, games, and marketplaces are interfaces. The ledger’s the record they’re reading and writing to.
+- Current translation: XRPL को ऐप के नीचे साझा डेटाबेस मानें। Xaman, एक्सचेंज, एक्सप्लोरर, गेम और मार्केटप्लेस इंटरफ़ेस हैं। लेजर वह रिकॉर्ड है जिसे वे पढ़ और लिख रहे हैं।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.29 `this-lesson-follows-the-classic-trus.fc252c0f`
+
+- Risk tier: Other security and finance
+- Page: Create a token (/xrpl/builders/create-token.html)
+- Heading on that page: Know what you are creating
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: This lesson follows the classic trust-line token model. XRPL also has Multi-Purpose Tokens (MPTs), with different identifiers and capabilities. Choose the standard deliberately and check the intended network and wallet support before following a tutorial. These lessons do not create either kind of token.
+- English: This lesson follows the classic trust-line token model. XRPL also has Multi-Purpose Tokens (MPTs), with different identifiers and capabilities. Choose the standard deliberately and check the intended network and wallet support before following a tutorial. These lessons do not create either kind of token.
+- Current translation: यह पाठ क्लासिक ट्रस्ट-लाइन (trust line) टोकन मॉडल का पालन करता है। XRPL में Multi-Purpose Tokens (MPTs) भी हैं, जिनके पहचानकर्ता और क्षमताएँ अलग हैं। मानक जानबूझकर चुनें और ट्यूटोरियल से पहले इच्छित नेटवर्क तथा वॉलेट समर्थन जाँचें। ये पाठ दोनों में से किसी प्रकार का टोकन नहीं बनाते।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.30 `withdrawal-freeze.01e58e5e`
+
+- Risk tier: Other security and finance
+- Page: Safety (/xrpl/safety.html)
+- Heading on that page: Withdrawal freeze
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: Withdrawal freeze
+- English: Withdrawal freeze
+- Current translation: निकासी फ़्रीज़ (withdrawal freeze)
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.31 `write-a-departure-plan-resolve-the-h.e40c2a02`
+
+- Risk tier: Other security and finance
+- Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
+- Heading on that page: Read a member account before changing anything
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: Write a departure plan: resolve the held balance through a deliberate redemption or transfer decision, then inspect non-default line settings on both sides. Setting the limit to zero alone is not proof the line disappeared. There can still be a balance or other state keeping it present.
+- English: Write a departure plan: resolve the held balance through a deliberate redemption or transfer decision, then inspect non-default line settings on both sides. Setting the limit to zero alone is not proof the line disappeared. There can still be a balance or other state keeping it present.
+- Current translation: प्रस्थान योजना लिखें: रखे बैलेंस को जानबूझकर रिडेम्पशन (redemption) या ट्रांसफ़र निर्णय से सुलझाएँ, फिर दोनों पक्षों की गैर-डिफ़ॉल्ट लाइन सेटिंग जाँचें। अकेले लिमिट (limit) शून्य करना इस बात का प्रमाण नहीं कि लाइन गायब हो गई। बैलेंस या अन्य अवस्था उसे अभी भी रख सकती है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.32 `write-the-purpose-exact-asset-identi.636d0341`
+
+- Risk tier: Other security and finance
+- Page: Builders hub (/xrpl/builders/)
+- Heading on that page: Start with a project, finish with evidence
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: {s1} write the purpose, exact asset identity, redemption promise and supply questions.
+- English: {s1} write the purpose, exact asset identity, redemption promise and supply questions.
+- Current translation: {s1} उद्देश्य, सटीक परिसंपत्ति पहचान, रिडेम्पशन (redemption) का वादा और आपूर्ति के प्रश्न लिखें।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.33 `xaman-credential-boundaries.55db3d97`
+
+- Risk tier: Other security and finance
+- Page: Xaman flows (/xrpl/builders/xaman-flows.html)
+- Heading on that page: Go deeper with official sources
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: Xaman credential boundaries
+- English: Xaman credential boundaries
+- Current translation: Xaman क्रेडेंशियल सीमाएँ
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.34 `xaman-flows.2d4dd6fc`
+
+- Risk tier: Other security and finance
+- Page: Builders hub; Issuer control; Project launch (/xrpl/builders/; /xrpl/builders/issuer-control.html; /xrpl/builders/project-launch-basics.html)
+- Heading on that page: Deploy; Keep building; Keep building
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: Xaman flows
+- English: Xaman flows
+- Current translation: Xaman फ़्लो
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.35 `xaman-flows.811c9129`
+
+- Risk tier: Other security and finance
+- Page: Builders hub (/xrpl/builders/)
+- Heading on that page: Start with a project, finish with evidence
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: Xaman flows:
+- English: Xaman flows:
+- Current translation: Xaman फ़्लो:
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.36 `xaman-flows.c8a29412`
+
+- Risk tier: Other security and finance
+- Page: Builders hub; Create a token; NFT basics; Trust lines lesson; Issuer control; Xaman flows; Project launch (/xrpl/builders/; /xrpl/builders/create-token.html; /xrpl/builders/nft-basics.html; /xrpl/builders/trust-lines.html; /xrpl/builders/issuer-control.html; /xrpl/builders/xaman-flows.html; /xrpl/builders/project-launch-basics.html)
+- Heading on that page: Builders Hub; Create a token with a clear identity; Read an NFT beyond its picture; Set a boundary for an issued asset; Know who can still change the rules; Follow a signing request to its real result; Launch something people can verify
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: {s1}Xaman flows
+- English: {s1}Xaman flows
+- Current translation: {s1}Xaman फ़्लो
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.37 `xaman-implementation-checklist.b10f39bc`
+
+- Risk tier: Other security and finance
+- Page: Xaman flows (/xrpl/builders/xaman-flows.html)
+- Heading on that page: Go deeper with official sources
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: Xaman implementation checklist
+- English: Xaman implementation checklist
+- Current translation: Xaman कार्यान्वयन चेकलिस्ट
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.38 `xaman-implementation-checks.cc5808c1`
+
+- Risk tier: Other security and finance
+- Page: Project launch (/xrpl/builders/project-launch-basics.html)
+- Heading on that page: Go deeper with official sources
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: Xaman implementation checks
+- English: Xaman implementation checks
+- Current translation: Xaman कार्यान्वयन जाँच
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.39 `xaman-payload-concepts.1ddf0450`
+
+- Risk tier: Other security and finance
+- Page: Xaman flows (/xrpl/builders/xaman-flows.html)
+- Heading on that page: Go deeper with official sources
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: Xaman payload concepts
+- English: Xaman payload concepts
+- Current translation: Xaman पेलोड (payload) अवधारणाएँ
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
