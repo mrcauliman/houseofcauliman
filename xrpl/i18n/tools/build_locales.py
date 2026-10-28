@@ -265,11 +265,17 @@ def fill_seo(root, rel, lang_id, canonical_slug, catalogs, release):
         head.children.insert(insert_at + offset, link)
 
 
+def show_review_labels(release):
+    """Presentation only; never changes approval, robots or discoverability."""
+    return release.get("presentation", {}).get("show_review_labels") is not False
+
+
 def release_js_text(release):
     payload = json.dumps(release["languages"], ensure_ascii=False, indent=2)
     return (
         "/* Generated from xrpl/i18n/release.json. Do not edit by hand. */\n"
         f"window.XRPL_RELEASE = {payload};\n"
+        f"window.XRPL_PRESENTATION = {{\"show_review_labels\": {str(show_review_labels(release)).lower()}}};\n"
     )
 
 
@@ -323,7 +329,7 @@ def mark_options(root, release, catalogs):
             continue
         text = _option_text(option)
         base = text[: -len(REVIEW_SUFFIX)] if text.endswith(REVIEW_SUFFIX) else text
-        new = base if is_public(release, lang, catalogs) else base + REVIEW_SUFFIX
+        new = base if is_public(release, lang, catalogs) or not show_review_labels(release) else base + REVIEW_SUFFIX
         if new == text:
             continue
         text_node = Node("text", text=new)
@@ -403,7 +409,10 @@ def apply_release(root, rel, lang, slug, catalogs, release):
         remove_notice(root)
         set_robots(root, False)
     else:
-        insert_notice(root)
+        if show_review_labels(release):
+            insert_notice(root)
+        else:
+            remove_notice(root)
         set_robots(root, True)
 
 
@@ -578,8 +587,8 @@ def audit_release_output(files, release, catalogs):
                     errors.append(f"{path} unapproved page is marked public")
                 if hrefs:
                     errors.append(f"{path} unapproved hreflang {hrefs}")
-                if REVIEW_NOTICE not in text:
-                    errors.append(f"{path} missing review notice")
+                if (REVIEW_NOTICE in text) != show_review_labels(release):
+                    errors.append(f"{path} review notice presentation mismatch")
                 if 'content="noindex, follow"' not in text or "data-xrpl-robots" not in text:
                     errors.append(f"{path} missing noindex")
                 if f"<loc>{expect_canon}</loc>" in sitemap:
@@ -592,9 +601,9 @@ def audit_release_output(files, release, catalogs):
                     for option_lang in LANG_ORDER:
                         label = labels.get(option_lang, "")
                         marked = label.endswith(REVIEW_SUFFIX)
-                        if is_public(release, option_lang, catalogs) and marked:
+                        if (is_public(release, option_lang, catalogs) or not show_review_labels(release)) and marked:
                             errors.append(f"{path} marks public {option_lang} under review")
-                        if not is_public(release, option_lang, catalogs) and not marked:
+                        if show_review_labels(release) and not is_public(release, option_lang, catalogs) and not marked:
                             errors.append(f"{path} leaves {option_lang} unmarked")
             if slug:
                 prefix = "/xrpl/" + slug
