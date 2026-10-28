@@ -11,3 +11,4 @@ window.XRPL_RELEASE = {
   "hi": "unapproved",
   "ar": "unapproved"
 };
+window.XRPL_PRESENTATION = {"show_review_labels": false};

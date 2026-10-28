@@ -31,6 +31,32 @@ class DeclaredStateTests(unittest.TestCase):
     def tearDownClass(cls):
         assert cls.release_path.read_bytes() == cls.original_release
 
+    def test_presentation_hides_labels_without_changing_release_gates(self):
+        hidden = copy.deepcopy(self.held)
+        hidden['presentation'] = {'show_review_labels': False}
+        files = render_site(self.sources, self.catalogs, hidden)
+        self.assertEqual(check.audit_declared_output(files, hidden, self.catalogs), [])
+        self.assertEqual(hidden['languages'], self.held['languages'])
+        self.assertEqual(files['xrpl/i18n/sitemap.proposed.xml'], self.base['xrpl/i18n/sitemap.proposed.xml'])
+        for lang, slug, *_ in check.LANGS:
+            for rel in check.PAGES:
+                path = 'xrpl/' + (slug + '/' if slug else '') + rel.removeprefix('xrpl/')
+                text = files[path]
+                self.assertNotIn('xrpl-review-notice', text)
+                self.assertNotIn('(under review)', text)
+                if lang != 'en':
+                    self.assertIn('noindex, follow', text)
+                    self.assertNotIn('hreflang=', text)
+                    self.assertNotIn('data-xrpl-public', text)
+        hidden['presentation']['show_review_labels'] = True
+        self.assertEqual(render_site(self.sources, self.catalogs, hidden), self.base)
+
+    def test_invalid_presentation_is_rejected(self):
+        for value in [None, [], {'show_review_labels': 'false'}, {'show_review_labels': 0}, {'unknown': False}]:
+            declaration = copy.deepcopy(self.held)
+            declaration['presentation'] = value
+            self.assertTrue(check.declared_state_errors(declaration))
+
     def test_held_and_mixed_declarations_are_dynamic(self):
         for declaration, files, loc_count in [(self.held,self.base,13), (self.one,self.one_files,26), (self.mixed,self.mixed_files,39)]:
             with self.subTest(public=loc_count):

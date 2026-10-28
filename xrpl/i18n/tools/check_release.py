@@ -107,6 +107,9 @@ def declared_state_errors(release):
     if not isinstance(languages, dict) or list(languages) != order:
         return ["release.json must declare exactly the ordered supported languages"]
     errors = []
+    presentation = release.get("presentation", {})
+    if not isinstance(presentation, dict) or set(presentation) - {"show_review_labels"} or ("show_review_labels" in presentation and type(presentation["show_review_labels"]) is not bool):
+        errors.append("presentation.show_review_labels must be a boolean")
     if languages["en"] != "source":
         errors.append("English must be source")
     for lang in order[1:]:
@@ -199,13 +202,14 @@ def audit_declared_output(files, release, catalogs):
             if robots != ([] if public_page else [("noindex, follow", "1")]):
                 errors.append(f"{name}: robots mismatch")
             notices = find_all(tree, attr="id", value="xrpl-review-notice")
-            if public_page and notices or not public_page and (len(notices) != 1 or notices[0].text_content() != NOTICE):
+            expect_notice = not public_page and release.get("presentation", {}).get("show_review_labels") is not False
+            if (not expect_notice and notices) or (expect_notice and (len(notices) != 1 or notices[0].text_content() != NOTICE)):
                 errors.append(f"{name}: review notice mismatch")
             if rel == "xrpl/index.html":
                 selects = find_all(tree, tag="select", attr="id", value="xrpl-language")
                 options = find_all(selects[0], tag="option") if len(selects) == 1 else []
                 actual = [(node.attr("value"), node.text_content()) for node in options]
-                expected_options = [(option_lang, names[option_lang] + ("" if option_lang in public else " (under review)")) for option_lang, *_rest in LANGS]
+                expected_options = [(option_lang, names[option_lang] + ("" if option_lang in public or release.get("presentation", {}).get("show_review_labels") is False else " (under review)")) for option_lang, *_rest in LANGS]
                 if actual != expected_options:
                     errors.append(f"{name}: selector mismatch")
     return errors

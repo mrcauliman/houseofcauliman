@@ -273,9 +273,13 @@
     existing.setAttribute("content", "noindex, follow");
   }
 
+  function showReviewLabels() {
+    return !window.XRPL_PRESENTATION || window.XRPL_PRESENTATION.show_review_labels !== false;
+  }
+
   function updateNotice(lang) {
     var notice = document.getElementById("xrpl-review-notice");
-    if (isPublic(lang)) {
+    if (isPublic(lang) || !showReviewLabels()) {
       if (notice && notice.parentNode) notice.parentNode.removeChild(notice);
       return;
     }
@@ -302,7 +306,7 @@
     replaceChildren(select, LANGS.map(function (lang) {
       var option = document.createElement("option");
       option.value = lang.id;
-      option.textContent = isPublic(lang.id) ? lang.native : lang.native + " (under review)";
+      option.textContent = isPublic(lang.id) || !showReviewLabels() ? lang.native : lang.native + " (under review)";
       option.lang = lang.htmlLang;
       if (lang.dir === "rtl") option.dir = "rtl";
       return option;
@@ -338,7 +342,7 @@
       if (!item) return;
       option.lang = item.htmlLang;
       if (item.dir === "rtl") option.dir = "rtl";
-      option.textContent = isPublic(item.id) ? item.native : item.native + " (under review)";
+      option.textContent = isPublic(item.id) || !showReviewLabels() ? item.native : item.native + " (under review)";
     });
     if (label) select.setAttribute("aria-labelledby", label.id);
     return select;
