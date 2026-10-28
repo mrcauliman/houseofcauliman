@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="ar" data-xrpl-page="index" data-xrpl-i18n="1" dir="rtl">
+<head><script data-xrpl-early="1">(function(){
+  var KNOWN={"en":1,"pt-BR":1,"es":1,"fr":1,"de":1,"ja":1,"ko":1,"zh-CN":1,"hi":1,"ar":1};
+  var SLUGS={"pt-br":"pt-BR","es":"es","fr":"fr","de":"de","ja":"ja","ko":"ko","zh-cn":"zh-CN","hi":"hi","ar":"ar"};
+  var path=location.pathname, at=path.indexOf("/xrpl/"), lang="";
+  if(at>=0){
+    var slug=path.slice(at+6).split("/")[0];
+    if(SLUGS[slug]) lang=SLUGS[slug];
+  }
+  if(!lang){ try{ lang=localStorage.getItem("xrpl-layman-language")||""; }catch(e){} }
+  if(!KNOWN[lang]) return;
+  document.documentElement.lang=lang;
+  document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+})();</script><link rel="stylesheet" href="/xrpl/i18n/i18n.css"><!--xrpl-seo-start--><link rel="canonical" href="https://houseofcauliman.com/xrpl/ar/"><!--xrpl-seo-end-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="meta.index.title">⁦XRPL Layman⁩ | ⁦House of Cauliman⁩</title>
+  <meta name="description" content="تعلّم كيف تستخدم ⁦XRP Ledger⁩ فعلاً. المحافظ، وشراء الرموز، و⁦NFT⁩، والسيولة، والتنفيذ.">
+  <style>
+    :root{
+      --bg:#05070b;
+      --panel:#0d1218;
+      --panel2:#111823;
+      --line:rgba(255,255,255,.10);
+      --text:#eef3f8;
+      --muted:#aeb8c6;
+      --blue:#58a6ff;
+      --gold:#d4a44a;
+      --green:#42d392;
+      --radius:18px;
+      --shadow:0 16px 48px rgba(0,0,0,.35);
+      --sans:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      --max:1180px;
+    }
+    *{box-sizing:border-box}
+    html,body{
+      margin:0;
+      padding:0;
+      background:radial-gradient(circle at top,#111827 0,#020308 55%,#000 100%);
+      color:var(--text);
+      font-family:var(--sans);
+    }
+    a{color:var(--blue);text-decoration:none}
+    .wrap{max-width:var(--max);margin:0 auto;padding:28px 18px 90px}
+    .hero{background:radial-gradient(circle at top,#0a74d0 0,#0b1220 35%,#050509 100%);border:1px solid rgba(43,51,69,.95);border-radius:24px;padding:26px;box-shadow:0 18px 45px rgba(0,0,0,.75)}
+    h1{margin:0;font-size:36px;line-height:1.05;letter-spacing:.3px}
+    .sub{margin:12px 0 0;color:var(--muted);font-size:15px;line-height:1.65;max-width:920px}
+    .pillbar{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--muted);
+      font-size:12px;
+      font-weight:700;
+    }
+    .dot{width:8px;height:8px;border-radius:999px;background:var(--green)}
+    .intro{margin-top:18px;background:linear-gradient(135deg,rgba(15,23,42,.92),rgba(5,6,12,.98));border:1px solid rgba(43,51,69,.9);border-radius:18px;padding:18px;box-shadow:0 18px 45px rgba(0,0,0,.75)}
+    .intro p{margin:8px 0;color:var(--muted);line-height:1.65}
+    .grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:16px;
+      margin-top:18px;
+    }
+    @media(min-width:980px){
+      .grid{grid-template-columns:1fr 1fr}
+    }
+    .card{background:radial-gradient(circle at top,rgba(26,35,58,.85) 0,#050509 55%,#000 100%);border:1px solid rgba(26,27,36,.95);border-radius:18px;padding:18px;box-shadow:0 18px 45px rgba(0,0,0,.75)}
+    .eyebrow{
+      display:inline-block;
+      color:var(--gold);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:8px;
+    }
+    .card h2{
+      margin:0 0 8px;
+      font-size:21px;
+      line-height:1.2;
+    }
+    .card p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.65;
+    }
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 14px;border-radius:10px;border:1px solid rgba(43,51,69,.95);background:linear-gradient(135deg,rgba(15,23,42,.98),rgba(3,7,18,.98));color:var(--text);font-size:13px;font-weight:800;letter-spacing:.02em;text-decoration:none;box-shadow:0 8px 20px rgba(0,0,0,.55)}
+    .btn:hover{
+      background:rgba(88,166,255,.18);
+      border-color:rgba(88,166,255,.45);
+    }
+    .foot{
+      margin-top:18px;
+      color:var(--muted);
+      font-size:12px;
+      text-align:center;
+      opacity:.9;
+    }
+
+    .card-media{margin:0 0 14px;border:1px solid rgba(43,51,69,.95);border-radius:14px;background:radial-gradient(circle at top,#111827 0,#020308 70%);padding:10px;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,.55)}
+    .card-media img{width:100%;height:180px;object-fit:contain;border-radius:10px;border:1px solid rgba(43,51,69,.95);display:block;background:#0a0f16;padding:8px}
+    
+    .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+    
+    .cta{display:inline-block;padding:12px 16px;border-radius:12px;border:1px solid rgba(43,51,69,.95);background:linear-gradient(135deg,rgba(15,23,42,.98),rgba(3,7,18,.98));color:var(--text);font-weight:800;font-size:14px;box-shadow:0 8px 20px rgba(0,0,0,.55);text-decoration:none}
+    .footer{margin-top:18px;color:var(--muted);font-size:12px;text-align:center}
+
+.hoc-standard-footer{
+  margin:28px auto 10px;
+  padding:18px 14px 28px;
+  border-top:1px solid rgba(255,255,255,.12);
+  color:rgba(230,238,247,.72);
+  font-size:12px;
+  text-align:center;
+  line-height:1.7;
+}
+.hoc-standard-footer a{color:inherit;text-decoration:none}
+.hoc-standard-footer a:hover{text-decoration:underline}
+.hoc-standard-footer-links{margin:4px 0}
+
+.xrpl-language-row{display:flex;justify-content:flex-end;align-items:center;gap:10px;margin-bottom:18px;color:#c4ccda}.xrpl-language-row select{background:#0d182a;color:#fff;border:1px solid #476995;border-radius:10px;padding:9px 12px}.xrpl-language-note{font-size:12px;color:#aeb8c6}@media(max-width:760px){.xrpl-language-row{justify-content:center;flex-wrap:wrap}}
+</style>
+<style id="xrpl-layman-header-icon-style">
+.xrpl-layman-brand{display:inline-flex;align-items:center;gap:10px}
+.xrpl-layman-brand img{width:32px;height:32px;object-fit:contain;display:block;flex:0 0 auto}
+@media (max-width:640px){.xrpl-layman-brand img{width:28px;height:28px}}
+</style>
+  <meta name="apple-mobile-web-app-title" content="XRPL LAYMAN">
+  <meta name="application-name" content="XRPL LAYMAN">
+  <!-- favicon: XRPL LAYMAN -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/xrpl_layman/favicon-32x32.png?v=2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/xrpl_layman/favicon-16x16.png?v=2">
+  <link rel="shortcut icon" href="/assets/favicons/xrpl_layman/favicon.ico?v=2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/xrpl_layman/apple-touch-icon.png?v=2">
+
+<style id="xrpl-dashboard-v2">
+body{
+  background:
+    radial-gradient(circle at 8% 10%,rgba(0,93,255,.22),transparent 30%),
+    radial-gradient(circle at 92% 20%,rgba(99,38,210,.18),transparent 34%),
+    linear-gradient(145deg,#020711 0%,#02050c 48%,#000 100%);
+}
+
+.wrap{
+  max-width:1500px;
+  padding:38px 28px 80px;
+}
+
+.xrpl-dashboard{
+  position:relative;
+  overflow:hidden;
+  padding:28px 14px 10px;
+}
+
+.xrpl-dashboard::before{
+  content:"";
+  position:absolute;
+  width:1050px;
+  height:1050px;
+  top:-770px;
+  left:-320px;
+  border:2px solid rgba(28,100,255,.33);
+  border-radius:50%;
+  box-shadow:
+    0 0 0 22px rgba(14,77,219,.08),
+    0 0 0 46px rgba(14,77,219,.045);
+  pointer-events:none;
+}
+
+.xrpl-dashboard::after{
+  content:"";
+  position:absolute;
+  width:980px;
+  height:980px;
+  top:-690px;
+  right:-520px;
+  border:2px solid rgba(121,49,255,.30);
+  border-radius:50%;
+  box-shadow:
+    0 0 0 22px rgba(106,40,230,.07),
+    0 0 0 46px rgba(106,40,230,.035);
+  pointer-events:none;
+}
+
+.xrpl-dashboard-hero{
+  position:relative;
+  z-index:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:42px;
+  max-width:1100px;
+  margin:0 auto;
+  padding:28px 20px 18px;
+}
+
+.xrpl-dashboard-logo{
+  width:220px;
+  height:220px;
+  flex:0 0 auto;
+  display:grid;
+  place-items:center;
+  border-radius:48px;
+  background:
+    radial-gradient(circle at 50% 42%,rgba(27,120,255,.40),transparent 46%),
+    linear-gradient(145deg,#08235a,#020817 72%);
+  border:2px solid rgba(120,169,255,.58);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.18),
+    inset 0 -18px 30px rgba(0,0,0,.35),
+    0 28px 70px rgba(0,0,0,.52),
+    0 0 50px rgba(20,104,255,.18);
+}
+
+.xrpl-dashboard-logo img{
+  width:160px;
+  height:160px;
+  object-fit:contain;
+  filter:drop-shadow(0 0 18px rgba(75,173,255,.68));
+}
+
+.xrpl-dashboard-title{
+  min-width:0;
+}
+
+.xrpl-dashboard-title h1{
+  margin:0;
+  font-size:clamp(48px,7vw,94px);
+  line-height:.95;
+  letter-spacing:-.055em;
+  font-weight:900;
+  color:#f8fbff;
+  white-space:nowrap;
+  text-shadow:0 8px 30px rgba(0,0,0,.55);
+}
+
+.xrpl-dashboard-title h1 span{
+  background:linear-gradient(90deg,#f9fbff 0%,#eef4ff 45%,#2f82ff 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.xrpl-dashboard-tagline{
+  margin:22px 0 0;
+  color:#aeb8ca;
+  font-size:clamp(16px,2vw,25px);
+  font-weight:750;
+  letter-spacing:.26em;
+  text-align:center;
+}
+
+.xrpl-dashboard-rule{
+  position:relative;
+  z-index:1;
+  width:min(760px,70%);
+  height:1px;
+  margin:18px auto 30px;
+  background:linear-gradient(90deg,transparent,#1f8cff 22%,#4da9ff 50%,#5742ec 78%,transparent);
+}
+
+.xrpl-dashboard-rule::after{
+  content:"";
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#fff;
+  transform:translate(-50%,-50%);
+  box-shadow:0 0 14px #1d8cff,0 0 28px #1d8cff;
+}
+
+.xrpl-dashboard-intro{
+  position:relative;
+  z-index:1;
+  margin:0 auto 42px;
+  color:#b8c3d2;
+  font-size:clamp(17px,2vw,23px);
+  text-align:center;
+}
+
+.xrpl-app-grid{
+  position:relative;
+  z-index:1;
+  display:grid;
+  grid-template-columns:repeat(7,minmax(0,1fr));
+  gap:16px;
+  max-width:1450px;
+  margin:0 auto;
+}
+
+.xrpl-app-card{
+  position:relative;
+  min-height:375px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:30px 18px 22px;
+  border-radius:18px;
+  border:1px solid var(--card-line);
+  background:
+    radial-gradient(circle at 50% 22%,var(--card-glow),transparent 31%),
+    linear-gradient(180deg,rgba(7,16,29,.93),rgba(2,8,17,.97));
+  color:#fff;
+  text-align:center;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.035),
+    0 20px 45px rgba(0,0,0,.32);
+  transition:
+    transform .18s ease,
+    border-color .18s ease,
+    box-shadow .18s ease;
+}
+
+.xrpl-app-card:hover{
+  transform:translateY(-7px);
+  border-color:var(--card-color);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.06),
+    0 28px 60px rgba(0,0,0,.45),
+    0 0 28px var(--card-glow);
+}
+
+.xrpl-app-card:focus-visible{
+  outline:2px solid #fff;
+  outline-offset:4px;
+}
+
+.xrpl-app-icon{
+  width:100px;
+  height:100px;
+  display:grid;
+  place-items:center;
+  margin-bottom:22px;
+  border-radius:50%;
+  background:radial-gradient(circle,var(--card-glow),transparent 68%);
+  color:var(--card-color);
+}
+
+.xrpl-app-icon svg{
+  width:68px;
+  height:68px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2.1;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  filter:drop-shadow(0 0 11px var(--card-color));
+}
+
+.xrpl-app-card h2{
+  margin:0 0 18px;
+  font-size:20px;
+  line-height:1.15;
+}
+
+.xrpl-app-card p{
+  margin:0;
+  color:#c4ccda;
+  font-size:14px;
+  line-height:1.65;
+}
+
+.xrpl-app-arrow{
+  margin-top:auto;
+  padding-top:24px;
+  color:var(--card-color);
+  font-size:33px;
+  line-height:1;
+}
+
+.xrpl-card-foundation{
+  --card-color:#ff941f;
+  --card-line:rgba(255,148,31,.32);
+  --card-glow:rgba(255,148,31,.13);
+}
+
+.xrpl-card-definitions{
+  --card-color:#168cff;
+  --card-line:rgba(22,140,255,.33);
+  --card-glow:rgba(22,140,255,.13);
+}
+
+.xrpl-card-wallets{
+  --card-color:#00d6d1;
+  --card-line:rgba(0,214,209,.33);
+  --card-glow:rgba(0,214,209,.13);
+}
+
+.xrpl-card-usage{
+  --card-color:#6ee82f;
+  --card-line:rgba(110,232,47,.28);
+  --card-glow:rgba(110,232,47,.11);
+}
+
+.xrpl-card-safety{
+  --card-color:#ff334f;
+  --card-line:rgba(255,51,79,.30);
+  --card-glow:rgba(255,51,79,.12);
+}
+
+.xrpl-card-reality{
+  --card-color:#984bff;
+  --card-line:rgba(152,75,255,.34);
+  --card-glow:rgba(152,75,255,.13);
+}
+
+.xrpl-card-house{
+  --card-color:#a9b3c6;
+  --card-line:rgba(169,179,198,.30);
+  --card-glow:rgba(169,179,198,.10);
+}
+
+.xrpl-builder-banner{
+  position:relative;
+  z-index:1;
+  display:flex;
+  align-items:center;
+  gap:24px;
+  max-width:1450px;
+  margin:42px auto 0;
+  padding:26px 34px;
+  border:1px solid rgba(119,61,255,.74);
+  border-left-color:rgba(255,145,22,.72);
+  border-radius:18px;
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      rgba(37,32,82,.22) 0,
+      rgba(37,32,82,.22) 14px,
+      rgba(3,10,23,.74) 14px,
+      rgba(3,10,23,.74) 28px
+    ),
+    linear-gradient(90deg,rgba(255,140,20,.05),rgba(93,43,225,.12));
+  box-shadow:0 22px 55px rgba(0,0,0,.36);
+}
+
+.xrpl-builder-icon{
+  width:78px;
+  height:78px;
+  flex:0 0 auto;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  color:#ff941f;
+  background:rgba(255,148,31,.07);
+  border:1px solid rgba(255,148,31,.34);
+  box-shadow:0 0 28px rgba(255,148,31,.12);
+}
+
+.xrpl-builder-icon svg{
+  width:45px;
+  height:45px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.xrpl-builder-copy{
+  flex:1;
+}
+
+.xrpl-builder-copy h2{
+  margin:0 0 6px;
+  font-size:30px;
+  letter-spacing:.035em;
+}
+
+.xrpl-builder-copy p{
+  margin:0;
+  color:#bdc7d6;
+  font-size:18px;
+}
+
+.xrpl-builder-status{
+  flex:0 0 auto;
+  padding:16px 24px;
+  border:1px solid rgba(53,115,255,.28);
+  border-radius:14px;
+  color:#278cff;
+  font-size:16px;
+  font-weight:800;
+  letter-spacing:.08em;
+}
+
+.xrpl-builder-status:focus-visible{outline:3px solid #ffcc66;outline-offset:4px}
+
+.xrpl-dashboard + .hoc-standard-footer{
+  margin-top:38px;
+}
+
+@media(max-width:1180px){
+  .xrpl-app-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+  }
+
+  .xrpl-app-card{
+    min-height:350px;
+  }
+}
+
+@media(max-width:760px){
+  .wrap{
+    padding:22px 14px 70px;
+  }
+
+  .xrpl-dashboard-hero{
+    flex-direction:column;
+    gap:22px;
+  }
+
+  .xrpl-dashboard-logo{
+    width:145px;
+    height:145px;
+    border-radius:34px;
+  }
+
+  .xrpl-dashboard-logo img{
+    width:105px;
+    height:105px;
+  }
+
+  .xrpl-dashboard-title h1{
+    white-space:normal;
+    text-align:center;
+  }
+
+  .xrpl-dashboard-tagline{
+    letter-spacing:.16em;
+  }
+
+  .xrpl-app-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .xrpl-app-card{
+    min-height:330px;
+  }
+
+  .xrpl-builder-banner{
+    align-items:flex-start;
+    flex-wrap:wrap;
+    padding:24px;
+  }
+
+  .xrpl-builder-copy{
+    min-width:calc(100% - 110px);
+  }
+
+  .xrpl-builder-status{
+    width:100%;
+    text-align:center;
+  }
+}
+
+@media(max-width:430px){
+  .xrpl-app-grid{
+    grid-template-columns:1fr;
+  }
+
+  .xrpl-app-card{
+    min-height:300px;
+  }
+}
+</style>
+
+<meta name="robots" content="noindex, follow" data-xrpl-robots="1"></head>
+<body id="top">
+  <div class="wrap">
+<section class="xrpl-dashboard"><div class="xrpl-language-row"><label id="xrpl-language-label" for="xrpl-language"><span aria-hidden="true">🌐</span> <span data-i18n="lang.label">اللغة</span></label><select id="xrpl-language" aria-labelledby="xrpl-language-label" data-i18n-attr="aria-label:lang.select" aria-label="اللغة"><option value="en" lang="en">English</option><option value="pt-BR" lang="pt-BR">Português (Brasil) (under review)</option><option value="es" lang="es">Español (under review)</option><option value="fr" lang="fr">Français (under review)</option><option value="de" lang="de">Deutsch (under review)</option><option value="ja" lang="ja">日本語 (under review)</option><option value="ko" lang="ko">한국어 (under review)</option><option value="zh-CN" lang="zh-CN">中文（简体） (under review)</option><option value="hi" lang="hi">हिन्दी (under review)</option><option value="ar" lang="ar" dir="rtl">العربية (under review)</option></select><span class="xrpl-language-note" data-i18n="lang.note">محفوظ على هذا الجهاز. ينطبق على كل صفحة في ⁦XRPL LAYMAN.⁩</span></div><p id="xrpl-review-notice" class="xrpl-review-notice" role="status">Translation under review. This is not a certified XRPL LAYMAN translation.</p>
+
+  <header class="xrpl-dashboard-hero">
+    <div class="xrpl-dashboard-logo">
+      <img src="/assets/xrpl/xrpl_layman_icon.png" alt="XRPL LAYMAN">
+    </div>
+
+    <div class="xrpl-dashboard-title">
+      <h1 data-i18n="xrpl.dc649ba3">⁦XRPL⁩ <span data-i18n-slot="s1">LAYMAN</span></h1>
+      <div class="xrpl-dashboard-tagline" data-i18n="understand-use-build.8aa41112">افهم. استخدم. ابنِ.</div>
+    </div>
+  </header>
+
+  <div class="xrpl-dashboard-rule"></div>
+
+  <p class="xrpl-dashboard-intro" data-i18n="understand-the-xrp-ledger-use-it-wit.0a80ead4">افهم ⁦XRP Ledger.⁩ استخدمه بثقة. ابنِ ما يأتي.</p>
+
+  <nav class="xrpl-app-grid" aria-label="تطبيقات التعلم في ⁦XRPL LAYMAN⁩" data-i18n-attr="aria-label:xrpl-layman-learning-applications.363081c1">
+
+    <a class="xrpl-app-card xrpl-card-foundation" href="/xrpl/ar/definitions.html">
+      <div class="xrpl-app-icon">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M20 7c20 11 20 39 0 50"/>
+          <path d="M44 7c-20 11-20 39 0 50"/>
+          <path d="M22 15h20M18 25h28M18 39h28M22 49h20"/>
+        </svg>
+      </div>
+      <h2 data-i18n="foundation.fdde6afa">الأساس</h2>
+      <p data-i18n="start-here-core-concepts-the-ledger.d99137a0">ابدأ هنا. المفاهيم الأساسية، والسجل، وكيف يتصل كل ذلك.</p>
+      <span class="xrpl-app-arrow">→</span>
+    </a>
+
+    <a class="xrpl-app-card xrpl-card-definitions" href="/xrpl/ar/definitions.html">
+      <div class="xrpl-app-icon">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M7 12c10-3 18-1 25 5v38c-7-6-15-8-25-5z"/>
+          <path d="M57 12c-10-3-18-1-25 5v38c7-6 15-8 25-5z"/>
+          <path d="M32 17v38"/>
+        </svg>
+      </div>
+      <h2 data-i18n="nav.definitions">التعريفات</h2>
+      <p data-i18n="plain-english-definitions-of-key-ter.bedc662d">تعريفات مبسطة للمصطلحات الأساسية ومفاهيم ⁦XRPL.⁩</p>
+      <span class="xrpl-app-arrow">→</span>
+    </a>
+
+    <a class="xrpl-app-card xrpl-card-wallets" href="/xrpl/ar/wallet-basics.html">
+      <div class="xrpl-app-icon">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M9 16h40a7 7 0 0 1 7 7v28H15a7 7 0 0 1-7-7V17a8 8 0 0 1 8-8h31"/>
+          <path d="M42 29h14v14H42a7 7 0 0 1 0-14z"/>
+          <circle cx="45" cy="36" r="1.5"/>
+        </svg>
+      </div>
+      <h2 data-i18n="nav.wallets">المحافظ</h2>
+      <p data-i18n="wallet-types-accounts-setup-funding.ca68cd74">أنواع المحافظ والحسابات والإعداد والتمويل والحفظ ⁦(custody)⁩ والحماية.</p>
+      <span class="xrpl-app-arrow">→</span>
+    </a>
+
+    <a class="xrpl-app-card xrpl-card-usage" href="/xrpl/ar/usage.html">
+      <div class="xrpl-app-icon">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M36 5 16 36h16l-4 23 20-32H32z"/>
+        </svg>
+      </div>
+      <h2 data-i18n="nav.usage">الاستخدام</h2>
+      <p data-i18n="payments-tokens-nfts-liquidity-trans.fd385814">الدفعات والرموز و⁦NFT⁩ والسيولة والمعاملات والتنفيذ الحقيقي.</p>
+      <span class="xrpl-app-arrow">→</span>
+    </a>
+
+    <a class="xrpl-app-card xrpl-card-safety" href="/xrpl/ar/safety.html">
+      <div class="xrpl-app-icon">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M32 5 54 14v17c0 14-9 23-22 28C19 54 10 45 10 31V14z"/>
+          <path d="M32 19v18M32 45h.01"/>
+        </svg>
+      </div>
+      <h2 data-i18n="nav.safety">الأمان</h2>
+      <p data-i18n="security-essentials-scams-to-avoid-a.a2a6c5fb">أساسيات الأمان، والاحتيالات التي تُتجنَّب، وحماية أصولك.</p>
+      <span class="xrpl-app-arrow">→</span>
+    </a>
+
+    <a class="xrpl-app-card xrpl-card-reality" href="/xrpl/ar/investing-reality.html">
+      <div class="xrpl-app-icon">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M9 55V33h10v22M27 55V20h10v35M45 55V9h10v46"/>
+          <path d="M6 55h52"/>
+        </svg>
+      </div>
+      <h2 data-i18n="investing-reality.b1d9866c">واقع الاستثمار</h2>
+      <p data-i18n="the-truth-about-risk-liquidity-cycle.b4fbd981">الحقيقة عن المخاطر والسيولة والدورات والمنظور الطويل.</p>
+      <span class="xrpl-app-arrow">→</span>
+    </a>
+
+    <a class="xrpl-app-card xrpl-card-house" href="/">
+      <div class="xrpl-app-icon">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M8 24 32 8l24 16"/>
+          <path d="M12 26h40M15 51h34M10 57h44"/>
+          <path d="M19 27v24M28 27v24M36 27v24M45 27v24"/>
+        </svg>
+      </div>
+      <h2 data-i18n="the-house.41f95977">البيت</h2>
+      <p data-i18n="return-to-the-main-hub-and-explore-h.23a2c35c">ارجع إلى المركز الرئيسي واستكشف مشاريع ⁦House of Cauliman.⁩</p>
+      <span class="xrpl-app-arrow">→</span>
+    </a>
+
+  </nav>
+
+  <section class="xrpl-builder-banner">
+    <div class="xrpl-builder-icon">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M39 9c8 3 13 8 16 16L39 41l-16-2-2-16z"/>
+        <path d="m21 23-9 4 8 8M39 41l-4 9-8-8"/>
+        <circle cx="41" cy="23" r="4"/>
+        <path d="M18 45c-5 0-9 4-9 9 5 0 9-4 9-9z"/>
+      </svg>
+    </div>
+
+    <div class="xrpl-builder-copy">
+      <h2 data-i18n="builders-hub.47501cc6">مركز المطوّرين</h2>
+      <p data-i18n="six-practical-lessons-create-control.bcddfcc3">ستة دروس عملية. أنشئ وتحكم وابنِ على ⁦XRPL.⁩</p>
+    </div>
+
+    <a class="xrpl-builder-status" href="/xrpl/ar/builders/" data-i18n="open-builders-hub.e92257e8">افتح مركز المطوّرين ←</a>
+  </section>
+
+</section>
+
+    <footer class="hoc-standard-footer">
+  <div data-i18n="footer.project">مشروع ⁦House of Cauliman⁩</div>
+  <div class="hoc-standard-footer-links" data-i18n="s.59a7bc31"><a href="/terms.html" data-i18n-slot="s1" data-i18n="footer.terms">الشروط</a> · <a href="/privacy.html" data-i18n-slot="s2" data-i18n="footer.privacy">الخصوصية</a> · <a href="/disclaimer.html" data-i18n-slot="s3" data-i18n="footer.disclaimer">إخلاء المسؤولية</a> · <a href="https://houseofcauliman.com" data-i18n-slot="s4">houseofcauliman.com</a></div>
+  <div data-i18n="footer.rights">© ⁦2026 House of Cauliman.⁩ جميع الحقوق محفوظة.</div>
+</footer>
+  </div>
+<script src="/xrpl/i18n/catalogs.js" defer></script><script src="/xrpl/i18n/release.js" defer></script><script src="/xrpl/i18n/i18n.js" defer></script></body>
+</html>

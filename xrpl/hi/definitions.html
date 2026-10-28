@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="hi" data-xrpl-page="definitions" data-xrpl-i18n="1" dir="ltr">
+<head><script data-xrpl-early="1">(function(){
+  var KNOWN={"en":1,"pt-BR":1,"es":1,"fr":1,"de":1,"ja":1,"ko":1,"zh-CN":1,"hi":1,"ar":1};
+  var SLUGS={"pt-br":"pt-BR","es":"es","fr":"fr","de":"de","ja":"ja","ko":"ko","zh-cn":"zh-CN","hi":"hi","ar":"ar"};
+  var path=location.pathname, at=path.indexOf("/xrpl/"), lang="";
+  if(at>=0){
+    var slug=path.slice(at+6).split("/")[0];
+    if(SLUGS[slug]) lang=SLUGS[slug];
+  }
+  if(!lang){ try{ lang=localStorage.getItem("xrpl-layman-language")||""; }catch(e){} }
+  if(!KNOWN[lang]) return;
+  document.documentElement.lang=lang;
+  document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+})();</script><link rel="stylesheet" href="/xrpl/i18n/i18n.css"><!--xrpl-seo-start--><link rel="canonical" href="https://houseofcauliman.com/xrpl/hi/definitions.html"><!--xrpl-seo-end-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title data-i18n="meta.definitions.title">XRPL परिभाषाएँ | XRPL LAYMAN</title>
+<meta name="description" content="XRP Ledger, वॉलेट, खाते, जारीकर्ता (issuer), ट्रस्टलाइन (trustline), रिज़र्व (reserve), टोकन, लेनदेन, DEX, AMM, NFT, और ये सब कैसे जुड़ते हैं, समझें।">
+<meta property="og:title" content="XRPL Definitions | XRPL LAYMAN">
+<meta property="og:description" content="The core XRP Ledger concepts explained clearly, deeply, and without the usual confusion.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#030812">
+<meta name="apple-mobile-web-app-title" content="XRPL LAYMAN">
+<meta name="application-name" content="XRPL LAYMAN">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/xrpl_layman/favicon-32x32.png?v=2">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/xrpl_layman/favicon-16x16.png?v=2">
+<link rel="shortcut icon" href="/assets/favicons/xrpl_layman/favicon.ico?v=2">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/xrpl_layman/apple-touch-icon.png?v=2">
+<style>
+:root{
+  --bg:#02050b;
+  --panel:#07101d;
+  --panel2:#0a1423;
+  --line:rgba(132,168,219,.17);
+  --text:#f4f7fb;
+  --muted:#aeb9c9;
+  --blue:#168cff;
+  --cyan:#00d6d1;
+  --gold:#ff9d25;
+  --green:#59d879;
+  --red:#ff4059;
+  --purple:#9a55ff;
+  --shadow:0 22px 60px rgba(0,0,0,.38);
+  --max:1320px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{margin:0;padding:0}
+body{
+  min-height:100vh;
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:
+    radial-gradient(circle at 8% 4%,rgba(0,106,255,.20),transparent 28%),
+    radial-gradient(circle at 92% 12%,rgba(100,44,220,.15),transparent 30%),
+    linear-gradient(145deg,#020711,#02050b 50%,#000);
+}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+.wrap{width:min(100%,var(--max));margin:auto;padding:24px 20px 80px}
+
+.appbar{
+  position:sticky;
+  top:12px;
+  z-index:20;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  margin-bottom:28px;
+  padding:12px 16px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:rgba(4,10,20,.82);
+  backdrop-filter:blur(20px);
+  box-shadow:0 14px 35px rgba(0,0,0,.30);
+}
+.appbar-brand{display:flex;align-items:center;gap:12px;min-width:0}
+.appbar-brand img{width:44px;height:44px;object-fit:contain}
+.appbar-title{font-size:15px;font-weight:850;letter-spacing:.02em}
+.appbar-sub{margin-top:2px;color:var(--muted);font-size:11px}
+.appbar-links{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.appbar-links a{
+  padding:9px 12px;
+  border:1px solid transparent;
+  border-radius:10px;
+  color:var(--muted);
+  font-size:12px;
+  font-weight:750;
+}
+.appbar-links a:hover,.appbar-links a.active{
+  color:#fff;
+  border-color:rgba(22,140,255,.35);
+  background:rgba(22,140,255,.10);
+}
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  align-items:center;
+  gap:34px;
+  padding:44px;
+  border:1px solid rgba(40,112,230,.26);
+  border-radius:26px;
+  background:
+    radial-gradient(circle at 12% 0,rgba(18,126,255,.24),transparent 40%),
+    linear-gradient(145deg,rgba(7,18,35,.98),rgba(2,7,15,.99));
+  box-shadow:var(--shadow);
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  width:560px;
+  height:560px;
+  right:-300px;
+  top:-340px;
+  border:1px solid rgba(80,137,255,.25);
+  border-radius:50%;
+  box-shadow:0 0 0 24px rgba(55,100,220,.05),0 0 0 48px rgba(55,100,220,.025);
+}
+.hero-logo{
+  position:relative;
+  z-index:1;
+  width:150px;
+  height:150px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(101,166,255,.45);
+  border-radius:34px;
+  background:linear-gradient(145deg,#09265f,#020916);
+  box-shadow:inset 0 1px rgba(255,255,255,.15),0 25px 60px rgba(0,0,0,.45);
+}
+.hero-logo img{width:108px;height:108px;object-fit:contain;filter:drop-shadow(0 0 18px rgba(52,160,255,.6))}
+.hero-copy{position:relative;z-index:1}
+.eyebrow{color:var(--blue);font-size:12px;font-weight:850;letter-spacing:.16em;text-transform:uppercase}
+h1{margin:8px 0 12px;font-size:clamp(38px,6vw,72px);line-height:.98;letter-spacing:-.045em}
+.hero p{max-width:820px;margin:0;color:var(--muted);font-size:18px;line-height:1.65}
+.progress{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:22px;
+  color:#d8e7fb;
+  font-size:12px;
+  font-weight:750;
+}
+.progress-track{width:190px;height:6px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}
+.progress-fill{width:0;height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan));transition:width .25s ease}
+
+.chapter-nav{
+  display:grid;
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:10px;
+  margin:22px 0;
+}
+.chapter-nav a{
+  padding:13px 10px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:rgba(255,255,255,.025);
+  color:var(--muted);
+  font-size:11px;
+  font-weight:800;
+  text-align:center;
+}
+.chapter-nav a:hover{color:#fff;border-color:rgba(22,140,255,.40);background:rgba(22,140,255,.08)}
+
+.lesson{
+  margin-top:22px;
+  padding:30px;
+  border:1px solid var(--line);
+  border-radius:22px;
+  background:linear-gradient(145deg,rgba(8,18,32,.96),rgba(3,9,18,.98));
+  box-shadow:var(--shadow);
+}
+.lesson-head{
+  display:grid;
+  grid-template-columns:58px 1fr;
+  gap:16px;
+  align-items:start;
+  margin-bottom:22px;
+}
+.lesson-number{
+  width:58px;height:58px;
+  display:grid;place-items:center;
+  border-radius:16px;
+  color:var(--accent,var(--blue));
+  border:1px solid color-mix(in srgb,var(--accent,var(--blue)) 38%,transparent);
+  background:color-mix(in srgb,var(--accent,var(--blue)) 10%,transparent);
+  font-size:18px;font-weight:900;
+}
+.lesson h2{margin:0;font-size:30px;letter-spacing:-.025em}
+.lesson-lead{max-width:900px;margin:7px 0 0;color:var(--muted);font-size:16px;line-height:1.65}
+.lesson h3{margin:28px 0 9px;font-size:18px}
+.lesson p,.lesson li{color:var(--muted);font-size:15px;line-height:1.75}
+.lesson strong{color:#fff}
+
+.concept-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:20px}
+.concept{
+  padding:20px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:rgba(255,255,255,.025);
+}
+.concept h3{margin:0 0 8px;color:var(--accent,var(--blue));font-size:16px}
+.concept p{margin:0;font-size:14px}
+
+.flow{
+  display:flex;
+  align-items:stretch;
+  gap:10px;
+  margin:22px 0;
+  overflow:auto;
+  padding:8px 2px 12px;
+}
+.flow-step{
+  flex:1 0 145px;
+  min-height:110px;
+  display:grid;
+  place-items:center;
+  padding:16px;
+  border:1px solid var(--line);
+  border-radius:15px;
+  background:#08111e;
+  text-align:center;
+  font-size:13px;
+  font-weight:800;
+}
+.flow-arrow{align-self:center;color:var(--blue);font-size:24px}
+
+.compare{width:100%;border-collapse:collapse;margin-top:20px}
+.compare th,.compare td{padding:14px;border:1px solid var(--line);text-align:left;vertical-align:top}
+.compare th{background:rgba(22,140,255,.09);color:#fff;font-size:13px}
+.compare td{color:var(--muted);font-size:14px}
+
+.callout{
+  margin-top:20px;
+  padding:17px 18px;
+  border-left:3px solid var(--accent,var(--blue));
+  border-radius:12px;
+  background:color-mix(in srgb,var(--accent,var(--blue)) 8%,transparent);
+}
+.callout strong{display:block;margin-bottom:5px;color:var(--accent,var(--blue));font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.callout p{margin:0}
+
+.tool{
+  margin-top:24px;
+  padding:22px;
+  border:1px solid rgba(22,140,255,.25);
+  border-radius:18px;
+  background:rgba(3,11,23,.82);
+}
+.tool h3{margin:0 0 8px;font-size:20px}
+.tool-intro{margin:0 0 18px;color:var(--muted)}
+.fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.field label{display:block;margin-bottom:7px;color:#c8d4e3;font-size:12px;font-weight:800}
+.field input{
+  width:100%;
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:#030914;
+  color:#fff;
+  outline:none;
+}
+.field input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(22,140,255,.10)}
+.result{
+  margin-top:15px;
+  padding:17px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:rgba(255,255,255,.025);
+}
+.result-value{font-size:26px;font-weight:900;color:var(--green)}
+.result-copy{margin-top:5px;color:var(--muted);font-size:13px;line-height:1.55}
+
+.identity-demo{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+.asset-card{padding:18px;border:1px solid var(--line);border-radius:15px;background:#060e1a}
+.asset-code{font-size:27px;font-weight:900}
+.asset-issuer{margin-top:8px;color:var(--muted);font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:11px;overflow-wrap:anywhere}
+.asset-status{margin-top:13px;font-size:12px;font-weight:850}
+.good{color:var(--green)}.warning{color:var(--red)}
+
+.trust-demo{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;margin-top:20px}
+.trust-node{
+  min-height:130px;
+  display:grid;
+  place-items:center;
+  padding:18px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:#06101d;
+  text-align:center;
+}
+.trust-line{
+  position:relative;
+  width:190px;
+  height:8px;
+  border-radius:999px;
+  background:rgba(255,255,255,.08);
+  overflow:hidden;
+}
+.trust-line span{
+  display:block;width:0;height:100%;
+  background:linear-gradient(90deg,var(--cyan),var(--blue));
+  transition:width .45s ease;
+}
+.trust-demo.active .trust-line span{width:100%}
+.tool-button{
+  margin-top:16px;
+  padding:11px 16px;
+  border:1px solid rgba(22,140,255,.38);
+  border-radius:11px;
+  background:rgba(22,140,255,.12);
+  color:#fff;
+  cursor:pointer;
+  font-weight:850;
+}
+.tool-button:hover{background:rgba(22,140,255,.20)}
+
+.mistakes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:18px}
+.mistake{padding:16px;border:1px solid rgba(255,64,89,.22);border-radius:13px;background:rgba(255,64,89,.045);color:#d9e0e9;font-size:14px}
+.mistake b{color:var(--red)}
+
+.quiz-question{margin-top:18px;padding:18px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.02)}
+.quiz-question h3{margin:0 0 12px;font-size:16px}
+.quiz-options{display:grid;gap:8px}
+.quiz-options button{
+  width:100%;
+  padding:11px 13px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:#050d18;
+  color:var(--muted);
+  text-align:left;
+  cursor:pointer;
+}
+.quiz-options button.correct{border-color:rgba(89,216,121,.55);background:rgba(89,216,121,.10);color:#fff}
+.quiz-options button.wrong{border-color:rgba(255,64,89,.55);background:rgba(255,64,89,.10);color:#fff}
+
+.next-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.next-card{
+  padding:22px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:rgba(255,255,255,.025);
+}
+.next-card strong{display:block;font-size:18px}
+.next-card span{display:block;margin-top:7px;color:var(--muted);font-size:13px;line-height:1.5}
+.next-card b{display:block;margin-top:20px;color:var(--blue)}
+
+.footer{
+  margin-top:36px;
+  padding:22px 14px;
+  border-top:1px solid var(--line);
+  color:#8f9bad;
+  font-size:12px;
+  line-height:1.8;
+  text-align:center;
+}
+.footer a{color:inherit}
+
+@media(max-width:900px){
+  .appbar-links{display:none}
+  .hero{grid-template-columns:1fr;text-align:center;padding:34px 24px}
+  .hero-logo{margin:auto}
+  .hero p{margin:auto}
+  .progress{justify-content:center}
+  .chapter-nav{grid-template-columns:repeat(3,1fr)}
+  .concept-grid,.fields,.next-grid{grid-template-columns:1fr}
+  .trust-demo{grid-template-columns:1fr}
+  .trust-line{width:8px;height:90px;margin:auto}
+  .trust-line span{width:100%;height:0}
+  .trust-demo.active .trust-line span{height:100%;width:100%}
+}
+@media(max-width:620px){
+  .wrap{padding:14px 12px 60px}
+  .hero-logo{width:120px;height:120px}
+  .hero-logo img{width:86px;height:86px}
+  .lesson{padding:22px 17px}
+  .lesson-head{grid-template-columns:46px 1fr}
+  .lesson-number{width:46px;height:46px}
+  .lesson h2{font-size:24px}
+  .chapter-nav{grid-template-columns:repeat(2,1fr)}
+  .concept-grid,.identity-demo,.mistakes{grid-template-columns:1fr}
+}
+
+.home-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  min-height:42px;
+  padding:10px 15px;
+  border:1px solid rgba(22,140,255,.40);
+  border-radius:11px;
+  background:rgba(22,140,255,.12);
+  color:#fff;
+  font-size:12px;
+  font-weight:850;
+  white-space:nowrap;
+}
+.home-button:hover{
+  background:rgba(22,140,255,.22);
+  border-color:rgba(22,140,255,.65);
+}
+@media(max-width:900px){
+  .home-button-text{display:none}
+}
+
+
+
+
+</style>
+<meta name="robots" content="noindex, follow" data-xrpl-robots="1"></head>
+<body id="top">
+<div class="wrap">
+
+<nav class="appbar">
+  <a class="appbar-brand" href="/xrpl/hi/">
+    <img src="/assets/xrpl/xrpl_layman_icon.png" alt="XRPL LAYMAN">
+    <span>
+      <span class="appbar-title">XRPL LAYMAN</span>
+      <span class="appbar-sub" data-i18n="nav.backDashboard">डैशबोर्ड पर वापस</span>
+    </span>
+  </a>
+  
+<a class="home-button" href="/xrpl/hi/" aria-label="XRPL LAYMAN पर वापस" data-i18n-attr="aria-label:nav.backHome">
+  <span aria-hidden="true">←</span>
+  <span class="home-button-text" data-i18n="nav.backHome">XRPL LAYMAN पर वापस</span>
+</a>
+<div class="appbar-links">
+    <a href="/xrpl/hi/" data-i18n="nav.dashboard">डैशबोर्ड</a>
+    <a class="active" href="/xrpl/hi/definitions.html" data-i18n="nav.definitions">परिभाषाएँ</a>
+    <a href="/xrpl/hi/wallet-basics.html" data-i18n="nav.wallets">वॉलेट</a>
+    <a href="/xrpl/hi/usage.html" data-i18n="nav.usage">उपयोग</a>
+    <a href="/xrpl/hi/safety.html" data-i18n="nav.safety">सुरक्षा</a>
+    <a href="/xrpl/hi/investing-reality.html" data-i18n="nav.reality">वास्तविकता</a>
+  </div>
+</nav><p id="xrpl-review-notice" class="xrpl-review-notice" role="status">Translation under review. This is not a certified XRPL LAYMAN translation.</p>
+
+<header class="hero">
+  <div class="hero-logo">
+    <img src="/assets/xrpl/xrpl_layman_icon.png" alt="XRPL LAYMAN">
+  </div>
+  <div class="hero-copy">
+    <div class="eyebrow" data-i18n="definitions-application.e04aef1b">परिभाषाएँ ऐप्लिकेशन</div>
+    <h1 data-i18n="understand-the-system.c6a69f4f">व्यवस्था समझें।</h1>
+    <p data-i18n="this-isn-t-a-list-of-crypto-words-it.82d33c34">यह क्रिप्टो शब्दों की सूची नहीं है। यह वह आधार है जिसकी ज़रूरत आपको XRPL क्या है, आपका वॉलेट क्या नियंत्रित करता है, परिसंपत्तियों की पहचान कैसे होती है, और लेजर इस्तेमाल करने पर वास्तव में क्या होता है, यह समझने के लिए है।</p>
+    <div class="progress">
+      <span data-i18n="lesson-progress.2f777fc9">पाठ प्रगति</span>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <span id="progressText">0%</span>
+    </div>
+  </div>
+</header>
+
+<nav class="chapter-nav">
+  <a href="#ledger" data-i18n="the-ledger.8ab5668d">लेजर</a>
+  <a href="#wallets" data-i18n="nav.wallets">वॉलेट</a>
+  <a href="#assets" data-i18n="assets.20e33862">परिसंपत्तियाँ</a>
+  <a href="#issuers" data-i18n="issuers.888090ef">जारीकर्ता (issuers)</a>
+  <a href="#trustlines" data-i18n="trustlines.57b2be31">ट्रस्टलाइनें (trustlines)</a>
+  <a href="#reserves" data-i18n="reserves.5ac63fc4">रिज़र्व (reserves)</a>
+  <a href="#transactions" data-i18n="transactions.1e3281a9">लेनदेन</a>
+  <a href="#markets" data-i18n="dex-amm.22b33553">DEX + AMM</a>
+  <a href="#nfts">NFTs</a>
+  <a href="#mistakes" data-i18n="mistakes.7868f675">गलतियाँ</a>
+  <a href="#quiz" data-i18n="knowledge-check.67f1d1d1">ज्ञान जाँच</a>
+  <a href="#next" data-i18n="next-step.574f02b7">अगला कदम</a>
+</nav>
+
+<section class="lesson" id="ledger" style="--accent:var(--blue)">
+  <div class="lesson-head">
+    <div class="lesson-number">01</div>
+    <div>
+      <h2 data-i18n="what-s-the-xrp-ledger.9e19a408">XRP Ledger क्या है?</h2>
+      <p class="lesson-lead" data-i18n="xrpl-is-a-public-ledger-that-keeps-o.bba3d4a1">XRPL एक सार्वजनिक लेजर है जो खातों, बैलेंस, परिसंपत्तियों, ऑफ़र (offer), NFT, सेटिंग और लेनदेन का एक साझा रिकॉर्ड रखता है।</p>
+    </div>
+  </div>
+
+  <p data-i18n="forget-the-price-chart-for-a-minute.c08ab92d">एक मिनट के लिए कीमत का चार्ट भूल जाएँ। लेजर ही वास्तविक व्यवस्था है। यह वह सार्वजनिक रिकॉर्ड है जिस पर सब सहमत होते हैं। जब लेनदेन वैलिडेटेड (validated) होता है, लेजर अपडेट होता है और वह परिणाम साझा इतिहास का हिस्सा बन जाता है।</p>
+
+  <div class="concept-grid">
+    <div class="concept">
+      <h3 data-i18n="public.dc5eb704">सार्वजनिक</h3>
+      <p data-i18n="anyone-can-inspect-addresses-transac.fe505816">कोई भी पते, लेनदेन, बैलेंस, ऑफ़र (offer) और लेजर वस्तुएँ देख सकता है।</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="shared.50d0d8dd">साझा</h3>
+      <p data-i18n="independent-servers-agree-on-the-sam.6f55feae">स्वतंत्र सर्वर एक ही क्रमबद्ध अवस्था पर सहमत होते हैं, एक कंपनी के डेटाबेस मालिक होने के बजाय।</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="final.672b22cc">अंतिम</h3>
+      <p data-i18n="once-your-transaction-is-validated-t.ab3a35e3">एक बार आपका लेनदेन वैलिडेटेड (validated) हो जाए, तो कोई ग्राहक-सेवा डेस्क नहीं जो उसे आपके लिए उलट दे।</p>
+    </div>
+  </div>
+
+  <div class="flow">
+    <div class="flow-step" data-i18n="you-create-a-transaction.76a614dc">आप लेनदेन बनाते हैं</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step" data-i18n="your-wallet-signs-it.f2d9a2bd">आपका वॉलेट उसे साइन करता है</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step" data-i18n="the-network-validates-it.c15e86c1">नेटवर्क उसे वैलिडेट करता है</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step" data-i18n="the-ledger-updates.d815416d">लेजर अपडेट होता है</div>
+  </div>
+
+  <div class="callout">
+    <strong data-i18n="layman-tip.4b644ca0">आसान सुझाव</strong>
+    <p data-i18n="think-of-xrpl-as-the-shared-database.0c61a794">XRPL को ऐप के नीचे साझा डेटाबेस मानें। Xaman, एक्सचेंज, एक्सप्लोरर, गेम और मार्केटप्लेस इंटरफ़ेस हैं। लेजर वह रिकॉर्ड है जिसे वे पढ़ और लिख रहे हैं।</p>
+  </div>
+</section>
+
+<section class="lesson" id="wallets" style="--accent:var(--cyan)">
+  <div class="lesson-head">
+    <div class="lesson-number">02</div>
+    <div>
+      <h2 data-i18n="wallet-account-address-and-keys.adf082b6">वॉलेट, खाता, पता और की (keys)</h2>
+      <p class="lesson-lead" data-i18n="people-use-these-words-like-they-re.4dbc34b9">लोग इन शब्दों को ऐसे इस्तेमाल करते हैं जैसे वे एक-दूसरे की जगह ले सकते हों। वे जुड़े हैं, पर एक ही चीज़ नहीं।</p>
+    </div>
+  </div>
+
+  <div class="concept-grid">
+    <div class="concept">
+      <h3 data-i18n="account.85dfa32c">खाता</h3>
+      <p data-i18n="the-account-s-the-on-ledger-identity.29528beb">खाता लेजर पर वह पहचान है जो बैलेंस, सेटिंग और स्वामित्व वाली वस्तुएँ रखती है।</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="address.d70f93df">पता</h3>
+      <p data-i18n="the-public-identifier-people-use-to.41735ee5">वह सार्वजनिक पहचानकर्ता जिससे लोग आपके XRPL खाते में परिसंपत्ति भेजते हैं। यह <strong data-i18n-slot="s1" dir="ltr" class="xrpl-ltr" translate="no">r</strong> से शुरू होता है।</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="wallet-app.45c65b75">वॉलेट ऐप</h3>
+      <p data-i18n="the-software-that-helps-you-view-the.bd40376a">वह सॉफ़्टवेयर जो खाता देखने, लेनदेन बनाने और उन्हें अपनी की (keys) से साइन करने में मदद करता है।</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="private-keys.f0dbb3c7">प्राइवेट की (private keys)</h3>
+      <p data-i18n="the-secret-authority-that-proves-you.94c08ea2">वह गुप्त अथॉरिटी जो साबित करती है कि आप खाता नियंत्रित करते हैं। जिसके पास की (keys) हैं, उसके पास खाता है।</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="seed.32fe9f5b">सीड (seed)</h3>
+      <p data-i18n="a-human-manageable-secret-that-can-d.8636fdfc">ऐसा सीक्रेट (secret) जिसे व्यक्ति संभाल सके और जिससे क्रिप्टोग्राफ़िक कुंजियाँ (keys) निकाली जा सकें। यह ऐसा पासवर्ड नहीं है जिसे आप रीसेट कर सकें।</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="exchange-balance.f5960b4e">एक्सचेंज बैलेंस</h3>
+      <p data-i18n="usually-an-entry-inside-the-exchange.72600dd7">आमतौर पर एक्सचेंज की व्यवस्था के अंदर एक प्रविष्टि। एक्सचेंज वास्तविक लेजर-पर खाता नियंत्रित कर सकता है।</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong data-i18n="reality-check.9feddbab">वास्तविकता की जाँच</strong>
+    <p data-i18n="your-wallet-app-doesn-t-hold-your-as.3bd4da5d">आपका वॉलेट ऐप परिसंपत्तियाँ वैसे नहीं रखता जैसे भौतिक वॉलेट नकदी रखता है। लेजर खाता अवस्था दर्ज करता है। आपका वॉलेट उसे नियंत्रित करने के लिए ज़रूरी अथॉरिटी रखता है।</p>
+  </div>
+</section>
+
+<section class="lesson" id="assets" style="--accent:var(--gold)">
+  <div class="lesson-head">
+    <div class="lesson-number">03</div>
+    <div>
+      <h2 data-i18n="xrp-vs-issued-assets.f5c63a0f">$XRP बनाम जारी परिसंपत्तियाँ</h2>
+      <p class="lesson-lead" data-i18n="xrp-is-native-to-xrpl-issued-assets.a96959a6">$XRP XRPL का मूल है। जारी परिसंपत्तियाँ खातों द्वारा बनाई जाती हैं और मुद्रा कोड तथा जारीकर्ता (issuer) दोनों से पहचानी जाती हैं।</p>
+    </div>
+  </div>
+
+  <table class="compare">
+    <thead>
+      <tr><th dir="ltr" class="xrpl-ltr" translate="no">$XRP</th><th data-i18n="issued-asset.beac78cd">जारी परिसंपत्ति</th></tr>
+    </thead>
+    <tbody>
+      <tr><td data-i18n="native-asset-of-the-ledger.5826b6b8">लेजर की मूल परिसंपत्ति</td><td data-i18n="created-and-issued-by-an-xrpl-accoun.106e71f9">एक XRPL खाते द्वारा बनाया और जारी किया गया</td></tr>
+      <tr><td data-i18n="no-issuer-address.197f7a7a">कोई जारीकर्ता पता नहीं</td><td data-i18n="issuer-address-is-part-of-its-identi.d1b4ce8a">जारीकर्ता पता (issuer address) उसकी पहचान का हिस्सा है</td></tr>
+      <tr><td data-i18n="no-trustline-needed.3867ff13">ट्रस्टलाइन (trustline) की ज़रूरत नहीं</td><td data-i18n="trustline-usually-required.cb68ce8d">ट्रस्टलाइन (trustline) आमतौर पर ज़रूरी</td></tr>
+      <tr><td data-i18n="used-for-reserves-and-transaction-co.64cd2832">रिज़र्व (reserve) और लेनदेन लागत के लिए इस्तेमाल</td><td data-i18n="can-represent-stablecoins-loyalty-po.c7bae63a">स्टेबलकॉइन, लॉयल्टी पॉइंट, गेम परिसंपत्तियाँ, दावे या प्रोजेक्ट टोकन दर्शा सकता है</td></tr>
+      <tr><td data-i18n="can-t-be-frozen-by-an-issuer.739bc330">जारीकर्ता (issuer) द्वारा फ़्रीज़ (freeze) नहीं हो सकता</td><td data-i18n="issuer-settings-may-allow-freezing-o.bda31d2f">जारीकर्ता सेटिंग फ़्रीज़ (freeze) या ऑथराइज़ेशन (authorization) नियंत्रण की अनुमति दे सकती हैं</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <strong data-i18n="reality-check.9feddbab">वास्तविकता की जाँच</strong>
+    <p data-i18n="a-token-named-xrp-isn-t-xrp-native-x.c68c4f04">XRP नाम का टोकन $XRP नहीं है। मूल $XRP का कोई जारीकर्ता (issuer) नहीं होता। नकली टोकन टिकर और लोगो कॉपी कर सकता है, पर लेजर की मूल परिसंपत्ति नहीं बन सकता।</p>
+  </div>
+</section>
+
+<section class="lesson" id="issuers" style="--accent:var(--purple)">
+  <div class="lesson-head">
+    <div class="lesson-number">04</div>
+    <div>
+      <h2 data-i18n="the-issuer-is-part-of-the-asset.fdc265fe">जारीकर्ता (issuer) परिसंपत्ति का हिस्सा है</h2>
+      <p class="lesson-lead" data-i18n="on-xrpl-the-ticker-alone-doesn-t-ide.1b88095c">XRPL पर अकेला टिकर जारी परिसंपत्ति की पहचान नहीं करता। असली पहचान मुद्रा कोड और जारीकर्ता खाता है।</p>
+    </div>
+  </div>
+
+  <div class="identity-demo">
+    <div class="asset-card">
+      <div class="asset-code">USD</div>
+      <div class="asset-issuer" data-i18n="issuer-rexampleissuer111111111111111.4bef734d">जारीकर्ता (issuer): rExampleIssuer111111111111111111</div>
+      <div class="asset-status good" data-i18n="asset-identity-a.36698d87">परिसंपत्ति पहचान A</div>
+    </div>
+    <div class="asset-card">
+      <div class="asset-code">USD</div>
+      <div class="asset-issuer" data-i18n="issuer-rdifferentissuer2222222222222.a35dc473">जारीकर्ता (issuer): rDifferentIssuer2222222222222222</div>
+      <div class="asset-status warning" data-i18n="different-asset-identity.cfea5bbd">अलग परिसंपत्ति पहचान</div>
+    </div>
+  </div>
+
+  <p data-i18n="both-assets-can-display-usd-that-doe.e62398d1">दोनों परिसंपत्तियाँ USD दिखा सकती हैं। इससे वे बराबर नहीं हो जातीं। एक जारीकर्ता (issuer) अपने टोकन को असली डॉलर में भुना सकता है। दूसरा अज्ञात, बेकार या दुर्भावनापूर्ण हो सकता है।</p>
+
+  <div class="flow">
+    <div class="flow-step" data-i18n="issuer-account.5b899c53">जारीकर्ता खाता (issuer account)</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step" data-i18n="currency-code.28a6fbbe">मुद्रा कोड</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step" data-i18n="trustline.9ba9cbe8">ट्रस्टलाइन (trustline)</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step" data-i18n="balance-in-your-account.2179d06f">आपके खाते में बैलेंस</div>
+  </div>
+
+  <div class="callout">
+    <strong data-i18n="layman-tip.4b644ca0">आसान सुझाव</strong>
+    <p data-i18n="the-ticker-s-the-name-on-the-jersey.c7344cab">टिकर जर्सी पर नाम है। जारीकर्ता (issuer) उसे पहनने वाले खिलाड़ी की पहचान है। हमेशा दोनों सत्यापित करें।</p>
+  </div>
+</section>
+
+<section class="lesson" id="trustlines" style="--accent:var(--cyan)">
+  <div class="lesson-head">
+    <div class="lesson-number">05</div>
+    <div>
+      <h2 data-i18n="what-s-a-trustline.b2cf3ed9">ट्रस्टलाइन (trustline) क्या है?</h2>
+      <p class="lesson-lead" data-i18n="a-trustline-is-an-on-ledger-relation.5f24b5a6">ट्रस्टलाइन (trustline) एक विशिष्ट मुद्रा कोड के लिए दो खातों के बीच लेजर पर संबंध है।</p>
+    </div>
+  </div>
+
+  <p data-i18n="a-trustline-tells-xrpl-that-your-acc.0ac7c82b">ट्रस्टलाइन (trustline) XRPL को बताती है कि आपका खाता किसी विशिष्ट जारीकर्ता (issuer) से जुड़ी जारी परिसंपत्ति रखने को तैयार है। इसमें लिमिट (limit) और अन्य सेटिंग हो सकती हैं। $XRP ट्रस्टलाइन का उपयोग नहीं करता क्योंकि वह लेजर का मूल है।</p>
+
+  <div class="tool">
+    <h3 data-i18n="trustline-visualizer.1fb70a8d">ट्रस्टलाइन (trustline) विज़ुअलाइज़र</h3>
+    <p class="tool-intro" data-i18n="activate-the-trustline-and-watch-the.bfd64ab7">ट्रस्टलाइन (trustline) सक्रिय करें और संबंध बनते देखें।</p>
+    <div class="trust-demo" id="trustDemo">
+      <div class="trust-node"><strong data-i18n="your-wallet.7fdc1073">आपका वॉलेट</strong><br><small data-i18n="can-t-hold-this-issued-asset-yet.c6789f31">यह जारी परिसंपत्ति अभी नहीं रख सकता</small></div>
+      <div class="trust-line"><span></span></div>
+      <div class="trust-node"><strong data-i18n="issuer.2587e48b">जारीकर्ता (issuer)</strong><br><small data-i18n="currency-token.96418786">मुद्रा: TOKEN</small></div>
+    </div>
+    <button class="tool-button" id="trustButton" type="button" data-i18n="definitions.trust.create">ट्रस्टलाइन बनाएँ (trustline)</button>
+    <div class="result-copy" id="trustResult" data-i18n="no-trustline-exists.e4056ea4">कोई ट्रस्टलाइन (trustline) मौजूद नहीं।</div>
+  </div>
+
+  <h3 data-i18n="what-a-trustline-doesn-t-mean.c56a66d8">ट्रस्टलाइन (trustline) का अर्थ क्या नहीं है</h3>
+  <ul>
+    <li data-i18n="it-doesn-t-prove-the-token-s-legitim.db996327">यह टोकन की वैधता साबित नहीं करता।</li>
+    <li data-i18n="it-doesn-t-mean-the-issuer-owes-you.a2616d08">इसका अर्थ यह नहीं कि जारीकर्ता (issuer) अपनी बताई शर्तों के अलावा आपका कुछ देनदार है।</li>
+    <li data-i18n="it-doesn-t-guarantee-liquidity-or-va.852ba36d">यह तरलता या मूल्य की गारंटी नहीं देता।</li>
+    <li data-i18n="it-doesn-t-give-the-issuer-control-o.c28ce01e">यह जारीकर्ता (issuer) को आपके $XRP का नियंत्रण नहीं देता।</li>
+  </ul>
+
+  <div class="callout">
+    <strong data-i18n="reality-check.9feddbab">वास्तविकता की जाँच</strong>
+    <p data-i18n="creating-a-trustline-is-permission-t.6a7a834b">ट्रस्टलाइन (trustline) बनाना परिसंपत्ति रखने की अनुमति है। यह समर्थन, निवेश गारंटी या सुरक्षा समीक्षा नहीं है।</p>
+  </div>
+</section>
+
+<section class="lesson" id="reserves" style="--accent:var(--green)">
+  <div class="lesson-head">
+    <div class="lesson-number">06</div>
+    <div>
+      <h2 data-i18n="why-some-xrp-stays-reserved.bb60d0fd">कुछ $XRP रिज़र्व (reserve) क्यों रहता है</h2>
+      <p class="lesson-lead" data-i18n="xrpl-makes-accounts-hold-a-minimum-a.209bb466">XRPL खातों से न्यूनतम $XRP रखवाता है ताकि स्पैम और अनावश्यक लेजर वस्तुएँ हतोत्साहित हों।</p>
+    </div>
+  </div>
+
+  <p data-i18n="mainnet-currently-uses-a-plus-these.85124d92">Mainnet अभी <strong data-i18n-slot="s1" data-i18n="1-xrp-base-reserve.824f6b20">1 $XRP आधार रिज़र्व (base reserve)</strong> प्लस <strong data-i18n-slot="s2" data-i18n="0-2-xrp-for-each-qualifying-owned-le.6132bf23">प्रत्येक योग्य स्वामित्व वाली लेजर वस्तु के लिए 0.2 $XRP</strong> का उपयोग करता है। ये मान वैलिडेटर फ़ीस वोटिंग से बदल सकते हैं, इसलिए सॉफ़्टवेयर इन्हें हमेशा के लिए हार्ड-कोड करने के बजाय नेटवर्क से पूछे।</p>
+
+  <div class="tool">
+    <h3 data-i18n="reserve-calculator.67176307">रिज़र्व (reserve) कैलकुलेटर</h3>
+    <p class="tool-intro" data-i18n="estimate-the-reserve-for-a-simple-ac.4984109c">एक साधारण खाते का रिज़र्व (reserve) अनुमान लगाएँ। वास्तविक स्वामित्व और रिज़र्व व्यवहार वस्तु के प्रकार के अनुसार बदल सकता है।</p>
+    <div class="fields">
+      <div class="field">
+        <label for="trustlinesInput" data-i18n="owned-trustlines.fa5a4cf5">स्वामित्व वाली ट्रस्टलाइन (trustlines)</label>
+        <input id="trustlinesInput" type="number" min="0" value="0" dir="ltr" class="xrpl-ltr">
+      </div>
+      <div class="field">
+        <label for="offersInput" data-i18n="open-offers.6e67d057">खुले ऑफ़र (offer)</label>
+        <input id="offersInput" type="number" min="0" value="0" dir="ltr" class="xrpl-ltr">
+      </div>
+      <div class="field">
+        <label for="objectsInput" data-i18n="other-owned-objects.ace0e7ad">अन्य स्वामित्व वाली वस्तुएँ</label>
+        <input id="objectsInput" type="number" min="0" value="0" dir="ltr" class="xrpl-ltr">
+      </div>
+    </div>
+    <div class="result">
+      <div class="result-value xrpl-ltr" id="reserveValue" dir="ltr" translate="no" data-i18n-skip="dynamic">1.0 $XRP</div>
+      <div class="result-copy xrpl-ltr" id="reserveCopy" dir="ltr" translate="no" data-i18n-skip="dynamic">1 $XRP base reserve + 0 owned objects.</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong data-i18n="important.4b6d6a30">महत्वपूर्ण</strong>
+    <p data-i18n="an-nft-doesn-t-always-equal-one-owne.12e690f6">NFT हमेशा एक मालिक-रिज़र्व (owner reserve) वस्तु के बराबर नहीं होता। XRPL NFT को NFTokenPage वस्तुओं में रखता है, और हर पेज कई NFT रख सकता है। अलग-अलग NFT को अलग रिज़र्व वस्तुएँ न गिनें।</p>
+  </div>
+</section>
+
+<section class="lesson" id="transactions" style="--accent:var(--blue)">
+  <div class="lesson-head">
+    <div class="lesson-number">07</div>
+    <div>
+      <h2 data-i18n="transactions-and-signing.ba626ab1">लेनदेन और साइनिंग (signing)</h2>
+      <p class="lesson-lead" data-i18n="a-transaction-is-an-instruction-your.21d93739">लेनदेन एक निर्देश है। आपका सिग्नेचर (signature) साबित करता है कि खाते ने उसे अधिकृत किया।</p>
+    </div>
+  </div>
+
+  <div class="concept-grid">
+    <div class="concept">
+      <h3 data-i18n="transaction.1a7b7c1b">लेनदेन</h3>
+      <p data-i18n="the-structured-instruction-such-as-s.85b5421e">संरचित निर्देश, जैसे भुगतान भेजना, ऑफ़र (offer) बनाना या खाता विकल्प सेट करना।</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="signature.2f32be1d">सिग्नेचर (signature)</h3>
+      <p data-i18n="cryptographic-proof-that-the-transac.9a658d6c">क्रिप्टोग्राफ़िक प्रमाण कि उस खाते की वैध की (key) ने लेनदेन अधिकृत किया।</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="sequence.5c8f4e0e">सीक्वेंस (sequence)</h3>
+      <p data-i18n="a-number-that-helps-order-transactio.f79ede80">एक संख्या जो लेनदेन को क्रम में रखती है और उसी साइन किए लेनदेन को बार-बार रीप्ले होने से रोकती है।</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="fee.c6e89c9c">फ़ीस (fee)</h3>
+      <p data-i18n="a-small-amount-of-xrp-destroyed-by-t.c56c62c2">लेनदेन द्वारा नष्ट $XRP की छोटी मात्रा। यह जारीकर्ता (issuer) या वैलिडेटर को नहीं दी जाती।</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="validation.dd74d182">वैलिडेशन (validation)</h3>
+      <p data-i18n="the-point-where-the-network-agrees-t.0b8fb470">वह बिंदु जहाँ नेटवर्क सहमत होता है कि लेनदेन वैलिडेटेड (validated) लेजर में आता है।</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="metadata.251edc0e">मेटाडेटा</h3>
+      <p data-i18n="the-record-showing-what-changed-beca.898dcf52">वह रिकॉर्ड जो दिखाता है कि लेनदेन से क्या बदला, डिलीवर राशियाँ और प्रभावित वस्तुएँ सहित।</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong data-i18n="reality-check.9feddbab">वास्तविकता की जाँच</strong>
+    <p data-i18n="never-sign-based-only-on-what-a-webs.62ad144b">केवल वेबसाइट बटन के कहने पर कभी साइन न करें। वह लेनदेन पढ़ें जिसे आपका वॉलेट मंज़ूरी के लिए दिखा रहा है।</p>
+  </div>
+</section>
+
+<section class="lesson" id="markets" style="--accent:var(--green)">
+  <div class="lesson-head">
+    <div class="lesson-number">08</div>
+    <div>
+      <h2 data-i18n="dex-offers-and-amms.93651ac8">DEX, ऑफ़र (offer) और AMM</h2>
+      <p class="lesson-lead" data-i18n="xrpl-has-native-market-infrastructur.c793f4dd">XRPL के पास मूल बाज़ार ढाँचा है। टोकन ऑर्डर बुक, ऑटोमेटेड मार्केट मेकर, या दोनों वाले पथों से ट्रेड कर सकते हैं।</p>
+    </div>
+  </div>
+
+  <div class="concept-grid">
+    <div class="concept">
+      <h3>DEX</h3>
+      <p data-i18n="the-ledger-s-decentralized-exchange.4646316c">लेजर की विकेंद्रीकृत एक्सचेंज व्यवस्था। जब उपयोगकर्ता ऑफ़र (offer) बनाते और ट्रेड करते हैं तो यह मुद्रा जोड़े ट्रैक करती है।</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="offer.3898b9aa">ऑफ़र (offer)</h3>
+      <p data-i18n="an-on-ledger-instruction-offering-on.31d6dfc0">एक लेजर-पर निर्देश जो एक निर्धारित दर पर एक परिसंपत्ति दूसरी के बदले देता है।</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="order-book.86c86ea6">ऑर्डर बुक</h3>
+      <p data-i18n="the-collection-of-open-offers-for-a.1d1c50fd">किसी विशिष्ट परिसंपत्ति जोड़े के खुले ऑफ़र (offer) का संग्रह।</p>
+    </div>
+    <div class="concept">
+      <h3>AMM</h3>
+      <p data-i18n="a-liquidity-pool-that-prices-swaps-t.ece1398f">एक तरलता पूल जो स्वैप की कीमत अपने पूल बैलेंस से लगाता है, केवल व्यक्तिगत ऑफ़र (offer) मिलाने पर निर्भर नहीं रहता।</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="liquidity.76a3e625">तरलता</h3>
+      <p data-i18n="the-real-depth-available-to-trade-wi.7bba6c10">अत्यधिक कीमत हलचल किए बिना ट्रेड के लिए उपलब्ध वास्तविक गहराई।</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="slippage.98bc091b">स्लिपेज (slippage)</h3>
+      <p data-i18n="the-difference-between-the-price-you.98f04c72">आपकी अपेक्षित कीमत और मिलने वाले प्रभावी परिणाम के बीच का अंतर।</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong data-i18n="reality-check.9feddbab">वास्तविकता की जाँच</strong>
+    <p data-i18n="a-chart-price-isn-t-proof-that-you-c.8c1a1d0e">चार्ट पर दिखाई गई कीमत यह साबित नहीं करती कि आप अपनी पूरी पोज़िशन उसी कीमत पर बेच सकते हैं। उपलब्ध तरलता तय करती है कि बेचकर बाहर निकलते समय वास्तव में कितना सौदा निष्पादित हो सकेगा।</p>
+  </div>
+</section>
+
+<section class="lesson" id="nfts" style="--accent:var(--purple)">
+  <div class="lesson-head">
+    <div class="lesson-number">09</div>
+    <div>
+      <h2 data-i18n="nfts-and-ledger-ownership.e1250f55">NFT और लेजर स्वामित्व</h2>
+      <p class="lesson-lead" data-i18n="an-xrpl-nft-is-a-unique-on-ledger-to.e0bd5a2f">XRPL NFT एक अनोखा लेजर-पर टोकन है, जिसकी अपनी पहचान, फ़्लैग (flags), जारीकर्ता (issuer), टैक्सन (taxon), सीक्वेंस (sequence) और वैकल्पिक ट्रांसफ़र फ़ीस होती है।</p>
+    </div>
+  </div>
+
+  <p data-i18n="the-nft-proves-ownership-of-the-on-l.95932ce1">NFT लेजर-पर टोकन के स्वामित्व का प्रमाण है। वह टोकन क्या दर्शाता है, यह प्रोजेक्ट, मेटाडेटा, कानूनी शर्तों और उससे जुड़ी उपयोगिता पर निर्भर करता है।</p>
+
+  <div class="concept-grid">
+    <div class="concept">
+      <h3 dir="ltr" class="xrpl-ltr" translate="no">NFTokenID</h3>
+      <p data-i18n="the-unique-identifier-for-the-nft-on.ad9bffe5">XRPL पर NFT का अनोखा पहचानकर्ता।</p>
+    </div>
+    <div class="concept">
+      <h3 dir="ltr" class="xrpl-ltr" translate="no">URI</h3>
+      <p data-i18n="an-optional-data-field-commonly-used.323ac786">एक वैकल्पिक डेटा फ़ील्ड जिसका उपयोग आमतौर पर मेटाडेटा या सामग्री की ओर संकेत करने के लिए होता है।</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="transfer-fee.3a7f5395">ट्रांसफ़र फ़ीस (transfer fee)</h3>
+      <p data-i18n="an-optional-mint-time-percentage-tha.da69968b">मिंट (mint) के समय का एक वैकल्पिक प्रतिशत जो योग्य द्वितीयक बिक्री के मूल्य का कुछ हिस्सा जारीकर्ता (issuer) को लौटा सकता है।</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="offer.3898b9aa">ऑफ़र (offer)</h3>
+      <p data-i18n="a-buy-or-sell-offer-used-to-trade-th.3a24bba5">लेजर पर NFT का व्यापार करने वाला खरीद या बिक्री ऑफ़र (offer)।</p>
+    </div>
+    <div class="concept">
+      <h3 data-i18n="flags.5d728758">फ़्लैग (flags)</h3>
+      <p data-i18n="settings-that-can-control-whether-th.33debda7">वे सेटिंग जो नियंत्रित कर सकती हैं कि NFT ट्रांसफ़र हो सकता है या नहीं और जारीकर्ता (issuer) उसे बर्न (burn) कर सकता है या नहीं।</p>
+    </div>
+    <div class="concept">
+      <h3 dir="ltr" class="xrpl-ltr" translate="no">NFTokenPage</h3>
+      <p data-i18n="the-ledger-object-that-stores-groups.e8e7aa1d">वह लेजर वस्तु जो एक खाते के स्वामित्व वाले NFT के समूह रखती है।</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong data-i18n="reality-check.9feddbab">वास्तविकता की जाँच</strong>
+    <p data-i18n="owning-an-nft-doesn-t-automatically.397d2c1e">NFT का मालिक होना अपने आप कॉपीराइट, कंपनी स्वामित्व, गारंटीशुदा उपयोगिता या भविष्य का खरीदार नहीं देता। वे अधिकार वास्तविक प्रोजेक्ट शर्तों से आने चाहिए।</p>
+  </div>
+</section>
+
+<section class="lesson" id="mistakes" style="--accent:var(--red)">
+  <div class="lesson-head">
+    <div class="lesson-number">10</div>
+    <div>
+      <h2 data-i18n="what-people-keep-mixing-up.27ebd92b">जिन्हें लोग बार-बार मिला देते हैं</h2>
+      <p class="lesson-lead" data-i18n="these-mistakes-are-responsible-for-a.8ce88a08">ये गलतियाँ भारी भ्रम और बुरे निर्णयों की वजह हैं।</p>
+    </div>
+  </div>
+
+  <div class="mistakes">
+    <div class="mistake" data-i18n="a-token-ticker-proves-identity-curre.24be02d0"><b data-i18n-slot="s1" data-i18n="common.wrong">गलत:</b> टोकन टिकर पहचान साबित करता है।<br data-i18n-slot="br2"><strong data-i18n-slot="s3" data-i18n="common.truth">सत्य:</strong> मुद्रा कोड और जारीकर्ता (issuer) मिलकर जारी परिसंपत्ति की पहचान करते हैं।</div>
+    <div class="mistake" data-i18n="a-trustline-proves-a-token-is-safe-i.70f360f9"><b data-i18n-slot="s1" data-i18n="common.wrong">गलत:</b> ट्रस्टलाइन (trustline) साबित करती है कि टोकन सुरक्षित है।<br data-i18n-slot="br2"><strong data-i18n-slot="s3" data-i18n="common.truth">सत्य:</strong> यह केवल उसे रखने के लिए ज़रूरी खाता संबंध बनाती है।</div>
+    <div class="mistake" data-i18n="wallet-and-account-mean-exactly-the.9fef2614"><b data-i18n-slot="s1" data-i18n="common.wrong">गलत:</b> वॉलेट और खाता ठीक एक ही चीज़ हैं।<br data-i18n-slot="br2"><strong data-i18n-slot="s3" data-i18n="common.truth">सत्य:</strong> ऐप लेजर-पर खाते तक पहुँच संभालता है।</div>
+    <div class="mistake" data-i18n="every-displayed-xrp-is-spendable-som.2dedfbaa"><b data-i18n-slot="s1" data-i18n="common.wrong">गलत:</b> दिखाया गया हर $XRP खर्च किया जा सकता है।<br data-i18n-slot="br2"><strong data-i18n-slot="s3" data-i18n="common.truth">सत्य:</strong> कुछ खाता और ओनर रिज़र्व (owner reserve) के लिए ज़रूरी हो सकता है।</div>
+    <div class="mistake" data-i18n="market-cap-equals-available-exit-mon.823a30b4"><b data-i18n-slot="s1" data-i18n="common.wrong">गलत:</b> मार्केट कैप उपलब्ध निकास धन के बराबर है।<br data-i18n-slot="br2"><strong data-i18n-slot="s3" data-i18n="common.truth">सत्य:</strong> तरलता निष्पादन योग्य गहराई तय करती है।</div>
+    <div class="mistake" data-i18n="a-failed-transaction-always-means-no.8f5f2c21"><b data-i18n-slot="s1" data-i18n="common.wrong">गलत:</b> विफल लेनदेन का हमेशा अर्थ है कि कुछ नहीं बदला।<br data-i18n-slot="br2"><strong data-i18n-slot="s3" data-i18n="common.truth">सत्य:</strong> विफल लेनदेन भी लेनदेन लागत का उपभोग कर सकते हैं।</div>
+    <div class="mistake" data-i18n="a-wallet-can-reverse-a-signed-paymen.72956ce8"><b data-i18n-slot="s1" data-i18n="common.wrong">गलत:</b> वॉलेट साइन किए भुगतान को उलट सकता है।<br data-i18n-slot="br2"><strong data-i18n-slot="s3" data-i18n="common.truth">सत्य:</strong> वैलिडेटेड (validated) लेजर लेनदेन अंतिम होते हैं।</div>
+    <div class="mistake" data-i18n="the-network-fee-goes-to-validators-x.e7651eb0"><b data-i18n-slot="s1" data-i18n="common.wrong">गलत:</b> नेटवर्क फ़ीस वैलिडेटरों को जाती है।<br data-i18n-slot="br2"><strong data-i18n-slot="s3" data-i18n="common.truth">सत्य:</strong> XRPL लेनदेन लागत नष्ट होती है।</div>
+  </div>
+</section>
+
+<section class="lesson" id="quiz" style="--accent:var(--gold)">
+  <div class="lesson-head">
+    <div class="lesson-number">11</div>
+    <div>
+      <h2 data-i18n="quiz.heading">समझ आ गया?</h2>
+      <p class="lesson-lead" data-i18n="answer-these-without-guessing-the-pa.2b9672a4">बिना अनुमान के इनके उत्तर दें। जब तक व्यवस्था समझ न आए, पृष्ठ पूरा नहीं।</p>
+    </div>
+  </div>
+
+  <div class="quiz-question" data-quiz-id="definitions-q1">
+    <h3 data-i18n="1-what-identifies-an-issued-xrpl-ass.4d05ffb9">1. जारी XRPL परिसंपत्ति की पहचान क्या है?</h3>
+    <div class="quiz-options">
+      <button data-correct="false" data-i18n="its-ticker-alone.6bbd02b8" data-choice-id="definitions-q1-c1">केवल उसका टिकर</button>
+      <button data-correct="true" data-i18n="its-currency-code-and-issuer.bfead693" data-choice-id="definitions-q1-c2">उसका मुद्रा कोड और जारीकर्ता (issuer)</button>
+      <button data-correct="false" data-i18n="its-logo-and-website.b1846bef" data-choice-id="definitions-q1-c3">उसका लोगो और वेबसाइट</button>
+    </div>
+  </div>
+
+  <div class="quiz-question" data-quiz-id="definitions-q2">
+    <h3 data-i18n="2-which-asset-doesn-t-need-a-trustli.9a866002">2. किस परिसंपत्ति को ट्रस्टलाइन (trustline) की ज़रूरत नहीं?</h3>
+    <div class="quiz-options">
+      <button data-correct="true" dir="ltr" class="xrpl-ltr" translate="no" data-choice-id="definitions-q2-c1">$XRP</button>
+      <button data-correct="false" data-i18n="every-stablecoin.6b61e6e3" data-choice-id="definitions-q2-c2">हर स्टेबलकॉइन</button>
+      <button data-correct="false" data-i18n="every-project-token.370704f5" data-choice-id="definitions-q2-c3">हर प्रोजेक्ट टोकन</button>
+    </div>
+  </div>
+
+  <div class="quiz-question" data-quiz-id="definitions-q3">
+    <h3 data-i18n="3-what-does-a-wallet-signature-prove.8f0ca436">3. वॉलेट का सिग्नेचर (signature) क्या साबित करता है?</h3>
+    <div class="quiz-options">
+      <button data-correct="false" data-i18n="the-transaction-will-make-money.9db1bb87" data-choice-id="definitions-q3-c1">लेनदेन पैसा कमाएगा</button>
+      <button data-correct="true" data-i18n="a-valid-account-key-authorized-the-t.a38c0c04" data-choice-id="definitions-q3-c2">एक वैध खाता की (key) ने लेनदेन अधिकृत किया</button>
+      <button data-correct="false" data-i18n="the-receiving-project-is-legitimate.c4aa39cf" data-choice-id="definitions-q3-c3">प्राप्त करने वाला प्रोजेक्ट वैध है</button>
+    </div>
+  </div>
+
+  <div class="quiz-question" data-quiz-id="definitions-q4">
+    <h3 data-i18n="4-where-does-the-standard-xrpl-trans.cd6bf9f9">4. मानक XRPL लेनदेन लागत कहाँ जाती है?</h3>
+    <div class="quiz-options">
+      <button data-correct="false" data-i18n="to-the-token-issuer.9d4de583" data-choice-id="definitions-q4-c1">टोकन जारीकर्ता (issuer) को</button>
+      <button data-correct="false" data-i18n="to-validators-as-a-reward.59938ddd" data-choice-id="definitions-q4-c2">वैलिडेटरों को इनाम के रूप में</button>
+      <button data-correct="true" data-i18n="it-s-destroyed.c09b8e94" data-choice-id="definitions-q4-c3">यह नष्ट हो जाती है</button>
+    </div>
+  </div>
+
+  <div class="quiz-question" data-quiz-id="definitions-q5">
+    <h3 data-i18n="5-does-market-cap-prove-you-can-sell.28c3a4d3">5. क्या मार्केट कैप साबित करता है कि आप दिखाई गई कीमत पर बेच सकते हैं?</h3>
+    <div class="quiz-options">
+      <button data-correct="false" data-i18n="common.yes" data-choice-id="definitions-q5-c1">हाँ</button>
+      <button data-correct="true" data-i18n="no-executable-liquidity-matters.994ed981" data-choice-id="definitions-q5-c2">नहीं। निष्पादन योग्य तरलता मायने रखती है</button>
+    </div>
+  </div>
+</section>
+
+<section class="lesson" id="next" style="--accent:var(--blue)">
+  <div class="lesson-head">
+    <div class="lesson-number">12</div>
+    <div>
+      <h2 data-i18n="next.heading">आगे बढ़ते रहें</h2>
+      <p class="lesson-lead" data-i18n="definitions-give-you-the-map-the-nex.b8ffdfb7">परिभाषाएँ आपको नक्शा देती हैं। अगले ऐप्लिकेशन सिखाते हैं कि खाता कैसे नियंत्रित करें, लेजर कैसे इस्तेमाल करें, और अपनी रक्षा कैसे करें।</p>
+    </div>
+  </div>
+
+  <div class="next-grid">
+    <a class="next-card" href="/xrpl/hi/wallet-basics.html">
+      <strong data-i18n="nav.wallets">वॉलेट</strong>
+      <span data-i18n="learn-custody-seeds-signing-funding.0a144ab8">कस्टडी (custody), सीड (seed), साइनिंग (signing), धन जोड़ना, खाता नियंत्रण और रिकवरी की सीमाएँ सीखें।</span>
+      <b data-i18n="open-wallets.35ad0204">वॉलेट खोलें →</b>
+    </a>
+    <a class="next-card" href="/xrpl/hi/usage.html">
+      <strong data-i18n="nav.usage">उपयोग</strong>
+      <span data-i18n="learn-payments-destination-tags-trus.fce7b359">भुगतान, डेस्टिनेशन टैग (destination tag), ट्रस्टलाइन (trustline), टोकन ट्रेड, NFT, ऑफ़र (offer) और निष्पादन सीखें।</span>
+      <b data-i18n="open-usage.680d208a">उपयोग खोलें →</b>
+    </a>
+    <a class="next-card" href="/xrpl/hi/safety.html">
+      <strong data-i18n="nav.safety">सुरक्षा</strong>
+      <span data-i18n="learn-issuer-verification-scam-detec.e793d8e5">जारीकर्ता (issuer) सत्यापन, घोटाला पहचान, साइनिंग (signing) रक्षा और खाता सुरक्षा सीखें।</span>
+      <b data-i18n="open-safety.8041cc85">सुरक्षा खोलें →</b>
+    </a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div><a href="https://houseofcauliman.com" data-i18n="footer.project">House of Cauliman का एक प्रोजेक्ट</a></div>
+  <div data-i18n="s.59a7bc31"><a href="/terms.html" data-i18n-slot="s1" data-i18n="footer.terms">शर्तें</a> · <a href="/privacy.html" data-i18n-slot="s2" data-i18n="footer.privacy">गोपनीयता</a> · <a href="/disclaimer.html" data-i18n-slot="s3" data-i18n="footer.disclaimer">अस्वीकरण</a> · <a href="https://houseofcauliman.com" data-i18n-slot="s4">houseofcauliman.com</a></div>
+  <div data-i18n="footer.rights">© 2026 House of Cauliman. सर्वाधिकार सुरक्षित।</div>
+</footer>
+
+</div>
+
+<script>
+(() => {
+  function xrplT(key, fallback, vars) {
+    if (window.XRPL_I18N && window.XRPL_I18N.t) return window.XRPL_I18N.t(key, fallback, vars);
+    var text = fallback;
+    if (vars) Object.keys(vars).forEach(function (name) { text = text.split("{" + name + "}").join(String(vars[name])); });
+    return text;
+  }
+  const trustDemo = document.getElementById("trustDemo");
+  const trustButton = document.getElementById("trustButton");
+  const trustResult = document.getElementById("trustResult");
+  let active = false;
+  let trustTouched = false;
+
+  function renderTrust() {
+    if (!trustTouched) return;
+    trustButton.textContent = active
+      ? xrplT("definitions.trust.remove", "Remove Trustline")
+      : xrplT("definitions.trust.create", "Create Trustline");
+    trustResult.textContent = active
+      ? xrplT("definitions.trust.active", "Trustline active. This wallet can now hold this issuer’s TOKEN asset, subject to its limit and settings.")
+      : xrplT("definitions.trust.inactive", "No trustline exists. This wallet can’t hold this issuer’s TOKEN asset.");
+  }
+
+  trustButton.addEventListener("click", () => {
+    active = !active;
+    trustTouched = true;
+    trustDemo.classList.toggle("active", active);
+    renderTrust();
+  });
+  document.addEventListener("xrpl:language", renderTrust);
+
+  const inputs = [
+    document.getElementById("trustlinesInput"),
+    document.getElementById("offersInput"),
+    document.getElementById("objectsInput")
+  ];
+
+  const reserveValue = document.getElementById("reserveValue");
+  const reserveCopy = document.getElementById("reserveCopy");
+
+  function calculateReserve(){
+    const counts = inputs.map(input => Math.max(0, Number(input.value) || 0));
+    const objects = counts.reduce((sum, value) => sum + value, 0);
+    const reserve = 1 + objects * .2;
+    reserveValue.textContent = reserve.toFixed(1) + " $XRP";
+    var reserveKey = objects === 1 ? "definitions.reserve.one" : "definitions.reserve.many";
+    var reserveFallback = objects === 1
+      ? "1 $XRP base reserve + {objects} owned object × 0.2 $XRP."
+      : "1 $XRP base reserve + {objects} owned objects × 0.2 $XRP.";
+    reserveCopy.textContent = xrplT(reserveKey, reserveFallback, {objects: objects});
+  }
+
+  inputs.forEach(input => input.addEventListener("input", calculateReserve));
+  document.addEventListener("xrpl:language", calculateReserve);
+  calculateReserve();
+
+  document.querySelectorAll(".quiz-options button").forEach(button => {
+    button.addEventListener("click", () => {
+      const group = button.closest(".quiz-options");
+      group.querySelectorAll("button").forEach(item => {
+        item.classList.remove("correct", "wrong");
+      });
+      button.classList.add(button.dataset.correct === "true" ? "correct" : "wrong");
+    });
+  });
+
+  const sections = [...document.querySelectorAll(".lesson")];
+  const progressFill = document.getElementById("progressFill");
+  const progressText = document.getElementById("progressText");
+
+  function updateProgress(){
+    const viewportBottom = window.scrollY + window.innerHeight;
+    const pageHeight = document.documentElement.scrollHeight;
+    const percent = Math.min(100, Math.max(0, Math.round(viewportBottom / pageHeight * 100)));
+    progressFill.style.width = percent + "%";
+    progressText.textContent = percent + "%";
+  }
+
+  updateProgress();
+  window.addEventListener("scroll", updateProgress, {passive:true});
+})();
+</script>
+<script src="/xrpl/i18n/catalogs.js" defer></script><script src="/xrpl/i18n/release.js" defer></script><script src="/xrpl/i18n/i18n.js" defer></script></body>
+</html>

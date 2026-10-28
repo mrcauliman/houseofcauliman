@@ -1,0 +1,149 @@
+/* Language control and right-to-left adjustments. Visual theme is unchanged. */
+.xrpl-lang{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  margin-left:auto;
+  margin-right:0;
+  color:#c4ccda;
+  font-size:13px;
+  font-weight:750;
+}
+html[dir="rtl"] .xrpl-lang{
+  margin-left:0;
+  margin-right:auto;
+}
+.xrpl-lang select,
+.xrpl-language-row select{
+  background:#0d182a;
+  color:#fff;
+  border:1px solid #476995;
+  border-radius:10px;
+  padding:9px 12px;
+  min-height:40px;
+  font-size:14px;
+  line-height:1.3;
+  max-width:100%;
+  min-width:0;
+}
+html .xrpl-lang select:focus-visible,
+html .xrpl-language-row select:focus-visible{
+  outline:3px solid #ffcc66;
+  outline-offset:3px;
+}
+.appbar{flex-wrap:wrap}
+.xrpl-dashboard-tagline,
+.hero h1,
+.lesson h2,
+.lesson-nav a,
+.next-card,
+.concept,
+.mistake,
+.checklist label,
+.xrpl-app-card h2,
+.xrpl-app-card p{
+  overflow-wrap:anywhere;
+}
+.xrpl-app-card{min-width:0}
+html[dir="rtl"] .xrpl-dashboard-title h1,
+html[dir="rtl"] .appbar-title{
+  direction:ltr;
+  unicode-bidi:isolate;
+}
+html[dir="rtl"] .xrpl-dashboard-title h1{text-align:right}
+html[dir="rtl"] .xrpl-language-row{justify-content:flex-start}
+html[lang="ja"] .hero h1,
+html[lang="ja"] .lesson h2,
+html[lang="ja"] .xrpl-app-card h2,
+html[lang="ko"] .hero h1,
+html[lang="ko"] .lesson h2,
+html[lang="ko"] .xrpl-app-card h2,
+html[lang="zh-CN"] .hero h1,
+html[lang="zh-CN"] .lesson h2,
+html[lang="zh-CN"] .xrpl-app-card h2{
+  overflow-wrap:break-word;
+  word-break:auto-phrase;
+  line-break:strict;
+  line-height:1.35;
+  letter-spacing:0;
+}
+html[lang="hi"] .xrpl-dashboard-tagline,
+html[lang="hi"] .xrpl-dashboard-intro,
+html[lang="hi"] .xrpl-app-card h2,
+html[lang="hi"] .xrpl-app-card p,
+html[lang="hi"] .hero h1,
+html[lang="hi"] .lesson h2,
+html[lang="hi"] .lesson p,
+html[lang="hi"] .lesson li,
+html[lang="ar"] .xrpl-dashboard-tagline,
+html[lang="ar"] .xrpl-dashboard-intro{
+  overflow-wrap:break-word;
+  word-break:normal;
+  line-height:1.7;
+}
+html[lang="hi"] .xrpl-dashboard-tagline,
+html[lang="ar"] .xrpl-dashboard-tagline,
+html[lang="ja"] .xrpl-dashboard-tagline,
+html[lang="ko"] .xrpl-dashboard-tagline,
+html[lang="zh-CN"] .xrpl-dashboard-tagline{
+  letter-spacing:.04em;
+}
+html[dir="rtl"] .callout{
+  border-left:0;
+  border-right:3px solid var(--accent);
+}
+html[dir="rtl"] .quiz-options button,
+html[dir="rtl"] .lesson-nav a,
+html[dir="rtl"] .checklist label,
+html[dir="rtl"] .appbar-links{
+  text-align:right;
+}
+html[dir="rtl"] input[type="number"],
+html[dir="rtl"] .result-value,
+html[dir="rtl"] .xrpl-ltr,
+html[dir="rtl"] code,
+html[dir="rtl"] #progressText,
+html[dir="rtl"] #reserveValue,
+html[dir="rtl"] #impactValue,
+html[dir="rtl"] #capValue,
+html[dir="rtl"] #ratioValue{
+  direction:ltr;
+  unicode-bidi:isolate;
+  text-align:left;
+}
+html[dir="rtl"] .flow-arrow,
+html[dir="rtl"] .xrpl-app-arrow,
+html[dir="rtl"] .home-button [aria-hidden="true"]{
+  display:inline-block;
+  transform:scaleX(-1);
+}
+/* OS UI fonts first. system-ui is often Latin-only, so it must not precede
+   these. WenQuanYi and Droid cover CJK when the OS font is missing. No CDN. */
+.xrpl-review-notice{
+  margin:0 0 14px;
+  padding:10px 12px;
+  border:1px solid #d4a44a;
+  border-radius:10px;
+  background:rgba(212,164,74,.12);
+  color:#ffcf8d;
+  font-size:13px;
+  line-height:1.45;
+  font-weight:650;
+}
+html[lang="ar"] body{font-family:"Noto Naskh Arabic","Noto Sans Arabic","Noto Kufi Arabic","Geeza Pro","Segoe UI",Tahoma,sans-serif}
+html[lang="hi"] body{font-family:"Noto Sans Devanagari","Nirmala UI","Kohinoor Devanagari",Mangal,"Noto Sans",sans-serif}
+html[lang="ja"] body{font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",YuGothic,Meiryo,"Noto Sans CJK JP","Noto Sans JP","Source Han Sans JP","WenQuanYi Micro Hei","Droid Sans Fallback",sans-serif}
+html[lang="ko"] body{font-family:"Apple SD Gothic Neo","Malgun Gothic","Noto Sans CJK KR","Noto Sans KR","Source Han Sans KR","WenQuanYi Micro Hei","Droid Sans Fallback",sans-serif}
+html[lang="zh-CN"] body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC","Noto Sans SC","Source Han Sans SC","WenQuanYi Micro Hei","Droid Sans Fallback",sans-serif}
+@media(max-width:900px){
+  .xrpl-lang{
+    width:100%;
+    margin-left:0;
+    margin-right:0;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+}
+@media print{
+  .xrpl-lang,.xrpl-language-row{display:none}
+}

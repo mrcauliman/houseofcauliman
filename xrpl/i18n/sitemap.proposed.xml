@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Proposed sitemap for XRPL LAYMAN. Generated from xrpl/i18n/release.json.
+Do not replace /sitemap.xml with this file.
+The live sitemap lists only https://houseofcauliman.com/.
+A non-English language is included here only when release.json marks it approved.
+Enabling one language does not add the others. None of this publishes the site.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- en -->
+  <url>
+    <loc>https://houseofcauliman.com/xrpl/</loc>
+  </url>
+  <url>
+    <loc>https://houseofcauliman.com/xrpl/definitions.html</loc>
+  </url>
+  <url>
+    <loc>https://houseofcauliman.com/xrpl/wallet-basics.html</loc>
+  </url>
+  <url>
+    <loc>https://houseofcauliman.com/xrpl/usage.html</loc>
+  </url>
+  <url>
+    <loc>https://houseofcauliman.com/xrpl/safety.html</loc>
+  </url>
+  <url>
+    <loc>https://houseofcauliman.com/xrpl/investing-reality.html</loc>
+  </url>
+  <url>
+    <loc>https://houseofcauliman.com/xrpl/builders/</loc>
+  </url>
+  <url>
+    <loc>https://houseofcauliman.com/xrpl/builders/create-token.html</loc>
+  </url>
+  <url>
+    <loc>https://houseofcauliman.com/xrpl/builders/nft-basics.html</loc>
+  </url>
+  <url>
+    <loc>https://houseofcauliman.com/xrpl/builders/trust-lines.html</loc>
+  </url>
+  <url>
+    <loc>https://houseofcauliman.com/xrpl/builders/issuer-control.html</loc>
+  </url>
+  <url>
+    <loc>https://houseofcauliman.com/xrpl/builders/xaman-flows.html</loc>
+  </url>
+  <url>
+    <loc>https://houseofcauliman.com/xrpl/builders/project-launch-basics.html</loc>
+  </url>
+</urlset>

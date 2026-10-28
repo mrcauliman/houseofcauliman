@@ -1,0 +1,5 @@
+FAKE FIXTURES. NOT AN APPROVAL.
+
+Files generated beside this note during tests are sample CSVs for import_review.py.
+They are not native-speaker decisions. Do not copy them into review-packages/approvals/
+and do not set release.json from them.

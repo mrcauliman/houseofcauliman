@@ -1185,9 +1185,18 @@ const publicCard04 = Object.freeze({
   mintedSupply:61
 });
 
+const publicCard05 = Object.freeze({
+  imageUrl:"https://tired-teal-sawfish.myfilebase.com/ipfs/QmaP9EyFPXdafAXvcC3uiF5HjWqCBEb13bUJpgAayLgAwG",
+  metadataUri:"ipfs://Qmdt1UViCJMi1QdDtGRgiRH79yNYoa2vB7GYXGUJf6g3fN",
+  nftId:"0008138849588295B82B938BC17754D3CA09FAE1F0E88A4D2A4447FB05D7B906",
+  mintedSupply:61
+});
+const publicCards = Object.freeze({ "04": publicCard04, "05": publicCard05 });
+
 const cards = {
+  "05": { name:"The Paper Hand", label:"05 THE PAPER HAND", releaseDate:"Sunday, October 25", ordinal:"fifth", unlockImage:`${API}/holder/the52/05/holder-media` },
   "04": { name:"The Diamond Hand", label:"04 THE DIAMOND HAND", releaseDate:"Sunday, October 18", ordinal:"fourth", unlockImage:`${API}/holder/the52/04/holder-media` },
-  "01": { name:"The Builder", label:"01 THE BUILDER", releaseDate:"Sunday, September 27", ordinal:"first", unlockImage:"/assets/the52/01/THE52_01_The_Builder_HOLDER_UNLOCK.webp" },
+  "01": { name:"The Builder", label:"01 THE BUILDER", releaseDate:"Sunday, September 27", ordinal:"first", unlockImage:`${API}/holder/the52/01/holder-media` },
   "02": { name:"The Whale", label:"02 THE WHALE", releaseDate:"Sunday, October 4", ordinal:"second", unlockImage:`${API}/holder/the52/02/holder-media` },
   "03": { name:"The Degen", label:"03 THE DEGEN", releaseDate:"Sunday, October 11", ordinal:"third", unlockImage:`${API}/holder/the52/03/holder-media` }
 };
@@ -2304,7 +2313,7 @@ async function openCard(num, historyMode = "push"){
   document.getElementById("modal").classList.add("open");
 
   formatCardLastSale(num);
-  if(num === "04") loadPublicCard04Market(generation);
+  if(publicCards[num]) loadPublicCardMarket(num, generation);
   else loadCardMarket(num);
 
   const [ownership, claim] = await Promise.all([
@@ -2319,16 +2328,17 @@ async function openCard(num, historyMode = "push"){
 
 
 
-async function loadPublicCard04Market(generation){
-  const panel = document.getElementById("card-04-Market");
+async function loadPublicCardMarket(num, generation){
+  const pub = publicCards[num];
+  const panel = document.getElementById(`card-${num}-Market`);
   try {
     const response = await fetch("https://monolithxrpl.com/api/nft-market/listings", {cache:"no-store"});
     if(!response.ok) throw new Error("Market unavailable");
     const data = await response.json();
-    if(modalCard !== "04" || generation !== modalGeneration) return;
+    if(modalCard !== num || generation !== modalGeneration) return;
     const listing = (Array.isArray(data.listings) ? data.listings : []).find(item =>
       item.status === "active" && item.isTest !== true &&
-      item.nftId === publicCard04.nftId && item.uri === publicCard04.metadataUri &&
+      item.nftId === pub.nftId && item.uri === pub.metadataUri &&
       item.sellerWallet === "rfgFM8z2abu2uahXFaRre8aWw9PEv48QbS" &&
       Number(item.askUsdCents) === 10000 &&
       /^nftml_[a-f0-9]{32}$/.test(item.listingId || ""));
@@ -2336,14 +2346,27 @@ async function loadPublicCard04Market(generation){
       panel.innerHTML = '<div class="market-label">MONOLITH MARKET</div><div class="market-meta">Public copy listing is being prepared.</div>';
       return;
     }
-    panel.innerHTML = '<div class="market-label">ONE PUBLIC COPY</div><div class="market-price">$100.00 USD</div><div class="market-meta">Paid in XRP. Review the current quote on MONOLITH.</div>';
+    const usd = Number(listing.askUsdCents) / 100;
+    let xrpText = "";
+    try {
+      const rateResponse = await fetch("https://monolithxrpl.com/api/rates/xrp", {cache:"no-store"});
+      const rateData = rateResponse.ok ? await rateResponse.json() : null;
+      const rate = Number(rateData?.rate?.xrpUsd);
+      if(rate > 0) xrpText = "≈ " + (Math.ceil((usd / rate) * 1e6) / 1e6).toLocaleString(undefined,{maximumFractionDigits:6}) + " $XRP at the current MONOLITH rate";
+    } catch {}
+    if(!xrpText && Number(listing.askXrp) > 0)
+      xrpText = "≈ " + Number(listing.askXrp).toLocaleString(undefined,{maximumFractionDigits:6}) + " $XRP (listing quote)";
+    if(modalCard !== num || generation !== modalGeneration) return;
+    panel.innerHTML = '<div class="market-label">ONE PUBLIC COPY</div><div class="market-price">$' + usd.toFixed(2) + ' USD</div>' +
+      (xrpText ? '<div class="market-xrp">' + escapeHtml(xrpText) + '</div>' : '') +
+      '<div class="market-meta">Paid in XRP. MONOLITH sets the final quote at purchase.</div>';
     const trade = document.getElementById("modalTrade");
     trade.classList.remove("disabled");
     trade.setAttribute("aria-disabled", "false");
     trade.textContent = "View Public Copy";
     trade.href = "https://monolithxrpl.com/nft-market/?listing=" + encodeURIComponent(listing.listingId);
   } catch {
-    if(modalCard === "04" && generation === modalGeneration)
+    if(modalCard === num && generation === modalGeneration)
       panel.textContent = "Live marketplace status is unavailable. Please try again shortly.";
   }
 }
