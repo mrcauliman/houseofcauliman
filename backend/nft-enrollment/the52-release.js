@@ -21,7 +21,8 @@ function validateManifest(card, m, bytes, now = new Date()) {
   }
   if (!/^[a-f0-9]{64}$/.test(m.metadataSha256 || "") || hash(bytes) !== m.metadataSha256) throw new Error("Metadata hash mismatch");
   const data = JSON.parse(bytes.toString("utf8"));
-  if (data.name !== `THE 52 — ${card.number} ${card.name}` || data.image !== m.imageUri || data.external_url !== "https://houseofcauliman.com/the52/") throw new Error("Metadata identity mismatch");
+  const expectedName = card.number === "06" ? "THE 52 - 06 THE MAXI" : `THE 52 — ${card.number} ${card.name}`;
+  if (data.name !== expectedName || data.image !== m.imageUri || data.external_url !== "https://houseofcauliman.com/the52/") throw new Error("Metadata identity mismatch");
   const expected = {Collection:"THE 52",Card:`${card.number}/52`,Character:card.name.toLowerCase().replace(/\b\w/g,x=>x.toUpperCase()),Network:"XRPL"};
   if (!Array.isArray(data.attributes) || data.attributes.length !== 4 || Object.entries(expected).some(([k,v])=>data.attributes.filter(a=>a.trait_type===k && a.value===v).length!==1)) throw new Error("Metadata traits mismatch");
   return data;
