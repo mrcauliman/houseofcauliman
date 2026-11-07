@@ -1718,6 +1718,7 @@ async function loadCardRelease(num){
       released: data.released === true,
       releasedAt: data.releasedAt || null,
       mintedSupply: Number(data.mintedSupply || 0),
+      supplyAccounting: isCorrectedEdition(num) ? data.supplyAccounting || null : null,
       imageUrl: data.imageUrl || null,
       lastSale: data.lastSale || {
         sale:null,
@@ -1736,6 +1737,31 @@ async function loadCardRelease(num){
   }catch(error){
     console.warn("THE 52 release state unavailable");
   }
+}
+
+function isCorrectedEdition(num){
+  return num === "05" || num === "06";
+}
+
+function recordedCount(value){
+  return Number.isSafeInteger(value) && value >= 0 ? String(value) : "Unknown";
+}
+
+function correctedEditionLabel(b){
+  const accounting = b.supplyAccounting || {};
+  return `${recordedCount(accounting.originalIssuedCount)} ORIGINAL ALLOCATION / ${recordedCount(accounting.replacementIssuedCount)} CORRECTED ISSUED`;
+}
+
+function correctedSupplyStats(b){
+  const accounting = b.supplyAccounting || {};
+  return `<div class="stat-pill">Original allocation ${recordedCount(accounting.originalIssuedCount)}</div>
+        <div class="stat-pill">Corrected issued (recorded) ${recordedCount(accounting.replacementIssuedCount)}</div>
+        <div class="stat-pill">Total recorded issuance ${recordedCount(accounting.totalRecordedIssuance)}</div>`;
+}
+
+function correctedSupplyNote(b){
+  return "Recorded issuance is not live on-chain supply." +
+    (b.supplyAccounting?.onChainBurnsReconciled === true ? "" : " On-chain burns are not reconciled.");
 }
 
 function renderReleasedCard(num){
@@ -1766,9 +1792,11 @@ function renderReleasedCard(num){
 
   if(edition){
     edition.textContent =
-      b.mintedSupply > 0
-        ? `EDITION · ${b.mintedSupply} MINTED`
-        : "LIMITED WEEKLY EDITION";
+      isCorrectedEdition(num)
+        ? correctedEditionLabel(b)
+        : b.mintedSupply > 0
+          ? `EDITION · ${b.mintedSupply} MINTED`
+          : "LIMITED WEEKLY EDITION";
   }
 }
 
@@ -2255,10 +2283,11 @@ async function openCard(num, historyMode = "push"){
         <div class="stat-pill">
           Card ${num} of 52
         </div>
-        <div class="stat-pill">
+        ${isCorrectedEdition(num) ? correctedSupplyStats(b) : `<div class="stat-pill">
           Verified Supply ${b.mintedSupply}
-        </div>
+        </div>`}
       </div>
+      ${isCorrectedEdition(num) ? `<div class="release-copy">${correctedSupplyNote(b)}</div>` : ""}
     </div>
 
     <div class="holder-panel" id="card-${num}-Holder">
