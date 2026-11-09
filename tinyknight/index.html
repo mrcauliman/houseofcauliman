@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tiny Knight | House of Cauliman</title>
+  <link rel="canonical" href="https://houseofcauliman.com/tinyknight/">
+  <meta name="description" content="A very small knight with a very big ego takes on the most dangerous monsters in the house. Small knight. Big beasts. Original animation. New episodes every week.">
+  <meta property="og:title" content="Tiny Knight | House of Cauliman">
+  <meta property="og:description" content="Small knight. Big beasts. A pocket-sized knight versus giant household monsters. Original animation.">
+  <meta property="og:image" content="https://houseofcauliman.com/tinyknight/assets/banner.webp">
+  <meta property="og:url" content="https://houseofcauliman.com/tinyknight/">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#1a0c2e">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/icon-180.png">
+  <style>
+    :root {
+      --ink: #14081f;
+      --plum: #2a1548;
+      --yellow: #ffd000;
+      --gold: #f0b429;
+      --cream: #fff8e8;
+      --muted: #f0e2c4;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--cream);
+      background:
+        radial-gradient(circle at 50% -8%, rgba(255, 208, 0, .22), transparent 36%),
+        linear-gradient(180deg, #2a1548 0%, #14081f 42%, #1a0c2e 100%);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    img { max-width: 100%; height: auto; }
+
+    a { color: inherit; }
+
+    .skip {
+      position: absolute;
+      left: 12px;
+      top: -48px;
+      z-index: 20;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--yellow);
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    .skip:focus { top: 12px; }
+
+    .top {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 8px 16px;
+      background: rgba(20, 8, 31, .9);
+      border-bottom: 3px solid var(--ink);
+      backdrop-filter: blur(12px);
+    }
+
+    .top a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      color: var(--yellow);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .top a:focus-visible,
+    .subscribe:focus-visible,
+    .house-link:focus-visible {
+      outline: 3px solid #fff;
+      outline-offset: 3px;
+    }
+
+    .wrap {
+      width: min(100% - 32px, 960px);
+      margin: 0 auto;
+      padding-bottom: 48px;
+    }
+
+    .hero { padding-top: 8px; }
+
+    .hero-id {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 0 16px;
+    }
+
+    .hero-copy { width: min(100%, 760px); }
+
+    .banner {
+      display: block;
+      width: 100%;
+      border: 4px solid var(--ink);
+      border-radius: 22px;
+      box-shadow: 8px 8px 0 var(--yellow);
+      background: #0e8f98;
+    }
+
+    .badge-wrap {
+      position: relative;
+      z-index: 0;
+      width: min(42vw, 168px);
+      margin: 0;
+      aspect-ratio: 1;
+    }
+
+    .knight {
+      position: relative;
+      z-index: 1;
+      display: block;
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 10px 0 rgba(20, 8, 31, .28));
+    }
+
+    h1 { margin: 8px 0 0; text-align: center; }
+
+    .wordmark {
+      display: block;
+      width: min(100%, 720px);
+      margin: 0 auto;
+    }
+
+    .tagline {
+      margin: 10px 0 0;
+      text-align: center;
+      font-size: clamp(1.25rem, 4vw, 1.8rem);
+      font-weight: 900;
+      letter-spacing: .04em;
+    }
+
+    .tagline strong { color: var(--yellow); }
+
+    #episodes { scroll-margin-top: 72px; }
+
+    .about,
+    .episodes {
+      margin-top: 28px;
+      padding: 22px 18px;
+      border: 4px solid var(--ink);
+      border-radius: 22px;
+      background: rgba(42, 21, 72, .88);
+      box-shadow: 8px 8px 0 rgba(255, 208, 0, .85);
+    }
+
+    h2, h3 { margin: 0; letter-spacing: .06em; text-transform: uppercase; }
+
+    h2 { font-size: clamp(1.4rem, 4vw, 1.8rem); color: var(--yellow); }
+
+    .about p,
+    .note,
+    .episode-caption {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .beasts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 16px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .beasts li {
+      --tilt: -2deg;
+      padding: 8px 12px;
+      border: 3px solid var(--ink);
+      border-radius: 999px;
+      background: var(--yellow);
+      color: var(--ink);
+      font-weight: 800;
+      transform: rotate(var(--tilt));
+    }
+
+    .beasts li:nth-child(even) { --tilt: 2deg; }
+
+    .subscribe {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      margin-top: 18px;
+      padding: 12px 18px;
+      border: 3px solid var(--ink);
+      border-radius: 999px;
+      background: var(--yellow);
+      color: var(--ink);
+      font-weight: 900;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      box-shadow: 4px 4px 0 var(--ink);
+    }
+
+    .shorts {
+      display: grid;
+      gap: 18px;
+      margin-top: 16px;
+    }
+
+    .shorts:empty { display: none; }
+
+    .short-frame,
+    .playlist {
+      position: relative;
+      overflow: hidden;
+      border: 3px solid var(--ink);
+      border-radius: 18px;
+      background: #000;
+    }
+
+    .short-frame { width: min(100%, 320px); margin-inline: auto; aspect-ratio: 9 / 16; }
+
+    .playlist { width: 100%; margin-top: 12px; aspect-ratio: 16 / 9; }
+
+    .short-frame iframe,
+    .playlist iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .short h3 { margin-top: 8px; font-size: 1rem; text-align: center; }
+
+    .ep-kicker {
+      margin: 0;
+      color: var(--gold);
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .latest { margin: 22px 0 0; font-size: 1.05rem; }
+
+    .footer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px 16px;
+      width: min(100% - 32px, 960px);
+      margin: 0 auto;
+      padding: 18px 0 28px;
+      border-top: 3px solid rgba(255, 208, 0, .35);
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .footer p { margin: 0; }
+
+    .house-link { color: var(--yellow); font-weight: 800; }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (min-width: 720px) {
+      .hero-id {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+        padding-top: 18px;
+      }
+      .badge-wrap { width: 168px; flex: none; }
+      .hero-copy { flex: 1; min-width: 0; }
+      h1, .tagline { text-align: left; }
+      .shorts { grid-template-columns: repeat(auto-fit, minmax(220px, 280px)); justify-content: center; }
+      .about, .episodes { padding: 28px; }
+    }
+
+    @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+      .beasts li:hover,
+      .subscribe:hover { animation: wiggle .4s ease; }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .knight { animation: bob 2.6s ease-in-out infinite; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .knight, .beasts li, .subscribe { animation: none; }
+      .beasts li:hover, .subscribe:hover { transform: rotate(var(--tilt, 0deg)); }
+    }
+
+    @media (forced-colors: active) {
+      .banner, .about, .episodes, .subscribe, .beasts li, .playlist, .short-frame {
+        border: 1px solid CanvasText;
+      }
+    }
+
+    @keyframes bob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(var(--tilt, 0deg)); }
+      30% { transform: rotate(calc(var(--tilt, 0deg) - 4deg)); }
+      70% { transform: rotate(calc(var(--tilt, 0deg) + 4deg)); }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#episodes">Skip to episodes</a>
+  <header class="top">
+    <a href="/">House of Cauliman</a>
+    <a href="#episodes">Episodes</a>
+  </header>
+  <main class="wrap">
+    <section class="hero" aria-labelledby="tk-title">
+      <div class="hero-id">
+        <div class="badge-wrap">
+          <img class="knight" src="assets/icon.webp" width="640" height="640" alt="Tiny Knight, a round silver helmet with a red plume, on a gold sunburst" decoding="async">
+        </div>
+        <div class="hero-copy">
+          <h1 id="tk-title">
+            <picture>
+              <source srcset="assets/logo-wordmark.webp" type="image/webp">
+              <img class="wordmark" src="assets/logo-wordmark.png" width="1400" height="347" alt="Tiny Knight">
+            </picture>
+          </h1>
+          <p class="tagline">Small knight. <strong>Big beasts.</strong></p>
+        </div>
+      </div>
+      <!-- Scene banner. To swap in the toy-dinosaur art, replace assets/banner.webp (16:9). -->
+      <img class="banner" src="assets/banner.webp" width="1600" height="900" alt="A pocket-sized knight with a red plume faces a giant vacuum on a teal living-room carpet" fetchpriority="high" decoding="async">
+    </section>
+
+    <section class="about" aria-labelledby="about-title">
+      <h2 id="about-title">About</h2>
+      <p>A very small knight with a very big ego takes on the most dangerous monsters in the house: vacuums, ceiling fans, the cat, and a toy T. rex. New episodes every week. Original animation.</p>
+      <ul class="beasts">
+        <li>Vacuums</li>
+        <li>Ceiling fans</li>
+        <li>The cat</li>
+        <li>A toy T. rex</li>
+      </ul>
+      <a class="subscribe" href="https://www.youtube.com/@TheTinyKnight" target="_blank" rel="noopener noreferrer">Subscribe on YouTube<span class="sr-only"> (opens in a new tab)</span></a>
+    </section>
+
+    <section class="episodes" id="episodes" aria-labelledby="episodes-title">
+      <h2 id="episodes-title">Episodes</h2>
+      <div id="episode-list" class="shorts"></div>
+      <p id="episode-note" class="note">New episodes every week. Each film shows up here, tall like a Short, once it is public.</p>
+      <h3 class="latest">Latest episodes</h3>
+      <div class="playlist">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/videoseries?list=UU2rBPmoOJlsoVPMhJaBuq6Q"
+          title="Latest Tiny Knight episodes"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen></iframe>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <p>Created by MRCΛULⅠMΛN</p>
+    <p><a class="house-link" href="/">House of Cauliman</a></p>
+  </footer>
+  <script>
+    // Public Shorts only. Add an item when its YouTube id is public.
+    // Leave this array empty until then. Shape: { id, title, episode }
+    // { id: "VIDEO_ID", title: "The Vacuum", episode: 1 }
+    var episodes = [
+    ];
+
+    (function () {
+      var list = document.getElementById("episode-list");
+      var note = document.getElementById("episode-note");
+      if (!list) return;
+
+      var ready = episodes.filter(function (ep) {
+        return ep && typeof ep.id === "string" && /^[A-Za-z0-9_-]{6,}$/.test(ep.id);
+      });
+      if (!ready.length) return;
+
+      if (note) note.hidden = true;
+      ready.forEach(function (ep) {
+        var article = document.createElement("article");
+        article.className = "short";
+
+        var label = document.createElement("p");
+        label.className = "ep-kicker";
+        var number = Number(ep.episode);
+        label.textContent = Number.isFinite(number) ? "Episode " + number : "Episode";
+
+        var title = document.createElement("h3");
+        title.textContent = ep.title || "Tiny Knight";
+
+        var frame = document.createElement("div");
+        frame.className = "short-frame";
+
+        var iframe = document.createElement("iframe");
+        iframe.src = "https://www.youtube-nocookie.com/embed/" + ep.id;
+        iframe.title = label.textContent + ": " + title.textContent;
+        iframe.loading = "lazy";
+        iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share");
+        iframe.referrerPolicy = "strict-origin-when-cross-origin";
+        iframe.setAttribute("allowfullscreen", "");
+
+        frame.appendChild(iframe);
+        article.appendChild(label);
+        article.appendChild(title);
+        article.appendChild(frame);
+        list.appendChild(article);
+      });
+    })();
+  </script>
+</body>
+</html>
