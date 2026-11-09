@@ -161,6 +161,19 @@
 
     .watch-row { margin: 14px 0 0; text-align: center; }
 
+    .premiere {
+      width: min(100%, 400px);
+      margin: 18px auto 8px;
+    }
+
+    .premiere .short-frame { width: 100%; }
+
+    .premiere figcaption {
+      margin: 10px 0 0;
+      text-align: center;
+      font-weight: 800;
+    }
+
     .watch {
       display: inline-flex;
       align-items: center;
@@ -405,6 +418,18 @@
           <p class="watch-row"><a class="watch" href="https://www.youtube.com/@TheTinyKnight" target="_blank" rel="noopener noreferrer"><svg class="play" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 8.2v7.6l6.4-3.8z" fill="currentColor"/></svg>Watch on YouTube<span class="sr-only"> (opens in a new tab)</span></a></p>
         </div>
       </div>
+      <figure class="premiere">
+        <div class="short-frame">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/b8n82MEXViY"
+            title="Tiny Knight vs. The Terrible Lizard | Episode 1"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen></iframe>
+        </div>
+        <figcaption>Episode 1: The Terrible Lizard</figcaption>
+      </figure>
       <!-- Scene banner. Replace assets/banner.webp (1600×900, 16:9) to swap the art. -->
       <img class="banner" src="assets/banner.webp" width="1600" height="900" alt="Tiny Knight, a pocket-sized knight with a red plume, faces a giant toy T. rex. The title reads Tiny Knight: Small knight. Big beasts." fetchpriority="high" decoding="async">
     </section>
