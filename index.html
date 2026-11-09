@@ -1273,6 +1273,18 @@
     .ledger-run-art{display:block;width:100%;max-width:310px;height:auto;margin:auto;filter:drop-shadow(0 16px 24px rgba(0,0,0,.25))}
     @media(max-width:640px){.ledger-run-feature{grid-template-columns:1fr;padding:22px}.ledger-run-art{max-width:230px}}
 
+    /* TINY KNIGHT: scoped entertainment feature */
+    #tiny-knight{scroll-margin-top:90px}
+    .tiny-knight-feature{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,.55fr);gap:26px;align-items:center;padding:30px;border:1px solid rgba(255,208,0,.5);border-radius:24px;background:radial-gradient(circle at 88% 16%,rgba(255,208,0,.16),transparent 36%),linear-gradient(145deg,#3a2468,#120818 75%)}
+    .tiny-knight-feature h2{font-size:clamp(2rem,5vw,3.5rem);margin:14px 0 8px;color:#ffd000}
+    .tiny-knight-feature p{color:var(--muted);line-height:1.65;max-width:650px}
+    .tiny-knight-feature .tk-tagline{color:var(--text);font-weight:900;letter-spacing:.08em}
+    .tiny-knight-art{display:block;width:100%;max-width:310px;height:auto;margin:auto;filter:drop-shadow(0 16px 24px rgba(0,0,0,.25))}
+    .tiny-knight-feature .btn{border-color:rgba(255,208,0,.8);background:#ffd000;color:#1a1030}
+    .tiny-knight-feature .btn:hover{background:#ffe14a}
+    .tiny-knight-feature .btn:focus-visible{outline:2px solid #fff;outline-offset:3px}
+    @media(max-width:640px){.tiny-knight-feature{grid-template-columns:1fr;padding:22px}.tiny-knight-art{max-width:230px}}
+
     /* RAD popup: compact copy, with reachable actions on short screens. */
     .house-modal.rad-popup{align-items:center;touch-action:pan-y;padding:calc(10px + env(safe-area-inset-top,0px)) 10px calc(10px + env(safe-area-inset-bottom,0px))}
     .rad-popup .house-modal-window{height:auto;min-height:0;max-height:calc(100svh - 20px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));max-height:calc(100dvh - 20px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));display:flex;flex-direction:column}
@@ -1706,6 +1718,20 @@
           <div class="btnrow"><a class="btn" href="https://radxrp.com/#ledger-run" target="_blank" rel="noopener">Explore LEDGER RUN</a></div>
         </div>
         <img class="ledger-run-art" src="/assets/COM-RAD-front.png" width="1254" height="1254" loading="lazy" alt="COM-RAD, the character starring in LEDGER RUN" />
+      </div>
+    </section>
+
+    <section id="tiny-knight" class="section" aria-labelledby="tiny-knight-title">
+      <div class="tiny-knight-feature">
+        <div>
+          <span class="badge">ORIGINAL SERIES</span>
+          <h2 id="tiny-knight-title">TINY KNIGHT</h2>
+          <p class="tk-tagline">SMALL KNIGHT. BIG BEASTS.</p>
+          <p>A very small knight with a very big ego takes on the most dangerous monsters in the house: vacuums, ceiling fans, the cat.</p>
+          <p>Original animation. New episodes every week.</p>
+          <div class="btnrow"><a class="btn" href="/tinyknight/">Watch Tiny Knight</a></div>
+        </div>
+        <img class="tiny-knight-art" src="/tinyknight/assets/icon.webp" width="640" height="640" loading="lazy" alt="Tiny Knight, a pocket-sized knight in a silver helmet with a red plume, on a gold sunburst" />
       </div>
     </section>
 
