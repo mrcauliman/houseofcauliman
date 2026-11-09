@@ -895,6 +895,19 @@ a{color:inherit;text-decoration:none}
 </style>
   <meta name="apple-mobile-web-app-title" content="THE 52" />
   <meta name="application-name" content="THE 52" />
+<style>
+.swap-cta{display:flex;align-items:center;gap:16px;max-width:620px;min-height:76px;margin:0 auto 26px;padding:14px 18px;border-radius:22px;border:1.5px solid rgba(212,164,74,.7);background:radial-gradient(circle at 0 0,rgba(212,164,74,.20),transparent 60%),linear-gradient(145deg,rgba(15,53,91,.96),rgba(3,10,20,.98));box-shadow:0 12px 30px rgba(0,0,0,.30);color:var(--text);text-decoration:none;-webkit-tap-highlight-color:transparent;transition:transform .15s ease,border-color .15s ease}
+.swap-cta:hover{border-color:var(--accent);transform:translateY(-2px)}
+.swap-cta:active{transform:scale(.98)}
+.swap-cta:focus-visible{outline:3px solid #f0cc78;outline-offset:3px}
+.swap-cta-icon{flex:0 0 48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:rgba(212,164,74,.18);font-size:1.4rem}
+.swap-cta-text{flex:1;display:flex;flex-direction:column;gap:3px;text-align:left}
+.swap-cta-title{font-size:1.08rem;font-weight:700;letter-spacing:.01em}
+.swap-cta-sub{font-size:.86rem;color:var(--muted);line-height:1.4}
+.swap-cta-pill{flex:0 0 auto;padding:7px 12px;border-radius:999px;background:rgba(212,164,74,.16);color:#f0cc78;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.swap-cta-chev{flex:0 0 auto;font-size:1.6rem;color:#57a9ff;line-height:1}
+@media(max-width:520px){.swap-cta{flex-wrap:wrap;gap:12px}.swap-cta-text{flex:1 1 calc(100% - 64px)}.swap-cta-pill{order:3}.swap-cta-chev{order:4;margin-left:auto}}
+</style>
 </head>
 <body>
 <main class="wrap">
@@ -918,6 +931,16 @@ a{color:inherit;text-decoration:none}
     across the House of Cauliman ecosystem.
   </p>
 </section>
+
+<a class="swap-cta" href="/the52/exchange/" aria-label="Card Swap for Cards 05 and 06. Opening soon. See how it will work.">
+  <span class="swap-cta-icon" aria-hidden="true">⇄</span>
+  <span class="swap-cta-text">
+    <span class="swap-cta-title">Card Swap · Cards 05 &amp; 06</span>
+    <span class="swap-cta-sub">Swap your original for the corrected card. Not open yet — tap to see how it will work.</span>
+  </span>
+  <span class="swap-cta-pill">🔒 Opening soon</span>
+  <span class="swap-cta-chev" aria-hidden="true">›</span>
+</a>
 
 <section class="subscriber-access">
   <div class="subscriber-access-head">
