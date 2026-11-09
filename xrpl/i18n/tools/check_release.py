@@ -124,6 +124,40 @@ def held_fixture():
                           for lang, *_rest in LANGS}}
 
 
+def translation_langs(release):
+    """Translated languages, in release.json order (everything except the source)."""
+    return [lang for lang, status in release["languages"].items() if status != "source"]
+
+
+def locale_slugs(exclude=()):
+    """Locale folder slugs derived from LANGS instead of a hard-coded list."""
+    return {slug for lang, slug, *_rest in LANGS if slug and lang not in exclude}
+
+
+def language_set_errors(release, catalogs, review_langs, locale_langs):
+    """Release, catalogs, review packages and locale table must name the same languages."""
+    errors = []
+    declared = translation_langs(release)
+    sources = [lang for lang, status in release["languages"].items() if status == "source"]
+    if sources != ["en"]:
+        errors.append(f"release.json source languages are {sources}, expected ['en']")
+    catalog_langs = sorted(lang for lang in catalogs if lang != "en")
+    if sorted(declared) != catalog_langs:
+        errors.append(f"release.json translations {sorted(declared)} != catalogs {catalog_langs}")
+    if list(review_langs) != declared:
+        errors.append(f"review languages {list(review_langs)} != release.json {declared}")
+    locales = [lang for lang in locale_langs if lang != "en"]
+    if locales != declared:
+        errors.append(f"locale table {locales} != release.json {declared}")
+    return errors
+
+
+def count_word(number):
+    words = {1: "one", 2: "two", 3: "three", 4: "four", 5: "five", 6: "six", 7: "seven", 8: "eight",
+             9: "nine", 10: "ten", 11: "eleven", 12: "twelve"}
+    return words.get(number, str(number))
+
+
 def declared_public(release, catalogs, lang):
     english = catalogs.get("en") or {}
     local = catalogs.get(lang) or {}
@@ -262,7 +296,7 @@ def packet_decision_errors(lang, rows, english, catalog, record, importer, expec
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--expect-held", action="store_true",
-                        help="require all nine translations unapproved and no reviewer decisions")
+                        help="require every translation unapproved and no reviewer decisions")
     args = parser.parse_args(argv)
     errors = []
     try:
@@ -284,6 +318,8 @@ def main(argv=None):
     if not isinstance(catalogs.get("en"), dict) or not catalogs["en"]:
         print("English source catalog is missing or empty")
         return 1
+    errors.extend(language_set_errors(release, catalogs, REVIEW_LANGS, [lang for lang, *_rest in LANGS]))
+    translations = translation_langs(release)
     live = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
     if "/xrpl/" in live:
         errors.append("live sitemap.xml contains an xrpl url")
@@ -404,31 +440,29 @@ def main(argv=None):
     pt_changed = [path for path in changed if path.startswith("xrpl/pt-br/")]
     other_locales = [
         path for path in changed
-        if path.startswith("xrpl/") and path.split("/")[1] in {"es", "fr", "de", "ja", "ko", "zh-cn", "hi", "ar"}
+        if path.startswith("xrpl/") and path.split("/")[1] in locale_slugs(exclude={"pt-BR"})
     ]
     native = "Português (Brasil)"
     marked = f">{native} (under review)</option>"
     unmarked = f">{native}</option>"
     # Lesson pages bake no language selector, so they stay byte-identical.
     # Each other dashboard changes only the approved language's option label.
-    if len(other_locales) != 8 or any(not path.endswith("/index.html") for path in other_locales):
+    if len(other_locales) != len(locale_slugs(exclude={"pt-BR"})) or any(not path.endswith("/index.html") for path in other_locales):
         errors.append(f"pt-BR approval touched {len(other_locales)} other locale files")
     for path in other_locales:
         expected = base_files[path].replace(marked, unmarked, 1)
         if mid[path] != expected or hreflangs(mid[path]) or REVIEW_NOTICE not in mid[path] or "data-xrpl-public" in mid[path]:
             errors.append(f"{path} changed beyond the pt-BR selector label")
             break
-    if len(pt_changed) != 13:
+    if len(pt_changed) != len(PAGES):
         errors.append(f"pt-BR approval changed {len(pt_changed)} pt-BR files")
     if "xrpl/i18n/sitemap.proposed.xml" not in changed or "xrpl/i18n/release.js" not in changed:
         errors.append("pt-BR approval did not change the sitemap and release.js")
     english_changed = [
         path for path in changed
-        if path.startswith("xrpl/") and not path.startswith("xrpl/i18n/") and path.split("/")[1] not in {
-            "pt-br", "es", "fr", "de", "ja", "ko", "zh-cn", "hi", "ar",
-        }
+        if path.startswith("xrpl/") and not path.startswith("xrpl/i18n/") and path.split("/")[1] not in locale_slugs()
     ]
-    if len(english_changed) != 13:
+    if len(english_changed) != len(PAGES):
         errors.append(f"english hreflang cluster changed {len(english_changed)} files")
     mid_errors = audit_release_output(mid, approved, catalogs) + audit_declared_output(mid, approved, catalogs)
     if mid_errors:
@@ -473,10 +507,10 @@ def main(argv=None):
         print("\n".join(errors))
         return 1
     print("declared-state release consistency checks passed")
-    print("packages: 9 languages x 230 keys; decision metadata checked structurally")
+    print(f"packages: {len(translations)} languages x {len(flagged)} keys; decision metadata checked structurally")
     print("public: " + ", ".join(lang for lang, *_rest in LANGS if declared_public(release, catalogs, lang)))
     if args.expect_held:
-        print("held-state checks passed: nine unapproved languages, zero reviewer decisions")
+        print(f"held-state checks passed: {count_word(len(translations))} unapproved languages, zero reviewer decisions")
     print("Not proof of authentic reviewers, native competence, owner acceptance or publication authorization.")
     return 0
 
