@@ -16,6 +16,9 @@ const XRPL_WS =
 const MAX_SCREENSHOTS = 5;
 const MAX_SCREENSHOT_BYTES = 5 * 1024 * 1024;
 
+// Explicit "no card received / not listed" choice from the holder page.
+const NO_CARD_DROP_ID = "none";
+
 const ISSUE_TYPES = new Set([
   "did_not_receive",
   "claim_not_working",
@@ -488,7 +491,14 @@ function createIssueRouter({
           String(req.body?.description || "")
             .trim();
 
-        if (!/^[1-9][0-9]*$/.test(dropId)) {
+        // Exact string only (no trimming/coercion).
+        const noCard =
+          req.body?.dropId === NO_CARD_DROP_ID;
+
+        if (
+          !noCard &&
+          !/^[1-9][0-9]*$/.test(dropId)
+        ) {
           return res.status(400).json({
             ok: false,
             error: "Select the affected THE 52 card."
@@ -519,7 +529,7 @@ function createIssueRouter({
           await buildDiagnostics(
             pool,
             session.xrpl_address,
-            dropId
+            noCard ? null : dropId
           );
 
         const registration =
@@ -528,7 +538,10 @@ function createIssueRouter({
         const recipient =
           diagnostics.recipient;
 
-        if (!registration || !recipient) {
+        if (
+          !noCard &&
+          (!registration || !recipient)
+        ) {
           return res.status(404).json({
             ok: false,
             error:

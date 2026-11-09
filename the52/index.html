@@ -1072,8 +1072,9 @@ a{color:inherit;text-decoration:none}
       </select>
 
       <div class="issue-file-help" id="issueDropHelp">
-        Only THE 52 cards assigned to your subscriber registration
-        can be reported here.
+        Pick the affected card, or choose "I haven't received any card"
+        if none is listed. Not registered yet?
+        <a href="/nft-enrollment/">Register at houseofcauliman.com/nft-enrollment</a>.
       </div>
     </div>
 
@@ -1313,6 +1314,25 @@ function validateIssueScreenshots(files){
   return null;
 }
 
+const NO_CARD_DROP_ID = "none";
+
+function appendNoCardOption(){
+  const option =
+    document.createElement("option");
+
+  option.value = NO_CARD_DROP_ID;
+
+  option.textContent =
+    "I haven't received any card / not listed";
+
+  issueDrop.appendChild(option);
+}
+
+const NO_CARD_HELP =
+  'If your card isn\'t listed, choose "I haven\'t received any card". ' +
+  'Not registered yet? <a href="/nft-enrollment/">Register at ' +
+  'houseofcauliman.com/nft-enrollment</a>.';
+
 async function loadIssueDrops(){
   issueDrop.disabled = true;
   issueDrop.innerHTML =
@@ -1356,8 +1376,13 @@ async function loadIssueDrops(){
       issueDrop.innerHTML =
         '<option value="">No THE 52 cards found</option>';
 
-      issueDropHelp.textContent =
-        "No frozen THE 52 delivery record was found for this registration.";
+      appendNoCardOption();
+
+      issueDrop.disabled = false;
+
+      issueDropHelp.innerHTML =
+        "No THE 52 card is linked to this wallet yet. " +
+        NO_CARD_HELP;
 
       return;
     }
@@ -1386,12 +1411,17 @@ async function loadIssueDrops(){
       issueDrop.appendChild(option);
     }
 
+    appendNoCardOption();
+
     issueDrop.disabled = false;
 
-    issueDropHelp.textContent =
-      drops.length === 1
-        ? "1 THE 52 card is available for this registration."
-        : `${drops.length} THE 52 cards are available for this registration.`;
+    issueDropHelp.innerHTML =
+      (
+        drops.length === 1
+          ? "1 THE 52 card is available for this registration. "
+          : `${drops.length} THE 52 cards are available for this registration. `
+      ) +
+      NO_CARD_HELP;
 
   }catch(error){
     console.warn(
@@ -1480,7 +1510,7 @@ issueForm.addEventListener("submit",async event=>{
 
   if(!selectedDrop){
     setIssueStatus(
-      "Select the affected THE 52 card.",
+      "Select the affected THE 52 card, or choose \"I haven't received any card\".",
       "error"
     );
 
