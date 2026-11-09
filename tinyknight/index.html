@@ -83,6 +83,8 @@
 
     .top a:focus-visible,
     .subscribe:focus-visible,
+    .watch:focus-visible,
+    .yt-mark:focus-visible,
     .house-link:focus-visible {
       outline: 3px solid #fff;
       outline-offset: 3px;
@@ -155,6 +157,39 @@
       text-align: center;
       font-size: .95rem;
       font-weight: 800;
+    }
+
+    .watch-row { margin: 14px 0 0; text-align: center; }
+
+    .watch {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 48px;
+      padding: 12px 18px;
+      border: 3px solid var(--ink);
+      border-radius: 999px;
+      background: #cc0000;
+      color: #fff;
+      font-weight: 900;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      box-shadow: 4px 4px 0 var(--ink);
+    }
+
+    .watch:hover { background: #a30000; }
+
+    .watch .play { display: block; flex: none; }
+
+    .yt-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 44px;
+      min-height: 44px;
+      color: #cc0000;
     }
 
     #episodes { scroll-margin-top: 72px; }
@@ -308,7 +343,7 @@
       }
       .badge-wrap { width: 168px; flex: none; }
       .hero-copy { flex: 1; min-width: 0; }
-      h1, .tagline, .house-project { text-align: left; }
+      h1, .tagline, .house-project, .watch-row { text-align: left; }
       .shorts { grid-template-columns: repeat(auto-fit, minmax(220px, 280px)); justify-content: center; }
       .about, .episodes { padding: 28px; }
     }
@@ -329,7 +364,7 @@
     }
 
     @media (forced-colors: active) {
-      .banner, .about, .episodes, .subscribe, .beasts li, .playlist, .short-frame {
+      .banner, .about, .episodes, .subscribe, .watch, .yt-mark, .beasts li, .playlist, .short-frame {
         border: 1px solid CanvasText;
       }
     }
@@ -367,6 +402,7 @@
           </h1>
           <p class="tagline">Small knight. <strong>Big beasts.</strong></p>
           <p class="house-project"><a class="house-link" href="/">A House of Cauliman project</a></p>
+          <p class="watch-row"><a class="watch" href="https://www.youtube.com/@TheTinyKnight" target="_blank" rel="noopener noreferrer"><svg class="play" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 8.2v7.6l6.4-3.8z" fill="currentColor"/></svg>Watch on YouTube<span class="sr-only"> (opens in a new tab)</span></a></p>
         </div>
       </div>
       <!-- Scene banner. Replace assets/banner.webp (1600×900, 16:9) to swap the art. -->
@@ -404,6 +440,7 @@
   <footer class="footer">
     <p>Created by MRCΛULⅠMΛN</p>
     <p><a class="house-link" href="/">A House of Cauliman project</a></p>
+    <p><a class="yt-mark" href="https://www.youtube.com/@TheTinyKnight" target="_blank" rel="noopener noreferrer" aria-label="Tiny Knight on YouTube (opens in a new tab)"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" focusable="false"><rect x="2" y="5" width="20" height="14" rx="4" fill="currentColor"/><path d="M10 9.2v5.6l5.2-2.8z" fill="#14081f"/></svg></a></p>
   </footer>
   <script>
     // Public Shorts only. Add an item when its YouTube id is public.
