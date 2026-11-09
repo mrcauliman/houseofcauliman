@@ -150,6 +150,13 @@
 
     .tagline strong { color: var(--yellow); }
 
+    .house-project {
+      margin: 8px 0 0;
+      text-align: center;
+      font-size: .95rem;
+      font-weight: 800;
+    }
+
     #episodes { scroll-margin-top: 72px; }
 
     .about,
@@ -273,7 +280,11 @@
 
     .footer p { margin: 0; }
 
-    .house-link { color: var(--yellow); font-weight: 800; }
+    .house-link {
+      color: var(--yellow);
+      font-weight: 800;
+      text-underline-offset: 3px;
+    }
 
     .sr-only {
       position: absolute;
@@ -297,7 +308,7 @@
       }
       .badge-wrap { width: 168px; flex: none; }
       .hero-copy { flex: 1; min-width: 0; }
-      h1, .tagline { text-align: left; }
+      h1, .tagline, .house-project { text-align: left; }
       .shorts { grid-template-columns: repeat(auto-fit, minmax(220px, 280px)); justify-content: center; }
       .about, .episodes { padding: 28px; }
     }
@@ -355,6 +366,7 @@
             </picture>
           </h1>
           <p class="tagline">Small knight. <strong>Big beasts.</strong></p>
+          <p class="house-project"><a class="house-link" href="/">A House of Cauliman project</a></p>
         </div>
       </div>
       <!-- Scene banner. To swap in the toy-dinosaur art, replace assets/banner.webp (16:9). -->
@@ -391,7 +403,7 @@
   </main>
   <footer class="footer">
     <p>Created by MRCΛULⅠMΛN</p>
-    <p><a class="house-link" href="/">House of Cauliman</a></p>
+    <p><a class="house-link" href="/">A House of Cauliman project</a></p>
   </footer>
   <script>
     // Public Shorts only. Add an item when its YouTube id is public.
