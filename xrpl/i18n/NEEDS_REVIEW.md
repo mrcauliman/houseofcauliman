@@ -41,15 +41,15 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - ko: 콜백(callback)은 백엔드가 페이로드 결과를 가져올 이유이지, 그대로 믿어도 된다는 증거가 아닙니다. resolved/signed 상태, 예상 계정, 의도한 네트워크를 확인하세요. 원장 트랜잭션이라면 트랜잭션 해시를 조회하고 검증, 결과, 의도한 작업을 그대로 확인하세요. 서명된 요청도 원장에서 실패하거나 미해결로 남을 수 있습니다.
 - zh-CN: 回调（callback）是让后端去获取载荷（payload）结果的理由，不是可以盲目信任的证明。请检查已解析/已签名状态、预期账户和目标网络。对于账本交易，查它的交易哈希，并核对验证、结果以及确切的预期操作。已签名的请求仍可能失败，或在账本上仍无定论。
 - hi: कॉलबैक (callback) बैकएंड के लिए पेलोड (payload) परिणाम लाने का कारण है, आँख मूँदकर भरोसा करने का प्रमाण नहीं। हल हुई/साइन हुई अवस्था, अपेक्षित खाता और इच्छित नेटवर्क जाँचें। लेजर लेनदेन के लिए उसका ट्रांज़ैक्शन हैश देखें और वैलिडेशन (validation), परिणाम तथा ठीक वही इच्छित कार्रवाई सत्यापित करें। साइन किया अनुरोध फिर भी विफल हो सकता है या लेजर पर अनसुलझा रह सकता है।
-- ar: الإشعار الراجع (callback) سبب لكي تجلب الخلفية (backend) نتيجة الحمولة (payload)، وليس برهاناً للثقة العمياء. تحقق من الحالة المحسومة أو الموقَّعة (signing)، والحساب المتوقع، والشبكة المقصودة. لمعاملة على السجل، ابحث عن تجزئة المعاملة وتحقق من التحقّق (validated) والنتيجة والعملية المقصودة بالضبط. الطلب الموقَّع قد يفشل أو يبقى غير محسوم على السجل.
+- ar: الإشعار الراجع (callback) سبب يدعو النظام الخلفي (backend) إلى جلب نتيجة الحمولة (payload)، وليس دليلاً يُوثق به دون تحقق. تحقق من حالة حسم الطلب وتوقيعه، ومن الحساب المتوقع والشبكة المقصودة. وبالنسبة إلى معاملة على السجل، ابحث عنها باستخدام تجزئتها وتحقق من اعتمادها في السجل، ومن نتيجتها، ومن مطابقتها للعملية المقصودة بالضبط. فالطلب الموقَّع قد يفشل أو يبقى غير محسوم على السجل.
 
 ## `a-fictional-club-proposes-1-000-club.bd5125de`
 
 - en: A fictional club proposes 1,000 CLUB credits. Its launch sheet lists a logo and ticker, but no issuer address, redemption policy or signing authority. What must be added before a member could identify the asset or judge the promise?
-- pt-BR: Um clube fictício propõe 1,000 créditos CLUB. A ficha de lançamento lista um logo e um ticker, mas não tem endereço do emissor, política de resgate nem autoridade de assinatura. O que precisa ser acrescentado antes de um membro identificar o ativo ou julgar a promessa?
-- es: Un club ficticio propone 1,000 créditos CLUB. Su ficha de lanzamiento lista un logo y un ticker, pero no la dirección del emisor, la política de canje ni la autoridad de firma. ¿Qué hay que agregar antes de que un miembro pueda identificar el activo o juzgar la promesa?
-- fr: Un club fictif propose 1,000 crédits CLUB. Sa fiche de lancement indique un logo et un ticker, mais pas d’adresse d’émetteur, de politique de rachat ni d’autorité de signature. Que faut-il ajouter avant qu’un membre puisse identifier l’actif ou juger la promesse ?
-- de: Ein fiktiver Club schlägt 1,000 CLUB-Credits vor. Sein Startblatt nennt ein Logo und einen Ticker, aber keine Emittentenadresse, keine Einlösepolitik und keine Signierbefugnis. Was muss ergänzt werden, bevor ein Mitglied das Asset identifizieren oder das Versprechen beurteilen könnte?
+- pt-BR: Um clube fictício propõe 1.000 créditos CLUB. A ficha de lançamento lista um logo e um ticker, mas não tem endereço do emissor, política de resgate nem autoridade de assinatura. O que precisa ser acrescentado antes de um membro identificar o ativo ou julgar a promessa?
+- es: Un club ficticio propone 1000 créditos CLUB. Su ficha de lanzamiento lista un logo y un ticker, pero no la dirección del emisor, la política de canje ni la autoridad de firma. ¿Qué hay que agregar antes de que un miembro pueda identificar el activo o juzgar la promesa?
+- fr: Un club fictif propose 1 000 crédits CLUB. Sa fiche de lancement indique un logo et un ticker, mais pas d’adresse d’émetteur, de politique de rachat ni d’autorité de signature. Que faut-il ajouter avant qu’un membre puisse identifier l’actif ou juger la promesse ?
+- de: Ein fiktiver Club schlägt 1.000 CLUB-Credits vor. Sein Startblatt nennt ein Logo und einen Ticker, aber keine Emittentenadresse, keine Einlösepolitik und keine Signierbefugnis. Was muss ergänzt werden, bevor ein Mitglied das Asset identifizieren oder das Versprechen beurteilen könnte?
 - ja: 架空のクラブが、1,000 CLUBクレジットを提案しています。公開シートにはロゴとティッカーがありますが、発行者アドレス、償還方針、署名権限はありません。メンバーが資産を識別したり、約束を判断したりする前に、何を追加する必要がありますか？
 - ko: 가상의 클럽이 CLUB 크레딧 1,000개를 제안합니다. 출시 안내에는 로고와 티커만 있고 발행자 주소, 상환 정책, 서명 권한은 없습니다. 회원이 자산을 식별하거나 약속을 판단하려면 무엇을 더해야 하나요?
 - zh-CN: 一家虚构俱乐部提议 1,000 CLUB 积分。它的发布页列出了 Logo 和代码，但没有发行方地址、赎回政策或签名权限。在成员能够识别该资产或判断这一承诺之前，必须补上什么？
@@ -61,13 +61,13 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - en: A human-manageable secret that can derive the keys. It’s not a password you can reset.
 - pt-BR: Um segredo que uma pessoa consegue guardar e que pode derivar as chaves. Não é uma senha que você possa redefinir.
 - es: Un secreto que una persona puede manejar y que puede derivar las claves. No es una contraseña que puedas restablecer.
-- fr: Un secret gérable par une personne, qui peut dériver les clés. Ce n’est pas un mot de passe que l’on peut réinitialiser.
+- fr: Un secret qu’une personne peut gérer et à partir duquel les clés peuvent être dérivées. Ce n’est pas un mot de passe que l’on peut réinitialiser.
 - de: Ein von Menschen handhabbares Geheimnis, aus dem sich die Schlüssel ableiten lassen. Es ist kein Passwort, das du zurücksetzen kannst.
 - ja: 鍵を導出できる、人が管理できる秘密情報（seed）です。リセットできるパスワードではありません。
 - ko: 키를 유도할 수 있는, 사람이 관리하는 비밀입니다. 재설정할 수 있는 비밀번호가 아닙니다.
 - zh-CN: 一种人可以自行保管、并能推导出密钥的秘密。它不是可以重置的密码。
-- hi: एक ऐसा मानवीय रूप से संभाला जा सकने वाला सीक्रेट (secret) जिससे की (keys) निकाली जा सकती हैं। यह ऐसा पासवर्ड नहीं है जिसे आप रीसेट कर सकें।
-- ar: سر يستطيع الإنسان إدارته ويُشتق منه المفاتيح. إنه ليس كلمة مرور يمكن إعادة تعيينها (seed).
+- hi: ऐसा सीक्रेट (secret) जिसे व्यक्ति संभाल सके और जिससे क्रिप्टोग्राफ़िक कुंजियाँ (keys) निकाली जा सकें। यह ऐसा पासवर्ड नहीं है जिसे आप रीसेट कर सकें।
+- ar: سر يستطيع الإنسان التعامل معه ويمكن اشتقاق المفاتيح منه. وليس كلمة مرور يمكنك إعادة تعيينها (seed).
 
 ## `a-listing-says-permanent-collectible.fc19f9eb`
 
@@ -75,9 +75,9 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - pt-BR: Um anúncio diz “colecionável permanente.” O NFT é mutável, a imagem fica num servidor web comum e o vendedor mostra uma captura de tela em vez do NFTokenID. Quais afirmações continuam sem prova?
 - es: Un anuncio dice «coleccionable permanente». El NFT es mutable, su imagen está en un servidor web común y el vendedor muestra una captura en lugar del NFTokenID. ¿Qué afirmaciones siguen sin probarse?
 - fr: Une annonce dit « objet de collection permanent ». Le NFT est mutable, son image est sur un serveur web ordinaire, et le vendeur montre une capture d’écran plutôt que le NFTokenID. Quelles affirmations restent non prouvées ?
-- de: Ein Inserat sagt „dauerhaftes Sammlerstück“. Das NFT ist mutable, sein Bild liegt auf einem gewöhnlichen Webserver, und die verkaufende Person zeigt einen Screenshot statt der NFTokenID. Welche Behauptungen bleiben unbelegt?
+- de: Ein Inserat sagt „dauerhaftes Sammlerstück“. Das NFT ist veränderbar, sein Bild liegt auf einem gewöhnlichen Webserver, und die verkaufende Person zeigt einen Screenshot statt der NFTokenID. Welche Behauptungen bleiben unbelegt?
 - ja: 出品文は「永久の収集品」と言っています。NFTは変更可能で、画像は普通のウェブサーバー上にあり、売り手はNFTokenIDではなくスクリーンショットを見せています。どの主張が、まだ証明されていませんか？
-- ko: 목록에 “영구 수집품”이라고 되어 있습니다. NFT는 변경 가능하고, 이미지는 일반 웹 서버에 있으며, 판매자는 NFTokenID 대신 스크린샷을 보여 줍니다. 아직 증명되지 않은 주장은 무엇인가요?
+- ko: 판매 게시물에 “영구 수집품”이라고 되어 있습니다. NFT는 변경 가능하고, 이미지는 일반 웹 서버에 있으며, 판매자는 NFTokenID 대신 스크린샷을 보여 줍니다. 아직 증명되지 않은 주장은 무엇인가요?
 - zh-CN: 一条上架信息写着“永久收藏品”。该 NFT 是可变的，图片放在普通网站服务器上，卖家出示的是截图而不是 NFTokenID。哪些说法仍然未经证实？
 - hi: एक लिस्टिंग कहती है “स्थायी संग्रहणीय।” NFT म्यूटेबल (mutable) है, उसकी छवि एक साधारण वेब सर्वर पर है, और विक्रेता NFTokenID की जगह स्क्रीनशॉट दिखाता है। कौन से दावे अब भी अप्रमाणित हैं?
 - ar: يقول إدراج «مقتنى دائم». NFT قابل للتغيير، وصورته على خادم ويب عادي، ويعرض البائع لقطة شاشة بدل NFTokenID. أي ادعاءات تبقى غير مثبتة؟
@@ -150,15 +150,15 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 ## `a-sale-normally-uses-an-nft-offer-an.ae15a8df`
 
 - en: A sale normally uses an NFT offer and its acceptance. Creating an offer is not completed payment or delivery. Before acceptance, review the exact NFT, payment asset, amount, destination restriction, expiration and issuer transfer fee. NFT transfer fees use units of 0.001%; for example 1,000 represents 1%, not 1,000 XRP. Applicability depends on the transfer. Confirm the validated outcome and ownership afterward.
-- pt-BR: Uma venda normalmente usa uma oferta de NFT e a aceitação dela. Criar uma oferta não é pagamento nem entrega concluídos. Antes de aceitar, revise o NFT exato, o ativo do pagamento, a quantia, a restrição de destino, a expiração e a taxa de transferência do emissor. Taxas de transferência de NFT usam unidades de 0.001%; por exemplo, 1,000 representa 1%, não 1,000 XRP. A aplicabilidade depende da transferência. Confirme depois o resultado validado e a propriedade.
-- es: Una venta normalmente usa una oferta de NFT y su aceptación. Crear una oferta no es un pago ni una entrega completados. Antes de aceptar, revisa el NFT exacto, el activo de pago, la cantidad, la restricción de destino, el vencimiento y la comisión de transferencia del emisor. Las comisiones de transferencia de NFT usan unidades de 0.001%; por ejemplo 1,000 representa 1%, no 1,000 XRP. La aplicación depende de la transferencia. Confirma después el resultado validado y la titularidad.
-- fr: Une vente utilise en général une offre NFT et son acceptation. Créer une offre n’est pas un paiement ni une livraison terminés. Avant l’acceptation, vérifiez le NFT exact, l’actif de paiement, le montant, la restriction de destination, l’expiration et les frais de transfert de l’émetteur. Les frais de transfert NFT utilisent des unités de 0.001% ; par exemple 1,000 représente 1%, pas 1,000 XRP. L’application dépend du transfert. Confirmez ensuite le résultat validé et la propriété.
-- de: Ein Verkauf nutzt normalerweise ein NFT-Offer und dessen Annahme. Ein Offer zu erstellen ist keine abgeschlossene Zahlung und keine Lieferung. Prüfe vor der Annahme das genaue NFT, das Zahlungs-Asset, den Betrag, die Zielbeschränkung, den Ablauf und die Transfergebühr des Emittenten. NFT-Transfergebühren nutzen Einheiten von 0.001%; zum Beispiel steht 1,000 für 1%, nicht für 1,000 XRP. Ob sie greifen, hängt von der Übertragung ab. Bestätige danach das validierte Ergebnis und das Eigentum.
+- pt-BR: Uma venda normalmente usa uma oferta de NFT e a aceitação dela. Criar uma oferta não é pagamento nem entrega concluídos. Antes de aceitar, revise o NFT exato, o ativo do pagamento, a quantia, a restrição de destino, a expiração e a taxa de transferência do emissor. Taxas de transferência de NFT usam unidades de 0,001%; por exemplo, 1.000 representa 1%, não 1.000 XRP. A aplicabilidade depende da transferência. Confirme depois o resultado validado e a propriedade.
+- es: Una venta normalmente usa una oferta de NFT y su aceptación. Crear una oferta no es un pago ni una entrega completados. Antes de aceptar, revisa el NFT exacto, el activo de pago, la cantidad, la restricción de destino, el vencimiento y la comisión de transferencia del emisor. Las comisiones de transferencia de NFT usan unidades de 0,001%; por ejemplo 1000 representa 1%, no 1000 XRP. La aplicación depende de la transferencia. Confirma después el resultado validado y la titularidad.
+- fr: Une vente utilise en général une offre NFT et son acceptation. Créer une offre n’est pas un paiement ni une livraison terminés. Avant l’acceptation, vérifiez le NFT exact, l’actif de paiement, le montant, la restriction de destination, l’expiration et les frais de transfert de l’émetteur. Les frais de transfert NFT utilisent des unités de 0,001 % ; par exemple 1 000 représente 1 %, pas 1 000 XRP. L’application dépend du transfert. Confirmez ensuite le résultat validé et la propriété.
+- de: Ein Verkauf nutzt normalerweise ein NFT-Offer und dessen Annahme. Ein Offer zu erstellen ist keine abgeschlossene Zahlung und keine Lieferung. Prüfe vor der Annahme das genaue NFT, das Zahlungs-Asset, den Betrag, die Zielbeschränkung, den Ablauf und die Transfergebühr des Emittenten. NFT-Transfergebühren nutzen Einheiten von 0,001 %; zum Beispiel steht 1.000 für 1%, nicht für 1.000 XRP. Ob sie greifen, hängt von der Übertragung ab. Bestätige danach das validierte Ergebnis und das Eigentum.
 - ja: 売却は通常、NFTオファーとその承諾を使います。オファーを作ることは、完了した支払いでも引き渡しでもありません。承諾の前に、正確なNFT、支払い資産、金額、宛先の制限、期限、発行者の移転手数料を確認してください。NFTの移転手数料は0.001%単位です。たとえば1,000は1%を表し、1,000 XRPではありません。適用されるかは移転によります。その後、検証済みの結果と所有を確認してください。
 - ko: 판매는 보통 NFT 오퍼와 그 수락을 사용합니다. 오퍼를 만드는 것은 완료된 지급이나 인도가 아닙니다. 수락 전에 정확한 NFT, 지급 자산, 금액, 목적지 제한, 만료, 발행자 전송 수수료를 검토하세요. NFT 전송 수수료 단위는 0.001%입니다. 예를 들어 1,000은 1%이지 1,000 XRP가 아닙니다. 적용 여부는 전송에 따라 다릅니다. 이후 검증된 결과와 소유권을 확인하세요.
 - zh-CN: 出售通常使用 NFT 挂单（offer）及其接受。创建挂单并不是已完成的付款或交付。接受之前，请核对确切的 NFT、支付资产、金额、目的地限制、到期时间和发行方转让费。NFT 转让费的单位是 0.001%；例如 1,000 表示 1%，而不是 1,000 XRP。是否适用取决于该次转让。事后确认已验证的结果和所有权。
 - hi: बिक्री आमतौर पर NFT ऑफ़र (offer) और उसकी स्वीकृति का उपयोग करती है। ऑफ़र बनाना पूरा भुगतान या डिलीवरी नहीं है। स्वीकृति से पहले सटीक NFT, भुगतान परिसंपत्ति, राशि, गंतव्य प्रतिबंध, समाप्ति और जारीकर्ता ट्रांसफ़र फ़ीस देखें। NFT ट्रांसफ़र फ़ीस 0.001% की इकाइयों में होती है; उदाहरण के लिए 1,000 का अर्थ 1% है, 1,000 XRP नहीं। लागू होना ट्रांसफ़र पर निर्भर करता है। बाद में वैलिडेटेड (validated) परिणाम और स्वामित्व की पुष्टि करें।
-- ar: يستخدم البيع عادة عرض NFT (offer) وقبوله. إنشاء العرض ليس دفعة مكتملة ولا تسليماً. قبل القبول، راجع NFT المحدد وأصل الدفع والمبلغ وقيد الوجهة وانتهاء الصلاحية ورسم نقل المُصدِر (issuer). تستخدم رسوم نقل NFT وحدات 0.001%؛ فمثلاً 1,000 تمثل 1%، لا 1,000 XRP. الانطباق يعتمد على النقل. أكّد النتيجة المتحقَّقة (validated) والملكية بعد ذلك.
+- ar: يستخدم البيع عادة عرض NFT (offer) وقبوله. إنشاء العرض ليس دفعة مكتملة ولا تسليماً. قبل القبول، راجع NFT المحدد وأصل الدفع والمبلغ وقيد الوجهة وانتهاء الصلاحية ورسم نقل المُصدِر (issuer). تستخدم رسوم نقل NFT وحدات 0.001%؛ فمثلاً 1,000 تمثل 1%، لا 1,000 XRP. الانطباق يعتمد على النقل. أكّد النتيجة المعتمدة في السجل (validated) والملكية بعد ذلك.
 
 ## `a-signer-list-assigns-weights-and-a.88fc3ebe`
 
@@ -166,10 +166,10 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - pt-BR: Uma signer list atribui pesos e um quórum. Por exemplo, três signatários independentes de peso um com quórum dois exigem assinaturas válidas suficientes para chegar a dois. Isso só protege o caminho de assinatura pretendido: revise também qualquer master key ou regular key ativada. Teste a recuperação numa rede que não seja de produção antes de mover a autoridade.
 - es: Una lista de firmantes asigna pesos y un quórum. Por ejemplo, tres firmantes independientes de peso uno con quórum dos exige suficientes firmas válidas para llegar a dos. Esto solo protege la vía de firma prevista: revisa también cualquier clave maestra o clave regular habilitada. Prueba la recuperación en una red que no sea de producción antes de mover la autoridad.
 - fr: Une signer list attribue des poids et un quorum. Par exemple, trois signataires indépendants de poids un, avec un quorum de deux, exigent assez de signatures valides pour atteindre deux. Cela ne protège que la voie de signature prévue : examinez aussi toute master key ou regular key activée. Testez la récupération sur un réseau hors production avant de déplacer l’autorité.
-- de: Eine Signer List vergibt Gewichte und ein Quorum. Zum Beispiel verlangen drei unabhängige Signer mit Gewicht eins und Quorum zwei genug gültige Signaturen, um zwei zu erreichen. Das schützt nur den beabsichtigten Signierweg: Prüfe auch jeden aktivierten Master Key oder Regular Key. Teste die Wiederherstellung in einem Netzwerk, das nicht der Produktion dient, bevor du Befugnis verschiebst.
+- de: Eine Signer List vergibt Gewichte und ein Quorum. Zum Beispiel verlangen drei unabhängige Signer mit Gewicht eins und Quorum zwei genug gültige Signaturen, um ein Gesamtgewicht von zwei zu erreichen. Das schützt nur den beabsichtigten Signierweg: Prüfe auch jeden aktivierten Master Key oder Regular Key. Teste die Wiederherstellung in einem Netzwerk, das nicht der Produktion dient, bevor du Befugnis verschiebst.
 - ja: 署名者リスト（signer list）は、重みとクォーラム（quorum）を割り当てます。たとえば、重み1の独立した署名者3人とクォーラム2なら、2に達するだけの有効な署名が必要です。これは意図した署名経路だけを守ります。有効なマスターキー（master key）やレギュラーキー（regular key）も確認してください。権限を移す前に、本番以外のネットワークで復旧を試してください。
-- ko: 서명자 목록(signer list)은 가중치와 정족수(quorum)를 지정합니다. 예를 들어 가중치 1인 독립 서명자 세 명과 정족수 2는, 유효한 서명이 2에 닿을 만큼 필요합니다. 이것은 의도한 서명 경로만 보호합니다. 켜져 있는 마스터 키(master key)나 레귤러 키(regular key)도 검토하세요. 권한을 옮기기 전에 비운영 네트워크에서 복구를 시험하세요.
-- zh-CN: 签名者列表（signer list）分配权重和法定人数（quorum）。例如，三位权重各为 1 的独立签名者、法定人数为 2，就需要足够的有效签名以达到 2。这只保护预期的那条签名途径：也要检查任何已启用的主密钥（master key）或常规密钥（regular key）。在转移权限之前，先在非生产网络上测试恢复。
+- ko: 서명자 목록(signer list)은 가중치와 서명 가중치 충족 기준(quorum)을 지정합니다. 예를 들어 독립된 서명자 세 명의 가중치가 각각 1이고 충족 기준이 2라면, 유효한 서명들의 가중치 합이 2 이상이어야 합니다. 이는 의도한 서명 경로만 보호합니다. 활성화된 마스터 키(master key)나 레귤러 키(regular key)도 검토하세요. 권한을 옮기기 전에 비운영 네트워크에서 복구를 시험하세요.
+- zh-CN: 签名者列表（signer list）设置各签名者的权重和签名权重门槛（quorum）。例如，三位独立签名者的权重各为 1，门槛为 2，就需要有效签名的权重合计达到 2。这只保护预期的那条签名途径：也要检查任何已启用的主密钥（master key）或常规密钥（regular key）。在转移权限之前，先在非生产网络上测试恢复。
 - hi: साइनर लिस्ट (signer list) वेट और कोरम (quorum) तय करती है। उदाहरण के लिए, वेट एक वाले तीन स्वतंत्र साइनर (signer) और कोरम दो का अर्थ है कि दो तक पहुँचने के लिए पर्याप्त वैध सिग्नेचर (signature) चाहिए। यह केवल इच्छित साइनिंग (signing) मार्ग की रक्षा करता है: चालू मास्टर की (master key) या रेगुलर की (regular key) भी देखें। अथॉरिटी ले जाने से पहले गैर-उत्पादन नेटवर्क पर रिकवरी का परीक्षण करें।
 - ar: تعيّن قائمة الموقّعين (signer list) أوزاناً ونصاباً (quorum). مثلاً، ثلاثة موقّعين مستقلين بوزن واحد ونصاب اثنين يتطلب تواقيع صالحة كافية لبلوغ اثنين. هذا يحمي مسار التوقيع (signing) المقصود فقط: راجع أيضاً أي مفتاح رئيسي (master key) أو مفتاح عادي (regular key) مفعّل. اختبر الاستعادة على شبكة غير إنتاجية قبل نقل السلطة.
 
@@ -246,7 +246,7 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - fr: Un payload Xaman est une demande de signature. Votre produit doit d’abord expliquer l’action, le réseau, le compte signataire, l’actif exact, le destinataire et le montant ou les permissions. Un sign-in identifie un compte ; ce n’est pas un paiement. Ne demandez jamais aux utilisateurs de coller un seed, des nombres secrets ou une clé privée dans votre page.
 - de: Ein Xaman-Payload ist eine Signieranfrage. Dein Produkt sollte zuerst die Aktion, das Netzwerk, das signierende Konto, das genaue Asset, den Empfänger und den Betrag oder die Berechtigungen erklären. Ein Sign-in identifiziert ein Konto; es ist keine Zahlung. Fordere Nutzer niemals auf, einen Seed, geheime Zahlen oder einen Private Key in deine Seite einzufügen.
 - ja: Xamanのペイロードは、署名リクエスト（signing request）です。プロダクトはまず、操作、ネットワーク、署名するアカウント、正確な資産、受取人、金額または権限を説明すべきです。サインインはアカウントを識別します。支払いではありません。シード（seed）、秘密の番号、秘密鍵を、あなたのページへ貼り付けさせないでください。
-- ko: Xaman 페이로드는 서명 요청입니다. 제품은 먼저 동작, 네트워크, 서명 계정, 정확한 자산, 받는 쪽, 금액 또는 권한을 설명해야 합니다. 로그인은 계정을 식별하는 것이지 지급이 아닙니다. 사용자에게 시드(seed), 비밀 번호, 개인 키를 페이지에 붙여 넣으라고 요청하지 마세요.
+- ko: Xaman 페이로드는 서명 요청입니다. 제품은 먼저 동작, 네트워크, 서명 계정, 정확한 자산, 받는 쪽, 금액 또는 권한을 설명해야 합니다. 로그인은 계정을 식별하는 것이지 지급이 아닙니다. 사용자에게 시드(seed), 복구용 비밀 숫자(secret numbers), 개인 키를 페이지에 붙여 넣으라고 요청하지 마세요.
 - zh-CN: Xaman 载荷（payload）是一条签名请求。你的产品应当先说明这一动作、网络、签名账户、确切资产、接收方，以及金额或权限。SignIn 用来识别一个账户；它不是一笔支付。绝不要让用户把种子（seed）、秘密数字或私钥粘贴到你的页面上。
 - hi: Xaman पेलोड (payload) एक साइनिंग (signing) अनुरोध है। आपके उत्पाद को पहले कार्रवाई, नेटवर्क, साइनिंग खाता, सटीक परिसंपत्ति, प्राप्तकर्ता और राशि या अनुमतियाँ समझानी चाहिए। साइन-इन खाते की पहचान करता है; वह भुगतान नहीं है। उपयोगकर्ताओं से कभी सीड (seed), गुप्त संख्याएँ या प्राइवेट की (private key) अपने पृष्ठ में चिपकाने को न कहें।
 - ar: حمولة Xaman (payload) هي طلب توقيع (signing). ينبغي أن يشرح منتجك أولاً الإجراء والشبكة وحساب التوقيع والأصل بالضبط والمستلم والمبلغ أو الصلاحيات. تسجيل الدخول يحدّد حساباً؛ وليس دفعة. لا تطلب من المستخدمين أبداً لصق بذرة (seed) أو أرقام سرية أو مفتاح خاص (private key) في صفحتك.
@@ -273,9 +273,22 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - de: Ergänze eine Spalte für Kontrollen. Notiere, ob eine Emittenten-Autorisierung nötig und erteilt ist, ob Freeze-Beschränkungen bestehen und wie die betreffenden Ripple-Einstellungen lauten. Unbekannt ist ein gültiges Ergebnis: Es bedeutet, dass du Nachweise brauchst, keine geratene Vorgabe.
 - ja: 管理の列を追加してください。発行者の認可が必要か、付与されているか、フリーズ（freeze）の制限があるか、関係するリップリング（rippling）の設定は何かをメモします。不明は有効な結果です。推測した既定値ではなく、証拠が必要だという意味です。
 - ko: 제어 열을 추가하세요. 발행자 승인이 필요하고 부여되었는지, 동결(freeze) 제한이 있는지, 관련 리플링(rippling) 설정이 무엇인지 적으세요. 알 수 없음도 유효한 결과입니다. 추측한 기본값이 아니라 증거가 필요하다는 뜻입니다.
-- zh-CN: 加一列控制项。记下发行方授权是否被要求、是否已授予，是否存在冻结（freeze）限制，以及相关的涟漪（rippling）设置是什么。未知是有效结果：它表示你需要证据，而不是一个猜出来的默认值。
+- zh-CN: 加一列控制项。记下发行方授权是否被要求、是否已授予，是否存在冻结（freeze）限制，以及相关的余额流转（rippling）设置是什么。未知是有效结果：它表示你需要证据，而不是一个猜出来的默认值。
 - hi: एक नियंत्रण कॉलम जोड़ें। नोट करें कि जारीकर्ता ऑथराइज़ेशन (authorization) ज़रूरी है और दी गई है या नहीं, फ़्रीज़ (freeze) प्रतिबंध हैं या नहीं, और संबंधित रिपल सेटिंग क्या हैं। अज्ञात वैध परिणाम है: इसका अर्थ है साक्ष्य चाहिए, अनुमानित डिफ़ॉल्ट नहीं।
 - ar: أضف عمود تحكم. دوّن ما إذا كان تفويض المُصدِر (authorization) مطلوباً وممنوحاً، وما إذا كانت قيود التجميد (freeze) موجودة، وما إعدادات التمرير (rippling) ذات الصلة. «غير معروف» نتيجة صالحة: تعني أنك تحتاج دليلاً، لا افتراضاً مخمَّناً.
+
+## `adds-something-new-example-the-amm-a.39d37cbc`
+
+- en: Adds something new. Example: the AMM amendment added automated market makers to the XRPL. It was enabled on 2024-03-22.
+- pt-BR: Acrescenta algo novo. Exemplo: o amendment AMM adicionou formadores de mercado automatizados ao XRPL. Ele foi ativado em 2024-03-22.
+- es: Añade algo nuevo. Ejemplo: la enmienda AMM añadió creadores de mercado automatizados a XRPL. Se activó el 2024-03-22.
+- fr: Ajoute quelque chose de nouveau. Exemple : l’amendment AMM a ajouté les teneurs de marché automatisés au XRPL. Il a été activé le 2024-03-22.
+- de: Fügt etwas Neues hinzu. Beispiel: Das Amendment AMM fügte dem XRPL automatisierte Market Maker hinzu. Es wurde am 2024-03-22 aktiviert.
+- ja: 新しいものを加えます。例：AMMというamendmentは、自動マーケットメーカーをXRPLに加えました。これは2024-03-22に有効になりました。
+- ko: 새로운 것을 더합니다. 예: AMM 아멘드먼트는 XRPL에 자동화된 마켓 메이커를 추가했습니다. 이 아멘드먼트는 2024-03-22에 활성화되었습니다.
+- zh-CN: 增加新东西。例如：AMM 修正案为 XRPL 增加了自动做市商。它于 2024-03-22 启用。
+- hi: कुछ नया जोड़ती है। उदाहरण: AMM संशोधन ने XRPL में ऑटोमेटेड मार्केट मेकर जोड़े। यह 2024-03-22 को सक्षम हुआ।
+- ar: تضيف شيئاً جديداً. مثال: أضاف تعديل AMM صانعي السوق الآليين إلى XRPL. وقد فُعِّل في 2024-03-22.
 
 ## `amm-fee.8a9bd5c7`
 
@@ -387,8 +400,8 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - pt-BR: {s1} são material de aprendizado somente leitura, com exemplos fictícios e retorno local de quiz. {s2} é um ledger separado para um ensaio posterior de implementação; os ativos de teste dele não pagam despesas da Mainnet. {s3} carrega ativos reais e consequências. Devnet pode incluir mudanças experimentais; sucesso ali não estabelece disponibilidade na Mainnet. Não reutilize segredos reais em experimentos. Confira {s4} e o status real do amendment alvo antes da implementação.
 - es: {s1} son material de aprendizaje de solo lectura, con ejemplos ficticios y respuesta local del cuestionario. {s2} es un ledger aparte para ensayar la implementación más adelante; sus activos de prueba no pagan cuentas de Mainnet. {s3} lleva activos reales y consecuencias. Devnet puede incluir cambios experimentales; el éxito allí no establece disponibilidad en Mainnet. No reutilices secretos reales en experimentos. Revisa {s4} y el estado real de la enmienda objetivo antes de implementar.
 - fr: {s1} sont du matériel d’apprentissage en lecture seule, avec des exemples fictifs et un retour de quiz local. {s2} est un registre séparé pour une répétition de mise en œuvre plus tard ; ses actifs de test ne règlent pas de factures Mainnet. {s3} porte de vrais actifs et de vraies conséquences. Devnet peut inclure des changements expérimentaux ; un succès là-bas n’établit pas la disponibilité sur Mainnet. Ne réutilisez pas de vrais secrets dans les expériences. Vérifiez {s4} et l’état réel de l’amendment visé avant la mise en œuvre.
-- de: {s1} sind nur lesbares Lernmaterial mit fiktiven Beispielen und lokalem Quiz-Feedback. {s2} ist ein separates Ledger für spätere Umsetzungsproben; seine Test-Assets begleichen keine Mainnet-Rechnungen. {s3} trägt echte Assets und Folgen. Devnet kann experimentelle Änderungen enthalten; Erfolg dort begründet keine Verfügbarkeit auf Mainnet. Verwende echte Geheimnisse nicht erneut in Experimenten. Prüfe {s4} und den tatsächlichen Amendment-Status des Ziels vor der Umsetzung.
-- ja: {s1}は、架空の例と、この画面だけのクイズ結果を含む、読み取り専用の学習資料です。{s2}は、あとで実装をリハーサルするための別のレジャーです。そのテスト資産でMainnetの請求は支払えません。{s3}には実資産と実害があります。Devnetには実験的な変更が含まれることがあり、そこでの成功はMainnetで使えることを示しません。実験で本物の秘密情報を使い回さないでください。実装の前に{s4}と、対象のamendmentの実際の状態を確認してください。
+- de: {s1} sind nur lesbares Lernmaterial mit fiktiven Beispielen und lokalem Quiz-Feedback. {s2} ist ein separates Ledger für spätere Umsetzungsproben; seine Test-Assets begleichen keine Mainnet-Rechnungen. Bei {s3} geht es um echte Assets und reale Folgen. Devnet kann experimentelle Änderungen enthalten; Erfolg dort begründet keine Verfügbarkeit auf Mainnet. Verwende echte Geheimnisse nicht erneut in Experimenten. Prüfe {s4} und den tatsächlichen Amendment-Status des Zielnetzwerks vor der Umsetzung.
+- ja: {s1}は、架空の例と、この画面だけのクイズ結果を含む、読み取り専用の学習資料です。{s2}は、あとで実装をリハーサルするための別のレジャーです。そのテスト資産でMainnetの請求は支払えません。{s3}では実資産を扱い、実際の影響が生じます。Devnetには実験的な変更が含まれることがあり、そこでの成功はMainnetで使えることを示しません。実験で本物の秘密情報を使い回さないでください。実装の前に{s4}と、対象のamendmentの実際の状態を確認してください。
 - ko: {s1} — 허구의 예시와 이 페이지 안 퀴즈 피드백만 있는 읽기 전용 학습 자료입니다. {s2} — 이후 구현을 연습하는 별도 원장입니다. 그 테스트 자산으로 Mainnet 청구를 결제하지 않습니다. {s3} — 실제 자산과 결과가 있습니다. Devnet에는 실험적 변경이 있을 수 있으며, 거기에서의 성공이 Mainnet에서 쓸 수 있음을 보장하지는 않습니다. 실험에 실제 비밀을 재사용하지 마세요. 구현 전에 {s4}와 실제 대상 아멘드먼트의 상태를 확인하세요.
 - zh-CN: {s1}是只读学习材料，带有虚构示例和本页测验反馈。{s2}是供日后实现演练的另一条账本；其中的测试资产不能支付 Mainnet 的账单。{s3}承载真实资产和真实后果。Devnet 可以包含实验性变更；在那里成功并不说明 Mainnet 可用。不要在实验中复用真实秘密。实现之前，请查看{s4}以及目标修正案（amendment）的实际状态。
 - hi: {s1} काल्पनिक उदाहरणों और स्थानीय क्विज़ फ़ीडबैक वाली केवल-पढ़ने की सीखने की सामग्री हैं। {s2} बाद के कार्यान्वयन अभ्यास के लिए एक अलग लेजर है; इसके परीक्षण एसेट Mainnet के बिल नहीं चुकाते। {s3} असली परिसंपत्तियाँ और परिणाम रखता है। Devnet में प्रयोगात्मक बदलाव हो सकते हैं; वहाँ की सफलता Mainnet पर उपलब्धता स्थापित नहीं करती। प्रयोगों में असली सीक्रेट (secret) दोबारा इस्तेमाल न करें। लागू करने से पहले {s4} और वास्तविक लक्षित संशोधन (amendment) की स्थिति जाँचें।
@@ -414,10 +427,10 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - es: Da por hecho que una semilla filtrada queda comprometida de forma permanente.
 - fr: Considérez un seed divulgué comme compromis de façon permanente.
 - de: Gehe davon aus, dass ein geleakter Seed dauerhaft kompromittiert ist.
-- ja: 漏れたシード（seed）は、永久に危険にさらされたとみなしてください。
+- ja: 漏えいしたシード（seed）は、永久に安全性が失われたものとみなしてください。
 - ko: 유출된 시드(seed)는 영구히 노출된 것으로 보세요.
 - zh-CN: 把泄露的种子（seed）视为已经永久失密。
-- hi: लीक हुए सीड (seed) को स्थायी रूप से समझौता हुआ मानें।
+- hi: मानकर चलें कि लीक हुआ सीड (seed) स्थायी रूप से असुरक्षित हो चुका है।
 - ar: افترض أن البذرة (seed) المسربة مخترقة بشكل دائم.
 
 ## `authorization-may-be-required-by-an.060da144`
@@ -429,7 +442,7 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - de: Ein Emittent kann eine Autorisierung verlangen, bevor ein Inhaber seine Währung halten darf. Freeze-Einstellungen können das Asset beschränken. Rippling kann Wert über passende Trust-Line-Beziehungen als Teil von Zahlungen bewegen. Einstellungen für No Ripple beeinflussen diese Pfade; sie machen einen Token nicht sicher und nehmen das Emittentenrisiko nicht weg. Prüfe Konto- und Linien-Einstellungen, bevor du Vorgaben änderst.
 - ja: 発行者が、保有者がその通貨を保有する前に認可を求めることがあります。フリーズ（freeze）の設定は資産を制限できます。リップリング（rippling）は、支払いの一部として、互換性のあるトラストライン（trust line）の関係を通じて価値を動かすことがあります。No Rippleの設定は、どの経路を使えるかに影響します。それらはトークンを安全にしたり、発行者リスクをなくしたりはしません。既定を変える前に、アカウントとラインの両方の設定を確認してください。
 - ko: 발행자가 요구하면, 보유자가 그 통화를 보유하기 전에 승인이 필요할 수 있습니다. 동결(freeze) 설정은 자산을 제한할 수 있습니다. 리플링(rippling)은 지급의 일부로, 호환되는 트러스트 라인 관계를 따라 가치를 옮길 수 있습니다. No Ripple 설정은 그 경로에 영향을 줍니다. 토큰을 안전하게 만들거나 발행자 위험을 없애지는 않습니다. 기본값을 바꾸기 전에 계정 설정과 라인 설정을 모두 검토하세요.
-- zh-CN: 在持有人能够持有某种货币之前，发行方可能要求授权（authorization）。冻结（freeze）设置可以限制该资产。涟漪（rippling）可以在支付过程中，跨兼容的信任线（trust line）关系移动价值。No Ripple 设置会影响这些路径；它们不会让代币变得安全，也不会消除发行方风险。更改默认值之前，账户设置和这条线的设置都要检查。
+- zh-CN: 在持有人能够持有某种货币之前，发行方可能要求授权（authorization）。冻结（freeze）设置可以限制该资产。余额流转（rippling）可以在支付过程中，跨兼容的信任线（trust line）关系移动价值。No Ripple 设置会影响这些路径；它们不会让代币变得安全，也不会消除发行方风险。更改默认值之前，账户设置和这条线的设置都要检查。
 - hi: ज़रूरी होने पर धारक मुद्रा रख सके, इसके पहले जारीकर्ता ऑथराइज़ेशन (authorization) माँगा जा सकता है। फ़्रीज़ (freeze) सेटिंग परिसंपत्ति को सीमित कर सकती हैं। रिपलिंग (rippling) भुगतान के हिस्से के रूप में संगत ट्रस्ट-लाइन (trust line) संबंधों के पार मूल्य ले जा सकती है। No Ripple सेटिंग तय करती हैं कि वे पथ इस्तेमाल हो सकते हैं या नहीं; वे टोकन को सुरक्षित नहीं बनातीं और जारीकर्ता जोखिम नहीं हटातीं। डिफ़ॉल्ट बदलने से पहले खाता और लाइन दोनों की सेटिंग देखें।
 - ar: قد يشترط المُصدِر (issuer) تفويضاً (authorization) قبل أن يستطيع الحائز حيازة عملته. يمكن لإعدادات التجميد (freeze) أن تقيّد الأصل. يمكن للتمرير (rippling) أن ينقل قيمة عبر علاقات خط ثقة (trust line) متوافقة كجزء من الدفعات. تؤثر إعدادات No Ripple في تلك المسارات؛ وهي لا تجعل الرمز آمناً ولا تزيل مخاطر المُصدِر. راجع إعدادات الحساب والخط معاً قبل تغيير الافتراضات.
 
@@ -478,7 +491,7 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - pt-BR: QR às cegas:
 - es: QR a ciegas:
 - fr: QR aveugle :
-- de: Blindes QR:
+- de: Blindes QR-Scannen:
 - ja: 内容を見ないQR：
 - ko: 블라인드 QR:
 - zh-CN: 盲目 QR：
@@ -595,7 +608,7 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - pt-BR: Escolha um exemplo visível publicamente e localize o NFTokenID, o emissor, o dono e o taxon sem conectar uma carteira.
 - es: Elige un ejemplo visible al público y localiza su NFTokenID, emisor, propietario y taxon sin conectar una billetera.
 - fr: Choisissez un exemple visible publiquement et trouvez son NFTokenID, son émetteur, son propriétaire et son taxon, sans connecter de portefeuille.
-- de: Wähl ein öffentlich einsehbares Beispiel und finde seine NFTokenID, den Emittenten, den Eigentümer und den Taxon, ohne eine Wallet zu verbinden.
+- de: Wähl ein öffentlich einsehbares Beispiel und finde seine NFTokenID, den Emittenten, den Eigentümer und das Taxon, ohne eine Wallet zu verbinden.
 - ja: 公開で見られる例を選び、ウォレットを接続せずに、そのNFTokenID、発行者、所有者、taxonを見つけてください。
 - ko: 공개적으로 볼 수 있는 예시를 고르고, 지갑을 연결하지 않은 채 NFTokenID, 발행자, 소유자, 택손(taxon)을 찾으세요.
 - zh-CN: 选一个可以公开查看的例子，在不连接钱包的情况下找到它的 NFTokenID、发行方、所有者和分类码（taxon）。
@@ -620,7 +633,7 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - en: Compare against the intended identity and policy. Reject a wrong signer where account control is required; do not silently relabel the order owner.
 - pt-BR: Compare com a identidade e a política pretendidas. Rejeite um signatário errado quando o controle da conta é exigido; não troque em silêncio o dono do pedido.
 - es: Compara con la identidad y la política previstas. Rechaza un firmante incorrecto cuando se exige control de la cuenta; no cambies en silencio al dueño del pedido.
-- fr: Comparez à l’identité et à la politique prévues. Refusez un mauvais signataire lorsque le contrôle du compte est requis ; ne renommez pas en silence le propriétaire de la commande.
+- fr: Comparez à l’identité et à la politique prévues. Refusez un signataire incorrect lorsque le contrôle du compte est requis ; ne réattribuez pas discrètement la commande à un autre propriétaire.
 - de: Vergleiche mit der beabsichtigten Identität und Richtlinie. Weise einen falschen Signer zurück, wo Kontokontrolle nötig ist; benenne den Bestellinhaber nicht still um.
 - ja: 意図した識別情報と方針と照合してください。アカウントの支配が必要な場面では、誤った署名者を拒否します。注文の所有者を黙って付け替えないでください。
 - ko: 의도한 정체성과 정책과 비교하세요. 계정 통제가 필요한데 서명자가 다르면 거절하세요. 주문 소유자를 조용히 다시 이름 붙이지 마세요.
@@ -632,13 +645,13 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 
 - en: Create a failure table with input, expected user message, stored state and recovery. Include rejection, wrong signer/network/asset/recipient, insufficient delivery, request expiry, network outage, duplicate callback, restart and stale data. For each, state what must never happen: no false receipt, duplicate entitlement or silent second payment.
 - pt-BR: Crie uma tabela de falhas com entrada, mensagem esperada para o usuário, estado armazenado e recuperação. Inclua rejeição, signatário/rede/ativo/destinatário errados, entrega insuficiente, expiração do pedido, queda da rede, callback duplicado, reinicialização e dados velhos. Para cada um, declare o que nunca deve acontecer: recibo falso, direito duplicado ou segundo pagamento silencioso.
-- es: Crea una tabla de fallos con la entrada, el mensaje esperado para el usuario, el estado guardado y la recuperación. Incluye rechazo, firmante, red, activo o destinatario incorrectos, entrega insuficiente, vencimiento de la solicitud, caída de la red, callback duplicado, reinicio y datos viejos. Para cada uno, indica qué no debe ocurrir nunca: ni un comprobante falso, ni un acceso duplicado, ni un segundo pago en silencio.
+- es: Crea una tabla de fallos con la entrada, el mensaje esperado para el usuario, el estado guardado y la recuperación. Incluye rechazo, firmante, red, activo o destinatario incorrectos, entrega insuficiente, vencimiento de la solicitud, caída de la red, callback duplicado, reinicio y datos desactualizados. Para cada uno, indica qué no debe ocurrir nunca: ni un comprobante falso, ni un acceso duplicado, ni un segundo pago en silencio.
 - fr: Créez un tableau des échecs avec l’entrée, le message utilisateur attendu, l’état enregistré et la récupération. Incluez le refus, le mauvais signataire, réseau, actif ou destinataire, une livraison insuffisante, l’expiration de la demande, une panne de réseau, un callback en double, un redémarrage et des données périmées. Pour chacun, dites ce qui ne doit jamais arriver : pas de faux reçu, de droit en double ni de second paiement silencieux.
 - de: Erstelle eine Fehlertabelle mit Eingabe, erwarteter Nutzernachricht, gespeichertem Zustand und Wiederherstellung. Nimm Ablehnung, falschen Signer, falsches Netzwerk, falsches Asset, falschen Empfänger, unzureichende Lieferung, Ablauf der Anfrage, Netzwerkausfall, doppelten Callback, Neustart und veraltete Daten auf. Sag für jeden Fall, was niemals geschehen darf: kein falscher Beleg, keine doppelte Berechtigung und keine stille zweite Zahlung.
 - ja: 入力、利用者に見せる想定メッセージ、保存状態、復旧を入れた失敗表を作ってください。拒否、誤った署名者・ネットワーク・資産・受取人、不足した引渡し、リクエストの期限切れ、ネットワーク障害、重複コールバック、再起動、古いデータを含めてください。それぞれについて、決して起きてはならないことを書いてください。偽の領収、権利の二重付与、黙った2回目の支払いです。
-- ko: 입력, 예상 사용자 메시지, 저장 상태, 복구를 담은 실패 표를 만드세요. 거절, 잘못된 서명자/네트워크/자산/받는 쪽, 부족한 인도, 요청 만료, 네트워크 장애, 중복 콜백, 재시작, 오래된 데이터를 넣으세요. 각각에 대해 절대 일어나면 안 되는 것을 적으세요. 거짓 영수증, 중복 권리, 조용한 두 번째 지급입니다.
+- ko: 입력, 예상 사용자 메시지, 저장 상태, 복구를 담은 실패 표를 만드세요. 거절, 잘못된 서명자/네트워크/자산/받는 쪽, 지급액 부족, 요청 만료, 네트워크 장애, 중복 콜백, 재시작, 오래된 데이터를 넣으세요. 각각에 대해 절대 일어나면 안 되는 것을 적으세요. 거짓 영수증, 중복 권리, 조용한 두 번째 지급입니다.
 - zh-CN: 做一张失败表，包含输入、预期的用户消息、存储状态和恢复。纳入拒绝、错误的签名者/网络/资产/接收方、交付不足、请求过期、网络中断、重复回调、重启和陈旧数据。对每一项写明绝不能发生的事：没有虚假收据、没有重复授予权益、没有静默的第二笔支付。
-- hi: इनपुट, अपेक्षित उपयोगकर्ता संदेश, संग्रहीत अवस्था और रिकवरी वाली विफलता तालिका बनाएँ। अस्वीकृति, गलत साइनर (signer)/नेटवर्क/परिसंपत्ति/प्राप्तकर्ता, अपर्याप्त डिलीवरी, अनुरोध समाप्ति, नेटवर्क रुकावट, दोहरा कॉलबैक (callback), रीस्टार्ट और बासी डेटा शामिल करें। हर एक के लिए लिखें कि क्या कभी नहीं होना चाहिए: झूठी रसीद नहीं, दोहरी हकदारी नहीं, या चुप दूसरा भुगतान नहीं।
+- hi: इनपुट, अपेक्षित उपयोगकर्ता संदेश, संग्रहीत अवस्था और रिकवरी वाली विफलता तालिका बनाएँ। अस्वीकृति, गलत साइनर (signer)/नेटवर्क/परिसंपत्ति/प्राप्तकर्ता, अपर्याप्त डिलीवरी, अनुरोध समाप्ति, नेटवर्क रुकावट, दोहरा कॉलबैक (callback), रीस्टार्ट और पुराना डेटा शामिल करें। हर एक के लिए लिखें कि क्या कभी नहीं होना चाहिए: झूठी रसीद नहीं, दोहरी हकदारी नहीं, या चुप दूसरा भुगतान नहीं।
 - ar: أنشئ جدول فشل فيه المدخل ورسالة المستخدم المتوقعة والحالة المخزَّنة والاستعادة. أدرج الرفض، والموقّع أو الشبكة أو الأصل أو المستلم الخاطئ، والتسليم غير الكافي، وانتهاء الطلب، وانقطاع الشبكة، والإشعار الراجع (callback) المكرر، وإعادة التشغيل، والبيانات القديمة. لكل منها، اذكر ما يجب ألا يحدث أبداً: لا إيصال كاذب، ولا استحقاق مكرر، ولا دفعة ثانية صامتة.
 
 ## `create-trustline.c92ac803`
@@ -685,7 +698,7 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - en: Currency code, issuer, supply, trustlines, and controls.
 - pt-BR: Código da moeda, emissor, suprimento, trustlines e controles.
 - es: Código de moneda, emisor, suministro, líneas de confianza y controles.
-- fr: Code de devise, émetteur, supply, trustlines et contrôles.
+- fr: Code de devise, émetteur, offre de jetons, trustlines et contrôles.
 - de: Währungscode, Emittent, Supply, Trustlines und Kontrollen.
 - ja: 通貨コード、発行者、供給、トラストライン（trust line）、管理。
 - ko: 통화 코드, 발행자, 공급량, 트러스트 라인, 제어.
@@ -881,7 +894,7 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - pt-BR: Trocar a senha de um aplicativo conserta uma seed vazada?
 - es: ¿Cambiar la contraseña de una app arregla una semilla filtrada?
 - fr: Changer le mot de passe d’une application répare-t-il un seed divulgué ?
-- de: Behebt das Ändern eines App-Passworts einen geleakten Seed?
+- de: Behebt das Ändern eines App-Passworts die Kompromittierung eines geleakten Seeds?
 - ja: アプリのパスワードを変えると、漏れたシード（seed）は直りますか？
 - ko: 앱 비밀번호를 바꾸면 유출된 시드(seed)가 고쳐지나요?
 - zh-CN: 更改应用密码能修复已泄露的种子（seed）吗？
@@ -1011,10 +1024,10 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - pt-BR: O Issuer A fictício tem master signing desativado, uma regular key atribuída e uma signer list de três pessoas, cada uma com peso um, e quórum dois. Este é um exemplo de inspeção, não uma configuração sugerida.
 - es: El Issuer A ficticio tiene la firma maestra desactivada, una clave regular asignada y una lista de firmantes de tres personas con peso uno cada una y quórum dos. Es un ejemplo de inspección, no una configuración sugerida.
 - fr: L’Issuer A fictif a la signature master désactivée, une regular key assignée, et une signer list de trois personnes de poids un chacune, avec un quorum de deux. C’est un exemple d’inspection, pas une configuration suggérée.
-- de: Der fiktive Issuer A hat Master-Signieren deaktiviert, einen Regular Key zugewiesen und eine Signer List aus drei Personen mit Gewicht eins und Quorum zwei. Das ist ein Prüfbeispiel, keine empfohlene Konfiguration.
+- de: Der fiktive Issuer A hat Master-Signieren deaktiviert, einen Regular Key zugewiesen und eine Signer List aus drei Personen mit jeweils Gewicht eins und Quorum zwei. Das ist ein Prüfbeispiel, keine empfohlene Konfiguration.
 - ja: 架空のIssuer Aは、マスター署名が無効で、レギュラーキー（regular key）が割り当てられ、重み1ずつ、クォーラム（quorum）2の3人からなる署名者リスト（signer list）を持っています。これは点検の例であり、推奨する構成ではありません。
-- ko: 가상의 Issuer A는 마스터 서명이 꺼져 있고, 레귤러 키(regular key)가 지정되어 있으며, 가중치 1인 사람 세 명과 정족수(quorum) 2의 서명자 목록(signer list)이 있습니다. 이것은 점검 예시이지 권장 구성이 아닙니다.
-- zh-CN: 虚构的 Issuer A 已禁用主密钥签名，指定了一把常规密钥（regular key），并有一份三人签名者列表（signer list），每人权重为 1，法定人数（quorum）为 2。这是一个检查示例，不是建议的配置。
+- ko: 가상의 Issuer A는 마스터 서명이 꺼져 있고, 레귤러 키(regular key)가 지정되어 있으며, 가중치 1인 사람 세 명과 서명 가중치 충족 기준(quorum) 2의 서명자 목록(signer list)이 있습니다. 이것은 점검 예시이지 권장 구성이 아닙니다.
+- zh-CN: 虚构的 Issuer A 已禁用主密钥签名，指定了一把常规密钥（regular key），并有一份三人签名者列表（signer list），每人权重为 1，签名权重门槛（quorum）为 2。这是一个检查示例，不是建议的配置。
 - hi: काल्पनिक Issuer A में मास्टर साइनिंग (master signing) बंद है, एक रेगुलर की (regular key) नियत है, और तीन लोगों की साइनर लिस्ट (signer list) है जिनमें प्रत्येक का वेट एक और कोरम (quorum) दो है। यह जाँच का उदाहरण है, सुझाई गई कॉन्फ़िगरेशन नहीं।
 - ar: لدى Issuer A الخيالي توقيع بالمفتاح الرئيسي (master key) معطّل، ومفتاح عادي (regular key) معيَّن، وقائمة موقّعين (signer list) من ثلاثة أشخاص بوزن واحد لكل منهم ونصاب (quorum) اثنين. هذا مثال فحص، لا إعداداً مقترحاً.
 
@@ -1048,7 +1061,7 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 
 - en: Follow a fictional neighborhood club from workshop credits to a collectible and a booking flow. Each lesson contains definitions, a guided paper worksheet, a worked decision, common mistakes and questions with explanations. Read the lesson, attempt the worksheet before checking the answer, and keep the resulting page of notes. There is no account, score certificate or saved learning profile.
 - pt-BR: Acompanhe um clube de bairro fictício, dos créditos de oficina a um colecionável e a um fluxo de agendamento. Cada lição tem definições, uma ficha guiada no papel, uma decisão resolvida, erros comuns e perguntas com explicação. Leia a lição, tente a ficha antes de conferir a resposta e guarde a página de notas. Não há conta, certificado de pontuação nem perfil de aprendizado salvo.
-- es: Sigue a un club ficticio del barrio, desde créditos de taller hasta un coleccionable y un flujo de cupos. Cada lección tiene definiciones, una hoja de trabajo guiada en papel, una decisión resuelta, errores comunes y preguntas con explicación. Lee la lección, intenta la hoja antes de ver la respuesta y conserva la página de notas. No hay cuenta, certificado de puntaje ni perfil de aprendizaje guardado.
+- es: Sigue a un club ficticio del barrio, desde créditos de taller hasta un coleccionable y un flujo de reservas. Cada lección tiene definiciones, una hoja de trabajo guiada en papel, una decisión resuelta, errores comunes y preguntas con explicación. Lee la lección, intenta la hoja antes de ver la respuesta y conserva la página de notas. No hay cuenta, certificado de puntaje ni perfil de aprendizaje guardado.
 - fr: Suivez un club de quartier fictif, des crédits d’atelier jusqu’à un objet de collection et un parcours de réservation. Chaque leçon contient des définitions, une feuille guidée sur papier, une décision traitée, des erreurs fréquentes et des questions avec explications. Lisez la leçon, tentez la feuille avant de vérifier la réponse, et gardez la page de notes qui en résulte. Il n’y a pas de compte, de certificat de score ni de profil d’apprentissage enregistré.
 - de: Begleite einen fiktiven Nachbarschaftsclub von Workshop-Credits über ein Sammlerstück bis zu einem Buchungsablauf. Jede Lektion enthält Definitionen, ein geführtes Papier-Arbeitsblatt, eine ausgearbeitete Entscheidung, häufige Fehler und Fragen mit Erklärungen. Lies die Lektion, versuch das Arbeitsblatt, bevor du die Antwort prüfst, und behalte die entstehende Notizseite. Es gibt kein Konto, kein Punktezeugnis und kein gespeichertes Lernprofil.
 - ja: 架空の近所のクラブを、ワークショップのクレジットから収集品、予約の流れまで追ってください。各レッスンには、定義、案内付きの紙のワークシート、解説済みの判断、よくある誤り、説明付きの質問があります。レッスンを読み、答えを見る前にワークシートに取り組み、できたメモのページを残してください。アカウントも、得点の証明書も、保存される学習プロフィールもありません。
@@ -1089,10 +1102,10 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - pt-BR: Para o caminho da signer list, calcule que quaisquer dois signatários de peso um alcançam o quórum dois, e um sozinho não alcança. Agora circule o caminho da regular key: ele é um caminho alternativo de assinatura. Uma signer list de duas pessoas não força o controle de duas pessoas em toda transação enquanto um caminho separado de chave única continuar existindo.
 - es: Para la vía de la lista de firmantes, calcula que dos firmantes cualesquiera de peso uno llegan al quórum dos, y uno no. Ahora marca la vía de la clave regular: es una vía de firma alternativa. Una lista de firmantes de dos personas no obliga a un control de dos personas en cada transacción mientras quede una vía aparte de una sola clave.
 - fr: Pour la voie de signer list, calculez que deux signataires de poids un atteignent le quorum de deux, alors qu’un seul ne l’atteint pas. Entourez maintenant la voie de regular key : c’est une voie de signature alternative. Une signer list à deux personnes n’impose pas un contrôle à deux personnes sur chaque transaction tant qu’une voie à clé unique séparée reste en place.
-- de: Rechne für den Signer-List-Weg aus, dass zwei beliebige Signer mit Gewicht eins das Quorum zwei erreichen, einer aber nicht. Kreise jetzt den Regular-Key-Weg ein: Er ist ein alternativer Signierweg. Eine Signer List mit zwei Personen erzwingt keine Kontrolle durch zwei Personen über jede Transaktion, solange ein separater Weg mit einem einzelnen Schlüssel bleibt.
+- de: Rechne für den Signer-List-Weg aus, dass zwei beliebige Signer mit Gewicht eins das Quorum zwei erreichen, einer aber nicht. Kreise jetzt den Regular-Key-Weg ein: Er ist ein alternativer Signierweg. Eine Signer List, die die Freigabe durch zwei Personen verlangt, erzwingt keine Kontrolle durch zwei Personen über jede Transaktion, solange ein separater Weg mit einem einzelnen Schlüssel bleibt.
 - ja: 署名者リスト（signer list）の経路では、重み1の署名者なら2人でクォーラム（quorum）2に達し、1人では達しないと計算してください。次にレギュラーキー（regular key）の経路を囲んでください。それは代替の署名経路です。別の単一鍵の経路が残っているあいだ、2人の署名者リストは、すべてのトランザクションを2人の管理に強制しません。
-- ko: 서명자 목록(signer list) 경로에서는 가중치 1인 서명자 둘이 정족수 2에 닿고, 하나로는 닿지 않는다고 계산하세요. 이제 레귤러 키(regular key) 경로를 동그라미 치세요. 그것은 대안 서명 경로입니다. 별도의 단일 키 경로가 남아 있으면, 두 사람의 서명자 목록이 모든 트랜잭션을 두 사람의 통제로 강제하지는 않습니다.
-- zh-CN: 对于签名者列表（signer list）这条途径，算出任意两位权重为 1 的签名者可以达到法定人数 2，而一位则不能。现在圈出常规密钥（regular key）途径：它是一条替代的签名途径。只要另一条单密钥途径还在，一份两人的签名者列表并不能迫使每一笔交易都由两个人控制。
+- ko: 서명자 목록(signer list) 경로에서는 가중치가 1인 서명자 중 어느 두 명이든 가중치 합이 충족 기준인 2에 도달하지만, 한 명만으로는 도달하지 않는다는 것을 계산하세요. 이제 레귤러 키(regular key) 경로에 동그라미를 치세요. 이는 별도의 서명 경로입니다. 별도의 단일 키 경로가 남아 있으면, 두 명의 서명을 요구하는 서명자 목록이 있어도 모든 트랜잭션에 두 사람의 통제를 강제하지는 못합니다.
+- zh-CN: 对于签名者列表（signer list）这条途径，算出任意两位权重为 1 的签名者可以达到权重门槛 2，而一位则不能。现在圈出常规密钥（regular key）途径：它是一条替代的签名途径。只要另一条单密钥途径还在，即使签名者列表要求两人签名，也不能保证每笔交易都由两个人控制。
 - hi: साइनर-लिस्ट (signer list) मार्ग के लिए गणना करें कि वेट-एक वाले कोई भी दो साइनर (signer) कोरम (quorum) दो तक पहुँचते हैं, एक नहीं। अब रेगुलर-की (regular key) मार्ग पर घेरा लगाएँ: वह वैकल्पिक साइनिंग (signing) मार्ग है। जब अलग एकल-की (single-key) मार्ग बचा हो, तो दो लोगों की साइनर लिस्ट हर लेनदेन पर दो लोगों का नियंत्रण बाध्य नहीं करती।
 - ar: لمسار قائمة الموقّعين (signer list)، احسب أن أي موقّعين بوزن واحد يبلغان النصاب (quorum) اثنين، بينما واحد لا يبلغه. الآن ضع دائرة على مسار المفتاح العادي (regular key): إنه مسار توقيع (signing) بديل. قائمة موقّعين من شخصين لا تفرض تحكم شخصين في كل معاملة ما دام مسار مفتاح واحد منفصل قائماً.
 
@@ -1128,11 +1141,11 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - pt-BR: O freeze restringe o movimento de tokens; o clawback pode recuperar um saldo de token do emissor quando a capacidade está ativada. Nenhum dos dois se aplica ao XRP nativo.
 - es: La congelación restringe el movimiento de los tokens; el clawback puede recuperar un saldo de token del emisor cuando la capacidad está habilitada. Ninguno se aplica al XRP nativo.
 - fr: Le freeze restreint le mouvement des jetons ; le clawback peut récupérer un solde de jeton d’émetteur lorsque la capacité est activée. Ni l’un ni l’autre ne s’applique au XRP natif.
-- de: Freeze beschränkt die Bewegung von Token; Clawback kann einen Token-Saldo des Emittenten zurückholen, wenn die Fähigkeit aktiviert ist. Beides gilt nicht für natives XRP.
+- de: Freeze beschränkt die Bewegung von Token; Clawback kann einen Saldo des vom Emittenten ausgegebenen Tokens zurückholen, wenn die Funktion aktiviert ist. Beides gilt nicht für natives XRP.
 - ja: フリーズ（freeze）はトークンの移動を制限します。クローバック（clawback）は、その機能が有効なとき、発行者トークンの残高を回収できます。どちらもネイティブのXRPには適用されません。
 - ko: 동결(freeze)은 토큰의 이동을 제한합니다. 클로백(clawback)은 그 기능이 켜져 있을 때 발행 토큰 잔액을 회수할 수 있습니다. 둘 다 네이티브 XRP에는 적용되지 않습니다.
 - zh-CN: 冻结（freeze）限制代币的移动；在该能力已启用时，追回（clawback）可以收回发行方代币的余额。二者都不适用于原生 XRP。
-- hi: फ़्रीज़ (freeze) टोकन की गति सीमित करता है; क्लॉबैक (clawback) क्षमता चालू होने पर जारीकर्ता टोकन बैलेंस वापस ले सकता है। दोनों मूल XRP पर लागू नहीं होते।
+- hi: फ़्रीज़ (freeze) टोकन के हस्तांतरण को प्रतिबंधित करता है; क्लॉबैक (clawback) क्षमता चालू होने पर जारीकर्ता अपने जारी किए टोकन का बैलेंस वापस ले सकता है। इनमें से कोई भी मूल XRP पर लागू नहीं होता।
 - ar: يقيّد التجميد (freeze) حركة الرموز؛ ويمكن للسحب (clawback) استرجاع رصيد رمز المُصدِر (issuer) عندما تكون القدرة مفعّلة. لا ينطبق أي منهما على XRP الأصلي.
 
 ## `freeze-types-and-no-freeze.7a6c33a3`
@@ -1177,22 +1190,22 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 ## `in-a-read-only-explorer-account-view.b057c38f`
 
 - en: In a read-only explorer account view, open the issued balances or trust-line section. Locate the precise currency and peer issuer, then compare balance, limit and any shown freeze/authorization/ripple fields. Identify whose perspective is displayed. If a field is missing from the interface, write not shown rather than assuming disabled. Your learning worksheet can stay fictional if no suitable record is available.
-- pt-BR: Numa visão somente leitura de conta no explorer, abra a seção de saldos emitidos ou de trust line. Localize a moeda exata e o emissor par, depois compare saldo, limite e quaisquer campos de freeze/autorização/ripple exibidos. Identifique de qual perspectiva a tela parte. Se um campo não aparecer na interface, escreva não exibido em vez de presumir desativado. Sua ficha de aprendizado pode continuar fictícia se não houver um registro adequado.
+- pt-BR: Numa visão somente leitura de conta no explorer, abra a seção de saldos emitidos ou de trust line. Localize a moeda exata e o emissor na outra ponta da linha, depois compare saldo, limite e quaisquer campos de freeze/autorização/ripple exibidos. Identifique de qual perspectiva a tela parte. Se um campo não aparecer na interface, escreva não exibido em vez de presumir desativado. Sua ficha de aprendizado pode continuar fictícia se não houver um registro adequado.
 - es: En una vista de cuenta de un explorador de solo lectura, abre la sección de saldos emitidos o de líneas de confianza. Localiza la moneda precisa y el emisor par, y luego compara saldo, límite y cualquier campo mostrado de congelación, autorización o rippling. Identifica qué perspectiva se muestra. Si falta un campo en la interfaz, escribe no mostrado en lugar de suponer que está desactivado. Tu hoja de aprendizaje puede seguir siendo ficticia si no hay un registro adecuado.
-- fr: Dans une vue de compte d’explorateur en lecture seule, ouvrez la section des soldes émis ou des trust lines. Trouvez la devise précise et l’émetteur pair, puis comparez le solde, la limite et les champs de freeze, d’autorisation ou de ripple affichés. Identifiez le point de vue affiché. Si un champ manque dans l’interface, écrivez non affiché au lieu de supposer qu’il est désactivé. Votre feuille d’apprentissage peut rester fictive si aucun enregistrement adapté n’est disponible.
-- de: Öffne in einer nur lesbaren Explorer-Ansicht des Kontos den Bereich für emittierte Salden oder Trust Lines. Such die genaue Währung und den Gegen-Emittenten, dann vergleiche Saldo, Limit und angezeigte Felder für Freeze, Autorisierung und Ripple. Erkenn, wessen Perspektive angezeigt wird. Wenn ein Feld in der Oberfläche fehlt, schreib „nicht angezeigt“, statt deaktiviert anzunehmen. Dein Lernblatt kann fiktiv bleiben, wenn kein passender Datensatz verfügbar ist.
+- fr: Dans une vue de compte d’explorateur en lecture seule, ouvrez la section des soldes émis ou des trust lines. Trouvez la devise précise et le compte émetteur à l’autre extrémité de la ligne, puis comparez le solde, la limite et les champs de freeze, d’autorisation ou de ripple affichés. Identifiez le point de vue affiché. Si un champ manque dans l’interface, écrivez non affiché au lieu de supposer qu’il est désactivé. Votre feuille d’apprentissage peut rester fictive si aucun enregistrement adapté n’est disponible.
+- de: Öffne in einer nur lesbaren Explorer-Ansicht des Kontos den Bereich für emittierte Salden oder Trust Lines. Such die genaue Währung und den Emittenten auf der Gegenseite, dann vergleiche Saldo, Limit und angezeigte Felder für Freeze, Autorisierung und Ripple. Erkenn, wessen Perspektive angezeigt wird. Wenn ein Feld in der Oberfläche fehlt, schreib „nicht angezeigt“, statt deaktiviert anzunehmen. Dein Lernblatt kann fiktiv bleiben, wenn kein passender Datensatz verfügbar ist.
 - ja: 読み取り専用のエクスプローラーのアカウント表示で、発行残高またはトラストライン（trust line）の節を開いてください。正確な通貨と相手の発行者を見つけ、残高、上限、表示されているフリーズ（freeze）、認可、リップリング（rippling）の欄を比べてください。誰の視点で表示されているかを特定します。画面に欄がなければ、無効と仮定せず、表示なしと書いてください。適切な記録がなければ、学習ワークシートは架空のままでかまいません。
 - ko: 읽기 전용 탐색기의 계정 보기에서 발행 잔액 또는 트러스트 라인 부분을 여세요. 정확한 통화와 상대 발행자를 찾고, 잔액, 한도, 표시된 동결(freeze)/승인/리플링 필드를 비교하세요. 누구의 시점인지 확인하세요. 화면에 필드가 없으면 꺼져 있다고 가정하지 말고 표시되지 않음이라고 적으세요. 적당한 기록이 없으면 학습 작업지는 가상으로 두어도 됩니다.
-- zh-CN: 在只读账本浏览器（explorer）的账户视图中，打开发行余额或信任线（trust line）部分。找到精确的货币和对端发行方，然后比较余额、限额，以及显示出来的冻结（freeze）/授权/涟漪（rippling）字段。辨明显示的是谁的视角。如果界面上缺少某个字段，就写“未显示”，而不要假设它已禁用。如果没有合适的记录，你的学习工作表可以继续用虚构内容。
+- zh-CN: 在只读账本浏览器（explorer）的账户视图中，打开发行余额或信任线（trust line）部分。找到精确的货币和对端发行方，然后比较余额、限额，以及显示出来的冻结（freeze）/授权/余额流转（rippling）字段。辨明显示的是谁的视角。如果界面上缺少某个字段，就写“未显示”，而不要假设它已禁用。如果没有合适的记录，你的学习工作表可以继续用虚构内容。
 - hi: केवल-पढ़ने वाले एक्सप्लोरर के खाता दृश्य में जारी बैलेंस या ट्रस्ट-लाइन (trust line) खंड खोलें। सटीक मुद्रा और साथी जारीकर्ता (issuer) ढूँढें, फिर बैलेंस, लिमिट (limit) और दिखे फ़्रीज़ (freeze)/ऑथराइज़ेशन (authorization)/रिपल फ़ील्ड की तुलना करें। पहचानें कि किसका दृष्टिकोण दिखाया गया है। यदि इंटरफ़ेस में कोई फ़ील्ड नहीं है, तो बंद मानने के बजाय नहीं दिखा लिखें। उपयुक्त रिकॉर्ड न हो तो आपकी सीखने की वर्कशीट काल्पनिक रह सकती है।
 - ar: في عرض حساب بمستكشف للقراءة فقط، افتح قسم الأرصدة المُصدَرة أو خط الثقة (trust line). حدّد العملة بدقة والمُصدِر (issuer) المقابل، ثم قارن الرصيد والحد وأي حقول تجميد (freeze) أو تفويض (authorization) أو تمرير (rippling) ظاهرة. حدّد المنظور المعروض. إذا غاب حقل عن الواجهة، اكتب «غير ظاهر» بدل افتراض أنه معطّل. يمكن أن تبقى ورقة التعلم خيالية إذا لم يتوفر سجل مناسب.
 
 ## `in-this-model-a-holder-establishes-a.1894c32f`
 
 - en: In this model, a holder establishes a trust line and the issuer sends issued currency to that holder. A trust line alone does not distribute tokens. Returning a balance to its issuer reduces the amount outstanding. A trust limit is not a project-wide supply cap, and a supply promise on a website is not ledger enforcement. Explain issuance, redemption and remaining authority before promoting the asset.
-- pt-BR: Neste modelo, um detentor estabelece uma trust line e o emissor envia moeda emitida a esse detentor. Uma trust line, sozinha, não distribui tokens. Devolver um saldo ao emissor reduz a quantia em aberto. Um limite de trust não é um teto de suprimento do projeto inteiro, e uma promessa de suprimento num site não é aplicação pelo ledger. Explique emissão, resgate e a autoridade que permanece antes de promover o ativo.
-- es: En este modelo, un tenedor establece una línea de confianza y el emisor envía moneda emitida a ese tenedor. Una línea de confianza por sí sola no distribuye tokens. Devolver un saldo a su emisor reduce la cantidad en circulación. Un límite de confianza no es un tope de suministro de todo el proyecto, y una promesa de suministro en un sitio web no es cumplimiento del ledger. Explica la emisión, el canje y la autoridad que queda antes de promover el activo.
-- fr: Dans ce modèle, un détenteur établit une trust line et l’émetteur envoie la devise émise à ce détenteur. Une trust line seule ne distribue pas de jetons. Renvoyer un solde à son émetteur réduit la quantité en circulation. Une limite de trust n’est pas un plafond de supply pour tout le projet, et une promesse de supply sur un site n’est pas une application par le registre. Expliquez l’émission, le rachat et l’autorité qui reste avant de promouvoir l’actif.
+- pt-BR: Neste modelo, um detentor estabelece uma trust line e o emissor envia moeda emitida a esse detentor. Uma trust line, sozinha, não distribui tokens. Devolver um saldo ao emissor reduz a quantia em aberto. Um limite de trust não é um teto de suprimento do projeto inteiro, e uma promessa de suprimento num site não significa que esse limite seja imposto pelo ledger. Explique emissão, resgate e a autoridade que permanece antes de promover o ativo.
+- es: En este modelo, un tenedor establece una línea de confianza y el emisor envía moneda emitida a ese tenedor. Una línea de confianza por sí sola no distribuye tokens. Devolver un saldo a su emisor reduce la cantidad en circulación. Un límite de confianza no es un tope de suministro de todo el proyecto, y una promesa de suministro en un sitio web no significa que el ledger la haga cumplir. Explica la emisión, el canje y la autoridad que queda antes de promover el activo.
+- fr: Dans ce modèle, un détenteur établit une trust line et l’émetteur lui envoie la devise émise. Une trust line seule ne distribue pas de jetons. Renvoyer un solde à son émetteur réduit la quantité en circulation. La limite d’une trust line ne plafonne pas l’offre de jetons de l’ensemble du projet, et une promesse sur cette offre publiée sur un site web n’est pas une contrainte imposée par le registre. Expliquez l’émission, le rachat et les pouvoirs qui subsistent avant de promouvoir l’actif.
 - de: In diesem Modell richtet ein Inhaber eine Trust Line ein, und der Emittent sendet emittierte Währung an diesen Inhaber. Eine Trust Line allein verteilt keine Token. Einen Saldo an den Emittenten zurückzugeben verringert die umlaufende Menge. Ein Trust-Limit ist keine projektweite Supply-Obergrenze, und ein Supply-Versprechen auf einer Website ist keine Durchsetzung im Ledger. Erkläre Ausgabe, Einlösung und verbleibende Befugnis, bevor du für das Asset wirbst.
 - ja: このモデルでは、保有者がトラストライン（trust line）を作り、発行者がその保有者へ発行通貨を送ります。トラストラインだけではトークンは配られません。残高を発行者へ戻すと、流通中の量が減ります。トラスト上限はプロジェクト全体の供給上限ではなく、ウェブサイト上の供給の約束はレジャーによる強制ではありません。資産を宣伝する前に、発行、償還、残る権限を説明してください。
 - ko: 이 모델에서 보유자가 트러스트 라인(trust line)을 만들고, 발행자가 그 보유자에게 발행 통화를 보냅니다. 트러스트 라인만으로 토큰이 배포되지는 않습니다. 잔액을 발행자에게 돌려주면 유통량이 줄어듭니다. 트러스트 한도는 프로젝트 전체의 공급 상한이 아니고, 웹사이트의 공급 약속은 원장의 집행이 아닙니다. 자산을 홍보하기 전에 발행, 상환, 남아 있는 권한을 설명하세요.
@@ -1203,10 +1216,10 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 ## `inspect-a-fictional-proposed-sale-nf.f3daf39c`
 
 - en: Inspect a fictional proposed sale: NFT Record N, price 20 XRP, restricted recipient Member C, and a stated expiry. The NFT transfer-fee field 1,000 represents 1%. On an applicable 20 XRP sale that is 0.2 XRP; check the actual sale mode and settlement accounting rather than assuming every displayed price is the seller net.
-- pt-BR: Inspecione uma venda fictícia proposta: NFT Record N, preço 20 XRP, destinatário restrito Member C e uma expiração declarada. O campo de taxa de transferência do NFT, 1,000, representa 1%. Numa venda aplicável de 20 XRP, isso é 0.2 XRP; confira o modo real da venda e a contabilidade da liquidação, em vez de presumir que todo preço exibido é o líquido do vendedor.
-- es: Inspecciona una venta propuesta ficticia: NFT Record N, precio 20 XRP, destinatario restringido Member C y un vencimiento indicado. El campo de comisión de transferencia del NFT, 1,000, representa 1%. En una venta aplicable de 20 XRP eso es 0.2 XRP; revisa el modo real de venta y la contabilidad de la liquidación en lugar de suponer que cada precio mostrado es el neto del vendedor.
-- fr: Inspectez une vente fictive proposée : NFT Record N, prix 20 XRP, destinataire restreint Member C, et une expiration indiquée. Le champ de frais de transfert du NFT, 1,000, représente 1%. Sur une vente applicable de 20 XRP, cela fait 0.2 XRP ; vérifiez le mode de vente réel et la comptabilité du règlement, au lieu de supposer que chaque prix affiché est le net du vendeur.
-- de: Prüfe einen fiktiven vorgeschlagenen Verkauf: NFT Record N, Preis 20 XRP, beschränkter Empfänger Member C und ein genannter Ablauf. Das NFT-Transfergebühr-Feld 1,000 steht für 1%. Bei einem zutreffenden Verkauf über 20 XRP sind das 0.2 XRP; prüfe den tatsächlichen Verkaufsmodus und die Abrechnung, statt anzunehmen, jeder angezeigte Preis sei der Nettoerlös der verkaufenden Person.
+- pt-BR: Inspecione uma venda fictícia proposta: NFT Record N, preço 20 XRP, destinatário restrito Member C e uma expiração declarada. O campo de taxa de transferência do NFT, 1.000, representa 1%. Numa venda aplicável de 20 XRP, isso é 0.2 XRP; confira o modo real da venda e a contabilidade da liquidação, em vez de presumir que todo preço exibido é o líquido do vendedor.
+- es: Inspecciona una venta propuesta ficticia: NFT Record N, precio 20 XRP, destinatario restringido Member C y un vencimiento indicado. El campo de comisión de transferencia del NFT, 1000, representa 1%. En una venta aplicable de 20 XRP eso es 0.2 XRP; revisa el modo real de venta y la contabilidad de la liquidación en lugar de suponer que cada precio mostrado es el neto del vendedor.
+- fr: Inspectez une vente fictive proposée : NFT Record N, prix 20 XRP, destinataire restreint Member C, et une expiration indiquée. Le champ de frais de transfert du NFT, 1 000, représente 1 %. Sur une vente applicable de 20 XRP, cela fait 0.2 XRP ; vérifiez le mode de vente réel et la comptabilité du règlement, au lieu de supposer que chaque prix affiché est le net du vendeur.
+- de: Prüfe einen fiktiven vorgeschlagenen Verkauf: NFT Record N, Preis 20 XRP, nur Member C als zugelassener Empfänger und ein genannter Ablauf. Das NFT-Transfergebühr-Feld 1.000 steht für 1%. Bei einem Verkauf über 20 XRP, für den diese Gebühr gilt, sind das 0.2 XRP; prüfe den tatsächlichen Verkaufsmodus und die Abrechnung, statt anzunehmen, jeder angezeigte Preis sei der Nettoerlös der verkaufenden Person.
 - ja: 架空の、提案された売却を調べてください。NFT Record N、価格20 XRP、制限された受取人Member C、示された期限です。NFTの移転手数料欄1,000は1%を表します。適用される20 XRPの売却では、それは0.2 XRPです。表示された価格がすべて売り手の手取りだと仮定せず、実際の売却の仕方と決済の計算を確認してください。
 - ko: 가상의 제안 판매를 살펴보세요. NFT Record N, 가격 20 XRP, 제한된 받는 쪽 Member C, 적힌 만료입니다. NFT 전송 수수료 필드 1,000은 1%입니다. 적용되는 20 XRP 판매에서는 0.2 XRP입니다. 표시된 가격이 모두 판매자 순액이라고 가정하지 말고, 실제 판매 방식과 정산 회계를 확인하세요.
 - zh-CN: 检查一笔虚构的拟议出售：NFT Record N，价格 20 XRP，受限接收方 Member C，并写明了到期时间。NFT 转让费字段 1,000 表示 1%。在一笔适用的 20 XRP 出售上，那是 0.2 XRP；请检查实际的出售方式和结算记账，不要假设每一个显示价格都是卖家净得。
@@ -1244,11 +1257,11 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - en: Inspect signer weights, quorum, authorized signer identities and the intended account/network. Do not weaken quorum or enable another key as a quick fix.
 - pt-BR: Inspecione pesos dos signatários, quórum, identidades autorizadas dos signatários e a conta/rede pretendidas. Não afrouxe o quórum nem ative outra chave como atalho.
 - es: Inspecciona los pesos de los firmantes, el quórum, las identidades de firmantes autorizados y la cuenta y la red previstas. No bajes el quórum ni habilites otra clave como arreglo rápido.
-- fr: Inspectez les poids des signataires, le quorum, les identités de signataires autorisées et le compte ou le réseau prévu. N’affaiblissez pas le quorum et n’activez pas une autre clé comme correctif rapide.
+- fr: Inspectez les poids des signataires, le quorum, les identités de signataires autorisées et le compte et le réseau prévus. N’affaiblissez pas le quorum et n’activez pas une autre clé comme correctif rapide.
 - de: Prüfe Signer-Gewichte, Quorum, autorisierte Signer-Identitäten und das beabsichtigte Konto und Netzwerk. Senke das Quorum nicht und aktiviere keinen weiteren Schlüssel als schnelle Reparatur.
 - ja: 署名者の重み、クォーラム（quorum）、認可された署名者の識別情報、意図したアカウントとネットワークを調べてください。応急処置として、クォーラムを弱めたり、別の鍵を有効にしたりしないでください。
-- ko: 서명자 가중치, 정족수(quorum), 승인된 서명자 정체성, 의도한 계정/네트워크를 살펴보세요. 빠른 해결로 정족수를 낮추거나 다른 키를 켜지 마세요.
-- zh-CN: 检查签名者权重、法定人数（quorum）、已授权的签名者身份，以及预期的账户/网络。不要把降低法定人数或再启用一把密钥当作权宜之计。
+- ko: 서명자 가중치, 서명 가중치 충족 기준(quorum), 승인된 서명자의 식별 정보, 의도한 계정/네트워크를 살펴보세요. 빠른 해결을 위해 충족 기준을 낮추거나 다른 키를 활성화하지 마세요.
+- zh-CN: 检查签名者权重、签名权重门槛（quorum）、已授权的签名者身份，以及预期的账户/网络。不要把降低权重门槛或再启用一把密钥当作权宜之计。
 - hi: साइनर वेट (signer weight), कोरम (quorum), अधिकृत साइनर (signer) पहचान और इच्छित खाता/नेटवर्क जाँचें। त्वरित समाधान के रूप में कोरम कमज़ोर न करें और दूसरी की (key) चालू न करें।
 - ar: افحص أوزان الموقّعين والنصاب (quorum) وهويات الموقّعين المأذون لهم والحساب أو الشبكة المقصودين. لا تُضعف النصاب ولا تفعّل مفتاحاً آخر كإصلاح سريع.
 
@@ -1281,15 +1294,15 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 ## `issuer-authorization-controls-who-ma.0238879b`
 
 - en: Issuer authorization controls who may hold a currency when required. Individual freeze restricts spending through a trust line; deep freeze adds receiving restrictions, with issuer-direct exceptions. Global freeze has broader effects. These token controls do not freeze native XRP. Clawback is a separate capability and should be disclosed separately; it is not another name for freeze.
-- pt-BR: A autorização do emissor controla quem pode guardar uma moeda quando isso é exigido. O individual freeze restringe gastos por uma trust line; o deep freeze acrescenta restrições de recebimento, com exceções diretas do emissor. O global freeze tem efeitos mais amplos. Esses controles de token não aplicam freeze ao XRP nativo. Clawback é uma capacidade separada e deve ser divulgada à parte; não é outro nome para freeze.
-- es: La autorización del emisor controla quién puede tener una moneda cuando se exige. La congelación individual restringe el gasto a través de una línea de confianza; el deep freeze agrega restricciones de recepción, con excepciones directas del emisor. La congelación global tiene efectos más amplios. Estos controles de token no congelan el XRP nativo. El clawback es una capacidad aparte y debe divulgarse aparte; no es otro nombre de la congelación.
-- fr: L’autorisation de l’émetteur contrôle qui peut détenir une devise lorsque c’est exigé. Le freeze individuel restreint la dépense à travers une trust line ; le deep freeze ajoute des restrictions de réception, avec des exceptions directes de l’émetteur. Le global freeze a des effets plus larges. Ces contrôles de jeton ne gèlent pas le XRP natif. Le clawback est une capacité séparée et doit être divulgué séparément ; ce n’est pas un autre nom pour freeze.
-- de: Die Emittenten-Autorisierung steuert, wer eine Währung halten darf, wenn das verlangt wird. Individual Freeze beschränkt das Ausgeben über eine Trust Line; Deep Freeze ergänzt Empfangsbeschränkungen, mit Ausnahmen für direkte Vorgänge des Emittenten. Global Freeze hat breitere Wirkungen. Diese Token-Kontrollen frieren natives XRP nicht ein. Clawback ist eine separate Fähigkeit und sollte getrennt offengelegt werden; es ist kein anderer Name für Freeze.
-- ja: 発行者の認可は、必要な場合に、誰がその通貨を保有できるかを制御します。個別フリーズ（individual freeze）は、トラストライン（trust line）を通じた支出を制限します。ディープフリーズ（deep freeze）は受取の制限を加えますが、発行者からの直接の例外があります。グローバルフリーズ（global freeze）は、より広い効果を持ちます。これらのトークン制御は、ネイティブのXRPをフリーズ（freeze）しません。クローバック（clawback）は別の機能であり、別に開示すべきです。フリーズの別名ではありません。
-- ko: 발행자 승인(authorization)은 필요할 때 누가 통화를 보유할 수 있는지를 제어합니다. 개별 동결(individual freeze)은 트러스트 라인(trust line)을 통한 사용을 제한합니다. 딥 프리즈(deep freeze)는 받는 쪽 제한을 더하며, 발행자가 직접 하는 예외가 있습니다. 글로벌 프리즈(global freeze)는 더 넓은 효과가 있습니다. 이 토큰 제어는 네이티브 XRP를 동결하지 않습니다. 클로백(clawback)은 별도 기능이므로 따로 공시해야 합니다. 동결의 다른 이름이 아닙니다.
-- zh-CN: 在有要求时，发行方授权（authorization）控制谁可以持有一种货币。单项冻结（individual freeze）限制通过信任线（trust line）的支出；深度冻结（deep freeze）再加上接收限制，并有发行方直接操作的例外。全局冻结（global freeze）影响更广。这些代币控制不会冻结原生 XRP。追回（clawback）是另一项能力，应当单独披露；它不是冻结的另一个名字。
-- hi: जारीकर्ता ऑथराइज़ेशन (issuer authorization) ज़रूरी होने पर नियंत्रित करता है कि मुद्रा कौन रख सकता है। व्यक्तिगत फ़्रीज़ (individual freeze) ट्रस्ट लाइन (trust line) के माध्यम से खर्च सीमित करता है; डीप फ़्रीज़ (deep freeze) प्राप्त करने के प्रतिबंध जोड़ता है, जारीकर्ता-प्रत्यक्ष अपवादों के साथ। ग्लोबल फ़्रीज़ (global freeze) के व्यापक प्रभाव हैं। ये टोकन नियंत्रण मूल XRP को फ़्रीज़ नहीं करते। क्लॉबैक (clawback) अलग क्षमता है और अलग से बताई जानी चाहिए; वह फ़्रीज़ का दूसरा नाम नहीं है।
-- ar: يتحكم تفويض المُصدِر (authorization) في من يجوز له حيازة عملة عندما يكون ذلك مطلوباً. يقيّد التجميد الفردي (individual freeze) الإنفاق عبر خط الثقة (trust line)؛ ويضيف التجميد العميق (deep freeze) قيود استلام، مع استثناءات مباشرة من المُصدِر (issuer). للتجميد العام (global freeze) آثار أوسع. ضوابط الرموز هذه لا تجمّد XRP الأصلي. السحب (clawback) قدرة منفصلة وينبغي الإفصاح عنها بشكل منفصل؛ وهو ليس اسماً آخر للتجميد (freeze).
+- pt-BR: A autorização do emissor controla quem pode guardar uma moeda quando isso é exigido. O individual freeze restringe gastos por uma trust line; o deep freeze acrescenta restrições de recebimento, com exceções para operações diretamente com o emissor. O global freeze tem efeitos mais amplos. Esses controles de token não aplicam freeze ao XRP nativo. Clawback é uma capacidade separada e deve ser divulgada à parte; não é outro nome para freeze.
+- es: La autorización del emisor controla quién puede tener una moneda cuando se exige. La congelación individual restringe el gasto a través de una línea de confianza; el deep freeze agrega restricciones de recepción, con excepciones para las operaciones directas con el emisor. La congelación global tiene efectos más amplios. Estos controles de token no congelan el XRP nativo. El clawback es una capacidad aparte y debe divulgarse aparte; no es otro nombre de la congelación.
+- fr: L’autorisation de l’émetteur contrôle qui peut détenir une devise lorsque c’est exigé. Le freeze individuel restreint la dépense à travers une trust line ; le deep freeze ajoute des restrictions de réception, avec des exceptions pour les transferts directs avec l’émetteur. Le global freeze a des effets plus larges. Ces contrôles de jeton ne gèlent pas le XRP natif. Le clawback est une capacité séparée et doit être divulgué séparément ; ce n’est pas un autre nom pour freeze.
+- de: Die Emittenten-Autorisierung steuert, wer eine Währung halten darf, wenn das verlangt wird. Individual Freeze beschränkt das Ausgeben über eine Trust Line; Deep Freeze ergänzt Empfangsbeschränkungen, mit Ausnahmen für direkte Vorgänge mit dem Emittenten. Global Freeze hat breitere Wirkungen. Diese Token-Kontrollen frieren natives XRP nicht ein. Clawback ist eine separate Fähigkeit und sollte getrennt offengelegt werden; es ist kein anderer Name für Freeze.
+- ja: 発行者の認可は、必要な場合に、誰がその通貨を保有できるかを制御します。個別フリーズ（individual freeze）は、トラストライン（trust line）を通じた支出を制限します。ディープフリーズ（deep freeze）は受取の制限を加えますが、発行者との直接取引には例外があります。グローバルフリーズ（global freeze）は、より広い効果を持ちます。これらのトークン制御は、ネイティブのXRPをフリーズ（freeze）しません。クローバック（clawback）は別の機能であり、別に開示すべきです。フリーズの別名ではありません。
+- ko: 발행자 승인(authorization)은 필요할 때 누가 통화를 보유할 수 있는지를 제어합니다. 개별 동결(individual freeze)은 트러스트 라인(trust line)을 통한 사용을 제한합니다. 딥 프리즈(deep freeze)는 받는 쪽 제한을 더하며, 발행자와 직접 거래하는 경우에는 예외가 있습니다. 글로벌 프리즈(global freeze)는 더 넓은 효과가 있습니다. 이 토큰 제어는 네이티브 XRP를 동결하지 않습니다. 클로백(clawback)은 별도 기능이므로 따로 공시해야 합니다. 동결의 다른 이름이 아닙니다.
+- zh-CN: 在有要求时，发行方授权（authorization）控制谁可以持有一种货币。单项冻结（individual freeze）限制通过信任线（trust line）的支出；深度冻结（deep freeze）再加上接收限制，并有与发行方直接往来的例外。全局冻结（global freeze）影响更广。这些代币控制不会冻结原生 XRP。追回（clawback）是另一项能力，应当单独披露；它不是冻结的另一个名字。
+- hi: जहाँ जारीकर्ता ऑथराइज़ेशन (issuer authorization) ज़रूरी हो, वह तय करता है कि मुद्रा कौन रख सकता है। व्यक्तिगत फ़्रीज़ (individual freeze) ट्रस्ट लाइन (trust line) के माध्यम से खर्च करने पर प्रतिबंध लगाता है; डीप फ़्रीज़ (deep freeze) प्राप्त करने पर भी प्रतिबंध जोड़ता है, लेकिन जारीकर्ता के साथ सीधे लेनदेन के लिए अपवाद होते हैं। ग्लोबल फ़्रीज़ (global freeze) के प्रभाव अधिक व्यापक हैं। ये टोकन नियंत्रण मूल XRP को फ़्रीज़ नहीं करते। क्लॉबैक (clawback) अलग क्षमता है और उसका अलग खुलासा होना चाहिए; वह फ़्रीज़ का दूसरा नाम नहीं है।
+- ar: يتحكم تفويض المُصدِر (authorization) في من يجوز له حيازة عملة عندما يكون ذلك مطلوباً. يقيّد التجميد الفردي (individual freeze) الإنفاق عبر خط الثقة (trust line)؛ ويضيف التجميد العميق (deep freeze) قيوداً على الاستلام، مع استثناءات للتعامل المباشر مع المُصدِر (issuer). وللتجميد العام (global freeze) آثار أوسع. ضوابط الرموز هذه لا تجمّد XRP الأصلي. والسحب (clawback) قدرة منفصلة ينبغي الإفصاح عنها بشكل منفصل؛ وهو ليس اسماً آخر للتجميد (freeze).
 
 ## `keep-backend-api-secrets-out-of-brow.f5ff651f`
 
@@ -1302,20 +1315,20 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - ko: 백엔드 API 비밀은 브라우저 코드 밖에 두세요. 애플리케이션에 맞는, 문서화된 Xaman 연동 모델을 사용하세요. 이 페이지에는 지갑 연결, QR 서명 요청, 제출 동작이 없습니다.
 - zh-CN: 把后端 API 秘密留在浏览器代码之外。使用适合该应用、且有文档的 Xaman 集成方式。这些页面没有钱包连接、QR 签名请求或提交动作。
 - hi: बैकएंड API सीक्रेट ब्राउज़र कोड से बाहर रखें। ऐप्लिकेशन के अनुकूल दस्तावेज़ी Xaman इंटीग्रेशन मॉडल इस्तेमाल करें। इन पृष्ठों पर वॉलेट कनेक्शन, QR साइनिंग (signing) अनुरोध या सबमिट कार्रवाई नहीं है।
-- ar: أبقِ أسرار واجهة الخلفية (API) خارج رمز المتصفح. استخدم نموذج تكامل Xaman موثقاً يناسب التطبيق. هذه الصفحات بلا وصل محفظة ولا طلب توقيع (signing) عبر QR ولا إجراء إرسال.
+- ar: أبقِ أسرار واجهة برمجة التطبيقات (API) الخاصة بالنظام الخلفي خارج الشيفرة البرمجية للمتصفح. استخدم نموذج تكامل Xaman موثقاً يناسب التطبيق. لا تتضمن هذه الصفحات اتصالاً بمحفظة، ولا طلب توقيع (signing) عبر QR، ولا إجراء إرسال.
 
 ## `keep-the-seed-offline-and-private.ac2d7a8b`
 
 - en: Keep the seed offline and private.
-- pt-BR: Mantenha a seed fora da rede e em privado.
+- pt-BR: Mantenha a seed offline e em sigilo.
 - es: Mantén la semilla fuera de línea y en privado.
 - fr: Gardez le seed hors ligne et privé.
 - de: Halt den Seed offline und privat.
 - ja: シード（seed）はオフラインで、非公開にしてください。
 - ko: 시드(seed)는 오프라인과 비공개로 보관하세요.
 - zh-CN: 把种子（seed）放在离线处，并保持私密。
-- hi: सीड (seed) ऑफ़लाइन और निजी रखें।
-- ar: أبقِ البذرة (seed) غير متصلة وخاصة.
+- hi: सीड (seed) को ऑफ़लाइन और गोपनीय रखें।
+- ar: احتفظ بالبذرة (seed) دون اتصال بالإنترنت وبسرية.
 
 ## `learn-and-inspect-first-no-wallet-co.b6c6fd0a`
 
@@ -1362,7 +1375,7 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - pt-BR: Objetos do ledger podem afetar a reserva de XRP exigida por uma conta. Regras e valores de reserva podem mudar, e existem exceções de trust line: confira as regras atuais da rede em vez de presumir que toda linha custa o mesmo. Definir o limite como zero não apaga um saldo diferente de zero nem garante remoção imediata. Uma linha removível precisa cumprir as condições de estado padrão do ledger.
 - es: Los objetos del ledger pueden afectar la reserva de XRP que necesita una cuenta. Las reglas y las cantidades de reserva pueden cambiar, y existen excepciones de línea de confianza: revisa las reglas actuales de la red en lugar de suponer que cada línea cuesta lo mismo. Poner el límite en cero no borra un saldo distinto de cero ni garantiza una eliminación inmediata. Una línea que se pueda quitar debe cumplir las condiciones de estado predeterminado del ledger.
 - fr: Les objets de registre peuvent affecter la réserve de XRP exigée par un compte. Les règles et les montants de réserve peuvent changer, et des exceptions de trust line existent : vérifiez les règles actuelles du réseau au lieu de supposer que chaque ligne coûte la même chose. Mettre une limite à zéro n’efface pas un solde non nul et ne garantit pas un retrait immédiat. Une ligne retirable doit remplir les conditions d’état par défaut du registre.
-- de: Ledger-Objekte können die XRP-Reserve beeinflussen, die ein Konto braucht. Reserveregeln und Beträge können sich ändern, und es gibt Ausnahmen bei Trust Lines: prüfe die aktuellen Netzwerkregeln, statt anzunehmen, jede Linie koste dasselbe. Ein Limit auf null zu setzen löscht keinen Saldo ungleich null und garantiert keine sofortige Entfernung. Eine entfernbare Linie muss die Vorgabezustandsbedingungen des Ledgers erfüllen.
+- de: Ledger-Objekte können die XRP-Reserve beeinflussen, die ein Konto braucht. Reserveregeln und Beträge können sich ändern, und es gibt Ausnahmen bei Trust Lines: prüfe die aktuellen Netzwerkregeln, statt anzunehmen, jede Linie koste dasselbe. Ein Limit auf null zu setzen löscht keinen Saldo ungleich null und garantiert keine sofortige Entfernung. Eine entfernbare Linie muss die Bedingungen des Ledgers für den Standardzustand erfüllen.
 - ja: レジャーオブジェクトは、アカウントが必要とするXRPのリザーブ（reserve）に影響することがあります。リザーブの規則と金額は変わることがあり、トラストライン（trust line）には例外があります。すべてのラインが同じ費用だと仮定せず、現在のネットワーク規則を確認してください。上限をゼロにしても、ゼロでない残高は消えず、すぐ外れることも保証されません。外せるラインは、レジャーの既定状態の条件を満たす必要があります。
 - ko: 원장 오브젝트는 계정에 필요한 XRP 준비금에 영향을 줄 수 있습니다. 준비금 규칙과 금액은 바뀔 수 있고, 트러스트 라인 예외가 있습니다. 모든 라인이 같은 비용이라고 가정하지 말고 현재 네트워크 규칙을 확인하세요. 한도를 0으로 설정해도 0이 아닌 잔액이 지워지거나 즉시 제거된다고 보장되지 않습니다. 제거할 수 있는 라인은 원장의 기본 상태 조건을 충족해야 합니다.
 - zh-CN: 账本对象会影响一个账户所需的 XRP 准备金（reserve）。准备金规则和金额可以改变，信任线（trust line）也有例外：请查看当前网络规则，不要假设每一条线的成本都相同。把限额设为零并不会抹掉非零余额，也不能保证立刻移除。一条可以移除的线，必须满足账本的默认状态条件。
@@ -1388,7 +1401,7 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - pt-BR: Liste o emissor, as contas operacionais, o master signing ativado, a regular key e a signer list. Uma regular key pode autorizar a maioria das ações da conta; ela não é só uma credencial de API somente leitura. Desativar o master signing não prova que todos os outros caminhos de assinatura sumiram.
 - es: Lista el emisor, las cuentas operativas, la firma maestra habilitada, la clave regular y la lista de firmantes. Una clave regular puede autorizar la mayoría de las acciones de la cuenta; no es solo una credencial de API de lectura. Desactivar la firma maestra no prueba que hayan desaparecido todas las demás vías de firma.
 - fr: Listez l’émetteur, les comptes opérationnels, la signature master activée, la regular key et la signer list. Une regular key peut autoriser la plupart des actions du compte ; ce n’est pas seulement un identifiant d’API en lecture seule. Désactiver la signature master ne prouve pas que toutes les autres voies de signature ont disparu.
-- de: Liste den Emittenten, die Betriebskonten, aktiviertes Master-Signieren, Regular Key und Signer List. Ein Regular Key kann die meisten Kontoaktionen autorisieren; er ist nicht bloß ein Nur-Lese-API-Nachweis. Master-Signieren zu deaktivieren beweist nicht, dass alle anderen Signierwege weg sind.
+- de: Liste den Emittenten, die Betriebskonten, aktiviertes Master-Signieren, Regular Key und Signer List. Ein Regular Key kann die meisten Kontoaktionen autorisieren; er ist nicht bloß ein API-Zugangsschlüssel mit reinem Lesezugriff. Master-Signieren zu deaktivieren beweist nicht, dass alle anderen Signierwege weg sind.
 - ja: 発行者、運用アカウント、有効なマスター署名、レギュラーキー（regular key）、署名者リスト（signer list）を列挙してください。レギュラーキーは、ほとんどのアカウント操作を認可できます。読み取り専用のAPI資格情報ではありません。マスター署名を無効にしても、他のすべての署名経路がなくなった証明にはなりません。
 - ko: 발행자, 운영 계정, 켜진 마스터 서명, 레귤러 키(regular key), 서명자 목록(signer list)을 적으세요. 레귤러 키는 대부분의 계정 동작을 승인할 수 있습니다. 읽기 전용 API 자격 증명이 아닙니다. 마스터 서명을 껐다고 다른 서명 경로가 모두 사라졌다는 증거는 아닙니다.
 - zh-CN: 列出发行方、运营账户、已启用的主密钥签名、常规密钥（regular key）和签名者列表（signer list）。常规密钥可以授权大多数账户动作；它不只是一个只读 API 凭证。禁用主密钥签名，并不能证明其他签名途径都已消失。
@@ -1411,15 +1424,15 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 ## `mainnet-currently-uses-a-plus-these.85124d92`
 
 - en: Mainnet currently uses a {s1} plus {s2}. These values can change through validator fee voting, so software should query the network instead of hard-coding them forever.
-- pt-BR: A Mainnet usa hoje um {s1} mais {s2}. Esses valores podem mudar pela votação de taxa dos validadores, então o software deve consultar a rede em vez de deixá-los fixos no código para sempre.
-- es: Mainnet usa ahora un {s1} más {s2}. Estos valores pueden cambiar por la votación de costos de los validadores, así que el software debe consultar la red en lugar de dejarlos fijos para siempre.
-- fr: Mainnet utilise actuellement un {s1} plus {s2}. Ces valeurs peuvent changer par le vote de frais des validateurs, donc le logiciel devrait interroger le réseau au lieu de les coder en dur pour toujours.
+- pt-BR: A Mainnet usa hoje {s1} mais {s2}. Esses valores podem mudar pela votação de taxas dos validadores, então o software deve consultar a rede em vez de deixá-los fixos no código para sempre.
+- es: Mainnet usa ahora {s1} más {s2}. Estos valores pueden cambiar por la votación de costos de los validadores, así que el software debe consultar la red en lugar de dejarlos fijos para siempre.
+- fr: Mainnet applique actuellement {s1} plus {s2}. Ces valeurs peuvent être modifiées par le vote des validateurs sur les frais. Les logiciels devraient donc interroger le réseau plutôt que de les coder en dur indéfiniment.
 - de: Mainnet nutzt derzeit eine {s1} plus {s2}. Diese Werte können sich durch das Fee-Voting der Validatoren ändern, deshalb sollte Software das Netzwerk abfragen, statt sie für immer fest zu codieren.
 - ja: Mainnetは現在、{s1}に、{s2}を加えたものを使います。これらの値はバリデータの手数料投票で変わることがあるため、ソフトウェアは恒久的に固定せず、ネットワークへ問い合わせるべきです。
 - ko: Mainnet은 현재 {s1}에 {s2}를 더해 씁니다. 이 값은 검증자 수수료 투표로 바뀔 수 있으므로, 소프트웨어는 영원히 하드코딩하지 말고 네트워크에 조회해야 합니다.
 - zh-CN: Mainnet 目前使用{s1}，外加{s2}。这些数值可以通过验证者的费用投票改变，因此软件应当查询网络，而不是把它们永久写死。
 - hi: Mainnet अभी {s1} प्लस {s2} का उपयोग करता है। ये मान वैलिडेटर फ़ीस वोटिंग से बदल सकते हैं, इसलिए सॉफ़्टवेयर इन्हें हमेशा के लिए हार्ड-कोड करने के बजाय नेटवर्क से पूछे।
-- ar: تستخدم Mainnet حالياً {s1} إضافة إلى {s2}. يمكن أن تتغير هذه القيم عبر تصويت المدققين (validators) على الرسم، لذلك ينبغي للبرنامج أن يستعلم الشبكة بدل تثبيتها في الرمز إلى الأبد.
+- ar: تستخدم Mainnet حالياً {s1} إضافة إلى {s2}. يمكن أن تتغير هذه القيم عبر تصويت المدققين (validators) على الرسم، لذلك ينبغي للبرنامج أن يستعلم الشبكة بدل تثبيتها في الشيفرة البرمجية إلى الأبد.
 
 ## `mark-irreversible-or-order-sensitive.88613afa`
 
@@ -1428,9 +1441,9 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - es: Marca las elecciones irreversibles o sensibles al orden. No Freeze no se puede deshacer. El clawback de línea de confianza debe habilitarse de forma deliberada, bajo los requisitos de su cuenta, antes de que el emisor haya llenado su directorio de propietario; no es un botón de recuperación que el emisor pueda agregar libremente después. Revisa las reglas actuales exactas de AccountSet antes de implementar.
 - fr: Marquez les choix irréversibles ou sensibles à l’ordre. No Freeze ne peut pas être annulé. Le clawback de trust line doit être activé délibérément, selon les exigences du compte, avant que l’émetteur ait rempli son répertoire de propriétaire ; ce n’est pas un bouton de récupération qu’un émetteur peut ajouter librement plus tard. Vérifiez les règles AccountSet actuelles exactes avant la mise en œuvre.
 - de: Markiere unumkehrbare oder reihenfolgeempfindliche Entscheidungen. No Freeze kann nicht rückgängig gemacht werden. Trust-Line-Clawback muss unter seinen Kontovoraussetzungen bewusst aktiviert werden, bevor der Emittent sein Owner Directory befüllt hat; es ist kein Reparaturknopf, den ein Emittent später frei hinzufügen kann. Prüfe die genauen aktuellen AccountSet-Regeln vor der Umsetzung.
-- ja: 取り消せない選択、または順序に敏感な選択に印を付けてください。No Freezeは元に戻せません。トラストライン（trust line）のクローバック（clawback）は、発行者がオーナーディレクトリを埋める前に、そのアカウント要件のもとで意図的に有効にする必要があります。発行者があとから自由に追加できる復旧ボタンではありません。実装の前に、現行の正確なAccountSetの規則を確認してください。
-- ko: 되돌릴 수 없거나 순서에 민감한 선택을 표시하세요. No Freeze는 되돌릴 수 없습니다. 트러스트 라인 클로백(clawback)은 발행자가 owner directory(소유자 디렉터리)를 채우기 전에, 계정 요건에 따라 의도적으로 켜야 합니다. 나중에 발행자가 자유롭게 추가하는 복구 버튼이 아닙니다. 구현 전에 현재 AccountSet 규칙을 그대로 확인하세요.
-- zh-CN: 标出不可逆或对顺序敏感的选择。No Freeze 不能撤销。信任线（trust line）追回（clawback）必须在发行方填入其所有者目录之前，按其账户要求有意启用；它不是发行方以后可以随意补上的恢复按钮。实现之前，请核对当前确切的 AccountSet 规则。
+- ja: 取り消せない選択、または実行順序が重要な選択に印を付けてください。No Freezeは元に戻せません。トラストライン（trust line）のクローバック（clawback）は、発行者のオーナーディレクトリに項目が作られる前に、そのアカウント要件のもとで意図的に有効にする必要があります。発行者があとから自由に追加できる復旧ボタンではありません。実装の前に、現行の正確なAccountSetの規則を確認してください。
+- ko: 되돌릴 수 없거나 순서에 민감한 선택을 표시하세요. No Freeze는 되돌릴 수 없습니다. 트러스트 라인 클로백(clawback)은 발행자의 owner directory(소유자 디렉터리)에 항목이 생기기 전에, 계정 요건에 따라 의도적으로 켜야 합니다. 나중에 발행자가 자유롭게 추가하는 복구 버튼이 아닙니다. 구현 전에 현재 AccountSet 규칙을 그대로 확인하세요.
+- zh-CN: 标出不可逆或对顺序敏感的选择。No Freeze 不能撤销。信任线（trust line）追回（clawback）必须在发行方的所有者目录中出现条目之前，按其账户要求有意启用；它不是发行方以后可以随意补上的恢复按钮。实现之前，请核对当前确切的 AccountSet 规则。
 - hi: अपरिवर्तनीय या क्रम-संवेदनशील विकल्प चिह्नित करें। No Freeze पूर्ववत नहीं हो सकता। ट्रस्ट-लाइन (trust line) क्लॉबैक (clawback) को जारीकर्ता (issuer) की ओनर डायरेक्टरी भरने से पहले, उसकी खाता शर्तों के तहत जानबूझकर चालू करना होता है; वह रिकवरी बटन नहीं जिसे जारीकर्ता बाद में स्वतंत्र रूप से जोड़ सके। लागू करने से पहले सटीक वर्तमान AccountSet नियम जाँचें।
 - ar: علّم الخيارات التي لا رجعة فيها أو الحساسة للترتيب. لا يمكن التراجع عن No Freeze. يجب تفعيل سحب خط الثقة (clawback) عمداً وفق متطلبات حسابه قبل أن يملأ المُصدِر (issuer) دليل المالك (owner directory)؛ وهو ليس زر استعادة يستطيع المُصدِر إضافته بحرية لاحقاً. تحقق من قواعد AccountSet الحالية بالضبط قبل التنفيذ.
 
@@ -1481,7 +1494,7 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - fr: Prix, liquidité, slippage, contrôles de l’émetteur, concentration, cycles, et le risque que les gens ignorent jusqu’à ce que cela fasse mal.
 - de: Preis, Liquidität, Slippage, Emittentenkontrollen, Konzentration, Zyklen und das Risiko, das Menschen ignorieren, bis es wehtut.
 - ja: 価格、流動性、スリッページ、発行者の制御、集中、循環、そして痛むまで人が無視するリスク。
-- ko: 가격, 유동성, 슬리피지, 발행자 제어, 집중, 주기, 그리고 아플 때까지 사람들이 무시하는 위험.
+- ko: 가격, 유동성, 슬리피지, 발행자 제어, 집중도, 주기, 그리고 아플 때까지 사람들이 무시하는 위험.
 - zh-CN: 价格、流动性、滑点、发行方控制、集中度、周期，以及人们直到受伤才理会的风险。
 - hi: कीमत, तरलता, स्लिपेज (slippage), जारीकर्ता (issuer) नियंत्रण, संकेंद्रण, चक्र, और वह जोखिम जिसे लोग तब तक अनदेखा करते हैं जब तक चोट न लगे।
 - ar: السعر والسيولة والانزلاق (slippage) وضوابط المُصدِر (issuer) والتركّز والدورات والمخاطر التي يتجاهلها الناس حتى تؤلم.
@@ -1532,8 +1545,8 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - es: Pagos, etiquetas, líneas de confianza, ofertas, AMM, NFT y cómo se ejecutan las transacciones de XRPL.
 - fr: Paiements, tags, trustlines, offres, AMM, NFT, et comment les transactions XRPL s’exécutent.
 - de: Zahlungen, Tags, Trustlines, Offers, AMMs, NFTs und wie XRPL-Transaktionen ausgeführt werden.
-- ja: 支払い、タグ、トラストライン（trust line）、オファー、AMM、NFT、そしてXRPLのトランザクションがどう約定するか。
-- ko: 지급, 태그, 트러스트 라인, 오퍼, AMM, NFT, 그리고 XRPL 트랜잭션이 체결되는 방식.
+- ja: 支払い、タグ、トラストライン（trust line）、オファー、AMM、NFT、そしてXRPLのトランザクションがどのように実行されるか。
+- ko: 지급, 태그, 트러스트 라인, 오퍼, AMM, NFT, 그리고 XRPL 트랜잭션이 실행되는 방식.
 - zh-CN: 支付、标签、信任线（trust line）、挂单（offer）、AMM、NFT，以及 XRPL 交易如何执行。
 - hi: भुगतान, टैग, ट्रस्टलाइन (trustline), ऑफ़र (offer), AMM, NFT, और XRPL लेनदेन कैसे निष्पादित होते हैं।
 - ar: الدفعات والأوسمة وخطوط الثقة (trust line) والعروض (offer) وAMM وNFT وكيف تُنفَّذ معاملات XRPL.
@@ -1548,7 +1561,7 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - ja: 管理、カストディ、シード（seed）、署名、入金、復旧、そして人からすべてを奪う誤り。
 - ko: 제어, 보관, 시드(seed), 서명, 자금, 복구, 그리고 모든 것을 잃게 하는 실수.
 - zh-CN: 控制、托管、种子（seed）、签名、注资、恢复，以及那些让人失去一切的错误。
-- hi: नियंत्रण, कस्टडी (custody), सीड (seed), साइनिंग (signing), धन जोड़ना, रिकवरी, और वे गलतियाँ जिनकी लोगों को पूरी कीमत चुकानी पड़ती है।
+- hi: नियंत्रण, कस्टडी (custody), सीड (seed), साइनिंग (signing), धन जोड़ना, रिकवरी, और वे गलतियाँ जिनसे लोग अपना सब कुछ खो सकते हैं।
 - ar: التحكم والحفظ (custody) والبذور (seed) والتوقيع (signing) والتمويل والاستعادة والأخطاء التي تكلف الناس كل شيء.
 
 ## `meta.xaman.title`
@@ -1587,7 +1600,7 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - ja: ミントはNFTを作ります。バーン（burn）はそのレジャートークンを破棄します。オファーは交換を提案し、承諾されないまま残ることがあります。
 - ko: 민팅(mint)은 NFT를 만듭니다. 소각(burn)은 그 원장 토큰을 파괴합니다. 오퍼는 교환을 제안하며 수락되지 않은 채 남을 수 있습니다.
 - zh-CN: 铸造（mint）创建 NFT；销毁（burn）销毁它的账本代币；挂单（offer）提议一次交换，并且可以一直不被接受。
-- hi: मिंट (mint) NFT बनाता है; बर्न (burn) उसके लेजर टोकन को नष्ट करता है; ऑफ़र (offer) विनिमय प्रस्तावित करता है और अस्वीकृत रह सकता है।
+- hi: मिंट (mint) NFT बनाता है; बर्न (burn) उसके लेजर टोकन को नष्ट करता है; ऑफ़र (offer) विनिमय का प्रस्ताव रखता है और बिना स्वीकार हुए रह सकता है।
 - ar: السك (mint) ينشئ NFT؛ والحرق (burn) يدمّر رمزه على السجل؛ والعرض (offer) يقترح مبادلة ويمكن أن يبقى غير مقبول.
 
 ## `multisigning.632671a2`
@@ -1625,7 +1638,7 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - de: Ändere Flags für Rippling, Freeze oder Autorisierung niemals nur, um eine Warnung zu beseitigen, die du nicht verstehst. Ein erfolgreiches TrustSet ist eine Einstellungsänderung, kein Kauf und keine Sicherheitsempfehlung.
 - ja: 理解していない警告を消すためだけに、リップリング（rippling）、フリーズ（freeze）、認可のフラグ（flags）を変えないでください。成功したTrustSetは設定の変更であり、購入でも安全の推奨でもありません。
 - ko: 이해하지 못한 경고를 지우려고 리플링(rippling), 동결(freeze), 승인 플래그를 바꾸지 마세요. 성공한 TrustSet은 설정 변경이지, 구매나 안전 보증이 아닙니다.
-- zh-CN: 绝不要只为消掉一个你不理解的警告，就去更改涟漪（rippling）、冻结（freeze）或授权标志。成功的 TrustSet 是一次设置变更，不是购买，也不是安全背书。
+- zh-CN: 绝不要只为消掉一个你不理解的警告，就去更改余额流转（rippling）、冻结（freeze）或授权标志。成功的 TrustSet 是一次设置变更，不是购买，也不是安全背书。
 - hi: ऐसी चेतावनी हटाने के लिए जिसे आप नहीं समझते, रिपलिंग (rippling), फ़्रीज़ (freeze) या ऑथराइज़ेशन (authorization) फ़्लैग न बदलें। सफल TrustSet सेटिंग बदलाव है, खरीदारी या सुरक्षा समर्थन नहीं।
 - ar: لا تغيّر أبداً أعلام التمرير (rippling) أو التجميد (freeze) أو التفويض (authorization) لمجرد إزالة تحذير لا تفهمه. TrustSet الناجح تغيير إعدادات، لا شراء ولا تزكية أمان.
 
@@ -1647,13 +1660,13 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - en: NFTokenMint sets important flags. Transferable allows transfers between ordinary holders; without it, issuer-related transfers have special restrictions. Burnable gives the issuer or its authorized party burn authority; owners can burn their own NFTs. A mutable NFT can have its URI updated by the issuer or authorized minter through NFTokenModify. Do not assume every NFT’s metadata pointer is fixed.
 - pt-BR: NFTokenMint define flags importantes. Transferable permite transferências entre detentores comuns; sem isso, transferências ligadas ao emissor têm restrições especiais. Burnable dá ao emissor ou à parte autorizada dele autoridade de burn; os donos podem fazer burn dos próprios NFTs. Um NFT mutável pode ter a URI atualizada pelo emissor ou pelo minter autorizado por meio de NFTokenModify. Não presuma que o ponteiro de metadados de todo NFT é fixo.
 - es: NFTokenMint fija flags importantes. Transferable permite transferencias entre tenedores comunes; sin eso, las transferencias ligadas al emisor tienen restricciones especiales. Burnable le da al emisor o a su parte autorizada autoridad de quema; los propietarios pueden quemar sus propios NFT. Un NFT mutable puede tener su URI actualizada por el emisor o por el acuñador autorizado mediante NFTokenModify. No supongas que el puntero de metadatos de cada NFT está fijo.
-- fr: NFTokenMint fixe des flags importants. Transferable permet les transferts entre détenteurs ordinaires ; sans lui, les transferts liés à l’émetteur ont des restrictions particulières. Burnable donne à l’émetteur ou à sa partie autorisée l’autorité de burn ; les propriétaires peuvent burn leurs propres NFT. Un NFT mutable peut voir son URI mise à jour par l’émetteur ou le minter autorisé, par NFTokenModify. Ne supposez pas que le pointeur de métadonnées de chaque NFT est fixe.
-- de: NFTokenMint setzt wichtige Flags. Transferable erlaubt Übertragungen zwischen gewöhnlichen Inhabern; ohne dieses Flag haben Übertragungen im Zusammenhang mit dem Emittenten besondere Beschränkungen. Burnable gibt dem Emittenten oder seiner autorisierten Stelle die Burn-Befugnis; Eigentümer können ihre eigenen NFTs per Burn entfernen. Bei einem mutable NFT kann der Emittent oder der autorisierte Minter die URI über NFTokenModify aktualisieren. Nimm nicht an, der Metadatenzeiger jedes NFT sei fest.
+- fr: NFTokenMint fixe des flags importants. Transferable permet les transferts entre détenteurs ordinaires ; sans lui, les transferts liés à l’émetteur ont des restrictions particulières. Burnable autorise l’émetteur ou la partie qu’il a autorisée à détruire le NFT ; les propriétaires peuvent détruire leurs propres NFT. Un NFT mutable peut voir son URI mise à jour par l’émetteur ou le minter autorisé, par NFTokenModify. Ne supposez pas que le pointeur de métadonnées de chaque NFT est fixe.
+- de: NFTokenMint setzt wichtige Flags. Transferable erlaubt Übertragungen zwischen gewöhnlichen Inhabern; ohne dieses Flag haben Übertragungen im Zusammenhang mit dem Emittenten besondere Beschränkungen. Burnable gibt dem Emittenten oder seiner autorisierten Stelle die Burn-Befugnis; Eigentümer können ihre eigenen NFTs per Burn entfernen. Bei einem veränderbaren NFT kann der Emittent oder der autorisierte Minter die URI über NFTokenModify aktualisieren. Nimm nicht an, der Metadatenzeiger jedes NFT sei fest.
 - ja: NFTokenMintは重要なフラグ（flags）を設定します。Transferableは、通常の保有者同士の移転を許可します。それがない場合、発行者に関係する移転には特別な制限があります。Burnableは、発行者またはその認可された相手にバーン（burn）の権限を与えます。所有者は自分のNFTをバーンできます。変更可能なNFTは、発行者または認可されたミンターがNFTokenModifyを通じてURIを更新できます。すべてのNFTのメタデータ参照が固定だと仮定しないでください。
 - ko: NFTokenMint는 중요한 플래그(flags)를 설정합니다. Transferable은 일반 보유자 사이의 전송을 허용합니다. 이것이 없으면 발행자와 관련된 전송에 특별한 제한이 있습니다. Burnable은 발행자 또는 그 권한을 받은 쪽에 소각(burn) 권한을 줍니다. 소유자는 자신의 NFT를 소각할 수 있습니다. 변경 가능한 NFT는 발행자 또는 승인된 민터가 NFTokenModify로 URI를 업데이트할 수 있습니다. 모든 NFT의 메타데이터 포인터가 고정되어 있다고 가정하지 마세요.
 - zh-CN: NFTokenMint 会设置重要的标志（flags）。Transferable 允许普通持有人之间转让；没有它时，与发行方相关的转让有特别限制。Burnable 把销毁（burn）权限给予发行方或其授权方；所有者可以销毁自己的 NFT。可变的 NFT 可以由发行方或经授权的铸造者通过 NFTokenModify 更新其 URI。不要假设每一枚 NFT 的元数据指针都是固定的。
 - hi: NFTokenMint महत्वपूर्ण फ़्लैग (flags) सेट करता है। Transferable साधारण धारकों के बीच ट्रांसफ़र की अनुमति देता है; इसके बिना जारीकर्ता-संबंधी ट्रांसफ़र पर विशेष प्रतिबंध हैं। Burnable जारीकर्ता (issuer) या उसके अधिकृत पक्ष को बर्न (burn) अथॉरिटी देता है; मालिक अपने NFT बर्न कर सकते हैं। म्यूटेबल (mutable) NFT का URI जारीकर्ता या अधिकृत मिंटर NFTokenModify से अपडेट कर सकता है। यह न मानें कि हर NFT का मेटाडेटा पॉइंटर स्थिर है।
-- ar: يضبط NFTokenMint أعلاماً (flags) مهمة. يسمح القابل للنقل بالنقل بين الحائزين العاديين؛ ومن دونه تكون للنقول المرتبطة بالمُصدِر (issuer) قيود خاصة. يمنح القابل للحرق (burn) المُصدِر أو طرفه المأذون سلطة الحرق؛ ويستطيع المالكون حرق NFT الخاصة بهم. يمكن لـ NFT القابل للتغيير أن يحدّث URI الخاص به المُصدِر أو الساك المأذون عبر NFTokenModify. لا تفترض أن مؤشر البيانات الوصفية (metadata) لكل NFT ثابت.
+- ar: يضبط NFTokenMint أعلاماً (flags) مهمة. يسمح علم Transferable بالنقل بين الحائزين العاديين؛ ومن دونه تخضع التحويلات المرتبطة بالمُصدِر (issuer) لقيود خاصة. ويمنح علم Burnable المُصدِر أو الطرف المأذون له سلطة الحرق (burn)؛ كما يستطيع المالكون حرق رموز NFT التي يملكونها. ويمكن للمُصدِر أو الجهة المخوّلة بالسك تحديث URI الخاص برمز NFT قابل للتغيير عبر NFTokenModify. لا تفترض أن مؤشر البيانات الوصفية (metadata) لكل NFT ثابت.
 
 ## `nftokenmodify-authority-is-separate.989d0e2a`
 
@@ -1685,14 +1698,14 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 
 - en: No Freeze permanently gives up individual and deep-freeze authority and the ability to clear a global freeze; it is not a general promise that no restriction can ever exist. Blackholing aims to remove usable signing authority. Neither label proves fair distribution, liquidity, backing or safe application code. Inspect actual account settings and every signing route rather than relying on a badge.
 - pt-BR: No Freeze abre mão de forma permanente da autoridade de individual freeze e de deep freeze e da capacidade de limpar um global freeze; não é uma promessa geral de que nenhuma restrição possa existir. Blackholing busca remover a autoridade de assinatura utilizável. Nenhum dos dois rótulos prova distribuição justa, liquidez, lastro ou código seguro do aplicativo. Inspecione as configurações reais da conta e cada caminho de assinatura, em vez de confiar num selo.
-- es: No Freeze renuncia de forma permanente a la autoridad de congelación individual y de deep freeze, y a la capacidad de levantar una congelación global; no es una promesa general de que nunca pueda existir una restricción. El blackholing busca quitar la autoridad de firma utilizable. Ninguna de las dos etiquetas demuestra distribución justa, liquidez, respaldo ni código de aplicación seguro. Inspecciona los ajustes reales de la cuenta y cada vía de firma en lugar de confiar en una insignia.
+- es: Activar No Freeze implica renunciar de forma permanente a la autoridad de congelación individual y de deep freeze, y a la capacidad de levantar una congelación global; no es una promesa general de que nunca pueda existir una restricción. El blackholing busca quitar la autoridad de firma utilizable. Ninguna de las dos etiquetas demuestra distribución justa, liquidez, respaldo ni código de aplicación seguro. Inspecciona los ajustes reales de la cuenta y cada vía de firma en lugar de confiar en una insignia.
 - fr: No Freeze abandonne de façon permanente l’autorité de freeze individuel et de deep freeze, ainsi que la capacité d’effacer un global freeze ; ce n’est pas une promesse générale qu’aucune restriction ne pourra jamais exister. Le blackholing vise à retirer l’autorité de signature utilisable. Aucune de ces étiquettes ne prouve une distribution équitable, la liquidité, la couverture ou un code d’application sûr. Inspectez les réglages réels du compte et chaque voie de signature, au lieu de vous fier à un badge.
 - de: No Freeze gibt dauerhaft die Befugnis für Individual Freeze und Deep Freeze auf sowie die Fähigkeit, einen Global Freeze aufzuheben; es ist kein allgemeines Versprechen, dass niemals eine Beschränkung existieren kann. Blackholing zielt darauf ab, nutzbare Signierbefugnis zu entfernen. Keines der beiden Etiketten beweist faire Verteilung, Liquidität, Deckung oder sicheren Anwendungscode. Prüfe die tatsächlichen Kontoeinstellungen und jeden Signierweg, statt dich auf ein Abzeichen zu verlassen.
 - ja: No Freezeは、個別フリーズとディープフリーズの権限、およびグローバルフリーズを解除する能力を永久に手放します。どんな制限も決して存在し得ないという一般的な約束ではありません。ブラックホール化（blackholing）は、使える署名権限を取り除くことを目指します。どちらのラベルも、公正な配布、流動性、裏付け、安全なアプリケーションコードを証明しません。バッジに頼らず、実際のアカウント設定とすべての署名経路を調べてください。
 - ko: No Freeze는 개별 동결(individual freeze) 권한과 딥 프리즈(deep freeze) 권한, 그리고 글로벌 프리즈(global freeze)를 해제할 능력을 영구히 포기합니다. 어떤 제한도 영원히 있을 수 없다는 일반 약속은 아닙니다. 블랙홀화(blackholing)는 사용할 수 있는 서명 권한을 제거하려는 것입니다. 어느 이름표도 공정한 배포, 유동성, 담보, 안전한 애플리케이션 코드를 증명하지 않습니다. 배지에 의존하지 말고 실제 계정 설정과 모든 서명 경로를 살펴보세요.
 - zh-CN: No Freeze 永久放弃单项冻结（individual freeze）和深度冻结（deep freeze）的权限，以及清除全局冻结（global freeze）的能力；它不是一项“以后任何限制都不可能存在”的笼统承诺。黑洞化（blackholing）旨在移除可用的签名权限。这两个标签都不能证明分配公平、有流动性、有资产支撑或应用代码安全。请检查实际的账户设置和每一条签名途径，而不要依赖一枚徽章。
-- hi: No Freeze व्यक्तिगत और डीप-फ़्रीज़ (deep freeze) अथॉरिटी तथा ग्लोबल फ़्रीज़ (global freeze) हटाने की क्षमता स्थायी रूप से छोड़ देता है; यह सामान्य वादा नहीं कि कोई प्रतिबंध कभी नहीं हो सकता। ब्लैकहोलिंग (blackholing) का लक्ष्य उपयोगी साइनिंग अथॉरिटी (signing authority) हटाना है। कोई भी लेबल निष्पक्ष वितरण, तरलता, समर्थन या सुरक्षित ऐप्लिकेशन कोड साबित नहीं करता। बैज पर भरोसा करने के बजाय वास्तविक खाता सेटिंग और हर साइनिंग (signing) मार्ग जाँचें।
-- ar: يتخلى No Freeze بشكل دائم عن سلطة التجميد الفردي والعميق (freeze) وعن القدرة على إلغاء تجميد عام؛ وهو ليس وعداً عاماً بأنه لا يمكن أن يوجد أي قيد أبداً. يهدف الثقب الأسود (blackholing) إلى إزالة سلطة التوقيع (signing) القابلة للاستخدام. لا تثبت أي من التسميتين توزيعاً عادلاً أو سيولة أو تغطية أو رمز تطبيق آمناً. افحص إعدادات الحساب الفعلية وكل مسار توقيع بدل الاعتماد على شارة.
+- hi: No Freeze व्यक्तिगत और डीप-फ़्रीज़ (deep freeze) अथॉरिटी तथा ग्लोबल फ़्रीज़ (global freeze) हटाने की क्षमता स्थायी रूप से छोड़ देता है; यह सामान्य वादा नहीं कि कोई प्रतिबंध कभी नहीं हो सकता। ब्लैकहोलिंग (blackholing) का लक्ष्य उपयोगी साइनिंग अथॉरिटी (signing authority) हटाना है। कोई भी लेबल निष्पक्ष वितरण, तरलता, वित्तीय आधार (backing) या सुरक्षित ऐप्लिकेशन कोड साबित नहीं करता। बैज पर भरोसा करने के बजाय वास्तविक खाता सेटिंग और हर साइनिंग (signing) मार्ग जाँचें।
+- ar: يتخلى No Freeze بشكل دائم عن سلطة التجميد الفردي والعميق (freeze) وعن القدرة على إلغاء تجميد عام؛ وهو ليس وعداً عاماً بأنه لا يمكن أن يوجد أي قيد أبداً. يهدف الثقب الأسود (blackholing) إلى إزالة سلطة التوقيع (signing) القابلة للاستخدام. لا تثبت أي من التسميتين توزيعاً عادلاً أو سيولة أو تغطية أو سلامة الشيفرة البرمجية للتطبيق. افحص إعدادات الحساب الفعلية وكل مسار توقيع بدل الاعتماد على شارة.
 
 ## `no-the-regular-key-remains-a-signing.03e57ab8`
 
@@ -1704,7 +1717,7 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - ja: いいえ。レギュラーキー（regular key）は、広い権限を持つ署名経路のままです。その存在と署名者リスト（signer list）を調べ、どの操作がまだ可能かを記録してください。アカウント構成の公開証拠は、誰かが秘密をどれだけ安全に保管しているか、秘密鍵が本当に未知かを証明できません。
 - ko: 아니요. 레귤러 키(regular key)는 넓은 권한을 가진 서명 경로로 남아 있습니다. 그것의 존재와 서명자 목록(signer list)을 살펴본 다음, 아직 가능한 동작을 문서화하세요. 계정 구성의 공개 증거는 누군가 비밀을 얼마나 안전하게 보관하는지, 또는 개인 키가 정말로 알려지지 않았는지를 증명하지 못합니다.
 - zh-CN: 否。常规密钥（regular key）仍然是一条权限宽泛的签名途径。检查它是否存在，以及签名者列表（signer list），然后记下哪些动作仍然可能。账户配置的公开证据，不能证明某人把秘密保管得多安全，也不能证明一把私钥是否真的无人知晓。
-- hi: नहीं। रेगुलर की (regular key) चौड़ी शक्तियों वाला साइनिंग (signing) मार्ग बनी रहती है। उसकी उपस्थिति और साइनर लिस्ट (signer list) जाँचें, फिर लिखें कि कौन सी कार्रवाइयाँ संभव रहती हैं। खाता कॉन्फ़िगरेशन का सार्वजनिक साक्ष्य यह साबित नहीं कर सकता कि कोई सीक्रेट (secret) कितनी सुरक्षित रखता है या प्राइवेट की (private key) सच में अज्ञात है या नहीं।
+- hi: नहीं। रेगुलर की (regular key) व्यापक अधिकारों वाला साइनिंग (signing) मार्ग बनी रहती है। उसकी उपस्थिति और साइनर लिस्ट (signer list) जाँचें, फिर लिखें कि कौन सी कार्रवाइयाँ संभव रहती हैं। खाता कॉन्फ़िगरेशन का सार्वजनिक साक्ष्य यह साबित नहीं कर सकता कि कोई सीक्रेट (secret) कितनी सुरक्षित रखता है या प्राइवेट की (private key) सच में अज्ञात है या नहीं।
 - ar: لا. يبقى المفتاح العادي (regular key) مسار توقيع (signing) بصلاحيات واسعة. افحص وجوده وقائمة الموقّعين (signer list)، ثم وثّق الإجراءات التي تبقى ممكنة. دليل عام على إعداد الحساب لا يستطيع إثبات مدى أمان تخزين شخص لسر، أو ما إذا كان مفتاح خاص (private key) مجهولاً حقاً.
 
 ## `no-trustline-exists.e4056ea4`
@@ -1752,7 +1765,7 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - pt-BR: Num explorer somente leitura, selecione a rede pretendida e busque o NFTokenID completo. Localize o dono atual, o emissor, o taxon, as flags e a URI. Decodifique as flags pela referência de transação indicada se o explorer não as explicar. Registre o horário da observação e o ledger, se estiverem disponíveis. Trate links remotos de metadados como conteúdo não confiável; não assine um pedido para revelar uma imagem.
 - es: En un explorador de solo lectura, selecciona la red prevista y busca el NFTokenID completo. Localiza el propietario actual, el emisor, el taxon, los flags y la URI. Decodifica los flags con la referencia de transacción enlazada si el explorador no los explica. Anota la hora de observación y el ledger si están disponibles. Trata los enlaces remotos de metadatos como contenido no confiable; no firmes una solicitud para revelar una imagen.
 - fr: Sur un explorateur en lecture seule, sélectionnez le réseau prévu et recherchez le NFTokenID complet. Trouvez le propriétaire actuel, l’émetteur, le taxon, les flags et l’URI. Décodez les flags avec la référence de transaction liée si l’explorateur ne les explique pas. Notez l’heure d’observation et le registre, s’ils sont disponibles. Traitez les liens de métadonnées distants comme un contenu non fiable ; ne signez pas une demande pour révéler une image.
-- de: Wähl in einem nur lesbaren Explorer das beabsichtigte Netzwerk und such die vollständige NFTokenID. Such den aktuellen Eigentümer, den Emittenten, den Taxon, die Flags und die URI. Decodiere Flags mit der verlinkten Transaktionsreferenz, wenn der Explorer sie nicht erklärt. Notiere den Beobachtungszeitpunkt und das Ledger, falls verfügbar. Behandle entfernte Metadatenlinks als nicht vertrauenswürdigen Inhalt; signiere keine Anfrage, um ein Bild anzuzeigen.
+- de: Wähl in einem nur lesbaren Explorer das beabsichtigte Netzwerk und such die vollständige NFTokenID. Such den aktuellen Eigentümer, den Emittenten, das Taxon, die Flags und die URI. Decodiere Flags mit der verlinkten Transaktionsreferenz, wenn der Explorer sie nicht erklärt. Notiere den Beobachtungszeitpunkt und das Ledger, falls verfügbar. Behandle externe Metadatenlinks als nicht vertrauenswürdigen Inhalt; signiere keine Anfrage, um ein Bild anzuzeigen.
 - ja: 読み取り専用のエクスプローラーで、意図したネットワークを選び、完全なNFTokenIDを検索してください。現在の所有者、発行者、taxon、フラグ（flags）、URIを見つけてください。エクスプローラーが説明しないなら、リンクされたトランザクション参照を使ってフラグを読み解いてください。観察時刻と、分かればレジャーを記録します。遠隔のメタデータリンクは、信頼できない内容として扱ってください。絵を見るためにリクエストへ署名しないでください。
 - ko: 읽기 전용 탐색기에서 의도한 네트워크를 고르고 NFTokenID 전체를 검색하세요. 현재 소유자, 발행자, 택손(taxon), 플래그(flags), URI를 찾으세요. 탐색기가 설명하지 않으면 연결된 트랜잭션 참고로 플래그를 해석하세요. 가능하면 관찰 시각과 원장을 적으세요. 원격 메타데이터 링크는 신뢰할 수 없는 콘텐츠로 보세요. 그림을 보여 달라는 요청에 서명하지 마세요.
 - zh-CN: 在只读账本浏览器（explorer）上，选择目标网络并搜索完整的 NFTokenID。找到当前所有者、发行方、分类码（taxon）、标志（flags）和 URI。如果浏览器没有解释标志，就用所链接的交易参考来解码。如果有观察时间和账本，请记下来。把远程元数据链接当作不可信的内容；不要为了显示一张图片而去签署请求。
@@ -1791,7 +1804,7 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - pt-BR: A propriedade, sozinha, não é permissão de edição. Num NFT mutável, NFTokenModify fica limitado ao emissor ou ao minter autorizado; o amendment da rede e o suporte da carteira também importam.
 - es: La titularidad por sí sola no es permiso de edición. En un NFT mutable, NFTokenModify se limita al emisor o al acuñador autorizado; también importan la enmienda de la red y el soporte de la billetera.
 - fr: La propriété seule n’est pas une permission de modification. Pour un NFT mutable, NFTokenModify est limité à l’émetteur ou au minter autorisé ; l’amendment du réseau et le support du portefeuille comptent aussi.
-- de: Eigentum allein ist keine Bearbeitungsberechtigung. Bei einem mutable NFT ist NFTokenModify auf den Emittenten oder den autorisierten Minter beschränkt; Amendment des Netzwerks und Wallet-Unterstützung zählen ebenfalls.
+- de: Eigentum allein ist keine Bearbeitungsberechtigung. Bei einem veränderbaren NFT ist NFTokenModify auf den Emittenten oder den autorisierten Minter beschränkt; Amendment des Netzwerks und Wallet-Unterstützung zählen ebenfalls.
 - ja: 所有だけでは、編集の許可になりません。変更可能なNFTでは、NFTokenModifyは発行者または認可されたミンターに限られます。ネットワークのamendmentとウォレットの対応も関係します。
 - ko: 소유만으로 편집 권한이 생기지는 않습니다. 변경 가능한 NFT에서 NFTokenModify는 발행자 또는 승인된 민터로 제한됩니다. 네트워크 아멘드먼트와 지갑 지원도 중요합니다.
 - zh-CN: 所有权本身不是编辑权限。对于可变的 NFT，NFTokenModify 仅限于发行方或经授权的铸造者；网络修正案（amendment）和钱包支持也有关系。
@@ -1853,15 +1866,15 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 ## `prove-mismatched-payments-cannot-unl.c94250d1`
 
 - en: Prove mismatched payments cannot unlock access, duplicates cannot double-credit, expiry and network outages recover, and records survive restart. Review the exact release diff, account authority and fee disclosures; rehearse backup/restore and rollback; assign support and monitoring. One happy-path payment is not full acceptance.
-- pt-BR: Prove que pagamentos que não correspondem não liberam acesso, que duplicatas não creditam duas vezes, que expiração e queda de rede se recuperam e que os registros sobrevivem a uma reinicialização. Revise o diff exato do lançamento, a autoridade da conta e as divulgações de taxa; ensaie backup/restauração e rollback; atribua suporte e monitoramento. Um pagamento do caminho feliz não é aceitação completa.
-- es: Demuestra que los pagos que no coinciden no pueden abrir el acceso, que los duplicados no pueden acreditar dos veces, que el vencimiento y las caídas de red se recuperan, y que los registros sobreviven a un reinicio. Revisa la diferencia exacta de la publicación, la autoridad de la cuenta y la divulgación de costos; ensaya copia de seguridad, restauración y rollback; asigna soporte y monitoreo. Un pago del camino feliz no es la aceptación completa.
-- fr: Prouvez que des paiements qui ne correspondent pas ne peuvent pas débloquer l’accès, que les doublons ne peuvent pas créditer deux fois, que l’expiration et les pannes de réseau se récupèrent, et que les enregistrements survivent au redémarrage. Examinez le diff exact de publication, l’autorité du compte et les divulgations de frais ; répétez la sauvegarde, la restauration et le retour arrière ; assignez l’assistance et la surveillance. Un paiement de parcours nominal ne vaut pas une acceptation complète.
-- de: Beweise, dass nicht passende Zahlungen keinen Zugang freischalten können, Duplikate nicht doppelt gutschreiben, Ablauf und Netzwerkausfälle sich erholen und Datensätze einen Neustart überstehen. Prüfe den genauen Veröffentlichungsunterschied, die Kontobefugnis und die Gebührenoffenlegung; übe Sicherung und Wiederherstellung sowie Rollback; weise Support und Beobachtung zu. Eine Zahlung auf dem Happy Path ist keine volle Abnahme.
+- pt-BR: Prove que pagamentos divergentes não liberam acesso, que duplicatas não geram crédito em dobro, que a recuperação após expiração e queda de rede funciona e que os registros sobrevivem a uma reinicialização. Revise o diff exato do lançamento, a autoridade da conta e as informações divulgadas sobre taxas; ensaie backup/restauração e rollback; atribua responsáveis pelo suporte e pelo monitoramento. Um pagamento bem-sucedido no cenário ideal não basta para a aceitação completa.
+- es: Demuestra que los pagos que no coinciden no pueden abrir el acceso, que los duplicados no pueden acreditar dos veces, que el vencimiento y las caídas de red se recuperan, y que los registros sobreviven a un reinicio. Revisa la diferencia exacta de la publicación, la autoridad de la cuenta y la divulgación de costos; ensaya copia de seguridad, restauración y rollback; asigna soporte y monitoreo. Un pago exitoso en un caso sin fallos no basta para la aceptación completa.
+- fr: Prouvez que des paiements qui ne correspondent pas ne peuvent pas débloquer l’accès, que les doublons ne peuvent pas créditer deux fois, que la reprise est possible après une expiration ou une panne de réseau, et que les enregistrements survivent au redémarrage. Examinez le diff exact de publication, l’autorité du compte et les divulgations de frais ; répétez la sauvegarde, la restauration et le retour arrière ; assignez l’assistance et la surveillance. Un paiement de parcours nominal ne vaut pas une acceptation complète.
+- de: Weise nach, dass nicht passende Zahlungen keinen Zugang freischalten, Duplikate nicht zu doppelten Gutschriften führen, sich der Ablauf nach einem Fristablauf oder Netzwerkausfall wieder aufnehmen lässt und Datensätze einen Neustart überstehen. Prüfe die genauen Änderungen der Veröffentlichung, die Kontobefugnisse und die Gebührenoffenlegung; übe Sicherung, Wiederherstellung und Rollback; lege Verantwortliche für Support und Überwachung fest. Eine einzelne erfolgreiche Zahlung im Normalfall reicht nicht für eine vollständige Abnahme.
 - ja: 一致しない支払いはアクセスを開けず、重複は二重に付与できず、期限切れとネットワーク障害は復旧し、記録は再起動を生き延びることを示してください。正確な公開差分、アカウント権限、手数料の開示を確認し、バックアップと復元、ロールバックをリハーサルし、サポートと監視を割り当ててください。順調な経路の支払い1回は、完全な受け入れではありません。
 - ko: 맞지 않는 지급은 접근을 열 수 없고, 중복은 두 번 적립될 수 없으며, 만료와 네트워크 장애는 복구되고, 기록은 재시작 뒤에도 남는다는 것을 증명하세요. 정확한 출시 diff, 계정 권한, 수수료 공시를 검토하세요. 백업/복원과 롤백을 연습하세요. 지원과 모니터링을 지정하세요. 정상 경로 지급 하나가 전체 승인은 아닙니다.
 - zh-CN: 证明不匹配的支付不能解锁访问，重复项不能重复入账，过期和网络中断可以恢复，并且记录能在重启后保留。审阅确切的发布差异、账户权限和费用披露；演练备份/恢复和回滚（rollback）；指定支持和监控。一次顺利路径上的付款并不是完整验收。
 - hi: साबित करें कि बेमेल भुगतान पहुँच नहीं खोल सकते, डुप्लिकेट दोहरा क्रेडिट नहीं दे सकते, समाप्ति और नेटवर्क रुकावट से उबरा जा सकता है, और रिकॉर्ड रीस्टार्ट के बाद बचते हैं। सटीक रिलीज़ अंतर, खाता अथॉरिटी और फ़ीस खुलासा देखें; बैकअप/रिस्टोर और रोलबैक (rollback) का अभ्यास करें; सहायता और निगरानी तय करें। एक सफल-पथ भुगतान पूरी स्वीकृति नहीं है।
-- ar: أثبت أن الدفعات غير المطابقة لا تستطيع فتح الوصول، وأن التكرار لا يمنح الرصيد مرتين، وأن انتهاء الصلاحية وانقطاع الشبكة يُستعادان، وأن السجلات تنجو من إعادة التشغيل. راجع فرق الإصدار بالضبط وسلطة الحساب وإفصاحات الرسوم؛ وتدرّب على النسخ الاحتياطي والاستعادة والتراجع (rollback)؛ وعيّن الدعم والمراقبة. دفعة مسار سعيد واحدة ليست قبولاً كاملاً.
+- ar: أثبت أن المدفوعات غير المطابقة لا تتيح الوصول، وأن تكرار الطلبات لا يضيف الرصيد مرتين، وأن النظام يتعافى من انتهاء الصلاحية وانقطاع الشبكة، وأن السجلات تبقى محفوظة بعد إعادة التشغيل. راجع التغييرات الدقيقة في الإصدار وسلطة الحساب والإفصاح عن الرسوم؛ وتدرّب على النسخ الاحتياطي والاستعادة والتراجع (rollback)؛ وحدّد المسؤولين عن الدعم والمراقبة. نجاح دفعة واحدة في المسار المعتاد لا يعني اجتياز اختبارات القبول كاملة.
 
 ## `quorum.fdaafe2d`
 
@@ -1871,8 +1884,8 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - fr: (same as English)
 - de: (same as English)
 - ja: クォーラム（quorum）
-- ko: 정족수
-- zh-CN: 法定人数（quorum）
+- ko: 서명 가중치 충족 기준(quorum)
+- zh-CN: 签名权重门槛（quorum）
 - hi: कोरम (quorum)
 - ar: نصاب (quorum)
 
@@ -1895,7 +1908,7 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - pt-BR: Registre a rede, o NFTokenID, o emissor, o dono atual e o taxon. Um taxon agrupa NFTs relacionados de um emissor; não é prova de raridade nem promessa de que uma coleção está terminada. Propriedade e mint são papéis diferentes.
 - es: Registra la red, el NFTokenID, el emisor, el propietario actual y el taxon. Un taxon agrupa NFT relacionados de un emisor; no es prueba de rareza ni una promesa de que una colección esté terminada. La titularidad y la acuñación son roles distintos.
 - fr: Notez le réseau, le NFTokenID, l’émetteur, le propriétaire actuel et le taxon. Un taxon regroupe des NFT liés d’un émetteur ; ce n’est pas une preuve de rareté ni une promesse qu’une collection est terminée. La propriété et le mint sont des rôles différents.
-- de: Notiere das Netzwerk, die NFTokenID, den Emittenten, den aktuellen Eigentümer und den Taxon. Ein Taxon gruppiert verwandte NFTs eines Emittenten; er ist kein Beweis für Seltenheit und kein Versprechen, dass eine Sammlung fertig ist. Eigentum und Mint sind verschiedene Rollen.
+- de: Notiere das Netzwerk, die NFTokenID, den Emittenten, den aktuellen Eigentümer und das Taxon. Ein Taxon gruppiert verwandte NFTs eines Emittenten; es ist kein Beweis für Seltenheit und kein Versprechen, dass eine Sammlung abgeschlossen ist. Eigentum und Minting sind verschiedene Rollen.
 - ja: ネットワーク、NFTokenID、発行者、現在の所有者、taxonを記録してください。taxonは、発行者からの関連するNFTをグループ化します。希少性の証明でも、コレクションが完成したという約束でもありません。所有とミントは別の役割です。
 - ko: 네트워크, NFTokenID, 발행자, 현재 소유자, 택손(taxon)을 기록하세요. 택손은 발행자의 관련 NFT를 묶습니다. 희소성의 증거나 컬렉션이 끝났다는 약속이 아닙니다. 소유와 민팅은 다른 역할입니다.
 - zh-CN: 记下网络、NFTokenID、发行方、当前所有者和分类码（taxon）。分类码把同一发行方的相关 NFT 归为一组；它不是稀有度的证明，也不是收藏已完成的承诺。所有权和铸造是不同的角色。
@@ -1972,12 +1985,12 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - en: Rehearse an uncertain transaction: a hash exists but a lookup cannot find it. Keep the original intent and bounded expiry evidence. Ask whether the queried server has the required history and has passed the relevant ledger boundary before concluding non-inclusion. Do not issue a fresh payment merely because one lookup was empty.
 - pt-BR: Ensaie uma transação incerta: existe um hash, mas uma consulta não o encontra. Guarde a intenção original e a evidência de expiração limitada. Pergunte se o servidor consultado tem o histórico exigido e se já passou do limite relevante de ledger antes de concluir que não houve inclusão. Não emita um pagamento novo só porque uma consulta veio vazia.
 - es: Ensaya una transacción incierta: existe un hash, pero una búsqueda no lo encuentra. Conserva la intención original y la evidencia de vencimiento acotado. Pregunta si el servidor consultado tiene el historial exigido y si ya pasó el límite de ledger relevante antes de concluir que no se incluyó. No emitas un pago nuevo solo porque una búsqueda salió vacía.
-- fr: Répétez une transaction incertaine : un hash existe, mais une recherche ne le trouve pas. Gardez l’intention d’origine et la preuve d’expiration bornée. Demandez si le serveur interrogé a l’historique exigé et a dépassé la borne de registre concernée, avant de conclure à la non-inclusion. N’émettez pas un nouveau paiement seulement parce qu’une recherche était vide.
-- de: Probiere eine unsichere Transaktion: Ein Hash existiert, aber ein Nachschlagen findet ihn nicht. Behalte die ursprüngliche Absicht und die Nachweise zum begrenzten Ablauf. Frag, ob der abgefragte Server die nötige Historie hat und die relevante Ledger-Grenze überschritten hat, bevor du auf Nichtaufnahme schließt. Löse keine frische Zahlung nur aus, weil ein Nachschlagen leer war.
-- ja: 不確実なトランザクションをリハーサルしてください。ハッシュはあるが、照会では見つかりません。元の意図と、限りのある期限の証拠を残してください。含まれなかったと結論する前に、照会したサーバーが必要な履歴を持ち、関係するレジャーの境界を過ぎたかを尋ねてください。1回の照会が空だったことだけを理由に、新しい支払いを出さないでください。
+- fr: Simulez le traitement d’une transaction au résultat incertain : un hash existe, mais une recherche ne le trouve pas. Gardez l’intention d’origine et la preuve d’expiration bornée. Demandez si le serveur interrogé a l’historique exigé et a dépassé la borne de registre concernée, avant de conclure à la non-inclusion. N’émettez pas un nouveau paiement seulement parce qu’une recherche était vide.
+- de: Spiele den Fall einer Transaktion mit unklarem Ausgang durch: Ein Hash existiert, aber die Abfrage findet die Transaktion nicht. Bewahre die ursprüngliche Absicht und die Nachweise für die festgelegte Ablaufgrenze auf. Prüfe vor dem Schluss, dass die Transaktion nicht aufgenommen wurde, ob der abgefragte Server über die nötige Historie verfügt und die relevante Ledger-Grenze überschritten hat. Löse nicht bloß deshalb eine neue Zahlung aus, weil eine einzelne Abfrage keinen Treffer geliefert hat.
+- ja: 不確実なトランザクションをリハーサルしてください。ハッシュはあるが、照会では見つかりません。元の意図と、有効期限の上限を示す証拠を残してください。含まれなかったと結論する前に、照会したサーバーが必要な履歴を持ち、関係するレジャーの境界を過ぎたかを尋ねてください。1回の照会が空だったことだけを理由に、新しい支払いを出さないでください。
 - ko: 불확실한 트랜잭션을 연습하세요. 해시는 있지만 조회가 찾지 못합니다. 원래 의도와 제한된 만료 증거를 유지하세요. 미포함이라고 결론 내리기 전에, 조회한 서버가 필요한 이력을 가지고 있고 관련 원장 경계를 지났는지 묻으세요. 조회 하나가 비었다는 이유만으로 새 지급을 내지 마세요.
 - zh-CN: 演练一笔不确定的交易：哈希存在，但查询找不到它。保留原来的意图和有界限的到期证据。在得出“未被纳入”的结论之前，先问所查询的服务器是否有所需的历史，以及是否已经过了相关的账本边界。不要仅仅因为一次查询是空的，就发出一笔新的支付。
-- hi: अनिश्चित लेनदेन का अभ्यास करें: हैश मौजूद है पर लुकअप उसे नहीं पाता। मूल इरादा और सीमित समाप्ति का साक्ष्य रखें। गैर-शामिल होने का निष्कर्ष निकालने से पहले पूछें कि पूछे गए सर्वर के पास ज़रूरी इतिहास है और वह संबंधित लेजर सीमा पार कर चुका है या नहीं। केवल एक खाली लुकअप के कारण नया भुगतान न भेजें।
+- hi: अनिश्चित लेनदेन का अभ्यास करें: हैश मौजूद है पर लुकअप उसे नहीं पाता। मूल इरादा और समाप्ति की निर्धारित सीमा का साक्ष्य रखें। गैर-शामिल होने का निष्कर्ष निकालने से पहले पूछें कि पूछे गए सर्वर के पास ज़रूरी इतिहास है और वह संबंधित लेजर सीमा पार कर चुका है या नहीं। केवल एक खाली लुकअप के कारण नया भुगतान न भेजें।
 - ar: تدرّب على معاملة غير مؤكدة: توجد تجزئة لكن البحث لا يجدها. أبقِ القصد الأصلي ودليل انتهاء الصلاحية المحدود. اسأل هل لدى الخادم المستعلَم التاريخ المطلوب وهل تجاوز حد السجل المعني قبل أن تستنتج عدم الإدراج. لا تصدر دفعة جديدة لمجرد أن بحثاً واحداً كان فارغاً.
 
 ## `reserve-calculator.67176307`
@@ -2037,7 +2050,7 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - en: Rotate regular keys or signer lists when appropriate.
 - pt-BR: Troque regular keys ou signer lists quando for adequado.
 - es: Rota claves regulares o listas de firmantes cuando corresponda.
-- fr: Faites tourner les regular keys ou les signer lists lorsque c’est approprié.
+- fr: Renouvelez les regular keys ou modifiez les signer lists lorsque c’est approprié.
 - de: Tausch Regular Keys oder Signer Lists, wenn es passt.
 - ja: 適切なときに、レギュラーキー（regular key）または署名者リスト（signer list）をローテーションする。
 - ko: 적절할 때 레귤러 키(regular key) 또는 서명자 목록(signer list)을 교체하세요.
@@ -2050,7 +2063,7 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - en: Save a one-page asset specification with purpose, chosen standard, network, identity, redemption terms, supply calculation and open authority questions. In lesson 2 you will add a separate collectible; do not treat the credit and collectible as the same asset.
 - pt-BR: Salve uma especificação de uma página do ativo, com propósito, padrão escolhido, rede, identidade, termos de resgate, cálculo de suprimento e perguntas abertas de autoridade. Na lição 2 você vai acrescentar um colecionável separado; não trate o crédito e o colecionável como o mesmo ativo.
 - es: Guarda una especificación del activo de una página, con propósito, estándar elegido, red, identidad, términos de canje, cálculo del suministro y preguntas abiertas de autoridad. En la lección 2 agregarás un coleccionable aparte; no trates el crédito y el coleccionable como el mismo activo.
-- fr: Enregistrez une spécification d’actif d’une page, avec le but, le standard choisi, le réseau, l’identité, les conditions de rachat, le calcul du supply et les questions d’autorité ouvertes. Dans la leçon 2, vous ajouterez un objet de collection séparé ; ne traitez pas le crédit et l’objet de collection comme le même actif.
+- fr: Enregistrez une spécification d’actif d’une page, avec le but, le standard choisi, le réseau, l’identité, les conditions de rachat, le calcul de l’offre de jetons et les questions d’autorité ouvertes. Dans la leçon 2, vous ajouterez un objet de collection séparé ; ne traitez pas le crédit et l’objet de collection comme le même actif.
 - de: Speichere eine einseitige Asset-Spezifikation mit Zweck, gewähltem Standard, Netzwerk, Identität, Einlösebedingungen, Supply-Rechnung und offenen Befugnisfragen. In Lektion 2 ergänzt du ein separates Sammlerstück; behandle Credit und Sammlerstück nicht als dasselbe Asset.
 - ja: 目的、選んだ標準、ネットワーク、識別情報、償還条件、供給の計算、未解決の権限の質問を入れた、1ページの資産仕様を保存してください。レッスン2では別の収集品を加えます。クレジットと収集品を同じ資産として扱わないでください。
 - ko: 목적, 고른 표준, 네트워크, 정체성, 상환 조건, 공급량 계산, 열린 권한 질문을 담은 한 장짜리 자산 명세를 저장하세요. 레슨 2에서 별도의 수집품을 추가합니다. 크레딧과 수집품을 같은 자산으로 다루지 마세요.
@@ -2065,10 +2078,10 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - es: Guarda el mapa de autoridad y la divulgación de controles en lenguaje claro. Pide a otra persona que explique cómo la clave regular cambia el ejemplo de dos de tres. Si no puede, mejora la explicación antes de pasar a la lección del flujo de firma.
 - fr: Enregistrez la carte d’autorité et la divulgation des contrôles en langage clair. Faites expliquer par une autre personne comment la regular key change l’exemple de deux sur trois. Si elle ne le peut pas, améliorez l’explication avant de passer à la leçon sur le parcours de signature.
 - de: Speichere die Befugniskarte und die Kontrolloffenlegung in einfacher Sprache. Lass eine andere Person erklären, wie der Regular Key das Beispiel zwei von drei verändert. Wenn sie das nicht kann, verbessere die Erklärung, bevor du zur Lektion über den Signierablauf gehst.
-- ja: 権限マップと、平易な言葉の制御の開示を保存してください。レギュラーキー（regular key）が2対3の例をどう変えるかを、別の人に説明してもらってください。説明できないなら、署名の流れのレッスンへ進む前に、説明を改善してください。
+- ja: 権限マップと、平易な言葉の制御の開示を保存してください。レギュラーキー（regular key）が3人中2人の署名を必要とする例をどう変えるかを、別の人に説明してもらってください。説明できないなら、署名の流れのレッスンへ進む前に、説明を改善してください。
 - ko: 권한 지도와 쉬운 말로 된 제어 공시를 저장하세요. 다른 사람에게 레귤러 키(regular key)가 3명 중 2명 예시를 어떻게 바꾸는지 설명하게 하세요. 설명하지 못하면, 서명 흐름 레슨으로 가기 전에 설명을 고치세요.
 - zh-CN: 保存权限图和白话的控制披露。请另一个人解释常规密钥（regular key）如何改变这个三取二的例子。如果他们说不清，就先改进说明，再进入签名流程那一课。
-- hi: अथॉरिटी नक्शा और सरल-भाषा नियंत्रण खुलासा सहेजें। किसी दूसरे व्यक्ति से कहें कि रेगुलर की (regular key) दो-में-से-तीन उदाहरण को कैसे बदलती है। यदि वे न समझा सकें, तो साइनिंग-फ़्लो (signing) पाठ पर जाने से पहले स्पष्टीकरण सुधारें।
+- hi: अथॉरिटी का नक्शा और सरल भाषा में नियंत्रणों का खुलासा सहेजें। किसी दूसरे व्यक्ति से समझाने को कहें कि रेगुलर की (regular key) तीन-में-से-दो वाले उदाहरण को कैसे बदलती है। यदि वे न समझा सकें, तो साइनिंग-फ़्लो (signing) पाठ पर जाने से पहले स्पष्टीकरण सुधारें।
 - ar: احفظ خريطة السلطة وإفصاح الضوابط بلغة مبسطة. اطلب من شخص آخر أن يشرح كيف يغيّر المفتاح العادي (regular key) مثال اثنين من ثلاثة. إذا لم يستطع، حسّن الشرح قبل الانتقال إلى درس مسار التوقيع (signing).
 
 ## `scammers-can-trick-you-into-authoriz.82c7e021`
@@ -2180,12 +2193,12 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - en: Separate recovery layers. Reverting a page can hide a bad button; restoring a database can lose newer legitimate receipts; neither reverses ledger transfers. Document backup boundaries, restore verification and how reconciliation preserves transactions after the backup point.
 - pt-BR: Separe as camadas de recuperação. Reverter uma página pode esconder um botão ruim; restaurar um banco de dados pode perder recibos legítimos mais novos; nenhum dos dois reverte transferências do ledger. Documente os limites do backup, a verificação da restauração e como a reconciliação preserva transações posteriores ao ponto do backup.
 - es: Separa las capas de recuperación. Revertir una página puede ocultar un botón malo; restaurar una base de datos puede perder comprobantes legítimos más nuevos; ninguna de las dos revierte transferencias del ledger. Documenta los límites de la copia de seguridad, la verificación de la restauración y cómo la conciliación conserva las transacciones posteriores al punto de la copia.
-- fr: Séparez les couches de récupération. Revenir sur une page peut cacher un mauvais bouton ; restaurer une base de données peut perdre des reçus légitimes plus récents ; ni l’un ni l’autre n’annule des transferts de registre. Documentez les limites des sauvegardes, la vérification de restauration, et comment le rapprochement conserve les transactions après le point de sauvegarde.
+- fr: Séparez les couches de récupération. Rétablir une version précédente d’une page peut cacher un mauvais bouton ; restaurer une base de données peut perdre des reçus légitimes plus récents ; ni l’un ni l’autre n’annule des transferts de registre. Documentez les limites des sauvegardes, la vérification de restauration, et comment le rapprochement conserve les transactions après le point de sauvegarde.
 - de: Trenn die Wiederherstellungsebenen. Eine Seite zurückzusetzen kann eine schlechte Schaltfläche verbergen; eine Datenbank wiederherzustellen kann neuere rechtmäßige Belege verlieren; keines von beiden macht Ledger-Übertragungen rückgängig. Dokumentiere Sicherungsgrenzen, die Prüfung der Wiederherstellung und wie der Abgleich Transaktionen nach dem Sicherungszeitpunkt erhält.
 - ja: 復旧の層を分けてください。ページを戻すと、悪いボタンを隠せます。データベースを復元すると、より新しい正当な領収を失うことがあります。どちらもレジャーの移転は取り消しません。バックアップの境界、復元の確認、バックアップ時点よりあとのトランザクションを照合がどう残すかを記録してください。
 - ko: 복구 층을 나누세요. 페이지를 되돌리면 나쁜 버튼을 숨길 수 있습니다. 데이터베이스를 복원하면 더 새로운 정당한 영수증을 잃을 수 있습니다. 둘 다 원장 전송을 되돌리지는 않습니다. 백업의 경계, 복원 확인, 백업 시점 이후의 트랜잭션을 대조가 어떻게 보존하는지를 문서화하세요.
 - zh-CN: 把恢复的各层分开。退回一个页面可以藏起一个坏按钮；恢复数据库可能丢失更新的正当收据；两者都不会撤销账本转让。写下备份边界、恢复核对，以及对账如何保留备份点之后的交易。
-- hi: रिकवरी परतें अलग करें। पेज वापस लेने से खराब बटन छिप सकता है; डेटाबेस रिस्टोर करने से नई वैध रसीदें खो सकती हैं; दोनों में से कोई लेजर ट्रांसफ़र नहीं उलटता। बैकअप सीमाएँ, रिस्टोर सत्यापन और यह लिखें कि मिलान (reconciliation) बैकअप बिंदु के बाद के लेनदेन कैसे बचाता है।
+- hi: रिकवरी परतें अलग करें। पेज को पुराने संस्करण पर लौटाने से खराब बटन छिप सकता है; डेटाबेस रिस्टोर करने से नई वैध रसीदें खो सकती हैं; दोनों में से कोई लेजर ट्रांसफ़र नहीं उलटता। बैकअप सीमाएँ, रिस्टोर सत्यापन और यह लिखें कि मिलान (reconciliation) बैकअप बिंदु के बाद के लेनदेन कैसे बचाता है।
 - ar: افصل طبقات الاستعادة. إرجاع صفحة قد يخفي زراً سيئاً؛ واستعادة قاعدة بيانات قد تفقد إيصالات مشروعة أحدث؛ ولا يعكس أي منهما نقل السجل. وثّق حدود النسخ الاحتياطي والتحقق من الاستعادة وكيف تحفظ المطابقة (reconciliation) المعاملات بعد نقطة النسخ.
 
 ## `settings-that-can-control-whether-th.33debda7`
@@ -2193,7 +2206,7 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - en: Settings that can control whether the NFT is transferable and whether the issuer can burn it.
 - pt-BR: Configurações que podem controlar se o NFT é transferível e se o emissor pode fazer o burn dele.
 - es: Ajustes que pueden controlar si el NFT es transferible y si el emisor puede quemarlo.
-- fr: Réglages qui peuvent contrôler si le NFT est transférable et si l’émetteur peut le burn.
+- fr: Réglages qui peuvent déterminer si le NFT est transférable et si l’émetteur peut le détruire.
 - de: Einstellungen, die steuern können, ob das NFT übertragbar ist und ob der Emittent es per Burn entfernen kann.
 - ja: NFTが移転可能か、発行者がそれをバーン（burn）できるかを制御し得る設定です。
 - ko: NFT를 전송할 수 있는지, 발행자가 그것을 소각(burn)할 수 있는지를 제어할 수 있는 설정입니다.
@@ -2285,7 +2298,7 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - pt-BR: Referências técnicas conferidas em 3 de outubro de 2026. Amendments da rede, suporte de carteira e regras de reserva podem mudar. Confira a documentação atual antes de implementar transações reais.
 - es: Referencias técnicas revisadas el 3 de octubre de 2026. Las enmiendas de la red, el soporte de las billeteras y las reglas de reserva pueden cambiar. Revisa la documentación actual antes de implementar transacciones reales.
 - fr: Références techniques vérifiées le 3 octobre 2026. Les amendments du réseau, le support des portefeuilles et les règles de réserve peuvent changer. Vérifiez la documentation actuelle avant de mettre en œuvre de vraies transactions.
-- de: Technische Nachweise geprüft am 3. Oktober 2026. Netzwerk-Amendments, Wallet-Unterstützung und Reserveregeln können sich ändern. Prüfe die aktuelle Dokumentation, bevor du echte Transaktionen umsetzt.
+- de: Technische Referenzen geprüft am 3. Oktober 2026. Netzwerk-Amendments, Wallet-Unterstützung und Reserveregeln können sich ändern. Prüfe die aktuelle Dokumentation, bevor du echte Transaktionen umsetzt.
 - ja: 技術参照の確認日は2026年10月3日です。ネットワークのamendment、ウォレットの対応、リザーブ（reserve）の規則は変わることがあります。実際のトランザクションを実装する前に、現行の文書を確認してください。
 - ko: 기술 참고 확인일: 2026년 10월 3일. 네트워크 아멘드먼트, 지갑 지원, 준비금 규칙은 바뀔 수 있습니다. 실제 트랜잭션을 구현하기 전에 현재 문서를 확인하세요.
 - zh-CN: 技术参考核对于 2026 年 10 月 3 日。网络修正案（amendment）、钱包支持和准备金（reserve）规则都可能改变。在实现真实交易之前，请查看当前文档。
@@ -2308,10 +2321,10 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 ## `the-club-now-proposes-an-optional-co.3e0bfebc`
 
 - en: The club now proposes an optional commemorative NFT. It is separate from the credits. Use this fictional record: network Testnet; NFT identity Record N; issuer Issuer A; owner Member B; transferable yes; burnable yes; mutable yes; transfer-fee field 1,000; URI an HTTPS metadata page. These are descriptive fields, not transaction JSON.
-- pt-BR: O clube agora propõe um NFT comemorativo opcional. Ele é separado dos créditos. Use este registro fictício: rede Testnet; identidade do NFT Record N; emissor Issuer A; dono Member B; transferível sim; burnable sim; mutável sim; campo de taxa de transferência 1,000; URI uma página HTTPS de metadados. Estes são campos descritivos, não JSON de transação.
-- es: El club ahora propone un NFT conmemorativo opcional. Es aparte de los créditos. Usa este registro ficticio: red Testnet; identidad del NFT Record N; emisor Issuer A; propietario Member B; transferable sí; burnable sí; mutable sí; campo de comisión de transferencia 1,000; URI una página de metadatos HTTPS. Son campos descriptivos, no un JSON de transacción.
-- fr: Le club propose maintenant un NFT commémoratif facultatif. Il est séparé des crédits. Utilisez cet enregistrement fictif : réseau Testnet ; identité du NFT Record N ; émetteur Issuer A ; propriétaire Member B ; transférable oui ; burnable oui ; mutable oui ; champ de frais de transfert 1,000 ; URI une page de métadonnées HTTPS. Ce sont des champs descriptifs, pas du JSON de transaction.
-- de: Der Club schlägt jetzt ein optionales Erinnerungs-NFT vor. Es ist von den Credits getrennt. Nutze diesen fiktiven Datensatz: Netzwerk Testnet; NFT-Identität Record N; Emittent Issuer A; Eigentümer Member B; transferable ja; burnable ja; mutable ja; Transfergebühr-Feld 1,000; URI eine HTTPS-Metadatenseite. Das sind beschreibende Felder, kein Transaktions-JSON.
+- pt-BR: O clube agora propõe um NFT comemorativo opcional. Ele é separado dos créditos. Use este registro fictício: rede Testnet; identidade do NFT Record N; emissor Issuer A; dono Member B; transferível sim; burnable sim; mutável sim; campo de taxa de transferência 1.000; URI uma página HTTPS de metadados. Estes são campos descritivos, não JSON de transação.
+- es: El club ahora propone un NFT conmemorativo opcional. Es aparte de los créditos. Usa este registro ficticio: red Testnet; identidad del NFT Record N; emisor Issuer A; propietario Member B; transferable sí; burnable sí; mutable sí; campo de comisión de transferencia 1000; URI una página de metadatos HTTPS. Son campos descriptivos, no un JSON de transacción.
+- fr: Le club propose maintenant un NFT commémoratif facultatif. Il est séparé des crédits. Utilisez cet enregistrement fictif : réseau Testnet ; identité du NFT Record N ; émetteur Issuer A ; propriétaire Member B ; transférable oui ; burnable oui ; mutable oui ; champ de frais de transfert 1 000 ; URI une page de métadonnées HTTPS. Ce sont des champs descriptifs, pas du JSON de transaction.
+- de: Der Club schlägt jetzt ein optionales Erinnerungs-NFT vor. Es ist von den Credits getrennt. Nutze diesen fiktiven Datensatz: Netzwerk Testnet; NFT-Identität Record N; Emittent Issuer A; Eigentümer Member B; transferable ja; burnable ja; mutable ja; Transfergebühr-Feld 1.000; URI eine HTTPS-Metadatenseite. Das sind beschreibende Felder, kein Transaktions-JSON.
 - ja: クラブは今、任意の記念NFTを提案しています。クレジットとは別です。この架空の記録を使ってください。ネットワークはTestnet、NFTの識別情報はRecord N、発行者はIssuer A、所有者はMember B、移転可能ははい、バーン（burn）可能ははい、変更可能ははい、移転手数料欄は1,000、URIはHTTPSのメタデータページです。これらは説明の欄であり、トランザクションJSONではありません。
 - ko: 클럽이 이제 선택적인 기념 NFT를 제안합니다. 크레딧과는 별개입니다. 이 가상 기록을 사용하세요. 네트워크 Testnet, NFT 정체성 Record N, 발행자 Issuer A, 소유자 Member B, transferable 예, burnable 예, mutable 예, 전송 수수료 필드 1,000, URI는 HTTPS 메타데이터 페이지. 이것은 설명 필드이지 트랜잭션 JSON이 아닙니다.
 - zh-CN: 俱乐部现在提议一枚可选的纪念 NFT。它和积分是分开的。使用这条虚构记录：网络 Testnet；NFT 身份 Record N；发行方 Issuer A；所有者 Member B；可转让：是；可销毁（burn）：是；可变：是；转让费字段 1,000；URI 为一个 HTTPS 元数据页面。这些是描述字段，不是交易 JSON。
@@ -2390,7 +2403,7 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - es: El sitio dice que nadie puede alterar el activo porque la firma maestra está desactivada. Tu mapa muestra una clave regular. Reemplaza la afirmación por un enunciado preciso de las vías habilitadas y de las capacidades que quedan. No tienes evidencia suficiente para afirmar que nadie conoce una clave, ni para certificar las prácticas de almacenamiento del equipo.
 - fr: Le site dit que personne ne peut modifier l’actif parce que la signature master est désactivée. Votre carte montre une regular key. Remplacez l’affirmation par un énoncé exact des voies activées et des capacités qui restent. Vous n’avez pas assez de preuves pour affirmer que personne ne connaît une clé, ni pour certifier les pratiques de stockage de l’équipe.
 - de: Die Website sagt, niemand könne das Asset ändern, weil Master-Signieren deaktiviert ist. Deine Karte zeigt einen Regular Key. Ersetze die Behauptung durch eine genaue Aussage über die aktivierten Wege und die verbleibenden Fähigkeiten. Du hast nicht genug Nachweise, um zu behaupten, niemand kenne einen Schlüssel, oder um die Aufbewahrungspraxis des Teams zu bescheinigen.
-- ja: ウェブサイトは、マスター署名が無効なので誰も資産を変えられないと言います。あなたの地図にはレギュラーキー（regular key）があります。その主張を、有効な経路と残る能力の正確な記述に置き換えてください。誰も鍵を知らないと主張する証拠も、チームの保管の仕方を認定する証拠も、あなたにはありません。
+- ja: ウェブサイトは、マスター署名が無効なので誰も資産を変えられないと言います。あなたの地図にはレギュラーキー（regular key）があります。その主張を、有効な経路と残る能力の正確な記述に置き換えてください。誰も鍵を知らないと主張したり、チームの秘密情報の保管方法を認定したりするには、証拠が不十分です。
 - ko: 웹사이트는 마스터 서명이 꺼져 있으니 아무도 자산을 바꿀 수 없다고 말합니다. 당신의 지도에는 레귤러 키(regular key)가 있습니다. 그 주장을, 켜진 경로와 남은 능력을 정확히 말한 것으로 바꾸세요. 아무도 키를 모른다고 주장하거나 팀의 보관 관행을 인증할 증거는 충분하지 않습니다.
 - zh-CN: 网站说，因为主密钥签名已禁用，所以没有人能改动这项资产。你的图上有一把常规密钥（regular key）。用对已启用途径和剩余能力的准确陈述替换这个说法。你没有足够的证据声称没有人知道一把密钥，也不能认证团队的保管做法。
 - hi: वेबसाइट कहती है कि मास्टर साइनिंग (master signing) बंद होने से कोई परिसंपत्ति नहीं बदल सकता। आपका नक्शा रेगुलर की (regular key) दिखाता है। दावे को चालू मार्गों और बची क्षमताओं के सटीक कथन से बदलें। यह दावा करने के लिए पर्याप्त साक्ष्य नहीं कि कोई की (key) नहीं जानता, या टीम की भंडारण प्रथाएँ प्रमाणित करने के लिए।
@@ -2417,7 +2430,7 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - fr: C’est un exercice d’inspection, pas une recette de blackholing. Ne désactivez pas de clés, ne posez pas de flags irréversibles et ne retirez pas de signataires en suivant cette leçon.
 - de: Das ist eine Prüfübung, kein Blackholing-Rezept. Deaktiviere keine Schlüssel, setze keine unumkehrbaren Flags und entferne keine Signer, während du dieser Lektion folgst.
 - ja: これは点検の演習であり、ブラックホール化（blackholing）の手順書ではありません。このレッスンに従いながら、鍵を無効にしたり、取り消せないフラグ（flags）を設定したり、署名者を外したりしないでください。
-- ko: 이것은 점검 연습이지 블랙홀화(blackholing) 조리법이 아닙니다. 이 레슨을 따라가며 키를 끄거나, 되돌릴 수 없는 플래그를 설정하거나, 서명자를 제거하지 마세요.
+- ko: 이것은 점검 연습이지 블랙홀화(blackholing) 실행 안내이 아닙니다. 이 레슨을 따라가며 키를 끄거나, 되돌릴 수 없는 플래그를 설정하거나, 서명자를 제거하지 마세요.
 - zh-CN: 这是一次检查练习，不是黑洞化（blackholing）的做法。跟随这一课时，不要禁用密钥、设置不可逆标志（flags），或移除签名者。
 - hi: यह जाँच अभ्यास है, ब्लैकहोलिंग (blackholing) की विधि नहीं। इस पाठ का पालन करते हुए न तो की (keys) बंद करें, न अपरिवर्तनीय फ़्लैग (flags) सेट करें, न साइनर (signer) हटाएँ।
 - ar: هذا تمرين فحص، لا وصفة للثقب الأسود (blackholing). لا تعطّل المفاتيح ولا تضبط أعلاماً (flags) لا رجعة فيها ولا تُزِل الموقّعين أثناء اتباع هذا الدرس.
@@ -2583,12 +2596,12 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - en: Two-of-three signers exist alongside an enabled regular key. Is every action forced through two people?
 - pt-BR: Há signatários em esquema dois de três junto com uma regular key ativada. Toda ação é forçada a passar por duas pessoas?
 - es: Hay firmantes de dos de tres junto a una clave regular habilitada. ¿Cada acción está obligada a pasar por dos personas?
-- fr: Des signataires deux sur trois existent à côté d’une regular key activée. Chaque action est-elle forcée de passer par deux personnes ?
-- de: Zwei-von-drei-Signer bestehen neben einem aktivierten Regular Key. Wird jede Aktion durch zwei Personen erzwungen?
-- ja: 2対3の署名者が、有効なレギュラーキー（regular key）と並んで存在します。すべての操作は2人を通りますか？
-- ko: 3명 중 2명의 서명자가 켜진 레귤러 키(regular key)와 함께 있습니다. 모든 동작이 두 사람을 통해야 하나요?
+- fr: Un dispositif exigeant deux signataires sur trois coexiste avec une regular key activée. Chaque action doit-elle obligatoirement être autorisée par deux personnes ?
+- de: Neben einer Signierkonfiguration, die zwei von drei Signaturen erfordert, besteht ein aktivierter Regular Key. Müssen deshalb wirklich alle Aktionen von zwei Personen autorisiert werden?
+- ja: 3人中2人の署名を必要とする設定と、有効なレギュラーキー（regular key）が併存しています。すべての操作に必ず2人が必要ですか？
+- ko: 서명자 3명 중 2명의 서명이 필요한 구성과 활성화된 레귤러 키(regular key)가 함께 있습니다. 모든 동작에 반드시 두 사람의 서명이 필요한가요?
 - zh-CN: 三取二的签名者旁边还有一把已启用的常规密钥（regular key）。是不是每一个动作都被强制经过两个人？
-- hi: दो-में-से-तीन साइनर (signer) एक चालू रेगुलर की (regular key) के साथ मौजूद हैं। क्या हर कार्रवाई दो लोगों से होकर बाध्य है?
+- hi: तीन में से दो साइनरों (signer) की आवश्यकता वाली व्यवस्था के साथ एक चालू रेगुलर की (regular key) भी मौजूद है। क्या हर कार्रवाई के लिए दो लोगों की मंज़ूरी अनिवार्य है?
 - ar: توجد قائمة اثنين من ثلاثة إلى جانب مفتاح عادي (regular key) مفعّل. هل تُفرض كل عملية عبر شخصين؟
 
 ## `usage.slippage.copy`
@@ -2596,9 +2609,9 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - en: Trade size is {pct}% of the selected pool side before a {fee}% fee.
 - pt-BR: O tamanho da operação é {pct}% do lado selecionado do pool antes de uma taxa de {fee}%.
 - es: El tamaño de la operación es el {pct}% del lado del pool seleccionado antes de una comisión del {fee}%.
-- fr: La taille de l’échange représente {pct}% du côté de pool sélectionné, avant des frais de {fee}%.
-- de: Die Handelsgröße ist {pct}% der gewählten Poolseite vor einer Gebühr von {fee}%.
-- ja: 取引サイズは、手数料 {fee}% の前で、選択したプール側の {pct}% です。
+- fr: La taille de l’échange représente {pct}% de la réserve de l’actif sélectionné dans le pool, avant des frais de {fee}%.
+- de: Vor Anwendung der Gebühr von {fee}% entspricht die Handelsgröße {pct}% des Guthabens auf der gewählten Poolseite.
+- ja: 手数料 {fee}% を適用する前の取引量は、選択したプール側の資産残高の {pct}% です。
 - ko: 거래 크기는 {fee}% 수수료 전, 선택한 풀 한쪽의 {pct}%입니다.
 - zh-CN: 交易规模是所选池一侧的 {pct}%，这是在 {fee}% 费用之前。
 - hi: ट्रेड का आकार चुने गए पूल पक्ष का {pct}% है, {fee}% फ़ीस से पहले।
@@ -2615,7 +2628,7 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - ko: 별도의 테스트 계정과 비운영 네트워크를 사용하세요. 거절된 서명, 만료, 부족한 자금/준비금, 잘못된 네트워크, 이용할 수 없는 RPC, 중복 콜백을 연습하세요. 비밀은 프론트엔드 자산과 로그 밖에 두세요. 실제 네트워크에 대해 현재 지갑 지원과 아멘드먼트 이용 가능 여부를 확인하세요. 문서 페이지는 모든 곳에서 활성화되었다는 증거가 아닙니다.
 - zh-CN: 使用单独的测试账户和非生产网络。演练被拒绝的签名、过期、资金/准备金（reserve）不足、错误网络、RPC 不可用和重复回调（callback）。把秘密留在前端资源和日志之外。核对实际网络上当前的钱包支持和修正案（amendment）可用性；一个文档页面并不是处处都已激活的证据。
 - hi: अलग परीक्षण खाते और गैर-उत्पादन नेटवर्क इस्तेमाल करें। अस्वीकृत सिग्नेचर (signature), समाप्ति, अपर्याप्त धन/रिज़र्व (reserve), गलत नेटवर्क, अनुपलब्ध RPC और दोहरे कॉलबैक (callback) का अभ्यास करें। सीक्रेट (secret) फ़्रंटएंड एसेट और लॉग से बाहर रखें। वास्तविक नेटवर्क के लिए वर्तमान वॉलेट समर्थन और संशोधन उपलब्धता सत्यापित करें; दस्तावेज़ पृष्ठ हर जगह सक्रियण का साक्ष्य नहीं है।
-- ar: استخدم حسابات اختبار منفصلة وشبكة غير إنتاجية. تدرّب على التواقيع المرفوضة وانتهاء الصلاحية ونقص الأموال أو الاحتياطي (reserve) والشبكة الخاطئة وRPC غير المتاح والإشعارات الراجعة (callback) المكررة. أبقِ الأسرار خارج أصول الواجهة والسجلات. تحقق من دعم المحفظة الحالي وتوفر التعديل (amendment) للشبكة الفعلية؛ وصفحة الوثائق ليست دليلاً على التفعيل في كل مكان.
+- ar: استخدم حسابات اختبار منفصلة وشبكة غير إنتاجية. تدرّب على التواقيع المرفوضة وانتهاء الصلاحية ونقص الأموال أو الاحتياطي (reserve) والشبكة الخاطئة وRPC غير المتاح والإشعارات الراجعة (callback) المكررة. أبقِ الأسرار خارج ملفات الواجهة الأمامية وسجلات التشغيل. تحقق من دعم المحفظة الحالي وتوفر التعديل (amendment) للشبكة الفعلية؛ وصفحة الوثائق ليست دليلاً على التفعيل في كل مكان.
 
 ## `use-the-exact-asset-identity-from-le.4fd4d9d1`
 
@@ -2691,7 +2704,7 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - de: Wo das Netzwerk die Delegation von Berechtigungen unterstützt, kann ein Konto ein anderes Konto autorisieren, festgelegte Aktionen auszuführen. Ein Delegate ist nicht dasselbe wie ein Regular Key oder ein Signer auf dem Eigentümerkonto. Nimm bestehende Delegationsdatensätze und ihre genauen Berechtigungen in eine echte Befugnisprüfung auf; eine Karte mit nur drei Schlüsselwegen kann unvollständig sein. Prüfe die aktuelle Amendment-Unterstützung und die offiziellen Warnungen zu den einzelnen Berechtigungen, bevor du diese Funktion nutzt. Dieser Kurs richtet keine Delegation ein.
 - ja: ネットワークが権限の委任に対応している場合、アカウントは別のアカウントに、指定した操作を行うことを認可できます。委任先は、レギュラーキー（regular key）とも、所有者アカウントの署名者とも同じではありません。実際の権限の確認には、既存の委任記録とその正確な権限を含めてください。3つの鍵の経路だけを含む地図は、不完全かもしれません。この機能を使う前に、現行のamendment対応と、公式の権限ごとの警告を確認してください。このコースは委任を設定しません。
 - ko: 네트워크가 권한 위임을 지원하면, 계정이 다른 계정에 지정된 동작을 승인할 수 있습니다. 위임받은 계정(delegate)은 레귤러 키(regular key)나 소유자 계정의 서명자와 같지 않습니다. 실제 권한 검토에는 기존 위임 기록과 그 정확한 권한을 넣으세요. 키 경로 세 개만 있는 지도는 불완전할 수 있습니다. 이 기능을 쓰기 전에 현재 아멘드먼트 지원과 공식 권한별 경고를 확인하세요. 이 과정은 위임을 구성하지 않습니다.
-- zh-CN: 在网络支持权限委托的地方，一个账户可以授权另一个账户执行指定的动作。被委托人（delegate）不同于常规密钥（regular key），也不同于所有者账户上的签名者。在真正的权限审查中，要纳入已有的委托记录及其确切权限；一张只含三条密钥途径的图可能是不完整的。使用这项功能之前，请检查当前的修正案（amendment）支持，以及官方针对具体权限的警告。这门课不配置委托。
+- zh-CN: 在网络支持权限委托的地方，一个账户可以授权另一个账户执行指定的动作。受委托账户（delegate）不同于常规密钥（regular key），也不同于所有者账户上的签名者。在真正的权限审查中，要纳入已有的委托记录及其确切权限；一张只含三条密钥途径的图可能是不完整的。使用这项功能之前，请检查当前的修正案（amendment）支持，以及官方针对具体权限的警告。这门课不配置委托。
 - hi: जहाँ नेटवर्क अनुमति डेलिगेशन (delegation) का समर्थन करे, एक खाता दूसरे खाते को निर्दिष्ट कार्रवाइयाँ करने के लिए अधिकृत कर सकता है। डेलिगेट (delegate) रेगुलर की (regular key) या मालिक खाते का साइनर (signer) नहीं है। वास्तविक अथॉरिटी समीक्षा में मौजूदा डेलिगेशन रिकॉर्ड और उनकी सटीक अनुमतियाँ शामिल करें; केवल तीन की (key) मार्गों वाला नक्शा अधूरा हो सकता है। इस सुविधा से पहले वर्तमान संशोधन समर्थन और आधिकारिक अनुमति-विशिष्ट चेतावनियाँ जाँचें। यह पाठ्यक्रम डेलिगेशन कॉन्फ़िगर नहीं करता।
 - ar: حيث تدعم الشبكة تفويض الصلاحيات، يستطيع حساب أن يأذن لحساب آخر بتنفيذ إجراءات محددة. المفوَّض ليس نفسه المفتاح العادي (regular key) ولا موقّعاً على حساب المالك. أدرج سجلات التفويض القائمة وصلاحياتها بالضبط في مراجعة سلطة حقيقية؛ وقد تكون خريطة فيها ثلاثة مسارات مفاتيح فقط ناقصة. تحقق من دعم التعديل (amendment) الحالي والتحذيرات الرسمية الخاصة بالصلاحية قبل استخدام هذه الميزة. هذه الدورة لا تضبط التفويض.
 
@@ -2725,9 +2738,9 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 
 - en: Write a departure plan: resolve the held balance through a deliberate redemption or transfer decision, then inspect non-default line settings on both sides. Setting the limit to zero alone is not proof the line disappeared. There can still be a balance or other state keeping it present.
 - pt-BR: Escreva um plano de saída: resolva o saldo guardado por uma decisão deliberada de resgate ou de transferência e depois inspecione configurações fora do padrão da linha dos dois lados. Definir o limite como zero, sozinho, não prova que a linha sumiu. Ainda pode haver um saldo ou outro estado mantendo ela presente.
-- es: Escribe un plan de salida: resuelve el saldo retenido con una decisión deliberada de canje o de transferencia, y luego inspecciona los ajustes de línea que no son los predeterminados en los dos lados. Poner el límite en cero, por sí solo, no prueba que la línea haya desaparecido. Todavía puede haber un saldo u otro estado que la mantenga presente.
+- es: Escribe un plan de salida: resuelve el saldo que mantienes con una decisión deliberada de canje o de transferencia, y luego inspecciona los ajustes de línea que no son los predeterminados en los dos lados. Poner el límite en cero, por sí solo, no prueba que la línea haya desaparecido. Todavía puede haber un saldo u otro estado que la mantenga presente.
 - fr: Écrivez un plan de départ : résolvez le solde détenu par une décision délibérée de rachat ou de transfert, puis inspectez les réglages de ligne non par défaut des deux côtés. Mettre la limite à zéro seul ne prouve pas que la ligne a disparu. Il peut encore y avoir un solde ou un autre état qui la maintient.
-- de: Schreib einen Abgangsplan: löse den gehaltenen Saldo durch eine bewusste Entscheidung zur Einlösung oder Übertragung auf und prüfe dann Linien-Einstellungen, die nicht der Vorgabe entsprechen, auf beiden Seiten. Das Limit allein auf null zu setzen ist kein Beweis, dass die Linie verschwunden ist. Es kann weiterhin einen Saldo oder einen anderen Zustand geben, der sie bestehen lässt.
+- de: Schreib einen Abgangsplan: löse den gehaltenen Saldo durch eine bewusste Entscheidung zur Einlösung oder Übertragung auf und prüfe dann Trust-Line-Einstellungen, die vom Standardzustand abweichen, auf beiden Seiten. Das Limit allein auf null zu setzen ist kein Beweis, dass die Linie verschwunden ist. Es kann weiterhin einen Saldo oder einen anderen Zustand geben, der sie bestehen lässt.
 - ja: 退出計画を書いてください。保有残高を、意図した償還または移転の判断で解消し、その後、両側の既定でないライン設定を調べます。上限をゼロにするだけでは、ラインが消えた証明にはなりません。残高や、他の状態が、まだそれを残していることがあります。
 - ko: 떠나는 계획을 쓰세요. 의도적인 상환 또는 전송 결정으로 보유 잔액을 해소한 다음, 양쪽의 기본이 아닌 라인 설정을 살펴보세요. 한도를 0으로 설정한 것만으로 라인이 사라졌다는 증거는 아닙니다. 잔액이나 다른 상태가 라인을 남겨 둘 수 있습니다.
 - zh-CN: 写一份离开计划：通过一次有意的赎回或转让决定来处理所持余额，然后检查双方的非默认线设置。单把限额设为零，并不能证明这条线已经消失。仍可能有余额或其他状态使它继续存在。
@@ -2751,9 +2764,9 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 
 - en: Write a redemption promise: one credit reserves one eligible seat, subject to the written booking terms. Decide cancellations, expiry, refunds, support and what happens if the club closes. The token protocol does not write or enforce those business terms for you.
 - pt-BR: Escreva uma promessa de resgate: um crédito reserva uma vaga elegível, sujeito aos termos escritos do agendamento. Decida cancelamentos, expiração, reembolsos, suporte e o que acontece se o clube fechar. O protocolo do token não escreve nem aplica esses termos de negócio por você.
-- es: Escribe una promesa de canje: un crédito aparta un asiento elegible, sujeto a los términos escritos del cupo. Decide cancelaciones, vencimiento, reembolsos, soporte y qué pasa si el club cierra. El protocolo del token no escribe ni hace cumplir esos términos de negocio por ti.
+- es: Escribe una promesa de canje: un crédito aparta un asiento elegible, sujeto a los términos escritos de la reserva. Decide cancelaciones, vencimiento, reembolsos, soporte y qué pasa si el club cierra. El protocolo del token no escribe ni hace cumplir esos términos de negocio por ti.
 - fr: Écrivez une promesse de rachat : un crédit réserve une place éligible, selon les conditions de réservation écrites. Décidez les annulations, l’expiration, les remboursements, l’assistance, et ce qui se passe si le club ferme. Le protocole du jeton n’écrit pas ces conditions métier pour vous, et ne les applique pas.
-- de: Schreib ein Einlöseversprechen: Ein Credit reserviert einen berechtigten Platz, nach den geschriebenen Buchungsbedingungen. Entscheide Stornierungen, Ablauf, Erstattungen, Support und was geschieht, wenn der Club schließt. Das Token-Protokoll schreibt oder erzwingt diese Geschäftsbedingungen nicht für dich.
+- de: Schreib ein Einlöseversprechen: Ein Credit reserviert einen dafür vorgesehenen Platz gemäß den schriftlichen Buchungsbedingungen. Lege Regeln für Stornierungen, Ablauf, Erstattungen, Support und den Fall fest, dass der Club schließt. Das Token-Protokoll formuliert diese Geschäftsbedingungen nicht für dich und setzt sie auch nicht durch.
 - ja: 償還の約束を書いてください。1クレジットは、書かれた予約条件のもとで、対象となる席を1つ予約します。取消、期限、返金、サポート、クラブが閉じたときの扱いを決めてください。トークンの仕組みは、それらの事業条件をあなたのために書いたり、強制したりはしません。
 - ko: 상환 약속을 쓰세요. 크레딧 하나는 적힌 예약 조건에 따라 자격 있는 좌석 하나를 예약합니다. 취소, 만료, 환불, 지원, 클럽이 문을 닫으면 어떻게 되는지를 정하세요. 토큰 프로토콜이 그 사업 조건을 대신 쓰거나 집행하지는 않습니다.
 - zh-CN: 写一条赎回承诺：一积分预订一个符合条件的席位，并受书面预约条款约束。决定取消、到期、退款、支持和俱乐部关闭时会发生什么。代币协议不会替你写下或强制执行那些业务条款。
@@ -2789,14 +2802,14 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 ## `write-recovery-scenarios-on-paper-on.cab7e62d`
 
 - en: Write recovery scenarios on paper: one signer unavailable; two unavailable; one compromised; the regular-key custodian absent. State which actions remain possible and who decides to pause operations. A private off-ledger promise to require two approvals is not the same as ledger enforcement.
-- pt-BR: Escreva no papel cenários de recuperação: um signatário indisponível; dois indisponíveis; um comprometido; o custodiante da regular key ausente. Declare quais ações continuam possíveis e quem decide pausar as operações. Uma promessa privada, fora do ledger, de exigir duas aprovações não é o mesmo que aplicação pelo ledger.
-- es: Escribe en papel escenarios de recuperación: un firmante no disponible; dos no disponibles; uno comprometido; ausente quien custodia la clave regular. Indica qué acciones siguen siendo posibles y quién decide pausar las operaciones. Una promesa privada, fuera del ledger, de exigir dos aprobaciones no es lo mismo que el cumplimiento del ledger.
+- pt-BR: Escreva no papel cenários de recuperação: um signatário indisponível; dois indisponíveis; um comprometido; o custodiante da regular key ausente. Declare quais ações continuam possíveis e quem decide pausar as operações. Uma promessa privada, fora do ledger, de exigir duas aprovações não é o mesmo que uma exigência imposta pelo ledger.
+- es: Escribe en papel escenarios de recuperación: un firmante no disponible; dos no disponibles; uno comprometido; ausente quien custodia la clave regular. Indica qué acciones siguen siendo posibles y quién decide pausar las operaciones. Una promesa privada, fuera del ledger, de exigir dos aprobaciones no equivale a una exigencia impuesta por el ledger.
 - fr: Écrivez sur papier des scénarios de récupération : un signataire indisponible ; deux indisponibles ; un compromis ; le gardien de la regular key absent. Dites quelles actions restent possibles et qui décide de suspendre les opérations. Une promesse privée, hors registre, d’exiger deux approbations n’est pas la même chose qu’une application par le registre.
 - de: Schreib Wiederherstellungsszenarien auf Papier: ein Signer nicht verfügbar; zwei nicht verfügbar; einer kompromittiert; die verwahrende Person des Regular Key abwesend. Sag, welche Aktionen möglich bleiben und wer entscheidet, den Betrieb anzuhalten. Ein privates Versprechen außerhalb des Ledgers, zwei Genehmigungen zu verlangen, ist nicht dasselbe wie Durchsetzung im Ledger.
-- ja: 紙の上で復旧のシナリオを書いてください。署名者1人が不在、2人が不在、1人が危険にさらされた、レギュラーキー（regular key）の保管者が不在です。どの操作がまだ可能か、運用を止める判断を誰がするかを述べてください。レジャーの外で2人の承認を要する私的な約束は、レジャーによる強制と同じではありません。
-- ko: 종이 위에 복구 시나리오를 쓰세요. 서명자 한 명 불가, 두 명 불가, 한 명 노출, 레귤러 키(regular key) 보관자 부재. 어떤 동작이 아직 가능한지, 누가 운영 중지를 결정하는지 적으세요. 원장 밖에서 승인 두 개를 요구하겠다는 사적 약속은 원장의 집행과 같지 않습니다.
-- zh-CN: 在纸上写下恢复情景：一位签名者不可用；两位不可用；一位已失密；常规密钥（regular key）的保管人不在。说明哪些动作仍然可能，以及谁决定暂停运营。账本之外、要求两人批准的私人承诺，并不等于账本上的强制执行。
-- hi: कागज़ पर रिकवरी परिदृश्य लिखें: एक साइनर (signer) अनुपलब्ध; दो अनुपलब्ध; एक समझौता हुआ; रेगुलर-की (regular key) संरक्षक अनुपस्थित। लिखें कि कौन सी कार्रवाइयाँ संभव रहती हैं और संचालन रोकने का निर्णय कौन करता है। दो मंज़ूरियों की निजी, लेजर-बाहरी प्रतिज्ञा लेजर प्रवर्तन के समान नहीं है।
+- ja: 紙の上で復旧のシナリオを書いてください。署名者1人が不在、2人が不在、1人の署名権限が侵害された、レギュラーキー（regular key）の保管者が不在です。どの操作がまだ可能か、運用を止める判断を誰がするかを述べてください。レジャーの外で2人の承認を要する私的な約束は、レジャーによる強制と同じではありません。
+- ko: 종이 위에 복구 시나리오를 쓰세요. 서명자 한 명 사용 불가, 두 명 사용 불가, 한 명의 서명 수단에 보안 침해 발생, 레귤러 키(regular key) 보관자 부재. 어떤 동작이 아직 가능한지, 누가 운영 중지를 결정하는지 적으세요. 원장 밖에서 승인 두 개를 요구하겠다는 사적 약속은 원장의 집행과 같지 않습니다.
+- zh-CN: 在纸上写下恢复情景：一位签名者不可用；两位不可用；一位签名者的安全已遭破坏；常规密钥（regular key）的保管人不在。说明哪些动作仍然可能，以及谁决定暂停运营。账本之外、要求两人批准的私人承诺，并不等于账本上的强制执行。
+- hi: कागज़ पर रिकवरी परिदृश्य लिखें: एक साइनर (signer) अनुपलब्ध; दो अनुपलब्ध; एक साइनर की सुरक्षा भंग हुई; रेगुलर-की (regular key) संरक्षक अनुपस्थित। लिखें कि कौन सी कार्रवाइयाँ संभव रहती हैं और संचालन रोकने का निर्णय कौन करता है। दो मंज़ूरियों की निजी, लेजर-बाहरी प्रतिज्ञा लेजर प्रवर्तन के समान नहीं है।
 - ar: اكتب سيناريوهات استعادة على الورق: موقّع واحد غير متاح؛ واثنان غير متاحين؛ وواحد مخترق؛ وحافظ المفتاح العادي (regular key) غائب. اذكر الإجراءات التي تبقى ممكنة ومن يقرر إيقاف العمليات. وعد خاص خارج السجل باشتراط موافقتين ليس نفسه إنفاذ السجل.
 
 ## `write-the-purpose-exact-asset-identi.636d0341`
@@ -2804,7 +2817,7 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - en: {s1} write the purpose, exact asset identity, redemption promise and supply questions.
 - pt-BR: {s1} escreva o propósito, a identidade exata do ativo, a promessa de resgate e as perguntas de suprimento.
 - es: {s1} escribe el propósito, la identidad exacta del activo, la promesa de canje y las preguntas de suministro.
-- fr: {s1} écrivez le but, l’identité exacte de l’actif, la promesse de rachat et les questions de supply.
+- fr: {s1} écrivez le but, l’identité exacte de l’actif, la promesse de rachat et les questions relatives à l’offre de jetons.
 - de: {s1} schreib den Zweck, die genaue Asset-Identität, das Einlöseversprechen und die Supply-Fragen.
 - ja: {s1} 目的、正確な資産の識別情報、償還の約束、供給の質問を書きます。
 - ko: {s1} 목적, 정확한 자산 정체성, 상환 약속, 공급량 질문을 적으세요.
@@ -2818,12 +2831,12 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - pt-BR: Limites de credencial do Xaman
 - es: Límites de credenciales de Xaman
 - fr: Limites des identifiants Xaman
-- de: Grenzen der Xaman-Nachweise
+- de: Grenzen für die Verwendung von Xaman-Zugangsdaten
 - ja: Xamanの資格情報の境界
 - ko: Xaman 자격 증명 경계
 - zh-CN: Xaman 凭证边界
 - hi: Xaman क्रेडेंशियल सीमाएँ
-- ar: حدود اعتماد Xaman
+- ar: حدود استخدام بيانات اعتماد Xaman
 
 ## `xaman-flows.2d4dd6fc`
 
@@ -2921,12 +2934,12 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - en: XRP that must remain available to support an account and relevant ledger objects; it is different from a transaction fee.
 - pt-BR: XRP que precisa continuar disponível para sustentar uma conta e os objetos relevantes do ledger; é diferente de uma taxa de transação.
 - es: XRP que debe seguir disponible para sostener una cuenta y los objetos relevantes del ledger; es distinto de un costo de transacción.
-- fr: Du XRP qui doit rester disponible pour soutenir un compte et les objets de registre concernés ; c’est différent d’un frais de transaction.
+- fr: Du XRP qui doit rester disponible pour prendre en charge un compte et les objets du registre concernés ; il ne s’agit pas de frais de transaction.
 - de: XRP, das verfügbar bleiben muss, um ein Konto und relevante Ledger-Objekte zu tragen; es ist etwas anderes als eine Transaktionsgebühr.
 - ja: アカウントと関係するレジャーオブジェクトを支えるために、利用できるまま残さなければならないXRPです。トランザクション手数料とは違います。
 - ko: 계정과 관련 원장 오브젝트를 유지하기 위해 남아 있어야 하는 XRP입니다. 트랜잭션 수수료와는 다릅니다.
 - zh-CN: 必须保持可用、以支撑一个账户和相关账本对象的 XRP；它不同于交易费用。
-- hi: वह XRP जो खाते और संबंधित लेजर वस्तुओं के सहारे उपलब्ध रहना चाहिए; यह लेनदेन फ़ीस से अलग है।
+- hi: खाते और संबंधित लेजर वस्तुओं की आवश्यक रिज़र्व शर्तें पूरी करने के लिए उपलब्ध रखा जाने वाला XRP; यह लेनदेन फ़ीस से अलग है।
 - ar: XRP يجب أن يبقى متاحاً لدعم حساب وعناصر السجل ذات الصلة؛ وهو مختلف عن رسم المعاملة.
 
 ## `xrpl-lets-accounts-separate-everyday.ce4f8952`
@@ -2960,7 +2973,7 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - en: Yes; the signer list overrides every other key
 - pt-BR: Sim; a signer list substitui toda outra chave
 - es: Sí; la lista de firmantes anula todas las demás claves
-- fr: Oui ; la signer list remplace chaque autre clé
+- fr: Oui ; la signer list prime sur toutes les autres clés
 - de: Ja; die Signer List setzt jeden anderen Schlüssel außer Kraft
 - ja: はい。署名者リスト（signer list）が他のすべての鍵を上書きする
 - ko: 예. 서명자 목록(signer list)이 다른 모든 키를 덮어씁니다
@@ -2994,4 +3007,4 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - hi: आपका सीड (seed) पासवर्ड नहीं है। लेजर के पीछे कोई रीसेट डेस्क नहीं है।
 - ar: بذرتك (seed) ليست كلمة مرور. لا يوجد مكتب إعادة تعيين خلف السجل.
 
-Count: 230 English strings.
+Count: 231 English strings.
