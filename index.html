@@ -1375,6 +1375,8 @@
     }
     .wide-card.battlefield-feature{
       grid-template-columns:1fr;
+      height:auto;
+      min-height:340px;
       border-color:rgba(87,169,255,.55);
       background:
         radial-gradient(circle at 18% 20%,rgba(50,120,255,.20),transparent 34%),
@@ -1387,7 +1389,16 @@
       position:relative;
       z-index:1;
       align-items:center;
+      height:auto;
+      max-height:none;
+      overflow:visible;
       text-align:center;
+    }
+    .wide-card.battlefield-feature .copy{
+      display:block;
+      max-width:800px;
+      overflow:visible;
+      -webkit-line-clamp:unset;
     }
     .wide-card.battlefield-feature .bf-kicker{
       margin:0;
@@ -1424,6 +1435,8 @@
       }
       .wide-card-copy{height:auto;padding:14px;overflow:visible}
       .wide-card .copy{-webkit-line-clamp:4}
+      .wide-card.battlefield-feature{min-height:0;height:auto}
+      .wide-card.battlefield-feature .copy{-webkit-line-clamp:unset}
     }
   </style>
   <link rel="icon" href="/assets/favicons/favicon.ico" sizes="any" />
@@ -1839,7 +1852,7 @@
             <div class="wide-card-copy">
               <p class="bf-kicker">AUGUR BATTLEFIELD • LIVE</p>
               <h3 id="battlefield-title">Forget the charts. Watch the battle.</h3>
-              <p class="copy">AUGUR BATTLEFIELD turns live global $XRP market pressure into a moving battlefield. Blue is buy pressure. Red is sell pressure.</p>
+              <p class="copy">AUGUR BATTLEFIELD turns live global $XRP market pressure into a moving battlefield. Blue represents buy pressure. Red represents sell pressure. Troops, tanks, aircraft, explosions, audio, and the front line respond as market pressure changes.</p>
               <a class="btn" href="https://augurxrpl.com/battlefield/" target="_blank" rel="noopener">Enter AUGUR Battlefield</a>
             </div>
           </article>
