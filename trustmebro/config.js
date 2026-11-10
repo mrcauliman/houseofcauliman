@@ -1,8 +1,8 @@
 // Trust Me Bro links. These two values are the only places the URLs live.
-// The channel is not created yet. Replace TRUST_ME_BRO_YOUTUBE_CHANNEL_URL
-// when the owner confirms it, and set TRUST_ME_BRO_EPISODE_1_VIDEO_URL when
-// the Episode 1 video URL is confirmed. Leave the episode value empty until then.
-var TRUST_ME_BRO_YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@TrustMeBroPod";
+// Channel handle: @TrustMeBroXRP. Replace TRUST_ME_BRO_YOUTUBE_CHANNEL_URL if the
+// confirmed URL changes. Set TRUST_ME_BRO_EPISODE_1_VIDEO_URL when Episode 1
+// is public. Leave that value empty until then.
+var TRUST_ME_BRO_YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@TrustMeBroXRP";
 var TRUST_ME_BRO_EPISODE_1_VIDEO_URL = "";
 
 function applyTrustMeBroLinks() {
