@@ -128,3 +128,12 @@ Native review of these 116 keys is still needed before any language could be app
 - `unique-node-list-unl.6d39a9be`: Unique Node List (UNL)
 - `governance.823619e0`: Governance
 - `how-the-xrpl-changes-its-rules-amend.19bf21eb`: How the XRPL changes its rules: amendments, validator votes, and server upgrades.
+
+## Navigation and next-card keys (added 2026-11-09, round 3)
+
+A Governance link was added to the top bar of all 13 pages that have one, and a Governance next-card to Definitions and the Builders Hub. That added 4 more English keys. Their nine translations are also AI drafts with no native review. `nav.governance` reuses the same AI-drafted values as the dashboard card title `governance.823619e0`. None of the 4 matches the flag pattern, so the review packets and NEEDS_REVIEW.md are unchanged (231 flagged). All nine languages stay `unapproved`.
+
+- `nav.governance`: Governance
+- `open-governance.1380166b`: Open Governance →
+- `learn-how-validators-vote-on-amendme.f1ed2c05`: Learn how validators vote on amendments that change the rules.
+- `learn-how-new-features-become-availa.889b6ce1`: Learn how new features become available on the network.
