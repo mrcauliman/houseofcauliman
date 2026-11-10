@@ -52,6 +52,7 @@ SHARED = {
     "Safety": "nav.safety",
     "Reality": "nav.reality",
     "Builders": "nav.builders",
+    "Governance": "nav.governance",
     "Back to Dashboard": "nav.backDashboard",
     "Back to XRPL LAYMAN": "nav.backHome",
     "A House of Cauliman Project": "footer.project",
