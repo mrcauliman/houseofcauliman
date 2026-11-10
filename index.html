@@ -1373,14 +1373,35 @@
       padding:18px;
       background:radial-gradient(circle at center,rgba(61,160,255,.16),rgba(3,7,14,.2) 70%);
     }
-    .wide-card-media.battlefield-feature{
-      position:relative;
-      height:100%;
-      min-height:100%;
-      border:0;
-      border-radius:0;
-      text-align:initial;
+    .wide-card.battlefield-feature{
+      grid-template-columns:1fr;
+      border-color:rgba(87,169,255,.55);
+      background:
+        radial-gradient(circle at 18% 20%,rgba(50,120,255,.20),transparent 34%),
+        radial-gradient(circle at 82% 80%,rgba(255,55,55,.18),transparent 34%),
+        linear-gradient(135deg,#07111f 0,#090b10 52%,#160a0d 100%);
+      isolation:isolate;
+      text-align:center;
     }
+    .wide-card.battlefield-feature .wide-card-copy{
+      position:relative;
+      z-index:1;
+      align-items:center;
+      text-align:center;
+    }
+    .wide-card.battlefield-feature .bf-kicker{
+      margin:0;
+      color:#9dbfe8;
+      font-size:.78rem;
+      font-weight:800;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+    }
+    .wide-card.battlefield-feature h3{
+      color:var(--gold);
+      text-shadow:0 0 18px rgba(212,164,74,.14);
+    }
+    .wide-card.battlefield-feature .btn{align-self:center}
     .card.wide-card{min-height:0}
     .card.wide-card:hover,
     .card.wide-card:focus-within{transform:none}
@@ -1814,14 +1835,13 @@
           </article>
         </div>
         <div class="wide-stack">
-          <article class="wide-card" id="augur-battlefield">
+          <article class="wide-card battlefield-feature" id="augur-battlefield">
             <div class="wide-card-copy">
-              <div class="topline"><span class="role">AUGUR BATTLEFIELD</span><span class="badge live">Live</span></div>
+              <p class="bf-kicker">AUGUR BATTLEFIELD • LIVE</p>
               <h3 id="battlefield-title">Forget the charts. Watch the battle.</h3>
               <p class="copy">AUGUR BATTLEFIELD turns live global $XRP market pressure into a moving battlefield. Blue is buy pressure. Red is sell pressure.</p>
               <a class="btn" href="https://augurxrpl.com/battlefield/" target="_blank" rel="noopener">Enter AUGUR Battlefield</a>
             </div>
-            <div class="wide-card-media battlefield-feature" aria-hidden="true"></div>
           </article>
           <article class="wide-card" id="ledger-run">
             <div class="wide-card-copy">
