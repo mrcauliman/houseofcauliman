@@ -84,6 +84,7 @@
     .top a:focus-visible,
     .subscribe:focus-visible,
     .watch:focus-visible,
+    .yt-channel-link:focus-visible,
     .yt-mark:focus-visible,
     .house-link:focus-visible {
       outline: 3px solid #fff;
@@ -188,7 +189,41 @@
       font-weight: 800;
     }
 
-    .watch-row { margin: 14px 0 0; text-align: center; }
+    .watch-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 12px 14px;
+      margin: 14px 0 0;
+      text-align: center;
+    }
+
+    .yt-channel-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      max-width: 100%;
+      color: #fff;
+      font-size: .9rem;
+      font-weight: 800;
+      line-height: 1;
+      text-decoration: none;
+      text-transform: none;
+    }
+
+    .yt-channel-link img {
+      display: block;
+      width: auto;
+      height: 22px;
+      max-width: none;
+      flex: none;
+    }
+
+    .yt-channel-link span { white-space: nowrap; }
+
+    .yt-channel-link:hover,
+    .yt-channel-link:focus-visible { color: var(--yellow); }
 
     .premiere {
       width: min(100%, 400px);
@@ -386,6 +421,7 @@
       .badge-wrap { width: 168px; flex: none; }
       .hero-copy { flex: 1; min-width: 0; }
       h1, .tagline, .house-project, .watch-row { text-align: left; }
+      .watch-row { justify-content: flex-start; }
       .hero-copy .made-for-kids { margin-left: 0; margin-right: 0; }
       .hero-copy .kids-line { margin-left: 0; margin-right: 0; text-align: left; }
       .shorts { grid-template-columns: repeat(auto-fit, minmax(220px, 280px)); justify-content: center; }
@@ -447,7 +483,7 @@
           <p class="tagline">Small knight. <strong>Big beasts.</strong></p>
           <p class="made-for-kids"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9.25" fill="#fff8dc" stroke="#1a1030" stroke-width="1.7"/><path fill="#1a1030" d="M12 5.4l1.55 3.28 3.6.46-2.66 2.48.7 3.58L12 13.5l-3.19 1.7.7-3.58-2.66-2.48 3.6-.46z"/></svg> Made for kids</p>
           <p class="kids-line">A show for kids. <a class="house-link" href="/">A House of Cauliman project.</a></p>
-          <p class="watch-row"><a class="watch" href="https://www.youtube.com/@TheTinyKnight" target="_blank" rel="noopener noreferrer"><svg class="play" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 8.2v7.6l6.4-3.8z" fill="currentColor"/></svg>Watch on YouTube<span class="sr-only"> (opens in a new tab)</span></a></p>
+          <p class="watch-row"><a class="watch" href="https://www.youtube.com/@TheTinyKnight" target="_blank" rel="noopener noreferrer"><svg class="play" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 8.2v7.6l6.4-3.8z" fill="currentColor"/></svg>Watch on YouTube<span class="sr-only"> (opens in a new tab)</span></a><a class="yt-channel-link" href="https://www.youtube.com/@TheTinyKnight" target="_blank" rel="noopener" aria-label="Tiny Knight on YouTube"><img src="/assets/brand/youtube/yt_icon_red_mark.png" alt="" width="827" height="579"> <span>/ @TheTinyKnight</span></a></p>
         </div>
       </div>
       <figure class="premiere">

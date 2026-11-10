@@ -1429,6 +1429,38 @@
       align-self:flex-start;
       margin-top:2px;
     }
+    .card-actions{
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      gap:8px 12px;
+      width:100%;
+      max-width:100%;
+      margin-top:2px;
+    }
+    .wide-card .card-actions .btn{align-self:center;margin-top:0}
+    .yt-channel-link{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      max-width:100%;
+      color:var(--muted);
+      font-size:.8rem;
+      font-weight:700;
+      letter-spacing:.01em;
+      line-height:1;
+      text-transform:none;
+    }
+    .yt-channel-link img{
+      display:block;
+      width:auto;
+      height:22px;
+      flex:none;
+    }
+    .yt-channel-link span{white-space:nowrap}
+    .yt-channel-link:hover,
+    .yt-channel-link:focus-visible{color:#fff}
+    .yt-channel-link:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
     @media(max-width:700px){
       .wide-card,
       .card.wide-card{
@@ -1886,6 +1918,7 @@
               <div class="topline"><span class="role">Podcast</span><span class="badge">General audiences</span></div>
               <h3 id="trust-me-bro-title">Trust Me Bro Podcast</h3>
               <p class="copy">Dex Lambo is confidently wrong about crypto. The Fact Checker isn't.</p>
+              <div class="card-actions">
               <a class="btn" href="/trustmebro/"
                  data-house-modal
                  data-popup="tmb"
@@ -1902,6 +1935,8 @@
                  data-link-label2="Subscribe on YouTube"
                  data-external2="true"
                  data-tmb-channel-slot="href2">Explore</a>
+              <a class="yt-channel-link" href="https://www.youtube.com/@TrustMeBroXRP" target="_blank" rel="noopener" aria-label="Trust Me Bro on YouTube"><img src="/assets/brand/youtube/yt_icon_red_mark.png" alt="" width="827" height="579"> <span>/ @TrustMeBroXRP</span></a>
+              </div>
             </div>
             <img class="wide-card-media" src="/trustmebro/assets/banner.webp" width="1600" height="900" alt="Trust Me Bro with Dex Lambo. Dex sits at a microphone beside the show title." />
           </article>
@@ -1913,6 +1948,7 @@
               <p class="kids-line">A show for kids. A House of Cauliman project.</p>
               <h3 id="tiny-knight-title">Tiny Knight</h3>
               <p class="copy">A very small knight with a very big ego takes on the most dangerous monsters in the house: vacuums, ceiling fans, the cat.</p>
+              <div class="card-actions">
               <a class="btn" href="/tinyknight/"
                  data-house-modal
                  data-title="Tiny Knight"
@@ -1928,6 +1964,8 @@
                  data-href2="https://www.youtube.com/@TheTinyKnight"
                  data-link-label2="Watch on YouTube"
                  data-external2="true">Explore</a>
+              <a class="yt-channel-link" href="https://www.youtube.com/@TheTinyKnight" target="_blank" rel="noopener" aria-label="Tiny Knight on YouTube"><img src="/assets/brand/youtube/yt_icon_red_mark.png" alt="" width="827" height="579"> <span>/ @TheTinyKnight</span></a>
+              </div>
             </div>
             <img class="wide-card-media" src="/tinyknight/assets/banner.webp" width="1600" height="900" alt="Tiny Knight, a pocket-sized knight with a red plume, faces a giant toy T. rex. The title reads Tiny Knight: Small knight. Big beasts." />
           </article>
