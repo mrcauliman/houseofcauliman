@@ -307,7 +307,7 @@ def main(argv=None):
 
     english = catalogs["en"]
     flagged = [key for key in english if FLAG.search(english[key] or "")]
-    if len(flagged) != 230:
+    if len(flagged) != 231:
         errors.append(f"flagged set is {len(flagged)}")
     importer = load_import_review()
     decisions_dir = ROOT / "xrpl/i18n/review-packages/approvals"
@@ -418,7 +418,7 @@ def main(argv=None):
         if mid[path] != expected or hreflangs(mid[path]) or REVIEW_NOTICE not in mid[path] or "data-xrpl-public" in mid[path]:
             errors.append(f"{path} changed beyond the pt-BR selector label")
             break
-    if len(pt_changed) != 13:
+    if len(pt_changed) != 14:
         errors.append(f"pt-BR approval changed {len(pt_changed)} pt-BR files")
     if "xrpl/i18n/sitemap.proposed.xml" not in changed or "xrpl/i18n/release.js" not in changed:
         errors.append("pt-BR approval did not change the sitemap and release.js")
@@ -428,7 +428,7 @@ def main(argv=None):
             "pt-br", "es", "fr", "de", "ja", "ko", "zh-cn", "hi", "ar",
         }
     ]
-    if len(english_changed) != 13:
+    if len(english_changed) != 14:
         errors.append(f"english hreflang cluster changed {len(english_changed)} files")
     mid_errors = audit_release_output(mid, approved, catalogs) + audit_declared_output(mid, approved, catalogs)
     if mid_errors:
@@ -473,7 +473,7 @@ def main(argv=None):
         print("\n".join(errors))
         return 1
     print("declared-state release consistency checks passed")
-    print("packages: 9 languages x 230 keys; decision metadata checked structurally")
+    print("packages: 9 languages x 231 keys; decision metadata checked structurally")
     print("public: " + ", ".join(lang for lang, *_rest in LANGS if declared_public(release, catalogs, lang)))
     if args.expect_held:
         print("held-state checks passed: nine unapproved languages, zero reviewer decisions")

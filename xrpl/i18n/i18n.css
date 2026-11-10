@@ -32,6 +32,8 @@ html .xrpl-language-row select:focus-visible{
   outline-offset:3px;
 }
 .appbar{flex-wrap:wrap}
+/* Round 3: eight appbar links (Governance added) fit in the same space as seven. */
+@media(min-width:901px){.appbar .appbar-links{gap:4px}.appbar .appbar-links a{padding:9px 7px}.appbar .appbar-title,.appbar .appbar-sub{display:block}}
 .xrpl-dashboard-tagline,
 .hero h1,
 .lesson h2,

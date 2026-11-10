@@ -299,7 +299,7 @@ body{
   position:relative;
   z-index:1;
   display:grid;
-  grid-template-columns:repeat(7,minmax(0,1fr));
+  grid-template-columns:repeat(4,minmax(0,1fr));
   gap:16px;
   max-width:1450px;
   margin:0 auto;
@@ -419,6 +419,12 @@ body{
   --card-color:#984bff;
   --card-line:rgba(152,75,255,.34);
   --card-glow:rgba(152,75,255,.13);
+}
+
+.xrpl-card-governance{
+  --card-color:#ffd23f;
+  --card-line:rgba(255,210,63,.30);
+  --card-glow:rgba(255,210,63,.11);
 }
 
 .xrpl-card-house{
@@ -675,6 +681,19 @@ body{
       </div>
       <h2 data-i18n="investing-reality.b1d9866c">Realidad de la inversión</h2>
       <p data-i18n="the-truth-about-risk-liquidity-cycle.b4fbd981">La verdad sobre el riesgo, la liquidez, los ciclos y la perspectiva de largo plazo.</p>
+      <span class="xrpl-app-arrow">→</span>
+    </a>
+
+    <a class="xrpl-app-card xrpl-card-governance" href="/xrpl/es/amendments-governance.html">
+      <div class="xrpl-app-icon">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M10 30h44v24H10z"/>
+          <path d="M20 30V10h24v20"/>
+          <path d="m25 20 5 5 9-10"/>
+        </svg>
+      </div>
+      <h2 data-i18n="governance.823619e0">Gobernanza</h2>
+      <p data-i18n="how-the-xrpl-changes-its-rules-amend.19bf21eb">Cómo cambia XRPL sus propias reglas: enmiendas, votos de validadores y actualizaciones de servidores.</p>
       <span class="xrpl-app-arrow">→</span>
     </a>
 

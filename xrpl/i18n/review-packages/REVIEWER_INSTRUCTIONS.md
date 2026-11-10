@@ -2,7 +2,7 @@
 
 These packets are not an approval. An automated check, including the importer below, cannot certify a translation. Only a person edits `xrpl/i18n/release.json`, and only after this review is accepted.
 
-Edit the CSV, not the Markdown. The Markdown is a reading copy of the same 230 rows.
+Edit the CSV, not the Markdown. The Markdown is a reading copy of the same 231 rows.
 
 ## Who can review
 
@@ -51,6 +51,6 @@ python3 xrpl/i18n/tools/import_review.py ja path/to/ja.csv --apply
 4. Updates the package CSV and the matching Markdown lines. An applied correction becomes the new `translation`, and `correction` is cleared because it has been used.
 5. Runs `node xrpl/i18n/check-catalogs.mjs` and `python3 xrpl/i18n/tools/check_behavior.py`. If either fails, it restores the catalog, the package, and the approval file.
 
-The importer never sets `release.json` to `approved`, even when all 230 rows say `approve`. It never claims the language is native-approved. After the import, regenerate pages with `python3 xrpl/i18n/tools/build_locales.py`. A person then decides whether that one language in `release.json` changes from `unapproved` to `approved`. The other languages stay as they are.
+The importer never sets `release.json` to `approved`, even when all 231 rows say `approve`. It never claims the language is native-approved. After the import, regenerate pages with `python3 xrpl/i18n/tools/build_locales.py`. A person then decides whether that one language in `release.json` changes from `unapproved` to `approved`. The other languages stay as they are.
 
 `python3 xrpl/i18n/tools/import_review.py --self-test` checks the importer against temporary files and does not touch the catalogs.

@@ -1,0 +1,139 @@
+# Amendments & Governance lesson: translation status (2026-11-09)
+
+`/xrpl/amendments-governance.html` and its dashboard card added 116 English keys. The nine non-English values for those keys (pt-BR, es, fr, de, ja, ko, zh-CN, hi, ar) are **AI drafts written on 2026-11-09**. No native speaker and no XRPL expert has reviewed them. The 28 October AI review in `AI_REVIEW_STATUS.md` did **not** cover these keys.
+
+- `release.json` is unchanged: English is `source` and all nine languages stay `unapproved`. The new locale pages therefore carry `noindex, follow`, no `hreflang`, and stay out of `sitemap.proposed.xml`, exactly like the existing pages.
+- One new key matches the repository's security and finance flag pattern (`needs_review.PATTERN`) and was added to `NEEDS_REVIEW.md` and to all nine review packets with blank Approve, Correction, Reviewer and Date cells: `adds-something-new-example-the-amm-a.39d37cbc`. The flag pattern itself was not changed.
+- The other 115 keys are not security or finance copy under that pattern. They are covered only by the language-level `unapproved` status, the same as every other non-flagged string on the site.
+- Existing catalog values were not changed. The 116 keys are additions only (`git diff --numstat`: 116 added, 0 removed per catalog).
+- Swedish is on hold and was not added.
+
+Native review of these 116 keys is still needed before any language could be approved. This file does not approve a language or authorize publication.
+
+## New keys
+
+- `meta.amendments.title`: Amendments & Governance | XRPL LAYMAN
+- `meta.amendments.description`: How the XRPL changes its rules: amendments, validator voting, the 80% for two weeks rule, amendment-blocked servers, and common misconceptions.
+- `governance-application.3ff8d8dc`: Governance Application
+- `amendments-governance.521c9e07`: Amendments & Governance
+- `how-the-xrpl-changes-its-rules-who-p.c3441c0b`: How the XRPL changes its rules: who proposes, who votes, the 80% for two weeks rule, and why servers must update.
+- `what-an-amendment-is.6d6fb1d9`: What an amendment is
+- `an-amendment-is-how-the-xrpl-changes.5893c987`: An amendment is how the XRPL changes its own rules.
+- `amendment.61b2c1cd`: amendment
+- `any-change-to-how-the-xrpl-processes.e25b43e9`: Any change to how the XRPL processes transactions is introduced as an {s1}. That covers new features, such as a new transaction type, and also bug fixes that change how transactions are processed.
+- `built-into-the-software.be06ed25`: Built into the software
+- `the-code-for-an-amendment-ships-insi.0991bee6`: The code for an amendment ships inside a server software release before anyone can vote on it.
+- `voted-on-by-validators.d6d06038`: Voted on by validators
+- `validators-vote-on-each-amendment-th.83b71922`: Validators vote on each amendment. The vote happens on the network itself.
+- `enabled-for-everyone.81cac34b`: Enabled for everyone
+- `if-an-amendment-passes-its-rule-appl.818a5975`: If an amendment passes, its rule applies to every later ledger version, for everyone at once.
+- `who-proposes-and-who-votes.e63835b3`: Who proposes and who votes
+- `anyone-can-propose-only-trusted-vali.e5d90cf1`: Anyone can propose. Only trusted validators decide.
+- `xrp-ledger-standard-xls.7931c335`: XRP Ledger Standard (XLS)
+- `xrpl-server-software-is-open-source.3da713a2`: XRPL server software is open source. A change usually starts as a public discussion and an {s1} document in the XRPL-Standards repository. Bug fixes don’t need an XLS, but they may still need an amendment.
+- `idea-and-public-discussion.572a84dc`: Idea and public discussion
+- `code-tests-and-review.b34d1fe8`: Code, tests, and review
+- `released-in-server-software.64c655ed`: Released in server software
+- `validators-vote.0983e258`: Validators vote
+- `enabled-after-more-than-80-for-two-w.2dff2802`: Enabled after more than 80% for two weeks
+- `validators.7c93aa4d`: validators
+- `trusted-validators.e9a38479`: trusted validators
+- `unl.a3207a81`: UNL
+- `only-vote-on-amendments-and-only-vot.1ef784e5`: Only {s1} vote on amendments, and only votes from {s2} count. Each server has a {s3} (Unique Node List), its list of validators it trusts not to collude. By default, servers use two recommended lists, one published by the XRP Ledger Foundation and one published by Ripple. Each operator can change their server’s list, and can change their own amendment votes at any time.
+- `list-publishers-don-t-validate-trans.d49d25cd`: List publishers don’t validate transactions, but the official docs say they wield significant power in choosing which validators are widely trusted.
+- `the-80-for-two-weeks-rule.24331ab3`: The 80% for two weeks rule
+- `support-has-to-be-strong-and-it-has.e729bc7a`: Support has to be strong and it has to last.
+- `more-than-80-of-trusted-validators-f.837e4d8b`: more than 80% of trusted validators for two weeks
+- `an-amendment-is-enabled-only-after-i.fbad47bf`: An amendment is enabled only after it holds support from {s1}.
+- `flag-ledgers.c5d657f6`: Flag ledgers
+- `every-256th-ledger-is-a-flag-ledger.6e792168`: Every 256th ledger is a flag ledger, typically about 15 minutes apart. Votes are counted around each one.
+- `majority-reached.22cc2573`: Majority reached
+- `when-support-passes-80-the-network-r.5959f0ed`: When support passes 80%, the network records that the amendment gained a majority and the two-week clock starts.
+- `majority-lost.dc6437fd`: Majority lost
+- `if-support-falls-to-80-or-less-the-c.4eec6410`: If support falls to 80% or less, the clock resets. An amendment can gain and lose a majority any number of times.
+- `real-example.1d4cf2e8`: Real example
+- `the-fixamendmentmajoritycalc-amendme.2603fc5b`: The fixAmendmentMajorityCalc amendment fixed a rounding bug that could let an amendment activate with slightly less than 80%, for example 28 of 36 validators (about 77.8%). It was enabled on 2021-04-08. Since then the minimum is never less than 80% of trusted validators.
+- `activation-is-permanent.eb78b4fb`: Activation is permanent
+- `once-enabled-there-is-no-off-switch.33e35546`: Once enabled, there is no off switch.
+- `permanently.f3c0246b`: permanently
+- `when-an-amendment-passes-the-change.6dbc7d57`: When an amendment passes, the change applies {s1} to all later ledger versions.
+- `new-amendment.d4051d78`: new amendment
+- `turning-off-a-passed-amendment-requi.204d06e5`: Turning off a passed amendment requires a {s1}, which has to pass the same vote.
+- `vetoed.2aa0db7f`: vetoed
+- `if-an-amendment-s-code-is-removed-fr.55729e89`: If an amendment’s code is removed from the software without it ever being enabled, the network treats it as {s1}.
+- `retired.dd14b94b`: retired
+- `two-years-after-an-amendment-is-enab.3d52f9ed`: Two years after an amendment is enabled on Mainnet, it can be {s1} under XLS-11: the old pre-amendment code is removed and the new rule becomes part of the core protocol.
+- `amendment-blocked-servers.ed48f219`: Amendment-blocked servers
+- `a-server-that-doesn-t-understand-the.daef08b4`: A server that doesn’t understand the new rules stops instead of guessing.
+- `amendment-blocked.0b9d0d76`: amendment blocked
+- `when-an-amendment-is-enabled-servers.390c0760`: When an amendment is enabled, servers running older software without that amendment’s code no longer understand the network’s rules. Instead of misreading ledger data, they become {s1}. A blocked server can’t:
+- `determine-whether-a-ledger-is-valid.a25e3747`: Determine whether a ledger is valid.
+- `submit-or-process-transactions.099dda1d`: Submit or process transactions.
+- `take-part-in-consensus.ec31800f`: Take part in consensus.
+- `vote-on-future-amendments.3ae89c1f`: Vote on future amendments.
+- `how-a-server-voted-doesn-t-matter-ev.d9d8a135`: How a server voted doesn’t matter. Every server follows the amendments the network enabled, so being blocked depends only on whether the server has the code. The fix is to upgrade to the newest server software.
+- `why-operators-must-update.29c8f448`: Why operators must update
+- `if-you-don-t-run-a-server-yourself-t.7550510d`: If you don’t run a server yourself, this is the job of whoever runs the server your app or exchange connects to. A server that misses an update can’t confirm or submit transactions until it upgrades.
+- `fixes-vs-features.de117ae9`: Fixes vs features
+- `both-go-through-the-same-vote.37d7092c`: Both go through the same vote.
+- `feature.ad565d9d`: Feature
+- `adds-something-new-example-the-amm-a.39d37cbc` (flagged): Adds something new. Example: the AMM amendment added automated market makers to the XRPL. It was enabled on 2024-03-22.
+- `fix.99a42316`: Fix
+- `corrects-behavior-many-fix-amendment.85ce00a4`: Corrects behavior. Many fix amendments have names that start with “fix”, such as fixAmendmentMajorityCalc. Bug fixes that change transaction processing still need an amendment.
+- `replaced.05033aaa`: Replaced
+- `sometimes-a-problem-is-found-first-t.4695b244`: Sometimes a problem is found first. The Batch amendment was removed from the server software in version 3.1.1 because of a bug and replaced by a new amendment, BatchV1_1.
+- `each-validator-operator-chooses-a-vo.a631f3fc`: Each validator operator chooses a vote for each amendment. If the operator doesn’t choose, the server uses a default vote set in the software, and that default can change between releases.
+- `the-negative-unl-is-not-governance.d7a19d52`: The Negative UNL is not governance
+- `it-keeps-the-network-moving-during-o.ef50c6e3`: It keeps the network moving during outages. It doesn’t change any rules.
+- `negative-unl.4492631d`: Negative UNL
+- `the-is-a-list-of-trusted-validators.1d41256c`: The {s1} is a list of trusted validators that the other validators agree appear to be offline or malfunctioning. Those validators are temporarily ignored when counting whether a new ledger has reached consensus, so the network can keep confirming ledgers during a partial outage.
+- `the-official-docs-say-it-has-no-impa.908d6e59`: The official docs say it has no impact on how the network processes transactions or what their outcomes are. It doesn’t vote on rules, and it doesn’t remove anyone from a UNL. The Negative UNL itself was added by the NegativeUNL amendment, enabled on 2021-11-21.
+- `common-misconceptions.5da4c986`: Common misconceptions
+- `what-people-often-get-wrong-about-xr.c9e5e758`: What people often get wrong about XRPL governance.
+- `ripple-can-flip-a-switch.ba11b901`: “Ripple can flip a switch.”
+- `no-single-server-can-enable-or-disab.c91bb549`: {s1} No single server can enable or disable an amendment. It needs more than 80% of trusted validators for two weeks.
+- `holding-xrp-gives-me-a-vote.a6b9087f`: “Holding $XRP gives me a vote.”
+- `only-validators-vote-on-amendments-h.6d81d1bf`: {s1} Only validators vote on amendments. Holding $XRP isn’t a vote.
+- `a-passed-amendment-can-be-undone-eas.7b3de091`: “A passed amendment can be undone easily.”
+- `undoing-it-takes-a-new-amendment-tha.b40cb389`: {s1} Undoing it takes a new amendment that passes the same vote.
+- `updating-server-software-is-optional.c4bc2d11`: “Updating server software is optional.”
+- `a-server-without-the-code-for-an-ena.7b7c65aa`: {s1} A server without the code for an enabled amendment becomes amendment blocked.
+- `the-negative-unl-is-a-governance-vot.7590ae4e`: “The Negative UNL is a governance vote.”
+- `it-only-helps-the-network-keep-confi.77fee402`: {s1} It only helps the network keep confirming ledgers when validators are offline.
+- `open-for-voting-means-it-s-coming.6db919bb`: “Open for voting means it’s coming.”
+- `many-amendments-stay-below-80-for-a.8a508074`: {s1} Many amendments stay below 80% for a long time, and some are never enabled.
+- `how-to-see-current-votes.f01c1a3d`: How to see current votes
+- `check-the-official-list-not-a-screen.acaa306a`: Check the official list, not a screenshot.
+- `known-amendments.aa2c57a2`: Known Amendments
+- `the-page-on-xrpl-org-lists-every-ame.de47d70a`: The {s1} page on xrpl.org lists every amendment that is enabled on Mainnet or open for voting, with its current support. Support changes as validators update their votes, so always check the live page.
+- `read-it-like-this.59367fe2`: Read it like this
+- `enabled-with-a-date-means-the-rule-i.8c4763d8`: “Enabled” with a date means the rule is live and permanent. “Open for Voting” with a percentage means validators are still deciding. “Obsolete” means the code was removed.
+- `what-does-an-amendment-need-to-be-en.6091da5a`: What does an amendment need to be enabled?
+- `more-than-80-of-trusted-validators-f.42989aeb`: More than 80% of trusted validators for two weeks
+- `a-majority-of-xrp-holders-for-one-da.460ee343`: A majority of $XRP holders for one day
+- `who-votes-on-amendments.e9b92067`: Who votes on amendments?
+- `anyone-who-holds-xrp.ebef9f20`: Anyone who holds $XRP
+- `validators-and-only-trusted-validato.a7c3f0db`: Validators, and only trusted validators’ votes count
+- `what-happens-to-a-server-without-the.627a764c`: What happens to a server without the code for a newly enabled amendment?
+- `it-becomes-amendment-blocked-until-i.331286e5`: It becomes amendment blocked until it upgrades
+- `it-keeps-working-normally.3c354329`: It keeps working normally
+- `is-the-negative-unl-a-way-to-vote-on.ee8ab57c`: Is the Negative UNL a way to vote on new rules?
+- `review-the-core-terms.01bd75a1`: Review the core terms.
+- `protect-your-keys-and-signing.251375e8`: Protect your keys and signing.
+- `see-how-projects-are-built.90a8433d`: See how projects are built.
+- `sources.2eb56be3`: Sources
+- `facts-on-this-page-were-checked-agai.1c0ccb34`: Facts on this page were checked against official xrpl.org documentation on 2026-11-09.
+- `amendments.90086687`: Amendments
+- `contribute-code.57d31c2e`: Contribute Code
+- `unique-node-list-unl.6d39a9be`: Unique Node List (UNL)
+- `governance.823619e0`: Governance
+- `how-the-xrpl-changes-its-rules-amend.19bf21eb`: How the XRPL changes its rules: amendments, validator votes, and server upgrades.
+
+## Navigation and next-card keys (added 2026-11-09, round 3)
+
+A Governance link was added to the top bar of all 13 pages that have one, and a Governance next-card to Definitions and the Builders Hub. That added 4 more English keys. Their nine translations are also AI drafts with no native review. `nav.governance` reuses the same AI-drafted values as the dashboard card title `governance.823619e0`. None of the 4 matches the flag pattern, so the review packets and NEEDS_REVIEW.md are unchanged (231 flagged). All nine languages stay `unapproved`.
+
+- `nav.governance`: Governance
+- `open-governance.1380166b`: Open Governance →
+- `learn-how-validators-vote-on-amendme.f1ed2c05`: Learn how validators vote on amendments that change the rules.
+- `learn-how-new-features-become-availa.889b6ce1`: Learn how new features become available on the network.
