@@ -647,6 +647,7 @@
     .house-modal-kicker,
     .house-modal-window h2,
     .house-modal-status,
+    .house-modal-audience,
     .house-modal-lead,
     .house-modal-details,
     .house-modal-actions{
@@ -679,6 +680,7 @@
       .house-modal-kicker,
       .house-modal-window h2,
       .house-modal-status,
+      .house-modal-audience,
       .house-modal-lead,
       .house-modal-details,
       .house-modal-actions{
@@ -1285,6 +1287,24 @@
     .tiny-knight-feature .btn:focus-visible{outline:2px solid #fff;outline-offset:3px}
     @media(max-width:640px){.tiny-knight-feature{grid-template-columns:1fr;padding:22px}.tiny-knight-art{max-width:230px}}
 
+    /* TRUST ME BRO: scoped entertainment feature, same layout as Ledger Run and Tiny Knight */
+    #trust-me-bro{scroll-margin-top:90px}
+    .trust-me-bro-feature{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,.55fr);gap:26px;align-items:center;padding:30px;border:1px solid rgba(255,225,74,.55);border-radius:24px;background:radial-gradient(circle at 88% 16%,rgba(255,225,74,.18),transparent 36%),linear-gradient(145deg,#1d4ed8,#0b1d4e 75%)}
+    .trust-me-bro-feature h2{font-size:clamp(2rem,5vw,3.5rem);margin:14px 0 8px;color:#ffe14a}
+    .trust-me-bro-feature p{color:var(--muted);line-height:1.65;max-width:650px}
+    .trust-me-bro-feature .tmb-tagline{color:var(--text);font-weight:900;letter-spacing:.08em}
+    .trust-me-bro-art{display:block;width:100%;max-width:310px;height:auto;margin:auto;filter:drop-shadow(0 16px 24px rgba(0,0,0,.25))}
+    .trust-me-bro-feature .btn{border-color:rgba(255,225,74,.85);background:#ffe14a;color:#1a1030}
+    .trust-me-bro-feature .btn:hover{background:#fff1a8}
+    .trust-me-bro-feature .btn:focus-visible{outline:2px solid #fff;outline-offset:3px}
+    @media(max-width:640px){.trust-me-bro-feature{grid-template-columns:1fr;padding:22px}.trust-me-bro-art{max-width:230px}}
+
+    .made-for-kids{display:inline-flex;align-items:center;gap:6px;width:max-content;max-width:100%;margin:0 0 12px;padding:4px 9px 4px 4px;border:1px solid rgba(255,208,0,.75);border-radius:999px;background:rgba(255,208,0,.16);color:#ffe9a0;font-size:.66rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;line-height:1.2}
+    .made-for-kids svg{display:block;flex:none}
+    .house-modal-audience{margin-top:12px}
+    .house-modal-audience[hidden]{display:none}
+    .house-modal-audience .made-for-kids{margin:0}
+
     /* RAD popup: compact copy, with reachable actions on short screens. */
     .house-modal.rad-popup{align-items:center;touch-action:pan-y;padding:calc(10px + env(safe-area-inset-top,0px)) 10px calc(10px + env(safe-area-inset-bottom,0px))}
     .rad-popup .house-modal-window{height:auto;min-height:0;max-height:calc(100svh - 20px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));max-height:calc(100dvh - 20px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));display:flex;flex-direction:column}
@@ -1701,6 +1721,57 @@
                data-link-label2="𝕏 Profile"
                data-external2="true">Explore</a>
           </article>
+
+          <article class="card" id="tiny-knight-card">
+            <div>
+              <div class="topline"><span class="role">Show</span><span class="badge">Original series</span></div>
+              <p class="made-for-kids"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9.25" fill="#ffd000" stroke="#1a1030" stroke-width="1.7"/><path fill="#1a1030" d="M12 5.4l1.55 3.28 3.6.46-2.66 2.48.7 3.58L12 13.5l-3.19 1.7.7-3.58-2.66-2.48 3.6-.46z"/></svg> Made for kids</p>
+              <img class="card-logo" src="/tinyknight/assets/icon.webp" width="640" height="640" alt="Tiny Knight, a pocket-sized knight in a silver helmet with a red plume, on a gold sunburst" />
+              <h3>Tiny Knight</h3>
+              <div class="verb">Watch</div>
+              <p class="copy">A very small knight with a very big ego takes on the most dangerous monsters in the house: vacuums, ceiling fans, the cat.</p>
+            </div>
+            <a href="/tinyknight/"
+               data-house-modal
+               data-title="Tiny Knight"
+               data-logo="/tinyknight/assets/icon.webp"
+               data-role="Show"
+               data-status="Original series"
+               data-kids="true"
+               data-lead="Small knight. Big beasts."
+               data-details="A very small knight with a very big ego takes on the most dangerous monsters in the house: vacuums, ceiling fans, the cat. Original animation. New episodes every week."
+               data-breakdown="Original animation|New episodes every week|Small knight. Big beasts.|Made for kids"
+               data-href="/tinyknight/"
+               data-link-label="Watch Tiny Knight"
+               data-href2="https://www.youtube.com/@TheTinyKnight"
+               data-link-label2="Watch on YouTube"
+               data-external2="true">Explore</a>
+          </article>
+
+          <article class="card" id="trust-me-bro-card">
+            <div>
+              <div class="topline"><span class="role">Podcast</span><span class="badge">General audiences</span></div>
+              <img class="card-logo" src="/trustmebro/assets/icon.webp" width="640" height="640" alt="Dex Lambo, the cartoon host of Trust Me Bro Podcast" />
+              <h3>Trust Me Bro Podcast</h3>
+              <div class="verb">Verify</div>
+              <p class="copy">Dex Lambo is confidently wrong about crypto. The Fact Checker isn't. A parody podcast: Dex is wrong on purpose, every claim gets checked with real sources, and nothing here is financial advice.</p>
+            </div>
+            <a href="/trustmebro/"
+               data-house-modal
+               data-title="Trust Me Bro Podcast"
+               data-logo="/trustmebro/assets/icon.webp"
+               data-role="Podcast"
+               data-status="General audiences"
+               data-lead="Don't trust. Verify, bro."
+               data-details="Dex Lambo is confidently wrong about crypto. The Fact Checker isn't. A parody podcast: Dex is wrong on purpose, every claim gets checked with real sources, and nothing here is financial advice."
+               data-breakdown="Hosted by Dex Lambo, an original cartoon character|Parody. Dex is wrong on purpose.|Facts are checked with real sources.|Not financial advice."
+               data-href="/trustmebro/"
+               data-link-label="Watch Trust Me Bro"
+               data-href2=""
+               data-link-label2="Watch on YouTube"
+               data-external2="true"
+               data-tmb-channel-slot="href2">Explore</a>
+          </article>
         </div>
       </section>
 
@@ -1732,6 +1803,20 @@
           <div class="btnrow"><a class="btn" href="/tinyknight/">Watch Tiny Knight</a></div>
         </div>
         <img class="tiny-knight-art" src="/tinyknight/assets/icon.webp" width="640" height="640" loading="lazy" alt="Tiny Knight, a pocket-sized knight in a silver helmet with a red plume, on a gold sunburst" />
+      </div>
+    </section>
+
+    <section id="trust-me-bro" class="section" aria-labelledby="trust-me-bro-title">
+      <div class="trust-me-bro-feature">
+        <div>
+          <span class="badge">Podcast</span>
+          <h2 id="trust-me-bro-title">TRUST ME BRO</h2>
+          <p class="tmb-tagline">DON'T TRUST. VERIFY, BRO.</p>
+          <p>Dex Lambo is confidently wrong about crypto. The Fact Checker isn't. A parody podcast: Dex is wrong on purpose, every claim gets checked with real sources, and nothing here is financial advice.</p>
+          <p>Hosted by Dex Lambo, an original cartoon character. General audiences.</p>
+          <div class="btnrow"><a class="btn" href="/trustmebro/">Watch Trust Me Bro</a></div>
+        </div>
+        <img class="trust-me-bro-art" src="/trustmebro/assets/icon.webp" width="640" height="640" loading="lazy" alt="Dex Lambo, the cartoon host of Trust Me Bro Podcast, winking and giving a thumbs up" />
       </div>
     </section>
 
@@ -1846,6 +1931,7 @@
         <div class="house-modal-kicker" id="houseModalRole"></div>
         <h2 id="houseModalTitle"></h2>
         <div class="house-modal-status" id="houseModalStatus"></div>
+        <div class="house-modal-audience" id="houseModalAudience" hidden></div>
         <p class="house-modal-lead" id="houseModalLead"></p>
         <div class="house-modal-details" id="houseModalDetails"></div>
         <div class="house-modal-breakdown" id="houseModalBreakdown"></div>
@@ -1866,6 +1952,14 @@
   const breakdown = document.getElementById('houseModalBreakdown');
   const actions = document.getElementById('houseModalActions');
   const logo = document.getElementById('houseModalLogo');
+  const audience = document.getElementById('houseModalAudience');
+
+  const madeForKidsBadge = () => {
+    const badge = document.createElement('p');
+    badge.className = 'made-for-kids';
+    badge.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9.25" fill="#ffd000" stroke="#1a1030" stroke-width="1.7"/><path fill="#1a1030" d="M12 5.4l1.55 3.28 3.6.46-2.66 2.48.7 3.58L12 13.5l-3.19 1.7.7-3.58-2.66-2.48 3.6-.46z"/></svg> Made for kids';
+    return badge;
+  };
 
   const closeModal = () => {
     modal.hidden = true;
@@ -1906,6 +2000,14 @@
         logo.removeAttribute('src');
         logo.alt = '';
         logo.hidden = true;
+      }
+
+      audience.replaceChildren();
+      if (trigger.dataset.kids === 'true') {
+        audience.hidden = false;
+        audience.appendChild(madeForKidsBadge());
+      } else {
+        audience.hidden = true;
       }
       actions.innerHTML = '';
 
@@ -1950,6 +2052,7 @@
   });
 })();
 </script>
+<script src="/trustmebro/config.js"></script>
 
 </body>
 </html>

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trust Me Bro Podcast | House of Cauliman</title>
+  <link rel="canonical" href="https://houseofcauliman.com/trustmebro/">
+  <meta name="description" content="Trust Me Bro Podcast, hosted by Dex Lambo. Don't trust. Verify, bro. A parody podcast: Dex is wrong on purpose, every claim gets checked with real sources, and nothing here is financial advice.">
+  <meta property="og:title" content="Trust Me Bro Podcast | House of Cauliman">
+  <meta property="og:description" content="Don't trust. Verify, bro. Dex Lambo is confidently wrong about crypto. The Fact Checker isn't. Parody. Not financial advice.">
+  <meta property="og:image" content="https://houseofcauliman.com/trustmebro/assets/banner.webp">
+  <meta property="og:url" content="https://houseofcauliman.com/trustmebro/">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#12307a">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/icon-180.png">
+  <style>
+    :root {
+      --ink: #0c1b4a;
+      --blue: #2e6bff;
+      --deep: #12307a;
+      --yellow: #ffe14a;
+      --cream: #f3f6ff;
+      --muted: #d9e2f8;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--cream);
+      background:
+        radial-gradient(circle at 50% -8%, rgba(255, 225, 74, .22), transparent 36%),
+        linear-gradient(180deg, #2e6bff 0%, #12307a 42%, #0c1b4a 100%);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    img { max-width: 100%; height: auto; }
+
+    a { color: inherit; }
+
+    .skip {
+      position: absolute;
+      left: 12px;
+      top: -48px;
+      z-index: 20;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--yellow);
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    .skip:focus { top: 12px; }
+
+    .top {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 8px 16px;
+      background: rgba(12, 27, 74, .92);
+      border-bottom: 3px solid var(--ink);
+      backdrop-filter: blur(12px);
+    }
+
+    .top a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      color: var(--yellow);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .top a:focus-visible,
+    .watch:focus-visible,
+    .yt-mark:focus-visible,
+    .house-link:focus-visible,
+    .ep-link:focus-visible {
+      outline: 3px solid #fff;
+      outline-offset: 3px;
+    }
+
+    .wrap {
+      width: min(100% - 32px, 960px);
+      margin: 0 auto;
+      padding-bottom: 48px;
+    }
+
+    .hero { padding-top: 8px; }
+
+    .hero-id {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 0 16px;
+    }
+
+    .hero-copy { width: min(100%, 760px); text-align: center; }
+
+    .banner {
+      display: block;
+      width: 100%;
+      margin-top: 18px;
+      border: 4px solid var(--ink);
+      border-radius: 22px;
+      box-shadow: 8px 8px 0 var(--yellow);
+      background: var(--blue);
+    }
+
+    .badge-wrap {
+      width: min(42vw, 168px);
+      margin: 0;
+      aspect-ratio: 1;
+    }
+
+    .host {
+      position: relative;
+      z-index: 1;
+      display: block;
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 10px 0 rgba(12, 27, 74, .28));
+    }
+
+    h1 { margin: 8px 0 0; }
+
+    .wordmark {
+      display: block;
+      width: min(100%, 720px);
+      margin: 0 auto;
+    }
+
+    .show-name {
+      margin: 8px 0 0;
+      font-size: clamp(1.15rem, 3vw, 1.45rem);
+      font-weight: 900;
+      letter-spacing: .04em;
+    }
+
+    .tagline {
+      margin: 10px 0 0;
+      font-size: clamp(1.25rem, 4vw, 1.8rem);
+      font-weight: 900;
+      letter-spacing: .02em;
+    }
+
+    .tagline strong { color: var(--yellow); }
+
+    .host-line,
+    .house-project {
+      margin: 8px 0 0;
+      font-size: .95rem;
+      font-weight: 800;
+    }
+
+    .audience {
+      display: inline-flex;
+      align-items: center;
+      margin: 12px 0 0;
+      padding: 6px 12px;
+      border: 3px solid var(--ink);
+      border-radius: 999px;
+      background: var(--cream);
+      color: var(--ink);
+      font-size: .75rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .disclaimer {
+      margin: 14px 0 0;
+      padding: 12px 14px;
+      border: 3px solid var(--ink);
+      border-radius: 16px;
+      background: #fff4cc;
+      color: var(--ink);
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .watch-row { margin: 14px 0 0; }
+
+    .watch {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 48px;
+      padding: 12px 18px;
+      border: 3px solid var(--ink);
+      border-radius: 999px;
+      background: #cc0000;
+      color: #fff;
+      font-weight: 900;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      box-shadow: 4px 4px 0 var(--ink);
+    }
+
+    .watch:hover { background: #a30000; }
+
+    .watch .play { display: block; flex: none; }
+
+    .yt-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 44px;
+      min-height: 44px;
+      color: #ff4d4d;
+    }
+
+    #episode { scroll-margin-top: 72px; }
+
+    .about,
+    .episode {
+      margin-top: 28px;
+      padding: 22px 18px;
+      border: 4px solid var(--ink);
+      border-radius: 22px;
+      background: rgba(18, 48, 122, .9);
+      box-shadow: 8px 8px 0 rgba(255, 225, 74, .9);
+    }
+
+    h2, h3 { margin: 0; letter-spacing: .04em; }
+
+    h2 {
+      font-size: clamp(1.4rem, 4vw, 1.8rem);
+      color: var(--yellow);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .about p,
+    .ep-note {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .ep-kicker {
+      margin: 0;
+      color: var(--yellow);
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .episode h3 {
+      margin-top: 8px;
+      font-size: clamp(1.15rem, 3vw, 1.45rem);
+    }
+
+    .episode .disclaimer { margin-top: 14px; }
+
+    .ep-frame {
+      margin: 16px 0 0;
+    }
+
+    .ep-still,
+    .video-frame {
+      display: block;
+      width: 100%;
+      border: 3px solid var(--ink);
+      border-radius: 18px;
+      background: #000;
+    }
+
+    .video-frame {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+    }
+
+    .video-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .ep-link { display: block; }
+
+    .footer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px 16px;
+      width: min(100% - 32px, 960px);
+      margin: 0 auto;
+      padding: 18px 0 28px;
+      border-top: 3px solid rgba(255, 225, 74, .4);
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .footer p { margin: 0; }
+
+    .house-link {
+      color: var(--yellow);
+      font-weight: 800;
+      text-underline-offset: 3px;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (min-width: 720px) {
+      .hero-id {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 18px;
+        padding-top: 18px;
+      }
+      .badge-wrap { width: 168px; flex: none; margin-top: 6px; }
+      .hero-copy { flex: 1; min-width: 0; text-align: left; }
+      .wordmark { width: min(100%, 520px); margin-left: 0; }
+      .about, .episode { padding: 28px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+
+    @media (forced-colors: active) {
+      .banner, .about, .episode, .watch, .yt-mark, .disclaimer, .audience, .ep-still, .video-frame {
+        border: 1px solid CanvasText;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#episode">Skip to episode 1</a>
+  <header class="top">
+    <a href="/">House of Cauliman</a>
+    <a href="#episode">Episode 1</a>
+  </header>
+  <main class="wrap">
+    <section class="hero" aria-labelledby="tmb-title">
+      <div class="hero-id">
+        <div class="badge-wrap">
+          <img class="host" src="assets/icon.webp" width="640" height="640" alt="Dex Lambo, the cartoon host of Trust Me Bro Podcast, winking and giving a thumbs up beside a microphone" decoding="async">
+        </div>
+        <div class="hero-copy">
+          <h1 id="tmb-title">
+            <picture>
+              <source srcset="assets/logo-wordmark.webp" type="image/webp">
+              <img class="wordmark" src="assets/logo-wordmark.png" width="1400" height="560" alt="Trust Me Bro">
+            </picture>
+            <span class="show-name">Trust Me Bro Podcast</span>
+          </h1>
+          <p class="tagline">Don't trust. <strong>Verify, bro.</strong></p>
+          <p class="host-line">Hosted by Dex Lambo, an original cartoon character.</p>
+          <p class="audience">General audiences</p>
+          <p class="disclaimer">Parody. Dex is wrong on purpose. Facts are checked. Not financial advice.</p>
+          <p class="house-project"><a class="house-link" href="/">A House of Cauliman project</a></p>
+          <p class="watch-row"><a class="watch" data-tmb-channel href="#trust-me-bro-youtube" target="_blank" rel="noopener noreferrer"><svg class="play" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 8.2v7.6l6.4-3.8z" fill="currentColor"/></svg>Watch on YouTube<span class="sr-only"> (opens in a new tab)</span></a></p>
+        </div>
+      </div>
+      <!-- Show banner, 1600×900, same size as the Tiny Knight banner. -->
+      <img class="banner" src="assets/banner.webp" width="1600" height="900" alt="Trust Me Bro Podcast banner. Dex Lambo sits at a microphone beside the words Trust Me Bro and Don't trust. Verify, bro." fetchpriority="high" decoding="async">
+    </section>
+
+    <section class="about" aria-labelledby="about-title">
+      <h2 id="about-title">About</h2>
+      <p>Dex Lambo is confidently wrong about crypto. The Fact Checker isn't. A parody podcast: Dex is wrong on purpose, every claim gets checked with real sources, and nothing here is financial advice.</p>
+      <p>General audiences. Dex Lambo is an original cartoon character.</p>
+    </section>
+
+    <section class="episode" id="episode" aria-labelledby="ep1-title">
+      <p class="ep-kicker">Episode 1</p>
+      <h2 id="ep1-title">XRP to $10K? Trust Me Bro | Episode 1</h2>
+      <p class="disclaimer">Parody. Dex is wrong on purpose. Facts are checked. Not financial advice.</p>
+      <figure class="ep-frame" id="ep1-frame">
+        <img class="ep-still" id="ep1-still" src="assets/episode-01.webp" width="1280" height="720" alt="Episode 1 thumbnail. Dex Lambo winks and gives a thumbs up beside the title XRP to $10K? and a Fact Check label.">
+      </figure>
+      <p class="ep-note" id="ep1-note">The episode video will be linked here when it is public. Until then, the channel button above is the place to watch.</p>
+    </section>
+  </main>
+  <footer class="footer">
+    <p>Created by MRCΛULⅠMΛN</p>
+    <p><a class="house-link" href="/">A House of Cauliman project</a></p>
+    <p><a class="yt-mark" data-tmb-channel href="#trust-me-bro-youtube" target="_blank" rel="noopener noreferrer" aria-label="Trust Me Bro Podcast on YouTube (opens in a new tab)"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" focusable="false"><rect x="2" y="5" width="20" height="14" rx="4" fill="currentColor"/><path d="M10 9.2v5.6l5.2-2.8z" fill="#0c1b4a"/></svg></a></p>
+  </footer>
+  <script src="config.js"></script>
+  <script>
+    (function () {
+      var frame = document.getElementById("ep1-frame");
+      var still = document.getElementById("ep1-still");
+      var note = document.getElementById("ep1-note");
+      var title = document.getElementById("ep1-title");
+      var raw = (typeof TRUST_ME_BRO_EPISODE_1_VIDEO_URL === "string") ? TRUST_ME_BRO_EPISODE_1_VIDEO_URL.trim() : "";
+      if (!frame || !still || !raw) return;
+
+      function youtubeId(value) {
+        var url;
+        try { url = new URL(value); } catch (e) { return ""; }
+        if (url.protocol !== "https:") return "";
+        var host = url.hostname.replace(/^www\./, "");
+        var id = "";
+        if (host === "youtu.be") id = url.pathname.split("/").filter(Boolean)[0] || "";
+        else if (host === "youtube.com" || host === "youtube-nocookie.com" || host === "m.youtube.com") {
+          if (url.pathname === "/watch") id = url.searchParams.get("v") || "";
+          else {
+            var parts = url.pathname.split("/").filter(Boolean);
+            if (parts[0] === "embed" || parts[0] === "shorts" || parts[0] === "live") id = parts[1] || "";
+          }
+        }
+        return /^[A-Za-z0-9_-]{6,}$/.test(id) ? id : "";
+      }
+
+      var id = youtubeId(raw);
+      if (id) {
+        var wrap = document.createElement("div");
+        wrap.className = "video-frame";
+        var iframe = document.createElement("iframe");
+        iframe.src = "https://www.youtube-nocookie.com/embed/" + id;
+        iframe.title = title ? title.textContent : "Trust Me Bro Podcast Episode 1";
+        iframe.loading = "lazy";
+        iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share");
+        iframe.referrerPolicy = "strict-origin-when-cross-origin";
+        iframe.setAttribute("allowfullscreen", "");
+        wrap.appendChild(iframe);
+        still.replaceWith(wrap);
+        if (note) note.hidden = true;
+        return;
+      }
+
+      var url;
+      try { url = new URL(raw); } catch (e) { return; }
+      if (url.protocol !== "https:") return;
+      var link = document.createElement("a");
+      link.className = "ep-link";
+      link.href = raw;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.setAttribute("aria-label", (title ? title.textContent : "Episode 1") + " (opens in a new tab)");
+      still.replaceWith(link);
+      link.appendChild(still);
+      if (note) note.hidden = true;
+    })();
+  </script>
+</body>
+</html>
