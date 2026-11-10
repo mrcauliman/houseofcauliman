@@ -1373,14 +1373,54 @@
       padding:18px;
       background:radial-gradient(circle at center,rgba(61,160,255,.16),rgba(3,7,14,.2) 70%);
     }
-    .wide-card-media.battlefield-feature{
-      position:relative;
-      height:100%;
-      min-height:100%;
-      border:0;
-      border-radius:0;
-      text-align:initial;
+    .wide-card.battlefield-feature{
+      grid-template-columns:1fr;
+      height:auto;
+      min-height:340px;
+      border-color:rgba(87,169,255,.55);
+      background:
+        radial-gradient(circle at 18% 20%,rgba(50,120,255,.20),transparent 34%),
+        radial-gradient(circle at 82% 80%,rgba(255,55,55,.18),transparent 34%),
+        linear-gradient(135deg,#07111f 0,#090b10 52%,#160a0d 100%);
+      isolation:isolate;
+      text-align:center;
     }
+    .wide-card.battlefield-feature .wide-card-copy{
+      position:relative;
+      z-index:1;
+      align-items:center;
+      height:auto;
+      max-height:none;
+      overflow:visible;
+      text-align:center;
+    }
+    .wide-card.battlefield-feature .copy{
+      display:block;
+      max-width:800px;
+      overflow:visible;
+      -webkit-line-clamp:unset;
+    }
+    .wide-card.battlefield-feature .bf-kicker{
+      margin:0;
+      color:#9dbfe8;
+      font-size:.78rem;
+      font-weight:800;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+    }
+    .wide-card.battlefield-feature h3{
+      color:var(--gold);
+      text-shadow:0 0 18px rgba(212,164,74,.14);
+    }
+    .wide-card.battlefield-feature .btn{align-self:center}
+    #monolith-card,
+    #ledger-run{position:relative;height:auto;min-height:340px}
+    #monolith-card .wide-card-copy,
+    #ledger-run .wide-card-copy{grid-column:1;height:auto;max-height:none;overflow:visible}
+    #monolith-card .wide-card-media,
+    #ledger-run .wide-card-media{position:absolute;top:0;right:0;bottom:0;left:auto;width:54%;height:100%;max-height:none;object-fit:contain;object-position:center}
+    #monolith-card .copy,
+    #ledger-run .copy{display:block;overflow:visible;-webkit-line-clamp:unset}
     .card.wide-card{min-height:0}
     .card.wide-card:hover,
     .card.wide-card:focus-within{transform:none}
@@ -1403,6 +1443,14 @@
       }
       .wide-card-copy{height:auto;padding:14px;overflow:visible}
       .wide-card .copy{-webkit-line-clamp:4}
+      .wide-card.battlefield-feature{min-height:0;height:auto}
+      .wide-card.battlefield-feature .copy{-webkit-line-clamp:unset}
+      #monolith-card,
+      #ledger-run{min-height:0;height:auto}
+      #monolith-card .wide-card-media,
+      #ledger-run .wide-card-media{position:static;top:auto;right:auto;bottom:auto;left:auto;width:100%;height:132px}
+      #monolith-card .wide-card-copy,
+      #ledger-run .wide-card-copy{grid-column:auto}
     }
   </style>
   <link rel="icon" href="/assets/favicons/favicon.ico" sizes="any" />
@@ -1448,7 +1496,7 @@
               <div class="topline"><span class="role">Platform</span><span class="badge utility-live">UTILITY LIVE</span></div>
               <h3>MONOLITH</h3>
               <div class="verb">Own</div>
-              <p class="copy">Digital ownership on XRPL. Claim permanent coordinates, build a public page, and buy or sell tiles through the Tile Market.</p>
+              <p class="copy">MONOLITH is digital ownership and utility on XRPL. Claim permanent coordinates, build a public page, and buy or sell coordinate deeds on the live Tile Market. The same ecosystem includes a live NFT marketplace for eligible XRPL NFTs, seller tools, storefronts, and P2P payments.</p>
               <a href="https://monolithxrpl.com/index.html"
                data-house-modal
                data-title="MONOLITH"
@@ -1814,21 +1862,20 @@
           </article>
         </div>
         <div class="wide-stack">
-          <article class="wide-card" id="augur-battlefield">
+          <article class="wide-card battlefield-feature" id="augur-battlefield">
             <div class="wide-card-copy">
-              <div class="topline"><span class="role">AUGUR BATTLEFIELD</span><span class="badge live">Live</span></div>
+              <p class="bf-kicker">AUGUR BATTLEFIELD • LIVE</p>
               <h3 id="battlefield-title">Forget the charts. Watch the battle.</h3>
-              <p class="copy">AUGUR BATTLEFIELD turns live global $XRP market pressure into a moving battlefield. Blue is buy pressure. Red is sell pressure.</p>
+              <p class="copy">AUGUR BATTLEFIELD turns live global $XRP market pressure into a moving battlefield. Blue represents buy pressure. Red represents sell pressure. Troops, tanks, aircraft, explosions, audio, and the front line respond as market pressure changes.</p>
               <a class="btn" href="https://augurxrpl.com/battlefield/" target="_blank" rel="noopener">Enter AUGUR Battlefield</a>
             </div>
-            <div class="wide-card-media battlefield-feature" aria-hidden="true"></div>
           </article>
           <article class="wide-card" id="ledger-run">
             <div class="wide-card-copy">
               <div class="topline"><span class="role">Game</span><span class="badge live">Game live</span></div>
               <h3 id="ledger-run-title">LEDGER RUN</h3>
               <p class="run-tagline">PLAY IT. BURN IT. HOLD IT.</p>
-              <p class="copy">COM-RAD takes the lead in LEDGER RUN, the live mobile-first 3D endless runner from RAD GARLINGTON. Free play. No prizes or token payouts.</p>
+              <p class="copy">COM-RAD takes the lead in LEDGER RUN, the live mobile-first 3D endless runner from RAD GARLINGTON. $RAD is the project’s live memecoin on XRPL and its intended in-game token. LEDGER RUN is live with free play; free plays are trial runs and do not trigger token burns, and there are no prizes or token payouts.</p>
               <a class="btn" href="https://radxrp.com/#ledger-run" target="_blank" rel="noopener">Explore LEDGER RUN</a>
             </div>
             <img class="wide-card-media is-mark" src="/assets/COM-RAD-front.png" width="1254" height="1254" alt="COM-RAD, the character starring in LEDGER RUN" />
