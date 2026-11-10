@@ -3,7 +3,7 @@
 // confirmed URL changes. Set TRUST_ME_BRO_EPISODE_1_VIDEO_URL when Episode 1
 // is public. Leave that value empty until then.
 var TRUST_ME_BRO_YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@TrustMeBroXRP";
-var TRUST_ME_BRO_EPISODE_1_VIDEO_URL = "https://www.youtube.com/watch?v=Zhd2T_-LzPI";
+var TRUST_ME_BRO_EPISODE_1_VIDEO_URL = "https://www.youtube.com/watch?v=m4RpDZdejYE";
 
 function applyTrustMeBroLinks() {
   var channel = TRUST_ME_BRO_YOUTUBE_CHANNEL_URL;
