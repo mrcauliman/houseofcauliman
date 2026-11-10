@@ -1266,38 +1266,9 @@
     }
 
 
-    /* LEDGER RUN: scoped project feature */
-    #ledger-run{scroll-margin-top:90px}
-    .ledger-run-feature{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,.55fr);gap:26px;align-items:center;padding:30px;border:1px solid rgba(87,169,255,.4);border-radius:24px;background:linear-gradient(145deg,#123b68,#061425 75%)}
-    .ledger-run-feature h2{font-size:clamp(2rem,5vw,3.5rem);margin:14px 0 8px}
-    .ledger-run-feature p{color:var(--muted);line-height:1.65;max-width:650px}
-    .ledger-run-feature .run-tagline{color:var(--text);font-weight:900;letter-spacing:.08em}
-    .ledger-run-art{display:block;width:100%;max-width:310px;height:auto;margin:auto;filter:drop-shadow(0 16px 24px rgba(0,0,0,.25))}
-    @media(max-width:640px){.ledger-run-feature{grid-template-columns:1fr;padding:22px}.ledger-run-art{max-width:230px}}
-
-    /* TINY KNIGHT: scoped entertainment feature */
-    #tiny-knight{scroll-margin-top:90px}
-    .tiny-knight-feature{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,.55fr);gap:26px;align-items:center;padding:30px;border:1px solid rgba(255,208,0,.5);border-radius:24px;background:radial-gradient(circle at 88% 16%,rgba(255,208,0,.16),transparent 36%),linear-gradient(145deg,#3a2468,#120818 75%)}
-    .tiny-knight-feature h2{font-size:clamp(2rem,5vw,3.5rem);margin:14px 0 8px;color:#ffd000}
-    .tiny-knight-feature p{color:var(--muted);line-height:1.65;max-width:650px}
-    .tiny-knight-feature .tk-tagline{color:var(--text);font-weight:900;letter-spacing:.08em}
-    .tiny-knight-art{display:block;width:100%;max-width:310px;height:auto;margin:auto;filter:drop-shadow(0 16px 24px rgba(0,0,0,.25))}
-    .tiny-knight-feature .btn{border-color:rgba(255,208,0,.8);background:#ffd000;color:#1a1030}
-    .tiny-knight-feature .btn:hover{background:#ffe14a}
-    .tiny-knight-feature .btn:focus-visible{outline:2px solid #fff;outline-offset:3px}
-    @media(max-width:640px){.tiny-knight-feature{grid-template-columns:1fr;padding:22px}.tiny-knight-art{max-width:230px}}
-
-    /* TRUST ME BRO: scoped entertainment feature, same layout as Ledger Run and Tiny Knight */
+    #ledger-run,
+    #tiny-knight,
     #trust-me-bro{scroll-margin-top:90px}
-    .trust-me-bro-feature{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,.55fr);gap:26px;align-items:center;padding:30px;border:1px solid rgba(255,225,74,.55);border-radius:24px;background:radial-gradient(circle at 88% 16%,rgba(255,225,74,.18),transparent 36%),linear-gradient(145deg,#1d4ed8,#0b1d4e 75%)}
-    .trust-me-bro-feature h2{font-size:clamp(2rem,5vw,3.5rem);margin:14px 0 8px;color:#ffe14a}
-    .trust-me-bro-feature p{color:var(--muted);line-height:1.65;max-width:650px}
-    .trust-me-bro-feature .tmb-tagline{color:var(--text);font-weight:900;letter-spacing:.08em}
-    .trust-me-bro-art{display:block;width:100%;max-width:310px;height:auto;margin:auto;filter:drop-shadow(0 16px 24px rgba(0,0,0,.25))}
-    .trust-me-bro-feature .btn{border-color:rgba(255,225,74,.85);background:#ffe14a;color:#1a1030}
-    .trust-me-bro-feature .btn:hover{background:#fff1a8}
-    .trust-me-bro-feature .btn:focus-visible{outline:2px solid #fff;outline-offset:3px}
-    @media(max-width:640px){.trust-me-bro-feature{grid-template-columns:1fr;padding:22px}.trust-me-bro-art{max-width:230px}}
 
     .made-for-kids{display:inline-flex;align-items:center;gap:6px;width:max-content;max-width:100%;margin:0 0 8px;padding:5px 10px 5px 5px;border:2px solid #ffd000;border-radius:999px;background:#ffd000;color:#1a1030;font-size:.74rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;line-height:1.2}
     .made-for-kids svg{display:block;flex:none}
@@ -1332,6 +1303,106 @@
     .tmb-popup .house-modal-actions a{border:3px solid #10245c;border-radius:999px;background:#e10600;color:#fff;font-weight:900}
     .tmb-popup .house-modal-actions a:last-child{background:#ffe14a;color:#10245c}
     .tmb-popup .house-modal-close{border-color:#ffe14a;color:#ffe14a}
+
+    /* Full-width project cards: one row, about the height of a normal card. */
+    .wide-card{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);
+      grid-column:1 / -1;
+      height:340px;
+      min-height:0;
+      margin:0;
+      padding:0;
+      overflow:hidden;
+      align-items:stretch;
+      border:1px solid rgba(61,160,255,.24);
+      border-radius:24px;
+      background:
+        radial-gradient(circle at 18% 0,rgba(61,160,255,.16),transparent 42%),
+        linear-gradient(145deg,rgba(15,28,48,.98),rgba(5,8,16,.99));
+      box-shadow:0 18px 45px rgba(0,0,0,.46);
+    }
+    .wide-card > *{min-width:0;min-height:0;max-height:100%}
+    .wide-stack{display:flex;flex-direction:column;gap:14px;margin-top:16px}
+    .wide-card-copy{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:flex-start;
+      gap:8px;
+      min-width:0;
+      height:100%;
+      padding:16px 20px;
+      overflow:hidden;
+    }
+    .wide-card-copy .topline,
+    .wide-card-copy h2,
+    .wide-card-copy h3,
+    .wide-card-copy .copy{width:100%;max-width:100%}
+    .wide-card h2,
+    .wide-card h3{
+      margin:0;
+      color:#fff;
+      font-size:clamp(1.15rem,2vw,1.6rem);
+      letter-spacing:.08em;
+      line-height:1.05;
+      text-transform:uppercase;
+    }
+    .wide-card .verb{margin:0;font-size:1.2rem}
+    .wide-card .copy{
+      margin:0;
+      display:-webkit-box;
+      -webkit-line-clamp:3;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+    }
+    .wide-card .run-tagline{margin:0;color:#fff;font-weight:900;letter-spacing:.08em}
+    .wide-card .kids-line{margin:0}
+    .wide-card .made-for-kids{margin:0}
+    .wide-card-media{
+      display:block;
+      width:100%;
+      height:100%;
+      min-width:0;
+      object-fit:cover;
+      object-position:center;
+    }
+    .wide-card-media.is-mark{
+      object-fit:contain;
+      padding:18px;
+      background:radial-gradient(circle at center,rgba(61,160,255,.16),rgba(3,7,14,.2) 70%);
+    }
+    .wide-card-media.battlefield-feature{
+      position:relative;
+      height:100%;
+      min-height:100%;
+      border:0;
+      border-radius:0;
+      text-align:initial;
+    }
+    .card.wide-card{min-height:0}
+    .card.wide-card:hover,
+    .card.wide-card:focus-within{transform:none}
+    .wide-card .btn,
+    .wide-card > .wide-card-copy > a{
+      align-self:flex-start;
+      margin-top:2px;
+    }
+    @media(max-width:700px){
+      .wide-card,
+      .card.wide-card{
+        grid-template-columns:1fr;
+        height:auto;
+      }
+      .wide-card > *{max-height:none}
+      .wide-card-media{
+        order:-1;
+        height:132px;
+        max-height:132px;
+      }
+      .wide-card-copy{height:auto;padding:14px;overflow:visible}
+      .wide-card .copy{-webkit-line-clamp:4}
+    }
   </style>
   <link rel="icon" href="/assets/favicons/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png" />
@@ -1367,15 +1438,16 @@
     <div class="wrap">
 
 
-      <section class="section panel battlefield-feature">
-        <p style="margin:0 0 6px;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:#9dbfe8;">AUGUR BATTLEFIELD • LIVE</p>
-        <h2 style="margin:0 0 12px;">Forget the charts. Watch the battle.</h2>
-        <p class="lead" style="max-width:800px;margin:0 auto 18px;">
-          AUGUR BATTLEFIELD turns live global $XRP market pressure into a moving battlefield. Blue represents buy pressure. Red represents sell pressure. Troops, tanks, aircraft, explosions, audio, and the front line respond as market pressure changes.
-        </p>
-        <div class="btnrow" style="justify-content:center;">
-          <a class="btn" href="https://augurxrpl.com/battlefield/">Enter AUGUR Battlefield</a>
-        </div>
+      <section class="section" id="augur-battlefield" aria-labelledby="battlefield-title">
+        <article class="wide-card">
+          <div class="wide-card-copy">
+            <div class="topline"><span class="role">AUGUR BATTLEFIELD</span><span class="badge live">Live</span></div>
+            <h2 id="battlefield-title">Forget the charts. Watch the battle.</h2>
+            <p class="copy">AUGUR BATTLEFIELD turns live global $XRP market pressure into a moving battlefield. Blue is buy pressure. Red is sell pressure.</p>
+            <a class="btn" href="https://augurxrpl.com/battlefield/" target="_blank" rel="noopener">Enter AUGUR Battlefield</a>
+          </div>
+          <div class="wide-card-media battlefield-feature" aria-hidden="true"></div>
+        </article>
       </section>
 
       <section id="projects" class="section">
@@ -1383,15 +1455,13 @@
         <p class="lead">Explore the platforms, brands, tools, collections, and media built inside the House.</p>
         <div class="grid">
 
-          <article class="card">
-            <div>
+          <article class="card wide-card" id="monolith-card">
+            <div class="wide-card-copy">
               <div class="topline"><span class="role">Platform</span><span class="badge utility-live">UTILITY LIVE</span></div>
-              <img class="card-logo" src="/assets/monolith/monolith_logo.webp" alt="MONOLITH" />
               <h3>MONOLITH</h3>
               <div class="verb">Own</div>
               <p class="copy">Digital ownership on XRPL. Claim permanent coordinates, build a public page, and buy or sell tiles through the Tile Market.</p>
-            </div>
-            <a href="https://monolithxrpl.com/index.html"
+              <a href="https://monolithxrpl.com/index.html"
                data-house-modal
                data-title="MONOLITH"
                data-logo="/assets/monolith/monolith_logo.webp"
@@ -1406,6 +1476,8 @@
                data-href2="https://x.com/monolith_xrpl"
                data-link-label2="𝕏 Profile"
                data-external2="true">Explore</a>
+            </div>
+            <img class="wide-card-media is-mark" src="/assets/monolith/monolith_logo.webp" width="1024" height="1024" alt="MONOLITH" />
           </article>
 
           <article class="card">
@@ -1752,106 +1824,71 @@
                data-link-label2="𝕏 Profile"
                data-external2="true">Explore</a>
           </article>
+        </div>
+        <div class="wide-stack">
+          <article class="wide-card" id="ledger-run">
+            <div class="wide-card-copy">
+              <div class="topline"><span class="role">Game</span><span class="badge live">Game live</span></div>
+              <h3 id="ledger-run-title">LEDGER RUN</h3>
+              <p class="run-tagline">PLAY IT. BURN IT. HOLD IT.</p>
+              <p class="copy">COM-RAD takes the lead in LEDGER RUN, the live mobile-first 3D endless runner from RAD GARLINGTON. Free play. No prizes or token payouts.</p>
+              <a class="btn" href="https://radxrp.com/#ledger-run" target="_blank" rel="noopener">Explore LEDGER RUN</a>
+            </div>
+            <img class="wide-card-media is-mark" src="/assets/COM-RAD-front.png" width="1254" height="1254" alt="COM-RAD, the character starring in LEDGER RUN" />
+          </article>
 
-          <article class="card" id="tiny-knight-card">
-            <div>
+          <article class="wide-card" id="trust-me-bro">
+            <div class="wide-card-copy">
+              <div class="topline"><span class="role">Podcast</span><span class="badge">General audiences</span></div>
+              <h3 id="trust-me-bro-title">Trust Me Bro Podcast</h3>
+              <p class="copy">Dex Lambo is confidently wrong about crypto. The Fact Checker isn't.</p>
+              <a class="btn" href="/trustmebro/"
+                 data-house-modal
+                 data-popup="tmb"
+                 data-title="Trust Me Bro Podcast"
+                 data-logo="/trustmebro/assets/icon.webp"
+                 data-role="Podcast"
+                 data-status="General audiences"
+                 data-lead="Dex Lambo is confidently wrong about crypto. The Fact Checker isn't."
+                 data-details="Don't trust. Verify, bro. Dex is wrong on purpose. Facts are checked."
+                 data-breakdown="Dex Lambo, host. Wrong on purpose.|The Fact Checker checks every claim with real sources.|General audiences"
+                 data-href="/trustmebro/"
+                 data-link-label="Watch Trust Me Bro"
+                 data-href2=""
+                 data-link-label2="Subscribe on YouTube"
+                 data-external2="true"
+                 data-tmb-channel-slot="href2">Explore</a>
+            </div>
+            <img class="wide-card-media" src="/trustmebro/assets/banner.webp" width="1600" height="900" alt="Trust Me Bro with Dex Lambo. Dex sits at a microphone beside the show title." />
+          </article>
+
+          <article class="wide-card" id="tiny-knight">
+            <div class="wide-card-copy">
               <div class="topline"><span class="role">Show</span><span class="badge">Original series</span></div>
               <p class="made-for-kids"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9.25" fill="#fff8dc" stroke="#1a1030" stroke-width="1.7"/><path fill="#1a1030" d="M12 5.4l1.55 3.28 3.6.46-2.66 2.48.7 3.58L12 13.5l-3.19 1.7.7-3.58-2.66-2.48 3.6-.46z"/></svg> Made for kids</p>
               <p class="kids-line">A show for kids. A House of Cauliman project.</p>
-              <img class="card-logo" src="/tinyknight/assets/icon.webp" width="640" height="640" alt="Tiny Knight, a pocket-sized knight in a silver helmet with a red plume, on a gold sunburst" />
-              <h3>Tiny Knight</h3>
-              <div class="verb">Watch</div>
+              <h3 id="tiny-knight-title">Tiny Knight</h3>
               <p class="copy">A very small knight with a very big ego takes on the most dangerous monsters in the house: vacuums, ceiling fans, the cat.</p>
+              <a class="btn" href="/tinyknight/"
+                 data-house-modal
+                 data-title="Tiny Knight"
+                 data-logo="/tinyknight/assets/icon.webp"
+                 data-role="Show"
+                 data-status="Original series"
+                 data-kids="true"
+                 data-lead="Small knight. Big beasts."
+                 data-details="A very small knight with a very big ego takes on the most dangerous monsters in the house: vacuums, ceiling fans, the cat. Original animation. New episodes every week."
+                 data-breakdown="Original animation|New episodes every week|Small knight. Big beasts."
+                 data-href="/tinyknight/"
+                 data-link-label="Watch Tiny Knight"
+                 data-href2="https://www.youtube.com/@TheTinyKnight"
+                 data-link-label2="Watch on YouTube"
+                 data-external2="true">Explore</a>
             </div>
-            <a href="/tinyknight/"
-               data-house-modal
-               data-title="Tiny Knight"
-               data-logo="/tinyknight/assets/icon.webp"
-               data-role="Show"
-               data-status="Original series"
-               data-kids="true"
-               data-lead="Small knight. Big beasts."
-               data-details="A very small knight with a very big ego takes on the most dangerous monsters in the house: vacuums, ceiling fans, the cat. Original animation. New episodes every week."
-               data-breakdown="Original animation|New episodes every week|Small knight. Big beasts."
-               data-href="/tinyknight/"
-               data-link-label="Watch Tiny Knight"
-               data-href2="https://www.youtube.com/@TheTinyKnight"
-               data-link-label2="Watch on YouTube"
-               data-external2="true">Explore</a>
-          </article>
-
-          <article class="card" id="trust-me-bro-card">
-            <div>
-              <div class="topline"><span class="role">Podcast</span><span class="badge">General audiences</span></div>
-              <img class="card-logo" src="/trustmebro/assets/icon.webp" width="640" height="640" alt="Dex Lambo, the cartoon host of Trust Me Bro Podcast" />
-              <h3>Trust Me Bro Podcast</h3>
-              <div class="verb">Verify</div>
-              <p class="copy">Dex Lambo is confidently wrong about crypto. The Fact Checker isn't.</p>
-            </div>
-            <a href="/trustmebro/"
-               data-house-modal
-               data-popup="tmb"
-               data-title="Trust Me Bro Podcast"
-               data-logo="/trustmebro/assets/icon.webp"
-               data-role="Podcast"
-               data-status="General audiences"
-               data-lead="Dex Lambo is confidently wrong about crypto. The Fact Checker isn't."
-               data-details="Don't trust. Verify, bro. Dex is wrong on purpose. Facts are checked."
-               data-breakdown="Dex Lambo, host. Wrong on purpose.|The Fact Checker checks every claim with real sources.|General audiences"
-               data-href="/trustmebro/"
-               data-link-label="Watch Trust Me Bro"
-               data-href2=""
-               data-link-label2="Subscribe on YouTube"
-               data-external2="true"
-               data-tmb-channel-slot="href2">Explore</a>
+            <img class="wide-card-media" src="/tinyknight/assets/banner.webp" width="1600" height="900" alt="Tiny Knight, a pocket-sized knight with a red plume, faces a giant toy T. rex. The title reads Tiny Knight: Small knight. Big beasts." />
           </article>
         </div>
       </section>
-
-
-
-    <section id="ledger-run" aria-labelledby="ledger-run-title">
-      <div class="ledger-run-feature">
-        <div>
-          <span class="badge">GAME LIVE</span>
-          <h2 id="ledger-run-title">LEDGER RUN</h2>
-          <p class="run-tagline">PLAY IT. BURN IT. HOLD IT.</p>
-          <p>COM-RAD takes the lead in LEDGER RUN, the live mobile-first 3D endless runner from RAD GARLINGTON.</p>
-          <p>$RAD is the project’s live memecoin on XRPL and its intended in-game token. LEDGER RUN is live with free play. No prizes or token payouts.</p>
-          <p>Free plays are trial runs and do not trigger token burns. A revenue-funded buyback-and-burn feature is planned for paid play. Burn eligibility, limits and accounting will be published before paid play launches.</p>
-          <div class="btnrow"><a class="btn" href="https://radxrp.com/#ledger-run" target="_blank" rel="noopener">Explore LEDGER RUN</a></div>
-        </div>
-        <img class="ledger-run-art" src="/assets/COM-RAD-front.png" width="1254" height="1254" loading="lazy" alt="COM-RAD, the character starring in LEDGER RUN" />
-      </div>
-    </section>
-
-    <section id="tiny-knight" class="section" aria-labelledby="tiny-knight-title">
-      <div class="tiny-knight-feature">
-        <div>
-          <span class="badge">ORIGINAL SERIES</span>
-          <h2 id="tiny-knight-title">TINY KNIGHT</h2>
-          <p class="tk-tagline">SMALL KNIGHT. BIG BEASTS.</p>
-          <p>A very small knight with a very big ego takes on the most dangerous monsters in the house: vacuums, ceiling fans, the cat.</p>
-          <p>Original animation. New episodes every week.</p>
-          <div class="btnrow"><a class="btn" href="/tinyknight/">Watch Tiny Knight</a></div>
-        </div>
-        <img class="tiny-knight-art" src="/tinyknight/assets/icon.webp" width="640" height="640" loading="lazy" alt="Tiny Knight, a pocket-sized knight in a silver helmet with a red plume, on a gold sunburst" />
-      </div>
-    </section>
-
-    <section id="trust-me-bro" class="section" aria-labelledby="trust-me-bro-title">
-      <div class="trust-me-bro-feature">
-        <div>
-          <span class="badge">Podcast</span>
-          <h2 id="trust-me-bro-title">TRUST ME BRO</h2>
-          <p class="tmb-tagline">DON'T TRUST. VERIFY, BRO.</p>
-          <p>Dex Lambo is confidently wrong about crypto. The Fact Checker isn't. Dex is wrong on purpose, every claim gets checked with real sources.</p>
-          <p>Hosted by Dex Lambo, an original cartoon character. General audiences.</p>
-          <div class="btnrow"><a class="btn" href="/trustmebro/">Watch Trust Me Bro</a></div>
-        </div>
-        <img class="trust-me-bro-art" src="/trustmebro/assets/icon.webp" width="640" height="640" loading="lazy" alt="Dex Lambo, the cartoon host of Trust Me Bro Podcast, winking and giving a thumbs up" />
-      </div>
-    </section>
 
       <section id="members" class="section panel">
         <h2>Members</h2>
