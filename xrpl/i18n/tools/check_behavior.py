@@ -17,6 +17,7 @@ PAGES = [
     "xrpl/usage.html",
     "xrpl/safety.html",
     "xrpl/investing-reality.html",
+    "xrpl/amendments-governance.html",
     "xrpl/builders/index.html",
     "xrpl/builders/create-token.html",
     "xrpl/builders/nft-basics.html",

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Write one reviewer packet per language. Reviewers do not need the source tree.
 
-The 230 security and finance strings are the same set as NEEDS_REVIEW.md.
+The 231 security and finance strings are the same set as NEEDS_REVIEW.md.
 A string is filed under the first tier below. Destination tags are checked
 before the broader signing tier so a destination-tag sentence is not buried
 there. Seed still wins when a sentence also mentions a later topic.
@@ -39,6 +39,7 @@ PAGES = [
     ("xrpl/usage.html", "Usage", "/xrpl/usage.html"),
     ("xrpl/safety.html", "Safety", "/xrpl/safety.html"),
     ("xrpl/investing-reality.html", "Investing reality", "/xrpl/investing-reality.html"),
+    ("xrpl/amendments-governance.html", "Amendments & Governance", "/xrpl/amendments-governance.html"),
     ("xrpl/builders/index.html", "Builders hub", "/xrpl/builders/"),
     ("xrpl/builders/create-token.html", "Create a token", "/xrpl/builders/create-token.html"),
     ("xrpl/builders/nft-basics.html", "NFT basics", "/xrpl/builders/nft-basics.html"),

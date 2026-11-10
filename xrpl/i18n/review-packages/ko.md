@@ -52,10 +52,10 @@ Nothing in this package is native-approved. The Approve, Correction, Reviewer, a
 | 3. Destination tags | 5 | 0 |
 | 4. Trust lines | 41 | 0 |
 | 5. Reserves and fees | 39 | 0 |
-| 6. DEX and AMM | 9 | 0 |
+| 6. DEX and AMM | 10 | 0 |
 | 7. NFTs | 16 | 0 |
 | 8. Other security and finance | 39 | 0 |
-| Total | 230 | 0 |
+| Total | 231 | 0 |
 
 ## 1. Wallet recovery and seed
 
@@ -2058,8 +2058,8 @@ What the reader must understand for this whole section: The teaching example is 
 ### 5.15 `footer.rights`
 
 - Risk tier: Reserves and fees
-- Page: Dashboard; Definitions; Wallets; Usage; Safety; Investing reality; Builders hub; Create a token; NFT basics; Trust lines lesson; Issuer control; Xaman flows; Project launch (/xrpl/; /xrpl/definitions.html; /xrpl/wallet-basics.html; /xrpl/usage.html; /xrpl/safety.html; /xrpl/investing-reality.html; /xrpl/builders/; /xrpl/builders/create-token.html; /xrpl/builders/nft-basics.html; /xrpl/builders/trust-lines.html; /xrpl/builders/issuer-control.html; /xrpl/builders/xaman-flows.html; /xrpl/builders/project-launch-basics.html)
-- Heading on that page: BUILDERS HUB; Keep moving; Keep moving; Keep moving; Keep moving; Keep moving; Keep moving; Keep building; Keep building; Keep building; Keep building; Keep building; Keep building
+- Page: Dashboard; Definitions; Wallets; Usage; Safety; Investing reality; Amendments & Governance; Builders hub; Create a token; NFT basics; Trust lines lesson; Issuer control; Xaman flows; Project launch (/xrpl/; /xrpl/definitions.html; /xrpl/wallet-basics.html; /xrpl/usage.html; /xrpl/safety.html; /xrpl/investing-reality.html; /xrpl/amendments-governance.html; /xrpl/builders/; /xrpl/builders/create-token.html; /xrpl/builders/nft-basics.html; /xrpl/builders/trust-lines.html; /xrpl/builders/issuer-control.html; /xrpl/builders/xaman-flows.html; /xrpl/builders/project-launch-basics.html)
+- Heading on that page: BUILDERS HUB; Keep moving; Keep moving; Keep moving; Keep moving; Keep moving; Sources; Keep moving; Keep building; Keep building; Keep building; Keep building; Keep building; Keep building
 - Purpose: This sentence is about XRP an account must keep, or about a fee.
 - What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: © 2026 House of Cauliman. All rights reserved.
 - English: © 2026 House of Cauliman. All rights reserved.
@@ -2410,7 +2410,21 @@ This sentence is about exchanging tokens, including slippage and the offer field
 
 What the reader must understand for this whole section: A trade can move the price. Slippage is that movement. TakerGets and TakerPays name the two sides of an offer. Neither field is a guarantee of a future price.
 
-### 6.1 `amms-and-slippage.da4418e3`
+### 6.1 `adds-something-new-example-the-amm-a.39d37cbc`
+
+- Risk tier: DEX and AMM
+- Page: Amendments & Governance (/xrpl/amendments-governance.html)
+- Heading on that page: Feature
+- Purpose: This sentence is about exchanging tokens, including slippage and the offer fields.
+- What the reader must understand: A trade can move the price. Slippage is that movement. TakerGets and TakerPays name the two sides of an offer. Neither field is a guarantee of a future price. The English wording to preserve is: Adds something new. Example: the AMM amendment added automated market makers to the XRPL. It was enabled on 2024-03-22.
+- English: Adds something new. Example: the AMM amendment added automated market makers to the XRPL. It was enabled on 2024-03-22.
+- Current translation: 새로운 것을 더합니다. 예: AMM 아멘드먼트는 XRPL에 자동화된 마켓 메이커를 추가했습니다. 이 아멘드먼트는 2024-03-22에 활성화되었습니다.
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 6.2 `amms-and-slippage.da4418e3`
 
 - Risk tier: DEX and AMM
 - Page: Usage (/xrpl/usage.html)
@@ -2424,7 +2438,7 @@ What the reader must understand for this whole section: A trade can move the pri
 - Reviewer:
 - Date:
 
-### 6.2 `an-amm-holds-two-assets-in-a-pool-an.45dadf03`
+### 6.3 `an-amm-holds-two-assets-in-a-pool-an.45dadf03`
 
 - Risk tier: DEX and AMM
 - Page: Usage (/xrpl/usage.html)
@@ -2438,7 +2452,7 @@ What the reader must understand for this whole section: A trade can move the pri
 - Reviewer:
 - Date:
 
-### 6.3 `dex-amm.22b33553`
+### 6.4 `dex-amm.22b33553`
 
 - Risk tier: DEX and AMM
 - Page: Definitions (/xrpl/definitions.html)
@@ -2452,7 +2466,7 @@ What the reader must understand for this whole section: A trade can move the pri
 - Reviewer:
 - Date:
 
-### 6.4 `dex-offers-and-amms.93651ac8`
+### 6.5 `dex-offers-and-amms.93651ac8`
 
 - Risk tier: DEX and AMM
 - Page: Definitions (/xrpl/definitions.html)
@@ -2466,7 +2480,7 @@ What the reader must understand for this whole section: A trade can move the pri
 - Reviewer:
 - Date:
 
-### 6.5 `meta.reality.description`
+### 6.6 `meta.reality.description`
 
 - Risk tier: DEX and AMM
 - Page: Investing reality (/xrpl/investing-reality.html)
@@ -2480,7 +2494,7 @@ What the reader must understand for this whole section: A trade can move the pri
 - Reviewer:
 - Date:
 
-### 6.6 `simple-slippage-visual.076d9ff0`
+### 6.7 `simple-slippage-visual.076d9ff0`
 
 - Risk tier: DEX and AMM
 - Page: Usage (/xrpl/usage.html)
@@ -2494,7 +2508,7 @@ What the reader must understand for this whole section: A trade can move the pri
 - Reviewer:
 - Date:
 
-### 6.7 `slippage-and-pool-depth.e68d4e14`
+### 6.8 `slippage-and-pool-depth.e68d4e14`
 
 - Risk tier: DEX and AMM
 - Page: Investing reality (/xrpl/investing-reality.html)
@@ -2508,7 +2522,7 @@ What the reader must understand for this whole section: A trade can move the pri
 - Reviewer:
 - Date:
 
-### 6.8 `slippage.98bc091b`
+### 6.9 `slippage.98bc091b`
 
 - Risk tier: DEX and AMM
 - Page: Definitions (/xrpl/definitions.html)
@@ -2522,7 +2536,7 @@ What the reader must understand for this whole section: A trade can move the pri
 - Reviewer:
 - Date:
 
-### 6.9 `xrpl-s-dex-uses-offers-to-exchange-o.3578c8fc`
+### 6.10 `xrpl-s-dex-uses-offers-to-exchange-o.3578c8fc`
 
 - Risk tier: DEX and AMM
 - Page: Usage (/xrpl/usage.html)

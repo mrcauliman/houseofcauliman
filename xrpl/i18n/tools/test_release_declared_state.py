@@ -58,7 +58,7 @@ class DeclaredStateTests(unittest.TestCase):
             self.assertTrue(check.declared_state_errors(declaration))
 
     def test_held_and_mixed_declarations_are_dynamic(self):
-        for declaration, files, loc_count in [(self.held,self.base,13), (self.one,self.one_files,26), (self.mixed,self.mixed_files,39)]:
+        for declaration, files, loc_count in [(self.held,self.base,14), (self.one,self.one_files,28), (self.mixed,self.mixed_files,42)]:
             with self.subTest(public=loc_count):
                 self.assertEqual(check.audit_declared_output(files,declaration,self.catalogs),[])
                 self.assertEqual(files['xrpl/i18n/sitemap.proposed.xml'].count('<loc>'),loc_count)

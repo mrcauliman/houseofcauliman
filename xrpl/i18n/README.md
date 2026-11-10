@@ -17,12 +17,13 @@ GitHub Pages cannot run server redirects for this tree. Locale URLs are real fil
 
 | Public URL | File | What it teaches |
 | --- | --- | --- |
-| `/xrpl/` | `xrpl/index.html` | Dashboard: Foundation, Definitions, Wallets, Usage, Safety, Investing Reality, The House, Builders Hub |
+| `/xrpl/` | `xrpl/index.html` | Dashboard: Foundation, Definitions, Wallets, Usage, Safety, Investing Reality, Governance, The House, Builders Hub |
 | `/xrpl/definitions.html` | same | Foundation lesson. Both Foundation and Definitions cards open this page. Progress meter, trust-line visualizer, reserve calculator, quiz |
 | `/xrpl/wallet-basics.html` | same | Custody, seed, funding, signing, regular keys, multisign, quiz |
 | `/xrpl/usage.html` | same | Payments, destination tags, trust lines, DEX fields, AMM slippage calculator, NFTs, quiz |
 | `/xrpl/safety.html` | same | Keys, issuer checks, phishing, signing, custody, compromise response, quiz |
 | `/xrpl/investing-reality.html` | same | Liquidity, market-cap calculator, position-to-liquidity calculator, issuer controls, quiz |
+| `/xrpl/amendments-governance.html` | same | Amendments and governance: validator voting, 80% for two weeks, permanence, amendment-blocked servers, fixes vs features, Negative UNL, misconceptions, quiz. Added 2026-11-09; its nine translations are AI drafts with no native review |
 | `/xrpl/builders/` | `xrpl/builders/index.html` | Builders Hub path and quiz |
 | `/xrpl/builders/*.html` | six lessons | Create a token, NFTs, trust lines, issuer control, Xaman flows, project launch. Checklists, worked examples, quizzes |
 
