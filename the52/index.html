@@ -1810,7 +1810,7 @@ function recordedCount(value){
 
 function correctedEditionLabel(b){
   const accounting = b.supplyAccounting || {};
-  return `${recordedCount(accounting.originalIssuedCount)} ORIGINAL ALLOCATION / ${recordedCount(accounting.replacementIssuedCount)} CORRECTED ISSUED`;
+  return `EDITION · ${recordedCount(accounting.originalIssuedCount)} MINTED`;
 }
 
 function correctedSupplyStats(b){
