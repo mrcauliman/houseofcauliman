@@ -202,3 +202,5 @@
   .hero-media img{object-fit:contain;object-position:center bottom}
   .byo-usb{font-size:10px;letter-spacing:.14em;right:14px;bottom:10px}
 }
+
+nav>a.small{display:inline-block}.download-card a.primary{width:100%;margin-top:14px}
