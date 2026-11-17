@@ -1484,6 +1484,48 @@
       #monolith-card .wide-card-copy,
       #ledger-run .wide-card-copy{grid-column:auto}
     }
+    .grid > article.card.wide-card:not(#monolith-card){
+      position:relative;
+      height:auto;
+      min-height:340px;
+    }
+    .grid > article.card.wide-card:not(#monolith-card) .wide-card-copy{
+      grid-column:1;
+      height:auto;
+      max-height:none;
+      overflow:visible;
+    }
+    .grid > article.card.wide-card:not(#monolith-card) .wide-card-media{
+      position:absolute;
+      top:0;
+      right:0;
+      bottom:0;
+      left:auto;
+      width:54%;
+      height:100%;
+      max-height:none;
+      object-fit:contain;
+      object-position:center;
+    }
+    .grid > article.card.wide-card:not(#monolith-card) .copy{
+      display:block;
+      overflow:visible;
+      -webkit-line-clamp:unset;
+    }
+    @media(max-width:700px){
+      .grid > article.card.wide-card:not(#monolith-card){min-height:0;height:auto}
+      .grid > article.card.wide-card:not(#monolith-card) .wide-card-media{
+        position:static;
+        top:auto;
+        right:auto;
+        bottom:auto;
+        left:auto;
+        width:100%;
+        height:132px;
+        max-height:132px;
+      }
+      .grid > article.card.wide-card:not(#monolith-card) .wide-card-copy{grid-column:auto;height:auto;overflow:visible}
+    }
   </style>
   <link rel="icon" href="/assets/favicons/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png" />
@@ -1548,15 +1590,17 @@
             <img class="wide-card-media is-mark" src="/assets/monolith/monolith_logo.webp" width="1024" height="1024" alt="MONOLITH" />
           </article>
 
-          <article class="card" id="blackbook-card">
-            <div>
+          <article class="card wide-card" id="blackbook-card">
+            <div class="wide-card-copy">
               <div class="topline"><span class="role">Windows App</span><span class="badge live">LIVE</span></div>
-              <img class="card-logo" src="/blackbook/assets/icon.png" alt="BLΛCKBOOK book and keyhole icon" loading="lazy" />
               <h3>BLΛCKBOOK</h3>
+              <p class="run-tagline">YOUR WALLETS. ONE BOOK. OFFLINE.</p>
               <div class="verb">Keep</div>
-              <p class="copy">A private digital recovery notebook for Windows. Wallet details, account records, and notes in one place. Password-and-key protection. Available now: $29 launch price for the first 100 buyers, paid in $XRP through Xaman.</p>
-            </div>
-            <a href="/blackbook/"
+              <p class="copy">A private digital recovery notebook for Windows. Wallet details, account records, and notes in one place, on your own USB. $29 launch price for the first 100 buyers, paid in $XRP through Xaman.</p>
+              <div class="card-actions">
+                <a class="btn" href="https://pay.houseofcauliman.com/blackbook/" target="_blank" rel="noopener">Buy now with Xaman</a>
+                <a class="btn" href="/blackbook/">View BLΛCKBOOK</a>
+                <a href="/blackbook/"
                data-house-modal
                data-title="BLΛCKBOOK"
                data-role="Windows App"
@@ -1568,17 +1612,20 @@
                data-href="/blackbook/"
                data-link-label="View BLΛCKBOOK"
                aria-label="Explore BLΛCKBOOK">Explore BLΛCKBOOK</a>
+              </div>
+            </div>
+            <img class="wide-card-media is-mark" src="/blackbook/assets/hero-blackbook.webp" width="1280" height="720" alt="A black leather BLΛCKBOOK notebook with an embossed keyhole emblem, resting on dark stone beside a silver USB flash drive." loading="lazy" />
           </article>
 
-          <article class="card">
-            <div>
+          <article class="card wide-card">
+            <div class="wide-card-copy">
               <div class="topline"><span class="role">Platform</span><span class="badge live">LIVE</span></div>
-              <img class="card-logo" src="/assets/lav/lav_icon.png" alt="LAV" />
               <h3>LAV</h3>
+              <p class="run-tagline">YOUR FAMILY IS NEVER LOCKED OUT.</p>
               <div class="verb">Protect</div>
               <p class="copy">Digital continuity, vault planning, recovery paths, and legacy protection for crypto holders and families. Start with a 3-day free trial, then lifetime access for a one-time $149 in $XRP.</p>
-            </div>
-            <a href="https://lavxrpl.com/"
+              <div class="card-actions">
+                <a href="https://lavxrpl.com/"
                data-house-modal
                data-title="LAV"
                data-role="Legacy Infrastructure"
@@ -1592,19 +1639,21 @@
                data-external="true"
                data-href2="https://x.com/lavxrpl"
                data-link-label2="𝕏 Profile"
-               data-external2="true">Explore</a>
+               data-external2="true">Start free trial</a>
+                <a class="btn" href="https://x.com/lavxrpl" target="_blank" rel="noopener">𝕏 Profile</a>
+              </div>
+            </div>
+            <img class="wide-card-media is-mark" src="/assets/lav/lav_icon.png" width="1024" height="1024" alt="LAV" loading="lazy" />
           </article>
 
-          <article class="card">
-            <div>
+          <article class="card wide-card">
+            <div class="wide-card-copy">
               <div class="topline"><span class="role">Platform</span><span class="badge utility-live">UTILITY LIVE</span></div>
-              <img class="card-logo" src="/assets/augur/augur_logo.png" alt="AUGUR" />
               <h3>AUGUR</h3>
               <div class="verb">Understand</div>
               <p class="copy">XRPL wallet intelligence, reports, risk analysis, readable ledger interpretation, and AUGUR BATTLEFIELD, a live visualization of global $XRP market pressure.</p>
-            </div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;">
-              <a href="https://augurxrpl.com/"
+              <div class="card-actions">
+                <a href="https://augurxrpl.com/"
                data-house-modal
                data-title="AUGUR"
                data-role="XRPL Intelligence"
@@ -1622,19 +1671,19 @@
                data-href3="https://x.com/augurintel"
                data-link-label3="𝕏 Profile"
                data-external3="true">Explore</a>
-
+              </div>
             </div>
+            <img class="wide-card-media is-mark" src="/assets/augur/augur_logo.png" width="1024" height="1024" alt="AUGUR" loading="lazy" />
           </article>
 
-          <article class="card">
-            <div>
+          <article class="card wide-card">
+            <div class="wide-card-copy">
               <div class="topline"><span class="role">Platform</span><span class="badge active-build">ACTIVE BUILD</span></div>
-              <img class="card-logo" src="/neb/assets/neb_icon.webp" alt="NEB" />
               <h3>NEB</h3>
               <div class="verb">Execute</div>
               <p class="copy">Execution infrastructure, automation, trading tools, and future XRPL market utilities.</p>
-            </div>
-            <a href="/neb/"
+              <div class="card-actions">
+                <a href="/neb/"
                data-house-modal
                data-title="NEB"
                data-role="Execution Infrastructure"
@@ -1648,17 +1697,19 @@
                data-href2="https://x.com/NEB_XRPL"
                data-link-label2="𝕏 Profile"
                data-external2="true">Explore</a>
+              </div>
+            </div>
+            <img class="wide-card-media is-mark" src="/neb/assets/neb-icon.png" width="1024" height="1024" alt="NEB" loading="lazy" />
           </article>
 
-          <article class="card">
-            <div>
+          <article class="card wide-card">
+            <div class="wide-card-copy">
               <div class="topline"><span class="role">Collection</span><span class="badge live">LIVE</span></div>
-              <img class="card-logo" src="/homeez/assets/HOMEEZ_logo.webp" alt="HOMEEZ" />
               <h3>HOMEEZ</h3>
               <div class="verb">Collect</div>
               <p class="copy">Stylized character collectibles built for XRPL ownership and future experiences.</p>
-            </div>
-            <a href="https://homeezxrpl.com/"
+              <div class="card-actions">
+                <a href="https://homeezxrpl.com/"
                data-house-modal
                data-title="HOMEEZ"
                data-role="XRPL Collection"
@@ -1672,18 +1723,20 @@
                data-href2="https://x.com/HOMEEZ_XRPL"
                data-link-label2="𝕏 Profile"
                data-external2="true">Explore</a>
+              </div>
+            </div>
+            <img class="wide-card-media is-mark" src="/homeez/assets/HOMEEZ_logo.webp" width="1255" height="1255" alt="HOMEEZ" loading="lazy" />
           </article>
 
-          <article class="card">
-            <div>
+          <article class="card wide-card">
+            <div class="wide-card-copy">
               <div class="topline"><span class="role">Brand</span><span class="badge live">LIVE</span></div>
               <div class="token-hud">TOKEN LIVE · $RAD</div>
-              <img class="card-logo" src="https://radxrp.com/assets/RAD_Logo_Transparent_1024.png" alt="RAD" />
               <h3>RAD</h3>
               <div class="verb">Play</div>
               <p class="copy">RAD GARLINGTON, $XRP culture, and LEDGER RUN, the live game starring COM-RAD.</p>
-            </div>
-            <a href="https://radxrp.com"
+              <div class="card-actions">
+                <a href="https://radxrp.com"
                data-house-modal
                data-title="RAD GARLINGTON"
                data-role="Brand / Token / Game"
@@ -1704,17 +1757,19 @@
                data-href4="https://x.com/radgarlington"
                data-link-label4="𝕏 Profile"
                data-external4="true">Explore</a>
+              </div>
+            </div>
+            <img class="wide-card-media is-mark" src="https://radxrp.com/assets/RAD_Logo_Transparent_1024.png" width="1024" height="1024" alt="RAD" loading="lazy" />
           </article>
 
-          <article class="card">
-            <div>
+          <article class="card wide-card">
+            <div class="wide-card-copy">
               <div class="topline"><span class="role">Weekly Collection</span><span class="badge live">LIVE</span></div>
-              <img class="card-logo" src="/assets/the52/THE_52_logo.webp" alt="THE 52" />
               <h3>THE 52</h3>
               <div class="verb">Collect</div>
               <p class="copy">52 original archetype NFTs released across one year, with subscriber drops, public releases, ownership recognition, and holder utility.</p>
-            </div>
-            <a href="/the52/"
+              <div class="card-actions">
+                <a href="/the52/"
                data-house-modal
                data-title="THE 52"
                data-role="Weekly XRPL Collection"
@@ -1727,18 +1782,20 @@
                data-link-label="View THE 52"
                data-href2="/nft-enrollment/"
                data-link-label2="Subscriber Enrollment">Explore</a>
+              </div>
+            </div>
+            <img class="wide-card-media is-mark" src="/assets/the52/THE_52_logo.webp" width="1254" height="1254" alt="THE 52" loading="lazy" />
           </article>
 
-          <article class="card">
-            <div>
+          <article class="card wide-card">
+            <div class="wide-card-copy">
               <div class="topline"><span class="role">Platform</span><span class="badge live">LIVE</span></div>
               <div class="token-hud">TOKEN LIVE · $BAG</div>
-              <img class="card-logo" src="/assets/bag/BAG_logo.webp" alt="$BAG Capital" />
               <h3>XRPL Trader</h3>
               <div class="verb">Compete</div>
               <p class="copy">Simulation-only XRPL trading competition with real market data, 30-day seasons, portfolio tracking, and global rankings.</p>
-            </div>
-            <a href="https://bagxrp.com"
+              <div class="card-actions">
+                <a href="https://bagxrp.com"
                data-house-modal
                data-title="$BAG CAPITAL"
                data-role="Token Ecosystem / Trading"
@@ -1756,17 +1813,19 @@
                data-href3="https://x.com/BAG_XRPL"
                data-link-label3="𝕏 Profile"
                data-external3="true">Explore</a>
+              </div>
+            </div>
+            <img class="wide-card-media is-mark" src="/assets/bag/BAG_logo.webp" width="1024" height="1024" alt="$BAG Capital" loading="lazy" />
           </article>
 
-          <article class="card">
-            <div>
+          <article class="card wide-card">
+            <div class="wide-card-copy">
               <div class="topline"><span class="role">Education</span><span class="badge utility-live">UTILITY LIVE</span></div>
-              <img class="card-logo" src="/assets/xrpl/xrpl_layman_logo.png" alt="XRPL LAYMAN" />
               <h3>XRPL LAYMAN</h3>
               <div class="verb">Learn</div>
               <p class="copy">Plain-English XRPL education for wallets, trustlines, DEX, AMM, safety, and real usage.</p>
-            </div>
-            <a href="/xrpl/"
+              <div class="card-actions">
+                <a href="/xrpl/"
                data-house-modal
                data-title="XRPL LAYMAN"
                data-role="Education"
@@ -1777,17 +1836,19 @@
                data-logo="/assets/xrpl/xrpl_layman_logo.png"
                data-href="/xrpl/"
                data-link-label="Enter XRPL Layman">Explore</a>
+              </div>
+            </div>
+            <img class="wide-card-media is-mark" src="/assets/xrpl/xrpl_layman_logo.png" width="1536" height="1024" alt="XRPL LAYMAN" loading="lazy" />
           </article>
 
-          <article class="card">
-            <div>
+          <article class="card wide-card">
+            <div class="wide-card-copy">
               <div class="topline"><span class="role">Media</span><span class="badge utility-live">UTILITY LIVE</span></div>
-              <img class="card-logo" src="/assets/ledger_drop_xrpl.png" alt="Ledger Drop XRPL" />
               <h3>Ledger Drop XRPL</h3>
               <div class="verb">Discover</div>
               <p class="copy">Premium XRP and XRPL wallpaper archive built as a growing visual media line.</p>
-            </div>
-            <a href="/ledgerdrop_xrpl/"
+              <div class="card-actions">
+                <a href="/ledgerdrop_xrpl/"
                data-house-modal
                data-title="LEDGER DROP XRPL"
                data-role="Media"
@@ -1801,18 +1862,20 @@
                data-href2="https://x.com/LedgerDrop_XRPL"
                data-link-label2="𝕏 Profile"
                data-external2="true">Explore</a>
+              </div>
+            </div>
+            <img class="wide-card-media is-mark" src="/assets/ledger_drop_xrpl.png" width="1024" height="500" alt="Ledger Drop XRPL" loading="lazy" />
           </article>
 
-          <article class="card">
-            <div>
+          <article class="card wide-card">
+            <div class="wide-card-copy">
               <div class="topline"><span class="role">House IP</span><span class="badge active-build">ACTIVE BUILD</span></div>
               <div class="token-hud">TOKEN LIVE · $WCK</div>
-              <img class="card-logo" src="/assets/wck_logo.webp" alt="Continental Wick" />
               <h3>Continental Wick</h3>
               <div class="verb">Expand</div>
               <p class="copy">An original House universe spanning XRPL collectibles, characters, story, and future interactive game experiences.</p>
-            </div>
-            <a href="https://continentalwick.com"
+              <div class="card-actions">
+                <a href="https://continentalwick.com"
                data-house-modal
                data-title="CONTINENTAL WICK"
                data-role="House IP"
@@ -1827,17 +1890,19 @@
                data-href2="https://x.com/ContinentalWCK"
                data-link-label2="𝕏 Profile"
                data-external2="true">Explore</a>
+              </div>
+            </div>
+            <img class="wide-card-media is-mark" src="/assets/wck_logo.webp" width="512" height="512" alt="Continental Wick" loading="lazy" />
           </article>
 
-          <article class="card">
-            <div>
+          <article class="card wide-card">
+            <div class="wide-card-copy">
               <div class="topline"><span class="role">Interactive Entertainment</span><span class="badge active-build">ACTIVE BUILD</span></div>
-              <img class="card-logo" src="/assets/dungeon-house/DUNGEON HOUSE ICON.webp" alt="Dungeon House" />
               <h3>Dungeon House</h3>
               <div class="verb">Play</div>
               <p class="copy">Retro dungeon crawler under active development for the House ecosystem.</p>
-            </div>
-            <a href="/dungeon-house.html"
+              <div class="card-actions">
+                <a href="/dungeon-house.html"
                data-house-modal
                data-title="DUNGEON HOUSE"
                data-role="Interactive Entertainment"
@@ -1848,17 +1913,19 @@
                data-logo="/assets/dungeon-house/DUNGEON HOUSE ICON.webp"
                data-href="/dungeon-house.html"
                data-link-label="Enter Dungeon House">Explore</a>
+              </div>
+            </div>
+            <img class="wide-card-media is-mark" src="/assets/dungeon-house/DUNGEON%20HOUSE.webp" width="1024" height="1024" alt="Dungeon House" loading="lazy" />
           </article>
 
-          <article class="card">
-            <div>
+          <article class="card wide-card">
+            <div class="wide-card-copy">
               <div class="topline"><span class="role">Collection</span><span class="badge active-build">ACTIVE BUILD</span></div>
-              <img class="card-logo" src="/collections/nftitans/assets/NFTITANS_logo.webp" alt="NFTITANS" />
               <h3>NFTITANS</h3>
               <div class="verb">Preserve</div>
               <p class="copy">Premium digital collectibles celebrating builders, creators, and XRP ecosystem culture.</p>
-            </div>
-            <a href="/collections/nftitans.html"
+              <div class="card-actions">
+                <a href="/collections/nftitans.html"
                data-house-modal
                data-title="NFTITANS"
                data-role="XRPL Collection"
@@ -1872,6 +1939,9 @@
                data-href2="https://x.com/NFTITANS_XRPL"
                data-link-label2="𝕏 Profile"
                data-external2="true">Explore</a>
+              </div>
+            </div>
+            <img class="wide-card-media is-mark" src="/collections/nftitans/assets/NFTITANS_logo.webp" width="1536" height="1024" alt="NFTITANS" loading="lazy" />
           </article>
         </div>
         <div class="wide-stack">
