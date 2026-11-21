@@ -588,10 +588,160 @@ body{
 }
 </style>
 
+<style id="xrpl-hoc-hud">
+.xrpl-topbar{
+  position:relative;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px 20px;
+  flex-wrap:wrap;
+  margin:0 0 10px;
+}
+.xrpl-topbar .xrpl-language-row{
+  margin-bottom:0;
+  justify-content:flex-end;
+  flex:1 1 auto;
+  min-width:min(100%, 260px);
+}
+.xrpl-hoc-hud{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  max-width:100%;
+  padding:8px 14px 8px 12px;
+  border:1px solid rgba(88,166,255,.48);
+  border-radius:10px;
+  background:linear-gradient(180deg,rgba(8,24,48,.94),rgba(2,8,20,.98));
+  color:#eef3f8;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  font-size:12.5px;
+  font-weight:700;
+  letter-spacing:.04em;
+  line-height:1.35;
+  text-decoration:none;
+  white-space:nowrap;
+  box-shadow:
+    0 0 0 1px rgba(20,104,255,.14),
+    0 0 18px rgba(20,104,255,.2),
+    inset 0 1px 0 rgba(255,255,255,.08);
+  transition:border-color .18s ease, box-shadow .18s ease, background .18s ease;
+  animation:xrpl-hoc-hud-pulse 3.2s ease-in-out infinite;
+}
+.xrpl-hoc-hud-scan{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  background:repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 2px,
+    rgba(186,214,255,.045) 2px,
+    rgba(186,214,255,.045) 3px
+  );
+}
+.xrpl-hoc-hud-pip{
+  position:relative;
+  z-index:1;
+  width:7px;
+  height:7px;
+  flex:0 0 auto;
+  border-radius:50%;
+  background:#42d392;
+  box-shadow:0 0 8px #42d392, 0 0 16px rgba(66,211,146,.45);
+}
+.xrpl-hoc-hud-text{
+  position:relative;
+  z-index:1;
+  color:#e0b45a;
+  font-weight:700;
+}
+.xrpl-hoc-hud::before,
+.xrpl-hoc-hud::after{
+  content:"";
+  position:absolute;
+  width:9px;
+  height:9px;
+  pointer-events:none;
+  z-index:1;
+  border-color:#58a6ff;
+  border-style:solid;
+  border-width:0;
+}
+.xrpl-hoc-hud::before{
+  top:3px;
+  left:3px;
+  border-top-width:1px;
+  border-left-width:1px;
+}
+.xrpl-hoc-hud::after{
+  right:3px;
+  bottom:3px;
+  border-right-width:1px;
+  border-bottom-width:1px;
+}
+@keyframes xrpl-hoc-hud-pulse{
+  0%,100%{
+    box-shadow:
+      0 0 0 1px rgba(20,104,255,.14),
+      0 0 14px rgba(20,104,255,.16),
+      inset 0 1px 0 rgba(255,255,255,.08);
+  }
+  50%{
+    box-shadow:
+      0 0 0 1px rgba(88,166,255,.32),
+      0 0 24px rgba(31,140,255,.34),
+      inset 0 1px 0 rgba(255,255,255,.12);
+  }
+}
+.xrpl-hoc-hud:hover{
+  border-color:rgba(88,166,255,.9);
+  background:linear-gradient(180deg,rgba(12,36,72,.96),rgba(3,12,28,.98));
+}
+.xrpl-hoc-hud:hover,
+.xrpl-hoc-hud:focus-visible{
+  color:#fff;
+  box-shadow:
+    0 0 0 1px rgba(88,166,255,.38),
+    0 0 28px rgba(31,140,255,.38),
+    inset 0 1px 0 rgba(255,255,255,.14);
+  animation:none;
+}
+.xrpl-hoc-hud:hover .xrpl-hoc-hud-text,
+.xrpl-hoc-hud:focus-visible .xrpl-hoc-hud-text{
+  color:#f3d48a;
+}
+.xrpl-hoc-hud:focus-visible{
+  outline:3px solid #ffcc66;
+  outline-offset:3px;
+}
+html[dir="rtl"] .xrpl-topbar .xrpl-language-row{justify-content:flex-start}
+@media(max-width:760px){
+  .xrpl-topbar{
+    flex-direction:column;
+    align-items:stretch;
+  }
+  .xrpl-hoc-hud{
+    align-self:center;
+    width:auto;
+    padding:8px 14px 8px 12px;
+    font-size:12px;
+  }
+  .xrpl-topbar .xrpl-language-row{justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){
+  .xrpl-hoc-hud{animation:none}
+}
+</style>
 <meta name="robots" content="noindex, follow" data-xrpl-robots="1"></head>
 <body id="top">
   <div class="wrap">
-<section class="xrpl-dashboard"><div class="xrpl-language-row"><label id="xrpl-language-label" for="xrpl-language"><span aria-hidden="true">🌐</span> <span data-i18n="lang.label">اللغة</span></label><select id="xrpl-language" aria-labelledby="xrpl-language-label" data-i18n-attr="aria-label:lang.select" aria-label="اللغة"><option value="en" lang="en">English</option><option value="pt-BR" lang="pt-BR">Português (Brasil)</option><option value="es" lang="es">Español</option><option value="fr" lang="fr">Français</option><option value="de" lang="de">Deutsch</option><option value="ja" lang="ja">日本語</option><option value="ko" lang="ko">한국어</option><option value="zh-CN" lang="zh-CN">中文（简体）</option><option value="hi" lang="hi">हिन्दी</option><option value="ar" lang="ar" dir="rtl">العربية</option></select><span class="xrpl-language-note" data-i18n="lang.note">محفوظ على هذا الجهاز. ينطبق على كل صفحة في ⁦XRPL LAYMAN.⁩</span></div>
+<section class="xrpl-dashboard"><div class="xrpl-topbar"><a class="xrpl-hoc-hud" href="https://houseofcauliman.com/" aria-label="House of Cauliman"><span class="xrpl-hoc-hud-scan" aria-hidden="true"></span><span class="xrpl-hoc-hud-pip" aria-hidden="true"></span><span class="xrpl-hoc-hud-text">House of Cauliman</span></a><div class="xrpl-language-row"><label id="xrpl-language-label" for="xrpl-language"><span aria-hidden="true">🌐</span> <span data-i18n="lang.label">اللغة</span></label><select id="xrpl-language" aria-labelledby="xrpl-language-label" data-i18n-attr="aria-label:lang.select" aria-label="اللغة"><option value="en" lang="en">English</option><option value="pt-BR" lang="pt-BR">Português (Brasil)</option><option value="es" lang="es">Español</option><option value="fr" lang="fr">Français</option><option value="de" lang="de">Deutsch</option><option value="ja" lang="ja">日本語</option><option value="ko" lang="ko">한국어</option><option value="zh-CN" lang="zh-CN">中文（简体）</option><option value="hi" lang="hi">हिन्दी</option><option value="ar" lang="ar" dir="rtl">العربية</option></select><span class="xrpl-language-note" data-i18n="lang.note">محفوظ على هذا الجهاز. ينطبق على كل صفحة في ⁦XRPL LAYMAN.⁩</span></div></div>
 
   <header class="xrpl-dashboard-hero">
     <div class="xrpl-dashboard-logo">
