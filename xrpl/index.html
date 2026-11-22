@@ -14,7 +14,7 @@
   document.documentElement.dir=lang==="ar"?"rtl":"ltr";
 })();</script><link rel="stylesheet" href="/xrpl/i18n/i18n.css"><!--xrpl-seo-start--><link rel="canonical" href="https://houseofcauliman.com/xrpl/"><link rel="alternate" hreflang="en" href="https://houseofcauliman.com/xrpl/"><link rel="alternate" hreflang="x-default" href="https://houseofcauliman.com/xrpl/"><!--xrpl-seo-end-->
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title data-i18n="meta.index.title">XRPL Layman | House of Cauliman</title>
   <meta name="description" content="Learn how to actually use the XRP Ledger. Wallets, buying tokens, NFTs, liquidity, and execution.">
   <style>
@@ -606,11 +606,23 @@ body{
   flex:1 1 auto;
   min-width:min(100%, 260px);
 }
-.xrpl-hoc-icon{
+.xrpl-hoc-icon-pin{
   position:fixed;
-  top:14px;
-  right:14px;
-  z-index:80;
+  inset:0;
+  width:100%;
+  height:100%;
+  height:100dvh;
+  pointer-events:none;
+  z-index:2147483646;
+}
+.xrpl-hoc-icon{
+  position:absolute;
+  top:calc(14px + env(safe-area-inset-top, 0px));
+  right:calc(14px + env(safe-area-inset-right, 0px));
+  bottom:auto;
+  left:auto;
+  z-index:1;
+  pointer-events:auto;
   display:inline-flex;
   align-items:center;
   justify-content:center;
@@ -623,6 +635,8 @@ body{
   box-shadow:0 4px 16px rgba(0,0,0,.4);
   text-decoration:none;
   line-height:0;
+  -webkit-transform:translateZ(0);
+  transform:translateZ(0);
 }
 .xrpl-hoc-icon img{
   display:block;
@@ -651,12 +665,14 @@ html[dir="rtl"] .xrpl-topbar .xrpl-language-row{justify-content:flex-start}
   .xrpl-topbar .xrpl-language-row{justify-content:center}
 }
 @media print{
-  .xrpl-hoc-icon{display:none}
+  .xrpl-hoc-icon-pin{display:none}
 }
 </style>
 </head>
 <body id="top">
-  <a class="xrpl-hoc-icon" href="https://houseofcauliman.com/" aria-label="House of Cauliman" title="House of Cauliman"><img src="/assets/favicons/apple-touch-icon.png" width="32" height="32" alt=""></a>
+  <div class="xrpl-hoc-icon-pin">
+    <a class="xrpl-hoc-icon" href="https://houseofcauliman.com/" aria-label="House of Cauliman" title="House of Cauliman"><img src="/assets/favicons/apple-touch-icon.png" width="32" height="32" alt=""></a>
+  </div>
   <div class="wrap">
 <section class="xrpl-dashboard"><div class="xrpl-topbar"><div class="xrpl-language-row"><label id="xrpl-language-label" for="xrpl-language"><span aria-hidden="true">🌐</span> <span data-i18n="lang.label">Language</span></label><select id="xrpl-language" aria-labelledby="xrpl-language-label" data-i18n-attr="aria-label:lang.select"><option value="en" lang="en">English</option><option value="pt-BR" lang="pt-BR">Português (Brasil)</option><option value="es" lang="es">Español</option><option value="fr" lang="fr">Français</option><option value="de" lang="de">Deutsch</option><option value="ja" lang="ja">日本語</option><option value="ko" lang="ko">한국어</option><option value="zh-CN" lang="zh-CN">中文（简体）</option><option value="hi" lang="hi">हिन्दी</option><option value="ar" lang="ar" dir="rtl">العربية</option></select><span class="xrpl-language-note" data-i18n="lang.note">Saved on this device. It applies to every XRPL LAYMAN page.</span></div></div>
 
