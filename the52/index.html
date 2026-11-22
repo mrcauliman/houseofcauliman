@@ -1223,7 +1223,25 @@ const publicCard07 = Object.freeze({
 });
 const publicCards = Object.freeze({ "04": publicCard04, "05": publicCard05, "07": publicCard07 });
 
+// Card 09 release identity is owner-locked. The release API remains authoritative
+// for whether it is live, the verified supply, and any listing.
+const card09ReleaseIdentity = Object.freeze({
+  metadataUri:"ipfs://QmPgXYu3v4FA7UJniDSSkpMJ9FvsF9oceqPD2b1gkE5tei",
+  imageUrl:"https://tired-teal-sawfish.myfilebase.com/ipfs/QmVazQt24VwdHgGZsd88BCgx1PWV6XYJ8USsCAhrG78dmD",
+  notBefore:Date.parse("2026-11-22T08:00:00Z")
+});
+
+function isVerifiedCard09Release(data, now = Date.now()){
+  const releasedAt = typeof data?.releasedAt === "string" ? Date.parse(data.releasedAt) : NaN;
+  return data?.released === true &&
+    data.metadataUri === card09ReleaseIdentity.metadataUri &&
+    data.imageUrl === card09ReleaseIdentity.imageUrl &&
+    Number.isSafeInteger(data.mintedSupply) && data.mintedSupply > 0 &&
+    releasedAt >= card09ReleaseIdentity.notBefore && releasedAt <= now;
+}
+
 const cards = {
+  "09": { name:"The Bag Holder", label:"09 THE BAG HOLDER", releaseDate:"Sunday, November 22", ordinal:"ninth", unlockImage:`${API}/holder/the52/09/holder-media` },
   "08": { name:"The Influencer", label:"08 THE INFLUENCER", releaseDate:"Sunday, November 15", ordinal:"eighth", unlockImage:`${API}/holder/the52/08/holder-media` },
   "07": { name:"The Lurker", label:"07 THE LURKER", releaseDate:"Sunday, November 8", ordinal:"seventh", unlockImage:`${API}/holder/the52/07/holder-media` },
   "06": { name:"The Maxi", label:"06 THE MAXI", releaseDate:"Sunday, November 1", ordinal:"sixth", unlockImage:`${API}/holder/the52/06/holder-media` },
@@ -1771,6 +1789,14 @@ async function loadCardRelease(num){
     if(!response.ok) throw new Error(`Release lookup failed: ${response.status}`);
 
     const data = await response.json();
+
+    if(num === "09" && !isVerifiedCard09Release(data)){
+      // Don't consume images, supply or market/holder state from a missing,
+      // unreleased, premature or mismatching Card 09 release response.
+      collectionState.cards[num].released = false;
+      collectionState.cards[num].releaseLoaded = data?.released === false;
+      return;
+    }
 
     collectionState.cards[num] = {
       ...collectionState.cards[num],
