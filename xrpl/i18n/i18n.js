@@ -45,7 +45,8 @@
 
   // One left-to-right isolate per English phrase. Isolating each word on its
   // own lets the Arabic bidi algorithm reverse "XRPL LAYMAN" and "XRP Ledger".
-  var LATIN_PHRASE = /\(?[A-Za-z0-9$][A-Za-z0-9$._:%+\-]*(?:(?:[ \t]+[+&]?[ \t]*|[ \t]*\/[ \t]*)[A-Za-z0-9$][A-Za-z0-9$._:%+\-]*)*\)?/g;
+  // A comma followed by a digit stays inside the run, so "1,000" is not shown as "000,1".
+  var LATIN_PHRASE = /\(?[A-Za-z0-9$](?:[A-Za-z0-9$._:%+\-]|,(?=\d))*(?:(?:[ \t]+[+&]?[ \t]*|[ \t]*\/[ \t]*)[A-Za-z0-9$](?:[A-Za-z0-9$._:%+\-]|,(?=\d))*)*\)?/g;
 
   function isolateRuns(value) {
     if (document.documentElement.getAttribute("dir") !== "rtl") return value;

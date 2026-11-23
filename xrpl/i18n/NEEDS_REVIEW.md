@@ -56,6 +56,19 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - hi: एक काल्पनिक क्लब 1,000 CLUB क्रेडिट प्रस्तावित करता है। उसकी लॉन्च शीट में लोगो और टिकर हैं, पर जारीकर्ता पता, रिडेम्पशन (redemption) नीति या साइनिंग अथॉरिटी (signing authority) नहीं। सदस्य परिसंपत्ति पहचान सके या वादे का आकलन कर सके, इसके पहले क्या जोड़ना ज़रूरी है?
 - ar: يقترح نادٍ خيالي 1,000 رصيداً من CLUB. تذكر ورقة الإطلاق شعاراً ورمزاً مختصراً (ticker)، لكن من غير عنوان مُصدِر (issuer) أو سياسة استرداد (redemption) أو سلطة توقيع (signing). ما الذي يجب إضافته قبل أن يستطيع عضو تحديد الأصل أو الحكم على الوعد؟
 
+## `a-holds-one-asset-xrp-a-trust-line-t.39df26c1`
+
+- en: A {s1} holds one asset: $XRP, a trust line token or an MPT. Depositors put that asset in and receive {s2}, which record their part of the vault. The shares are MPTs issued by the vault.
+- pt-BR: Um {s1} guarda um único ativo: $XRP, um token de trust line ou um MPT. Os depositantes colocam esse ativo e recebem {s2}, que registram a parte deles no cofre. As cotas são MPTs emitidos pelo cofre.
+- es: Una {s1} guarda un solo activo: $XRP, un token de línea de confianza o un MPT. Los depositantes ponen ese activo y reciben {s2}, que registran su parte de la bóveda. Las participaciones son MPTs emitidos por la bóveda.
+- fr: Un {s1} détient un seul actif : du $XRP, un token de trust line ou un MPT. Les déposants y placent cet actif et reçoivent {s2}, qui enregistrent leur part du coffre. Ces parts sont des MPT émis par le coffre.
+- de: Ein {s1} hält ein einziges Asset: $XRP, einen Trust-Line-Token oder einen MPT. Einzahler legen dieses Asset ein und erhalten {s2}, die ihren Teil des Vaults festhalten. Die Anteile sind MPTs, die der Vault ausgibt.
+- ja: {s1}は1種類の資産だけを保有します：$XRP、トラストライン（trust line）トークン、またはMPTです。預け入れ者はその資産を入れて{s2}を受け取り、それがボールト内の持ち分を記録します。シェアはボールトが発行するMPTです。
+- ko: {s1}는 한 가지 자산만 보관합니다: $XRP, 트러스트 라인(trust line) 토큰 또는 MPT. 예치자는 그 자산을 넣고 {s2}을 받으며, 이것이 볼트에서 자신의 몫을 기록합니다. 지분은 볼트가 발행하는 MPT입니다.
+- zh-CN: {s1} 只持有一种资产：$XRP、信任线（trust line）代币或 MPT。存款人存入这种资产并获得{s2}，用来记录他们在金库中的份额。份额本身是金库发行的 MPT。
+- hi: एक {s1} सिर्फ़ एक एसेट रखता है: $XRP, ट्रस्ट लाइन (trust line) टोकन या MPT। जमाकर्ता वह एसेट डालते हैं और {s2} पाते हैं, जो वॉल्ट में उनका हिस्सा दर्ज करते हैं। ये शेयर वॉल्ट द्वारा जारी MPT होते हैं।
+- ar: تحتفظ {s1} بأصل واحد فقط: $XRP، أو توكن خط ثقة (trust line)، أو MPT. يضع المودعون هذا الأصل ويحصلون على {s2} تسجّل نصيبهم من الخزنة. والحصص نفسها رموز MPT تصدرها الخزنة.
+
 ## `a-human-manageable-secret-that-can-d.8636fdfc`
 
 - en: A human-manageable secret that can derive the keys. It’s not a password you can reset.
@@ -69,6 +82,19 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - hi: ऐसा सीक्रेट (secret) जिसे व्यक्ति संभाल सके और जिससे क्रिप्टोग्राफ़िक कुंजियाँ (keys) निकाली जा सकें। यह ऐसा पासवर्ड नहीं है जिसे आप रीसेट कर सकें।
 - ar: سر يستطيع الإنسان التعامل معه ويمكن اشتقاق المفاتيح منه. وليس كلمة مرور يمكنك إعادة تعيينها (seed).
 
+## `a-late-payment-must-cover-one-full-p.9878f9b5`
+
+- en: A late payment must cover one full payment period plus fees and late interest. Until every overdue period is paid, the borrower can’t make on-time payments or repay early.
+- pt-BR: Um pagamento atrasado precisa cobrir um período de pagamento completo, mais tarifas e juros de atraso. Até que todos os períodos vencidos sejam pagos, o tomador não pode fazer pagamentos em dia nem quitar antecipadamente.
+- es: Un pago tardío debe cubrir un periodo de pago completo más comisiones e intereses de demora. Hasta pagar todos los periodos vencidos, el prestatario no puede hacer pagos puntuales ni devolver por adelantado.
+- fr: Un paiement en retard doit couvrir une période de paiement complète, plus les frais et les intérêts de retard. Tant que toutes les périodes échues ne sont pas payées, l’emprunteur ne peut ni payer à l’échéance ni rembourser par anticipation.
+- de: Eine verspätete Zahlung muss einen vollen Zahlungszeitraum plus Gebühren und Verzugszinsen abdecken. Bis alle überfälligen Zeiträume bezahlt sind, kann der Kreditnehmer weder pünktliche Zahlungen leisten noch vorzeitig zurückzahlen.
+- ja: 延滞時の返済は、1回分の返済期間全体に加えて手数料と延滞利息をカバーする必要があります。延滞しているすべての期間を支払うまで、借り手は期日どおりの返済も早期返済もできません。
+- ko: 연체 상환은 한 번의 상환 기간 전체와 수수료, 연체 이자를 모두 내야 합니다. 밀린 기간을 모두 갚기 전까지 차입자는 정상 상환이나 조기 상환을 할 수 없습니다.
+- zh-CN: 逾期还款必须覆盖一个完整的还款周期，外加费用和逾期利息。在付清所有逾期周期之前，借款人不能按期还款，也不能提前还款。
+- hi: देर से किया गया भुगतान एक पूरी भुगतान अवधि के साथ फ़ीस और लेट ब्याज भी कवर करना चाहिए। जब तक हर बकाया अवधि का भुगतान नहीं हो जाता, उधारकर्ता समय पर भुगतान या जल्दी पूरा भुगतान नहीं कर सकता।
+- ar: يجب أن تغطي الدفعة المتأخرة فترة سداد كاملة بالإضافة إلى الرسوم وفائدة التأخير. وإلى أن تُسدَّد كل الفترات المتأخرة، لا يستطيع المقترض الدفع في الموعد ولا السداد المبكر.
+
 ## `a-listing-says-permanent-collectible.fc19f9eb`
 
 - en: A listing says “permanent collectible.” The NFT is mutable, its image sits on an ordinary web server, and the seller shows a screenshot rather than the NFTokenID. Which claims remain unproven?
@@ -81,6 +107,19 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - zh-CN: 一条上架信息写着“永久收藏品”。该 NFT 是可变的，图片放在普通网站服务器上，卖家出示的是截图而不是 NFTokenID。哪些说法仍然未经证实？
 - hi: एक लिस्टिंग कहती है “स्थायी संग्रहणीय।” NFT म्यूटेबल (mutable) है, उसकी छवि एक साधारण वेब सर्वर पर है, और विक्रेता NFTokenID की जगह स्क्रीनशॉट दिखाता है। कौन से दावे अब भी अप्रमाणित हैं?
 - ar: يقول إدراج «مقتنى دائم». NFT قابل للتغيير، وصورته على خادم ويب عادي، ويعرض البائع لقطة شاشة بدل NFTokenID. أي ادعاءات تبقى غير مثبتة؟
+
+## `a-loan-broker-creates-a-vault-for-on.b081e860`
+
+- en: A loan broker creates a vault for one asset and sets up lending on it. The vault starts empty.
+- pt-BR: Um loan broker cria um cofre para um ativo e configura empréstimos nele. O cofre começa vazio.
+- es: Un loan broker crea una bóveda para un activo y configura préstamos en ella. La bóveda empieza vacía.
+- fr: Un loan broker crée un coffre pour un actif et y met en place les prêts. Le coffre est vide au départ.
+- de: Ein Loan Broker erstellt einen Vault für ein Asset und richtet darauf die Kreditvergabe ein. Der Vault ist anfangs leer.
+- ja: ローンブローカーが1つの資産のボールトを作り、そこでレンディングを設定します。ボールトは最初は空です。
+- ko: 대출 브로커가 한 자산의 볼트를 만들고 그 위에 대출을 설정합니다. 볼트는 처음에 비어 있습니다.
+- zh-CN: 贷款经纪人为一种资产创建金库，并在上面设置借贷。金库一开始是空的。
+- hi: लोन ब्रोकर एक एसेट के लिए वॉल्ट बनाता है और उस पर लेंडिंग सेट करता है। वॉल्ट शुरू में खाली होता है।
+- ar: ينشئ وسيط القروض خزنة لأصل واحد ويُعدّ الإقراض عليها. تبدأ الخزنة فارغة.
 
 ## `a-member-sees-two-assets-with-the-sa.a08c1393`
 
@@ -537,6 +576,19 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - hi: पाठ 1 से अपना परिसंपत्ति विनिर्देश लाइए। सार्वजनिक पहचानकर्ता और सीक्रेट (secret) का अंतर जानें। नीचे दिए काल्पनिक रिकॉर्ड से हर अभ्यास पूरा हो सकता है; एक्सप्लोरर खोलना वैकल्पिक है।
 - ar: أحضر مواصفة الأصل من الدرس 1. اعرف الفرق بين المعرّف العام والسر. تستطيع إكمال كل تمرين باستخدام السجلات الخيالية أدناه؛ وفتح مستكشف اختياري.
 
+## `broker-fees-can-include-an-originati.773654b8`
+
+- en: Broker fees can include an origination fee taken from the principal when the loan is made, a service fee on each payment, late and early payment fees, and a management fee, which is a percentage of the interest. A broker whose first-loss capital is below the minimum can’t receive fees. They’re added to its cover instead.
+- pt-BR: As tarifas do broker podem incluir uma tarifa de originação tirada do principal quando o empréstimo é feito, uma tarifa de serviço em cada pagamento, tarifas por atraso e por pagamento antecipado, e uma tarifa de administração, que é uma porcentagem dos juros. Um broker cujo capital de primeira perda está abaixo do mínimo não pode receber tarifas. Elas são somadas à sua cobertura.
+- es: Las comisiones del broker pueden incluir una comisión de apertura que se toma del principal al hacer el préstamo, una comisión de servicio en cada pago, comisiones por pago tardío y anticipado, y una comisión de gestión, que es un porcentaje de los intereses. Un broker cuyo capital de primera pérdida está por debajo del mínimo no puede recibir comisiones. Se suman a su cobertura.
+- fr: Les frais du broker peuvent inclure des frais de dossier prélevés sur le principal à la création du prêt, des frais de service à chaque paiement, des frais de retard et de remboursement anticipé, et des frais de gestion, qui sont un pourcentage des intérêts. Un broker dont le capital de première perte est sous le minimum ne peut pas recevoir de frais : ils s’ajoutent à sa couverture.
+- de: Zu den Broker-Gebühren können eine Abschlussgebühr gehören, die bei Vergabe von der Kreditsumme abgezogen wird, eine Servicegebühr pro Zahlung, Gebühren für verspätete und vorzeitige Zahlungen sowie eine Verwaltungsgebühr, die ein Prozentsatz der Zinsen ist. Ein Broker, dessen First-Loss-Kapital unter dem Minimum liegt, kann keine Gebühren erhalten. Sie werden stattdessen seiner Deckung zugeschlagen.
+- ja: ブローカーの手数料には、ローン実行時に元本から差し引かれる組成手数料、各返済ごとのサービス手数料、延滞・早期返済の手数料、利息の一定割合である管理手数料が含まれることがあります。ファーストロス資本が最低額を下回っているブローカーは手数料を受け取れず、手数料はそのカバーに加えられます。
+- ko: 브로커 수수료에는 대출 실행 때 원금에서 떼는 취급 수수료, 상환마다 붙는 서비스 수수료, 연체 및 조기 상환 수수료, 이자의 일정 비율인 관리 수수료가 있을 수 있습니다. 퍼스트 로스 자본이 최소액보다 낮은 브로커는 수수료를 받을 수 없고, 수수료는 대신 보전 자본에 더해집니다.
+- zh-CN: 经纪人的费用可能包括：放款时从本金中扣除的发放费、每次还款的服务费、逾期和提前还款费，以及按利息一定比例收取的管理费。首损资本低于最低额度的经纪人不能收取费用，这些费用会改为计入其首损资本。
+- hi: ब्रोकर की फ़ीस में लोन देते समय मूलधन से ली जाने वाली ओरिजिनेशन फ़ीस, हर भुगतान पर सर्विस फ़ीस, देर से और जल्दी भुगतान की फ़ीस, और मैनेजमेंट फ़ीस शामिल हो सकती है, जो ब्याज का एक प्रतिशत होती है। जिस ब्रोकर की फ़र्स्ट-लॉस पूँजी न्यूनतम से कम है, वह फ़ीस नहीं ले सकता। फ़ीस उसकी कवर में जुड़ जाती है।
+- ar: قد تشمل رسوم الوسيط رسوم إنشاء تُقتطع من أصل المبلغ عند منح القرض، ورسوم خدمة على كل دفعة، ورسوماً على الدفع المتأخر والمبكر، ورسوم إدارة هي نسبة من الفائدة. والوسيط الذي يقل رأس مال الخسارة الأولى لديه عن الحد الأدنى لا يمكنه تلقي الرسوم، بل تُضاف إلى غطائه.
+
 ## `burn.b96d6af1`
 
 - en: Burn
@@ -575,6 +627,19 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - zh-CN: 发行方能否用它的代币冻结（freeze）控制来冻结原生 XRP？
 - hi: क्या जारीकर्ता (issuer) अपने टोकन फ़्रीज़ (freeze) नियंत्रणों से मूल XRP फ़्रीज़ कर सकता है?
 - ar: هل يستطيع مُصدِر (issuer) تجميد (freeze) XRP الأصلي باستخدام ضوابط تجميد رموزه؟
+
+## `charges-the-broker-can-set-such-as-a.d44f5ddb`
+
+- en: Charges the broker can set, such as a service fee on each payment or a late payment fee.
+- pt-BR: Cobranças que o broker pode definir, como uma tarifa de serviço em cada pagamento ou uma tarifa por atraso.
+- es: Cargos que el broker puede fijar, como una comisión de servicio en cada pago o una comisión por pago tardío.
+- fr: Montants que le broker peut fixer, comme des frais de service à chaque paiement ou des frais de retard.
+- de: Beträge, die der Broker festlegen kann, etwa eine Servicegebühr pro Zahlung oder eine Gebühr für verspätete Zahlungen.
+- ja: ブローカーが設定できる料金です。例：各返済ごとのサービス手数料や延滞手数料。
+- ko: 브로커가 정할 수 있는 요금입니다. 예: 상환마다 붙는 서비스 수수료, 연체 수수료.
+- zh-CN: 经纪人可以设定的收费，例如每次还款的服务费或逾期费。
+- hi: ब्रोकर द्वारा तय किए जा सकने वाले शुल्क, जैसे हर भुगतान पर सर्विस फ़ीस या देर से भुगतान की फ़ीस।
+- ar: مبالغ يمكن للوسيط تحديدها، مثل رسوم خدمة على كل دفعة أو رسوم على الدفع المتأخر.
 
 ## `check-burn-transfer-and-uri-mutation.fe95a3bd`
 
@@ -940,6 +1005,32 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - hi: पाठ 1 के हर खाते के लिए एक बॉक्स बनाएँ। हर एक के नीचे चालू मास्टर साइनिंग (master signing), रेगुलर की (regular key) और साइनर-लिस्ट (signer list) मार्ग अलग-अलग लिखें। यदि सार्वजनिक रिकॉर्ड प्रश्न का उत्तर न दे तो अज्ञात जोड़ें; नक्शा पूरा करने के लिए किसी का सीक्रेट (secret) न माँगें।
 - ar: ارسم مربعاً لكل حساب من الدرس 1. تحت كل منها، اذكر بشكل منفصل التوقيع بالمفتاح الرئيسي (master key) المفعّل، والمفتاح العادي (regular key)، ومسار قائمة الموقّعين (signer list). أضف «غير معروف» إذا لم يجب السجل العام عن سؤال؛ ولا تطلب سر أي شخص لإكمال الخريطة.
 
+## `each-loan-sets-its-principal-interes.f5bf8de0`
+
+- en: Each loan sets its principal, interest rate, payment schedule, fees and grace period up front.
+- pt-BR: Cada empréstimo define antecipadamente o principal, a taxa de juros, o cronograma de pagamentos, as tarifas e o período de carência.
+- es: Cada préstamo fija de antemano el principal, la tasa de interés, el calendario de pagos, las comisiones y el periodo de gracia.
+- fr: Chaque prêt fixe dès le départ son principal, son taux d’intérêt, son calendrier de paiements, ses frais et son délai de grâce.
+- de: Jeder Kredit legt vorab Kreditsumme, Zinssatz, Zahlungsplan, Gebühren und Kulanzfrist fest.
+- ja: 各ローンは、元本、金利、返済スケジュール、手数料、猶予期間を最初に決めます。
+- ko: 각 대출은 원금, 이자율, 상환 일정, 수수료, 유예 기간을 처음에 정합니다.
+- zh-CN: 每笔贷款事先确定本金、利率、还款计划、费用和宽限期。
+- hi: हर लोन पहले से अपना मूलधन, ब्याज दर, भुगतान शेड्यूल, फ़ीस और ग्रेस पीरियड तय करता है।
+- ar: يحدد كل قرض مسبقاً أصل المبلغ وسعر الفائدة وجدول السداد والرسوم وفترة السماح.
+
+## `each-payment-is-split-into-principal.7531ec70`
+
+- en: Each payment is split into principal, interest and fees.
+- pt-BR: Cada pagamento é dividido em principal, juros e tarifas.
+- es: Cada pago se divide en principal, intereses y comisiones.
+- fr: Chaque paiement se répartit entre principal, intérêts et frais.
+- de: Jede Zahlung teilt sich in Tilgung, Zinsen und Gebühren.
+- ja: 各返済は元本、利息、手数料に分けられます。
+- ko: 각 상환은 원금, 이자, 수수료로 나뉩니다.
+- zh-CN: 每次还款分为本金、利息和费用。
+- hi: हर भुगतान मूलधन, ब्याज और फ़ीस में बँटता है।
+- ar: تُقسَّم كل دفعة إلى أصل المبلغ والفائدة والرسوم.
+
 ## `estimate-the-reserve-for-a-simple-ac.4984109c`
 
 - en: Estimate the reserve for a simple account. Actual ownership and reserve behavior can vary by object type.
@@ -965,6 +1056,19 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - zh-CN: {s1} 显示出来的每一笔 $XRP 都可以花。{br2}{s3}有一部分可能是账户准备金和所有者准备金所需要的。
 - hi: {s1} दिखाया गया हर $XRP खर्च किया जा सकता है।{br2}{s3} कुछ खाता और ओनर रिज़र्व (owner reserve) के लिए ज़रूरी हो सकता है।
 - ar: {s1} كل $XRP معروض قابل للإنفاق.{br2}{s3} قد يُلزم بعضه لاحتياطي الحساب واحتياطي المالك (reserve).
+
+## `every-number-here-is-a-made-up-examp.7b5dde92`
+
+- en: Every number here is a made-up example in a generic token, taken from the worked example on xrpl.org. No fees are charged in this example.
+- pt-BR: Todos os números aqui são exemplos inventados em um token genérico, tirados do exemplo resolvido no xrpl.org. Nenhuma tarifa é cobrada neste exemplo.
+- es: Todos los números aquí son ejemplos inventados en un token genérico, tomados del ejemplo resuelto de xrpl.org. En este ejemplo no se cobran comisiones.
+- fr: Tous les chiffres ici sont des exemples inventés dans un token générique, tirés de l’exemple détaillé de xrpl.org. Aucuns frais ne sont facturés dans cet exemple.
+- de: Alle Zahlen hier sind erfundene Beispiele in einem generischen Token, übernommen aus dem Rechenbeispiel auf xrpl.org. In diesem Beispiel fallen keine Gebühren an.
+- ja: ここの数字はすべて、汎用トークンで作った架空の例で、xrpl.orgの計算例に基づいています。この例では手数料はかかりません。
+- ko: 여기 나오는 숫자는 모두 일반 토큰으로 만든 가상의 예시이며, xrpl.org의 계산 예시를 따랐습니다. 이 예시에서는 수수료가 없습니다.
+- zh-CN: 这里的所有数字都是用一种通用代币编出来的示例，取自 xrpl.org 上的计算示例。本例中不收取任何费用。
+- hi: यहाँ हर आँकड़ा एक सामान्य टोकन में बनाया गया काल्पनिक उदाहरण है, जो xrpl.org के हल किए गए उदाहरण से लिया गया है। इस उदाहरण में कोई फ़ीस नहीं ली जाती।
+- ar: كل رقم هنا مثال مُختلق بتوكن عام، مأخوذ من المثال المحلول على xrpl.org. لا تُفرض أي رسوم في هذا المثال.
 
 ## `explain-why-xrp-needs-no-trust-line.ce59177b`
 
@@ -1017,6 +1121,19 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - zh-CN: 费用
 - hi: फ़ीस (fee)
 - ar: الرسم
+
+## `fees.72abbc92`
+
+- en: Fees
+- pt-BR: Tarifas
+- es: Comisiones
+- fr: Frais
+- de: Gebühren
+- ja: 手数料
+- ko: 수수료
+- zh-CN: 费用
+- hi: फ़ीस
+- ar: الرسوم
 
 ## `fictional-issuer-a-has-master-signin.286a3096`
 
@@ -1303,6 +1420,19 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - zh-CN: 在有要求时，发行方授权（authorization）控制谁可以持有一种货币。单项冻结（individual freeze）限制通过信任线（trust line）的支出；深度冻结（deep freeze）再加上接收限制，并有与发行方直接往来的例外。全局冻结（global freeze）影响更广。这些代币控制不会冻结原生 XRP。追回（clawback）是另一项能力，应当单独披露；它不是冻结的另一个名字。
 - hi: जहाँ जारीकर्ता ऑथराइज़ेशन (issuer authorization) ज़रूरी हो, वह तय करता है कि मुद्रा कौन रख सकता है। व्यक्तिगत फ़्रीज़ (individual freeze) ट्रस्ट लाइन (trust line) के माध्यम से खर्च करने पर प्रतिबंध लगाता है; डीप फ़्रीज़ (deep freeze) प्राप्त करने पर भी प्रतिबंध जोड़ता है, लेकिन जारीकर्ता के साथ सीधे लेनदेन के लिए अपवाद होते हैं। ग्लोबल फ़्रीज़ (global freeze) के प्रभाव अधिक व्यापक हैं। ये टोकन नियंत्रण मूल XRP को फ़्रीज़ नहीं करते। क्लॉबैक (clawback) अलग क्षमता है और उसका अलग खुलासा होना चाहिए; वह फ़्रीज़ का दूसरा नाम नहीं है।
 - ar: يتحكم تفويض المُصدِر (authorization) في من يجوز له حيازة عملة عندما يكون ذلك مطلوباً. يقيّد التجميد الفردي (individual freeze) الإنفاق عبر خط الثقة (trust line)؛ ويضيف التجميد العميق (deep freeze) قيوداً على الاستلام، مع استثناءات للتعامل المباشر مع المُصدِر (issuer). وللتجميد العام (global freeze) آثار أوسع. ضوابط الرموز هذه لا تجمّد XRP الأصلي. والسحب (clawback) قدرة منفصلة ينبغي الإفصاح عنها بشكل منفصل؛ وهو ليس اسماً آخر للتجميد (freeze).
+
+## `issuers-of-trust-line-tokens-and-mpt.791ea505`
+
+- en: Issuers of trust line tokens and MPTs can claw back first-loss capital, but only down to the minimum the broker must keep. They can also freeze accounts. A frozen borrower can’t make payments but still owes them.
+- pt-BR: Emissores de tokens de trust line e de MPTs podem fazer clawback do capital de primeira perda, mas só até o mínimo que o broker precisa manter. Eles também podem congelar contas. Um tomador congelado não consegue fazer pagamentos, mas continua devendo.
+- es: Los emisores de tokens de línea de confianza y de MPTs pueden recuperar (clawback) capital de primera pérdida, pero solo hasta el mínimo que el broker debe mantener. También pueden congelar cuentas. Un prestatario congelado no puede hacer pagos, pero los sigue debiendo.
+- fr: Les émetteurs de tokens de trust line et de MPT peuvent reprendre (clawback) du capital de première perte, mais seulement jusqu’au minimum que le broker doit conserver. Ils peuvent aussi geler des comptes. Un emprunteur gelé ne peut pas payer, mais reste redevable.
+- de: Emittenten von Trust-Line-Tokens und MPTs können First-Loss-Kapital per Clawback zurückholen, aber nur bis zu dem Minimum, das der Broker halten muss. Sie können außerdem Konten einfrieren. Ein eingefrorener Kreditnehmer kann nicht zahlen, schuldet die Zahlungen aber weiter.
+- ja: トラストライン（trust line）トークンやMPTの発行者は、ファーストロス資本をクローバックできますが、ブローカーが維持すべき最低額までに限られます。発行者はアカウントを凍結することもできます。凍結された借り手は返済できませんが、債務はなくなりません。
+- ko: 트러스트 라인(trust line) 토큰과 MPT의 발행자는 퍼스트 로스 자본을 클로백할 수 있지만, 브로커가 유지해야 하는 최소액까지만 가능합니다. 발행자는 계정을 동결할 수도 있습니다. 동결된 차입자는 상환할 수 없지만 빚은 그대로 남습니다.
+- zh-CN: 信任线（trust line）代币和 MPT 的发行方可以回收（clawback）首损资本，但最多只能回收到经纪人必须保留的最低额度。他们还可以冻结账户。被冻结的借款人无法还款，但仍然欠着这笔钱。
+- hi: ट्रस्ट लाइन (trust line) टोकन और MPT के जारीकर्ता फ़र्स्ट-लॉस पूँजी को क्लॉबैक कर सकते हैं, लेकिन सिर्फ़ उस न्यूनतम तक जो ब्रोकर को रखना ज़रूरी है। वे खाते फ़्रीज़ भी कर सकते हैं। फ़्रीज़ हुआ उधारकर्ता भुगतान नहीं कर सकता, लेकिन उस पर कर्ज़ बना रहता है।
+- ar: يمكن لمُصدري توكنات خطوط الثقة (trust line) ورموز MPT استرداد (clawback) رأس مال الخسارة الأولى، ولكن فقط حتى الحد الأدنى الذي يجب أن يحتفظ به الوسيط. ويمكنهم أيضاً تجميد الحسابات. المقترض المجمَّد لا يستطيع الدفع، لكنه يظل مديناً.
 
 ## `keep-backend-api-secrets-out-of-brow.f5ff651f`
 
@@ -1993,6 +2123,19 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - hi: अनिश्चित लेनदेन का अभ्यास करें: हैश मौजूद है पर लुकअप उसे नहीं पाता। मूल इरादा और समाप्ति की निर्धारित सीमा का साक्ष्य रखें। गैर-शामिल होने का निष्कर्ष निकालने से पहले पूछें कि पूछे गए सर्वर के पास ज़रूरी इतिहास है और वह संबंधित लेजर सीमा पार कर चुका है या नहीं। केवल एक खाली लुकअप के कारण नया भुगतान न भेजें।
 - ar: تدرّب على معاملة غير مؤكدة: توجد تجزئة لكن البحث لا يجدها. أبقِ القصد الأصلي ودليل انتهاء الصلاحية المحدود. اسأل هل لدى الخادم المستعلَم التاريخ المطلوب وهل تجاوز حد السجل المعني قبل أن تستنتج عدم الإدراج. لا تصدر دفعة جديدة لمجرد أن بحثاً واحداً كان فارغاً.
 
+## `repays-with-loanpay-each-payment-cov.702af75a`
+
+- en: Repays with LoanPay. Each payment covers principal, interest and fees.
+- pt-BR: Paga com LoanPay. Cada pagamento cobre principal, juros e tarifas.
+- es: Paga con LoanPay. Cada pago cubre principal, intereses y comisiones.
+- fr: Rembourse avec LoanPay. Chaque paiement couvre principal, intérêts et frais.
+- de: Zahlt mit LoanPay zurück. Jede Zahlung deckt Tilgung, Zinsen und Gebühren.
+- ja: LoanPayで返済します。各返済は元本、利息、手数料をカバーします。
+- ko: LoanPay로 상환합니다. 각 상환은 원금, 이자, 수수료를 포함합니다.
+- zh-CN: 用 LoanPay 还款。每次还款包含本金、利息和费用。
+- hi: LoanPay से चुकाता है। हर भुगतान में मूलधन, ब्याज और फ़ीस शामिल होती है।
+- ar: يسدد عبر LoanPay. تغطي كل دفعة أصل المبلغ والفائدة والرسوم.
+
 ## `reserve-calculator.67176307`
 
 - en: Reserve calculator
@@ -2395,6 +2538,19 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - zh-CN: 应用中存放秘密和权威订单检查的服务器端部分。
 - hi: ऐप्लिकेशन का सर्वर-पक्ष, जहाँ सीक्रेट (secret) और आधिकारिक ऑर्डर जाँच रहती हैं।
 - ar: جزء التطبيق على الخادم حيث تنتمي الأسرار وفحوص الطلب المعتمدة.
+
+## `the-share-of-the-broker-s-total-debt.ff3778fe`
+
+- en: The share of the broker’s total debt that must be covered. Below it, the broker can’t make new loans or receive fees.
+- pt-BR: A parte da dívida total do broker que precisa estar coberta. Abaixo dela, o broker não pode fazer novos empréstimos nem receber tarifas.
+- es: La parte de la deuda total del broker que debe estar cubierta. Por debajo, el broker no puede hacer préstamos nuevos ni recibir comisiones.
+- fr: La part de la dette totale du broker qui doit être couverte. En dessous, le broker ne peut ni accorder de nouveaux prêts ni recevoir de frais.
+- de: Der Anteil an der Gesamtschuld des Brokers, der gedeckt sein muss. Darunter kann der Broker keine neuen Kredite vergeben und keine Gebühren erhalten.
+- ja: ブローカーの債務総額のうち、カバーされていなければならない割合。これを下回ると、ブローカーは新規ローンを出せず、手数料も受け取れません。
+- ko: 브로커의 총부채 중 보전되어야 하는 비율. 이보다 낮으면 브로커는 새 대출을 내거나 수수료를 받을 수 없습니다.
+- zh-CN: 经纪人总债务中必须被覆盖的比例。低于这个比例，经纪人不能发放新贷款，也不能收取费用。
+- hi: ब्रोकर के कुल कर्ज़ का वह हिस्सा जो कवर होना ज़रूरी है। इससे नीचे होने पर ब्रोकर नए लोन नहीं दे सकता और फ़ीस नहीं ले सकता।
+- ar: الجزء من إجمالي دين الوسيط الذي يجب تغطيته. وتحته لا يستطيع الوسيط منح قروض جديدة ولا تلقي الرسوم.
 
 ## `the-website-says-nobody-can-alter-th.18cab641`
 
@@ -3007,4 +3163,4 @@ Preserved on purpose: `$XRP`, addresses, `NFTokenID`, `NFTokenPage`, `TakerGets`
 - hi: आपका सीड (seed) पासवर्ड नहीं है। लेजर के पीछे कोई रीसेट डेस्क नहीं है।
 - ar: بذرتك (seed) ليست كلمة مرور. لا يوجد مكتب إعادة تعيين خلف السجل.
 
-Count: 231 English strings.
+Count: 243 English strings.

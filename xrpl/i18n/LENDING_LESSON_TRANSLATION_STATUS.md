@@ -1,0 +1,213 @@
+# Lending Protocol lesson: translation status (2026-11-23)
+
+`/xrpl/lending-protocol.html`, its dashboard card and the new `Lending` top-bar link added 198 English keys. The nine non-English values for those keys (pt-BR, es, fr, de, ja, ko, zh-CN, hi, ar) are **AI drafts written on 2026-11-23**. No native speaker and no XRPL expert has reviewed them. The 28 October AI review in `AI_REVIEW_STATUS.md` did **not** cover these keys.
+
+- `release.json` is unchanged: English is `source` and all nine languages stay `unapproved`. The new locale pages therefore carry `noindex, follow`, no `hreflang`, and stay out of `sitemap.proposed.xml`, exactly like the existing pages.
+- 12 new keys match the repository's security and finance flag pattern (`needs_review.PATTERN`) and were added to `NEEDS_REVIEW.md` and to all nine review packets with blank Approve, Correction, Reviewer and Date cells (231 → 243 flagged). The flag pattern itself was not changed: `each-loan-sets-its-principal-interes.f5bf8de0`, `a-holds-one-asset-xrp-a-trust-line-t.39df26c1`, `repays-with-loanpay-each-payment-cov.702af75a`, `each-payment-is-split-into-principal.7531ec70`, `fees.72abbc92`, `charges-the-broker-can-set-such-as-a.d44f5ddb`, `broker-fees-can-include-an-originati.773654b8`, `a-late-payment-must-cover-one-full-p.9878f9b5`, `the-share-of-the-broker-s-total-debt.ff3778fe`, `issuers-of-trust-line-tokens-and-mpt.791ea505`, `every-number-here-is-a-made-up-examp.7b5dde92`, `a-loan-broker-creates-a-vault-for-on.b081e860`.
+- The other 186 keys are covered only by the language-level `unapproved` status, the same as every other non-flagged string on the site.
+- Existing catalog values were not changed. The 198 keys are additions only (`git diff --numstat`: 198 added, 0 removed per catalog).
+- Three keys (`lending.shares.copy`, `lending.cover.copy`, `lending.sim.progress`) are runtime templates used by `/xrpl/lending-protocol.js`.
+- Swedish is on hold and was not added.
+
+Native review of these 198 keys is still needed before any language could be approved. This file does not approve a language or authorize publication.
+
+## New keys
+
+- `lending.shares.copy`: New shares issued, rounded down to a whole share. After this deposit they are {pct}% of all {total} shares.
+- `lending.cover.copy`: First-loss capital covers {covered} of the {amount} in default. The vault absorbs the other {loss}.
+- `lending.sim.progress`: Step {n} of {total}
+- `meta.lending.title`: Lending Protocol | XRPL LAYMAN
+- `meta.lending.description`: How the proposed XRPL Lending Protocol (XLS-66) works: Single Asset Vaults and shares, loan brokers and borrowers, LoanSet, payments, first-loss capital, grace periods and default, with a step-through loan simulator.
+- `nav.lending`: Lending
+- `lending-application.67b303bf`: Lending Application
+- `lending-protocol.a2de0802`: Lending Protocol
+- `how-the-proposed-lending-protocol-xl.885064c8`: How the proposed Lending Protocol (XLS-66) would build fixed-term loans into the XRPL itself, using pooled funds from Single Asset Vaults (XLS-65).
+- `what-it-is.f8c94a3b`: What it is
+- `loans-written-into-the-ledger-itself.64d5557f`: Loans written into the ledger itself.
+- `single-asset-vault.859c9502`: Single Asset Vault
+- `uncollateralized.fdbe1758`: uncollateralized
+- `the-lending-protocol-lets-a-pool-of.a7bc1d6d`: The Lending Protocol lets a pool of funds be lent out as fixed-term loans, with every loan recorded on the XRPL. The pool lives in a {s1}. The loans are {s2}: the ledger holds no collateral and liquidates no one.
+- `pooled-funds.19150fe5`: Pooled funds
+- `many-depositors-put-one-asset-into-a.e59c0cef`: Many depositors put one asset into a vault. Loans are paid out of that vault.
+- `fixed-terms.a9afcaba`: Fixed terms
+- `each-loan-sets-its-principal-interes.f5bf8de0`: Each loan sets its principal, interest rate, payment schedule, fees and grace period up front.
+- `recorded-on-chain.6ef656b0`: Recorded on-chain
+- `creating-a-loan-each-payment-and-any.2b5ab3f9`: Creating a loan, each payment and any default are transactions on the ledger.
+- `status-on-2026-11-23.c9707203`: Status on 2026-11-23
+- `proposed-not-live-the-lendingprotoco.9b869fda`: Proposed, not live. The LendingProtocol and SingleAssetVault amendments are open for validator voting and are not enabled on Mainnet. Support changes as validators vote, so check the {s1} page for live numbers.
+- `vaults-and-shares-xls-65.8efc4ebc`: Vaults and shares (XLS-65)
+- `one-asset-goes-in-shares-come-out.2e147d78`: One asset goes in. Shares come out.
+- `shares.2ece2907`: shares
+- `a-holds-one-asset-xrp-a-trust-line-t.39df26c1`: A {s1} holds one asset: $XRP, a trust line token or an MPT. Depositors put that asset in and receive {s2}, which record their part of the vault. The shares are MPTs issued by the vault.
+- `public.61c9b2b1`: public
+- `private.e8072179`: private
+- `a-vault-can-be-so-anyone-can-deposit.e53b830a`: A vault can be {s1}, so anyone can deposit, or {s2}, so only accounts holding the right Credentials can deposit.
+- `shareholders-redeem-shares-to-take-t.9c14a982`: Shareholders redeem shares to take the asset back out. In a private vault, a depositor whose credentials expire can still redeem.
+- `pseudo-account.33dc145e`: pseudo-account
+- `the-vault-s-funds-sit-in-a-a-ledger.051b796f`: The vault’s funds sit in a {s1}: a ledger-owned account that can’t sign transactions or receive payments.
+- `if-the-vault-takes-a-loss-the-number.4415b391`: If the vault takes a loss, the number of shares stays the same, but each share is backed by less.
+- `shares-calculator.e906d31d`: Shares calculator
+- `example-numbers-only-new-shares-are.3fc59d04`: Example numbers only. New shares are issued in proportion to what the vault already holds. Real vaults also adjust for unrealized losses.
+- `assets-in-the-vault.7ed4aaf0`: Assets in the vault
+- `shares-outstanding.8b225675`: Shares outstanding
+- `new-deposit.30e350f0`: New deposit
+- `three-roles.0f8d937e`: Three roles
+- `pick-a-role-to-see-what-it-does.95160952`: Pick a role to see what it does.
+- `lending-roles.68c5751b`: Lending roles
+- `depositor.06776caf`: Depositor
+- `loan-broker.f592e4b0`: Loan broker
+- `borrower.046298d1`: Borrower
+- `adds-the-vault-s-asset-and-receives.d4309829`: Adds the vault’s asset and receives shares.
+- `deposits-with-vaultdeposit-and-gets.394da2d6`: Deposits with VaultDeposit and gets shares back.
+- `redeems-shares-with-vaultwithdraw.0f8131a6`: Redeems shares with VaultWithdraw.
+- `shares-the-loss-if-a-loan-isn-t-repa.3e324b61`: Shares the loss if a loan isn’t repaid, after any first-loss capital is used.
+- `creates-the-vault-sets-up-lending-on.b573b0db`: Creates the vault, sets up lending on it and manages its loans. For now, the vault owner and the loan broker must be the same account.
+- `creates-the-vault-with-vaultcreate-a.10baaf65`: Creates the vault with VaultCreate and the lending setup with LoanBrokerSet.
+- `decides-who-gets-a-loan-and-on-what.8c075901`: Decides who gets a loan and on what terms. That judgment happens off-chain.
+- `co-signs-each-loanset-with-the-borro.cb2eff91`: Co-signs each LoanSet with the borrower.
+- `can-deposit-first-loss-capital-and-c.61b61674`: Can deposit first-loss capital, and can default a loan once its grace period ends.
+- `receives-a-loan-and-repays-it-on-the.1b11000f`: Receives a loan and repays it on the schedule in its terms.
+- `agrees-the-terms-and-co-signs-loanse.5138790a`: Agrees the terms and co-signs LoanSet.
+- `receives-the-principal-from-the-vaul.3cdcecc0`: Receives the principal from the vault.
+- `repays-with-loanpay-each-payment-cov.702af75a`: Repays with LoanPay. Each payment covers principal, interest and fees.
+- `creating-a-loan-loanset.b641908e`: Creating a loan: LoanSet
+- `both-sides-sign-before-any-funds-mov.a509abbe`: Both sides sign before any funds move.
+- `broker-and-borrower-agree-terms.c70d68fc`: Broker and borrower agree terms
+- `one-side-builds-and-signs-loanset.80490f73`: One side builds and signs LoanSet
+- `the-other-side-checks-the-terms-and.36d2a915`: The other side checks the terms and signs
+- `principal-moves-from-the-vault-to-th.a55cc6bd`: Principal moves from the vault to the borrower
+- `loanset.7a2a8042`: LoanSet
+- `creates-a-loan-entry-on-the-ledger-i.174ea6d1`: {s1} creates a Loan entry on the ledger. It is a mutual agreement, so it must be signed by both the loan broker and the borrower. Either side can start it. The terms include the principal, the interest rate, the number of payments, the time between payments and the grace period.
+- `built-in-limits.f702b0f6`: Built-in limits
+- `loanset-fails-if-the-vault-doesn-t-h.7dc21ac7`: LoanSet fails if the vault doesn’t hold enough to fund the loan, or if the broker’s first-loss capital would fall below the minimum required for its new total debt.
+- `payments.44357ae5`: Payments
+- `each-payment-is-split-into-principal.7531ec70`: Each payment is split into principal, interest and fees.
+- `principal.f3b86b13`: Principal
+- `reduces-what-the-borrower-still-owes.35ce32ba`: Reduces what the borrower still owes.
+- `interest.3a12015d`: Interest
+- `the-cost-of-borrowing-for-that-perio.7ad4100f`: The cost of borrowing for that period, at the rate set in the loan.
+- `fees.72abbc92`: Fees
+- `charges-the-broker-can-set-such-as-a.d44f5ddb`: Charges the broker can set, such as a service fee on each payment or a late payment fee.
+- `loanpay.6ff8cf49`: LoanPay
+- `borrowers-pay-with-a-loan-can-set-th.5b555285`: Borrowers pay with {s1}. A loan can set three rates: the regular interest rate, a higher late interest rate for late payments, and a rate charged for repaying the whole loan early.
+- `broker-fees-can-include-an-originati.773654b8`: Broker fees can include an origination fee taken from the principal when the loan is made, a service fee on each payment, late and early payment fees, and a management fee, which is a percentage of the interest. A broker whose first-loss capital is below the minimum can’t receive fees. They’re added to its cover instead.
+- `a-late-payment-must-cover-one-full-p.9878f9b5`: A late payment must cover one full payment period plus fees and late interest. Until every overdue period is paid, the borrower can’t make on-time payments or repay early.
+- `no-collateral.a1097e44`: No collateral
+- `whether-a-borrower-can-repay-is-judg.b93ad931`: Whether a borrower can repay is judged off-chain.
+- `this-version-of-the-protocol-doesn-t.0073a1a6`: This version of the protocol doesn’t hold collateral and has no automatic liquidation. Deciding who gets a loan, and on what terms, is up to the loan broker, using its own checks outside the ledger. The ledger handles creating the loan, taking payments and recording defaults.
+- `if-a-borrower-doesn-t-repay-the-ledg.162d5132`: If a borrower doesn’t repay, the ledger can’t seize anything. The loss falls on the vault, after whatever first-loss capital covers.
+- `first-loss-capital.57d45979`: First-loss capital
+- `the-broker-s-own-funds-take-the-firs.ff8bc2d9`: The broker’s own funds take the first hit.
+- `first-loss-capital.0032aa49`: first-loss capital
+- `a-loan-broker-can-deposit-in-the-sam.7bb33adc`: A loan broker can deposit {s1} in the same asset as the vault. It’s held in a separate pseudo-account, and if a loan defaults, part of it moves into the vault to offset the loss. It is optional, and it reduces losses rather than removing them.
+- `cover-available.1b72b48c`: Cover available
+- `how-much-first-loss-capital-the-brok.61f06d2b`: How much first-loss capital the broker has deposited.
+- `minimum-cover-rate.88bedcb9`: Minimum cover rate
+- `the-share-of-the-broker-s-total-debt.ff3778fe`: The share of the broker’s total debt that must be covered. Below it, the broker can’t make new loans or receive fees.
+- `liquidation-rate.ec342146`: Liquidation rate
+- `caps-how-much-of-the-minimum-require.770c147c`: Caps how much of the minimum required cover moves into the vault when a loan defaults.
+- `default-cover-calculator.0ee44d43`: Default cover calculator
+- `uses-the-formula-from-xrpl-org-cover.ad9ab7a8`: Uses the formula from xrpl.org: cover used = the smaller of (total debt × minimum cover rate × liquidation rate) and the amount in default. The starting numbers are the xrpl.org example.
+- `broker-s-total-debt.38e238a0`: Broker’s total debt
+- `minimum-cover-rate.10bf09ee`: Minimum cover rate %
+- `liquidation-rate.d71f3d92`: Liquidation rate %
+- `amount-in-default.36eac74e`: Amount in default
+- `issuer-controls.d3d289a3`: Issuer controls
+- `issuers-of-trust-line-tokens-and-mpt.791ea505`: Issuers of trust line tokens and MPTs can claw back first-loss capital, but only down to the minimum the broker must keep. They can also freeze accounts. A frozen borrower can’t make payments but still owes them.
+- `missed-payments-and-default.98929efb`: Missed payments and default
+- `a-grace-period-first-then-the-broker.f221d171`: A grace period first. Then the broker decides.
+- `payment-due.8c4e74e9`: Payment due
+- `payment-missed.24ef79db`: Payment missed
+- `grace-period.eba58f3c`: Grace period
+- `broker-can-default-the-loan.e477649d`: Broker can default the loan
+- `first-loss-capital-covers-part-of-th.93efa8ff`: First-loss capital covers part of the loss
+- `grace-period.5c5c9216`: grace period
+- `each-loan-sets-a-how-long-after-a-du.991f381e`: Each loan sets a {s1}: how long after a due date the loan can be defaulted. It can’t be longer than the time between payments.
+- `can.7e9219a0`: can
+- `once-the-grace-period-ends-the-loan.065f0121`: Once the grace period ends, the loan broker {s1} default the loan with LoanManage. It isn’t automatic.
+- `impaired.a4b9b589`: impaired
+- `a-broker-that-expects-a-missed-payme.de1d21b1`: A broker that expects a missed payment can mark the loan {s1}. That records a paper loss in the vault and moves the next due date up to that moment, so the loan can default sooner. If the borrower pays first, the impairment clears.
+- `when-a-loan-is-fully-repaid-or-defau.164ff24f`: When a loan is fully repaid or defaulted, it can be deleted from the ledger.
+- `step-through-a-loan.47465a59`: Step through a loan
+- `follow-one-example-loan-from-deposit.b2d38d12`: Follow one example loan from deposit to default.
+- `example-numbers.dd72f6b8`: Example numbers
+- `every-number-here-is-a-made-up-examp.7b5dde92`: Every number here is a made-up example in a generic token, taken from the worked example on xrpl.org. No fees are charged in this example.
+- `vaultcreate-loanbrokerset.86ac5d24`: VaultCreate · LoanBrokerSet
+- `the-broker-opens-a-vault.10584b08`: The broker opens a vault
+- `a-loan-broker-creates-a-vault-for-on.b081e860`: A loan broker creates a vault for one asset and sets up lending on it. The vault starts empty.
+- `vaultdeposit.6848f305`: VaultDeposit
+- `depositors-add-funds.8da8408c`: Depositors add funds
+- `depositors-put-100-000-tokens-into-t.7f04e7c5`: Depositors put 100,000 tokens into the vault and receive 100,000 shares between them.
+- `loanbrokercoverdeposit.e50909ee`: LoanBrokerCoverDeposit
+- `the-broker-adds-first-loss-capital.513f2447`: The broker adds first-loss capital
+- `the-broker-deposits-1-000-tokens-of.0d628165`: The broker deposits 1,000 tokens of its own as cover. It’s held apart from the vault.
+- `broker-and-borrower-sign-the-loan.f61d31de`: Broker and borrower sign the loan
+- `both-sign-a-loanset-for-1-000-tokens.28ad01e4`: Both sign a LoanSet for 1,000 tokens of principal, with 90 tokens of interest over the life of the loan. The 1,000 leaves the vault for the borrower. The broker’s cover of 1,000 is above the 10% minimum (109), so the loan is allowed.
+- `in-this-example-the-vault-counts-the.c51b4da5`: In this example the vault counts the 90 of scheduled interest in its total value right away. A follow-up amendment, LendingProtocolV1_1, would count interest only once it’s paid.
+- `graceperiod.cd4b4f75`: GracePeriod
+- `a-payment-is-missed.51c8892a`: A payment is missed
+- `the-first-due-date-passes-without-a.e2f6e284`: The first due date passes without a LoanPay from the borrower. The loan enters its grace period. Nothing moves yet.
+- `loanmanage.8ad44f9b`: LoanManage
+- `the-broker-defaults-the-loan.7c08e22e`: The broker defaults the loan
+- `the-grace-period-ends-and-the-borrow.2f9f088d`: The grace period ends and the borrower still hasn’t paid, so the broker defaults the loan. First-loss capital covers 10.9 tokens (10% liquidation rate × 10% of 1,090) and moves them into the vault. The vault absorbs the other 1,079.1.
+- `vaultwithdraw.922db95b`: VaultWithdraw
+- `depositors-share-the-loss.1c35d8fb`: Depositors share the loss
+- `there-are-still-100-000-shares-but-t.0bee135e`: There are still 100,000 shares, but the vault now holds 99,010.9 tokens. Each share is backed by a little less than one token, and every depositor redeems at that lower value.
+- `loandelete.01f74b6d`: LoanDelete
+- `cleaning-up.7bde6bc4`: Cleaning up
+- `the-defaulted-loan-can-now-be-delete.e4e4cef3`: The defaulted loan can now be deleted. If the borrower had made every payment, the loan would have been repaid in full and deleted the same way, with no loss to the vault.
+- `example-ledger-state.905f71e1`: Example ledger state
+- `available-in-vault.96a90541`: Available in vault
+- `vault-total-value.d1d88e78`: Vault total value
+- `owed-by-borrower.054b0d1d`: Owed by borrower
+- `first-loss-cover.28225b0e`: First-loss cover
+- `vault-shares.bc7146ea`: Vault shares
+- `back.c32ae9f4`: ← Back
+- `next.2f04eb15`: Next →
+- `start-over.51dd91dc`: Start over
+- `how-it-goes-live.122f559a`: How it goes live
+- `two-amendments-the-same-vote-as-ever.dce811f9`: Two amendments. The same vote as every other change.
+- `xls-65.38b41151`: XLS-65
+- `xls-64.c7007c95`: XLS-64
+- `xls-66-builds-on-single-asset-vaults.15d53088`: XLS-66 builds on {s1}, Single Asset Vaults, and {s2}, pseudo-accounts. Vault shares are Multi-Purpose Tokens from XLS-33, which is already enabled on Mainnet.
+- `singleassetvault.b49e57ea`: SingleAssetVault
+- `lendingprotocol.c1108af7`: LendingProtocol
+- `lending-needs-both-the-and-amendment.77c81ccf`: Lending needs both the {s1} and {s2} amendments. Each is enabled only after it holds support from {s3}. A follow-up amendment, LendingProtocolV1_1, is also open for voting. It would change some details, such as limiting new loans to closed-ended vaults with fixed phases.
+- `check-it-yourself.babd6e47`: Check it yourself
+- `the-page-shows-live-support-for-each.06f96b6c`: The {s1} page shows live support for each amendment. The {s2} lesson explains how the vote works.
+- `what-people-often-get-wrong-about-xr.a9ed458f`: What people often get wrong about XRPL lending.
+- `it-s-already-live.f9ed482f`: “It’s already live.”
+- `on-2026-11-23-it-is-open-for-voting.d978e6a9`: {s1} On 2026-11-23 it is open for voting and not enabled on Mainnet.
+- `the-ledger-checks-the-borrower-s-cre.1d2db4b3`: “The ledger checks the borrower’s credit.”
+- `it-doesn-t-that-judgment-happens-off.c5c6a4f4`: {s1} It doesn’t. That judgment happens off-chain. The ledger enforces the agreed terms.
+- `loans-are-backed-by-collateral.3e532b86`: “Loans are backed by collateral.”
+- `this-version-has-no-on-chain-collate.61de7f40`: {s1} This version has no on-chain collateral and no liquidation.
+- `first-loss-capital-means-depositors.adb49592`: “First-loss capital means depositors can’t lose.”
+- `it-covers-only-part-of-a-default-in.4d292279`: {s1} It covers only part of a default. In the xrpl.org example it covers 10.9 of 1,090.
+- `a-broker-can-write-a-loan-alone.bed6e1b5`: “A broker can write a loan alone.”
+- `loanset-needs-signatures-from-both-t.f54b3c78`: {s1} LoanSet needs signatures from both the broker and the borrower.
+- `a-missed-payment-defaults-the-loan-a.c1d0800d`: “A missed payment defaults the loan at once.”
+- `a-grace-period-comes-first-and-after.bdc70552`: {s1} A grace period comes first, and after it the broker decides whether to default.
+- `who-must-sign-a-loanset-transaction.10f57662`: Who must sign a LoanSet transaction?
+- `both-the-loan-broker-and-the-borrowe.2afb01b4`: Both the loan broker and the borrower
+- `only-the-borrower.49c84ca9`: Only the borrower
+- `what-collateral-does-the-ledger-hold.ef8656c9`: What collateral does the ledger hold for a loan?
+- `the-borrower-s-xrp.f60e5096`: The borrower’s $XRP
+- `none-this-version-has-no-on-chain-co.6b309c3f`: None. This version has no on-chain collateral
+- `what-does-a-depositor-receive-for-ad.ff724b83`: What does a depositor receive for adding assets to a vault?
+- `shares-in-the-vault.3d0e8a33`: Shares in the vault
+- `a-loan.8023c8c6`: A loan
+- `what-happens-right-after-a-missed-pa.f4f92e5f`: What happens right after a missed payment?
+- `the-loan-defaults-automatically.7579f75e`: The loan defaults automatically
+- `a-grace-period-runs-before-the-broke.0c8c9f78`: A grace period runs before the broker can default the loan
+- `what-happens-to-first-loss-capital-w.1a9f82ec`: What happens to first-loss capital when a loan defaults?
+- `part-of-it-moves-into-the-vault-to-o.f14ec2f7`: Part of it moves into the vault to offset the loss
+- `it-repays-the-whole-loan.08006dcb`: It repays the whole loan
+- `facts-on-this-page-were-checked-agai.c35ff187`: Facts on this page were checked against official xrpl.org documentation and the XRPL-Standards repository on 2026-11-23.
+- `single-asset-vaults.2bfa2e8e`: Single Asset Vaults
+- `loanset-transaction.346045ee`: LoanSet transaction
+- `loanmanage-transaction.d1586d0e`: LoanManage transaction
+- `pseudo-accounts.995a4590`: Pseudo-Accounts
+- `xls-66-lending-protocol-specificatio.4e07db2a`: XLS-66 Lending Protocol specification
+- `xls-65-single-asset-vault-specificat.9630e45d`: XLS-65 Single Asset Vault specification
+- `how-the-proposed-lending-protocol-wo.fde1c66b`: How the proposed Lending Protocol works: vaults, loans, payments and defaults.
