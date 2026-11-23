@@ -18,6 +18,7 @@ PAGES = [
     "xrpl/safety.html",
     "xrpl/investing-reality.html",
     "xrpl/amendments-governance.html",
+    "xrpl/lending-protocol.html",
     "xrpl/builders/index.html",
     "xrpl/builders/create-token.html",
     "xrpl/builders/nft-basics.html",
@@ -85,6 +86,8 @@ def main():
         "0.2 $XRP": "\u20660.2 $XRP\u2069",
         "DEX + AMM": "\u2066DEX + AMM\u2069",
         "DEX/AMM": "\u2066DEX/AMM\u2069",
+        "1,090": "\u20661,090\u2069",
+        "99,010.9": "\u206699,010.9\u2069",
     }
     for source, expected in phrases.items():
         got = isolate(source, "rtl")

@@ -50,12 +50,12 @@ Nothing in this package is native-approved. The Approve, Correction, Reviewer, a
 | 1. Wallet recovery and seed | 33 | 0 |
 | 2. Signing | 48 | 0 |
 | 3. Destination tags | 5 | 0 |
-| 4. Trust lines | 41 | 0 |
-| 5. Reserves and fees | 39 | 0 |
+| 4. Trust lines | 43 | 0 |
+| 5. Reserves and fees | 48 | 0 |
 | 6. DEX and AMM | 10 | 0 |
 | 7. NFTs | 16 | 0 |
-| 8. Other security and finance | 39 | 0 |
-| Total | 231 | 0 |
+| 8. Other security and finance | 40 | 0 |
+| Total | 243 | 0 |
 
 ## 1. Wallet recovery and seed
 
@@ -1299,7 +1299,21 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.2 `a-promotional-page-asks-you-to-add-a.9a219adb`
+### 4.2 `a-holds-one-asset-xrp-a-trust-line-t.39df26c1`
+
+- Risk tier: Trust lines
+- Page: Lending Protocol (/xrpl/lending-protocol.html)
+- Heading on that page: Vaults and shares (XLS-65)
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: A {s1} holds one asset: $XRP, a trust line token or an MPT. Depositors put that asset in and receive {s2}, which record their part of the vault. The shares are MPTs issued by the vault.
+- English: A {s1} holds one asset: $XRP, a trust line token or an MPT. Depositors put that asset in and receive {s2}, which record their part of the vault. The shares are MPTs issued by the vault.
+- Current translation: एक {s1} सिर्फ़ एक एसेट रखता है: $XRP, ट्रस्ट लाइन (trust line) टोकन या MPT। जमाकर्ता वह एसेट डालते हैं और {s2} पाते हैं, जो वॉल्ट में उनका हिस्सा दर्ज करते हैं। ये शेयर वॉल्ट द्वारा जारी MPT होते हैं।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.3 `a-promotional-page-asks-you-to-add-a.9a219adb`
 
 - Risk tier: Trust lines
 - Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
@@ -1313,7 +1327,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.3 `a-trust-line-records-a-relationship.41fdf4ce`
+### 4.4 `a-trust-line-records-a-relationship.41fdf4ce`
 
 - Risk tier: Trust lines
 - Page: Builders hub (/xrpl/builders/)
@@ -1327,7 +1341,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.4 `a-trustline-is-an-on-ledger-relation.5f24b5a6`
+### 4.5 `a-trustline-is-an-on-ledger-relation.5f24b5a6`
 
 - Risk tier: Trust lines
 - Page: Definitions (/xrpl/definitions.html)
@@ -1341,7 +1355,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.5 `a-trustline-proves-a-token-is-safe-i.70f360f9`
+### 4.6 `a-trustline-proves-a-token-is-safe-i.70f360f9`
 
 - Risk tier: Trust lines
 - Page: Definitions (/xrpl/definitions.html)
@@ -1355,7 +1369,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.6 `a-trustline-tells-xrpl-that-your-acc.0ac7c82b`
+### 4.7 `a-trustline-tells-xrpl-that-your-acc.0ac7c82b`
 
 - Risk tier: Trust lines
 - Page: Definitions (/xrpl/definitions.html)
@@ -1369,7 +1383,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.7 `activate-the-trustline-and-watch-the.bfd64ab7`
+### 4.8 `activate-the-trustline-and-watch-the.bfd64ab7`
 
 - Risk tier: Trust lines
 - Page: Definitions (/xrpl/definitions.html)
@@ -1383,7 +1397,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.8 `create-trustline.c92ac803`
+### 4.9 `create-trustline.c92ac803`
 
 - Risk tier: Trust lines
 - Page: Usage (/xrpl/usage.html)
@@ -1397,7 +1411,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.9 `creating-a-trustline-is-permission-t.6a7a834b`
+### 4.10 `creating-a-trustline-is-permission-t.6a7a834b`
 
 - Risk tier: Trust lines
 - Page: Definitions (/xrpl/definitions.html)
@@ -1411,7 +1425,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.10 `currency-code-issuer-supply-trustlin.090f0f84`
+### 4.11 `currency-code-issuer-supply-trustlin.090f0f84`
 
 - Risk tier: Trust lines
 - Page: Builders hub (/xrpl/builders/)
@@ -1425,7 +1439,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.11 `definitions.trust.active`
+### 4.12 `definitions.trust.active`
 
 - Risk tier: Trust lines
 - Page: Shared chrome or meta text
@@ -1438,7 +1452,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.12 `definitions.trust.create`
+### 4.13 `definitions.trust.create`
 
 - Risk tier: Trust lines
 - Page: Definitions (/xrpl/definitions.html)
@@ -1452,7 +1466,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.13 `definitions.trust.inactive`
+### 4.14 `definitions.trust.inactive`
 
 - Risk tier: Trust lines
 - Page: Shared chrome or meta text
@@ -1465,7 +1479,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.14 `definitions.trust.remove`
+### 4.15 `definitions.trust.remove`
 
 - Risk tier: Trust lines
 - Page: Shared chrome or meta text
@@ -1478,7 +1492,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.15 `do-you-need-a-trust-line-to-receive.e5034039`
+### 4.16 `do-you-need-a-trust-line-to-receive.e5034039`
 
 - Risk tier: Trust lines
 - Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
@@ -1492,7 +1506,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.16 `does-a-trustline-prove-safety.e60fa2c6`
+### 4.17 `does-a-trustline-prove-safety.e60fa2c6`
 
 - Risk tier: Trust lines
 - Page: Usage (/xrpl/usage.html)
@@ -1506,7 +1520,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.17 `explain-why-xrp-needs-no-trust-line.ce59177b`
+### 4.18 `explain-why-xrp-needs-no-trust-line.ce59177b`
 
 - Risk tier: Trust lines
 - Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
@@ -1520,7 +1534,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.18 `first-check-the-network-and-exact-as.aadd4c6c`
+### 4.19 `first-check-the-network-and-exact-as.aadd4c6c`
 
 - Risk tier: Trust lines
 - Page: Create a token (/xrpl/builders/create-token.html)
@@ -1534,7 +1548,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.19 `in-this-model-a-holder-establishes-a.1894c32f`
+### 4.20 `in-this-model-a-holder-establishes-a.1894c32f`
 
 - Risk tier: Trust lines
 - Page: Create a token (/xrpl/builders/create-token.html)
@@ -1548,7 +1562,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.20 `issuer-authorization-controls-who-ma.0238879b`
+### 4.21 `issuer-authorization-controls-who-ma.0238879b`
 
 - Risk tier: Trust lines
 - Page: Issuer control (/xrpl/builders/issuer-control.html)
@@ -1562,7 +1576,21 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.21 `meta.definitions.description`
+### 4.22 `issuers-of-trust-line-tokens-and-mpt.791ea505`
+
+- Risk tier: Trust lines
+- Page: Lending Protocol (/xrpl/lending-protocol.html)
+- Heading on that page: Default cover calculator
+- Purpose: This sentence is about the opt-in that lets an account hold an issued token.
+- What the reader must understand: A trust line creates the holding relationship for an issued token. It is not an endorsement, not proof the token is safe, and not a promise the issuer will redeem it. The English wording to preserve is: Issuers of trust line tokens and MPTs can claw back first-loss capital, but only down to the minimum the broker must keep. They can also freeze accounts. A frozen borrower can’t make payments but still owes them.
+- English: Issuers of trust line tokens and MPTs can claw back first-loss capital, but only down to the minimum the broker must keep. They can also freeze accounts. A frozen borrower can’t make payments but still owes them.
+- Current translation: ट्रस्ट लाइन (trust line) टोकन और MPT के जारीकर्ता फ़र्स्ट-लॉस पूँजी को क्लॉबैक कर सकते हैं, लेकिन सिर्फ़ उस न्यूनतम तक जो ब्रोकर को रखना ज़रूरी है। वे खाते फ़्रीज़ भी कर सकते हैं। फ़्रीज़ हुआ उधारकर्ता भुगतान नहीं कर सकता, लेकिन उस पर कर्ज़ बना रहता है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 4.23 `meta.definitions.description`
 
 - Risk tier: Trust lines
 - Page: Shared chrome or meta text
@@ -1575,7 +1603,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.22 `meta.trust-lines.description`
+### 4.24 `meta.trust-lines.description`
 
 - Risk tier: Trust lines
 - Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
@@ -1589,7 +1617,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.23 `meta.trust-lines.title`
+### 4.25 `meta.trust-lines.title`
 
 - Risk tier: Trust lines
 - Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
@@ -1603,7 +1631,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.24 `meta.usage.description`
+### 4.26 `meta.usage.description`
 
 - Risk tier: Trust lines
 - Page: Usage (/xrpl/usage.html)
@@ -1617,7 +1645,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.25 `no-trustline-exists.e4056ea4`
+### 4.27 `no-trustline-exists.e4056ea4`
 
 - Risk tier: Trust lines
 - Page: Definitions (/xrpl/definitions.html)
@@ -1631,7 +1659,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.26 `no-trustline-needed.3867ff13`
+### 4.28 `no-trustline-needed.3867ff13`
 
 - Risk tier: Trust lines
 - Page: Definitions (/xrpl/definitions.html)
@@ -1645,7 +1673,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.27 `owned-trustlines.fa5a4cf5`
+### 4.29 `owned-trustlines.fa5a4cf5`
 
 - Risk tier: Trust lines
 - Page: Definitions (/xrpl/definitions.html)
@@ -1659,7 +1687,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.28 `payment-trustline-offer-nft-offer-or.5e4d07c6`
+### 4.30 `payment-trustline-offer-nft-offer-or.5e4d07c6`
 
 - Risk tier: Trust lines
 - Page: Wallets (/xrpl/wallet-basics.html)
@@ -1673,7 +1701,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.29 `trust-line.ecacf5fe`
+### 4.31 `trust-line.ecacf5fe`
 
 - Risk tier: Trust lines
 - Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
@@ -1687,7 +1715,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.30 `trust-lines.145a705b`
+### 4.32 `trust-lines.145a705b`
 
 - Risk tier: Trust lines
 - Page: Builders hub; NFT basics; Issuer control (/xrpl/builders/; /xrpl/builders/nft-basics.html; /xrpl/builders/issuer-control.html)
@@ -1701,7 +1729,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.31 `trust-lines.d4c063e8`
+### 4.33 `trust-lines.d4c063e8`
 
 - Risk tier: Trust lines
 - Page: Builders hub (/xrpl/builders/)
@@ -1715,7 +1743,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.32 `trust-lines.fdb24683`
+### 4.34 `trust-lines.fdb24683`
 
 - Risk tier: Trust lines
 - Page: Builders hub; Create a token; NFT basics; Trust lines lesson; Issuer control; Xaman flows; Project launch (/xrpl/builders/; /xrpl/builders/create-token.html; /xrpl/builders/nft-basics.html; /xrpl/builders/trust-lines.html; /xrpl/builders/issuer-control.html; /xrpl/builders/xaman-flows.html; /xrpl/builders/project-launch-basics.html)
@@ -1729,7 +1757,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.33 `trustline-usually-required.cb68ce8d`
+### 4.35 `trustline-usually-required.cb68ce8d`
 
 - Risk tier: Trust lines
 - Page: Definitions (/xrpl/definitions.html)
@@ -1743,7 +1771,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.34 `trustline-visualizer.1fb70a8d`
+### 4.36 `trustline-visualizer.1fb70a8d`
 
 - Risk tier: Trust lines
 - Page: Definitions (/xrpl/definitions.html)
@@ -1757,7 +1785,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.35 `trustline.9ba9cbe8`
+### 4.37 `trustline.9ba9cbe8`
 
 - Risk tier: Trust lines
 - Page: Definitions (/xrpl/definitions.html)
@@ -1771,7 +1799,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.36 `trustlines.57b2be31`
+### 4.38 `trustlines.57b2be31`
 
 - Risk tier: Trust lines
 - Page: Definitions (/xrpl/definitions.html)
@@ -1785,7 +1813,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.37 `trustset-creates-or-modifies-a-trust.a6fb1a7c`
+### 4.39 `trustset-creates-or-modifies-a-trust.a6fb1a7c`
 
 - Risk tier: Trust lines
 - Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
@@ -1799,7 +1827,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.38 `what-a-trustline-doesn-t-mean.c56a66d8`
+### 4.40 `what-a-trustline-doesn-t-mean.c56a66d8`
 
 - Risk tier: Trust lines
 - Page: Definitions (/xrpl/definitions.html)
@@ -1813,7 +1841,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.39 `what-s-a-trustline.b2cf3ed9`
+### 4.41 `what-s-a-trustline.b2cf3ed9`
 
 - Risk tier: Trust lines
 - Page: Definitions (/xrpl/definitions.html)
@@ -1827,7 +1855,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.40 `xrp-is-native-trust-lines-describe-i.d8c8105e`
+### 4.42 `xrp-is-native-trust-lines-describe-i.d8c8105e`
 
 - Risk tier: Trust lines
 - Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
@@ -1841,7 +1869,7 @@ What the reader must understand for this whole section: A trust line creates the
 - Reviewer:
 - Date:
 
-### 4.41 `your-account-usually-needs-a-trustli.bee0965e`
+### 4.43 `your-account-usually-needs-a-trustli.bee0965e`
 
 - Risk tier: Trust lines
 - Page: Usage (/xrpl/usage.html)
@@ -1875,7 +1903,21 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.2 `a-sale-normally-uses-an-nft-offer-an.ae15a8df`
+### 5.2 `a-late-payment-must-cover-one-full-p.9878f9b5`
+
+- Risk tier: Reserves and fees
+- Page: Lending Protocol (/xrpl/lending-protocol.html)
+- Heading on that page: Fees
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: A late payment must cover one full payment period plus fees and late interest. Until every overdue period is paid, the borrower can’t make on-time payments or repay early.
+- English: A late payment must cover one full payment period plus fees and late interest. Until every overdue period is paid, the borrower can’t make on-time payments or repay early.
+- Current translation: देर से किया गया भुगतान एक पूरी भुगतान अवधि के साथ फ़ीस और लेट ब्याज भी कवर करना चाहिए। जब तक हर बकाया अवधि का भुगतान नहीं हो जाता, उधारकर्ता समय पर भुगतान या जल्दी पूरा भुगतान नहीं कर सकता।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.3 `a-sale-normally-uses-an-nft-offer-an.ae15a8df`
 
 - Risk tier: Reserves and fees
 - Page: NFT basics (/xrpl/builders/nft-basics.html)
@@ -1889,7 +1931,7 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.3 `amm-fee.8a9bd5c7`
+### 5.4 `amm-fee.8a9bd5c7`
 
 - Risk tier: Reserves and fees
 - Page: Usage (/xrpl/usage.html)
@@ -1903,7 +1945,7 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.4 `an-account-becomes-active-on-ledger.93d4ca9b`
+### 5.5 `an-account-becomes-active-on-ledger.93d4ca9b`
 
 - Risk tier: Reserves and fees
 - Page: Wallets (/xrpl/wallet-basics.html)
@@ -1917,7 +1959,7 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.5 `an-nft-doesn-t-always-equal-one-owne.12e690f6`
+### 5.6 `an-nft-doesn-t-always-equal-one-owne.12e690f6`
 
 - Risk tier: Reserves and fees
 - Page: Definitions (/xrpl/definitions.html)
@@ -1931,7 +1973,7 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.6 `an-xrpl-nft-is-a-unique-on-ledger-to.e0bd5a2f`
+### 5.7 `an-xrpl-nft-is-a-unique-on-ledger-to.e0bd5a2f`
 
 - Risk tier: Reserves and fees
 - Page: Definitions (/xrpl/definitions.html)
@@ -1945,7 +1987,35 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.7 `current-reserve-rules.57f361c2`
+### 5.8 `broker-fees-can-include-an-originati.773654b8`
+
+- Risk tier: Reserves and fees
+- Page: Lending Protocol (/xrpl/lending-protocol.html)
+- Heading on that page: Fees
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: Broker fees can include an origination fee taken from the principal when the loan is made, a service fee on each payment, late and early payment fees, and a management fee, which is a percentage of the interest. A broker whose first-loss capital is below the minimum can’t receive fees. They’re added to its cover instead.
+- English: Broker fees can include an origination fee taken from the principal when the loan is made, a service fee on each payment, late and early payment fees, and a management fee, which is a percentage of the interest. A broker whose first-loss capital is below the minimum can’t receive fees. They’re added to its cover instead.
+- Current translation: ब्रोकर की फ़ीस में लोन देते समय मूलधन से ली जाने वाली ओरिजिनेशन फ़ीस, हर भुगतान पर सर्विस फ़ीस, देर से और जल्दी भुगतान की फ़ीस, और मैनेजमेंट फ़ीस शामिल हो सकती है, जो ब्याज का एक प्रतिशत होती है। जिस ब्रोकर की फ़र्स्ट-लॉस पूँजी न्यूनतम से कम है, वह फ़ीस नहीं ले सकता। फ़ीस उसकी कवर में जुड़ जाती है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.9 `charges-the-broker-can-set-such-as-a.d44f5ddb`
+
+- Risk tier: Reserves and fees
+- Page: Lending Protocol (/xrpl/lending-protocol.html)
+- Heading on that page: Fees
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: Charges the broker can set, such as a service fee on each payment or a late payment fee.
+- English: Charges the broker can set, such as a service fee on each payment or a late payment fee.
+- Current translation: ब्रोकर द्वारा तय किए जा सकने वाले शुल्क, जैसे हर भुगतान पर सर्विस फ़ीस या देर से भुगतान की फ़ीस।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.10 `current-reserve-rules.57f361c2`
 
 - Risk tier: Reserves and fees
 - Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
@@ -1959,7 +2029,7 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.8 `definitions.reserve.many`
+### 5.11 `definitions.reserve.many`
 
 - Risk tier: Reserves and fees
 - Page: Shared chrome or meta text
@@ -1972,7 +2042,7 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.9 `definitions.reserve.one`
+### 5.12 `definitions.reserve.one`
 
 - Risk tier: Reserves and fees
 - Page: Shared chrome or meta text
@@ -1985,7 +2055,7 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.10 `distinguish-balance-limit-controls-a.e936c1d1`
+### 5.13 `distinguish-balance-limit-controls-a.e936c1d1`
 
 - Risk tier: Reserves and fees
 - Page: Builders hub (/xrpl/builders/)
@@ -1999,7 +2069,35 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.11 `estimate-the-reserve-for-a-simple-ac.4984109c`
+### 5.14 `each-loan-sets-its-principal-interes.f5bf8de0`
+
+- Risk tier: Reserves and fees
+- Page: Lending Protocol (/xrpl/lending-protocol.html)
+- Heading on that page: Fixed terms
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: Each loan sets its principal, interest rate, payment schedule, fees and grace period up front.
+- English: Each loan sets its principal, interest rate, payment schedule, fees and grace period up front.
+- Current translation: हर लोन पहले से अपना मूलधन, ब्याज दर, भुगतान शेड्यूल, फ़ीस और ग्रेस पीरियड तय करता है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.15 `each-payment-is-split-into-principal.7531ec70`
+
+- Risk tier: Reserves and fees
+- Page: Lending Protocol (/xrpl/lending-protocol.html)
+- Heading on that page: Payments
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: Each payment is split into principal, interest and fees.
+- English: Each payment is split into principal, interest and fees.
+- Current translation: हर भुगतान मूलधन, ब्याज और फ़ीस में बँटता है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.16 `estimate-the-reserve-for-a-simple-ac.4984109c`
 
 - Risk tier: Reserves and fees
 - Page: Definitions (/xrpl/definitions.html)
@@ -2013,7 +2111,7 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.12 `every-displayed-xrp-is-spendable-som.2dedfbaa`
+### 5.17 `every-displayed-xrp-is-spendable-som.2dedfbaa`
 
 - Risk tier: Reserves and fees
 - Page: Definitions (/xrpl/definitions.html)
@@ -2027,7 +2125,21 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.13 `fee.c6e89c9c`
+### 5.18 `every-number-here-is-a-made-up-examp.7b5dde92`
+
+- Risk tier: Reserves and fees
+- Page: Lending Protocol (/xrpl/lending-protocol.html)
+- Heading on that page: Step through a loan
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: Every number here is a made-up example in a generic token, taken from the worked example on xrpl.org. No fees are charged in this example.
+- English: Every number here is a made-up example in a generic token, taken from the worked example on xrpl.org. No fees are charged in this example.
+- Current translation: यहाँ हर आँकड़ा एक सामान्य टोकन में बनाया गया काल्पनिक उदाहरण है, जो xrpl.org के हल किए गए उदाहरण से लिया गया है। इस उदाहरण में कोई फ़ीस नहीं ली जाती।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.19 `fee.c6e89c9c`
 
 - Risk tier: Reserves and fees
 - Page: Definitions; Wallets; Safety (/xrpl/definitions.html; /xrpl/wallet-basics.html; /xrpl/safety.html)
@@ -2041,7 +2153,21 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.14 `flags-uri-taxon-offers-transfer-fees.f3d2bfe9`
+### 5.20 `fees.72abbc92`
+
+- Risk tier: Reserves and fees
+- Page: Lending Protocol (/xrpl/lending-protocol.html)
+- Heading on that page: Fees
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: Fees
+- English: Fees
+- Current translation: फ़ीस
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.21 `flags-uri-taxon-offers-transfer-fees.f3d2bfe9`
 
 - Risk tier: Reserves and fees
 - Page: Builders hub (/xrpl/builders/)
@@ -2055,11 +2181,11 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.15 `footer.rights`
+### 5.22 `footer.rights`
 
 - Risk tier: Reserves and fees
-- Page: Dashboard; Definitions; Wallets; Usage; Safety; Investing reality; Amendments & Governance; Builders hub; Create a token; NFT basics; Trust lines lesson; Issuer control; Xaman flows; Project launch (/xrpl/; /xrpl/definitions.html; /xrpl/wallet-basics.html; /xrpl/usage.html; /xrpl/safety.html; /xrpl/investing-reality.html; /xrpl/amendments-governance.html; /xrpl/builders/; /xrpl/builders/create-token.html; /xrpl/builders/nft-basics.html; /xrpl/builders/trust-lines.html; /xrpl/builders/issuer-control.html; /xrpl/builders/xaman-flows.html; /xrpl/builders/project-launch-basics.html)
-- Heading on that page: BUILDERS HUB; Keep moving; Keep moving; Keep moving; Keep moving; Keep moving; Sources; Keep moving; Keep building; Keep building; Keep building; Keep building; Keep building; Keep building
+- Page: Dashboard; Definitions; Wallets; Usage; Safety; Investing reality; Amendments & Governance; Lending Protocol; Builders hub; Create a token; NFT basics; Trust lines lesson; Issuer control; Xaman flows; Project launch (/xrpl/; /xrpl/definitions.html; /xrpl/wallet-basics.html; /xrpl/usage.html; /xrpl/safety.html; /xrpl/investing-reality.html; /xrpl/amendments-governance.html; /xrpl/lending-protocol.html; /xrpl/builders/; /xrpl/builders/create-token.html; /xrpl/builders/nft-basics.html; /xrpl/builders/trust-lines.html; /xrpl/builders/issuer-control.html; /xrpl/builders/xaman-flows.html; /xrpl/builders/project-launch-basics.html)
+- Heading on that page: BUILDERS HUB; Keep moving; Keep moving; Keep moving; Keep moving; Keep moving; Sources; Sources; Keep moving; Keep building; Keep building; Keep building; Keep building; Keep building; Keep building
 - Purpose: This sentence is about XRP an account must keep, or about a fee.
 - What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: © 2026 House of Cauliman. All rights reserved.
 - English: © 2026 House of Cauliman. All rights reserved.
@@ -2069,7 +2195,7 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.16 `inspect-a-fictional-proposed-sale-nf.f3daf39c`
+### 5.23 `inspect-a-fictional-proposed-sale-nf.f3daf39c`
 
 - Risk tier: Reserves and fees
 - Page: NFT basics (/xrpl/builders/nft-basics.html)
@@ -2083,7 +2209,7 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.17 `is-the-fee-abnormal.20139bf0`
+### 5.24 `is-the-fee-abnormal.20139bf0`
 
 - Risk tier: Reserves and fees
 - Page: Safety (/xrpl/safety.html)
@@ -2097,7 +2223,7 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.18 `ledger-objects-can-affect-the-xrp-re.e36fd0f5`
+### 5.25 `ledger-objects-can-affect-the-xrp-re.e36fd0f5`
 
 - Risk tier: Reserves and fees
 - Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
@@ -2111,7 +2237,7 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.19 `mainnet-currently-uses-a-plus-these.85124d92`
+### 5.26 `mainnet-currently-uses-a-plus-these.85124d92`
 
 - Risk tier: Reserves and fees
 - Page: Definitions (/xrpl/definitions.html)
@@ -2125,7 +2251,7 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.20 `our-fictional-neighborhood-club-want.30fb4b14`
+### 5.27 `our-fictional-neighborhood-club-want.30fb4b14`
 
 - Risk tier: Reserves and fees
 - Page: Create a token (/xrpl/builders/create-token.html)
@@ -2139,7 +2265,7 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.21 `plan-for-reserves-and-removal.05cef868`
+### 5.28 `plan-for-reserves-and-removal.05cef868`
 
 - Risk tier: Reserves and fees
 - Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
@@ -2153,7 +2279,7 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.22 `plan-reserve-inspection-separately-f.62e08c92`
+### 5.29 `plan-reserve-inspection-separately-f.62e08c92`
 
 - Risk tier: Reserves and fees
 - Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
@@ -2167,7 +2293,7 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.23 `read-balance-limit-issuer-controls-a.88aa5ddc`
+### 5.30 `read-balance-limit-issuer-controls-a.88aa5ddc`
 
 - Risk tier: Reserves and fees
 - Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
@@ -2181,7 +2307,21 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.24 `reserve-calculator.67176307`
+### 5.31 `repays-with-loanpay-each-payment-cov.702af75a`
+
+- Risk tier: Reserves and fees
+- Page: Lending Protocol (/xrpl/lending-protocol.html)
+- Heading on that page: Borrower
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: Repays with LoanPay. Each payment covers principal, interest and fees.
+- English: Repays with LoanPay. Each payment covers principal, interest and fees.
+- Current translation: LoanPay से चुकाता है। हर भुगतान में मूलधन, ब्याज और फ़ीस शामिल होती है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.32 `reserve-calculator.67176307`
 
 - Risk tier: Reserves and fees
 - Page: Definitions (/xrpl/definitions.html)
@@ -2195,7 +2335,7 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.25 `reserve.187579e3`
+### 5.33 `reserve.187579e3`
 
 - Risk tier: Reserves and fees
 - Page: Wallets; Trust lines lesson (/xrpl/wallet-basics.html; /xrpl/builders/trust-lines.html)
@@ -2209,7 +2349,7 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.26 `reserves.5ac63fc4`
+### 5.34 `reserves.5ac63fc4`
 
 - Risk tier: Reserves and fees
 - Page: Definitions (/xrpl/definitions.html)
@@ -2223,7 +2363,7 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.27 `separate-product-revenue-from-xrpl-n.48a70ebe`
+### 5.35 `separate-product-revenue-from-xrpl-n.48a70ebe`
 
 - Risk tier: Reserves and fees
 - Page: Builders hub (/xrpl/builders/)
@@ -2237,7 +2377,7 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.28 `technical-references-checked-3-octob.9bab9f8c`
+### 5.36 `technical-references-checked-3-octob.9bab9f8c`
 
 - Risk tier: Reserves and fees
 - Page: Create a token; NFT basics; Trust lines lesson; Issuer control; Xaman flows; Project launch (/xrpl/builders/create-token.html; /xrpl/builders/nft-basics.html; /xrpl/builders/trust-lines.html; /xrpl/builders/issuer-control.html; /xrpl/builders/xaman-flows.html; /xrpl/builders/project-launch-basics.html)
@@ -2251,7 +2391,7 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.29 `the-club-now-proposes-an-optional-co.3e0bfebc`
+### 5.37 `the-club-now-proposes-an-optional-co.3e0bfebc`
 
 - Risk tier: Reserves and fees
 - Page: NFT basics (/xrpl/builders/nft-basics.html)
@@ -2265,7 +2405,7 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.30 `the-network-fee-goes-to-validators-x.e7651eb0`
+### 5.38 `the-network-fee-goes-to-validators-x.e7651eb0`
 
 - Risk tier: Reserves and fees
 - Page: Definitions (/xrpl/definitions.html)
@@ -2279,7 +2419,21 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.31 `total-balance-is-not-the-same-as-xrp.cd4ebe84`
+### 5.39 `the-share-of-the-broker-s-total-debt.ff3778fe`
+
+- Risk tier: Reserves and fees
+- Page: Lending Protocol (/xrpl/lending-protocol.html)
+- Heading on that page: Minimum cover rate
+- Purpose: This sentence is about XRP an account must keep, or about a fee.
+- What the reader must understand: The teaching example is a 1 $XRP base reserve plus 0.2 $XRP for each qualifying owned object. The usual transaction fee is destroyed. It is not paid to validators. Live reserves can change by fee voting, so software should query the network. The English wording to preserve is: The share of the broker’s total debt that must be covered. Below it, the broker can’t make new loans or receive fees.
+- English: The share of the broker’s total debt that must be covered. Below it, the broker can’t make new loans or receive fees.
+- Current translation: ब्रोकर के कुल कर्ज़ का वह हिस्सा जो कवर होना ज़रूरी है। इससे नीचे होने पर ब्रोकर नए लोन नहीं दे सकता और फ़ीस नहीं ले सकता।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 5.40 `total-balance-is-not-the-same-as-xrp.cd4ebe84`
 
 - Risk tier: Reserves and fees
 - Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
@@ -2293,7 +2447,7 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.32 `transfer-fee.3a7f5395`
+### 5.41 `transfer-fee.3a7f5395`
 
 - Risk tier: Reserves and fees
 - Page: Definitions (/xrpl/definitions.html)
@@ -2307,7 +2461,7 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.33 `usage.slippage.copy`
+### 5.42 `usage.slippage.copy`
 
 - Risk tier: Reserves and fees
 - Page: Shared chrome or meta text
@@ -2320,7 +2474,7 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.34 `used-for-reserves-and-transaction-co.64cd2832`
+### 5.43 `used-for-reserves-and-transaction-co.64cd2832`
 
 - Risk tier: Reserves and fees
 - Page: Definitions (/xrpl/definitions.html)
@@ -2334,7 +2488,7 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.35 `why-some-xrp-stays-reserved.bb60d0fd`
+### 5.44 `why-some-xrp-stays-reserved.bb60d0fd`
 
 - Risk tier: Reserves and fees
 - Page: Definitions (/xrpl/definitions.html)
@@ -2348,7 +2502,7 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.36 `write-a-one-page-release-contract-us.4be7eeff`
+### 5.45 `write-a-one-page-release-contract-us.4be7eeff`
 
 - Risk tier: Reserves and fees
 - Page: Project launch (/xrpl/builders/project-launch-basics.html)
@@ -2362,7 +2516,7 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.37 `write-a-redemption-promise-one-credi.303df116`
+### 5.46 `write-a-redemption-promise-one-credi.303df116`
 
 - Risk tier: Reserves and fees
 - Page: Create a token (/xrpl/builders/create-token.html)
@@ -2376,7 +2530,7 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.38 `write-down-the-problem-intended-user.45e28e9c`
+### 5.47 `write-down-the-problem-intended-user.45e28e9c`
 
 - Risk tier: Reserves and fees
 - Page: Project launch (/xrpl/builders/project-launch-basics.html)
@@ -2390,7 +2544,7 @@ What the reader must understand for this whole section: The teaching example is 
 - Reviewer:
 - Date:
 
-### 5.39 `xrp-that-must-remain-available-to-su.dfbf0556`
+### 5.48 `xrp-that-must-remain-available-to-su.dfbf0556`
 
 - Risk tier: Reserves and fees
 - Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
@@ -2786,7 +2940,21 @@ This sentence is other security or finance teaching, such as freeze, blackhole, 
 
 What the reader must understand for this whole section: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false.
 
-### 8.1 `a-member-sees-two-assets-with-the-sa.a08c1393`
+### 8.1 `a-loan-broker-creates-a-vault-for-on.b081e860`
+
+- Risk tier: Other security and finance
+- Page: Lending Protocol (/xrpl/lending-protocol.html)
+- Heading on that page: The broker opens a vault
+- Purpose: This sentence is other security or finance teaching, such as freeze, blackhole, phishing, Xaman, or MPTs.
+- What the reader must understand: Keep the English warning. Freeze is not destruction. A blackhole is not proof a project is safe. MPTs are a different standard from trust-line tokens. A false quiz answer must stay false. The English wording to preserve is: A loan broker creates a vault for one asset and sets up lending on it. The vault starts empty.
+- English: A loan broker creates a vault for one asset and sets up lending on it. The vault starts empty.
+- Current translation: लोन ब्रोकर एक एसेट के लिए वॉल्ट बनाता है और उस पर लेंडिंग सेट करता है। वॉल्ट शुरू में खाली होता है।
+- Approve:
+- Correction:
+- Reviewer:
+- Date:
+
+### 8.2 `a-member-sees-two-assets-with-the-sa.a08c1393`
 
 - Risk tier: Other security and finance
 - Page: Create a token (/xrpl/builders/create-token.html)
@@ -2800,7 +2968,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.2 `add-a-control-column-note-whether-is.b0a44ba6`
+### 8.3 `add-a-control-column-note-whether-is.b0a44ba6`
 
 - Risk tier: Other security and finance
 - Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
@@ -2814,7 +2982,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.3 `authorization-may-be-required-by-an.060da144`
+### 8.4 `authorization-may-be-required-by-an.060da144`
 
 - Risk tier: Other security and finance
 - Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
@@ -2828,7 +2996,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.4 `blackhole-status.60b409e6`
+### 8.5 `blackhole-status.60b409e6`
 
 - Risk tier: Other security and finance
 - Page: Investing reality (/xrpl/investing-reality.html)
@@ -2842,7 +3010,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.5 `bring-the-project-identity-and-autho.48f611b5`
+### 8.6 `bring-the-project-identity-and-autho.48f611b5`
 
 - Risk tier: Other security and finance
 - Page: Xaman flows (/xrpl/builders/xaman-flows.html)
@@ -2856,7 +3024,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.6 `can-an-issuer-freeze-native-xrp-usin.99e811b3`
+### 8.7 `can-an-issuer-freeze-native-xrp-usin.99e811b3`
 
 - Risk tier: Other security and finance
 - Page: Issuer control (/xrpl/builders/issuer-control.html)
@@ -2870,7 +3038,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.7 `creation-does-not-create-buyers-a-ma.30fb7d14`
+### 8.8 `creation-does-not-create-buyers-a-ma.30fb7d14`
 
 - Risk tier: Other security and finance
 - Page: Create a token (/xrpl/builders/create-token.html)
@@ -2884,7 +3052,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.8 `does-freezing-an-issued-token-mean-t.021d0f68`
+### 8.9 `does-freezing-an-issued-token-mean-t.021d0f68`
 
 - Risk tier: Other security and finance
 - Page: Issuer control (/xrpl/builders/issuer-control.html)
@@ -2898,7 +3066,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.9 `explain-your-answer-without-looking.0a3835d8`
+### 8.10 `explain-your-answer-without-looking.0a3835d8`
 
 - Risk tier: Other security and finance
 - Page: Create a token; NFT basics; Trust lines lesson; Issuer control; Xaman flows; Project launch (/xrpl/builders/create-token.html; /xrpl/builders/nft-basics.html; /xrpl/builders/trust-lines.html; /xrpl/builders/issuer-control.html; /xrpl/builders/xaman-flows.html; /xrpl/builders/project-launch-basics.html)
@@ -2912,7 +3080,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.10 `follow-a-fictional-neighborhood-club.3379ae6e`
+### 8.11 `follow-a-fictional-neighborhood-club.3379ae6e`
 
 - Risk tier: Other security and finance
 - Page: Builders hub (/xrpl/builders/)
@@ -2926,7 +3094,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.11 `freeze-controls.8523f760`
+### 8.12 `freeze-controls.8523f760`
 
 - Risk tier: Other security and finance
 - Page: Investing reality (/xrpl/investing-reality.html)
@@ -2940,7 +3108,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.12 `freeze-is-described-as-destroying-to.9896b013`
+### 8.13 `freeze-is-described-as-destroying-to.9896b013`
 
 - Risk tier: Other security and finance
 - Page: Issuer control (/xrpl/builders/issuer-control.html)
@@ -2954,7 +3122,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.13 `freeze-types-and-no-freeze.7a6c33a3`
+### 8.14 `freeze-types-and-no-freeze.7a6c33a3`
 
 - Risk tier: Other security and finance
 - Page: Issuer control (/xrpl/builders/issuer-control.html)
@@ -2968,7 +3136,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.14 `freeze-versus-clawback.0c521a9b`
+### 8.15 `freeze-versus-clawback.0c521a9b`
 
 - Risk tier: Other security and finance
 - Page: Issuer control (/xrpl/builders/issuer-control.html)
@@ -2982,7 +3150,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.15 `freeze.5a6b2d30`
+### 8.16 `freeze.5a6b2d30`
 
 - Risk tier: Other security and finance
 - Page: Builders hub (/xrpl/builders/)
@@ -2996,7 +3164,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.16 `in-a-read-only-explorer-account-view.b057c38f`
+### 8.17 `in-a-read-only-explorer-account-view.b057c38f`
 
 - Risk tier: Other security and finance
 - Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
@@ -3010,7 +3178,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.17 `interactive-feedback-requires-javasc.047d8e72`
+### 8.18 `interactive-feedback-requires-javasc.047d8e72`
 
 - Risk tier: Other security and finance
 - Page: Create a token; NFT basics; Trust lines lesson; Issuer control; Xaman flows; Project launch (/xrpl/builders/create-token.html; /xrpl/builders/nft-basics.html; /xrpl/builders/trust-lines.html; /xrpl/builders/issuer-control.html; /xrpl/builders/xaman-flows.html; /xrpl/builders/project-launch-basics.html)
@@ -3024,7 +3192,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.18 `list-the-evidence-a-reviewer-needs-e.71edfb57`
+### 8.19 `list-the-evidence-a-reviewer-needs-e.71edfb57`
 
 - Risk tier: Other security and finance
 - Page: Create a token (/xrpl/builders/create-token.html)
@@ -3038,7 +3206,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.19 `list-token-controls-separately-from.1cffbef3`
+### 8.20 `list-token-controls-separately-from.1cffbef3`
 
 - Risk tier: Other security and finance
 - Page: Issuer control (/xrpl/builders/issuer-control.html)
@@ -3052,7 +3220,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.20 `meta.xaman.title`
+### 8.21 `meta.xaman.title`
 
 - Risk tier: Other security and finance
 - Page: Xaman flows (/xrpl/builders/xaman-flows.html)
@@ -3066,7 +3234,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.21 `neb-s-public-page-describes-a-future.2da289c9`
+### 8.22 `neb-s-public-page-describes-a-future.2da289c9`
 
 - Risk tier: Other security and finance
 - Page: Project launch (/xrpl/builders/project-launch-basics.html)
@@ -3080,7 +3248,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.22 `never-change-rippling-freeze-or-auth.5af57760`
+### 8.23 `never-change-rippling-freeze-or-auth.5af57760`
 
 - Risk tier: Other security and finance
 - Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
@@ -3094,7 +3262,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.23 `phishing-and-fake-connection-flows.27a92c45`
+### 8.24 `phishing-and-fake-connection-flows.27a92c45`
 
 - Risk tier: Other security and finance
 - Page: Safety (/xrpl/safety.html)
@@ -3108,7 +3276,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.24 `redemption.843604af`
+### 8.25 `redemption.843604af`
 
 - Risk tier: Other security and finance
 - Page: Investing reality; Create a token (/xrpl/investing-reality.html; /xrpl/builders/create-token.html)
@@ -3122,7 +3290,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.25 `rehearse-an-uncertain-transaction-a.dd025fa6`
+### 8.26 `rehearse-an-uncertain-transaction-a.dd025fa6`
 
 - Risk tier: Other security and finance
 - Page: Project launch (/xrpl/builders/project-launch-basics.html)
@@ -3136,7 +3304,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.26 `save-a-one-page-asset-specification.286034dc`
+### 8.27 `save-a-one-page-asset-specification.286034dc`
 
 - Risk tier: Other security and finance
 - Page: Create a token (/xrpl/builders/create-token.html)
@@ -3150,7 +3318,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.27 `scammers-can-trick-you-into-authoriz.82c7e021`
+### 8.28 `scammers-can-trick-you-into-authoriz.82c7e021`
 
 - Risk tier: Other security and finance
 - Page: Safety (/xrpl/safety.html)
@@ -3164,7 +3332,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.28 `think-of-xrpl-as-the-shared-database.0c61a794`
+### 8.29 `think-of-xrpl-as-the-shared-database.0c61a794`
 
 - Risk tier: Other security and finance
 - Page: Definitions (/xrpl/definitions.html)
@@ -3178,7 +3346,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.29 `this-lesson-follows-the-classic-trus.fc252c0f`
+### 8.30 `this-lesson-follows-the-classic-trus.fc252c0f`
 
 - Risk tier: Other security and finance
 - Page: Create a token (/xrpl/builders/create-token.html)
@@ -3192,7 +3360,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.30 `withdrawal-freeze.01e58e5e`
+### 8.31 `withdrawal-freeze.01e58e5e`
 
 - Risk tier: Other security and finance
 - Page: Safety (/xrpl/safety.html)
@@ -3206,7 +3374,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.31 `write-a-departure-plan-resolve-the-h.e40c2a02`
+### 8.32 `write-a-departure-plan-resolve-the-h.e40c2a02`
 
 - Risk tier: Other security and finance
 - Page: Trust lines lesson (/xrpl/builders/trust-lines.html)
@@ -3220,7 +3388,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.32 `write-the-purpose-exact-asset-identi.636d0341`
+### 8.33 `write-the-purpose-exact-asset-identi.636d0341`
 
 - Risk tier: Other security and finance
 - Page: Builders hub (/xrpl/builders/)
@@ -3234,7 +3402,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.33 `xaman-credential-boundaries.55db3d97`
+### 8.34 `xaman-credential-boundaries.55db3d97`
 
 - Risk tier: Other security and finance
 - Page: Xaman flows (/xrpl/builders/xaman-flows.html)
@@ -3248,7 +3416,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.34 `xaman-flows.2d4dd6fc`
+### 8.35 `xaman-flows.2d4dd6fc`
 
 - Risk tier: Other security and finance
 - Page: Builders hub; Issuer control; Project launch (/xrpl/builders/; /xrpl/builders/issuer-control.html; /xrpl/builders/project-launch-basics.html)
@@ -3262,7 +3430,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.35 `xaman-flows.811c9129`
+### 8.36 `xaman-flows.811c9129`
 
 - Risk tier: Other security and finance
 - Page: Builders hub (/xrpl/builders/)
@@ -3276,7 +3444,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.36 `xaman-flows.c8a29412`
+### 8.37 `xaman-flows.c8a29412`
 
 - Risk tier: Other security and finance
 - Page: Builders hub; Create a token; NFT basics; Trust lines lesson; Issuer control; Xaman flows; Project launch (/xrpl/builders/; /xrpl/builders/create-token.html; /xrpl/builders/nft-basics.html; /xrpl/builders/trust-lines.html; /xrpl/builders/issuer-control.html; /xrpl/builders/xaman-flows.html; /xrpl/builders/project-launch-basics.html)
@@ -3290,7 +3458,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.37 `xaman-implementation-checklist.b10f39bc`
+### 8.38 `xaman-implementation-checklist.b10f39bc`
 
 - Risk tier: Other security and finance
 - Page: Xaman flows (/xrpl/builders/xaman-flows.html)
@@ -3304,7 +3472,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.38 `xaman-implementation-checks.cc5808c1`
+### 8.39 `xaman-implementation-checks.cc5808c1`
 
 - Risk tier: Other security and finance
 - Page: Project launch (/xrpl/builders/project-launch-basics.html)
@@ -3318,7 +3486,7 @@ What the reader must understand for this whole section: Keep the English warning
 - Reviewer:
 - Date:
 
-### 8.39 `xaman-payload-concepts.1ddf0450`
+### 8.40 `xaman-payload-concepts.1ddf0450`
 
 - Risk tier: Other security and finance
 - Page: Xaman flows (/xrpl/builders/xaman-flows.html)

@@ -25,6 +25,7 @@ PAGES = [
     ("xrpl/safety.html", "safety"),
     ("xrpl/investing-reality.html", "reality"),
     ("xrpl/amendments-governance.html", "amendments"),
+    ("xrpl/lending-protocol.html", "lending"),
     ("xrpl/builders/index.html", "builders"),
     ("xrpl/builders/create-token.html", "create-token"),
     ("xrpl/builders/nft-basics.html", "nft-basics"),
@@ -53,6 +54,7 @@ SHARED = {
     "Reality": "nav.reality",
     "Builders": "nav.builders",
     "Governance": "nav.governance",
+    "Lending": "nav.lending",
     "Back to Dashboard": "nav.backDashboard",
     "Back to XRPL LAYMAN": "nav.backHome",
     "A House of Cauliman Project": "footer.project",
@@ -85,12 +87,15 @@ EXTRA = {
     "quiz.feedback.notYet": "Not yet.",
     "quiz.feedback.keepGoing": "Keep going.",
     "quiz.feedback.review": "Review the lesson and try again.",
+    "lending.shares.copy": "New shares issued, rounded down to a whole share. After this deposit they are {pct}% of all {total} shares.",
+    "lending.cover.copy": "First-loss capital covers {covered} of the {amount} in default. The vault absorbs the other {loss}.",
+    "lending.sim.progress": "Step {n} of {total}",
     "builders.progress": "{checked} of {total} practice steps checked. This page only; reloading resets them. This is not certification.",
 }
 ADDRESS_RE = re.compile(r"r[1-9A-HJ-NP-Za-km-z]{24,}")
 HASH_RE = re.compile(r"\b[A-Fa-f0-9]{64}\b")
 SKIP_CLASS = {"lesson-number", "flow-arrow", "xrpl-app-arrow", "progress-fill", "trust-line"}
-SKIP_DYNAMIC_IDS = {"reserveCopy", "reserveValue", "impactCopy", "impactValue", "capCopy", "capValue", "ratioCopy", "ratioValue"}
+SKIP_DYNAMIC_IDS = {"reserveCopy", "reserveValue", "impactCopy", "impactValue", "capCopy", "capValue", "ratioCopy", "ratioValue", "sharesCopy", "sharesValue", "coverCopy", "coverValue", "simProgress"}
 EARLY_SCRIPT = """(function(){
   var KNOWN={"en":1,"pt-BR":1,"es":1,"fr":1,"de":1,"ja":1,"ko":1,"zh-CN":1,"hi":1,"ar":1};
   var SLUGS={"pt-br":"pt-BR","es":"es","fr":"fr","de":"de","ja":"ja","ko":"ko","zh-cn":"zh-CN","hi":"hi","ar":"ar"};

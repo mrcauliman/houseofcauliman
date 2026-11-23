@@ -299,7 +299,7 @@ body{
   position:relative;
   z-index:1;
   display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
+  grid-template-columns:repeat(3,minmax(0,1fr));
   gap:16px;
   max-width:1450px;
   margin:0 auto;
@@ -427,6 +427,12 @@ body{
   --card-glow:rgba(255,210,63,.11);
 }
 
+.xrpl-card-lending{
+  --card-color:#ff5fc8;
+  --card-line:rgba(255,95,200,.30);
+  --card-glow:rgba(255,95,200,.12);
+}
+
 .xrpl-card-house{
   --card-color:#a9b3c6;
   --card-line:rgba(169,179,198,.30);
@@ -515,7 +521,7 @@ body{
 
 @media(max-width:1180px){
   .xrpl-app-grid{
-    grid-template-columns:repeat(4,minmax(0,1fr));
+    grid-template-columns:repeat(3,minmax(0,1fr));
   }
 
   .xrpl-app-card{
@@ -555,6 +561,10 @@ body{
 
   .xrpl-app-grid{
     grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .xrpl-card-house{
+    grid-column:1/-1;
   }
 
   .xrpl-app-card{
@@ -765,6 +775,20 @@ html[dir="rtl"] .xrpl-topbar .xrpl-language-row{justify-content:flex-start}
       </div>
       <h2 data-i18n="governance.823619e0">治理</h2>
       <p data-i18n="how-the-xrpl-changes-its-rules-amend.19bf21eb">XRPL 如何改变自身规则：修正案、验证者投票和服务器升级。</p>
+      <span class="xrpl-app-arrow">→</span>
+    </a>
+
+    <a class="xrpl-app-card xrpl-card-lending" href="/xrpl/zh-cn/lending-protocol.html">
+      <div class="xrpl-app-icon">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M8 24 32 9l24 15"/>
+          <path d="M10 26h44v28H10z"/>
+          <circle cx="32" cy="40" r="7"/>
+          <path d="M32 33v14M18 33v14M46 33v14"/>
+        </svg>
+      </div>
+      <h2 data-i18n="nav.lending">借贷</h2>
+      <p data-i18n="how-the-proposed-lending-protocol-wo.fde1c66b">拟议中的借贷协议如何运作：金库、贷款、还款和违约。</p>
       <span class="xrpl-app-arrow">→</span>
     </a>
 

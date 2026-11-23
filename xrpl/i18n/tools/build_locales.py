@@ -29,6 +29,7 @@ PAGES = [
     "xrpl/safety.html",
     "xrpl/investing-reality.html",
     "xrpl/amendments-governance.html",
+    "xrpl/lending-protocol.html",
     "xrpl/builders/index.html",
     "xrpl/builders/create-token.html",
     "xrpl/builders/nft-basics.html",
@@ -135,7 +136,7 @@ def lookup(catalogs, lang, key):
 # Keep this in step with LATIN_PHRASE in xrpl/i18n/i18n.js. A phrase such as
 # "XRP Ledger" or "House of Cauliman" is one isolate, so Arabic does not
 # reverse the English word order. Parentheses that wrap the phrase stay inside.
-_LATIN = r"[A-Za-z0-9$][A-Za-z0-9$._:%+\-]*"
+_LATIN = r"[A-Za-z0-9$](?:[A-Za-z0-9$._:%+\-]|,(?=\d))*"
 _SEP = r"(?:[ \t]+[+&]?[ \t]*|[ \t]*/[ \t]*)"
 _PHRASE = re.compile(rf"\(?{_LATIN}(?:{_SEP}{_LATIN})*\)?")
 
