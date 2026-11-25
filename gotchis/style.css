@@ -4,3 +4,13 @@
 .signoff{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:clamp(20px,4vw,60px);background:radial-gradient(ellipse at 5% 20%,#4b3525,#211916 75%);padding:clamp(24px,7vw,90px) clamp(24px,8vw,128px);border-top:1px solid #65523e}.signoff img{width:clamp(50px,9vw,104px);height:auto}.signoff h2{margin:9px 0}.signoff p:last-child{color:var(--muted);margin:0}.signoff a{font-size:.8rem;font-weight:750;color:var(--gold);border-bottom:1px solid var(--gold);padding:.2rem 0;align-self:end;width:max-content}footer{border-top:1px solid #574232;color:#c5b198}
 @media(max-width:680px){.mast,footer{padding-inline:20px}.mast{min-height:56px}.house,.top-link,footer{font-size:.59rem;letter-spacing:.16em}.hero{align-items:end;min-height:0;aspect-ratio:7/11;padding:28px 23px 40px}.hero-art{object-position:57% 30%}.hero:after{background:linear-gradient(0deg,#16110eee 1%,#1b1411dd 37%,#18131125 71%,#18131109),linear-gradient(90deg,#15120f55,transparent 77%)}.hero h1 img{width:min(106%,460px);margin-left:-3.4%}.hero-note{margin:11px 0 16px;font-size:.93rem;max-width:270px}.hero-line{font-size:clamp(2.2rem,10vw,4rem)}.scene-stamp{font-size:.53rem;bottom:10px;right:15px}.hero-action{padding:.56rem .8rem}.editorial{padding:45px 20px}.section-head{display:block;margin-bottom:19px}.section-head h2{margin:7px 0 11px}.spread{grid-template-columns:1fr;gap:16px}.art-note{text-align:left}.signoff{padding:25px 20px;grid-template-columns:auto 1fr;gap:16px}.signoff h2{font-size:2.1rem}.signoff a{grid-column:2}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+.hero{background:radial-gradient(ellipse at 50% 12%,#302319 0,#14120f 64%);min-height:0;aspect-ratio:auto;padding:clamp(30px,5vw,64px) 20px clamp(42px,7vw,88px);text-align:center;justify-items:center}
+.hero:after{display:none}.hero-content{width:min(100%,670px);max-width:none}
+.hero h1{margin:14px 0 12px}.hero h1 img{width:min(100%,390px);margin:auto;max-width:100%}
+.reveal-poster{width:min(100%,490px);height:auto;margin:0 auto 24px;border:1px solid #65523e;border-radius:10px}
+.hero .hero-line{font-size:clamp(2.45rem,5vw,4.6rem)}
+.hero-note{margin:16px auto 21px;max-width:55ch;text-wrap:pretty}
+.neighborhood{grid-column:1/-1;display:grid;grid-template-columns:1.7fr 1fr;align-items:center}
+.panel img{aspect-ratio:3/2}.signoff h2{font-size:clamp(1.8rem,3.5vw,3.3rem)}
+@media(max-width:680px){.hero h1 img{width:min(100%,275px);margin:auto}.neighborhood{display:block}}
